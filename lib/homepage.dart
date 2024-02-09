@@ -19,13 +19,13 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(100.0),
         child: Padding(
-          padding: const EdgeInsets.only(top: 40),
+          padding: const EdgeInsets.only(top: 40, right: 100),
           child: AppBar(
             automaticallyImplyLeading: false,
             centerTitle: false,
             elevation: 0.0,
             title: Container(
-              padding: const EdgeInsets.only(left: 400),
+              padding: const EdgeInsets.only(left: 330),
               child: Image.asset(
                 'Naqli-final-logo.png',
                 width: 140,
@@ -34,13 +34,13 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             actions: [
               Padding(
-                padding: EdgeInsets.only(right: 300.0, top: 10),
+                padding: EdgeInsets.only(right: 250.0, top: 10),
                 child: Row(
                   children: [
                     const SizedBox(
                       height: 30,
                       child: Padding(
-                        padding: EdgeInsets.only(left: 15, top: 5),
+                        padding: EdgeInsets.only(left: 100, top: 5),
                         child: Text(
                           "Contact Us",
                           style: TextStyle(fontFamily: 'Colfax', fontSize: 16),
@@ -148,7 +148,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       child: Column(
                         children: [
                           Container(
-                            width: 1200,
+                            width: 1170,
                             height: 350,
                             decoration: BoxDecoration(
                               color: Color.fromARGB(255, 232, 229, 240),
