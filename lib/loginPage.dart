@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/Widgets/customButton.dart';
 
 import '../main.dart';
 
@@ -14,16 +15,221 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Dialog(
       // The Dialog widget provides a full-page overlay
-      child: Padding(
-        padding:
-            const EdgeInsets.only(left: 80.0, right: 80, top: 50, bottom: 50),
-        child: Container(
-          height: 1000,
-          width: 1500,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [],
-          ),
+      child: Container(
+        height: 750,
+        width: 1100,
+        child: Column(
+          children: [
+            Row(
+              children: [
+                Container(
+                  width: 550,
+                  height: 750,
+                  decoration: const BoxDecoration(
+                      color: Color.fromARGB(255, 128, 123, 229),
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(31),
+                          bottomLeft: Radius.circular(31))),
+                  child: Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Image.asset(
+                      'loginlogo.png',
+                      width: 500,
+                      height: 500,
+                    ),
+                  ),
+                ),
+                Container(
+                  width: 550,
+                  height: 750,
+                  decoration: const BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.only(
+                          topRight: Radius.circular(31),
+                          bottomRight: Radius.circular(31))),
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                        left: 20.0, right: 20, top: 20, bottom: 80),
+                    child: Column(children: [
+                      Align(
+                          alignment: Alignment.topRight,
+                          child: IconButton(
+                              onPressed: () {}, icon: Icon(Icons.cancel))),
+                      SizedBox(
+                        height: 100,
+                      ),
+                      Align(
+                        alignment: Alignment.center,
+                        child: Text(
+                          'Login',
+                          style: TextStyle(
+                              fontFamily: 'Colfax',
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            left: 40.0, right: 40, top: 80),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Email ID',
+                              style: TextStyle(
+                                fontFamily: 'Colfax',
+                                fontSize: 16,
+                              ),
+                            ),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            TextField(
+                              decoration: InputDecoration(
+                                contentPadding: EdgeInsets.all(5.0),
+                                border: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(5))),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            Text(
+                              'Password',
+                              style: TextStyle(
+                                fontFamily: 'Colfax',
+                                fontSize: 16,
+                              ),
+                            ),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            TextField(
+                              decoration: InputDecoration(
+                                contentPadding: EdgeInsets.all(5.0),
+                                border: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(5))),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                          left: 40.0,
+                          right: 40,
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            SizedBox(
+                              height: 43,
+                              width: 140,
+                              child: ElevatedButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => LoginPage()),
+                                  );
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  fixedSize:
+                                      const Size.fromWidth(double.infinity),
+                                  backgroundColor:
+                                      Color.fromARGB(255, 128, 123, 229),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(
+                                        5), // Adjust border radius as needed
+                                  ),
+                                ),
+                                child: Text(
+                                  'Login',
+                                  style: TextStyle(
+                                    fontFamily: 'Colfax',
+                                    fontSize: 16,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            TextButton(
+                              child: Text(
+                                'Forgot Password?',
+                                style: TextStyle(
+                                    fontFamily: 'Colfax',
+                                    fontSize: 16,
+                                    color: Color.fromARGB(255, 128, 123, 229)),
+                              ),
+                              onPressed: () {},
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: 13,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                          left: 40.0,
+                          right: 40,
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Dont't have an account?",
+                              style: TextStyle(
+                                  fontFamily: 'Colfax',
+                                  fontSize: 16,
+                                  color: Colors.black),
+                            ),
+                            TextButton(
+                              child: Text(
+                                'Create One!',
+                                style: TextStyle(
+                                    fontFamily: 'Colfax',
+                                    fontSize: 16,
+                                    color: Color.fromARGB(255, 128, 123, 229)),
+                              ),
+                              onPressed: () {},
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                          left: 40.0,
+                          right: 40,
+                        ),
+                        child: Align(
+                          alignment: Alignment.centerLeft,
+                          child: TextButton(
+                            child: Text(
+                              'Use without Log in',
+                              style: TextStyle(
+                                  fontFamily: 'Colfax',
+                                  fontSize: 16,
+                                  color: Color.fromARGB(255, 128, 123, 229)),
+                            ),
+                            onPressed: () {},
+                          ),
+                        ),
+                      ),
+                    ]),
+                  ),
+                )
+              ],
+            )
+          ],
         ),
       ),
     );
