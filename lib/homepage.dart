@@ -53,26 +53,18 @@ class _MyHomePageState extends State<MyHomePage> {
                         color: Colors.black,
                       ),
                     ),
-                    SizedBox(
-                      height: 30,
-                      width: 170,
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 13, top: 5),
-                        child: TextButton(
-                          onPressed: () {
-                            showDialog(
-                              context: context,
-                              builder: (context) {
-                                return LoginPage();
-                              },
-                            );
+                    TextButton(
+                      onPressed: () {
+                        showDialog(
+                          context: context,
+                          builder: (context) {
+                            return LoginPage();
                           },
-                          child: Text(
-                            'Login',
-                            style:
-                                TextStyle(fontFamily: 'Colfax', fontSize: 20),
-                          ),
-                        ),
+                        );
+                      },
+                      child: Text(
+                        'Login',
+                        style: TextStyle(fontFamily: 'Colfax', fontSize: 16),
                       ),
                     ),
                     SizedBox(width: 40),
