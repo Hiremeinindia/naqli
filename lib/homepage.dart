@@ -41,7 +41,10 @@ class _MyHomePageState extends State<MyHomePage> {
                       height: 30,
                       child: Padding(
                         padding: EdgeInsets.only(left: 15, top: 5),
-                        child: Text("Contact Us"),
+                        child: Text(
+                          "Contact Us",
+                          style: TextStyle(fontFamily: 'Colfax', fontSize: 16),
+                        ),
                       ),
                     ),
                     SizedBox(
@@ -53,26 +56,18 @@ class _MyHomePageState extends State<MyHomePage> {
                         color: Colors.black,
                       ),
                     ),
-                    SizedBox(
-                      height: 30,
-                      width: 170,
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 13, top: 5),
-                        child: TextButton(
-                          onPressed: () {
-                            showDialog(
-                              context: context,
-                              builder: (context) {
-                                return LoginPage();
-                              },
-                            );
+                    TextButton(
+                      onPressed: () {
+                        showDialog(
+                          context: context,
+                          builder: (context) {
+                            return LoginPage();
                           },
-                          child: Text(
-                            'Login',
-                            style:
-                                TextStyle(fontFamily: 'Colfax', fontSize: 20),
-                          ),
-                        ),
+                        );
+                      },
+                      child: Text(
+                        'Login',
+                        style: TextStyle(fontFamily: 'Colfax', fontSize: 16),
                       ),
                     ),
                     SizedBox(width: 40),
@@ -126,7 +121,6 @@ class _MyHomePageState extends State<MyHomePage> {
                             left: 450, right: 200, top: 200),
                         child: Container(
                           height: 750,
-                          color: Colors.white,
                         ),
                       ),
                       SizedBox(
@@ -260,7 +254,12 @@ class _MyHomePageState extends State<MyHomePage> {
                                               color: Colors.black,
                                             ),
                                             SizedBox(height: 2),
-                                            Text('Vehicle'),
+                                            Text(
+                                              'Vehicle',
+                                              style: TextStyle(
+                                                  fontFamily: 'Colfax',
+                                                  fontSize: 16),
+                                            ),
                                           ],
                                         ),
                                       ),
@@ -290,7 +289,12 @@ class _MyHomePageState extends State<MyHomePage> {
                                               color: Colors.black,
                                             ),
                                             SizedBox(height: 2),
-                                            Text('Bus'),
+                                            Text(
+                                              'Bus',
+                                              style: TextStyle(
+                                                  fontFamily: 'Colfax',
+                                                  fontSize: 16),
+                                            ),
                                           ],
                                         ),
                                       ),
@@ -320,7 +324,12 @@ class _MyHomePageState extends State<MyHomePage> {
                                               color: Colors.black,
                                             ),
                                             SizedBox(height: 2),
-                                            Text('Equipment-2'),
+                                            Text(
+                                              'Equipment-2',
+                                              style: TextStyle(
+                                                  fontFamily: 'Colfax',
+                                                  fontSize: 16),
+                                            ),
                                           ],
                                         ),
                                       ),
@@ -350,7 +359,12 @@ class _MyHomePageState extends State<MyHomePage> {
                                               color: Colors.black,
                                             ),
                                             SizedBox(height: 2),
-                                            Text('Special'),
+                                            Text(
+                                              'Special',
+                                              style: TextStyle(
+                                                  fontFamily: 'Colfax',
+                                                  fontSize: 16),
+                                            ),
                                           ],
                                         ),
                                       ),
@@ -381,9 +395,11 @@ class _MyHomePageState extends State<MyHomePage> {
                                             Text(
                                               "Get an Estimate",
                                               style: TextStyle(
-                                                color: Colors.white,
-                                                // Add other text style properties as needed
-                                              ),
+                                                  color: Colors.white,
+                                                  fontFamily: 'Colfax',
+                                                  fontSize: 16
+                                                  // Add other text style properties as needed
+                                                  ),
                                             ),
                                             SizedBox(height: 20),
                                             Image.asset(
@@ -401,142 +417,136 @@ class _MyHomePageState extends State<MyHomePage> {
                               ],
                             ),
                           ),
-                          Container(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    Image.asset(
-                                      'Rectangle.png', // Replace with your image path
-                                      width: 500,
-                                      height: 270,
-                                      color: Colors.grey,
-                                    ),
-                                    SizedBox(
-                                        width:
-                                            40), // Adjust this space as needed
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          "Naqli For Individuals",
-                                          style: TextStyle(
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.bold,
-                                          ),
+                          Column(
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Image.asset(
+                                    'Rectangle.png', // Replace with your image path
+                                    width: 500,
+                                    height: 270,
+                                    color: Colors.grey,
+                                  ),
+                                  SizedBox(
+                                      width: 40), // Adjust this space as needed
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        "Naqli For Individuals",
+                                        style: TextStyle(
+                                          fontFamily: 'Colfax',
+                                          fontSize: 19,
+                                          fontWeight: FontWeight.bold,
                                         ),
-                                        SizedBox(height: 10),
-                                        Text(
-                                          "Lorem_ipsum_dolor_sit_amet_consectetur_adipiscing_elit_sed_do_eiusmod\n"
-                                          "tempor_incididunt_ut_labore_et_dolore_magna_aliqua.Ut_enim_ad_minim\n"
-                                          "veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea\n"
-                                          "commodo consequat. Duis aute irure dolor in reprehenderit in voluptate\n"
-                                          "velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat\n"
-                                          "cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est\n"
-                                          "laborum.",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                          textAlign: TextAlign.justify,
+                                      ),
+                                      SizedBox(height: 10),
+                                      Text(
+                                        "Lorem_ipsum_dolor_sit_amet_consectetur_adipiscing_elit_sed_do_eiusmod\n"
+                                        "tempor_incididunt_ut_labore_et_dolore_magna_aliqua.Ut_enim_ad_minim\n"
+                                        "veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea\n"
+                                        "commodo consequat. Duis aute irure dolor in reprehenderit in voluptate\n"
+                                        "velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat\n"
+                                        "cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est\n"
+                                        "laborum.",
+                                        style: TextStyle(
+                                            fontFamily: 'Colfax', fontSize: 12),
+                                        textAlign: TextAlign.justify,
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                              // Repeat the above structure for other rows without unnecessary SizedBox
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Image.asset(
+                                    'Rectangle.png', // Replace with your image path
+                                    width: 500,
+                                    height: 270,
+                                    color: Colors.grey,
+                                  ),
+                                  SizedBox(
+                                      width: 40), // Adjust this space as needed
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        "Naqli For Business",
+                                        style: TextStyle(
+                                          fontFamily: 'Colfax',
+                                          fontSize: 19,
+                                          fontWeight: FontWeight.bold,
                                         ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                                // Repeat the above structure for other rows without unnecessary SizedBox
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    Image.asset(
-                                      'Rectangle.png', // Replace with your image path
-                                      width: 500,
-                                      height: 270,
-                                      color: Colors.grey,
-                                    ),
-                                    SizedBox(
-                                        width:
-                                            40), // Adjust this space as needed
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          "Naqli For Business",
-                                          style: TextStyle(
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.bold,
-                                          ),
+                                      ),
+                                      SizedBox(height: 10),
+                                      Text(
+                                        "Lorem_ipsum_dolor_sit_amet_consectetur_adipiscing_elit_sed_do_eiusmod\n"
+                                        "tempor_incididunt_ut_labore_et_dolore_magna_aliqua.Ut_enim_ad_minim\n"
+                                        "veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea\n"
+                                        "commodo consequat. Duis aute irure dolor in reprehenderit in voluptate\n"
+                                        "velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat\n"
+                                        "cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est\n"
+                                        "laborum.",
+                                        style: TextStyle(
+                                            fontFamily: 'Colfax', fontSize: 12),
+                                        textAlign: TextAlign.justify,
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Image.asset(
+                                    'Rectangle.png', // Replace with your image path
+                                    width: 500,
+                                    height: 270,
+                                    color: Colors.grey,
+                                  ),
+                                  SizedBox(
+                                      width: 40), // Adjust this space as needed
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        "Naqli For Partner",
+                                        style: TextStyle(
+                                          fontFamily: 'Colfax',
+                                          fontSize: 19,
+                                          fontWeight: FontWeight.bold,
                                         ),
-                                        SizedBox(height: 10),
-                                        Text(
-                                          "Lorem_ipsum_dolor_sit_amet_consectetur_adipiscing_elit_sed_do_eiusmod\n"
-                                          "tempor_incididunt_ut_labore_et_dolore_magna_aliqua.Ut_enim_ad_minim\n"
-                                          "veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea\n"
-                                          "commodo consequat. Duis aute irure dolor in reprehenderit in voluptate\n"
-                                          "velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat\n"
-                                          "cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est\n"
-                                          "laborum.",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                          textAlign: TextAlign.justify,
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    Image.asset(
-                                      'Rectangle.png', // Replace with your image path
-                                      width: 500,
-                                      height: 270,
-                                      color: Colors.grey,
-                                    ),
-                                    SizedBox(
-                                        width:
-                                            40), // Adjust this space as needed
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          "Naqli For Partner",
-                                          style: TextStyle(
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                        SizedBox(height: 10),
-                                        Text(
-                                          "Lorem_ipsum_dolor_sit_amet_consectetur_adipiscing_elit_sed_do_eiusmod\n"
-                                          "tempor_incididunt_ut_labore_et_dolore_magna_aliqua.Ut_enim_ad_minim\n"
-                                          "veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea\n"
-                                          "commodo consequat. Duis aute irure dolor in reprehenderit in voluptate\n"
-                                          "velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat\n"
-                                          "cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est\n"
-                                          "laborum.",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                          textAlign: TextAlign.justify,
-                                        ),
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      height: 20,
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
+                                      ),
+                                      SizedBox(height: 10),
+                                      Text(
+                                        "Lorem_ipsum_dolor_sit_amet_consectetur_adipiscing_elit_sed_do_eiusmod\n"
+                                        "tempor_incididunt_ut_labore_et_dolore_magna_aliqua.Ut_enim_ad_minim\n"
+                                        "veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea\n"
+                                        "commodo consequat. Duis aute irure dolor in reprehenderit in voluptate\n"
+                                        "velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat\n"
+                                        "cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est\n"
+                                        "laborum.",
+                                        style: TextStyle(
+                                            fontFamily: 'Colfax', fontSize: 12),
+                                        textAlign: TextAlign.justify,
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 20,
+                                  ),
+                                ],
+                              ),
+                            ],
                           ),
                           SizedBox(
                             height: 20,
@@ -566,10 +576,10 @@ class _MyHomePageState extends State<MyHomePage> {
                                       Text(
                                         'How to get Naqli in Action',
                                         style: TextStyle(
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 30,
-                                        ),
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold,
+                                            fontFamily: 'Colfax',
+                                            fontSize: 20),
                                       ),
                                     ],
                                   ),
@@ -588,6 +598,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                       "commodo consequat. Duis aute\n"
                                       "irure dolor in",
                                       style: TextStyle(
+                                        fontFamily: 'Colfax',
+                                        fontSize: 19,
                                         color: Colors.black,
                                       ),
                                     ),
