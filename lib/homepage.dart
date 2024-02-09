@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
+import 'loginPage.dart';
+
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
 
@@ -56,7 +58,21 @@ class _MyHomePageState extends State<MyHomePage> {
                       width: 170,
                       child: Padding(
                         padding: const EdgeInsets.only(left: 13, top: 5),
-                        child: Text("Login"),
+                        child: TextButton(
+                          onPressed: () {
+                            showDialog(
+                              context: context,
+                              builder: (context) {
+                                return LoginPage();
+                              },
+                            );
+                          },
+                          child: Text(
+                            'Login',
+                            style:
+                                TextStyle(fontFamily: 'Colfax', fontSize: 20),
+                          ),
+                        ),
                       ),
                     ),
                     SizedBox(width: 40),
