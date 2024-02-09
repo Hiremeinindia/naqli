@@ -401,13 +401,15 @@ class _MyHomePageState extends State<MyHomePage> {
                                     ),
                                     SizedBox(
                                         width:
-                                            20), // Adjust this space as needed
+                                            40), // Adjust this space as needed
                                     Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
                                         Text(
                                           "Naqli For Individuals",
                                           style: TextStyle(
-                                            fontSize: 24,
+                                            fontSize: 20,
                                             fontWeight: FontWeight.bold,
                                           ),
                                         ),
@@ -421,7 +423,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                           "cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est\n"
                                           "laborum.",
                                           style: TextStyle(
-                                            fontSize: 14,
+                                            fontSize: 12,
                                           ),
                                           textAlign: TextAlign.justify,
                                         ),
@@ -442,17 +444,19 @@ class _MyHomePageState extends State<MyHomePage> {
                                     ),
                                     SizedBox(
                                         width:
-                                            20), // Adjust this space as needed
+                                            40), // Adjust this space as needed
                                     Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
                                         Text(
                                           "Naqli For Business",
                                           style: TextStyle(
-                                            fontSize: 24,
+                                            fontSize: 20,
                                             fontWeight: FontWeight.bold,
                                           ),
                                         ),
-                                        SizedBox(height: 20),
+                                        SizedBox(height: 10),
                                         Text(
                                           "Lorem_ipsum_dolor_sit_amet_consectetur_adipiscing_elit_sed_do_eiusmod\n"
                                           "tempor_incididunt_ut_labore_et_dolore_magna_aliqua.Ut_enim_ad_minim\n"
@@ -462,7 +466,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                           "cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est\n"
                                           "laborum.",
                                           style: TextStyle(
-                                            fontSize: 14,
+                                            fontSize: 12,
                                           ),
                                           textAlign: TextAlign.justify,
                                         ),
@@ -482,17 +486,19 @@ class _MyHomePageState extends State<MyHomePage> {
                                     ),
                                     SizedBox(
                                         width:
-                                            20), // Adjust this space as needed
+                                            40), // Adjust this space as needed
                                     Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
                                         Text(
                                           "Naqli For Partner",
                                           style: TextStyle(
-                                            fontSize: 24,
+                                            fontSize: 20,
                                             fontWeight: FontWeight.bold,
                                           ),
                                         ),
-                                        SizedBox(height: 20),
+                                        SizedBox(height: 10),
                                         Text(
                                           "Lorem_ipsum_dolor_sit_amet_consectetur_adipiscing_elit_sed_do_eiusmod\n"
                                           "tempor_incididunt_ut_labore_et_dolore_magna_aliqua.Ut_enim_ad_minim\n"
@@ -502,11 +508,14 @@ class _MyHomePageState extends State<MyHomePage> {
                                           "cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est\n"
                                           "laborum.",
                                           style: TextStyle(
-                                            fontSize: 14,
+                                            fontSize: 12,
                                           ),
                                           textAlign: TextAlign.justify,
                                         ),
                                       ],
+                                    ),
+                                    SizedBox(
+                                      height: 20,
                                     ),
                                   ],
                                 ),
