@@ -43,7 +43,10 @@ class _MyHomePageState extends State<TripDetails> {
                       height: 30,
                       child: Padding(
                         padding: EdgeInsets.only(left: 15, top: 5),
-                        child: Text("Contact Us"),
+                        child: Text(
+                          "Contact Us",
+                          style: TextStyle(fontFamily: 'Colfax', fontSize: 16),
+                        ),
                       ),
                     ),
                     SizedBox(
@@ -60,7 +63,10 @@ class _MyHomePageState extends State<TripDetails> {
                       width: 170,
                       child: Padding(
                         padding: const EdgeInsets.only(left: 13, top: 5),
-                        child: Text("Hello Customer!"),
+                        child: Text(
+                          "Hello Customer!",
+                          style: TextStyle(fontFamily: 'Colfax', fontSize: 16),
+                        ),
                       ),
                     ),
                     SizedBox(width: 40),
@@ -202,7 +208,13 @@ class _MyHomePageState extends State<TripDetails> {
                                                       return DropdownMenuItem<
                                                           String>(
                                                         value: value,
-                                                        child: Text(value),
+                                                        child: Text(
+                                                          value,
+                                                          style: TextStyle(
+                                                              fontFamily:
+                                                                  'Colfax',
+                                                              fontSize: 16),
+                                                        ),
                                                       );
                                                     },
                                                   ).toList(),
@@ -229,7 +241,11 @@ class _MyHomePageState extends State<TripDetails> {
                                     SizedBox(
                                       width: 30,
                                     ),
-                                    Text("Enter Pickup Point"),
+                                    Text(
+                                      "Enter Pickup Point",
+                                      style: TextStyle(
+                                          fontFamily: 'Colfax', fontSize: 16),
+                                    ),
                                     SizedBox(
                                       width: 10,
                                     ),
@@ -247,7 +263,11 @@ class _MyHomePageState extends State<TripDetails> {
                                     SizedBox(
                                       width: 20,
                                     ),
-                                    Text("Enter Drop Point"),
+                                    Text(
+                                      "Enter Drop Point",
+                                      style: TextStyle(
+                                          fontFamily: 'Colfax', fontSize: 16),
+                                    ),
                                     SizedBox(
                                       width: 10,
                                     ),
