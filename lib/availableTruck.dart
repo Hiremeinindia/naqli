@@ -26,6 +26,13 @@ class _AvailabeTruckList extends State<AvailabeTruckList> {
               actions: [
                 Row(
                   children: [
+                    Icon(
+                      Icons.notifications,
+                      color: Color.fromRGBO(106, 102, 209, 1),
+                    ),
+                    SizedBox(
+                      width: 10,
+                    ),
                     Text(
                       'Contact us',
                       style: TextStyle(
