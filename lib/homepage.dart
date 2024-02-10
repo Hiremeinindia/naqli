@@ -211,7 +211,13 @@ class _MyHomePageState extends State<MyHomePage> {
                                                       return DropdownMenuItem<
                                                           String>(
                                                         value: value,
-                                                        child: Text(value),
+                                                        child: Text(
+                                                          value,
+                                                          style: TextStyle(
+                                                              fontFamily:
+                                                                  'Colfax',
+                                                              fontSize: 16),
+                                                        ),
                                                       );
                                                     },
                                                   ).toList(),
