@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/availableTruck.dart';
+import 'package:flutter_application_1/confirmtrip.dart';
 import 'package:flutter_application_1/homepage.dart';
 import 'package:flutter_application_1/tripdetails.dart';
 
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const ConfirmTrip(title: 'Flutter Demo Home Page'),
     );
   }
 }
