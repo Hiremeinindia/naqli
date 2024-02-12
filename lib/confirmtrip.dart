@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
 class ConfirmTrip extends StatefulWidget {
-  const ConfirmTrip({Key? key, required this.title}) : super(key: key);
-
-  final String title;
+  const ConfirmTrip({
+    Key? key,
+  }) : super(key: key);
 
   @override
-  State<ConfirmTrip> createState() => _MyHomePageState();
+  State<ConfirmTrip> createState() => _ConfirmTrip();
 }
 
-class _MyHomePageState extends State<ConfirmTrip> {
+class _ConfirmTrip extends State<ConfirmTrip> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
