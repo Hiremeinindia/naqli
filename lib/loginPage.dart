@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/Widgets/customButton.dart';
 import 'package:flutter_application_1/createAccount.dart';
+import 'package:flutter_application_1/homepage.dart';
 
 import '../main.dart';
 
@@ -136,10 +137,11 @@ class _LoginPageState extends State<LoginPage> {
                               width: 140,
                               child: ElevatedButton(
                                 onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => LoginPage()),
+                                  showDialog(
+                                    context: context,
+                                    builder: (context) {
+                                      return CreateAccount();
+                                    },
                                   );
                                 },
                                 style: ElevatedButton.styleFrom(
