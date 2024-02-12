@@ -81,6 +81,9 @@ flutter:
     - family: ColfaxBold
       fonts:
         - asset: fonts/Colfax-Bold.otf
+    - family: Segoe
+      fonts:
+        - asset: fonts/Segoe UI Italic.otf
   #       - asset: fonts/Schyler-Regular.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
