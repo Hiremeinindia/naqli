@@ -12,6 +12,12 @@ class CreateAccount extends StatefulWidget {
 }
 
 class _CreateAccountState extends State<CreateAccount> {
+  List<String> cities = ['City 1', 'City 2', 'City 3', 'City 4'];
+
+// Declare a variable to hold the selected city
+  String? selectedCity;
+  String? selectedType;
+  String? selectedOption;
   @override
   Widget build(BuildContext context) {
     return Dialog(
@@ -199,13 +205,29 @@ class _CreateAccountState extends State<CreateAccount> {
                       ),
                       SizedBox(
                         height: 45,
-                        child: TextField(
+                        child: DropdownButtonFormField(
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.all(5.0),
                             border: OutlineInputBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(5))),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(5)),
+                            ),
                           ),
+                          value:
+                              selectedCity, // Set it to null or a default city
+                          onChanged: (String? newValue) {
+                            // Handle the city selection
+                            setState(() {
+                              selectedCity = newValue;
+                            });
+                          },
+                          items: cities
+                              .map<DropdownMenuItem<String>>((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(value),
+                            );
+                          }).toList(),
                         ),
                       ),
                       SizedBox(
@@ -213,13 +235,34 @@ class _CreateAccountState extends State<CreateAccount> {
                       ),
                       SizedBox(
                         height: 45,
-                        child: TextField(
+                        child: DropdownButtonFormField<String>(
+                          value: selectedOption,
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.all(5.0),
                             border: OutlineInputBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(5))),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(5)),
+                            ),
                           ),
+                          onChanged: (String? newValue) {
+                            setState(() {
+                              selectedOption = newValue;
+                            });
+                          },
+                          items: [
+                            DropdownMenuItem<String>(
+                              value: 'National ID',
+                              child: Text('National ID'),
+                            ),
+                            DropdownMenuItem<String>(
+                              value: 'Iqama No.',
+                              child: Text('Iqama No.'),
+                            ),
+                            DropdownMenuItem<String>(
+                              value: 'Visit Visa / Border No',
+                              child: Text('Visit Visa / Border No'),
+                            ),
+                          ],
                         ),
                       ),
                       SizedBox(
@@ -310,13 +353,30 @@ class _CreateAccountState extends State<CreateAccount> {
                       ),
                       SizedBox(
                         height: 45,
-                        child: TextField(
+                        child: DropdownButtonFormField<String>(
+                          value: selectedType,
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.all(5.0),
                             border: OutlineInputBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(5))),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(5)),
+                            ),
                           ),
+                          onChanged: (String? newValue) {
+                            setState(() {
+                              selectedType = newValue;
+                            });
+                          },
+                          items: [
+                            DropdownMenuItem<String>(
+                              value: 'Individual',
+                              child: Text('Individual'),
+                            ),
+                            DropdownMenuItem<String>(
+                              value: 'Company',
+                              child: Text('Company'),
+                            ),
+                          ],
                         ),
                       ),
                       SizedBox(
