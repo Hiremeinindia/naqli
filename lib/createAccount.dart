@@ -29,31 +29,140 @@ class _CreateAccountState extends State<CreateAccount> {
           padding:
               const EdgeInsets.only(left: 100, right: 100, top: 50, bottom: 50),
           child: Column(children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                IconButton(onPressed: () {}, icon: Icon(Icons.cancel)),
-              ],
-            ),
-            SizedBox(
-              height: 30,
-            ),
             Text(
               'Create your account',
               style: TextStyle(
-                  fontFamily: 'Colfax',
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold),
+                fontFamily: 'ColfaxBold',
+                fontSize: 25,
+              ),
             ),
             SizedBox(
               height: 30,
             ),
             Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Text(
+                  'First Name ',
+                  style: TextStyle(
+                    fontFamily: 'Colfax',
+                    fontSize: 16,
+                  ),
+                ),
+                SizedBox(
+                  width: 20,
+                ),
+                Expanded(
+                  child: SizedBox(
+                    height: 45,
+                    child: TextField(
+                      decoration: InputDecoration(
+                        hintText: 'First Name',
+                        contentPadding: EdgeInsets.all(5.0),
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(5))),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  width: 25,
+                ),
+                Expanded(
+                  child: SizedBox(
+                    height: 45,
+                    child: TextField(
+                      decoration: InputDecoration(
+                        hintText: 'Last Name',
+                        contentPadding: EdgeInsets.all(5.0),
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(5))),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Row(
+              children: [
+                Text(
+                  'Email Address',
+                  style: TextStyle(
+                    fontFamily: 'Colfax',
+                    fontSize: 16,
+                  ),
+                ),
+                SizedBox(
+                  width: 20,
+                ),
+                Expanded(
+                  child: SizedBox(
+                    height: 45,
+                    child: TextField(
+                      decoration: InputDecoration(
+                        hintText: 'Email address',
+                        contentPadding: EdgeInsets.all(5.0),
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(5))),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Row(
               children: [
                 Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Email ID',
+                      'Password',
+                      style: TextStyle(
+                        fontFamily: 'Colfax',
+                        fontSize: 16,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 30,
+                    ),
+                    Text(
+                      'Contact Number',
+                      style: TextStyle(
+                        fontFamily: 'Colfax',
+                        fontSize: 16,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 30,
+                    ),
+                    Text(
+                      'Address 1',
+                      style: TextStyle(
+                        fontFamily: 'Colfax',
+                        fontSize: 16,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 30,
+                    ),
+                    Text(
+                      'City',
+                      style: TextStyle(
+                        fontFamily: 'Colfax',
+                        fontSize: 16,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 30,
+                    ),
+                    Text(
+                      'Govt ID',
                       style: TextStyle(
                         fontFamily: 'Colfax',
                         fontSize: 16,
@@ -63,7 +172,56 @@ class _CreateAccountState extends State<CreateAccount> {
                 ),
                 Expanded(
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      SizedBox(
+                        height: 10,
+                      ),
+                      SizedBox(
+                        height: 45,
+                        child: TextField(
+                          decoration: InputDecoration(
+                            hintText: 'Password',
+                            contentPadding: EdgeInsets.all(5.0),
+                            border: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(5))),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      SizedBox(
+                        height: 45,
+                        child: TextField(
+                          decoration: InputDecoration(
+                            hintText: 'Phone Number',
+                            contentPadding: EdgeInsets.all(5.0),
+                            border: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(5))),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      SizedBox(
+                        height: 45,
+                        child: TextField(
+                          decoration: InputDecoration(
+                            hintText: 'Address',
+                            contentPadding: EdgeInsets.all(5.0),
+                            border: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(5))),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
                       SizedBox(
                         height: 45,
                         child: TextField(
@@ -74,14 +232,72 @@ class _CreateAccountState extends State<CreateAccount> {
                                     BorderRadius.all(Radius.circular(5))),
                           ),
                         ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      SizedBox(
+                        height: 45,
+                        child: TextField(
+                          decoration: InputDecoration(
+                            contentPadding: EdgeInsets.all(5.0),
+                            border: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(5))),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
                       ),
                     ],
                   ),
                 ),
                 Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Email ID',
+                      'Confirm Password',
+                      style: TextStyle(
+                        fontFamily: 'Colfax',
+                        fontSize: 16,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 30,
+                    ),
+                    Text(
+                      'Alternate Number',
+                      style: TextStyle(
+                        fontFamily: 'Colfax',
+                        fontSize: 16,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 30,
+                    ),
+                    Text(
+                      'Address 2',
+                      style: TextStyle(
+                        fontFamily: 'Colfax',
+                        fontSize: 16,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 30,
+                    ),
+                    Text(
+                      'Account Type',
+                      style: TextStyle(
+                        fontFamily: 'Colfax',
+                        fontSize: 16,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 30,
+                    ),
+                    Text(
+                      'ID Number',
                       style: TextStyle(
                         fontFamily: 'Colfax',
                         fontSize: 16,
@@ -91,7 +307,53 @@ class _CreateAccountState extends State<CreateAccount> {
                 ),
                 Expanded(
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      SizedBox(
+                        height: 45,
+                        child: TextField(
+                          decoration: InputDecoration(
+                            hintText: 'Password',
+                            contentPadding: EdgeInsets.all(5.0),
+                            border: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(5))),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      SizedBox(
+                        height: 45,
+                        child: TextField(
+                          decoration: InputDecoration(
+                            hintText: 'Phone Number',
+                            contentPadding: EdgeInsets.all(5.0),
+                            border: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(5))),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      SizedBox(
+                        height: 45,
+                        child: TextField(
+                          decoration: InputDecoration(
+                            hintText: 'Address',
+                            contentPadding: EdgeInsets.all(5.0),
+                            border: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(5))),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
                       SizedBox(
                         height: 45,
                         child: TextField(
@@ -102,6 +364,23 @@ class _CreateAccountState extends State<CreateAccount> {
                                     BorderRadius.all(Radius.circular(5))),
                           ),
                         ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      SizedBox(
+                        height: 45,
+                        child: TextField(
+                          decoration: InputDecoration(
+                            contentPadding: EdgeInsets.all(5.0),
+                            border: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(5))),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
                       ),
                     ],
                   ),
@@ -109,33 +388,10 @@ class _CreateAccountState extends State<CreateAccount> {
               ],
             ),
             SizedBox(
-              height: 20,
+              height: 10,
             ),
             SizedBox(
-              height: 20,
-            ),
-            Text(
-              'Password',
-              style: TextStyle(
-                fontFamily: 'Colfax',
-                fontSize: 16,
-              ),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            SizedBox(
-              height: 45,
-              child: TextField(
-                decoration: InputDecoration(
-                  contentPadding: EdgeInsets.all(5.0),
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(5))),
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 20,
+              height: 10,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -229,6 +485,14 @@ class _CreateAccountState extends State<CreateAccount> {
                   onPressed: () {},
                 ),
               ],
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Expanded(
+              child: Divider(
+                color: Colors.black,
+              ),
             ),
             SizedBox(
               height: 10,
