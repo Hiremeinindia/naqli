@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/advancepayment.dart';
 import 'package:flutter_application_1/availableTruck.dart';
 import 'package:flutter_application_1/confirmtrip.dart';
 import 'package:flutter_application_1/homepage.dart';
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: const ConfirmTrip(title: 'Flutter Demo Home Page'),
+      home: const AdvancePayment(),
     );
   }
 }
