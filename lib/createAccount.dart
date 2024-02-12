@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/Widgets/customButton.dart';
+import 'package:flutter_application_1/Widgets/formText.dart';
 
 import '../main.dart';
 
@@ -42,13 +43,7 @@ class _CreateAccountState extends State<CreateAccount> {
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                Text(
-                  'First Name ',
-                  style: TextStyle(
-                    fontFamily: 'Colfax',
-                    fontSize: 16,
-                  ),
-                ),
+                Text('First Name ', style: FormTextStyle.text),
                 SizedBox(
                   width: 20,
                 ),
@@ -57,6 +52,7 @@ class _CreateAccountState extends State<CreateAccount> {
                     height: 45,
                     child: TextField(
                       decoration: InputDecoration(
+                        hintStyle: FormTextStyle.textfieldtext,
                         hintText: 'First Name',
                         contentPadding: EdgeInsets.all(5.0),
                         border: OutlineInputBorder(
@@ -73,6 +69,7 @@ class _CreateAccountState extends State<CreateAccount> {
                     height: 45,
                     child: TextField(
                       decoration: InputDecoration(
+                        hintStyle: FormTextStyle.textfieldtext,
                         hintText: 'Last Name',
                         contentPadding: EdgeInsets.all(5.0),
                         border: OutlineInputBorder(
@@ -103,6 +100,7 @@ class _CreateAccountState extends State<CreateAccount> {
                     height: 45,
                     child: TextField(
                       decoration: InputDecoration(
+                        hintStyle: FormTextStyle.textfieldtext,
                         hintText: 'Email address',
                         contentPadding: EdgeInsets.all(5.0),
                         border: OutlineInputBorder(
@@ -121,53 +119,23 @@ class _CreateAccountState extends State<CreateAccount> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      'Password',
-                      style: TextStyle(
-                        fontFamily: 'Colfax',
-                        fontSize: 16,
-                      ),
-                    ),
+                    Text('Password', style: FormTextStyle.text),
                     SizedBox(
                       height: 30,
                     ),
-                    Text(
-                      'Contact Number',
-                      style: TextStyle(
-                        fontFamily: 'Colfax',
-                        fontSize: 16,
-                      ),
-                    ),
+                    Text('Contact Number', style: FormTextStyle.text),
                     SizedBox(
                       height: 30,
                     ),
-                    Text(
-                      'Address 1',
-                      style: TextStyle(
-                        fontFamily: 'Colfax',
-                        fontSize: 16,
-                      ),
-                    ),
+                    Text('Address 1', style: FormTextStyle.text),
                     SizedBox(
                       height: 30,
                     ),
-                    Text(
-                      'City',
-                      style: TextStyle(
-                        fontFamily: 'Colfax',
-                        fontSize: 16,
-                      ),
-                    ),
+                    Text('City', style: FormTextStyle.text),
                     SizedBox(
                       height: 30,
                     ),
-                    Text(
-                      'Govt ID',
-                      style: TextStyle(
-                        fontFamily: 'Colfax',
-                        fontSize: 16,
-                      ),
-                    ),
+                    Text('Govt ID', style: FormTextStyle.text),
                   ],
                 ),
                 Expanded(
@@ -181,6 +149,7 @@ class _CreateAccountState extends State<CreateAccount> {
                         height: 45,
                         child: TextField(
                           decoration: InputDecoration(
+                            hintStyle: FormTextStyle.textfieldtext,
                             hintText: 'Password',
                             contentPadding: EdgeInsets.all(5.0),
                             border: OutlineInputBorder(
@@ -196,6 +165,7 @@ class _CreateAccountState extends State<CreateAccount> {
                         height: 45,
                         child: TextField(
                           decoration: InputDecoration(
+                            hintStyle: FormTextStyle.textfieldtext,
                             hintText: 'Phone Number',
                             contentPadding: EdgeInsets.all(5.0),
                             border: OutlineInputBorder(
@@ -211,6 +181,7 @@ class _CreateAccountState extends State<CreateAccount> {
                         height: 45,
                         child: TextField(
                           decoration: InputDecoration(
+                            hintStyle: FormTextStyle.textfieldtext,
                             hintText: 'Address',
                             contentPadding: EdgeInsets.all(5.0),
                             border: OutlineInputBorder(
@@ -256,53 +227,23 @@ class _CreateAccountState extends State<CreateAccount> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      'Confirm Password',
-                      style: TextStyle(
-                        fontFamily: 'Colfax',
-                        fontSize: 16,
-                      ),
-                    ),
+                    Text('Confirm Password', style: FormTextStyle.text),
                     SizedBox(
                       height: 30,
                     ),
-                    Text(
-                      'Alternate Number',
-                      style: TextStyle(
-                        fontFamily: 'Colfax',
-                        fontSize: 16,
-                      ),
-                    ),
+                    Text('Alternate Number', style: FormTextStyle.text),
                     SizedBox(
                       height: 30,
                     ),
-                    Text(
-                      'Address 2',
-                      style: TextStyle(
-                        fontFamily: 'Colfax',
-                        fontSize: 16,
-                      ),
-                    ),
+                    Text('Address 2', style: FormTextStyle.text),
                     SizedBox(
                       height: 30,
                     ),
-                    Text(
-                      'Account Type',
-                      style: TextStyle(
-                        fontFamily: 'Colfax',
-                        fontSize: 16,
-                      ),
-                    ),
+                    Text('Account Type', style: FormTextStyle.text),
                     SizedBox(
                       height: 30,
                     ),
-                    Text(
-                      'ID Number',
-                      style: TextStyle(
-                        fontFamily: 'Colfax',
-                        fontSize: 16,
-                      ),
-                    ),
+                    Text('ID Number', style: FormTextStyle.text),
                   ],
                 ),
                 Expanded(
@@ -313,6 +254,7 @@ class _CreateAccountState extends State<CreateAccount> {
                         height: 45,
                         child: TextField(
                           decoration: InputDecoration(
+                            hintStyle: FormTextStyle.textfieldtext,
                             hintText: 'Password',
                             contentPadding: EdgeInsets.all(5.0),
                             border: OutlineInputBorder(
@@ -328,6 +270,7 @@ class _CreateAccountState extends State<CreateAccount> {
                         height: 45,
                         child: TextField(
                           decoration: InputDecoration(
+                            hintStyle: FormTextStyle.textfieldtext,
                             hintText: 'Phone Number',
                             contentPadding: EdgeInsets.all(5.0),
                             border: OutlineInputBorder(
@@ -343,6 +286,7 @@ class _CreateAccountState extends State<CreateAccount> {
                         height: 45,
                         child: TextField(
                           decoration: InputDecoration(
+                            hintStyle: FormTextStyle.textfieldtext,
                             hintText: 'Address',
                             contentPadding: EdgeInsets.all(5.0),
                             border: OutlineInputBorder(

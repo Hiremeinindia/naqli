@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-class FormText {
+class FormTextStyle {
   static const TextStyle text = TextStyle(
     fontFamily: 'Colfax',
     fontSize: 14,
   );
   static const TextStyle textfieldtext =
-      TextStyle(fontSize: 12, color: Colors.black, fontFamily: 'Poppins');
+      TextStyle(fontSize: 12, color: Colors.black, fontFamily: 'Segoe');
   static const TextStyle dropdowntext = TextStyle(
       fontSize: 12,
       color: Colors.white,
