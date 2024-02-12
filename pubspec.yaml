@@ -78,6 +78,9 @@ flutter:
     - family: Colfax
       fonts:
         - asset: fonts/Colfax-Regular.otf
+    - family: ColfaxBold
+      fonts:
+        - asset: fonts/Colfax-Bold.otf
   #       - asset: fonts/Schyler-Regular.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic

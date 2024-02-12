@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/Widgets/customButton.dart';
+import 'package:flutter_application_1/createAccount.dart';
 
 import '../main.dart';
 
@@ -54,7 +55,10 @@ class _LoginPageState extends State<LoginPage> {
                       Align(
                           alignment: Alignment.topRight,
                           child: IconButton(
-                              onPressed: () {}, icon: Icon(Icons.cancel))),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              icon: Icon(Icons.cancel))),
                       SizedBox(
                         height: 100,
                       ),
@@ -197,7 +201,14 @@ class _LoginPageState extends State<LoginPage> {
                                     fontSize: 16,
                                     color: Color.fromARGB(255, 128, 123, 229)),
                               ),
-                              onPressed: () {},
+                              onPressed: () {
+                                showDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    return CreateAccount();
+                                  },
+                                );
+                              },
                             ),
                           ],
                         ),

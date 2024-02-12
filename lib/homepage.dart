@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter_application_1/createAccount.dart';
 
 import 'loginPage.dart';
 
@@ -61,7 +62,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         showDialog(
                           context: context,
                           builder: (context) {
-                            return LoginPage();
+                            return CreateAccount();
                           },
                         );
                       },
