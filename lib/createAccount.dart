@@ -28,7 +28,7 @@ class _CreateAccountState extends State<CreateAccount> {
                 bottomRight: Radius.circular(31))),
         child: Padding(
           padding:
-              const EdgeInsets.only(left: 100, right: 100, top: 50, bottom: 50),
+              const EdgeInsets.only(left: 100, right: 100, top: 50, bottom: 45),
           child: Column(children: [
             Text(
               'Create your account',
@@ -45,11 +45,12 @@ class _CreateAccountState extends State<CreateAccount> {
               children: [
                 Text('First Name ', style: FormTextStyle.text),
                 SizedBox(
-                  width: 20,
+                  width: 63,
                 ),
                 Expanded(
                   child: SizedBox(
                     height: 45,
+                    width: 100,
                     child: TextField(
                       decoration: InputDecoration(
                         hintStyle: FormTextStyle.textfieldtext,
@@ -81,7 +82,7 @@ class _CreateAccountState extends State<CreateAccount> {
               ],
             ),
             SizedBox(
-              height: 10,
+              height: 15,
             ),
             Row(
               children: [
@@ -93,7 +94,7 @@ class _CreateAccountState extends State<CreateAccount> {
                   ),
                 ),
                 SizedBox(
-                  width: 20,
+                  width: 30,
                 ),
                 Expanded(
                   child: SizedBox(
@@ -121,22 +122,25 @@ class _CreateAccountState extends State<CreateAccount> {
                   children: [
                     Text('Password', style: FormTextStyle.text),
                     SizedBox(
-                      height: 30,
+                      height: 40,
                     ),
                     Text('Contact Number', style: FormTextStyle.text),
                     SizedBox(
-                      height: 30,
+                      height: 40,
                     ),
                     Text('Address 1', style: FormTextStyle.text),
                     SizedBox(
-                      height: 30,
+                      height: 40,
                     ),
                     Text('City', style: FormTextStyle.text),
                     SizedBox(
-                      height: 30,
+                      height: 40,
                     ),
                     Text('Govt ID', style: FormTextStyle.text),
                   ],
+                ),
+                SizedBox(
+                  width: 30,
                 ),
                 Expanded(
                   child: Column(
@@ -159,7 +163,7 @@ class _CreateAccountState extends State<CreateAccount> {
                         ),
                       ),
                       SizedBox(
-                        height: 10,
+                        height: 15,
                       ),
                       SizedBox(
                         height: 45,
@@ -175,7 +179,7 @@ class _CreateAccountState extends State<CreateAccount> {
                         ),
                       ),
                       SizedBox(
-                        height: 10,
+                        height: 15,
                       ),
                       SizedBox(
                         height: 45,
@@ -191,7 +195,7 @@ class _CreateAccountState extends State<CreateAccount> {
                         ),
                       ),
                       SizedBox(
-                        height: 10,
+                        height: 15,
                       ),
                       SizedBox(
                         height: 45,
@@ -205,7 +209,7 @@ class _CreateAccountState extends State<CreateAccount> {
                         ),
                       ),
                       SizedBox(
-                        height: 10,
+                        height: 15,
                       ),
                       SizedBox(
                         height: 45,
@@ -219,32 +223,38 @@ class _CreateAccountState extends State<CreateAccount> {
                         ),
                       ),
                       SizedBox(
-                        height: 10,
+                        height: 15,
                       ),
                     ],
                   ),
+                ),
+                SizedBox(
+                  width: 30,
                 ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text('Confirm Password', style: FormTextStyle.text),
                     SizedBox(
-                      height: 30,
+                      height: 40,
                     ),
                     Text('Alternate Number', style: FormTextStyle.text),
                     SizedBox(
-                      height: 30,
+                      height: 40,
                     ),
                     Text('Address 2', style: FormTextStyle.text),
                     SizedBox(
-                      height: 30,
+                      height: 40,
                     ),
                     Text('Account Type', style: FormTextStyle.text),
                     SizedBox(
-                      height: 30,
+                      height: 40,
                     ),
                     Text('ID Number', style: FormTextStyle.text),
                   ],
+                ),
+                SizedBox(
+                  width: 10,
                 ),
                 Expanded(
                   child: Column(
@@ -264,7 +274,7 @@ class _CreateAccountState extends State<CreateAccount> {
                         ),
                       ),
                       SizedBox(
-                        height: 10,
+                        height: 15,
                       ),
                       SizedBox(
                         height: 45,
@@ -280,7 +290,7 @@ class _CreateAccountState extends State<CreateAccount> {
                         ),
                       ),
                       SizedBox(
-                        height: 10,
+                        height: 15,
                       ),
                       SizedBox(
                         height: 45,
@@ -296,7 +306,7 @@ class _CreateAccountState extends State<CreateAccount> {
                         ),
                       ),
                       SizedBox(
-                        height: 10,
+                        height: 15,
                       ),
                       SizedBox(
                         height: 45,
@@ -310,7 +320,7 @@ class _CreateAccountState extends State<CreateAccount> {
                         ),
                       ),
                       SizedBox(
-                        height: 10,
+                        height: 15,
                       ),
                       SizedBox(
                         height: 45,
@@ -324,7 +334,7 @@ class _CreateAccountState extends State<CreateAccount> {
                         ),
                       ),
                       SizedBox(
-                        height: 10,
+                        height: 15,
                       ),
                     ],
                   ),
@@ -332,10 +342,7 @@ class _CreateAccountState extends State<CreateAccount> {
               ],
             ),
             SizedBox(
-              height: 10,
-            ),
-            SizedBox(
-              height: 10,
+              height: 20,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
