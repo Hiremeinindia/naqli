@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/Widgets/customButton.dart';
 import 'package:flutter_application_1/Widgets/formText.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_application_1/homepage.dart';
+import 'package:flutter_application_1/loginPage.dart';
 
 import '../main.dart';
 
@@ -12,35 +15,165 @@ class CreateAccount extends StatefulWidget {
 }
 
 class _CreateAccountState extends State<CreateAccount> {
+  final _formKey = GlobalKey<FormState>();
+
   List<String> cities = ['City 1', 'City 2', 'City 3', 'City 4'];
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
 // Declare a variable to hold the selected city
   String? selectedCity;
   String? selectedType;
   String? selectedOption;
+
+  TextEditingController firstNameController = TextEditingController();
+  TextEditingController lastNameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController contactNumberController = TextEditingController();
+  TextEditingController addressController = TextEditingController();
+  TextEditingController govtIdController = TextEditingController();
+  TextEditingController confirmPasswordController = TextEditingController();
+  TextEditingController alternateNumberController = TextEditingController();
+  TextEditingController address2Controller = TextEditingController();
+  TextEditingController idNumberController = TextEditingController();
+  TextEditingController cityController = TextEditingController();
+  TextEditingController accounttypeController = TextEditingController();
+  Future<void> _saveUserDataToFirestore() async {
+    try {
+      // Your Firestore collection reference
+      CollectionReference usersCollection = _firestore.collection('users');
+
+      // Save user data
+      await usersCollection.add({
+        'firstName': firstNameController.text,
+        'lastName': lastNameController.text,
+        'email': emailController.text,
+        'password': passwordController.text,
+        'phoneNumber': contactNumberController.text,
+        'address': addressController.text,
+        'city': selectedCity,
+        'govtId': selectedOption,
+        'confirmPassword': confirmPasswordController.text,
+        'alternateNumber': alternateNumberController.text,
+        'address2': address2Controller.text,
+        'accountType': selectedType,
+        'idNumber': idNumberController.text,
+      });
+
+      // Start phone authentication
+      // await _startPhoneAuth(contactNumberController.text);
+
+      // Show success message or navigate to another screen
+      print('User data saved to Firestore successfully!');
+    } catch (e) {
+      // Handle errors
+      print('Error saving user data to Firestore: $e');
+    }
+  }
+
+  // Future<void> _startPhoneAuth(String phoneNumber) async {
+  //   final phoneAuth = FirebasePhoneAuth(
+  //     phoneNumber: phoneNumber,
+  //     onCompleted: (phoneAuthCredential) async {
+  //       // The phone number has been successfully verified.
+  //       // You can proceed with creating the user account or navigating to the home page.
+  //       await _saveUserDataToFirestore();
+  //       Navigator.push(
+  //         context,
+  //         MaterialPageRoute(builder: (context) => MyHomePage()),
+  //       );
+  //     },
+  //     onFailed: (error) {
+  //       // Handle the verification failure
+  //       print('Phone authentication failed: $error');
+  //     },
+  //   );
+
+  //   await phoneAuth.start();
+  // }
+  bool isValidName(String name) {
+    final RegExp nameRegExp = RegExp(r"^[A-Za-z']+([- ][A-Za-z']+)*$");
+    return nameRegExp.hasMatch(name);
+  }
+
+  bool isValidWorkexp(String workexp) {
+    final RegExp pattern = RegExp(r"^[A-Za-z0-9]+$");
+    return pattern.hasMatch(workexp);
+  }
+
+  bool isValidEmail(String email) {
+    // Regular expression for basic email validation
+    // This is a simple example and may not cover all valid email formats
+    final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+    return emailRegex.hasMatch(email);
+  }
+
+  String? workexpValidator(String? value) {
+    if (value == null || value.isEmpty) {
+      return '*Required';
+    } else if (!isValidWorkexp(value)) {
+      return 'Invalid format';
+    }
+    return null;
+  }
+
+  String? nameValidator(String? value) {
+    if (value == null || value.isEmpty) {
+      return '*Required';
+    } else if (!isValidName(value)) {
+      return 'Invalid format';
+    }
+    return null;
+  }
+
+  String? emailValidator(String? value) {
+    if (value == null || value.isEmpty) {
+      return '*Required';
+    } else if (!isValidEmail(value)) {
+      return 'Invalid email format';
+    }
+    return null;
+  }
+
+  String? validatePassword(String? value) {
+    RegExp regex =
+        RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$');
+    if (value!.isEmpty) {
+      return 'Please enter password';
+    } else {
+      if (!regex.hasMatch(value)) {
+        return 'Enter valid password';
+      } else {
+        return null;
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      // The Dialog widget provides a full-page overlay
-      child: Container(
-        width: 1100,
-        height: 750,
-        decoration: const BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(31),
-                bottomLeft: Radius.circular(31),
-                topRight: Radius.circular(31),
-                bottomRight: Radius.circular(31))),
-        child: Padding(
-          padding:
-              const EdgeInsets.only(left: 100, right: 100, top: 50, bottom: 45),
+        child: Container(
+      width: 1100,
+      height: 750,
+      decoration: const BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(31),
+          bottomLeft: Radius.circular(31),
+          topRight: Radius.circular(31),
+          bottomRight: Radius.circular(31),
+        ),
+      ),
+      child: Padding(
+        padding:
+            const EdgeInsets.only(left: 100, right: 100, top: 50, bottom: 45),
+        child: Form(
+          key: _formKey,
           child: Column(children: [
             Text(
               'Create your account',
               style: TextStyle(
                 fontFamily: 'ColfaxBold',
-                fontSize: 25,
               ),
             ),
             SizedBox(
@@ -49,69 +182,65 @@ class _CreateAccountState extends State<CreateAccount> {
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                Text('First Name ', style: FormTextStyle.text),
-                SizedBox(
-                  width: 63,
-                ),
+                Text('First Name '),
+                SizedBox(width: 63),
                 Expanded(
                   child: SizedBox(
                     height: 45,
                     width: 100,
-                    child: TextField(
+                    child: TextFormField(
+                      controller: firstNameController,
+                      validator: nameValidator,
                       decoration: InputDecoration(
-                        hintStyle: FormTextStyle.textfieldtext,
+                        hintStyle: TextStyle(fontSize: 16),
                         hintText: 'First Name',
                         contentPadding: EdgeInsets.all(5.0),
                         border: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(5))),
+                          borderRadius: BorderRadius.all(Radius.circular(5)),
+                        ),
                       ),
                     ),
                   ),
                 ),
-                SizedBox(
-                  width: 25,
-                ),
+                SizedBox(width: 25),
                 Expanded(
                   child: SizedBox(
                     height: 45,
-                    child: TextField(
+                    child: TextFormField(
+                      controller: lastNameController,
+                      validator: nameValidator,
                       decoration: InputDecoration(
-                        hintStyle: FormTextStyle.textfieldtext,
+                        hintStyle: TextStyle(fontSize: 16),
                         hintText: 'Last Name',
                         contentPadding: EdgeInsets.all(5.0),
                         border: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(5))),
+                          borderRadius: BorderRadius.all(Radius.circular(5)),
+                        ),
                       ),
                     ),
                   ),
                 ),
               ],
             ),
-            SizedBox(
-              height: 15,
-            ),
+            SizedBox(height: 15),
             Row(
               children: [
-                Text(
-                  'Email Address',
-                  style: TextStyle(
-                    fontFamily: 'Colfax',
-                    fontSize: 16,
-                  ),
-                ),
-                SizedBox(
-                  width: 30,
-                ),
+                Text('Email Address',
+                    style: TextStyle(fontFamily: 'Colfax', fontSize: 16)),
+                SizedBox(width: 30),
                 Expanded(
                   child: SizedBox(
                     height: 45,
-                    child: TextField(
+                    child: TextFormField(
+                      controller: emailController,
+                      validator: emailValidator,
                       decoration: InputDecoration(
-                        hintStyle: FormTextStyle.textfieldtext,
+                        hintStyle: TextStyle(fontSize: 16),
                         hintText: 'Email address',
                         contentPadding: EdgeInsets.all(5.0),
                         border: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(5))),
+                          borderRadius: BorderRadius.all(Radius.circular(5)),
+                        ),
                       ),
                     ),
                   ),
@@ -157,7 +286,9 @@ class _CreateAccountState extends State<CreateAccount> {
                       ),
                       SizedBox(
                         height: 45,
-                        child: TextField(
+                        child: TextFormField(
+                          controller: passwordController,
+                          validator: validatePassword,
                           decoration: InputDecoration(
                             hintStyle: FormTextStyle.textfieldtext,
                             hintText: 'Password',
@@ -173,7 +304,14 @@ class _CreateAccountState extends State<CreateAccount> {
                       ),
                       SizedBox(
                         height: 45,
-                        child: TextField(
+                        child: TextFormField(
+                          controller: contactNumberController,
+                          validator: (value) {
+                            if (value!.length != 10)
+                              return 'Mobile Number must be of 10 digit';
+                            else
+                              return null;
+                          },
                           decoration: InputDecoration(
                             hintStyle: FormTextStyle.textfieldtext,
                             hintText: 'Phone Number',
@@ -189,7 +327,9 @@ class _CreateAccountState extends State<CreateAccount> {
                       ),
                       SizedBox(
                         height: 45,
-                        child: TextField(
+                        child: TextFormField(
+                          controller: addressController,
+                          validator: nameValidator,
                           decoration: InputDecoration(
                             hintStyle: FormTextStyle.textfieldtext,
                             hintText: 'Address',
@@ -305,7 +445,9 @@ class _CreateAccountState extends State<CreateAccount> {
                     children: [
                       SizedBox(
                         height: 45,
-                        child: TextField(
+                        child: TextFormField(
+                          validator: validatePassword,
+                          controller: confirmPasswordController,
                           decoration: InputDecoration(
                             hintStyle: FormTextStyle.textfieldtext,
                             hintText: 'Password',
@@ -321,7 +463,14 @@ class _CreateAccountState extends State<CreateAccount> {
                       ),
                       SizedBox(
                         height: 45,
-                        child: TextField(
+                        child: TextFormField(
+                          validator: (value) {
+                            if (value!.length != 10)
+                              return 'Mobile Number must be of 10 digit';
+                            else
+                              return null;
+                          },
+                          controller: alternateNumberController,
                           decoration: InputDecoration(
                             hintStyle: FormTextStyle.textfieldtext,
                             hintText: 'Phone Number',
@@ -337,7 +486,9 @@ class _CreateAccountState extends State<CreateAccount> {
                       ),
                       SizedBox(
                         height: 45,
-                        child: TextField(
+                        child: TextFormField(
+                          validator: nameValidator,
+                          controller: address2Controller,
                           decoration: InputDecoration(
                             hintStyle: FormTextStyle.textfieldtext,
                             hintText: 'Address',
@@ -384,7 +535,14 @@ class _CreateAccountState extends State<CreateAccount> {
                       ),
                       SizedBox(
                         height: 45,
-                        child: TextField(
+                        child: TextFormField(
+                          validator: (value) {
+                            if (value!.length != 10)
+                              return 'Mobile Number must be of 10 digit';
+                            else
+                              return null;
+                          },
+                          controller: idNumberController,
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.all(5.0),
                             border: OutlineInputBorder(
@@ -410,12 +568,15 @@ class _CreateAccountState extends State<CreateAccount> {
                 SizedBox(
                   height: 45,
                   child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => CreateAccount()),
-                      );
+                    onPressed: () async {
+                      if (_formKey.currentState!.validate()) {
+                        await _saveUserDataToFirestore();
+                        // Navigator.push(
+                        //   context,
+                        //   MaterialPageRoute(builder: (context) => MyHomePage()),
+                        // );
+                      }
+                      ;
                     },
                     style: ElevatedButton.styleFrom(
                       fixedSize: const Size.fromWidth(double.infinity),
@@ -453,7 +614,7 @@ class _CreateAccountState extends State<CreateAccount> {
                     },
                     style: ElevatedButton.styleFrom(
                       fixedSize: const Size.fromWidth(double.infinity),
-                      backgroundColor: Color.fromARGB(255, 128, 123, 229),
+                      backgroundColor: Color.fromRGBO(112, 112, 112, 1),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(
                             5), // Adjust border radius as needed
@@ -464,10 +625,9 @@ class _CreateAccountState extends State<CreateAccount> {
                       child: Text(
                         'Cancel',
                         style: TextStyle(
-                          fontFamily: 'Colfax',
-                          fontSize: 16,
-                          color: Colors.white,
-                        ),
+                            fontFamily: 'Colfax',
+                            fontSize: 16,
+                            color: Colors.white),
                       ),
                     ),
                   ),
@@ -531,6 +691,6 @@ class _CreateAccountState extends State<CreateAccount> {
           ]),
         ),
       ),
-    );
+    ));
   }
 }
