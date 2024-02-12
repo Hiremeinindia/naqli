@@ -142,10 +142,17 @@ class _MyHomePageState extends State<TripDetails> {
                           Container(
                             width: 1100,
                             height: 200,
-                            decoration: BoxDecoration(
-                              color: Color.fromARGB(255, 232, 229, 240),
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
+                            decoration: const BoxDecoration(
+                                color: Colors.white,
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.grey,
+                                    spreadRadius: 1,
+                                    blurRadius: 2, // changes position of shadow
+                                  ),
+                                ],
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(25))),
                             child: ListView(
                               // Use ListView instead of Column
                               shrinkWrap: true,
