@@ -140,7 +140,7 @@ class _LoginPageState extends State<LoginPage> {
                                   showDialog(
                                     context: context,
                                     builder: (context) {
-                                      return CreateAccount();
+                                      return MyHomePage();
                                     },
                                   );
                                 },
@@ -233,7 +233,13 @@ class _LoginPageState extends State<LoginPage> {
                                   fontSize: 16,
                                   color: Color.fromARGB(255, 128, 123, 229)),
                             ),
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => MyHomePage()),
+                              );
+                            },
                           ),
                         ),
                       ),
