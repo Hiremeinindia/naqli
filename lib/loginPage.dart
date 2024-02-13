@@ -145,13 +145,11 @@ class _LoginPageState extends State<LoginPage> {
                                   );
                                 },
                                 style: ElevatedButton.styleFrom(
-                                  fixedSize:
-                                      const Size.fromWidth(double.infinity),
-                                  backgroundColor:
-                                      Color.fromARGB(255, 128, 123, 229),
+                                  primary: Color.fromRGBO(112, 112, 112, 1),
+                                  side: BorderSide(
+                                      color: Color.fromRGBO(112, 112, 112, 1)),
                                   shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(
-                                        5), // Adjust border radius as needed
+                                    borderRadius: BorderRadius.circular(8),
                                   ),
                                 ),
                                 child: Text(
