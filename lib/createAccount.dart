@@ -282,6 +282,7 @@ class _CreateAccountState extends State<CreateAccount> {
                   'Create your account',
                   style: TextStyle(
                     fontFamily: 'ColfaxBold',
+                    fontSize: 30,
                   ),
                 ),
                 SizedBox(
@@ -291,7 +292,7 @@ class _CreateAccountState extends State<CreateAccount> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Text('First Name '),
-                    SizedBox(width: 65),
+                    SizedBox(width: 75),
                     Expanded(
                       child: SizedBox(
                         height: 45,
@@ -337,7 +338,7 @@ class _CreateAccountState extends State<CreateAccount> {
                   children: [
                     Text('Email Address',
                         style: TextStyle(fontFamily: 'Colfax', fontSize: 16)),
-                    SizedBox(width: 30),
+                    SizedBox(width: 40),
                     Expanded(
                       child: SizedBox(
                         height: 45,
@@ -694,11 +695,53 @@ class _CreateAccountState extends State<CreateAccount> {
                             await _saveUserDataToFirestore();
                           }
                         },
+                        style: ElevatedButton.styleFrom(
+                          fixedSize: const Size.fromWidth(double.infinity),
+                          backgroundColor: Color.fromARGB(255, 128, 123, 229),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(
+                                5), // Adjust border radius as needed
+                          ),
+                        ),
                         child: Text(
                           'Create Account',
                           style: TextStyle(
                             fontFamily: 'Colfax',
                             fontSize: 16,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 30,
+                    ),
+                    SizedBox(
+                      height: 45,
+                      child: ElevatedButton(
+                        onPressed: () async {
+                          if (_formKey.currentState!.validate()) {
+                            print("track1");
+                            await _startPhoneAuth(contactNumberController.text);
+                            // _showOtpVerificationDialog();
+                            // Save user data and start phone authentication
+                            await _saveUserDataToFirestore();
+                          }
+                        },
+                        style: ElevatedButton.styleFrom(
+                          fixedSize: const Size.fromWidth(double.infinity),
+                          backgroundColor: Color.fromARGB(112, 112, 112, 1),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(
+                                5), // Adjust border radius as needed
+                          ),
+                        ),
+                        child: Text(
+                          'Cancel',
+                          style: TextStyle(
+                            fontFamily: 'Colfax',
+                            fontSize: 16,
+                            color: Colors.white,
                           ),
                         ),
                       ),
