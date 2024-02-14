@@ -25,40 +25,85 @@ class _LoginPageState extends State<LoginPage> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text("Verification"),
-          content: Column(
-            children: [
-              Text("Enter Mobile Number"),
-              TextField(
-                controller: contactNumberController,
-                keyboardType: TextInputType.number,
-                decoration: InputDecoration(
-                  hintText: 'Mobile Number',
+          title: Center(child: Text("Verify Account")),
+          content: Container(
+            height: 200, // Set the desired height
+            width: 300, // Set the desired width
+            child: Column(
+              children: [
+                Text("Enter Mobile Number"),
+                SizedBox(height: 10),
+                Row(
+                  children: [
+                    Expanded(
+                      child: SizedBox(
+                        height: 30,
+                        width: 200,
+                        child: TextField(
+                          controller: contactNumberController,
+                          keyboardType: TextInputType.number,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                          ),
+                        ),
+                      ),
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                        _startPhoneAuth(contactNumberController.text);
+                      },
+                      style: ElevatedButton.styleFrom(
+                        primary: Color.fromRGBO(60, 55, 148, 1),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                      ),
+                      child: Text(
+                        "Get OTP",
+                        style: TextStyle(
+                          fontFamily: 'Colfax',
+                          fontSize: 16,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-              ),
-              SizedBox(height: 10),
-              ElevatedButton(
-                onPressed: () {
-                  // Validate mobile number and proceed if valid
-                  // String mobileNumber = mobileNumberController.text;
-
-                  // Generate OTP logic goes here
-
-                  // Display OTP input dialog
-                  // Close current dialog
-                  Navigator.pop(context);
-                  _startPhoneAuth(contactNumberController.text);
-                },
-                child: Text("Get OTP"),
-              ),
-            ],
+                SizedBox(height: 10),
+              ],
+            ),
           ),
           actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: Text("Cancel"),
+            Padding(
+              padding: const EdgeInsets.only(left: 30),
+              child: Row(
+                children: [
+                  Text(
+                    "Didn't receive an email?",
+                    style: TextStyle(
+                      fontFamily: 'Colfax',
+                      fontSize: 14,
+                      color: Colors.black,
+                    ),
+                  ),
+                  InkWell(
+                    onTap: () {
+                      // Implement the logic to resend the OTP
+                      // For now, let's close the dialog
+                      Navigator.pop(context);
+                    },
+                    child: Text(
+                      "Resend",
+                      style: TextStyle(
+                        fontFamily: 'Colfax',
+                        fontSize: 14,
+                        color: Color.fromRGBO(60, 55, 148, 1),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ],
         );
@@ -336,7 +381,7 @@ class _LoginPageState extends State<LoginPage> {
                                   ),
                                 ),
                               ),
-                              TextButton(
+                              InkWell(
                                 child: Text(
                                   'Forgot Password?',
                                   style: TextStyle(
@@ -345,7 +390,7 @@ class _LoginPageState extends State<LoginPage> {
                                     color: Color.fromARGB(255, 128, 123, 229),
                                   ),
                                 ),
-                                onPressed: () {},
+                                onTap: () {},
                               ),
                             ],
                           ),
@@ -369,7 +414,7 @@ class _LoginPageState extends State<LoginPage> {
                                   color: Colors.black,
                                 ),
                               ),
-                              TextButton(
+                              InkWell(
                                 child: Text(
                                   'Create One!',
                                   style: TextStyle(
@@ -378,7 +423,7 @@ class _LoginPageState extends State<LoginPage> {
                                     color: Color.fromARGB(255, 128, 123, 229),
                                   ),
                                 ),
-                                onPressed: () {
+                                onTap: () {
                                   showDialog(
                                     context: context,
                                     builder: (context) {
@@ -400,7 +445,7 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                           child: Align(
                             alignment: Alignment.centerLeft,
-                            child: TextButton(
+                            child: InkWell(
                               child: Text(
                                 'Use without Log in',
                                 style: TextStyle(
@@ -409,7 +454,7 @@ class _LoginPageState extends State<LoginPage> {
                                   color: Color.fromARGB(255, 128, 123, 229),
                                 ),
                               ),
-                              onPressed: () async {
+                              onTap: () async {
                                 _showOtpVerificationDialog();
                                 if (isVerified) {
                                   Navigator.push(
