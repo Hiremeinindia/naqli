@@ -133,6 +133,12 @@ class _CreateAccountState extends State<CreateAccount> {
                       // Check if the verification is successful
                       if (result.user != null) {
                         print("otp verified successfully");
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => MyHomePage(),
+                          ),
+                        );
                         setState(() {
                           isVerified = true;
                         });
@@ -180,14 +186,14 @@ class _CreateAccountState extends State<CreateAccount> {
             ],
           ),
           actions: [
-            TextButton(
-              onPressed: () {
+            InkWell(
+              onTap: () {
                 Navigator.of(context).pop();
               },
               child: Text("Cancel"),
             ),
-            TextButton(
-              onPressed: () async {
+            InkWell(
+              onTap: () async {
                 // Validate OTP and proceed if valid
                 String enteredOtp = otpController.text;
                 if (enteredOtp.isNotEmpty) {
@@ -748,11 +754,13 @@ class _CreateAccountState extends State<CreateAccount> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text('Already have an account? '),
-                    TextButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => LoginPage()),
+                    InkWell(
+                      onTap: () {
+                        showDialog(
+                          context: context,
+                          builder: (context) {
+                            return LoginPage();
+                          },
                         );
                       },
                       child: Text(

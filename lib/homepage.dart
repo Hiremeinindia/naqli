@@ -57,8 +57,8 @@ class _MyHomePageState extends State<MyHomePage> {
                         color: Colors.black,
                       ),
                     ),
-                    TextButton(
-                      onPressed: () {
+                    InkWell(
+                      onTap: () {
                         showDialog(
                           context: context,
                           builder: (context) {
