@@ -130,8 +130,6 @@ class _CreateAccountState extends State<CreateAccount> {
                     );
 
                     auth.signInWithCredential(_credential).then((result) {
-                      Navigator.pop(context);
-
                       // Check if the verification is successful
                       if (result.user != null) {
                         print("otp verified successfully");
