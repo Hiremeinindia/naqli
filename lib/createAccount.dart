@@ -75,8 +75,6 @@ class _CreateAccountState extends State<CreateAccount> {
         'idNumber': idNumberController.text,
       });
 
-      await _startPhoneAuth(contactNumberController.text);
-
       print('User data saved to Firestore successfully!');
     } catch (e) {
       print('Error saving user data to Firestore: $e');
@@ -146,8 +144,6 @@ class _CreateAccountState extends State<CreateAccount> {
                       }
                     }).catchError((e) {
                       print("Error signing in with credential: $e");
-                      showErrorDialog(
-                          "Invalid verification code. Please enter the correct code.");
                     });
                   },
                   child: Text("Done"),
@@ -167,7 +163,6 @@ class _CreateAccountState extends State<CreateAccount> {
 
   void _showOtpVerificationDialog() {
     print("track4");
-    TextEditingController otpController = TextEditingController();
 
     showDialog(
       context: context,
