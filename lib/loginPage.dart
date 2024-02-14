@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/Widgets/customButton.dart';
@@ -13,6 +15,15 @@ class LoginPage extends StatefulWidget {
   _LoginPageState createState() => _LoginPageState();
 }
 
+class ScaleSize {
+  static double textScaleFactor(BuildContext context,
+      {double maxTextScaleFactor = 2}) {
+    final width = MediaQuery.of(context).size.width;
+    double val = (width / 1400) * maxTextScaleFactor;
+    return max(1, min(val, maxTextScaleFactor));
+  }
+}
+
 class _LoginPageState extends State<LoginPage> {
   bool isVerified = false;
   TextEditingController otpController = TextEditingController();
@@ -25,13 +36,30 @@ class _LoginPageState extends State<LoginPage> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Center(child: Text("Verify Account")),
+          title: Center(
+              child: Text(
+            "Verify Account",
+            textScaleFactor: ScaleSize.textScaleFactor(context),
+            style: TextStyle(
+              fontFamily: 'Colfax',
+              fontSize: 15,
+              color: Colors.black,
+            ),
+          )),
           content: Container(
             height: 200, // Set the desired height
             width: 300, // Set the desired width
             child: Column(
               children: [
-                Text("Enter Mobile Number"),
+                Text(
+                  "Enter Mobile Number",
+                  textScaleFactor: ScaleSize.textScaleFactor(context),
+                  style: TextStyle(
+                    fontFamily: 'Colfax',
+                    fontSize: 10,
+                    color: Colors.black,
+                  ),
+                ),
                 SizedBox(height: 10),
                 Row(
                   children: [
@@ -63,9 +91,10 @@ class _LoginPageState extends State<LoginPage> {
                         "Get OTP",
                         style: TextStyle(
                           fontFamily: 'Colfax',
-                          fontSize: 16,
+                          fontSize: 10,
                           color: Colors.white,
                         ),
+                        textScaleFactor: ScaleSize.textScaleFactor(context),
                       ),
                     ),
                   ],
@@ -75,35 +104,35 @@ class _LoginPageState extends State<LoginPage> {
             ),
           ),
           actions: [
-            Padding(
-              padding: const EdgeInsets.only(left: 30),
-              child: Row(
-                children: [
-                  Text(
-                    "Didn't receive an email?",
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "Didn't receive an email?",
+                  style: TextStyle(
+                    fontFamily: 'Colfax',
+                    fontSize: 7,
+                    color: Colors.black,
+                  ),
+                  textScaleFactor: ScaleSize.textScaleFactor(context),
+                ),
+                InkWell(
+                  onTap: () {
+                    // Implement the logic to resend the OTP
+                    // For now, let's close the dialog
+                    Navigator.pop(context);
+                  },
+                  child: Text(
+                    "Resend",
                     style: TextStyle(
                       fontFamily: 'Colfax',
-                      fontSize: 14,
-                      color: Colors.black,
+                      fontSize: 7,
+                      color: Color.fromRGBO(60, 55, 148, 1),
                     ),
+                    textScaleFactor: ScaleSize.textScaleFactor(context),
                   ),
-                  InkWell(
-                    onTap: () {
-                      // Implement the logic to resend the OTP
-                      // For now, let's close the dialog
-                      Navigator.pop(context);
-                    },
-                    child: Text(
-                      "Resend",
-                      style: TextStyle(
-                        fontFamily: 'Colfax',
-                        fontSize: 14,
-                        color: Color.fromRGBO(60, 55, 148, 1),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
           ],
         );
@@ -284,6 +313,7 @@ class _LoginPageState extends State<LoginPage> {
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
                             ),
+                            textScaleFactor: ScaleSize.textScaleFactor(context),
                           ),
                         ),
                         Padding(
@@ -299,8 +329,10 @@ class _LoginPageState extends State<LoginPage> {
                                 'Email ID',
                                 style: TextStyle(
                                   fontFamily: 'Colfax',
-                                  fontSize: 16,
+                                  fontSize: 8,
                                 ),
+                                textScaleFactor:
+                                    ScaleSize.textScaleFactor(context),
                               ),
                               SizedBox(
                                 height: 20,
@@ -321,8 +353,10 @@ class _LoginPageState extends State<LoginPage> {
                                 'Password',
                                 style: TextStyle(
                                   fontFamily: 'Colfax',
-                                  fontSize: 16,
+                                  fontSize: 8,
                                 ),
+                                textScaleFactor:
+                                    ScaleSize.textScaleFactor(context),
                               ),
                               SizedBox(
                                 height: 20,
@@ -363,9 +397,9 @@ class _LoginPageState extends State<LoginPage> {
                                     );
                                   },
                                   style: ElevatedButton.styleFrom(
-                                    primary: Color.fromRGBO(112, 112, 112, 1),
+                                    primary: Color.fromRGBO(128, 123, 229, 1),
                                     side: BorderSide(
-                                      color: Color.fromRGBO(112, 112, 112, 1),
+                                      color: Color.fromRGBO(128, 123, 229, 1),
                                     ),
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(8),
@@ -375,9 +409,11 @@ class _LoginPageState extends State<LoginPage> {
                                     'Login',
                                     style: TextStyle(
                                       fontFamily: 'Colfax',
-                                      fontSize: 16,
+                                      fontSize: 8,
                                       color: Colors.white,
                                     ),
+                                    textScaleFactor:
+                                        ScaleSize.textScaleFactor(context),
                                   ),
                                 ),
                               ),
@@ -386,9 +422,11 @@ class _LoginPageState extends State<LoginPage> {
                                   'Forgot Password?',
                                   style: TextStyle(
                                     fontFamily: 'Colfax',
-                                    fontSize: 16,
+                                    fontSize: 8,
                                     color: Color.fromARGB(255, 128, 123, 229),
                                   ),
+                                  textScaleFactor:
+                                      ScaleSize.textScaleFactor(context),
                                 ),
                                 onTap: () {},
                               ),
@@ -410,18 +448,22 @@ class _LoginPageState extends State<LoginPage> {
                                 "Don't have an account?",
                                 style: TextStyle(
                                   fontFamily: 'Colfax',
-                                  fontSize: 16,
+                                  fontSize: 8,
                                   color: Colors.black,
                                 ),
+                                textScaleFactor:
+                                    ScaleSize.textScaleFactor(context),
                               ),
                               InkWell(
                                 child: Text(
                                   'Create One!',
                                   style: TextStyle(
                                     fontFamily: 'Colfax',
-                                    fontSize: 16,
+                                    fontSize: 8,
                                     color: Color.fromARGB(255, 128, 123, 229),
                                   ),
+                                  textScaleFactor:
+                                      ScaleSize.textScaleFactor(context),
                                 ),
                                 onTap: () {
                                   showDialog(
@@ -450,9 +492,11 @@ class _LoginPageState extends State<LoginPage> {
                                 'Use without Log in',
                                 style: TextStyle(
                                   fontFamily: 'Colfax',
-                                  fontSize: 16,
+                                  fontSize: 8,
                                   color: Color.fromARGB(255, 128, 123, 229),
                                 ),
+                                textScaleFactor:
+                                    ScaleSize.textScaleFactor(context),
                               ),
                               onTap: () async {
                                 _showOtpVerificationDialog();
