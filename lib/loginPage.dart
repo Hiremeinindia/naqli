@@ -41,18 +41,18 @@ class _LoginPageState extends State<LoginPage> {
             "Verify Account",
             textScaleFactor: ScaleSize.textScaleFactor(context),
             style: TextStyle(
-              fontFamily: 'Colfax',
-              fontSize: 15,
-              color: Colors.black,
-            ),
+                fontFamily: 'Colfax',
+                fontSize: 15,
+                color: Colors.black,
+                fontWeight: FontWeight.bold),
           )),
           content: Container(
-            height: 200, // Set the desired height
-            width: 300, // Set the desired width
+            height: 150, // Set the desired height
+            width: 1000, // Set the desired width
             child: Column(
               children: [
                 Text(
-                  "Enter Mobile Number",
+                  "Enter Mobile NO",
                   textScaleFactor: ScaleSize.textScaleFactor(context),
                   style: TextStyle(
                     fontFamily: 'Colfax',
@@ -62,17 +62,16 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 SizedBox(height: 10),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Expanded(
-                      child: SizedBox(
-                        height: 30,
-                        width: 200,
-                        child: TextField(
-                          controller: contactNumberController,
-                          keyboardType: TextInputType.number,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(),
-                          ),
+                    SizedBox(
+                      height: 30,
+                      width: 200,
+                      child: TextField(
+                        controller: contactNumberController,
+                        keyboardType: TextInputType.number,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
                         ),
                       ),
                     ),
@@ -108,7 +107,7 @@ class _LoginPageState extends State<LoginPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  "Didn't receive an email?",
+                  "Didn't receive an email? ",
                   style: TextStyle(
                     fontFamily: 'Colfax',
                     fontSize: 7,
@@ -123,12 +122,12 @@ class _LoginPageState extends State<LoginPage> {
                     Navigator.pop(context);
                   },
                   child: Text(
-                    "Resend",
+                    "Resend.",
                     style: TextStyle(
-                      fontFamily: 'Colfax',
-                      fontSize: 7,
-                      color: Color.fromRGBO(60, 55, 148, 1),
-                    ),
+                        fontFamily: 'Colfax',
+                        fontSize: 7,
+                        color: Color.fromRGBO(60, 55, 148, 1),
+                        fontWeight: FontWeight.bold),
                     textScaleFactor: ScaleSize.textScaleFactor(context),
                   ),
                 ),
