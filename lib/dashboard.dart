@@ -2,21 +2,16 @@ import 'dart:math';
 
 import 'package:easy_sidemenu/easy_sidemenu.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/echarts_data.dart';
+import 'package:graphic/graphic.dart';
+import 'package:flutter/gestures.dart';
+import 'package:quiver/iterables.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({Key? key}) : super(key: key);
 
   @override
   State<Dashboard> createState() => _MyHomePageState();
-}
-
-class ScaleSize {
-  static double textScaleFactor(BuildContext context,
-      {double maxTextScaleFactor = 2}) {
-    final width = MediaQuery.of(context).size.width;
-    double val = (width / 1400) * maxTextScaleFactor;
-    return max(1, min(val, maxTextScaleFactor));
-  }
 }
 
 class _MyHomePageState extends State<Dashboard> {
@@ -57,7 +52,6 @@ class _MyHomePageState extends State<Dashboard> {
                         },
                         child: Text(
                           'User',
-                          textScaleFactor: ScaleSize.textScaleFactor(context),
                           style: TextStyle(
                             fontSize: 12,
                             fontFamily: "Segoe UI",
@@ -79,7 +73,6 @@ class _MyHomePageState extends State<Dashboard> {
                         },
                         child: Text(
                           'Enterprise',
-                          textScaleFactor: ScaleSize.textScaleFactor(context),
                           style: TextStyle(
                             fontSize: 12,
                             fontFamily: "Segoe UI",
@@ -101,7 +94,6 @@ class _MyHomePageState extends State<Dashboard> {
                         },
                         child: Text(
                           'Partner',
-                          textScaleFactor: ScaleSize.textScaleFactor(context),
                           style: TextStyle(
                             fontSize: 12,
                             fontFamily: "Segoe UI",
@@ -126,7 +118,6 @@ class _MyHomePageState extends State<Dashboard> {
                           padding: EdgeInsets.only(left: 15, top: 5),
                           child: Text(
                             "Contact Us",
-                            textScaleFactor: ScaleSize.textScaleFactor(context),
                             style: TextStyle(
                               fontFamily: 'Colfax',
                               fontSize: 8,
@@ -150,7 +141,6 @@ class _MyHomePageState extends State<Dashboard> {
                           padding: const EdgeInsets.only(left: 13, top: 5),
                           child: Text(
                             "Hello Faizal!",
-                            textScaleFactor: ScaleSize.textScaleFactor(context),
                             style: TextStyle(
                               fontFamily: 'Colfax',
                               fontSize: 8,
@@ -168,17 +158,21 @@ class _MyHomePageState extends State<Dashboard> {
         ),
       ),
       body: SingleChildScrollView(
-        child: Center(
-          child: Container(
-            child: Row(
-              children: [
-                Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(20.0),
-                      child: Container(
-                        height: 1420, // Adjust the height as needed
-                        width: 400,
+        scrollDirection: Axis.horizontal,
+        child: Flexible(
+          fit: FlexFit.tight,
+          child: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Padding(
+              padding: const EdgeInsets.only(left: 40),
+              child: Container(
+                  width: 1800,
+                  color: Color.fromRGBO(240, 237, 250, 1),
+                  child: Row(
+                    children: [
+                      Container(
+                        height: 1000, // Adjust the height as needed
+                        width: 500,
                         color: Color.fromRGBO(234, 232, 235, 1),
                         child: Padding(
                           padding: const EdgeInsets.all(30.0),
@@ -192,7 +186,7 @@ class _MyHomePageState extends State<Dashboard> {
                                   borderRadius: BorderRadius.circular(
                                       30.0), // Adjust the radius as needed
                                   child: Image.asset(
-                                    'Card.png',
+                                    'Circleavatar.png',
                                     width: 550,
                                     height: 400, // Adjust the height as needed
                                     fit: BoxFit.cover,
@@ -200,6 +194,7 @@ class _MyHomePageState extends State<Dashboard> {
                                 ),
                                 SizedBox(
                                   width: 450,
+                                  height: 360,
                                   child: Card(
                                     elevation: 10,
                                     shape: RoundedRectangleBorder(
@@ -288,13 +283,362 @@ class _MyHomePageState extends State<Dashboard> {
                           ),
                         ),
                       ),
-                    ),
-                  ],
-                ),
-                Column(
-                  children: [],
-                ),
-              ],
+                      Padding(
+                        padding: const EdgeInsets.all(50.0),
+                        child: Container(
+                          height: 1000,
+                          color: Color.fromRGBO(240, 237, 250, 1),
+                          child: Container(
+                            width: 1200,
+                            color: Color.fromRGBO(240, 237, 250, 0.9),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.only(top: 150, left: 50),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Container(
+                                        color: Colors.white,
+                                        margin: const EdgeInsets.only(top: 10),
+                                        width: 400,
+                                        height: 300,
+                                        child: Chart(
+                                          data: zip(lineSectionsData).toList(),
+                                          variables: {
+                                            'time': Variable(
+                                              accessor: (List datum) =>
+                                                  datum[0] as String,
+                                              scale: OrdinalScale(
+                                                  inflate: true, tickCount: 6),
+                                            ),
+                                            'value': Variable(
+                                              accessor: (List datum) =>
+                                                  datum[1] as num,
+                                              scale: LinearScale(
+                                                max: 800,
+                                                min: 0,
+                                                formatter: (v) =>
+                                                    '${v.toInt()} W',
+                                              ),
+                                            ),
+                                          },
+                                          marks: [
+                                            LineMark(
+                                              shape: ShapeEncode(
+                                                  value: BasicLineShape(
+                                                      smooth: true)),
+                                            )
+                                          ],
+                                          axes: [
+                                            Defaults.horizontalAxis,
+                                            Defaults.verticalAxis,
+                                          ],
+                                          selections: {
+                                            'tooltipMouse': PointSelection(on: {
+                                              GestureType.hover,
+                                            }, devices: {
+                                              PointerDeviceKind.mouse
+                                            }, dim: Dim.x),
+                                            'tooltipTouch': PointSelection(on: {
+                                              GestureType.scaleUpdate,
+                                              GestureType.tapDown,
+                                              GestureType.longPressMoveUpdate
+                                            }, devices: {
+                                              PointerDeviceKind.touch
+                                            }, dim: Dim.x),
+                                          },
+                                          tooltip: TooltipGuide(
+                                            followPointer: [true, true],
+                                            align: Alignment.topLeft,
+                                          ),
+                                          crosshair: CrosshairGuide(
+                                            followPointer: [false, true],
+                                          ),
+                                          annotations: [
+                                            RegionAnnotation(
+                                              values: ['07:30', '10:00'],
+                                              color: const Color.fromARGB(
+                                                  120, 255, 173, 177),
+                                            ),
+                                            RegionAnnotation(
+                                              values: ['17:30', '21:15'],
+                                              color: const Color.fromARGB(
+                                                  120, 255, 173, 177),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: 50,
+                                      ),
+                                      Container(
+                                        color: Colors.white,
+                                        margin: const EdgeInsets.only(top: 10),
+                                        width: 400,
+                                        height: 300,
+                                        child: Chart(
+                                          data: lineMarkerData,
+                                          variables: {
+                                            'day': Variable(
+                                              accessor: (Map datum) =>
+                                                  datum['day'] as String,
+                                              scale:
+                                                  OrdinalScale(inflate: true),
+                                            ),
+                                            'value': Variable(
+                                              accessor: (Map datum) =>
+                                                  datum['value'] as num,
+                                              scale: LinearScale(
+                                                max: 15,
+                                                min: -3,
+                                                tickCount: 7,
+                                                formatter: (v) =>
+                                                    '${v.toInt()} ℃',
+                                              ),
+                                            ),
+                                            'group': Variable(
+                                              accessor: (Map datum) =>
+                                                  datum['group'] as String,
+                                            ),
+                                          },
+                                          marks: [
+                                            LineMark(
+                                              position: Varset('day') *
+                                                  Varset('value') /
+                                                  Varset('group'),
+                                              color: ColorEncode(
+                                                variable: 'group',
+                                                values: [
+                                                  const Color(0xff5470c6),
+                                                  const Color(0xff91cc75),
+                                                ],
+                                              ),
+                                            ),
+                                          ],
+                                          axes: [
+                                            Defaults.horizontalAxis,
+                                            Defaults.verticalAxis,
+                                          ],
+                                          selections: {
+                                            'tooltipMouse': PointSelection(on: {
+                                              GestureType.hover,
+                                            }, devices: {
+                                              PointerDeviceKind.mouse
+                                            }, variable: 'day', dim: Dim.x),
+                                            'tooltipTouch': PointSelection(on: {
+                                              GestureType.scaleUpdate,
+                                              GestureType.tapDown,
+                                              GestureType.longPressMoveUpdate
+                                            }, devices: {
+                                              PointerDeviceKind.touch
+                                            }, variable: 'day', dim: Dim.x),
+                                          },
+                                          tooltip: TooltipGuide(
+                                            followPointer: [true, true],
+                                            align: Alignment.topLeft,
+                                            variables: ['group', 'value'],
+                                          ),
+                                          crosshair: CrosshairGuide(
+                                            followPointer: [false, true],
+                                          ),
+                                          annotations: [
+                                            LineAnnotation(
+                                              dim: Dim.y,
+                                              value: 6.14,
+                                              style: PaintStyle(
+                                                strokeColor:
+                                                    const Color(0xff5470c6)
+                                                        .withAlpha(100),
+                                                dash: [2],
+                                              ),
+                                            ),
+                                            LineAnnotation(
+                                              dim: Dim.y,
+                                              value: 3.57,
+                                              style: PaintStyle(
+                                                strokeColor:
+                                                    const Color(0xff91cc75)
+                                                        .withAlpha(100),
+                                                dash: [2],
+                                              ),
+                                            ),
+                                            CustomAnnotation(
+                                                renderer: (offset, _) => [
+                                                      CircleElement(
+                                                          center: offset,
+                                                          radius: 5,
+                                                          style: PaintStyle(
+                                                              fillColor:
+                                                                  const Color(
+                                                                      0xff5470c6)))
+                                                    ],
+                                                values: ['Mar', -3]),
+                                            CustomAnnotation(
+                                                renderer: (offset, _) => [
+                                                      CircleElement(
+                                                          center: offset,
+                                                          radius: 5,
+                                                          style: PaintStyle(
+                                                              fillColor:
+                                                                  const Color(
+                                                                      0xff5470c6)))
+                                                    ],
+                                                values: ['Jul', -7]),
+                                            CustomAnnotation(
+                                                renderer: (offset, _) => [
+                                                      CircleElement(
+                                                          center: offset,
+                                                          radius: 5,
+                                                          style: PaintStyle(
+                                                              fillColor:
+                                                                  const Color(
+                                                                      0xff91cc75)))
+                                                    ],
+                                                values: ['Feb', 2]),
+                                            CustomAnnotation(
+                                                renderer: (offset, _) => [
+                                                      CircleElement(
+                                                          center: offset,
+                                                          radius: 5,
+                                                          style: PaintStyle(
+                                                              fillColor:
+                                                                  const Color(
+                                                                      0xff91cc75)))
+                                                    ],
+                                                values: ['Apr', -5]),
+                                            TagAnnotation(
+                                              label: Label(
+                                                  '13',
+                                                  LabelStyle(
+                                                    textStyle:
+                                                        Defaults.textStyle,
+                                                    offset:
+                                                        const Offset(0, -10),
+                                                  )),
+                                              values: ['Mar', -13],
+                                            ),
+                                            TagAnnotation(
+                                              label: Label(
+                                                  '9',
+                                                  LabelStyle(
+                                                    textStyle:
+                                                        Defaults.textStyle,
+                                                    offset:
+                                                        const Offset(0, -10),
+                                                  )),
+                                              values: ['July', -9],
+                                            ),
+                                            TagAnnotation(
+                                              label: Label(
+                                                  '-2',
+                                                  LabelStyle(
+                                                    textStyle:
+                                                        Defaults.textStyle,
+                                                    offset:
+                                                        const Offset(0, -10),
+                                                  )),
+                                              values: ['Feb', -2],
+                                            ),
+                                            TagAnnotation(
+                                              label: Label(
+                                                  '5',
+                                                  LabelStyle(
+                                                    textStyle:
+                                                        Defaults.textStyle,
+                                                    offset:
+                                                        const Offset(0, -10),
+                                                  )),
+                                              values: ['Apr', -5],
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: 50,
+                                      ),
+                                      Container(
+                                        height: 300,
+                                        color: Colors.white,
+                                        width: 193,
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Column(
+                                            children: [
+                                              Container(
+                                                height:
+                                                    70, // Adjust the height as needed
+                                                color: Color.fromRGBO(75, 61,
+                                                    82, 1), // Brown color
+                                                child: Center(
+                                                  child: Text(
+                                                    'New Booking',
+                                                    style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 18,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                  height:
+                                                      8.0), // Add spacing between the brown container and the white container
+                                              Container(
+                                                height:
+                                                    70, // Adjust the height as needed
+                                                color: Colors.white,
+                                                child: Center(
+                                                  child: FloatingActionButton(
+                                                    onPressed: () {
+                                                      // Add your plus button functionality here
+                                                    },
+                                                    child: Icon(Icons.add),
+                                                    backgroundColor: Colors
+                                                        .blue, // Customize the button color
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 60,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 100),
+                                  child: Row(
+                                    children: [
+                                      Container(
+                                        width: 100,
+                                        height: 100,
+                                        color: Colors.black,
+                                      ),
+                                      SizedBox(
+                                        width: 30,
+                                      ),
+                                      Container(
+                                        width: 100,
+                                        height: 100,
+                                        color: Colors.black,
+                                      )
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  )),
             ),
           ),
         ),

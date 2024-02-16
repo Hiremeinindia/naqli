@@ -7,6 +7,7 @@ import 'package:flutter_application_1/createAccount.dart';
 import 'package:flutter_application_1/dashboard.dart';
 import 'package:flutter_application_1/homepage.dart';
 import 'package:flutter_application_1/loginPage.dart';
+import 'package:flutter_application_1/sample.dart';
 import 'package:flutter_application_1/tripdetails.dart';
 
 Future<void> main() async {
