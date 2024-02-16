@@ -40,6 +40,10 @@ dependencies:
   firebase_core: ^2.25.4
   firebase_auth: ^4.17.4
   easy_sidemenu: ^0.5.0
+  fl_chart: ^0.66.2
+  graphic: ^2.2.1
+  quiver: ^3.2.1
+  simple_line_chart: ^1.4.2
 
 dev_dependencies:
   flutter_test:
