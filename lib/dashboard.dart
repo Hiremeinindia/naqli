@@ -199,7 +199,7 @@ class _MyHomePageState extends State<Dashboard> {
                                   child: Card(
                                     elevation: 10,
                                     shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(20),
+                                      borderRadius: BorderRadius.circular(10),
                                     ),
                                     color: Color.fromRGBO(240, 237, 250, 1),
                                     child: SideMenu(
@@ -298,13 +298,14 @@ class _MyHomePageState extends State<Dashboard> {
                                 Padding(
                                   padding: const EdgeInsets.only(left: 50),
                                   child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
                                     children: [
                                       Container(
                                         color: Colors.white,
                                         margin: const EdgeInsets.only(top: 10),
-                                        width: 400,
-                                        height: 300,
+                                        width: 350,
+                                        height: 250,
                                         child: Chart(
                                           data: zip(lineSectionsData).toList(),
                                           variables: {
@@ -378,7 +379,7 @@ class _MyHomePageState extends State<Dashboard> {
                                         color: Colors.white,
                                         margin: const EdgeInsets.only(top: 10),
                                         width: 400,
-                                        height: 300,
+                                        height: 250,
                                         child: Chart(
                                           data: lineMarkerData,
                                           variables: {
@@ -560,85 +561,80 @@ class _MyHomePageState extends State<Dashboard> {
                                         width: 50,
                                       ),
                                       Container(
-                                        height: 300,
+                                        height: 250,
                                         color: Colors.white,
-                                        width: 193,
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: Column(
-                                            children: [
-                                              GestureDetector(
-                                                onTap: () {
-                                                  // Navigate to a different screen when the brown container is pressed
-                                                  Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          MyHomePage(),
+                                        width: 163,
+                                        child: Column(
+                                          children: [
+                                            GestureDetector(
+                                              onTap: () {
+                                                // Navigate to a different screen when the brown container is pressed
+                                                Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        MyHomePage(),
+                                                  ),
+                                                );
+                                              },
+                                              child: Container(
+                                                height: 70,
+                                                color: Color.fromRGBO(75, 61,
+                                                    82, 1), // Brown color
+                                                child: Center(
+                                                  child: Text(
+                                                    'New Booking',
+                                                    style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 18,
+                                                      fontWeight:
+                                                          FontWeight.bold,
                                                     ),
-                                                  );
-                                                },
-                                                child: Container(
-                                                  height: 70,
-                                                  color: Color.fromRGBO(75, 61,
-                                                      82, 1), // Brown color
-                                                  child: Center(
-                                                    child: Text(
-                                                      'New Booking',
-                                                      style: TextStyle(
-                                                        color: Colors.white,
-                                                        fontSize: 18,
-                                                        fontWeight:
-                                                            FontWeight.bold,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              height: 8.0,
+                                            ), // Add spacing between the brown container and the white container
+                                            GestureDetector(
+                                              onTap: () {
+                                                // Navigate to a different screen when the image is pressed
+                                                Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        MyHomePage(),
+                                                  ),
+                                                );
+                                              },
+                                              child: Container(
+                                                height: 70,
+                                                color: Colors.white,
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(8.0),
+                                                  child: ColorFiltered(
+                                                    colorFilter:
+                                                        ColorFilter.mode(
+                                                      Color.fromRGBO(
+                                                          183, 174, 185, 1),
+                                                      BlendMode.srcIn,
+                                                    ),
+                                                    child: Transform.translate(
+                                                      offset: Offset(0,
+                                                          50), // Adjust the Y offset as needed
+                                                      child: Image.asset(
+                                                        'add.png',
+                                                        width: 120,
+                                                        height: 170,
                                                       ),
                                                     ),
                                                   ),
                                                 ),
                                               ),
-                                              SizedBox(
-                                                height: 8.0,
-                                              ), // Add spacing between the brown container and the white container
-                                              GestureDetector(
-                                                onTap: () {
-                                                  // Navigate to a different screen when the image is pressed
-                                                  Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          MyHomePage(),
-                                                    ),
-                                                  );
-                                                },
-                                                child: Container(
-                                                  height: 70,
-                                                  color: Colors.white,
-                                                  child: Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            8.0),
-                                                    child: ColorFiltered(
-                                                      colorFilter:
-                                                          ColorFilter.mode(
-                                                        Color.fromRGBO(
-                                                            183, 174, 185, 1),
-                                                        BlendMode.srcIn,
-                                                      ),
-                                                      child:
-                                                          Transform.translate(
-                                                        offset: Offset(0,
-                                                            50), // Adjust the Y offset as needed
-                                                        child: Image.asset(
-                                                          'add.png',
-                                                          width: 120,
-                                                          height: 170,
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
+                                            ),
+                                          ],
                                         ),
                                       )
                                     ],
@@ -648,22 +644,668 @@ class _MyHomePageState extends State<Dashboard> {
                                   height: 60,
                                 ),
                                 Padding(
-                                  padding: const EdgeInsets.only(left: 100),
+                                  padding: const EdgeInsets.only(left: 50),
                                   child: Row(
                                     children: [
                                       Container(
-                                        width: 100,
-                                        height: 100,
-                                        color: Colors.black,
+                                        height: 292,
+                                        color: Colors.white,
+                                        width: 350,
+                                        child: Column(
+                                          children: [
+                                            Container(
+                                              height: 70,
+                                              color: Color.fromRGBO(
+                                                  75, 61, 82, 1), // Brown color
+                                              child: Center(
+                                                child: Row(
+                                                  children: [
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              8.0),
+                                                      child: Text(
+                                                        'Bookings',
+                                                        style: TextStyle(
+                                                          color: Colors.white,
+                                                          fontSize: 18,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              left: 150),
+                                                      child: Text(
+                                                        "view all",
+                                                        style: TextStyle(
+                                                          color: Colors.white,
+                                                          fontSize: 15,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              height: 6.0,
+                                            ), // Add spacing between the brown container and the white container
+                                            Container(
+                                              height: 215,
+                                              color: Colors.white,
+                                              child: ListView(
+                                                children: [
+                                                  SizedBox(
+                                                    height: 60,
+                                                    width: 100,
+                                                    child: ListTile(
+                                                      leading: CircleAvatar(),
+                                                      title: Text(
+                                                        'Trip 1',
+                                                        style: const TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontSize: 12,
+                                                        ),
+                                                      ),
+                                                      subtitle: Text(
+                                                        '18.02.2022',
+                                                        style: TextStyle(
+                                                            fontSize: 10),
+                                                      ),
+                                                      trailing: Row(
+                                                        mainAxisSize:
+                                                            MainAxisSize.min,
+                                                        children: [
+                                                          Row(
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .end,
+                                                            children: [
+                                                              Text("Truck"),
+                                                            ],
+                                                          ),
+                                                          SizedBox(
+                                                              width:
+                                                                  30), // Add some space between "Truck" and "View" button
+                                                          GestureDetector(
+                                                            onTap: () {
+                                                              // Add your View button functionality here
+                                                              print(
+                                                                  'View button pressed');
+                                                            },
+                                                            child: Container(
+                                                              height: 44,
+                                                              width: 80,
+                                                              padding:
+                                                                  EdgeInsets
+                                                                      .all(8),
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                color: Color
+                                                                    .fromRGBO(
+                                                                        245,
+                                                                        243,
+                                                                        255,
+                                                                        1),
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            5),
+                                                              ),
+                                                              child: Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                        .all(
+                                                                        8.0),
+                                                                child: Center(
+                                                                  child: Text(
+                                                                    'View',
+                                                                    style:
+                                                                        TextStyle(
+                                                                      color: Color.fromRGBO(
+                                                                          127,
+                                                                          106,
+                                                                          255,
+                                                                          1),
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold,
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Divider(
+                                                    thickness: 1,
+                                                    color: Color.fromRGBO(
+                                                        206, 203, 203, 1),
+                                                  ),
+                                                  SizedBox(
+                                                    height: 60,
+                                                    width: 100,
+                                                    child: ListTile(
+                                                      leading: CircleAvatar(),
+                                                      title: Text(
+                                                        'Equipment Hire',
+                                                        style: const TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontSize: 11,
+                                                        ),
+                                                      ),
+                                                      subtitle: Text(
+                                                        '10.02.2022',
+                                                        style: TextStyle(
+                                                            fontSize: 10),
+                                                      ),
+                                                      trailing: Row(
+                                                        mainAxisSize:
+                                                            MainAxisSize.min,
+                                                        children: [
+                                                          Column(
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .end,
+                                                            children: [
+                                                              Text("Heavy"),
+                                                              Text("Equipment"),
+                                                            ],
+                                                          ),
+
+                                                          SizedBox(
+                                                              width:
+                                                                  30), // Add some space between "Truck" and "View" button
+                                                          GestureDetector(
+                                                            onTap: () {
+                                                              // Add your View button functionality here
+                                                              print(
+                                                                  'View button pressed');
+                                                            },
+                                                            child: Container(
+                                                              height: 44,
+                                                              width: 80,
+                                                              padding:
+                                                                  EdgeInsets
+                                                                      .all(8),
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                color: Color
+                                                                    .fromRGBO(
+                                                                        245,
+                                                                        243,
+                                                                        255,
+                                                                        1),
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            5),
+                                                              ),
+                                                              child: Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                        .all(
+                                                                        8.0),
+                                                                child: Center(
+                                                                  child: Text(
+                                                                    'View',
+                                                                    style:
+                                                                        TextStyle(
+                                                                      color: Color.fromRGBO(
+                                                                          127,
+                                                                          106,
+                                                                          255,
+                                                                          1),
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold,
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Divider(
+                                                    thickness: 1,
+                                                    color: Color.fromRGBO(
+                                                        206, 203, 203, 1),
+                                                  ),
+                                                  SizedBox(
+                                                    height: 60,
+                                                    width: 100,
+                                                    child: ListTile(
+                                                      leading: CircleAvatar(),
+                                                      title: Text(
+                                                        'Fletch Skinner',
+                                                        style: const TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontSize: 12,
+                                                        ),
+                                                      ),
+                                                      subtitle: Text(
+                                                        '07.02.2022',
+                                                        style: TextStyle(
+                                                            fontSize: 10),
+                                                      ),
+                                                      trailing: Row(
+                                                        mainAxisSize:
+                                                            MainAxisSize.min,
+                                                        children: [
+                                                          Row(
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .end,
+                                                            children: [
+                                                              Text("Trailer"),
+                                                            ],
+                                                          ),
+                                                          SizedBox(
+                                                              width:
+                                                                  30), // Add some space between "Truck" and "View" button
+                                                          GestureDetector(
+                                                            onTap: () {
+                                                              // Add your View button functionality here
+                                                              print(
+                                                                  'View button pressed');
+                                                            },
+                                                            child: Container(
+                                                              height: 44,
+                                                              width: 80,
+                                                              padding:
+                                                                  EdgeInsets
+                                                                      .all(8),
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                color: Color
+                                                                    .fromRGBO(
+                                                                        245,
+                                                                        243,
+                                                                        255,
+                                                                        1),
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            5),
+                                                              ),
+                                                              child: Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                        .all(
+                                                                        8.0),
+                                                                child: Center(
+                                                                  child: Text(
+                                                                    'View',
+                                                                    style:
+                                                                        TextStyle(
+                                                                      color: Color.fromRGBO(
+                                                                          127,
+                                                                          106,
+                                                                          255,
+                                                                          1),
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold,
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  // Add more cards with your data as needed
+                                                ],
+                                              ),
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                       SizedBox(
-                                        width: 30,
+                                        width: 50,
                                       ),
                                       Container(
-                                        width: 100,
-                                        height: 100,
-                                        color: Colors.black,
-                                      )
+                                        height: 294,
+                                        color: Colors.white,
+                                        width: 613,
+                                        child: Column(
+                                          children: [
+                                            Container(
+                                              height: 70,
+                                              color: Color.fromRGBO(
+                                                  75, 61, 82, 1), // Brown color
+                                              child: Center(
+                                                child: Row(
+                                                  children: [
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              8.0),
+                                                      child: Text(
+                                                        'Pending Booking tickets',
+                                                        style: TextStyle(
+                                                          color: Colors.white,
+                                                          fontSize: 18,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              left: 200),
+                                                      child: Text(
+                                                        "view all",
+                                                        style: TextStyle(
+                                                          color: Colors.white,
+                                                          fontSize: 15,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              height: 8.0,
+                                            ), // Add spacing between the brown container and the white container
+                                            Container(
+                                              height: 200,
+                                              color: Colors.white,
+                                              child: ListView(
+                                                children: [
+                                                  SizedBox(
+                                                    height: 60,
+                                                    width: 100,
+                                                    child: ListTile(
+                                                      leading: CircleAvatar(),
+                                                      title: Text(
+                                                        'Trip 1',
+                                                        style: const TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontSize: 12,
+                                                        ),
+                                                      ),
+                                                      subtitle: Text(
+                                                        'Booking ID XXXXXX',
+                                                        style: TextStyle(
+                                                            fontSize: 10),
+                                                      ),
+                                                      trailing: Row(
+                                                        mainAxisSize:
+                                                            MainAxisSize.min,
+                                                        children: [
+                                                          Row(
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .end,
+                                                            children: [
+                                                              Text("Truck"),
+                                                            ],
+                                                          ),
+                                                          SizedBox(
+                                                              width:
+                                                                  30), // Add some space between "Truck" and "View" button
+                                                          GestureDetector(
+                                                            onTap: () {
+                                                              // Add your View button functionality here
+                                                              print(
+                                                                  'View button pressed');
+                                                            },
+                                                            child: Container(
+                                                              height: 44,
+                                                              width: 80,
+                                                              padding:
+                                                                  EdgeInsets
+                                                                      .all(8),
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                color: Color
+                                                                    .fromRGBO(
+                                                                        245,
+                                                                        243,
+                                                                        255,
+                                                                        1),
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            5),
+                                                              ),
+                                                              child: Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                        .all(
+                                                                        8.0),
+                                                                child: Center(
+                                                                  child: Text(
+                                                                    'View',
+                                                                    style:
+                                                                        TextStyle(
+                                                                      color: Color.fromRGBO(
+                                                                          127,
+                                                                          106,
+                                                                          255,
+                                                                          1),
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold,
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Divider(
+                                                    thickness: 1,
+                                                    color: Color.fromRGBO(
+                                                        206, 203, 203, 1),
+                                                  ),
+                                                  SizedBox(
+                                                    height: 60,
+                                                    width: 100,
+                                                    child: ListTile(
+                                                      leading: CircleAvatar(),
+                                                      title: Text(
+                                                        'Equipment Hire',
+                                                        style: const TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontSize: 11,
+                                                        ),
+                                                      ),
+                                                      subtitle: Text(
+                                                        'Booking ID XXXXXX',
+                                                        style: TextStyle(
+                                                            fontSize: 10),
+                                                      ),
+                                                      trailing: Row(
+                                                        mainAxisSize:
+                                                            MainAxisSize.min,
+                                                        children: [
+                                                          Column(
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .end,
+                                                            children: [
+                                                              Text("Heavy"),
+                                                              Text("Equipment"),
+                                                            ],
+                                                          ),
+
+                                                          SizedBox(
+                                                              width:
+                                                                  30), // Add some space between "Truck" and "View" button
+                                                          GestureDetector(
+                                                            onTap: () {
+                                                              // Add your View button functionality here
+                                                              print(
+                                                                  'View button pressed');
+                                                            },
+                                                            child: Container(
+                                                              height: 44,
+                                                              width: 80,
+                                                              padding:
+                                                                  EdgeInsets
+                                                                      .all(8),
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                color: Color
+                                                                    .fromRGBO(
+                                                                        245,
+                                                                        243,
+                                                                        255,
+                                                                        1),
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            5),
+                                                              ),
+                                                              child: Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                        .all(
+                                                                        8.0),
+                                                                child: Center(
+                                                                  child: Text(
+                                                                    'View',
+                                                                    style:
+                                                                        TextStyle(
+                                                                      color: Color.fromRGBO(
+                                                                          127,
+                                                                          106,
+                                                                          255,
+                                                                          1),
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold,
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Divider(
+                                                    thickness: 1,
+                                                    color: Color.fromRGBO(
+                                                        206, 203, 203, 1),
+                                                  ),
+                                                  SizedBox(
+                                                    height: 45,
+                                                    width: 100,
+                                                    child: ListTile(
+                                                      leading: CircleAvatar(),
+                                                      title: Text(
+                                                        'Bus Trip',
+                                                        style: const TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontSize: 12,
+                                                        ),
+                                                      ),
+                                                      subtitle: Text(
+                                                        'Booking ID XXXXXX',
+                                                        style: TextStyle(
+                                                            fontSize: 10),
+                                                      ),
+                                                      trailing: Row(
+                                                        mainAxisSize:
+                                                            MainAxisSize.min,
+                                                        children: [
+                                                          Row(
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .end,
+                                                            children: [
+                                                              Text("Trailer"),
+                                                            ],
+                                                          ),
+                                                          SizedBox(
+                                                              width:
+                                                                  30), // Add some space between "Truck" and "View" button
+                                                          GestureDetector(
+                                                            onTap: () {
+                                                              // Add your View button functionality here
+                                                              print(
+                                                                  'View button pressed');
+                                                            },
+                                                            child: Container(
+                                                              height: 44,
+                                                              width: 80,
+                                                              padding:
+                                                                  EdgeInsets
+                                                                      .all(8),
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                color: Color
+                                                                    .fromRGBO(
+                                                                        245,
+                                                                        243,
+                                                                        255,
+                                                                        1),
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            5),
+                                                              ),
+                                                              child: Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                        .all(
+                                                                        8.0),
+                                                                child: Center(
+                                                                  child: Text(
+                                                                    'View',
+                                                                    style:
+                                                                        TextStyle(
+                                                                      color: Color.fromRGBO(
+                                                                          127,
+                                                                          106,
+                                                                          255,
+                                                                          1),
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold,
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  // Add more cards with your data as needed
+                                                ],
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
                                     ],
                                   ),
                                 )
