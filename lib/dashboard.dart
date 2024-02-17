@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:easy_sidemenu/easy_sidemenu.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/echarts_data.dart';
+import 'package:flutter_application_1/homepage.dart';
 import 'package:graphic/graphic.dart';
 import 'package:flutter/gestures.dart';
 import 'package:quiver/iterables.dart';
@@ -295,8 +296,7 @@ class _MyHomePageState extends State<Dashboard> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Padding(
-                                  padding:
-                                      const EdgeInsets.only(top: 150, left: 50),
+                                  padding: const EdgeInsets.only(left: 50),
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
@@ -567,38 +567,73 @@ class _MyHomePageState extends State<Dashboard> {
                                           padding: const EdgeInsets.all(8.0),
                                           child: Column(
                                             children: [
-                                              Container(
-                                                height:
-                                                    70, // Adjust the height as needed
-                                                color: Color.fromRGBO(75, 61,
-                                                    82, 1), // Brown color
-                                                child: Center(
-                                                  child: Text(
-                                                    'New Booking',
-                                                    style: TextStyle(
-                                                      color: Colors.white,
-                                                      fontSize: 18,
-                                                      fontWeight:
-                                                          FontWeight.bold,
+                                              GestureDetector(
+                                                onTap: () {
+                                                  // Navigate to a different screen when the brown container is pressed
+                                                  Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          MyHomePage(),
+                                                    ),
+                                                  );
+                                                },
+                                                child: Container(
+                                                  height: 70,
+                                                  color: Color.fromRGBO(75, 61,
+                                                      82, 1), // Brown color
+                                                  child: Center(
+                                                    child: Text(
+                                                      'New Booking',
+                                                      style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize: 18,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                      ),
                                                     ),
                                                   ),
                                                 ),
                                               ),
                                               SizedBox(
-                                                  height:
-                                                      8.0), // Add spacing between the brown container and the white container
-                                              Container(
-                                                height:
-                                                    70, // Adjust the height as needed
-                                                color: Colors.white,
-                                                child: Center(
-                                                  child: FloatingActionButton(
-                                                    onPressed: () {
-                                                      // Add your plus button functionality here
-                                                    },
-                                                    child: Icon(Icons.add),
-                                                    backgroundColor: Colors
-                                                        .blue, // Customize the button color
+                                                height: 8.0,
+                                              ), // Add spacing between the brown container and the white container
+                                              GestureDetector(
+                                                onTap: () {
+                                                  // Navigate to a different screen when the image is pressed
+                                                  Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          MyHomePage(),
+                                                    ),
+                                                  );
+                                                },
+                                                child: Container(
+                                                  height: 70,
+                                                  color: Colors.white,
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            8.0),
+                                                    child: ColorFiltered(
+                                                      colorFilter:
+                                                          ColorFilter.mode(
+                                                        Color.fromRGBO(
+                                                            183, 174, 185, 1),
+                                                        BlendMode.srcIn,
+                                                      ),
+                                                      child:
+                                                          Transform.translate(
+                                                        offset: Offset(0,
+                                                            50), // Adjust the Y offset as needed
+                                                        child: Image.asset(
+                                                          'add.png',
+                                                          width: 120,
+                                                          height: 170,
+                                                        ),
+                                                      ),
+                                                    ),
                                                   ),
                                                 ),
                                               ),
