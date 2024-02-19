@@ -44,6 +44,7 @@ dependencies:
   graphic: ^2.2.1
   quiver: ^3.2.1
   simple_line_chart: ^1.4.2
+  pie_chart: ^5.4.0
 
 dev_dependencies:
   flutter_test:

@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:easy_sidemenu/easy_sidemenu.dart';
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/echarts_data.dart';
 import 'package:flutter_application_1/homepage.dart';
@@ -17,6 +18,28 @@ class Dashboard extends StatefulWidget {
 
 class _MyHomePageState extends State<Dashboard> {
   SideMenuController sideMenu = SideMenuController();
+  String month = '';
+  void tapOnPieChart(FlTouchEvent event, PieTouchResponse? response) {
+    if (response != null) {
+      final sectionIndex = response.touchedSection!.touchedSectionIndex;
+      final value = response.touchedSection!.touchedSection!.value;
+      if (sectionIndex == 0) {
+        month = 'January - $value';
+      } else if (sectionIndex == 1) {
+        month = 'February - $value';
+      } else if (sectionIndex == 2) {
+        month = 'March - $value';
+      } else if (sectionIndex == 3) {
+        month = 'April - $value';
+      } else if (sectionIndex == 4) {
+        month = 'May - $value';
+      }
+      setState(() {});
+      print('Tapped on section: $sectionIndex');
+      // You can add your custom logic here to respond to the tap on the Pie Chart
+    }
+  }
+
   TextStyle myTextStyle = const TextStyle(
     fontFamily: 'Poppins',
     fontSize: 14,
@@ -204,7 +227,7 @@ class _MyHomePageState extends State<Dashboard> {
                                 ),
                                 SizedBox(
                                   width: 500,
-                                  height: 410,
+                                  height: 370,
                                   child: Card(
                                     elevation: 10,
                                     shape: RoundedRectangleBorder(
@@ -312,8 +335,21 @@ class _MyHomePageState extends State<Dashboard> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Padding(
+                                  padding: const EdgeInsets.only(left: 90),
+                                  child: Row(
+                                    children: [
+                                      Text("No of Bookings  "),
+                                      Text(
+                                        "103",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Padding(
                                   padding:
-                                      const EdgeInsets.only(left: 90, top: 50),
+                                      const EdgeInsets.only(left: 90, top: 10),
                                   child: Row(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.center,
@@ -327,68 +363,59 @@ class _MyHomePageState extends State<Dashboard> {
                                         margin: const EdgeInsets.only(top: 10),
                                         width: 350,
                                         height: 250,
-                                        child: Chart(
-                                          data: zip(lineSectionsData).toList(),
-                                          variables: {
-                                            'time': Variable(
-                                              accessor: (List datum) =>
-                                                  datum[0] as String,
-                                              scale: OrdinalScale(
-                                                  inflate: true, tickCount: 6),
-                                            ),
-                                            'value': Variable(
-                                              accessor: (List datum) =>
-                                                  datum[1] as num,
-                                              scale: LinearScale(
-                                                max: 800,
-                                                min: 0,
-                                                formatter: (v) =>
-                                                    '${v.toInt()} W',
+                                        child: Stack(
+                                          children: [
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      vertical: 10,
+                                                      horizontal: 80),
+                                              child: PieChart(
+                                                swapAnimationDuration:
+                                                    const Duration(seconds: 1),
+                                                swapAnimationCurve:
+                                                    Curves.easeInOutQuint,
+                                                PieChartData(
+                                                  pieTouchData: PieTouchData(
+                                                    touchCallback:
+                                                        tapOnPieChart,
+                                                  ),
+                                                  sections: [
+                                                    PieChartSectionData(
+                                                        color: Colors.orange),
+                                                    PieChartSectionData(
+                                                        color: Colors.grey),
+                                                    PieChartSectionData(
+                                                        color: Colors.green),
+                                                    PieChartSectionData(
+                                                        color: Colors.red),
+                                                    PieChartSectionData(
+                                                        color: Colors.yellow),
+                                                  ],
+                                                ),
                                               ),
                                             ),
-                                          },
-                                          marks: [
-                                            LineMark(
-                                              shape: ShapeEncode(
-                                                  value: BasicLineShape(
-                                                      smooth: true)),
-                                            )
-                                          ],
-                                          axes: [
-                                            Defaults.horizontalAxis,
-                                            Defaults.verticalAxis,
-                                          ],
-                                          selections: {
-                                            'tooltipMouse': PointSelection(on: {
-                                              GestureType.hover,
-                                            }, devices: {
-                                              PointerDeviceKind.mouse
-                                            }, dim: Dim.x),
-                                            'tooltipTouch': PointSelection(on: {
-                                              GestureType.scaleUpdate,
-                                              GestureType.tapDown,
-                                              GestureType.longPressMoveUpdate
-                                            }, devices: {
-                                              PointerDeviceKind.touch
-                                            }, dim: Dim.x),
-                                          },
-                                          tooltip: TooltipGuide(
-                                            followPointer: [true, true],
-                                            align: Alignment.topLeft,
-                                          ),
-                                          crosshair: CrosshairGuide(
-                                            followPointer: [false, true],
-                                          ),
-                                          annotations: [
-                                            RegionAnnotation(
-                                              values: ['07:30', '10:00'],
-                                              color: const Color.fromARGB(
-                                                  120, 255, 173, 177),
-                                            ),
-                                            RegionAnnotation(
-                                              values: ['17:30', '21:15'],
-                                              color: const Color.fromARGB(
-                                                  120, 255, 173, 177),
+                                            Positioned.fill(
+                                              child: Center(
+                                                child: Column(
+                                                  children: [
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              8.0),
+                                                      child: Text(
+                                                        '29% Completed Successfully',
+                                                        style: TextStyle(
+                                                          fontSize: 10,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          color: Colors.black,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
                                             ),
                                           ],
                                         ),
@@ -717,7 +744,7 @@ class _MyHomePageState extends State<Dashboard> {
                                                     Padding(
                                                       padding:
                                                           const EdgeInsets.only(
-                                                              left: 150),
+                                                              left: 180),
                                                       child: Text(
                                                         "view all",
                                                         style: TextStyle(
@@ -1056,7 +1083,7 @@ class _MyHomePageState extends State<Dashboard> {
                                                     Padding(
                                                       padding:
                                                           const EdgeInsets.only(
-                                                              left: 200),
+                                                              left: 320),
                                                       child: Text(
                                                         "view all",
                                                         style: TextStyle(
