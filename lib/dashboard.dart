@@ -1077,281 +1077,734 @@ class _MyHomePageState extends State<Dashboard> {
                                               height: 200,
                                               decoration: BoxDecoration(
                                                 color: Colors.white,
-                                                borderRadius: BorderRadius.circular(
-                                                    10), // Set a common borderRadius for all containers
+                                                // Set a common borderRadius for all containers
                                               ),
-                                              child: ListView(
+                                              child: Row(
                                                 children: [
-                                                  SizedBox(
-                                                    height: 60,
-                                                    width: 100,
-                                                    child: ListTile(
-                                                      leading: CircleAvatar(),
-                                                      title: Text(
-                                                        'Trip 1',
-                                                        style: const TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          fontSize: 12,
-                                                        ),
-                                                      ),
-                                                      subtitle: Text(
-                                                        'Booking ID XXXXXX',
-                                                        style: TextStyle(
-                                                            fontSize: 10),
-                                                      ),
-                                                      trailing: Row(
-                                                        mainAxisSize:
-                                                            MainAxisSize.min,
+                                                  Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceEvenly,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Row(
                                                         children: [
-                                                          Row(
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .end,
+                                                          SizedBox(
+                                                            width: 10,
+                                                          ),
+                                                          Column(
                                                             children: [
-                                                              Text("Truck"),
+                                                              SizedBox(
+                                                                width: 10,
+                                                              ),
+                                                              CircleAvatar(),
                                                             ],
                                                           ),
-                                                          SizedBox(
-                                                            width: 30,
-                                                          ),
-                                                          GestureDetector(
-                                                            onTap: () {
-                                                              // Add your View button functionality here
-                                                              print(
-                                                                  'View button pressed');
-                                                            },
-                                                            child: Container(
-                                                              height: 44,
-                                                              width: 80,
-                                                              padding:
-                                                                  EdgeInsets
-                                                                      .all(8),
-                                                              decoration:
-                                                                  BoxDecoration(
-                                                                color: Color
-                                                                    .fromRGBO(
-                                                                        245,
-                                                                        243,
-                                                                        255,
-                                                                        1),
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            5), // Set borderRadius for the button
-                                                              ),
-                                                              child: Padding(
-                                                                padding:
-                                                                    const EdgeInsets
-                                                                        .all(
-                                                                        8.0),
-                                                                child: Center(
-                                                                  child: Text(
-                                                                    'View',
-                                                                    style:
-                                                                        TextStyle(
-                                                                      color: Color.fromRGBO(
-                                                                          127,
-                                                                          106,
-                                                                          255,
-                                                                          1),
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .bold,
-                                                                    ),
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  Divider(
-                                                    thickness: 1,
-                                                    color: Color.fromRGBO(
-                                                        206, 203, 203, 1),
-                                                  ),
-                                                  SizedBox(
-                                                    height: 60,
-                                                    width: 100,
-                                                    child: ListTile(
-                                                      leading: CircleAvatar(),
-                                                      title: Text(
-                                                        'Equipment Hire',
-                                                        style: const TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          fontSize: 11,
-                                                        ),
-                                                      ),
-                                                      subtitle: Text(
-                                                        'Booking ID XXXXXX',
-                                                        style: TextStyle(
-                                                            fontSize: 10),
-                                                      ),
-                                                      trailing: Row(
-                                                        mainAxisSize:
-                                                            MainAxisSize.min,
-                                                        children: [
+                                                          SizedBox(width: 10),
                                                           Column(
                                                             crossAxisAlignment:
                                                                 CrossAxisAlignment
-                                                                    .end,
+                                                                    .start,
                                                             children: [
-                                                              Text("Heavy"),
-                                                              Text("Equipment"),
-                                                            ],
-                                                          ),
-                                                          SizedBox(
-                                                            width: 30,
-                                                          ),
-                                                          GestureDetector(
-                                                            onTap: () {
-                                                              // Add your View button functionality here
-                                                              print(
-                                                                  'View button pressed');
-                                                            },
-                                                            child: Container(
-                                                              height: 44,
-                                                              width: 80,
-                                                              padding:
-                                                                  EdgeInsets
-                                                                      .all(8),
-                                                              decoration:
-                                                                  BoxDecoration(
-                                                                color: Color
-                                                                    .fromRGBO(
-                                                                        245,
-                                                                        243,
-                                                                        255,
-                                                                        1),
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            5),
-                                                              ),
-                                                              child: Padding(
-                                                                padding:
-                                                                    const EdgeInsets
-                                                                        .all(
-                                                                        8.0),
-                                                                child: Center(
-                                                                  child: Text(
-                                                                    'View',
-                                                                    style:
-                                                                        TextStyle(
-                                                                      color: Color.fromRGBO(
-                                                                          127,
-                                                                          106,
-                                                                          255,
-                                                                          1),
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .bold,
-                                                                    ),
-                                                                  ),
+                                                              Text(
+                                                                'Trip1',
+                                                                style:
+                                                                    const TextStyle(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                  fontSize: 12,
                                                                 ),
                                                               ),
-                                                            ),
-                                                          ),
+                                                              Text(
+                                                                  "Booking ID Xxxxxx")
+                                                            ],
+                                                          )
                                                         ],
                                                       ),
-                                                    ),
-                                                  ),
-                                                  Divider(
-                                                    thickness: 1,
-                                                    color: Color.fromRGBO(
-                                                        206, 203, 203, 1),
-                                                  ),
-                                                  SizedBox(
-                                                    height: 45,
-                                                    width: 100,
-                                                    child: ListTile(
-                                                      leading: CircleAvatar(),
-                                                      title: Text(
-                                                        'Bus Trip',
-                                                        style: const TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          fontSize: 12,
+                                                      SizedBox(
+                                                        width: 20,
+                                                      ),
+                                                      SizedBox(
+                                                        width: 300,
+                                                        child: Divider(
+                                                          color: Color.fromRGBO(
+                                                              206, 203, 203, 1),
                                                         ),
                                                       ),
-                                                      subtitle: Text(
-                                                        'Booking ID XXXXXX',
-                                                        style: TextStyle(
-                                                            fontSize: 10),
-                                                      ),
-                                                      trailing: Row(
-                                                        mainAxisSize:
-                                                            MainAxisSize.min,
+                                                      Row(
                                                         children: [
-                                                          Row(
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .end,
+                                                          SizedBox(
+                                                            width: 10,
+                                                          ),
+                                                          Column(
                                                             children: [
-                                                              Text("Trailer"),
+                                                              SizedBox(
+                                                                width: 10,
+                                                              ),
+                                                              CircleAvatar(),
                                                             ],
                                                           ),
+                                                          SizedBox(width: 10),
+                                                          Column(
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
+                                                            children: [
+                                                              Text(
+                                                                'Equipment Hire',
+                                                                style:
+                                                                    const TextStyle(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                  fontSize: 12,
+                                                                ),
+                                                              ),
+                                                              Text(
+                                                                  "Booking ID Xxxxxx")
+                                                            ],
+                                                          )
+                                                        ],
+                                                      ),
+                                                      SizedBox(
+                                                        width: 20,
+                                                      ),
+                                                      SizedBox(
+                                                        width: 300,
+                                                        child: Divider(
+                                                          color: Color.fromRGBO(
+                                                              206, 203, 203, 1),
+                                                        ),
+                                                      ),
+                                                      Row(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
                                                           SizedBox(
-                                                            width: 30,
+                                                            width: 10,
                                                           ),
-                                                          GestureDetector(
-                                                            onTap: () {
-                                                              // Add your View button functionality here
-                                                              print(
-                                                                  'View button pressed');
-                                                            },
-                                                            child: Container(
-                                                              height: 44,
-                                                              width: 80,
-                                                              padding:
-                                                                  EdgeInsets
-                                                                      .all(8),
-                                                              decoration:
-                                                                  BoxDecoration(
+                                                          Column(
+                                                            children: [
+                                                              SizedBox(
+                                                                width: 10,
+                                                              ),
+                                                              CircleAvatar(),
+                                                            ],
+                                                          ),
+                                                          SizedBox(width: 10),
+                                                          Column(
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
+                                                            children: [
+                                                              Text(
+                                                                'Bus Trip',
+                                                                style:
+                                                                    const TextStyle(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                  fontSize: 12,
+                                                                ),
+                                                              ),
+                                                              Text(
+                                                                  "Booking ID Xxxxxx")
+                                                            ],
+                                                          )
+                                                        ],
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  Column(
+                                                    children: [
+                                                      Row(
+                                                        children: [
+                                                          Container(
+                                                            width: 100,
+                                                            decoration: BoxDecoration(
                                                                 color: Color
                                                                     .fromRGBO(
                                                                         245,
                                                                         243,
                                                                         255,
                                                                         1),
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            5),
-                                                              ),
-                                                              child: Padding(
-                                                                padding:
-                                                                    const EdgeInsets
-                                                                        .all(
-                                                                        8.0),
-                                                                child: Center(
-                                                                  child: Text(
-                                                                    'View',
-                                                                    style:
-                                                                        TextStyle(
-                                                                      color: Color.fromRGBO(
-                                                                          127,
-                                                                          106,
-                                                                          255,
-                                                                          1),
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .bold,
+                                                                border: Border.all(
+                                                                    color: Color
+                                                                        .fromARGB(
+                                                                            246,
+                                                                            245,
+                                                                            242,
+                                                                            242))),
+                                                            child: Column(
+                                                              children: [
+                                                                Padding(
+                                                                  padding:
+                                                                      const EdgeInsets
+                                                                          .all(
+                                                                          8.0),
+                                                                  child:
+                                                                      Container(
+                                                                    width: 100,
+                                                                    height: 30,
+                                                                    decoration: BoxDecoration(
+                                                                        color: Color.fromRGBO(
+                                                                            200,
+                                                                            251,
+                                                                            253,
+                                                                            1),
+                                                                        borderRadius:
+                                                                            BorderRadius.circular(
+                                                                                12.0),
+                                                                        border: Border.all(
+                                                                            color: Color.fromARGB(
+                                                                                246,
+                                                                                245,
+                                                                                242,
+                                                                                242))),
+                                                                    child:
+                                                                        Padding(
+                                                                      padding: const EdgeInsets
+                                                                          .all(
+                                                                          8.0),
+                                                                      child:
+                                                                          Center(
+                                                                        child:
+                                                                            Text(
+                                                                          "Xxxxx SAR",
+                                                                          style: const TextStyle(
+                                                                              fontWeight: FontWeight.bold,
+                                                                              fontSize: 8,
+                                                                              color: Color.fromRGBO(127, 106, 255, 1)),
+                                                                        ),
+                                                                      ),
                                                                     ),
                                                                   ),
                                                                 ),
-                                                              ),
+                                                                Text("Vendor 1",
+                                                                    style: const TextStyle(
+                                                                        fontWeight:
+                                                                            FontWeight
+                                                                                .bold,
+                                                                        fontSize:
+                                                                            9,
+                                                                        color: Color.fromRGBO(
+                                                                            128,
+                                                                            118,
+                                                                            118,
+                                                                            1))),
+                                                                SizedBox(
+                                                                  height: 10,
+                                                                ),
+                                                                Padding(
+                                                                  padding:
+                                                                      const EdgeInsets
+                                                                          .all(
+                                                                          8.0),
+                                                                  child:
+                                                                      Container(
+                                                                    width: 100,
+                                                                    height: 30,
+                                                                    decoration: BoxDecoration(
+                                                                        color: Color.fromRGBO(
+                                                                            200,
+                                                                            251,
+                                                                            253,
+                                                                            1),
+                                                                        borderRadius:
+                                                                            BorderRadius.circular(
+                                                                                12.0),
+                                                                        border: Border.all(
+                                                                            color: Color.fromARGB(
+                                                                                246,
+                                                                                245,
+                                                                                242,
+                                                                                242))),
+                                                                    child:
+                                                                        Padding(
+                                                                      padding: const EdgeInsets
+                                                                          .all(
+                                                                          8.0),
+                                                                      child:
+                                                                          Center(
+                                                                        child:
+                                                                            Text(
+                                                                          "Xxxxx SAR",
+                                                                          style: const TextStyle(
+                                                                              fontWeight: FontWeight.bold,
+                                                                              fontSize: 8,
+                                                                              color: Color.fromRGBO(127, 106, 255, 1)),
+                                                                        ),
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                                Text("Vendor 1",
+                                                                    style: const TextStyle(
+                                                                        fontWeight:
+                                                                            FontWeight
+                                                                                .bold,
+                                                                        fontSize:
+                                                                            9,
+                                                                        color: Color.fromRGBO(
+                                                                            128,
+                                                                            118,
+                                                                            118,
+                                                                            1))),
+                                                                SizedBox(
+                                                                  height: 10,
+                                                                ),
+                                                                Padding(
+                                                                  padding:
+                                                                      const EdgeInsets
+                                                                          .all(
+                                                                          8.0),
+                                                                  child:
+                                                                      Container(
+                                                                    width: 100,
+                                                                    height: 30,
+                                                                    decoration: BoxDecoration(
+                                                                        color: Color.fromRGBO(
+                                                                            200,
+                                                                            251,
+                                                                            253,
+                                                                            1),
+                                                                        borderRadius:
+                                                                            BorderRadius.circular(
+                                                                                12.0),
+                                                                        border: Border.all(
+                                                                            color: Color.fromARGB(
+                                                                                246,
+                                                                                245,
+                                                                                242,
+                                                                                242))),
+                                                                    child:
+                                                                        Padding(
+                                                                      padding: const EdgeInsets
+                                                                          .all(
+                                                                          8.0),
+                                                                      child:
+                                                                          Center(
+                                                                        child:
+                                                                            Text(
+                                                                          "Xxxxx SAR",
+                                                                          style: const TextStyle(
+                                                                              fontWeight: FontWeight.bold,
+                                                                              fontSize: 8,
+                                                                              color: Color.fromRGBO(127, 106, 255, 1)),
+                                                                        ),
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                                Text("Vendor 1",
+                                                                    style: const TextStyle(
+                                                                        fontWeight:
+                                                                            FontWeight
+                                                                                .bold,
+                                                                        fontSize:
+                                                                            9,
+                                                                        color: Color.fromRGBO(
+                                                                            128,
+                                                                            118,
+                                                                            118,
+                                                                            1))),
+                                                              ],
+                                                            ),
+                                                          ),
+                                                          Container(
+                                                            width: 100,
+                                                            height: 200,
+                                                            decoration: BoxDecoration(
+                                                                color: Color
+                                                                    .fromRGBO(
+                                                                        245,
+                                                                        243,
+                                                                        255,
+                                                                        1),
+                                                                border: Border.all(
+                                                                    color: Color
+                                                                        .fromARGB(
+                                                                            246,
+                                                                            245,
+                                                                            242,
+                                                                            242))),
+                                                            child: Column(
+                                                              children: [
+                                                                Padding(
+                                                                  padding:
+                                                                      const EdgeInsets
+                                                                          .all(
+                                                                          8.0),
+                                                                  child:
+                                                                      Container(
+                                                                    width: 100,
+                                                                    height: 30,
+                                                                    decoration: BoxDecoration(
+                                                                        color: Color.fromRGBO(
+                                                                            224,
+                                                                            253,
+                                                                            200,
+                                                                            1),
+                                                                        borderRadius:
+                                                                            BorderRadius.circular(
+                                                                                12.0),
+                                                                        border: Border.all(
+                                                                            color: Color.fromARGB(
+                                                                                246,
+                                                                                245,
+                                                                                242,
+                                                                                242))),
+                                                                    child:
+                                                                        Padding(
+                                                                      padding: const EdgeInsets
+                                                                          .all(
+                                                                          8.0),
+                                                                      child:
+                                                                          Center(
+                                                                        child:
+                                                                            Text(
+                                                                          "Xxxxx SAR",
+                                                                          style: const TextStyle(
+                                                                              fontWeight: FontWeight.bold,
+                                                                              fontSize: 8,
+                                                                              color: Color.fromRGBO(127, 106, 255, 1)),
+                                                                        ),
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                                Text("Vendor 2",
+                                                                    style: const TextStyle(
+                                                                        fontWeight:
+                                                                            FontWeight
+                                                                                .bold,
+                                                                        fontSize:
+                                                                            9,
+                                                                        color: Color.fromRGBO(
+                                                                            128,
+                                                                            118,
+                                                                            118,
+                                                                            1))),
+                                                                SizedBox(
+                                                                  height: 10,
+                                                                ),
+                                                                Padding(
+                                                                  padding:
+                                                                      const EdgeInsets
+                                                                          .all(
+                                                                          8.0),
+                                                                  child:
+                                                                      Container(
+                                                                    width: 100,
+                                                                    height: 30,
+                                                                    decoration: BoxDecoration(
+                                                                        color: Color.fromRGBO(
+                                                                            224,
+                                                                            253,
+                                                                            200,
+                                                                            1),
+                                                                        borderRadius:
+                                                                            BorderRadius.circular(
+                                                                                12.0),
+                                                                        border: Border.all(
+                                                                            color: Color.fromARGB(
+                                                                                246,
+                                                                                245,
+                                                                                242,
+                                                                                242))),
+                                                                    child:
+                                                                        Padding(
+                                                                      padding: const EdgeInsets
+                                                                          .all(
+                                                                          8.0),
+                                                                      child:
+                                                                          Center(
+                                                                        child:
+                                                                            Text(
+                                                                          "Xxxxx SAR",
+                                                                          style: const TextStyle(
+                                                                              fontWeight: FontWeight.bold,
+                                                                              fontSize: 8,
+                                                                              color: Color.fromRGBO(127, 106, 255, 1)),
+                                                                        ),
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                                Text("Vendor 2",
+                                                                    style: const TextStyle(
+                                                                        fontWeight:
+                                                                            FontWeight
+                                                                                .bold,
+                                                                        fontSize:
+                                                                            9,
+                                                                        color: Color.fromRGBO(
+                                                                            128,
+                                                                            118,
+                                                                            118,
+                                                                            1))),
+                                                                SizedBox(
+                                                                  height: 10,
+                                                                ),
+                                                                Padding(
+                                                                  padding:
+                                                                      const EdgeInsets
+                                                                          .all(
+                                                                          8.0),
+                                                                  child:
+                                                                      Container(
+                                                                    width: 100,
+                                                                    height: 30,
+                                                                    decoration: BoxDecoration(
+                                                                        color: Color.fromRGBO(
+                                                                            224,
+                                                                            253,
+                                                                            200,
+                                                                            1),
+                                                                        borderRadius:
+                                                                            BorderRadius.circular(
+                                                                                12.0),
+                                                                        border: Border.all(
+                                                                            color: Color.fromARGB(
+                                                                                246,
+                                                                                245,
+                                                                                242,
+                                                                                242))),
+                                                                    child:
+                                                                        Padding(
+                                                                      padding: const EdgeInsets
+                                                                          .all(
+                                                                          8.0),
+                                                                      child:
+                                                                          Center(
+                                                                        child:
+                                                                            Text(
+                                                                          "Xxxxx SAR",
+                                                                          style: const TextStyle(
+                                                                              fontWeight: FontWeight.bold,
+                                                                              fontSize: 8,
+                                                                              color: Color.fromRGBO(127, 106, 255, 1)),
+                                                                        ),
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                                Text("Vendor 2",
+                                                                    style: const TextStyle(
+                                                                        fontWeight:
+                                                                            FontWeight
+                                                                                .bold,
+                                                                        fontSize:
+                                                                            9,
+                                                                        color: Color.fromRGBO(
+                                                                            128,
+                                                                            118,
+                                                                            118,
+                                                                            1))),
+                                                              ],
+                                                            ),
+                                                          ),
+                                                          Container(
+                                                            width: 100,
+                                                            height: 200,
+                                                            decoration: BoxDecoration(
+                                                                color: Color
+                                                                    .fromRGBO(
+                                                                        245,
+                                                                        243,
+                                                                        255,
+                                                                        1),
+                                                                border: Border.all(
+                                                                    color: Color
+                                                                        .fromARGB(
+                                                                            246,
+                                                                            245,
+                                                                            242,
+                                                                            242))),
+                                                            child: Column(
+                                                              children: [
+                                                                Padding(
+                                                                  padding:
+                                                                      const EdgeInsets
+                                                                          .all(
+                                                                          8.0),
+                                                                  child:
+                                                                      Container(
+                                                                    width: 100,
+                                                                    height: 30,
+                                                                    decoration: BoxDecoration(
+                                                                        color: Color.fromRGBO(
+                                                                            245,
+                                                                            253,
+                                                                            200,
+                                                                            1),
+                                                                        borderRadius:
+                                                                            BorderRadius.circular(
+                                                                                12.0),
+                                                                        border: Border.all(
+                                                                            color: Color.fromARGB(
+                                                                                246,
+                                                                                245,
+                                                                                242,
+                                                                                242))),
+                                                                    child:
+                                                                        Padding(
+                                                                      padding: const EdgeInsets
+                                                                          .all(
+                                                                          8.0),
+                                                                      child:
+                                                                          Center(
+                                                                        child:
+                                                                            Text(
+                                                                          "Xxxxx SAR",
+                                                                          style: const TextStyle(
+                                                                              fontWeight: FontWeight.bold,
+                                                                              fontSize: 8,
+                                                                              color: Color.fromRGBO(127, 106, 255, 1)),
+                                                                        ),
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                                Text("Vendor 3",
+                                                                    style: const TextStyle(
+                                                                        fontWeight:
+                                                                            FontWeight
+                                                                                .bold,
+                                                                        fontSize:
+                                                                            9,
+                                                                        color: Color.fromRGBO(
+                                                                            128,
+                                                                            118,
+                                                                            118,
+                                                                            1))),
+                                                                SizedBox(
+                                                                  height: 10,
+                                                                ),
+                                                                Padding(
+                                                                  padding:
+                                                                      const EdgeInsets
+                                                                          .all(
+                                                                          8.0),
+                                                                  child:
+                                                                      Container(
+                                                                    width: 100,
+                                                                    height: 30,
+                                                                    decoration: BoxDecoration(
+                                                                        color: Color.fromRGBO(
+                                                                            245,
+                                                                            253,
+                                                                            200,
+                                                                            1),
+                                                                        borderRadius:
+                                                                            BorderRadius.circular(
+                                                                                12.0),
+                                                                        border: Border.all(
+                                                                            color: Color.fromARGB(
+                                                                                246,
+                                                                                245,
+                                                                                242,
+                                                                                242))),
+                                                                    child:
+                                                                        Padding(
+                                                                      padding: const EdgeInsets
+                                                                          .all(
+                                                                          8.0),
+                                                                      child:
+                                                                          Center(
+                                                                        child:
+                                                                            Text(
+                                                                          "Xxxxx SAR",
+                                                                          style: const TextStyle(
+                                                                              fontWeight: FontWeight.bold,
+                                                                              fontSize: 8,
+                                                                              color: Color.fromRGBO(127, 106, 255, 1)),
+                                                                        ),
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                                Text("Vendor 3",
+                                                                    style: const TextStyle(
+                                                                        fontWeight:
+                                                                            FontWeight
+                                                                                .bold,
+                                                                        fontSize:
+                                                                            9,
+                                                                        color: Color.fromRGBO(
+                                                                            128,
+                                                                            118,
+                                                                            118,
+                                                                            1))),
+                                                                SizedBox(
+                                                                  height: 10,
+                                                                ),
+                                                                Padding(
+                                                                  padding:
+                                                                      const EdgeInsets
+                                                                          .all(
+                                                                          8.0),
+                                                                  child:
+                                                                      Container(
+                                                                    width: 100,
+                                                                    height: 30,
+                                                                    decoration: BoxDecoration(
+                                                                        color: Color.fromRGBO(
+                                                                            245,
+                                                                            253,
+                                                                            200,
+                                                                            1),
+                                                                        borderRadius:
+                                                                            BorderRadius.circular(
+                                                                                12.0),
+                                                                        border: Border.all(
+                                                                            color: Color.fromARGB(
+                                                                                246,
+                                                                                245,
+                                                                                242,
+                                                                                242))),
+                                                                    child:
+                                                                        Padding(
+                                                                      padding: const EdgeInsets
+                                                                          .all(
+                                                                          8.0),
+                                                                      child:
+                                                                          Center(
+                                                                        child:
+                                                                            Text(
+                                                                          "Xxxxx SAR",
+                                                                          style: const TextStyle(
+                                                                              fontWeight: FontWeight.bold,
+                                                                              fontSize: 8,
+                                                                              color: Color.fromRGBO(127, 106, 255, 1)),
+                                                                        ),
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                                Text("Vendor 3",
+                                                                    style: const TextStyle(
+                                                                        fontWeight:
+                                                                            FontWeight
+                                                                                .bold,
+                                                                        fontSize:
+                                                                            9,
+                                                                        color: Color.fromRGBO(
+                                                                            128,
+                                                                            118,
+                                                                            118,
+                                                                            1))),
+                                                              ],
                                                             ),
                                                           ),
                                                         ],
                                                       ),
-                                                    ),
-                                                  ),
-                                                  // Add more cards with your data as needed
+                                                    ],
+                                                  )
                                                 ],
                                               ),
                                             ),
