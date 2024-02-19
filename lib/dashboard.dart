@@ -626,10 +626,9 @@ class _MyHomePageState extends State<Dashboard> {
                                             ),
                                             SizedBox(
                                               height: 8.0,
-                                            ), // Add spacing between the brown container and the white container
+                                            ),
                                             GestureDetector(
                                               onTap: () {
-                                                // Navigate to a different screen when the image is pressed
                                                 Navigator.push(
                                                   context,
                                                   MaterialPageRoute(
