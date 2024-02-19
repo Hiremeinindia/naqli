@@ -54,7 +54,7 @@ class _MyHomePageState extends State<Dashboard> {
                         child: Text(
                           'User',
                           style: TextStyle(
-                            fontSize: 12,
+                            fontSize: 24,
                             fontFamily: "Segoe UI",
                             color: Color.fromRGBO(112, 112, 112, 1),
                           ),
@@ -75,7 +75,7 @@ class _MyHomePageState extends State<Dashboard> {
                         child: Text(
                           'Enterprise',
                           style: TextStyle(
-                            fontSize: 12,
+                            fontSize: 24,
                             fontFamily: "Segoe UI",
                             color: Color.fromRGBO(206, 203, 203, 1),
                           ),
@@ -96,7 +96,7 @@ class _MyHomePageState extends State<Dashboard> {
                         child: Text(
                           'Partner',
                           style: TextStyle(
-                            fontSize: 12,
+                            fontSize: 24,
                             fontFamily: "Segoe UI",
                             color: Color.fromRGBO(206, 203, 203, 1),
                           ),
@@ -121,7 +121,7 @@ class _MyHomePageState extends State<Dashboard> {
                             "Contact Us",
                             style: TextStyle(
                               fontFamily: 'Colfax',
-                              fontSize: 8,
+                              fontSize: 16,
                             ),
                           ),
                         ),
@@ -144,7 +144,7 @@ class _MyHomePageState extends State<Dashboard> {
                             "Hello Faizal!",
                             style: TextStyle(
                               fontFamily: 'Colfax',
-                              fontSize: 8,
+                              fontSize: 16,
                             ),
                           ),
                         ),
@@ -165,116 +165,132 @@ class _MyHomePageState extends State<Dashboard> {
           child: Padding(
             padding: const EdgeInsets.all(20.0),
             child: Padding(
-              padding: const EdgeInsets.only(left: 40),
+              padding: const EdgeInsets.only(left: 80),
               child: Container(
-                  width: 1800,
+                  width: 1700,
                   color: Color.fromRGBO(240, 237, 250, 1),
                   child: Row(
                     children: [
                       Container(
                         height: 1000, // Adjust the height as needed
-                        width: 500,
+                        width: 400,
                         color: Color.fromRGBO(234, 232, 235, 1),
                         child: Padding(
                           padding: const EdgeInsets.all(30.0),
                           child: Container(
-                            height: 300,
-                            width: 450,
+                            height: 350,
+                            width: 400,
                             color: Color.fromRGBO(240, 237, 250, 1),
                             child: Column(
                               children: [
-                                ClipRRect(
-                                  borderRadius: BorderRadius.circular(
-                                      30.0), // Adjust the radius as needed
-                                  child: Image.asset(
-                                    'Circleavatar.png',
-                                    width: 550,
-                                    height: 400, // Adjust the height as needed
-                                    fit: BoxFit.cover,
+                                Container(
+                                  height: 350,
+                                  width: 400,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(12.0),
+                                  ),
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(
+                                        30.0), // Adjust the radius as needed
+                                    child: Image.asset(
+                                      'Circleavatar.png',
+                                      width: 550,
+                                      height:
+                                          400, // Adjust the height as needed
+                                      fit: BoxFit.cover,
+                                    ),
                                   ),
                                 ),
                                 SizedBox(
-                                  width: 450,
-                                  height: 360,
+                                  width: 500,
+                                  height: 410,
                                   child: Card(
                                     elevation: 10,
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(10),
                                     ),
                                     color: Color.fromRGBO(240, 237, 250, 1),
-                                    child: SideMenu(
-                                      controller: sideMenu,
-                                      style: SideMenuStyle(
-                                        displayMode: SideMenuDisplayMode.auto,
-                                        selectedColor:
-                                            Color.fromRGBO(98, 105, 254, 1),
-                                        unselectedTitleTextStyle: myTextStyle,
-                                        selectedTitleTextStyle: const TextStyle(
-                                            fontFamily: 'Poppins',
-                                            color: Colors.white,
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.w600),
-                                        unselectedIconColor:
-                                            Color.fromRGBO(128, 118, 118, 1),
-                                        selectedIconColor: const Color.fromARGB(
-                                            255, 64, 114, 61),
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: 30, top: 50),
+                                      child: SideMenu(
+                                        controller: sideMenu,
+                                        style: SideMenuStyle(
+                                          displayMode: SideMenuDisplayMode.auto,
+                                          selectedColor:
+                                              Color.fromRGBO(98, 105, 254, 1),
+                                          unselectedTitleTextStyle: myTextStyle,
+                                          selectedTitleTextStyle:
+                                              const TextStyle(
+                                                  fontFamily: 'Poppins',
+                                                  color: Colors.white,
+                                                  fontSize: 14,
+                                                  fontWeight: FontWeight.w600),
+                                          unselectedIconColor:
+                                              Color.fromRGBO(128, 118, 118, 1),
+                                          selectedIconColor:
+                                              const Color.fromARGB(
+                                                  255, 64, 114, 61),
+                                        ),
+                                        items: [
+                                          SideMenuItem(
+                                            priority: 0,
+                                            title: 'Dashboard',
+                                            onTap: (page, _) {
+                                              sideMenu.changePage(page);
+                                            },
+                                            icon: const Icon(
+                                                Icons.login_outlined),
+                                          ),
+                                          SideMenuItem(
+                                            priority: 1,
+                                            title: 'Trigger Booking',
+                                            onTap: (page, _) {
+                                              sideMenu.changePage(page);
+                                            },
+                                            icon: const Icon(
+                                                Icons.person_2_outlined),
+                                          ),
+                                          SideMenuItem(
+                                            priority: 2,
+                                            title: 'Bookings',
+                                            onTap: (page, _) {
+                                              sideMenu.changePage(page);
+                                            },
+                                            icon: const Icon(
+                                                Icons.person_2_outlined),
+                                            // Set the style property to change the text size
+                                          ),
+                                          SideMenuItem(
+                                            priority: 3,
+                                            title: 'Payments',
+                                            onTap: (page, _) {
+                                              sideMenu.changePage(page);
+                                            },
+                                            icon: const Icon(
+                                                Icons.mode_comment_outlined),
+                                          ),
+                                          SideMenuItem(
+                                            priority: 4,
+                                            title: 'Report an issue',
+                                            onTap: (page, _) {
+                                              sideMenu.changePage(page);
+                                            },
+                                            icon: const Icon(
+                                                Icons.mode_comment_outlined),
+                                          ),
+                                          SideMenuItem(
+                                            priority: 5,
+                                            title: 'Help',
+                                            onTap: (page, _) {
+                                              sideMenu.changePage(page);
+                                            },
+                                            icon: const Icon(
+                                                Icons.inbox_outlined),
+                                          ),
+                                        ],
                                       ),
-                                      items: [
-                                        SideMenuItem(
-                                          priority: 0,
-                                          title: 'Dashboard',
-                                          onTap: (page, _) {
-                                            sideMenu.changePage(page);
-                                          },
-                                          icon:
-                                              const Icon(Icons.login_outlined),
-                                        ),
-                                        SideMenuItem(
-                                          priority: 1,
-                                          title: 'Trigger Booking',
-                                          onTap: (page, _) {
-                                            sideMenu.changePage(page);
-                                          },
-                                          icon: const Icon(
-                                              Icons.person_2_outlined),
-                                        ),
-                                        SideMenuItem(
-                                          priority: 2,
-                                          title: 'Bookings',
-                                          onTap: (page, _) {
-                                            sideMenu.changePage(page);
-                                          },
-                                          icon: const Icon(
-                                              Icons.person_2_outlined),
-                                        ),
-                                        SideMenuItem(
-                                          priority: 3,
-                                          title: 'Payments',
-                                          onTap: (page, _) {
-                                            sideMenu.changePage(page);
-                                          },
-                                          icon: const Icon(
-                                              Icons.mode_comment_outlined),
-                                        ),
-                                        SideMenuItem(
-                                          priority: 4,
-                                          title: 'Report an issue',
-                                          onTap: (page, _) {
-                                            sideMenu.changePage(page);
-                                          },
-                                          icon: const Icon(
-                                              Icons.mode_comment_outlined),
-                                        ),
-                                        SideMenuItem(
-                                          priority: 5,
-                                          title: 'Help',
-                                          onTap: (page, _) {
-                                            sideMenu.changePage(page);
-                                          },
-                                          icon:
-                                              const Icon(Icons.inbox_outlined),
-                                        ),
-                                      ],
                                     ),
                                   ),
                                 )
@@ -296,13 +312,18 @@ class _MyHomePageState extends State<Dashboard> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Padding(
-                                  padding: const EdgeInsets.only(left: 50),
+                                  padding:
+                                      const EdgeInsets.only(left: 90, top: 50),
                                   child: Row(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.center,
                                     children: [
                                       Container(
-                                        color: Colors.white,
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius:
+                                              BorderRadius.circular(12.0),
+                                        ),
                                         margin: const EdgeInsets.only(top: 10),
                                         width: 350,
                                         height: 250,
@@ -376,7 +397,11 @@ class _MyHomePageState extends State<Dashboard> {
                                         width: 50,
                                       ),
                                       Container(
-                                        color: Colors.white,
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius:
+                                              BorderRadius.circular(12.0),
+                                        ),
                                         margin: const EdgeInsets.only(top: 10),
                                         width: 400,
                                         height: 250,
@@ -562,8 +587,12 @@ class _MyHomePageState extends State<Dashboard> {
                                       ),
                                       Container(
                                         height: 250,
-                                        color: Colors.white,
                                         width: 163,
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius:
+                                              BorderRadius.circular(12.0),
+                                        ),
                                         child: Column(
                                           children: [
                                             GestureDetector(
@@ -579,6 +608,7 @@ class _MyHomePageState extends State<Dashboard> {
                                               },
                                               child: Container(
                                                 height: 70,
+
                                                 color: Color.fromRGBO(75, 61,
                                                     82, 1), // Brown color
                                                 child: Center(
@@ -610,7 +640,12 @@ class _MyHomePageState extends State<Dashboard> {
                                               },
                                               child: Container(
                                                 height: 70,
-                                                color: Colors.white,
+                                                decoration: BoxDecoration(
+                                                  color: Colors.white,
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          12.0),
+                                                ),
                                                 child: Padding(
                                                   padding:
                                                       const EdgeInsets.all(8.0),
@@ -644,12 +679,18 @@ class _MyHomePageState extends State<Dashboard> {
                                   height: 60,
                                 ),
                                 Padding(
-                                  padding: const EdgeInsets.only(left: 50),
+                                  padding: const EdgeInsets.only(
+                                    left: 90,
+                                  ),
                                   child: Row(
                                     children: [
                                       Container(
                                         height: 292,
-                                        color: Colors.white,
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius:
+                                              BorderRadius.circular(12.0),
+                                        ),
                                         width: 350,
                                         child: Column(
                                           children: [
@@ -695,7 +736,11 @@ class _MyHomePageState extends State<Dashboard> {
                                             ), // Add spacing between the brown container and the white container
                                             Container(
                                               height: 215,
-                                              color: Colors.white,
+                                              decoration: BoxDecoration(
+                                                color: Colors.white,
+                                                borderRadius:
+                                                    BorderRadius.circular(12.0),
+                                              ),
                                               child: ListView(
                                                 children: [
                                                   SizedBox(
@@ -980,7 +1025,11 @@ class _MyHomePageState extends State<Dashboard> {
                                       ),
                                       Container(
                                         height: 294,
-                                        color: Colors.white,
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius:
+                                              BorderRadius.circular(12.0),
+                                        ),
                                         width: 613,
                                         child: Column(
                                           children: [
@@ -1026,7 +1075,11 @@ class _MyHomePageState extends State<Dashboard> {
                                             ), // Add spacing between the brown container and the white container
                                             Container(
                                               height: 200,
-                                              color: Colors.white,
+                                              decoration: BoxDecoration(
+                                                color: Colors.white,
+                                                borderRadius: BorderRadius.circular(
+                                                    10), // Set a common borderRadius for all containers
+                                              ),
                                               child: ListView(
                                                 children: [
                                                   SizedBox(
@@ -1060,8 +1113,8 @@ class _MyHomePageState extends State<Dashboard> {
                                                             ],
                                                           ),
                                                           SizedBox(
-                                                              width:
-                                                                  30), // Add some space between "Truck" and "View" button
+                                                            width: 30,
+                                                          ),
                                                           GestureDetector(
                                                             onTap: () {
                                                               // Add your View button functionality here
@@ -1085,7 +1138,7 @@ class _MyHomePageState extends State<Dashboard> {
                                                                 borderRadius:
                                                                     BorderRadius
                                                                         .circular(
-                                                                            5),
+                                                                            5), // Set borderRadius for the button
                                                               ),
                                                               child: Padding(
                                                                 padding:
@@ -1151,10 +1204,9 @@ class _MyHomePageState extends State<Dashboard> {
                                                               Text("Equipment"),
                                                             ],
                                                           ),
-
                                                           SizedBox(
-                                                              width:
-                                                                  30), // Add some space between "Truck" and "View" button
+                                                            width: 30,
+                                                          ),
                                                           GestureDetector(
                                                             onTap: () {
                                                               // Add your View button functionality here
@@ -1244,8 +1296,8 @@ class _MyHomePageState extends State<Dashboard> {
                                                             ],
                                                           ),
                                                           SizedBox(
-                                                              width:
-                                                                  30), // Add some space between "Truck" and "View" button
+                                                            width: 30,
+                                                          ),
                                                           GestureDetector(
                                                             onTap: () {
                                                               // Add your View button functionality here
