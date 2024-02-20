@@ -8,6 +8,7 @@ import 'package:flutter_application_1/dashboard.dart';
 import 'package:flutter_application_1/homepage.dart';
 import 'package:flutter_application_1/loginPage.dart';
 import 'package:flutter_application_1/sample.dart';
+import 'package:flutter_application_1/triggerBooking.dart';
 import 'package:flutter_application_1/tripdetails.dart';
 
 Future<void> main() async {
@@ -36,7 +37,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Dashboard(),
+      home: TriggerBooking(),
     );
   }
 }
