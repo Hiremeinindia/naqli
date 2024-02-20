@@ -809,7 +809,7 @@ class _MyHomePageState extends State<Dashboard> {
                                                                   'View button pressed');
                                                             },
                                                             child: Container(
-                                                              height: 44,
+                                                              height: 43,
                                                               width: 80,
                                                               padding:
                                                                   EdgeInsets
@@ -845,6 +845,8 @@ class _MyHomePageState extends State<Dashboard> {
                                                                       fontWeight:
                                                                           FontWeight
                                                                               .bold,
+                                                                      fontSize:
+                                                                          10,
                                                                     ),
                                                                   ),
                                                                 ),
@@ -902,7 +904,7 @@ class _MyHomePageState extends State<Dashboard> {
                                                                   'View button pressed');
                                                             },
                                                             child: Container(
-                                                              height: 44,
+                                                              height: 43,
                                                               width: 80,
                                                               padding:
                                                                   EdgeInsets
@@ -938,6 +940,8 @@ class _MyHomePageState extends State<Dashboard> {
                                                                       fontWeight:
                                                                           FontWeight
                                                                               .bold,
+                                                                      fontSize:
+                                                                          10,
                                                                     ),
                                                                   ),
                                                                 ),
@@ -993,7 +997,7 @@ class _MyHomePageState extends State<Dashboard> {
                                                                   'View button pressed');
                                                             },
                                                             child: Container(
-                                                              height: 44,
+                                                              height: 43,
                                                               width: 80,
                                                               padding:
                                                                   EdgeInsets
@@ -1029,6 +1033,8 @@ class _MyHomePageState extends State<Dashboard> {
                                                                       fontWeight:
                                                                           FontWeight
                                                                               .bold,
+                                                                      fontSize:
+                                                                          10,
                                                                     ),
                                                                   ),
                                                                 ),
@@ -1071,7 +1077,7 @@ class _MyHomePageState extends State<Dashboard> {
                                                           const EdgeInsets.all(
                                                               8.0),
                                                       child: Text(
-                                                        'Pending Booking tickets',
+                                                        'Pending Booking Approvals',
                                                         style: TextStyle(
                                                           color: Colors.white,
                                                           fontSize: 18,
@@ -1083,7 +1089,7 @@ class _MyHomePageState extends State<Dashboard> {
                                                     Padding(
                                                       padding:
                                                           const EdgeInsets.only(
-                                                              left: 320),
+                                                              left: 300),
                                                       child: Text(
                                                         "view all",
                                                         style: TextStyle(
@@ -1096,11 +1102,9 @@ class _MyHomePageState extends State<Dashboard> {
                                                 ),
                                               ),
                                             ),
-                                            SizedBox(
-                                              height: 8.0,
-                                            ), // Add spacing between the brown container and the white container
+                                            // Add spacing between the brown container and the white container
                                             Container(
-                                              height: 200,
+                                              height: 224,
                                               decoration: BoxDecoration(
                                                 color: Colors.white,
                                                 // Set a common borderRadius for all containers
@@ -1154,7 +1158,7 @@ class _MyHomePageState extends State<Dashboard> {
                                                         width: 20,
                                                       ),
                                                       SizedBox(
-                                                        width: 300,
+                                                        width: 220,
                                                         child: Divider(
                                                           color: Color.fromRGBO(
                                                               206, 203, 203, 1),
@@ -1199,7 +1203,7 @@ class _MyHomePageState extends State<Dashboard> {
                                                         width: 20,
                                                       ),
                                                       SizedBox(
-                                                        width: 300,
+                                                        width: 220,
                                                         child: Divider(
                                                           color: Color.fromRGBO(
                                                               206, 203, 203, 1),
@@ -1245,12 +1249,16 @@ class _MyHomePageState extends State<Dashboard> {
                                                       ),
                                                     ],
                                                   ),
-                                                  Column(
-                                                    children: [
-                                                      Row(
+                                                  Expanded(
+                                                    child: Container(
+                                                      height: 250,
+                                                      width: 400,
+                                                      color: Color.fromARGB(
+                                                          246, 245, 242, 242),
+                                                      child: Row(
                                                         children: [
                                                           Container(
-                                                            width: 100,
+                                                            width: 130,
                                                             decoration: BoxDecoration(
                                                                 color: Color
                                                                     .fromRGBO(
@@ -1266,6 +1274,9 @@ class _MyHomePageState extends State<Dashboard> {
                                                                             242,
                                                                             242))),
                                                             child: Column(
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .spaceEvenly,
                                                               children: [
                                                                 Padding(
                                                                   padding:
@@ -1274,7 +1285,7 @@ class _MyHomePageState extends State<Dashboard> {
                                                                           8.0),
                                                                   child:
                                                                       Container(
-                                                                    width: 100,
+                                                                    width: 120,
                                                                     height: 30,
                                                                     decoration: BoxDecoration(
                                                                         color: Color.fromRGBO(
@@ -1299,29 +1310,23 @@ class _MyHomePageState extends State<Dashboard> {
                                                                       child:
                                                                           Center(
                                                                         child:
+                                                                            Row(
+                                                                          children: [
+                                                                            Text("Vendor 1",
+                                                                                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 9, color: Color.fromRGBO(128, 118, 118, 1))),
+                                                                            SizedBox(
+                                                                              width: 10,
+                                                                            ),
                                                                             Text(
-                                                                          "Xxxxx SAR",
-                                                                          style: const TextStyle(
-                                                                              fontWeight: FontWeight.bold,
-                                                                              fontSize: 8,
-                                                                              color: Color.fromRGBO(127, 106, 255, 1)),
+                                                                              "Xxxxx SAR",
+                                                                              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 8, color: Color.fromRGBO(127, 106, 255, 1)),
+                                                                            ),
+                                                                          ],
                                                                         ),
                                                                       ),
                                                                     ),
                                                                   ),
                                                                 ),
-                                                                Text("Vendor 1",
-                                                                    style: const TextStyle(
-                                                                        fontWeight:
-                                                                            FontWeight
-                                                                                .bold,
-                                                                        fontSize:
-                                                                            9,
-                                                                        color: Color.fromRGBO(
-                                                                            128,
-                                                                            118,
-                                                                            118,
-                                                                            1))),
                                                                 SizedBox(
                                                                   height: 10,
                                                                 ),
@@ -1332,7 +1337,7 @@ class _MyHomePageState extends State<Dashboard> {
                                                                           8.0),
                                                                   child:
                                                                       Container(
-                                                                    width: 100,
+                                                                    width: 150,
                                                                     height: 30,
                                                                     decoration: BoxDecoration(
                                                                         color: Color.fromRGBO(
@@ -1357,29 +1362,23 @@ class _MyHomePageState extends State<Dashboard> {
                                                                       child:
                                                                           Center(
                                                                         child:
+                                                                            Row(
+                                                                          children: [
+                                                                            Text("Vendor 1",
+                                                                                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 9, color: Color.fromRGBO(128, 118, 118, 1))),
+                                                                            SizedBox(
+                                                                              width: 10,
+                                                                            ),
                                                                             Text(
-                                                                          "Xxxxx SAR",
-                                                                          style: const TextStyle(
-                                                                              fontWeight: FontWeight.bold,
-                                                                              fontSize: 8,
-                                                                              color: Color.fromRGBO(127, 106, 255, 1)),
+                                                                              "Xxxxx SAR",
+                                                                              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 8, color: Color.fromRGBO(127, 106, 255, 1)),
+                                                                            ),
+                                                                          ],
                                                                         ),
                                                                       ),
                                                                     ),
                                                                   ),
                                                                 ),
-                                                                Text("Vendor 1",
-                                                                    style: const TextStyle(
-                                                                        fontWeight:
-                                                                            FontWeight
-                                                                                .bold,
-                                                                        fontSize:
-                                                                            9,
-                                                                        color: Color.fromRGBO(
-                                                                            128,
-                                                                            118,
-                                                                            118,
-                                                                            1))),
                                                                 SizedBox(
                                                                   height: 10,
                                                                 ),
@@ -1390,7 +1389,7 @@ class _MyHomePageState extends State<Dashboard> {
                                                                           8.0),
                                                                   child:
                                                                       Container(
-                                                                    width: 100,
+                                                                    width: 120,
                                                                     height: 30,
                                                                     decoration: BoxDecoration(
                                                                         color: Color.fromRGBO(
@@ -1415,35 +1414,28 @@ class _MyHomePageState extends State<Dashboard> {
                                                                       child:
                                                                           Center(
                                                                         child:
+                                                                            Row(
+                                                                          children: [
+                                                                            Text("Vendor 1",
+                                                                                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 9, color: Color.fromRGBO(128, 118, 118, 1))),
+                                                                            SizedBox(
+                                                                              width: 10,
+                                                                            ),
                                                                             Text(
-                                                                          "Xxxxx SAR",
-                                                                          style: const TextStyle(
-                                                                              fontWeight: FontWeight.bold,
-                                                                              fontSize: 8,
-                                                                              color: Color.fromRGBO(127, 106, 255, 1)),
+                                                                              "Xxxxx SAR",
+                                                                              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 8, color: Color.fromRGBO(127, 106, 255, 1)),
+                                                                            ),
+                                                                          ],
                                                                         ),
                                                                       ),
                                                                     ),
                                                                   ),
                                                                 ),
-                                                                Text("Vendor 1",
-                                                                    style: const TextStyle(
-                                                                        fontWeight:
-                                                                            FontWeight
-                                                                                .bold,
-                                                                        fontSize:
-                                                                            9,
-                                                                        color: Color.fromRGBO(
-                                                                            128,
-                                                                            118,
-                                                                            118,
-                                                                            1))),
                                                               ],
                                                             ),
                                                           ),
                                                           Container(
-                                                            width: 100,
-                                                            height: 200,
+                                                            width: 130,
                                                             decoration: BoxDecoration(
                                                                 color: Color
                                                                     .fromRGBO(
@@ -1459,6 +1451,9 @@ class _MyHomePageState extends State<Dashboard> {
                                                                             242,
                                                                             242))),
                                                             child: Column(
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .spaceEvenly,
                                                               children: [
                                                                 Padding(
                                                                   padding:
@@ -1467,7 +1462,7 @@ class _MyHomePageState extends State<Dashboard> {
                                                                           8.0),
                                                                   child:
                                                                       Container(
-                                                                    width: 100,
+                                                                    width: 120,
                                                                     height: 30,
                                                                     decoration: BoxDecoration(
                                                                         color: Color.fromRGBO(
@@ -1492,29 +1487,23 @@ class _MyHomePageState extends State<Dashboard> {
                                                                       child:
                                                                           Center(
                                                                         child:
+                                                                            Row(
+                                                                          children: [
+                                                                            Text("Vendor 2",
+                                                                                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 9, color: Color.fromRGBO(128, 118, 118, 1))),
+                                                                            SizedBox(
+                                                                              width: 10,
+                                                                            ),
                                                                             Text(
-                                                                          "Xxxxx SAR",
-                                                                          style: const TextStyle(
-                                                                              fontWeight: FontWeight.bold,
-                                                                              fontSize: 8,
-                                                                              color: Color.fromRGBO(127, 106, 255, 1)),
+                                                                              "Xxxxx SAR",
+                                                                              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 8, color: Color.fromRGBO(127, 106, 255, 1)),
+                                                                            ),
+                                                                          ],
                                                                         ),
                                                                       ),
                                                                     ),
                                                                   ),
                                                                 ),
-                                                                Text("Vendor 2",
-                                                                    style: const TextStyle(
-                                                                        fontWeight:
-                                                                            FontWeight
-                                                                                .bold,
-                                                                        fontSize:
-                                                                            9,
-                                                                        color: Color.fromRGBO(
-                                                                            128,
-                                                                            118,
-                                                                            118,
-                                                                            1))),
                                                                 SizedBox(
                                                                   height: 10,
                                                                 ),
@@ -1525,7 +1514,7 @@ class _MyHomePageState extends State<Dashboard> {
                                                                           8.0),
                                                                   child:
                                                                       Container(
-                                                                    width: 100,
+                                                                    width: 120,
                                                                     height: 30,
                                                                     decoration: BoxDecoration(
                                                                         color: Color.fromRGBO(
@@ -1550,29 +1539,23 @@ class _MyHomePageState extends State<Dashboard> {
                                                                       child:
                                                                           Center(
                                                                         child:
+                                                                            Row(
+                                                                          children: [
+                                                                            Text("Vendor 2",
+                                                                                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 9, color: Color.fromRGBO(128, 118, 118, 1))),
+                                                                            SizedBox(
+                                                                              width: 10,
+                                                                            ),
                                                                             Text(
-                                                                          "Xxxxx SAR",
-                                                                          style: const TextStyle(
-                                                                              fontWeight: FontWeight.bold,
-                                                                              fontSize: 8,
-                                                                              color: Color.fromRGBO(127, 106, 255, 1)),
+                                                                              "Xxxxx SAR",
+                                                                              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 8, color: Color.fromRGBO(127, 106, 255, 1)),
+                                                                            ),
+                                                                          ],
                                                                         ),
                                                                       ),
                                                                     ),
                                                                   ),
                                                                 ),
-                                                                Text("Vendor 2",
-                                                                    style: const TextStyle(
-                                                                        fontWeight:
-                                                                            FontWeight
-                                                                                .bold,
-                                                                        fontSize:
-                                                                            9,
-                                                                        color: Color.fromRGBO(
-                                                                            128,
-                                                                            118,
-                                                                            118,
-                                                                            1))),
                                                                 SizedBox(
                                                                   height: 10,
                                                                 ),
@@ -1583,7 +1566,7 @@ class _MyHomePageState extends State<Dashboard> {
                                                                           8.0),
                                                                   child:
                                                                       Container(
-                                                                    width: 100,
+                                                                    width: 120,
                                                                     height: 30,
                                                                     decoration: BoxDecoration(
                                                                         color: Color.fromRGBO(
@@ -1608,35 +1591,28 @@ class _MyHomePageState extends State<Dashboard> {
                                                                       child:
                                                                           Center(
                                                                         child:
+                                                                            Row(
+                                                                          children: [
+                                                                            Text("Vendor 2",
+                                                                                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 9, color: Color.fromRGBO(128, 118, 118, 1))),
+                                                                            SizedBox(
+                                                                              width: 10,
+                                                                            ),
                                                                             Text(
-                                                                          "Xxxxx SAR",
-                                                                          style: const TextStyle(
-                                                                              fontWeight: FontWeight.bold,
-                                                                              fontSize: 8,
-                                                                              color: Color.fromRGBO(127, 106, 255, 1)),
+                                                                              "Xxxxx SAR",
+                                                                              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 8, color: Color.fromRGBO(127, 106, 255, 1)),
+                                                                            ),
+                                                                          ],
                                                                         ),
                                                                       ),
                                                                     ),
                                                                   ),
                                                                 ),
-                                                                Text("Vendor 2",
-                                                                    style: const TextStyle(
-                                                                        fontWeight:
-                                                                            FontWeight
-                                                                                .bold,
-                                                                        fontSize:
-                                                                            9,
-                                                                        color: Color.fromRGBO(
-                                                                            128,
-                                                                            118,
-                                                                            118,
-                                                                            1))),
                                                               ],
                                                             ),
                                                           ),
                                                           Container(
-                                                            width: 100,
-                                                            height: 200,
+                                                            width: 130,
                                                             decoration: BoxDecoration(
                                                                 color: Color
                                                                     .fromRGBO(
@@ -1652,6 +1628,9 @@ class _MyHomePageState extends State<Dashboard> {
                                                                             242,
                                                                             242))),
                                                             child: Column(
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .spaceEvenly,
                                                               children: [
                                                                 Padding(
                                                                   padding:
@@ -1660,7 +1639,7 @@ class _MyHomePageState extends State<Dashboard> {
                                                                           8.0),
                                                                   child:
                                                                       Container(
-                                                                    width: 100,
+                                                                    width: 120,
                                                                     height: 30,
                                                                     decoration: BoxDecoration(
                                                                         color: Color.fromRGBO(
@@ -1685,29 +1664,23 @@ class _MyHomePageState extends State<Dashboard> {
                                                                       child:
                                                                           Center(
                                                                         child:
+                                                                            Row(
+                                                                          children: [
+                                                                            Text("Vendor 3",
+                                                                                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 9, color: Color.fromRGBO(128, 118, 118, 1))),
+                                                                            SizedBox(
+                                                                              width: 10,
+                                                                            ),
                                                                             Text(
-                                                                          "Xxxxx SAR",
-                                                                          style: const TextStyle(
-                                                                              fontWeight: FontWeight.bold,
-                                                                              fontSize: 8,
-                                                                              color: Color.fromRGBO(127, 106, 255, 1)),
+                                                                              "Xxxxx SAR",
+                                                                              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 8, color: Color.fromRGBO(127, 106, 255, 1)),
+                                                                            ),
+                                                                          ],
                                                                         ),
                                                                       ),
                                                                     ),
                                                                   ),
                                                                 ),
-                                                                Text("Vendor 3",
-                                                                    style: const TextStyle(
-                                                                        fontWeight:
-                                                                            FontWeight
-                                                                                .bold,
-                                                                        fontSize:
-                                                                            9,
-                                                                        color: Color.fromRGBO(
-                                                                            128,
-                                                                            118,
-                                                                            118,
-                                                                            1))),
                                                                 SizedBox(
                                                                   height: 10,
                                                                 ),
@@ -1718,7 +1691,7 @@ class _MyHomePageState extends State<Dashboard> {
                                                                           8.0),
                                                                   child:
                                                                       Container(
-                                                                    width: 100,
+                                                                    width: 120,
                                                                     height: 30,
                                                                     decoration: BoxDecoration(
                                                                         color: Color.fromRGBO(
@@ -1743,29 +1716,23 @@ class _MyHomePageState extends State<Dashboard> {
                                                                       child:
                                                                           Center(
                                                                         child:
+                                                                            Row(
+                                                                          children: [
+                                                                            Text("Vendor 3",
+                                                                                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 9, color: Color.fromRGBO(128, 118, 118, 1))),
+                                                                            SizedBox(
+                                                                              width: 10,
+                                                                            ),
                                                                             Text(
-                                                                          "Xxxxx SAR",
-                                                                          style: const TextStyle(
-                                                                              fontWeight: FontWeight.bold,
-                                                                              fontSize: 8,
-                                                                              color: Color.fromRGBO(127, 106, 255, 1)),
+                                                                              "Xxxxx SAR",
+                                                                              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 8, color: Color.fromRGBO(127, 106, 255, 1)),
+                                                                            ),
+                                                                          ],
                                                                         ),
                                                                       ),
                                                                     ),
                                                                   ),
                                                                 ),
-                                                                Text("Vendor 3",
-                                                                    style: const TextStyle(
-                                                                        fontWeight:
-                                                                            FontWeight
-                                                                                .bold,
-                                                                        fontSize:
-                                                                            9,
-                                                                        color: Color.fromRGBO(
-                                                                            128,
-                                                                            118,
-                                                                            118,
-                                                                            1))),
                                                                 SizedBox(
                                                                   height: 10,
                                                                 ),
@@ -1776,7 +1743,7 @@ class _MyHomePageState extends State<Dashboard> {
                                                                           8.0),
                                                                   child:
                                                                       Container(
-                                                                    width: 100,
+                                                                    width: 120,
                                                                     height: 30,
                                                                     decoration: BoxDecoration(
                                                                         color: Color.fromRGBO(
@@ -1801,35 +1768,29 @@ class _MyHomePageState extends State<Dashboard> {
                                                                       child:
                                                                           Center(
                                                                         child:
+                                                                            Row(
+                                                                          children: [
+                                                                            Text("Vendor 3",
+                                                                                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 9, color: Color.fromRGBO(128, 118, 118, 1))),
+                                                                            SizedBox(
+                                                                              width: 10,
+                                                                            ),
                                                                             Text(
-                                                                          "Xxxxx SAR",
-                                                                          style: const TextStyle(
-                                                                              fontWeight: FontWeight.bold,
-                                                                              fontSize: 8,
-                                                                              color: Color.fromRGBO(127, 106, 255, 1)),
+                                                                              "Xxxxx SAR",
+                                                                              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 8, color: Color.fromRGBO(127, 106, 255, 1)),
+                                                                            ),
+                                                                          ],
                                                                         ),
                                                                       ),
                                                                     ),
                                                                   ),
                                                                 ),
-                                                                Text("Vendor 3",
-                                                                    style: const TextStyle(
-                                                                        fontWeight:
-                                                                            FontWeight
-                                                                                .bold,
-                                                                        fontSize:
-                                                                            9,
-                                                                        color: Color.fromRGBO(
-                                                                            128,
-                                                                            118,
-                                                                            118,
-                                                                            1))),
                                                               ],
                                                             ),
                                                           ),
                                                         ],
                                                       ),
-                                                    ],
+                                                    ),
                                                   )
                                                 ],
                                               ),
