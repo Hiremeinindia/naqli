@@ -19,6 +19,7 @@ class TriggerBooking extends StatefulWidget {
 class TriggerBookingState extends State<TriggerBooking> {
   SideMenuController sideMenu = SideMenuController();
   bool value = false;
+  int? selectedRadioValue;
   TextStyle myTextStyle = const TextStyle(
     fontFamily: 'Poppins',
     fontSize: 14,
@@ -401,20 +402,24 @@ class TriggerBookingState extends State<TriggerBooking> {
                                                                   SizedBox(
                                                                     width: 10,
                                                                   ),
-                                                                  Checkbox(
-                                                                    value: this
-                                                                        .value,
-                                                                    onChanged:
-                                                                        (bool?
-                                                                            value) {
-                                                                      // Change the parameter type to bool?
-                                                                      setState(
-                                                                          () {
-                                                                        this.value =
-                                                                            value ??
-                                                                                false; // Use null-aware operator to handle null case
-                                                                      });
-                                                                    },
+                                                                  Transform
+                                                                      .scale(
+                                                                    scale: 1.0,
+                                                                    child:
+                                                                        Checkbox(
+                                                                      value: this
+                                                                          .value,
+                                                                      onChanged:
+                                                                          (bool?
+                                                                              value) {
+                                                                        // Change the parameter type to bool?
+                                                                        setState(
+                                                                            () {
+                                                                          this.value =
+                                                                              value ?? false; // Use null-aware operator to handle null case
+                                                                        });
+                                                                      },
+                                                                    ),
                                                                   ),
                                                                 ],
                                                               ),
@@ -437,7 +442,7 @@ class TriggerBookingState extends State<TriggerBooking> {
                                                                     ),
                                                                   ),
                                                                   SizedBox(
-                                                                    height: 10,
+                                                                    height: 3,
                                                                   ),
                                                                   Text(
                                                                     "Booking ID Xxxxxx",
@@ -462,7 +467,7 @@ class TriggerBookingState extends State<TriggerBooking> {
                                                                     child:
                                                                         Container(
                                                                       width:
-                                                                          170,
+                                                                          165,
                                                                       height:
                                                                           50,
                                                                       decoration: BoxDecoration(
@@ -472,7 +477,7 @@ class TriggerBookingState extends State<TriggerBooking> {
                                                                               253,
                                                                               1),
                                                                           borderRadius: BorderRadius.circular(
-                                                                              12.0),
+                                                                              25.0),
                                                                           border:
                                                                               Border.all(color: Color.fromARGB(246, 245, 242, 242))),
                                                                       child:
@@ -484,11 +489,28 @@ class TriggerBookingState extends State<TriggerBooking> {
                                                                             Center(
                                                                           child:
                                                                               Row(
+                                                                            mainAxisAlignment:
+                                                                                MainAxisAlignment.start,
                                                                             children: [
-                                                                              Text("Vendor 1", style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 9, color: Color.fromRGBO(128, 118, 118, 1))),
                                                                               SizedBox(
-                                                                                width: 10,
+                                                                                width: 5,
                                                                               ),
+                                                                              Radio(
+                                                                                value: 1,
+                                                                                fillColor: MaterialStateColor.resolveWith((states) => Colors.white),
+                                                                                groupValue: selectedRadioValue,
+                                                                                onChanged: (value) {
+                                                                                  setState(() {
+                                                                                    selectedRadioValue = value;
+                                                                                  });
+                                                                                },
+                                                                                activeColor: Colors.white, // Set the background color when the radio button is selected
+                                                                              ),
+                                                                              SizedBox(
+                                                                                width: 5,
+                                                                              ),
+                                                                              Text("Vendor 1", style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 9, color: Color.fromRGBO(128, 118, 118, 1))),
+                                                                              SizedBox(width: 10),
                                                                               Text(
                                                                                 "Xxxxx SAR",
                                                                                 style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 8, color: Color.fromRGBO(127, 106, 255, 1)),
@@ -507,7 +529,7 @@ class TriggerBookingState extends State<TriggerBooking> {
                                                                     child:
                                                                         Container(
                                                                       width:
-                                                                          170,
+                                                                          165,
                                                                       height:
                                                                           50,
                                                                       decoration: BoxDecoration(
@@ -517,7 +539,7 @@ class TriggerBookingState extends State<TriggerBooking> {
                                                                               200,
                                                                               1),
                                                                           borderRadius: BorderRadius.circular(
-                                                                              12.0),
+                                                                              25.0),
                                                                           border:
                                                                               Border.all(color: Color.fromARGB(246, 245, 242, 242))),
                                                                       child:
@@ -529,11 +551,28 @@ class TriggerBookingState extends State<TriggerBooking> {
                                                                             Center(
                                                                           child:
                                                                               Row(
+                                                                            mainAxisAlignment:
+                                                                                MainAxisAlignment.start,
                                                                             children: [
-                                                                              Text("Vendor 2", style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 9, color: Color.fromRGBO(128, 118, 118, 1))),
                                                                               SizedBox(
-                                                                                width: 10,
+                                                                                width: 5,
                                                                               ),
+                                                                              Radio(
+                                                                                value: 1,
+                                                                                fillColor: MaterialStateColor.resolveWith((states) => Colors.white),
+                                                                                groupValue: selectedRadioValue,
+                                                                                onChanged: (value) {
+                                                                                  setState(() {
+                                                                                    selectedRadioValue = value;
+                                                                                  });
+                                                                                },
+                                                                                activeColor: Colors.white, // Set the background color when the radio button is selected
+                                                                              ),
+                                                                              SizedBox(
+                                                                                width: 5,
+                                                                              ),
+                                                                              Text("Vendor 2", style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 9, color: Color.fromRGBO(128, 118, 118, 1))),
+                                                                              SizedBox(width: 10),
                                                                               Text(
                                                                                 "Xxxxx SAR",
                                                                                 style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 8, color: Color.fromRGBO(127, 106, 255, 1)),
@@ -552,7 +591,7 @@ class TriggerBookingState extends State<TriggerBooking> {
                                                                     child:
                                                                         Container(
                                                                       width:
-                                                                          170,
+                                                                          165,
                                                                       height:
                                                                           50,
                                                                       decoration: BoxDecoration(
@@ -562,7 +601,7 @@ class TriggerBookingState extends State<TriggerBooking> {
                                                                               200,
                                                                               1),
                                                                           borderRadius: BorderRadius.circular(
-                                                                              12.0),
+                                                                              25.0),
                                                                           border:
                                                                               Border.all(color: Color.fromARGB(246, 245, 242, 242))),
                                                                       child:
@@ -574,11 +613,28 @@ class TriggerBookingState extends State<TriggerBooking> {
                                                                             Center(
                                                                           child:
                                                                               Row(
+                                                                            mainAxisAlignment:
+                                                                                MainAxisAlignment.start,
                                                                             children: [
-                                                                              Text("Vendor 3", style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 9, color: Color.fromRGBO(128, 118, 118, 1))),
                                                                               SizedBox(
-                                                                                width: 10,
+                                                                                width: 5,
                                                                               ),
+                                                                              Radio(
+                                                                                value: 1,
+                                                                                fillColor: MaterialStateColor.resolveWith((states) => Colors.white),
+                                                                                groupValue: selectedRadioValue,
+                                                                                onChanged: (value) {
+                                                                                  setState(() {
+                                                                                    selectedRadioValue = value;
+                                                                                  });
+                                                                                },
+                                                                                activeColor: Colors.white, // Set the background color when the radio button is selected
+                                                                              ),
+                                                                              SizedBox(
+                                                                                width: 5,
+                                                                              ),
+                                                                              Text("Vendor 3", style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 9, color: Color.fromRGBO(128, 118, 118, 1))),
+                                                                              SizedBox(width: 10),
                                                                               Text(
                                                                                 "Xxxxx SAR",
                                                                                 style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 8, color: Color.fromRGBO(127, 106, 255, 1)),
@@ -592,28 +648,43 @@ class TriggerBookingState extends State<TriggerBooking> {
                                                                 ],
                                                               ),
                                                               SizedBox(
-                                                                width: 10,
+                                                                width: 20,
                                                               ),
-                                                              IconButton(
-                                                                  onPressed:
-                                                                      null,
-                                                                  icon: Icon(
-                                                                    Icons
-                                                                        .edit_document,
-                                                                    color: Color
-                                                                        .fromRGBO(
+                                                              Row(
+                                                                children: [
+                                                                  IconButton(
+                                                                      padding:
+                                                                          EdgeInsets
+                                                                              .zero,
+                                                                      constraints:
+                                                                          BoxConstraints(),
+                                                                      onPressed:
+                                                                          null,
+                                                                      icon:
+                                                                          Icon(
+                                                                        Icons
+                                                                            .edit_document,
+                                                                        color: Color.fromRGBO(
                                                                             74,
                                                                             60,
                                                                             81,
                                                                             1),
-                                                                  )),
-                                                              IconButton(
-                                                                  onPressed:
-                                                                      null,
-                                                                  icon: Icon(Icons
-                                                                      .delete)),
+                                                                      )),
+                                                                  IconButton(
+                                                                      padding:
+                                                                          EdgeInsets
+                                                                              .zero,
+                                                                      // constraints:
+                                                                      //     BoxConstraints(),
+                                                                      onPressed:
+                                                                          null,
+                                                                      icon: Icon(
+                                                                          Icons
+                                                                              .delete)),
+                                                                ],
+                                                              ),
                                                               SizedBox(
-                                                                width: 10,
+                                                                width: 20,
                                                               ),
                                                               SizedBox(
                                                                 width: 150,
@@ -717,7 +788,7 @@ class TriggerBookingState extends State<TriggerBooking> {
                                                                     ),
                                                                   ),
                                                                   SizedBox(
-                                                                    height: 10,
+                                                                    height: 3,
                                                                   ),
                                                                   Text(
                                                                     "Booking ID Xxxxxx",
@@ -742,7 +813,7 @@ class TriggerBookingState extends State<TriggerBooking> {
                                                                     child:
                                                                         Container(
                                                                       width:
-                                                                          170,
+                                                                          165,
                                                                       height:
                                                                           50,
                                                                       decoration: BoxDecoration(
@@ -752,7 +823,7 @@ class TriggerBookingState extends State<TriggerBooking> {
                                                                               253,
                                                                               1),
                                                                           borderRadius: BorderRadius.circular(
-                                                                              12.0),
+                                                                              25.0),
                                                                           border:
                                                                               Border.all(color: Color.fromARGB(246, 245, 242, 242))),
                                                                       child:
@@ -764,11 +835,28 @@ class TriggerBookingState extends State<TriggerBooking> {
                                                                             Center(
                                                                           child:
                                                                               Row(
+                                                                            mainAxisAlignment:
+                                                                                MainAxisAlignment.start,
                                                                             children: [
-                                                                              Text("Vendor 1", style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 9, color: Color.fromRGBO(128, 118, 118, 1))),
                                                                               SizedBox(
-                                                                                width: 10,
+                                                                                width: 5,
                                                                               ),
+                                                                              Radio(
+                                                                                value: 1,
+                                                                                fillColor: MaterialStateColor.resolveWith((states) => Colors.white),
+                                                                                groupValue: selectedRadioValue,
+                                                                                onChanged: (value) {
+                                                                                  setState(() {
+                                                                                    selectedRadioValue = value;
+                                                                                  });
+                                                                                },
+                                                                                activeColor: Colors.white, // Set the background color when the radio button is selected
+                                                                              ),
+                                                                              SizedBox(
+                                                                                width: 5,
+                                                                              ),
+                                                                              Text("Vendor 1", style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 9, color: Color.fromRGBO(128, 118, 118, 1))),
+                                                                              SizedBox(width: 10),
                                                                               Text(
                                                                                 "Xxxxx SAR",
                                                                                 style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 8, color: Color.fromRGBO(127, 106, 255, 1)),
@@ -787,7 +875,7 @@ class TriggerBookingState extends State<TriggerBooking> {
                                                                     child:
                                                                         Container(
                                                                       width:
-                                                                          170,
+                                                                          165,
                                                                       height:
                                                                           50,
                                                                       decoration: BoxDecoration(
@@ -797,7 +885,7 @@ class TriggerBookingState extends State<TriggerBooking> {
                                                                               200,
                                                                               1),
                                                                           borderRadius: BorderRadius.circular(
-                                                                              12.0),
+                                                                              25.0),
                                                                           border:
                                                                               Border.all(color: Color.fromARGB(246, 245, 242, 242))),
                                                                       child:
@@ -809,11 +897,28 @@ class TriggerBookingState extends State<TriggerBooking> {
                                                                             Center(
                                                                           child:
                                                                               Row(
+                                                                            mainAxisAlignment:
+                                                                                MainAxisAlignment.start,
                                                                             children: [
-                                                                              Text("Vendor 2", style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 9, color: Color.fromRGBO(128, 118, 118, 1))),
                                                                               SizedBox(
-                                                                                width: 10,
+                                                                                width: 5,
                                                                               ),
+                                                                              Radio(
+                                                                                value: 1,
+                                                                                fillColor: MaterialStateColor.resolveWith((states) => Colors.white),
+                                                                                groupValue: selectedRadioValue,
+                                                                                onChanged: (value) {
+                                                                                  setState(() {
+                                                                                    selectedRadioValue = value;
+                                                                                  });
+                                                                                },
+                                                                                activeColor: Colors.white, // Set the background color when the radio button is selected
+                                                                              ),
+                                                                              SizedBox(
+                                                                                width: 5,
+                                                                              ),
+                                                                              Text("Vendor 2", style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 9, color: Color.fromRGBO(128, 118, 118, 1))),
+                                                                              SizedBox(width: 10),
                                                                               Text(
                                                                                 "Xxxxx SAR",
                                                                                 style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 8, color: Color.fromRGBO(127, 106, 255, 1)),
@@ -832,7 +937,7 @@ class TriggerBookingState extends State<TriggerBooking> {
                                                                     child:
                                                                         Container(
                                                                       width:
-                                                                          170,
+                                                                          165,
                                                                       height:
                                                                           50,
                                                                       decoration: BoxDecoration(
@@ -842,7 +947,7 @@ class TriggerBookingState extends State<TriggerBooking> {
                                                                               200,
                                                                               1),
                                                                           borderRadius: BorderRadius.circular(
-                                                                              12.0),
+                                                                              25.0),
                                                                           border:
                                                                               Border.all(color: Color.fromARGB(246, 245, 242, 242))),
                                                                       child:
@@ -854,11 +959,28 @@ class TriggerBookingState extends State<TriggerBooking> {
                                                                             Center(
                                                                           child:
                                                                               Row(
+                                                                            mainAxisAlignment:
+                                                                                MainAxisAlignment.start,
                                                                             children: [
-                                                                              Text("Vendor 3", style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 9, color: Color.fromRGBO(128, 118, 118, 1))),
                                                                               SizedBox(
-                                                                                width: 10,
+                                                                                width: 5,
                                                                               ),
+                                                                              Radio(
+                                                                                value: 1,
+                                                                                fillColor: MaterialStateColor.resolveWith((states) => Colors.white),
+                                                                                groupValue: selectedRadioValue,
+                                                                                onChanged: (value) {
+                                                                                  setState(() {
+                                                                                    selectedRadioValue = value;
+                                                                                  });
+                                                                                },
+                                                                                activeColor: Colors.white, // Set the background color when the radio button is selected
+                                                                              ),
+                                                                              SizedBox(
+                                                                                width: 5,
+                                                                              ),
+                                                                              Text("Vendor 3", style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 9, color: Color.fromRGBO(128, 118, 118, 1))),
+                                                                              SizedBox(width: 10),
                                                                               Text(
                                                                                 "Xxxxx SAR",
                                                                                 style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 8, color: Color.fromRGBO(127, 106, 255, 1)),
@@ -872,28 +994,43 @@ class TriggerBookingState extends State<TriggerBooking> {
                                                                 ],
                                                               ),
                                                               SizedBox(
-                                                                width: 10,
+                                                                width: 20,
                                                               ),
-                                                              IconButton(
-                                                                  onPressed:
-                                                                      null,
-                                                                  icon: Icon(
-                                                                    Icons
-                                                                        .edit_document,
-                                                                    color: Color
-                                                                        .fromRGBO(
+                                                              Row(
+                                                                children: [
+                                                                  IconButton(
+                                                                      padding:
+                                                                          EdgeInsets
+                                                                              .zero,
+                                                                      constraints:
+                                                                          BoxConstraints(),
+                                                                      onPressed:
+                                                                          null,
+                                                                      icon:
+                                                                          Icon(
+                                                                        Icons
+                                                                            .edit_document,
+                                                                        color: Color.fromRGBO(
                                                                             74,
                                                                             60,
                                                                             81,
                                                                             1),
-                                                                  )),
-                                                              IconButton(
-                                                                  onPressed:
-                                                                      null,
-                                                                  icon: Icon(Icons
-                                                                      .delete)),
+                                                                      )),
+                                                                  IconButton(
+                                                                      padding:
+                                                                          EdgeInsets
+                                                                              .zero,
+                                                                      // constraints:
+                                                                      //     BoxConstraints(),
+                                                                      onPressed:
+                                                                          null,
+                                                                      icon: Icon(
+                                                                          Icons
+                                                                              .delete)),
+                                                                ],
+                                                              ),
                                                               SizedBox(
-                                                                width: 10,
+                                                                width: 20,
                                                               ),
                                                               SizedBox(
                                                                 width: 150,
@@ -997,7 +1134,7 @@ class TriggerBookingState extends State<TriggerBooking> {
                                                                     ),
                                                                   ),
                                                                   SizedBox(
-                                                                    height: 10,
+                                                                    height: 3,
                                                                   ),
                                                                   Text(
                                                                     "Booking ID Xxxxxx",
@@ -1022,7 +1159,7 @@ class TriggerBookingState extends State<TriggerBooking> {
                                                                     child:
                                                                         Container(
                                                                       width:
-                                                                          170,
+                                                                          165,
                                                                       height:
                                                                           50,
                                                                       decoration: BoxDecoration(
@@ -1032,7 +1169,7 @@ class TriggerBookingState extends State<TriggerBooking> {
                                                                               253,
                                                                               1),
                                                                           borderRadius: BorderRadius.circular(
-                                                                              12.0),
+                                                                              25.0),
                                                                           border:
                                                                               Border.all(color: Color.fromARGB(246, 245, 242, 242))),
                                                                       child:
@@ -1044,11 +1181,28 @@ class TriggerBookingState extends State<TriggerBooking> {
                                                                             Center(
                                                                           child:
                                                                               Row(
+                                                                            mainAxisAlignment:
+                                                                                MainAxisAlignment.start,
                                                                             children: [
-                                                                              Text("Vendor 1", style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 9, color: Color.fromRGBO(128, 118, 118, 1))),
                                                                               SizedBox(
-                                                                                width: 10,
+                                                                                width: 5,
                                                                               ),
+                                                                              Radio(
+                                                                                value: 1,
+                                                                                fillColor: MaterialStateColor.resolveWith((states) => Colors.white),
+                                                                                groupValue: selectedRadioValue,
+                                                                                onChanged: (value) {
+                                                                                  setState(() {
+                                                                                    selectedRadioValue = value;
+                                                                                  });
+                                                                                },
+                                                                                activeColor: Colors.white, // Set the background color when the radio button is selected
+                                                                              ),
+                                                                              SizedBox(
+                                                                                width: 5,
+                                                                              ),
+                                                                              Text("Vendor 1", style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 9, color: Color.fromRGBO(128, 118, 118, 1))),
+                                                                              SizedBox(width: 10),
                                                                               Text(
                                                                                 "Xxxxx SAR",
                                                                                 style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 8, color: Color.fromRGBO(127, 106, 255, 1)),
@@ -1067,7 +1221,7 @@ class TriggerBookingState extends State<TriggerBooking> {
                                                                     child:
                                                                         Container(
                                                                       width:
-                                                                          170,
+                                                                          165,
                                                                       height:
                                                                           50,
                                                                       decoration: BoxDecoration(
@@ -1077,7 +1231,7 @@ class TriggerBookingState extends State<TriggerBooking> {
                                                                               200,
                                                                               1),
                                                                           borderRadius: BorderRadius.circular(
-                                                                              12.0),
+                                                                              25.0),
                                                                           border:
                                                                               Border.all(color: Color.fromARGB(246, 245, 242, 242))),
                                                                       child:
@@ -1089,11 +1243,28 @@ class TriggerBookingState extends State<TriggerBooking> {
                                                                             Center(
                                                                           child:
                                                                               Row(
+                                                                            mainAxisAlignment:
+                                                                                MainAxisAlignment.start,
                                                                             children: [
-                                                                              Text("Vendor 2", style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 9, color: Color.fromRGBO(128, 118, 118, 1))),
                                                                               SizedBox(
-                                                                                width: 10,
+                                                                                width: 5,
                                                                               ),
+                                                                              Radio(
+                                                                                value: 1,
+                                                                                fillColor: MaterialStateColor.resolveWith((states) => Colors.white),
+                                                                                groupValue: selectedRadioValue,
+                                                                                onChanged: (value) {
+                                                                                  setState(() {
+                                                                                    selectedRadioValue = value;
+                                                                                  });
+                                                                                },
+                                                                                activeColor: Colors.white, // Set the background color when the radio button is selected
+                                                                              ),
+                                                                              SizedBox(
+                                                                                width: 5,
+                                                                              ),
+                                                                              Text("Vendor 2", style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 9, color: Color.fromRGBO(128, 118, 118, 1))),
+                                                                              SizedBox(width: 10),
                                                                               Text(
                                                                                 "Xxxxx SAR",
                                                                                 style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 8, color: Color.fromRGBO(127, 106, 255, 1)),
@@ -1112,7 +1283,7 @@ class TriggerBookingState extends State<TriggerBooking> {
                                                                     child:
                                                                         Container(
                                                                       width:
-                                                                          170,
+                                                                          165,
                                                                       height:
                                                                           50,
                                                                       decoration: BoxDecoration(
@@ -1122,7 +1293,7 @@ class TriggerBookingState extends State<TriggerBooking> {
                                                                               200,
                                                                               1),
                                                                           borderRadius: BorderRadius.circular(
-                                                                              12.0),
+                                                                              25.0),
                                                                           border:
                                                                               Border.all(color: Color.fromARGB(246, 245, 242, 242))),
                                                                       child:
@@ -1134,11 +1305,28 @@ class TriggerBookingState extends State<TriggerBooking> {
                                                                             Center(
                                                                           child:
                                                                               Row(
+                                                                            mainAxisAlignment:
+                                                                                MainAxisAlignment.start,
                                                                             children: [
-                                                                              Text("Vendor 3", style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 9, color: Color.fromRGBO(128, 118, 118, 1))),
                                                                               SizedBox(
-                                                                                width: 10,
+                                                                                width: 5,
                                                                               ),
+                                                                              Radio(
+                                                                                value: 1,
+                                                                                fillColor: MaterialStateColor.resolveWith((states) => Colors.white),
+                                                                                groupValue: selectedRadioValue,
+                                                                                onChanged: (value) {
+                                                                                  setState(() {
+                                                                                    selectedRadioValue = value;
+                                                                                  });
+                                                                                },
+                                                                                activeColor: Colors.white, // Set the background color when the radio button is selected
+                                                                              ),
+                                                                              SizedBox(
+                                                                                width: 5,
+                                                                              ),
+                                                                              Text("Vendor 3", style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 9, color: Color.fromRGBO(128, 118, 118, 1))),
+                                                                              SizedBox(width: 10),
                                                                               Text(
                                                                                 "Xxxxx SAR",
                                                                                 style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 8, color: Color.fromRGBO(127, 106, 255, 1)),
@@ -1152,28 +1340,43 @@ class TriggerBookingState extends State<TriggerBooking> {
                                                                 ],
                                                               ),
                                                               SizedBox(
-                                                                width: 10,
+                                                                width: 20,
                                                               ),
-                                                              IconButton(
-                                                                  onPressed:
-                                                                      null,
-                                                                  icon: Icon(
-                                                                    Icons
-                                                                        .edit_document,
-                                                                    color: Color
-                                                                        .fromRGBO(
+                                                              Row(
+                                                                children: [
+                                                                  IconButton(
+                                                                      padding:
+                                                                          EdgeInsets
+                                                                              .zero,
+                                                                      constraints:
+                                                                          BoxConstraints(),
+                                                                      onPressed:
+                                                                          null,
+                                                                      icon:
+                                                                          Icon(
+                                                                        Icons
+                                                                            .edit_document,
+                                                                        color: Color.fromRGBO(
                                                                             74,
                                                                             60,
                                                                             81,
                                                                             1),
-                                                                  )),
-                                                              IconButton(
-                                                                  onPressed:
-                                                                      null,
-                                                                  icon: Icon(Icons
-                                                                      .delete)),
+                                                                      )),
+                                                                  IconButton(
+                                                                      padding:
+                                                                          EdgeInsets
+                                                                              .zero,
+                                                                      // constraints:
+                                                                      //     BoxConstraints(),
+                                                                      onPressed:
+                                                                          null,
+                                                                      icon: Icon(
+                                                                          Icons
+                                                                              .delete)),
+                                                                ],
+                                                              ),
                                                               SizedBox(
-                                                                width: 10,
+                                                                width: 20,
                                                               ),
                                                               SizedBox(
                                                                 width: 150,
@@ -1229,7 +1432,7 @@ class TriggerBookingState extends State<TriggerBooking> {
                                       ],
                                     ),
                                     SizedBox(
-                                      height: 20,
+                                      height: 200,
                                     ),
                                     SingleChildScrollView(
                                       scrollDirection: Axis.horizontal,
@@ -1246,7 +1449,7 @@ class TriggerBookingState extends State<TriggerBooking> {
                                 ),
                               ),
                               SizedBox(
-                                height: 20,
+                                height: 40,
                               ),
                               SizedBox(
                                 width: 150,
@@ -1266,7 +1469,7 @@ class TriggerBookingState extends State<TriggerBooking> {
                                     'Confirm Booking',
                                     style: TextStyle(
                                       color: Colors.white,
-                                      fontSize: 13,
+                                      fontSize: 13.4,
                                     ),
                                   ),
                                 ),
