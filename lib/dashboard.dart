@@ -24,7 +24,11 @@ class _MyHomePageState extends State<Dashboard> {
   bool checkbox2 = false;
   bool checkbox3 = false;
   bool isButtonEnabled = false;
-  int? selectedRadioValue = 0;
+  bool isButtonEnabled1 = false;
+  bool isButtonEnabled2 = false;
+  int? selectedRadioValue;
+  int? selectedRadioValue1;
+  int? selectedRadioValue2;
   bool payNowButtonEnabled = false;
 
   void enablePayNowButton() {
@@ -136,7 +140,151 @@ class _MyHomePageState extends State<Dashboard> {
     );
   }
 
+  Widget buildVendorContainer1(int value1, String vendorName, String amount) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        width: 165,
+        height: 50,
+        decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey,
+              spreadRadius: 1,
+              blurRadius: 2, // changes position of shadow
+            ),
+          ],
+          color: getVendorContainerColor(value1),
+          borderRadius: BorderRadius.circular(25.0),
+          border: Border.all(color: Color.fromARGB(246, 245, 242, 242)),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Center(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                SizedBox(width: 5),
+                Radio(
+                  value: value1,
+                  fillColor:
+                      MaterialStateColor.resolveWith((states) => Colors.white),
+                  groupValue: selectedRadioValue1,
+                  onChanged: (val) {
+                    setState(() {
+                      selectedRadioValue1 = val as int;
+                      isButtonEnabled1 = true;
+                    });
+                  },
+                  activeColor: Colors.white,
+                ),
+                SizedBox(width: 5),
+                Text(vendorName,
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 9,
+                        color: Color.fromRGBO(128, 118, 118, 1))),
+                SizedBox(width: 10),
+                Text(
+                  amount,
+                  style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 8,
+                      color: Color.fromRGBO(127, 106, 255, 1)),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget buildVendorContainer2(int value2, String vendorName, String amount) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        width: 165,
+        height: 50,
+        decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey,
+              spreadRadius: 1,
+              blurRadius: 2, // changes position of shadow
+            ),
+          ],
+          color: getVendorContainerColor(value2),
+          borderRadius: BorderRadius.circular(25.0),
+          border: Border.all(color: Color.fromARGB(246, 245, 242, 242)),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Center(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                SizedBox(width: 5),
+                Radio(
+                  value: value2,
+                  fillColor:
+                      MaterialStateColor.resolveWith((states) => Colors.white),
+                  groupValue: selectedRadioValue2,
+                  onChanged: (val) {
+                    setState(() {
+                      selectedRadioValue2 = val as int;
+                      isButtonEnabled2 = true;
+                    });
+                  },
+                  activeColor: Colors.white,
+                ),
+                SizedBox(width: 5),
+                Text(vendorName,
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 9,
+                        color: Color.fromRGBO(128, 118, 118, 1))),
+                SizedBox(width: 10),
+                Text(
+                  amount,
+                  style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 8,
+                      color: Color.fromRGBO(127, 106, 255, 1)),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
   Color getVendorContainerColor(int value) {
+    // Provide the color based on the vendor value or any other logic you prefer
+    if (value == 1) {
+      return Color.fromRGBO(200, 251, 253, 1);
+    } else if (value == 2) {
+      return Color.fromRGBO(224, 253, 200, 1);
+    } else if (value == 3) {
+      return Color.fromRGBO(245, 253, 200, 1);
+    }
+    return Colors.white; // Default color
+  }
+
+  Color getVendorContainerColor1(int value) {
+    // Provide the color based on the vendor value or any other logic you prefer
+    if (value == 1) {
+      return Color.fromRGBO(200, 251, 253, 1);
+    } else if (value == 2) {
+      return Color.fromRGBO(224, 253, 200, 1);
+    } else if (value == 3) {
+      return Color.fromRGBO(245, 253, 200, 1);
+    }
+    return Colors.white; // Default color
+  }
+
+  Color getVendorContainerColor2(int value) {
     // Provide the color based on the vendor value or any other logic you prefer
     if (value == 1) {
       return Color.fromRGBO(200, 251, 253, 1);
@@ -2381,15 +2529,15 @@ class _MyHomePageState extends State<Dashboard> {
                                                                         ),
                                                                         Row(
                                                                           children: [
-                                                                            buildVendorContainer(
+                                                                            buildVendorContainer1(
                                                                                 1,
                                                                                 "Vendor 1",
                                                                                 "Xxxxx SAR"),
-                                                                            buildVendorContainer(
+                                                                            buildVendorContainer1(
                                                                                 2,
                                                                                 "Vendor 2",
                                                                                 "Xxxxx SAR"),
-                                                                            buildVendorContainer(
+                                                                            buildVendorContainer1(
                                                                                 3,
                                                                                 "Vendor 3",
                                                                                 "Xxxxx SAR"),
@@ -2428,7 +2576,7 @@ class _MyHomePageState extends State<Dashboard> {
                                                                               50,
                                                                           child:
                                                                               ElevatedButton(
-                                                                            onPressed: isButtonEnabled
+                                                                            onPressed: isButtonEnabled1
                                                                                 ? () {
                                                                                     // Handle button press only if any radio button is selected
                                                                                     print('Elevated Button Pressed!');
@@ -2436,9 +2584,9 @@ class _MyHomePageState extends State<Dashboard> {
                                                                                 : null,
                                                                             style:
                                                                                 ElevatedButton.styleFrom(
-                                                                              primary: isButtonEnabled ? Color.fromRGBO(98, 105, 254, 1) : Colors.grey,
+                                                                              primary: isButtonEnabled1 ? Color.fromRGBO(98, 105, 254, 1) : Colors.grey,
                                                                               side: BorderSide(
-                                                                                color: isButtonEnabled ? Color.fromRGBO(98, 105, 254, 1) : Colors.grey,
+                                                                                color: isButtonEnabled1 ? Color.fromRGBO(98, 105, 254, 1) : Colors.grey,
                                                                               ),
                                                                             ),
                                                                             child:
@@ -2524,15 +2672,15 @@ class _MyHomePageState extends State<Dashboard> {
                                                                         ),
                                                                         Row(
                                                                           children: [
-                                                                            buildVendorContainer(
+                                                                            buildVendorContainer2(
                                                                                 1,
                                                                                 "Vendor 1",
                                                                                 "Xxxxx SAR"),
-                                                                            buildVendorContainer(
+                                                                            buildVendorContainer2(
                                                                                 2,
                                                                                 "Vendor 2",
                                                                                 "Xxxxx SAR"),
-                                                                            buildVendorContainer(
+                                                                            buildVendorContainer2(
                                                                                 3,
                                                                                 "Vendor 3",
                                                                                 "Xxxxx SAR"),
@@ -2571,7 +2719,7 @@ class _MyHomePageState extends State<Dashboard> {
                                                                               50,
                                                                           child:
                                                                               ElevatedButton(
-                                                                            onPressed: isButtonEnabled
+                                                                            onPressed: isButtonEnabled2
                                                                                 ? () {
                                                                                     // Handle button press only if any radio button is selected
                                                                                     print('Elevated Button Pressed!');
@@ -2579,9 +2727,9 @@ class _MyHomePageState extends State<Dashboard> {
                                                                                 : null,
                                                                             style:
                                                                                 ElevatedButton.styleFrom(
-                                                                              primary: isButtonEnabled ? Color.fromRGBO(98, 105, 254, 1) : Colors.grey,
+                                                                              primary: isButtonEnabled2 ? Color.fromRGBO(98, 105, 254, 1) : Colors.grey,
                                                                               side: BorderSide(
-                                                                                color: isButtonEnabled ? Color.fromRGBO(98, 105, 254, 1) : Colors.grey,
+                                                                                color: isButtonEnabled2 ? Color.fromRGBO(98, 105, 254, 1) : Colors.grey,
                                                                               ),
                                                                             ),
                                                                             child:
