@@ -24,7 +24,7 @@ class _MyHomePageState extends State<Dashboard> {
   bool checkbox2 = false;
   bool checkbox3 = false;
   bool isButtonEnabled = false;
-  int? selectedRadioValue;
+  int? selectedRadioValue = 0;
   bool payNowButtonEnabled = false;
 
   void enablePayNowButton() {
@@ -2172,733 +2172,432 @@ class _MyHomePageState extends State<Dashboard> {
                                                           child: Row(
                                                             children: [
                                                               Column(
-                                                                mainAxisAlignment:
-                                                                    MainAxisAlignment
-                                                                        .spaceEvenly,
-                                                                children: [
-                                                                  Row(
-                                                                    children: [
-                                                                      SizedBox(
-                                                                        width:
-                                                                            10,
-                                                                      ),
-                                                                      Column(
-                                                                        children: [
-                                                                          SizedBox(
-                                                                            width:
-                                                                                10,
-                                                                          ),
-                                                                          Transform
-                                                                              .scale(
-                                                                            scale:
-                                                                                1.0,
-                                                                            child:
-                                                                                Checkbox(
-                                                                              value: checkbox1,
-                                                                              onChanged: (bool? value) {
-                                                                                setState(() {
-                                                                                  checkbox1 = value ?? false;
-                                                                                  if (checkbox1) {
-                                                                                    // If checkbox1 is selected, disable the other checkboxes
-                                                                                    checkbox2 = false;
-                                                                                    checkbox3 = false;
-                                                                                    // You can add additional logic or actions here
-                                                                                    enablePayNowButton();
-                                                                                  } else {
-                                                                                    disablePayNowButton();
-                                                                                  }
-                                                                                });
-                                                                              },
-                                                                            ),
-                                                                          ),
-                                                                        ],
-                                                                      ),
-                                                                      SizedBox(
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .spaceEvenly,
+                                                                  children: [
+                                                                    Row(
+                                                                      children: [
+                                                                        SizedBox(
                                                                           width:
-                                                                              10),
-                                                                      Column(
-                                                                        crossAxisAlignment:
-                                                                            CrossAxisAlignment.start,
-                                                                        children: [
-                                                                          Text(
-                                                                            'Trip 1',
-                                                                            style:
-                                                                                const TextStyle(
-                                                                              fontWeight: FontWeight.bold,
-                                                                              fontSize: 16,
-                                                                            ),
-                                                                          ),
-                                                                          SizedBox(
-                                                                            height:
-                                                                                3,
-                                                                          ),
-                                                                          Text(
-                                                                            "Booking ID Xxxxxx",
-                                                                            style:
-                                                                                TextStyle(fontFamily: "SFProText", fontSize: 14),
-                                                                          ),
-                                                                        ],
-                                                                      ),
-                                                                      SizedBox(
-                                                                        width:
-                                                                            100,
-                                                                      ),
-                                                                      Row(
-                                                                        children: [
-                                                                          buildVendorContainer(
-                                                                              1,
-                                                                              "Vendor 1",
-                                                                              "Xxxxx SAR"),
-                                                                          buildVendorContainer(
-                                                                              2,
-                                                                              "Vendor 2",
-                                                                              "Xxxxx SAR"),
-                                                                          buildVendorContainer(
-                                                                              3,
-                                                                              "Vendor 3",
-                                                                              "Xxxxx SAR"),
-                                                                        ],
-                                                                      ),
-                                                                      SizedBox(
-                                                                        width:
-                                                                            20,
-                                                                      ),
-                                                                      Row(
-                                                                        children: [
-                                                                          IconButton(
-                                                                            padding:
-                                                                                EdgeInsets.zero,
-                                                                            constraints:
-                                                                                BoxConstraints(),
-                                                                            onPressed:
-                                                                                null,
-                                                                            icon:
-                                                                                Icon(
-                                                                              Icons.edit_document,
-                                                                              color: Color.fromRGBO(74, 60, 81, 1),
-                                                                            ),
-                                                                          ),
-                                                                          IconButton(
-                                                                            padding:
-                                                                                EdgeInsets.zero,
-                                                                            onPressed:
-                                                                                null,
-                                                                            icon:
-                                                                                Icon(Icons.delete),
-                                                                          ),
-                                                                        ],
-                                                                      ),
-                                                                      SizedBox(
-                                                                        width:
-                                                                            20,
-                                                                      ),
-                                                                      SizedBox(
-                                                                        width:
-                                                                            150,
-                                                                        height:
-                                                                            50,
-                                                                        child:
-                                                                            ElevatedButton(
-                                                                          onPressed: isButtonEnabled
-                                                                              ? () {
-                                                                                  // Handle button press only if any radio button is selected
-                                                                                  print('Elevated Button Pressed!');
-                                                                                }
-                                                                              : null,
-                                                                          style:
-                                                                              ElevatedButton.styleFrom(
-                                                                            primary: isButtonEnabled
-                                                                                ? Color.fromRGBO(98, 105, 254, 1)
-                                                                                : Colors.grey,
-                                                                            side:
-                                                                                BorderSide(
-                                                                              color: isButtonEnabled ? Color.fromRGBO(98, 105, 254, 1) : Colors.grey,
-                                                                            ),
-                                                                          ),
-                                                                          child:
-                                                                              Text(
-                                                                            'Pay Now',
-                                                                            style:
-                                                                                TextStyle(
-                                                                              color: Colors.white,
-                                                                              fontSize: 16,
-                                                                              fontFamily: "Helvetica",
-                                                                            ),
-                                                                          ),
+                                                                              10,
                                                                         ),
-                                                                      ),
-                                                                    ],
-                                                                  ),
-                                                                  SizedBox(
-                                                                    width: 20,
-                                                                  ),
-                                                                  SizedBox(
-                                                                    width: 1184,
-                                                                    child:
-                                                                        Divider(
-                                                                      color: Color.fromRGBO(
-                                                                          206,
-                                                                          203,
-                                                                          203,
-                                                                          1),
-                                                                    ),
-                                                                  ),
-                                                                  Row(
-                                                                    children: [
-                                                                      SizedBox(
-                                                                        width:
-                                                                            10,
-                                                                      ),
-                                                                      Column(
-                                                                        children: [
-                                                                          SizedBox(
+                                                                        Column(
+                                                                          children: [
+                                                                            SizedBox(
+                                                                              width: 10,
+                                                                            ),
+                                                                            Transform.scale(
+                                                                              scale: 1.0,
+                                                                              child: Checkbox(
+                                                                                value: checkbox1,
+                                                                                onChanged: (bool? value) {
+                                                                                  setState(() {
+                                                                                    checkbox1 = value ?? false;
+                                                                                    if (checkbox1) {
+                                                                                      // If checkbox1 is selected, disable the other checkboxes
+                                                                                      checkbox2 = false;
+                                                                                      checkbox3 = false;
+                                                                                      // You can add additional logic or actions here
+                                                                                      enablePayNowButton();
+                                                                                    } else {
+                                                                                      disablePayNowButton();
+                                                                                    }
+                                                                                  });
+                                                                                },
+                                                                              ),
+                                                                            ),
+                                                                          ],
+                                                                        ),
+                                                                        SizedBox(
                                                                             width:
-                                                                                10,
-                                                                          ),
-                                                                          Checkbox(
-                                                                              value: checkbox2,
-                                                                              onChanged: (bool? value) {
-                                                                                setState(() {
-                                                                                  checkbox2 = value ?? false;
-                                                                                  if (checkbox2) {
-                                                                                    // If checkbox1 is selected, disable the other checkboxes
-                                                                                    checkbox1 = false;
-                                                                                    checkbox3 = false;
-                                                                                    // You can add additional logic or actions here
-                                                                                  }
-                                                                                });
-                                                                              }),
-                                                                        ],
-                                                                      ),
-                                                                      SizedBox(
+                                                                                10),
+                                                                        Column(
+                                                                          crossAxisAlignment:
+                                                                              CrossAxisAlignment.start,
+                                                                          children: [
+                                                                            Text(
+                                                                              'Trip 1',
+                                                                              style: const TextStyle(
+                                                                                fontWeight: FontWeight.bold,
+                                                                                fontSize: 16,
+                                                                              ),
+                                                                            ),
+                                                                            SizedBox(
+                                                                              height: 3,
+                                                                            ),
+                                                                            Text(
+                                                                              "Booking ID Xxxxxx",
+                                                                              style: TextStyle(fontFamily: "SFProText", fontSize: 14),
+                                                                            ),
+                                                                          ],
+                                                                        ),
+                                                                        SizedBox(
                                                                           width:
-                                                                              10),
-                                                                      Column(
-                                                                        crossAxisAlignment:
-                                                                            CrossAxisAlignment.start,
-                                                                        children: [
-                                                                          Text(
-                                                                            'Equipment Hire',
-                                                                            style:
-                                                                                const TextStyle(
-                                                                              fontWeight: FontWeight.bold,
-                                                                              fontSize: 16,
-                                                                            ),
-                                                                          ),
-                                                                          SizedBox(
-                                                                            height:
+                                                                              100,
+                                                                        ),
+                                                                        Row(
+                                                                          children: [
+                                                                            buildVendorContainer(
+                                                                                1,
+                                                                                "Vendor 1",
+                                                                                "Xxxxx SAR"),
+                                                                            buildVendorContainer(
+                                                                                2,
+                                                                                "Vendor 2",
+                                                                                "Xxxxx SAR"),
+                                                                            buildVendorContainer(
                                                                                 3,
-                                                                          ),
-                                                                          Text(
-                                                                            "Booking ID Xxxxxx",
-                                                                            style:
-                                                                                TextStyle(fontFamily: "SFProText", fontSize: 14),
-                                                                          )
-                                                                        ],
-                                                                      ),
-                                                                      SizedBox(
-                                                                        width:
-                                                                            100,
-                                                                      ),
-                                                                      Row(
-                                                                        children: [
-                                                                          Padding(
-                                                                            padding:
-                                                                                const EdgeInsets.all(8.0),
-                                                                            child:
-                                                                                Container(
-                                                                              width: 165,
-                                                                              height: 50,
-                                                                              decoration: BoxDecoration(boxShadow: [
-                                                                                BoxShadow(
-                                                                                  color: Colors.grey,
-                                                                                  spreadRadius: 1,
-                                                                                  blurRadius: 2, // changes position of shadow
-                                                                                ),
-                                                                              ], color: Color.fromRGBO(200, 251, 253, 1), borderRadius: BorderRadius.circular(25.0), border: Border.all(color: Color.fromARGB(246, 245, 242, 242))),
-                                                                              child: Padding(
-                                                                                padding: const EdgeInsets.all(8.0),
-                                                                                child: Center(
-                                                                                  child: Row(
-                                                                                    mainAxisAlignment: MainAxisAlignment.start,
-                                                                                    children: [
-                                                                                      SizedBox(
-                                                                                        width: 5,
-                                                                                      ),
-                                                                                      Radio(
-                                                                                        value: 1,
-                                                                                        fillColor: MaterialStateColor.resolveWith((states) => Colors.white),
-                                                                                        groupValue: selectedRadioValue,
-                                                                                        onChanged: (value) {
-                                                                                          setState(() {
-                                                                                            selectedRadioValue = value;
-                                                                                          });
-                                                                                        },
-                                                                                        activeColor: Colors.white, // Set the background color when the radio button is selected
-                                                                                      ),
-                                                                                      SizedBox(
-                                                                                        width: 5,
-                                                                                      ),
-                                                                                      Text("Vendor 1", style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 9, color: Color.fromRGBO(128, 118, 118, 1))),
-                                                                                      SizedBox(width: 10),
-                                                                                      Text(
-                                                                                        "Xxxxx SAR",
-                                                                                        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 8, color: Color.fromRGBO(127, 106, 255, 1)),
-                                                                                      ),
-                                                                                    ],
-                                                                                  ),
-                                                                                ),
-                                                                              ),
-                                                                            ),
-                                                                          ),
-                                                                          Padding(
-                                                                            padding:
-                                                                                const EdgeInsets.all(8.0),
-                                                                            child:
-                                                                                Container(
-                                                                              width: 165,
-                                                                              height: 50,
-                                                                              decoration: BoxDecoration(boxShadow: [
-                                                                                BoxShadow(
-                                                                                  color: Colors.grey,
-                                                                                  spreadRadius: 1,
-                                                                                  blurRadius: 2, // changes position of shadow
-                                                                                ),
-                                                                              ], color: Color.fromRGBO(224, 253, 200, 1), borderRadius: BorderRadius.circular(25.0), border: Border.all(color: Color.fromARGB(246, 245, 242, 242))),
-                                                                              child: Padding(
-                                                                                padding: const EdgeInsets.all(8.0),
-                                                                                child: Center(
-                                                                                  child: Row(
-                                                                                    mainAxisAlignment: MainAxisAlignment.start,
-                                                                                    children: [
-                                                                                      SizedBox(
-                                                                                        width: 5,
-                                                                                      ),
-                                                                                      Radio(
-                                                                                        value: 1,
-                                                                                        fillColor: MaterialStateColor.resolveWith((states) => Colors.white),
-                                                                                        groupValue: selectedRadioValue,
-                                                                                        onChanged: (value) {
-                                                                                          setState(() {
-                                                                                            selectedRadioValue = value;
-                                                                                          });
-                                                                                        },
-                                                                                        activeColor: Colors.white, // Set the background color when the radio button is selected
-                                                                                      ),
-                                                                                      SizedBox(
-                                                                                        width: 5,
-                                                                                      ),
-                                                                                      Text("Vendor 2", style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 9, color: Color.fromRGBO(128, 118, 118, 1))),
-                                                                                      SizedBox(width: 10),
-                                                                                      Text(
-                                                                                        "Xxxxx SAR",
-                                                                                        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 8, color: Color.fromRGBO(127, 106, 255, 1)),
-                                                                                      ),
-                                                                                    ],
-                                                                                  ),
-                                                                                ),
-                                                                              ),
-                                                                            ),
-                                                                          ),
-                                                                          Padding(
-                                                                            padding:
-                                                                                const EdgeInsets.all(8.0),
-                                                                            child:
-                                                                                Container(
-                                                                              width: 165,
-                                                                              height: 50,
-                                                                              decoration: BoxDecoration(boxShadow: [
-                                                                                BoxShadow(
-                                                                                  color: Colors.grey,
-                                                                                  spreadRadius: 1,
-                                                                                  blurRadius: 2, // changes position of shadow
-                                                                                ),
-                                                                              ], color: Color.fromRGBO(245, 253, 200, 1), borderRadius: BorderRadius.circular(25.0), border: Border.all(color: Color.fromARGB(246, 245, 242, 242))),
-                                                                              child: Padding(
-                                                                                padding: const EdgeInsets.all(8.0),
-                                                                                child: Center(
-                                                                                  child: Row(
-                                                                                    mainAxisAlignment: MainAxisAlignment.start,
-                                                                                    children: [
-                                                                                      SizedBox(
-                                                                                        width: 5,
-                                                                                      ),
-                                                                                      Radio(
-                                                                                        value: 1,
-                                                                                        fillColor: MaterialStateColor.resolveWith((states) => Colors.white),
-                                                                                        groupValue: selectedRadioValue,
-                                                                                        onChanged: (value) {
-                                                                                          setState(() {
-                                                                                            selectedRadioValue = value;
-                                                                                          });
-                                                                                        },
-                                                                                        activeColor: Colors.white, // Set the background color when the radio button is selected
-                                                                                      ),
-                                                                                      SizedBox(
-                                                                                        width: 5,
-                                                                                      ),
-                                                                                      Text("Vendor 3", style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 9, color: Color.fromRGBO(128, 118, 118, 1))),
-                                                                                      SizedBox(width: 10),
-                                                                                      Text(
-                                                                                        "Xxxxx SAR",
-                                                                                        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 8, color: Color.fromRGBO(127, 106, 255, 1)),
-                                                                                      ),
-                                                                                    ],
-                                                                                  ),
-                                                                                ),
-                                                                              ),
-                                                                            ),
-                                                                          ),
-                                                                        ],
-                                                                      ),
-                                                                      SizedBox(
-                                                                        width:
-                                                                            20,
-                                                                      ),
-                                                                      Row(
-                                                                        children: [
-                                                                          IconButton(
+                                                                                "Vendor 3",
+                                                                                "Xxxxx SAR"),
+                                                                          ],
+                                                                        ),
+                                                                        SizedBox(
+                                                                          width:
+                                                                              20,
+                                                                        ),
+                                                                        Row(
+                                                                          children: [
+                                                                            IconButton(
                                                                               padding: EdgeInsets.zero,
                                                                               constraints: BoxConstraints(),
                                                                               onPressed: null,
                                                                               icon: Icon(
                                                                                 Icons.edit_document,
                                                                                 color: Color.fromRGBO(74, 60, 81, 1),
-                                                                              )),
-                                                                          IconButton(
-                                                                              padding: EdgeInsets.zero,
-                                                                              // constraints:
-                                                                              //     BoxConstraints(),
-                                                                              onPressed: null,
-                                                                              icon: Icon(Icons.delete)),
-                                                                        ],
-                                                                      ),
-                                                                      SizedBox(
-                                                                        width:
-                                                                            20,
-                                                                      ),
-                                                                      SizedBox(
-                                                                        width:
-                                                                            150,
-                                                                        height:
-                                                                            50,
-                                                                        child:
-                                                                            ElevatedButton(
-                                                                          onPressed:
-                                                                              () {
-                                                                            // Handle button press
-                                                                            print('Elevated Button Pressed!');
-                                                                          },
-                                                                          style:
-                                                                              ElevatedButton.styleFrom(
-                                                                            primary: Color.fromRGBO(
-                                                                                98,
-                                                                                105,
-                                                                                254,
-                                                                                1),
-                                                                            side:
-                                                                                BorderSide(
-                                                                              color: Color.fromRGBO(98, 105, 254, 1),
+                                                                              ),
                                                                             ),
-                                                                          ),
+                                                                            IconButton(
+                                                                              padding: EdgeInsets.zero,
+                                                                              onPressed: null,
+                                                                              icon: Icon(Icons.delete),
+                                                                            ),
+                                                                          ],
+                                                                        ),
+                                                                        SizedBox(
+                                                                          width:
+                                                                              20,
+                                                                        ),
+                                                                        SizedBox(
+                                                                          width:
+                                                                              150,
+                                                                          height:
+                                                                              50,
                                                                           child:
-                                                                              Text(
-                                                                            'Pay Now',
-                                                                            style: TextStyle(
+                                                                              ElevatedButton(
+                                                                            onPressed: isButtonEnabled
+                                                                                ? () {
+                                                                                    // Handle button press only if any radio button is selected
+                                                                                    print('Elevated Button Pressed!');
+                                                                                  }
+                                                                                : null,
+                                                                            style:
+                                                                                ElevatedButton.styleFrom(
+                                                                              primary: isButtonEnabled ? Color.fromRGBO(98, 105, 254, 1) : Colors.grey,
+                                                                              side: BorderSide(
+                                                                                color: isButtonEnabled ? Color.fromRGBO(98, 105, 254, 1) : Colors.grey,
+                                                                              ),
+                                                                            ),
+                                                                            child:
+                                                                                Text(
+                                                                              'Pay Now',
+                                                                              style: TextStyle(
                                                                                 color: Colors.white,
                                                                                 fontSize: 16,
-                                                                                fontFamily: "Helvetica"),
+                                                                                fontFamily: "Helvetica",
+                                                                              ),
+                                                                            ),
                                                                           ),
                                                                         ),
-                                                                      )
-                                                                    ],
-                                                                  ),
-                                                                  SizedBox(
-                                                                    width: 20,
-                                                                  ),
-                                                                  SizedBox(
-                                                                    width: 1184,
-                                                                    child:
-                                                                        Divider(
-                                                                      color: Color.fromRGBO(
-                                                                          206,
-                                                                          203,
-                                                                          203,
-                                                                          1),
+                                                                      ],
                                                                     ),
-                                                                  ),
-                                                                  Row(
-                                                                    children: [
-                                                                      SizedBox(
-                                                                        width:
-                                                                            10,
+                                                                    SizedBox(
+                                                                      width: 20,
+                                                                    ),
+                                                                    SizedBox(
+                                                                      width:
+                                                                          1184,
+                                                                      child:
+                                                                          Divider(
+                                                                        color: Color.fromRGBO(
+                                                                            206,
+                                                                            203,
+                                                                            203,
+                                                                            1),
                                                                       ),
-                                                                      Column(
-                                                                        children: [
-                                                                          SizedBox(
-                                                                            width:
-                                                                                10,
-                                                                          ),
-                                                                          Checkbox(
-                                                                              value: checkbox3,
-                                                                              onChanged: (bool? value) {
-                                                                                setState(() {
-                                                                                  checkbox3 = value ?? false;
-                                                                                  if (checkbox3) {
-                                                                                    // If checkbox1 is selected, disable the other checkboxes
-                                                                                    checkbox1 = false;
-                                                                                    checkbox2 = false;
-                                                                                    // You can add additional logic or actions here
-                                                                                  }
-                                                                                });
-                                                                              }),
-                                                                        ],
-                                                                      ),
-                                                                      SizedBox(
+                                                                    ),
+                                                                    Row(
+                                                                      children: [
+                                                                        SizedBox(
                                                                           width:
-                                                                              10),
-                                                                      Column(
-                                                                        crossAxisAlignment:
-                                                                            CrossAxisAlignment.start,
-                                                                        children: [
-                                                                          Text(
-                                                                            'Bus Trip',
-                                                                            style:
-                                                                                const TextStyle(
-                                                                              fontWeight: FontWeight.bold,
-                                                                              fontSize: 16,
+                                                                              10,
+                                                                        ),
+                                                                        Column(
+                                                                          children: [
+                                                                            SizedBox(
+                                                                              width: 10,
                                                                             ),
-                                                                          ),
-                                                                          SizedBox(
-                                                                            height:
+                                                                            Checkbox(
+                                                                                value: checkbox2,
+                                                                                onChanged: (bool? value) {
+                                                                                  setState(() {
+                                                                                    checkbox2 = value ?? false;
+                                                                                    if (checkbox2) {
+                                                                                      // If checkbox1 is selected, disable the other checkboxes
+                                                                                      checkbox1 = false;
+                                                                                      checkbox3 = false;
+                                                                                      // You can add additional logic or actions here
+                                                                                    }
+                                                                                  });
+                                                                                }),
+                                                                          ],
+                                                                        ),
+                                                                        SizedBox(
+                                                                            width:
+                                                                                10),
+                                                                        Column(
+                                                                          crossAxisAlignment:
+                                                                              CrossAxisAlignment.start,
+                                                                          children: [
+                                                                            Text(
+                                                                              'Equipment Hire',
+                                                                              style: const TextStyle(
+                                                                                fontWeight: FontWeight.bold,
+                                                                                fontSize: 16,
+                                                                              ),
+                                                                            ),
+                                                                            SizedBox(
+                                                                              height: 3,
+                                                                            ),
+                                                                            Text(
+                                                                              "Booking ID Xxxxxx",
+                                                                              style: TextStyle(fontFamily: "SFProText", fontSize: 14),
+                                                                            )
+                                                                          ],
+                                                                        ),
+                                                                        SizedBox(
+                                                                          width:
+                                                                              100,
+                                                                        ),
+                                                                        Row(
+                                                                          children: [
+                                                                            buildVendorContainer(
+                                                                                1,
+                                                                                "Vendor 1",
+                                                                                "Xxxxx SAR"),
+                                                                            buildVendorContainer(
+                                                                                2,
+                                                                                "Vendor 2",
+                                                                                "Xxxxx SAR"),
+                                                                            buildVendorContainer(
                                                                                 3,
-                                                                          ),
-                                                                          Text(
-                                                                            "Booking ID Xxxxxx",
-                                                                            style:
-                                                                                TextStyle(fontFamily: "SFProText", fontSize: 14),
-                                                                          )
-                                                                        ],
-                                                                      ),
-                                                                      SizedBox(
-                                                                        width:
-                                                                            100,
-                                                                      ),
-                                                                      Row(
-                                                                        children: [
-                                                                          Padding(
-                                                                            padding:
-                                                                                const EdgeInsets.all(8.0),
-                                                                            child:
-                                                                                Container(
-                                                                              width: 165,
-                                                                              height: 50,
-                                                                              decoration: BoxDecoration(boxShadow: [
-                                                                                BoxShadow(
-                                                                                  color: Colors.grey,
-                                                                                  spreadRadius: 1,
-                                                                                  blurRadius: 2, // changes position of shadow
-                                                                                ),
-                                                                              ], color: Color.fromRGBO(200, 251, 253, 1), borderRadius: BorderRadius.circular(25.0), border: Border.all(color: Color.fromARGB(246, 245, 242, 242))),
-                                                                              child: Padding(
-                                                                                padding: const EdgeInsets.all(8.0),
-                                                                                child: Center(
-                                                                                  child: Row(
-                                                                                    mainAxisAlignment: MainAxisAlignment.start,
-                                                                                    children: [
-                                                                                      SizedBox(
-                                                                                        width: 5,
-                                                                                      ),
-                                                                                      Radio(
-                                                                                        value: 1,
-                                                                                        fillColor: MaterialStateColor.resolveWith((states) => Colors.white),
-                                                                                        groupValue: selectedRadioValue,
-                                                                                        onChanged: (value) {
-                                                                                          setState(() {
-                                                                                            selectedRadioValue = value;
-                                                                                          });
-                                                                                        },
-                                                                                        activeColor: Colors.white, // Set the background color when the radio button is selected
-                                                                                      ),
-                                                                                      SizedBox(
-                                                                                        width: 5,
-                                                                                      ),
-                                                                                      Text("Vendor 1", style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 9, color: Color.fromRGBO(128, 118, 118, 1))),
-                                                                                      SizedBox(width: 10),
-                                                                                      Text(
-                                                                                        "Xxxxx SAR",
-                                                                                        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 8, color: Color.fromRGBO(127, 106, 255, 1)),
-                                                                                      ),
-                                                                                    ],
-                                                                                  ),
-                                                                                ),
-                                                                              ),
-                                                                            ),
-                                                                          ),
-                                                                          Padding(
-                                                                            padding:
-                                                                                const EdgeInsets.all(8.0),
-                                                                            child:
-                                                                                Container(
-                                                                              width: 165,
-                                                                              height: 50,
-                                                                              decoration: BoxDecoration(boxShadow: [
-                                                                                BoxShadow(
-                                                                                  color: Colors.grey,
-                                                                                  spreadRadius: 1,
-                                                                                  blurRadius: 2, // changes position of shadow
-                                                                                ),
-                                                                              ], color: Color.fromRGBO(224, 253, 200, 1), borderRadius: BorderRadius.circular(25.0), border: Border.all(color: Color.fromARGB(246, 245, 242, 242))),
-                                                                              child: Padding(
-                                                                                padding: const EdgeInsets.all(8.0),
-                                                                                child: Center(
-                                                                                  child: Row(
-                                                                                    mainAxisAlignment: MainAxisAlignment.start,
-                                                                                    children: [
-                                                                                      SizedBox(
-                                                                                        width: 5,
-                                                                                      ),
-                                                                                      Radio(
-                                                                                        value: 1,
-                                                                                        fillColor: MaterialStateColor.resolveWith((states) => Colors.white),
-                                                                                        groupValue: selectedRadioValue,
-                                                                                        onChanged: (value) {
-                                                                                          setState(() {
-                                                                                            selectedRadioValue = value;
-                                                                                          });
-                                                                                        },
-                                                                                        activeColor: Colors.white, // Set the background color when the radio button is selected
-                                                                                      ),
-                                                                                      SizedBox(
-                                                                                        width: 5,
-                                                                                      ),
-                                                                                      Text("Vendor 2", style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 9, color: Color.fromRGBO(128, 118, 118, 1))),
-                                                                                      SizedBox(width: 10),
-                                                                                      Text(
-                                                                                        "Xxxxx SAR",
-                                                                                        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 8, color: Color.fromRGBO(127, 106, 255, 1)),
-                                                                                      ),
-                                                                                    ],
-                                                                                  ),
-                                                                                ),
-                                                                              ),
-                                                                            ),
-                                                                          ),
-                                                                          Padding(
-                                                                            padding:
-                                                                                const EdgeInsets.all(8.0),
-                                                                            child:
-                                                                                Container(
-                                                                              width: 165,
-                                                                              height: 50,
-                                                                              decoration: BoxDecoration(boxShadow: [
-                                                                                BoxShadow(
-                                                                                  color: Colors.grey,
-                                                                                  spreadRadius: 1,
-                                                                                  blurRadius: 2, // changes position of shadow
-                                                                                ),
-                                                                              ], color: Color.fromRGBO(245, 253, 200, 1), borderRadius: BorderRadius.circular(25.0), border: Border.all(color: Color.fromARGB(246, 245, 242, 242))),
-                                                                              child: Padding(
-                                                                                padding: const EdgeInsets.all(8.0),
-                                                                                child: Center(
-                                                                                  child: Row(
-                                                                                    mainAxisAlignment: MainAxisAlignment.start,
-                                                                                    children: [
-                                                                                      SizedBox(
-                                                                                        width: 5,
-                                                                                      ),
-                                                                                      Radio(
-                                                                                        value: 1,
-                                                                                        fillColor: MaterialStateColor.resolveWith((states) => Colors.white),
-                                                                                        groupValue: selectedRadioValue,
-                                                                                        onChanged: (value) {
-                                                                                          setState(() {
-                                                                                            selectedRadioValue = value;
-                                                                                          });
-                                                                                        },
-                                                                                        activeColor: Colors.white, // Set the background color when the radio button is selected
-                                                                                      ),
-                                                                                      SizedBox(
-                                                                                        width: 5,
-                                                                                      ),
-                                                                                      Text("Vendor 3", style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 9, color: Color.fromRGBO(128, 118, 118, 1))),
-                                                                                      SizedBox(width: 10),
-                                                                                      Text(
-                                                                                        "Xxxxx SAR",
-                                                                                        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 8, color: Color.fromRGBO(127, 106, 255, 1)),
-                                                                                      ),
-                                                                                    ],
-                                                                                  ),
-                                                                                ),
-                                                                              ),
-                                                                            ),
-                                                                          ),
-                                                                        ],
-                                                                      ),
-                                                                      SizedBox(
-                                                                        width:
-                                                                            20,
-                                                                      ),
-                                                                      Row(
-                                                                        children: [
-                                                                          IconButton(
+                                                                                "Vendor 3",
+                                                                                "Xxxxx SAR"),
+                                                                          ],
+                                                                        ),
+                                                                        SizedBox(
+                                                                          width:
+                                                                              20,
+                                                                        ),
+                                                                        Row(
+                                                                          children: [
+                                                                            IconButton(
                                                                               padding: EdgeInsets.zero,
                                                                               constraints: BoxConstraints(),
                                                                               onPressed: null,
                                                                               icon: Icon(
                                                                                 Icons.edit_document,
                                                                                 color: Color.fromRGBO(74, 60, 81, 1),
-                                                                              )),
-                                                                          IconButton(
-                                                                              padding: EdgeInsets.zero,
-                                                                              // constraints:
-                                                                              //     BoxConstraints(),
-                                                                              onPressed: null,
-                                                                              icon: Icon(Icons.delete)),
-                                                                        ],
-                                                                      ),
-                                                                      SizedBox(
-                                                                        width:
-                                                                            20,
-                                                                      ),
-                                                                      SizedBox(
-                                                                        width:
-                                                                            150,
-                                                                        height:
-                                                                            50,
-                                                                        child:
-                                                                            ElevatedButton(
-                                                                          onPressed:
-                                                                              () {
-                                                                            // Handle button press
-                                                                            print('Elevated Button Pressed!');
-                                                                          },
-                                                                          style:
-                                                                              ElevatedButton.styleFrom(
-                                                                            primary: Color.fromRGBO(
-                                                                                98,
-                                                                                105,
-                                                                                254,
-                                                                                1),
-                                                                            side:
-                                                                                BorderSide(
-                                                                              color: Color.fromRGBO(98, 105, 254, 1),
+                                                                              ),
                                                                             ),
-                                                                          ),
+                                                                            IconButton(
+                                                                              padding: EdgeInsets.zero,
+                                                                              onPressed: null,
+                                                                              icon: Icon(Icons.delete),
+                                                                            ),
+                                                                          ],
+                                                                        ),
+                                                                        SizedBox(
+                                                                          width:
+                                                                              20,
+                                                                        ),
+                                                                        SizedBox(
+                                                                          width:
+                                                                              150,
+                                                                          height:
+                                                                              50,
                                                                           child:
-                                                                              Text(
-                                                                            'Pay Now',
-                                                                            style: TextStyle(
+                                                                              ElevatedButton(
+                                                                            onPressed: isButtonEnabled
+                                                                                ? () {
+                                                                                    // Handle button press only if any radio button is selected
+                                                                                    print('Elevated Button Pressed!');
+                                                                                  }
+                                                                                : null,
+                                                                            style:
+                                                                                ElevatedButton.styleFrom(
+                                                                              primary: isButtonEnabled ? Color.fromRGBO(98, 105, 254, 1) : Colors.grey,
+                                                                              side: BorderSide(
+                                                                                color: isButtonEnabled ? Color.fromRGBO(98, 105, 254, 1) : Colors.grey,
+                                                                              ),
+                                                                            ),
+                                                                            child:
+                                                                                Text(
+                                                                              'Pay Now',
+                                                                              style: TextStyle(
                                                                                 color: Colors.white,
                                                                                 fontSize: 16,
-                                                                                fontFamily: "Helvetica"),
+                                                                                fontFamily: "Helvetica",
+                                                                              ),
+                                                                            ),
                                                                           ),
                                                                         ),
-                                                                      )
-                                                                    ],
-                                                                  ),
-                                                                ],
-                                                              ),
+                                                                      ],
+                                                                    ),
+                                                                    SizedBox(
+                                                                      width: 20,
+                                                                    ),
+                                                                    SizedBox(
+                                                                      width:
+                                                                          1184,
+                                                                      child:
+                                                                          Divider(
+                                                                        color: Color.fromRGBO(
+                                                                            206,
+                                                                            203,
+                                                                            203,
+                                                                            1),
+                                                                      ),
+                                                                    ),
+                                                                    Row(
+                                                                      children: [
+                                                                        SizedBox(
+                                                                          width:
+                                                                              10,
+                                                                        ),
+                                                                        Column(
+                                                                          children: [
+                                                                            SizedBox(
+                                                                              width: 10,
+                                                                            ),
+                                                                            Checkbox(
+                                                                                value: checkbox3,
+                                                                                onChanged: (bool? value) {
+                                                                                  setState(() {
+                                                                                    checkbox3 = value ?? false;
+                                                                                    if (checkbox3) {
+                                                                                      // If checkbox1 is selected, disable the other checkboxes
+                                                                                      checkbox1 = false;
+                                                                                      checkbox2 = false;
+                                                                                      // You can add additional logic or actions here
+                                                                                    }
+                                                                                  });
+                                                                                }),
+                                                                          ],
+                                                                        ),
+                                                                        SizedBox(
+                                                                            width:
+                                                                                10),
+                                                                        Column(
+                                                                          crossAxisAlignment:
+                                                                              CrossAxisAlignment.start,
+                                                                          children: [
+                                                                            Text(
+                                                                              'Bus Trip',
+                                                                              style: const TextStyle(
+                                                                                fontWeight: FontWeight.bold,
+                                                                                fontSize: 16,
+                                                                              ),
+                                                                            ),
+                                                                            SizedBox(
+                                                                              height: 3,
+                                                                            ),
+                                                                            Text(
+                                                                              "Booking ID Xxxxxx",
+                                                                              style: TextStyle(fontFamily: "SFProText", fontSize: 14),
+                                                                            )
+                                                                          ],
+                                                                        ),
+                                                                        SizedBox(
+                                                                          width:
+                                                                              100,
+                                                                        ),
+                                                                        Row(
+                                                                          children: [
+                                                                            buildVendorContainer(
+                                                                                1,
+                                                                                "Vendor 1",
+                                                                                "Xxxxx SAR"),
+                                                                            buildVendorContainer(
+                                                                                2,
+                                                                                "Vendor 2",
+                                                                                "Xxxxx SAR"),
+                                                                            buildVendorContainer(
+                                                                                3,
+                                                                                "Vendor 3",
+                                                                                "Xxxxx SAR"),
+                                                                          ],
+                                                                        ),
+                                                                        SizedBox(
+                                                                          width:
+                                                                              20,
+                                                                        ),
+                                                                        Row(
+                                                                          children: [
+                                                                            IconButton(
+                                                                              padding: EdgeInsets.zero,
+                                                                              constraints: BoxConstraints(),
+                                                                              onPressed: null,
+                                                                              icon: Icon(
+                                                                                Icons.edit_document,
+                                                                                color: Color.fromRGBO(74, 60, 81, 1),
+                                                                              ),
+                                                                            ),
+                                                                            IconButton(
+                                                                              padding: EdgeInsets.zero,
+                                                                              onPressed: null,
+                                                                              icon: Icon(Icons.delete),
+                                                                            ),
+                                                                          ],
+                                                                        ),
+                                                                        SizedBox(
+                                                                          width:
+                                                                              20,
+                                                                        ),
+                                                                        SizedBox(
+                                                                          width:
+                                                                              150,
+                                                                          height:
+                                                                              50,
+                                                                          child:
+                                                                              ElevatedButton(
+                                                                            onPressed: isButtonEnabled
+                                                                                ? () {
+                                                                                    // Handle button press only if any radio button is selected
+                                                                                    print('Elevated Button Pressed!');
+                                                                                  }
+                                                                                : null,
+                                                                            style:
+                                                                                ElevatedButton.styleFrom(
+                                                                              primary: isButtonEnabled ? Color.fromRGBO(98, 105, 254, 1) : Colors.grey,
+                                                                              side: BorderSide(
+                                                                                color: isButtonEnabled ? Color.fromRGBO(98, 105, 254, 1) : Colors.grey,
+                                                                              ),
+                                                                            ),
+                                                                            child:
+                                                                                Text(
+                                                                              'Pay Now',
+                                                                              style: TextStyle(
+                                                                                color: Colors.white,
+                                                                                fontSize: 16,
+                                                                                fontFamily: "Helvetica",
+                                                                              ),
+                                                                            ),
+                                                                          ),
+                                                                        ),
+                                                                      ],
+                                                                    ),
+                                                                  ]),
                                                             ],
                                                           ),
                                                         ),
