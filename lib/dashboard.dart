@@ -23,7 +23,22 @@ class _MyHomePageState extends State<Dashboard> {
   bool checkbox1 = false;
   bool checkbox2 = false;
   bool checkbox3 = false;
+  bool isButtonEnabled = false;
   int? selectedRadioValue;
+  bool payNowButtonEnabled = false;
+
+  void enablePayNowButton() {
+    setState(() {
+      payNowButtonEnabled = true;
+    });
+  }
+
+  void disablePayNowButton() {
+    setState(() {
+      payNowButtonEnabled = false;
+    });
+  }
+
   String month = '';
   @override
   void initState() {
@@ -32,6 +47,13 @@ class _MyHomePageState extends State<Dashboard> {
     });
     super.initState();
   }
+
+  TextStyle myTextStyle = const TextStyle(
+    fontFamily: 'Poppins',
+    fontSize: 14,
+    fontWeight: FontWeight.w600,
+    color: Color.fromRGBO(128, 118, 118, 1),
+  );
 
   void tapOnPieChart(FlTouchEvent event, PieTouchResponse? response) {
     if (response != null) {
@@ -54,12 +76,82 @@ class _MyHomePageState extends State<Dashboard> {
     }
   }
 
-  TextStyle myTextStyle = const TextStyle(
-    fontFamily: 'Poppins',
-    fontSize: 14,
-    fontWeight: FontWeight.w600,
-    color: Color.fromRGBO(128, 118, 118, 1),
-  );
+  Widget buildVendorContainer(int value, String vendorName, String amount) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        width: 165,
+        height: 50,
+        decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey,
+              spreadRadius: 1,
+              blurRadius: 2, // changes position of shadow
+            ),
+          ],
+          color: getVendorContainerColor(value),
+          borderRadius: BorderRadius.circular(25.0),
+          border: Border.all(color: Color.fromARGB(246, 245, 242, 242)),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Center(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                SizedBox(width: 5),
+                Radio(
+                  value: value,
+                  fillColor:
+                      MaterialStateColor.resolveWith((states) => Colors.white),
+                  groupValue: selectedRadioValue,
+                  onChanged: (val) {
+                    setState(() {
+                      selectedRadioValue = val as int;
+                      isButtonEnabled = true;
+                    });
+                  },
+                  activeColor: Colors.white,
+                ),
+                SizedBox(width: 5),
+                Text(vendorName,
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 9,
+                        color: Color.fromRGBO(128, 118, 118, 1))),
+                SizedBox(width: 10),
+                Text(
+                  amount,
+                  style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 8,
+                      color: Color.fromRGBO(127, 106, 255, 1)),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Color getVendorContainerColor(int value) {
+    // Provide the color based on the vendor value or any other logic you prefer
+    if (value == 1) {
+      return Color.fromRGBO(200, 251, 253, 1);
+    } else if (value == 2) {
+      return Color.fromRGBO(224, 253, 200, 1);
+    } else if (value == 3) {
+      return Color.fromRGBO(245, 253, 200, 1);
+    }
+    return Colors.white; // Default color
+  }
+
+  bool isAnyCheckboxSelected() {
+    return checkbox1 || checkbox2 || checkbox3;
+  }
+
   @override
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
@@ -2100,19 +2192,24 @@ class _MyHomePageState extends State<Dashboard> {
                                                                               .scale(
                                                                             scale:
                                                                                 1.0,
-                                                                            child: Checkbox(
-                                                                                value: checkbox1,
-                                                                                onChanged: (bool? value) {
-                                                                                  setState(() {
-                                                                                    checkbox1 = value ?? false;
-                                                                                    if (checkbox1) {
-                                                                                      // If checkbox1 is selected, disable the other checkboxes
-                                                                                      checkbox2 = false;
-                                                                                      checkbox3 = false;
-                                                                                      // You can add additional logic or actions here
-                                                                                    }
-                                                                                  });
-                                                                                }),
+                                                                            child:
+                                                                                Checkbox(
+                                                                              value: checkbox1,
+                                                                              onChanged: (bool? value) {
+                                                                                setState(() {
+                                                                                  checkbox1 = value ?? false;
+                                                                                  if (checkbox1) {
+                                                                                    // If checkbox1 is selected, disable the other checkboxes
+                                                                                    checkbox2 = false;
+                                                                                    checkbox3 = false;
+                                                                                    // You can add additional logic or actions here
+                                                                                    enablePayNowButton();
+                                                                                  } else {
+                                                                                    disablePayNowButton();
+                                                                                  }
+                                                                                });
+                                                                              },
+                                                                            ),
                                                                           ),
                                                                         ],
                                                                       ),
@@ -2139,7 +2236,7 @@ class _MyHomePageState extends State<Dashboard> {
                                                                             "Booking ID Xxxxxx",
                                                                             style:
                                                                                 TextStyle(fontFamily: "SFProText", fontSize: 14),
-                                                                          )
+                                                                          ),
                                                                         ],
                                                                       ),
                                                                       SizedBox(
@@ -2148,153 +2245,18 @@ class _MyHomePageState extends State<Dashboard> {
                                                                       ),
                                                                       Row(
                                                                         children: [
-                                                                          Padding(
-                                                                            padding:
-                                                                                const EdgeInsets.all(8.0),
-                                                                            child:
-                                                                                Container(
-                                                                              width: 165,
-                                                                              height: 50,
-                                                                              decoration: BoxDecoration(boxShadow: [
-                                                                                BoxShadow(
-                                                                                  color: Colors.grey,
-                                                                                  spreadRadius: 1,
-                                                                                  blurRadius: 2, // changes position of shadow
-                                                                                ),
-                                                                              ], color: Color.fromRGBO(200, 251, 253, 1), borderRadius: BorderRadius.circular(25.0), border: Border.all(color: Color.fromARGB(246, 245, 242, 242))),
-                                                                              child: Padding(
-                                                                                padding: const EdgeInsets.all(8.0),
-                                                                                child: Center(
-                                                                                  child: Row(
-                                                                                    mainAxisAlignment: MainAxisAlignment.start,
-                                                                                    children: [
-                                                                                      SizedBox(
-                                                                                        width: 5,
-                                                                                      ),
-                                                                                      Radio(
-                                                                                        value: 1,
-                                                                                        fillColor: MaterialStateColor.resolveWith((states) => Colors.white),
-                                                                                        groupValue: selectedRadioValue,
-                                                                                        onChanged: (value) {
-                                                                                          setState(() {
-                                                                                            selectedRadioValue = value;
-                                                                                          });
-                                                                                        },
-                                                                                        activeColor: Colors.white, // Set the background color when the radio button is selected
-                                                                                      ),
-                                                                                      SizedBox(
-                                                                                        width: 5,
-                                                                                      ),
-                                                                                      Text("Vendor 1", style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 9, color: Color.fromRGBO(128, 118, 118, 1))),
-                                                                                      SizedBox(width: 10),
-                                                                                      Text(
-                                                                                        "Xxxxx SAR",
-                                                                                        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 8, color: Color.fromRGBO(127, 106, 255, 1)),
-                                                                                      ),
-                                                                                    ],
-                                                                                  ),
-                                                                                ),
-                                                                              ),
-                                                                            ),
-                                                                          ),
-                                                                          Padding(
-                                                                            padding:
-                                                                                const EdgeInsets.all(8.0),
-                                                                            child:
-                                                                                Container(
-                                                                              width: 165,
-                                                                              height: 50,
-                                                                              decoration: BoxDecoration(boxShadow: [
-                                                                                BoxShadow(
-                                                                                  color: Colors.grey,
-                                                                                  spreadRadius: 1,
-                                                                                  blurRadius: 2, // changes position of shadow
-                                                                                ),
-                                                                              ], color: Color.fromRGBO(224, 253, 200, 1), borderRadius: BorderRadius.circular(25.0), border: Border.all(color: Color.fromARGB(246, 245, 242, 242))),
-                                                                              child: Padding(
-                                                                                padding: const EdgeInsets.all(8.0),
-                                                                                child: Center(
-                                                                                  child: Row(
-                                                                                    mainAxisAlignment: MainAxisAlignment.start,
-                                                                                    children: [
-                                                                                      SizedBox(
-                                                                                        width: 5,
-                                                                                      ),
-                                                                                      Radio(
-                                                                                        value: 1,
-                                                                                        fillColor: MaterialStateColor.resolveWith((states) => Colors.white),
-                                                                                        groupValue: selectedRadioValue,
-                                                                                        onChanged: (value) {
-                                                                                          setState(() {
-                                                                                            selectedRadioValue = value;
-                                                                                          });
-                                                                                        },
-                                                                                        activeColor: Colors.white, // Set the background color when the radio button is selected
-                                                                                      ),
-                                                                                      SizedBox(
-                                                                                        width: 5,
-                                                                                      ),
-                                                                                      Text("Vendor 2", style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 9, color: Color.fromRGBO(128, 118, 118, 1))),
-                                                                                      SizedBox(width: 10),
-                                                                                      Text(
-                                                                                        "Xxxxx SAR",
-                                                                                        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 8, color: Color.fromRGBO(127, 106, 255, 1)),
-                                                                                      ),
-                                                                                    ],
-                                                                                  ),
-                                                                                ),
-                                                                              ),
-                                                                            ),
-                                                                          ),
-                                                                          Padding(
-                                                                            padding:
-                                                                                const EdgeInsets.all(8.0),
-                                                                            child:
-                                                                                Container(
-                                                                              width: 165,
-                                                                              height: 50,
-                                                                              decoration: BoxDecoration(boxShadow: [
-                                                                                BoxShadow(
-                                                                                  color: Colors.grey,
-                                                                                  spreadRadius: 1,
-                                                                                  blurRadius: 2, // changes position of shadow
-                                                                                ),
-                                                                              ], color: Color.fromRGBO(245, 253, 200, 1), borderRadius: BorderRadius.circular(25.0), border: Border.all(color: Color.fromARGB(246, 245, 242, 242))),
-                                                                              child: Padding(
-                                                                                padding: const EdgeInsets.all(8.0),
-                                                                                child: Center(
-                                                                                  child: Row(
-                                                                                    mainAxisAlignment: MainAxisAlignment.start,
-                                                                                    children: [
-                                                                                      SizedBox(
-                                                                                        width: 5,
-                                                                                      ),
-                                                                                      Radio(
-                                                                                        value: 1,
-                                                                                        fillColor: MaterialStateColor.resolveWith((states) => Colors.white),
-                                                                                        groupValue: selectedRadioValue,
-                                                                                        onChanged: (value) {
-                                                                                          setState(() {
-                                                                                            selectedRadioValue = value;
-                                                                                          });
-                                                                                        },
-                                                                                        activeColor: Colors.white, // Set the background color when the radio button is selected
-                                                                                      ),
-                                                                                      SizedBox(
-                                                                                        width: 5,
-                                                                                      ),
-                                                                                      Text("Vendor 3", style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 9, color: Color.fromRGBO(128, 118, 118, 1))),
-                                                                                      SizedBox(width: 10),
-                                                                                      Text(
-                                                                                        "Xxxxx SAR",
-                                                                                        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 8, color: Color.fromRGBO(127, 106, 255, 1)),
-                                                                                      ),
-                                                                                    ],
-                                                                                  ),
-                                                                                ),
-                                                                              ),
-                                                                            ),
-                                                                          ),
+                                                                          buildVendorContainer(
+                                                                              1,
+                                                                              "Vendor 1",
+                                                                              "Xxxxx SAR"),
+                                                                          buildVendorContainer(
+                                                                              2,
+                                                                              "Vendor 2",
+                                                                              "Xxxxx SAR"),
+                                                                          buildVendorContainer(
+                                                                              3,
+                                                                              "Vendor 3",
+                                                                              "Xxxxx SAR"),
                                                                         ],
                                                                       ),
                                                                       SizedBox(
@@ -2304,19 +2266,26 @@ class _MyHomePageState extends State<Dashboard> {
                                                                       Row(
                                                                         children: [
                                                                           IconButton(
-                                                                              padding: EdgeInsets.zero,
-                                                                              constraints: BoxConstraints(),
-                                                                              onPressed: null,
-                                                                              icon: Icon(
-                                                                                Icons.edit_document,
-                                                                                color: Color.fromRGBO(74, 60, 81, 1),
-                                                                              )),
+                                                                            padding:
+                                                                                EdgeInsets.zero,
+                                                                            constraints:
+                                                                                BoxConstraints(),
+                                                                            onPressed:
+                                                                                null,
+                                                                            icon:
+                                                                                Icon(
+                                                                              Icons.edit_document,
+                                                                              color: Color.fromRGBO(74, 60, 81, 1),
+                                                                            ),
+                                                                          ),
                                                                           IconButton(
-                                                                              padding: EdgeInsets.zero,
-                                                                              // constraints:
-                                                                              //     BoxConstraints(),
-                                                                              onPressed: null,
-                                                                              icon: Icon(Icons.delete)),
+                                                                            padding:
+                                                                                EdgeInsets.zero,
+                                                                            onPressed:
+                                                                                null,
+                                                                            icon:
+                                                                                Icon(Icons.delete),
+                                                                          ),
                                                                         ],
                                                                       ),
                                                                       SizedBox(
@@ -2330,33 +2299,34 @@ class _MyHomePageState extends State<Dashboard> {
                                                                             50,
                                                                         child:
                                                                             ElevatedButton(
-                                                                          onPressed:
-                                                                              () {
-                                                                            // Handle button press
-                                                                            print('Elevated Button Pressed!');
-                                                                          },
+                                                                          onPressed: isButtonEnabled
+                                                                              ? () {
+                                                                                  // Handle button press only if any radio button is selected
+                                                                                  print('Elevated Button Pressed!');
+                                                                                }
+                                                                              : null,
                                                                           style:
                                                                               ElevatedButton.styleFrom(
-                                                                            primary: Color.fromRGBO(
-                                                                                98,
-                                                                                105,
-                                                                                254,
-                                                                                1),
+                                                                            primary: isButtonEnabled
+                                                                                ? Color.fromRGBO(98, 105, 254, 1)
+                                                                                : Colors.grey,
                                                                             side:
                                                                                 BorderSide(
-                                                                              color: Color.fromRGBO(98, 105, 254, 1),
+                                                                              color: isButtonEnabled ? Color.fromRGBO(98, 105, 254, 1) : Colors.grey,
                                                                             ),
                                                                           ),
                                                                           child:
                                                                               Text(
                                                                             'Pay Now',
-                                                                            style: TextStyle(
-                                                                                color: Colors.white,
-                                                                                fontSize: 16,
-                                                                                fontFamily: "Helvetica"),
+                                                                            style:
+                                                                                TextStyle(
+                                                                              color: Colors.white,
+                                                                              fontSize: 16,
+                                                                              fontFamily: "Helvetica",
+                                                                            ),
                                                                           ),
                                                                         ),
-                                                                      )
+                                                                      ),
                                                                     ],
                                                                   ),
                                                                   SizedBox(
