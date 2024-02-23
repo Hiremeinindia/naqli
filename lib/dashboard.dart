@@ -20,6 +20,9 @@ class _MyHomePageState extends State<Dashboard> {
   PageController page = PageController();
   SideMenuController sideMenu = SideMenuController();
   bool value = false;
+  bool checkbox1 = false;
+  bool checkbox2 = false;
+  bool checkbox3 = false;
   int? selectedRadioValue;
   String month = '';
   @override
@@ -2097,16 +2100,19 @@ class _MyHomePageState extends State<Dashboard> {
                                                                               .scale(
                                                                             scale:
                                                                                 1.0,
-                                                                            child:
-                                                                                Checkbox(
-                                                                              value: this.value,
-                                                                              onChanged: (bool? value) {
-                                                                                // Change the parameter type to bool?
-                                                                                setState(() {
-                                                                                  this.value = value ?? false; // Use null-aware operator to handle null case
-                                                                                });
-                                                                              },
-                                                                            ),
+                                                                            child: Checkbox(
+                                                                                value: checkbox1,
+                                                                                onChanged: (bool? value) {
+                                                                                  setState(() {
+                                                                                    checkbox1 = value ?? false;
+                                                                                    if (checkbox1) {
+                                                                                      // If checkbox1 is selected, disable the other checkboxes
+                                                                                      checkbox2 = false;
+                                                                                      checkbox3 = false;
+                                                                                      // You can add additional logic or actions here
+                                                                                    }
+                                                                                  });
+                                                                                }),
                                                                           ),
                                                                         ],
                                                                       ),
@@ -2380,16 +2386,18 @@ class _MyHomePageState extends State<Dashboard> {
                                                                                 10,
                                                                           ),
                                                                           Checkbox(
-                                                                            value:
-                                                                                this.value,
-                                                                            onChanged:
-                                                                                (bool? value) {
-                                                                              // Change the parameter type to bool?
-                                                                              setState(() {
-                                                                                this.value = value ?? false; // Use null-aware operator to handle null case
-                                                                              });
-                                                                            },
-                                                                          ),
+                                                                              value: checkbox2,
+                                                                              onChanged: (bool? value) {
+                                                                                setState(() {
+                                                                                  checkbox2 = value ?? false;
+                                                                                  if (checkbox2) {
+                                                                                    // If checkbox1 is selected, disable the other checkboxes
+                                                                                    checkbox1 = false;
+                                                                                    checkbox3 = false;
+                                                                                    // You can add additional logic or actions here
+                                                                                  }
+                                                                                });
+                                                                              }),
                                                                         ],
                                                                       ),
                                                                       SizedBox(
@@ -2662,16 +2670,18 @@ class _MyHomePageState extends State<Dashboard> {
                                                                                 10,
                                                                           ),
                                                                           Checkbox(
-                                                                            value:
-                                                                                this.value,
-                                                                            onChanged:
-                                                                                (bool? value) {
-                                                                              // Change the parameter type to bool?
-                                                                              setState(() {
-                                                                                this.value = value ?? false; // Use null-aware operator to handle null case
-                                                                              });
-                                                                            },
-                                                                          ),
+                                                                              value: checkbox3,
+                                                                              onChanged: (bool? value) {
+                                                                                setState(() {
+                                                                                  checkbox3 = value ?? false;
+                                                                                  if (checkbox3) {
+                                                                                    // If checkbox1 is selected, disable the other checkboxes
+                                                                                    checkbox1 = false;
+                                                                                    checkbox2 = false;
+                                                                                    // You can add additional logic or actions here
+                                                                                  }
+                                                                                });
+                                                                              }),
                                                                         ],
                                                                       ),
                                                                       SizedBox(
