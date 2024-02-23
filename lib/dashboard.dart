@@ -837,6 +837,16 @@ class _MyHomePageState extends State<Dashboard> {
                                                                         .all(8),
                                                                 decoration:
                                                                     BoxDecoration(
+                                                                  boxShadow: [
+                                                                    BoxShadow(
+                                                                      color: Colors
+                                                                          .grey,
+                                                                      spreadRadius:
+                                                                          1,
+                                                                      blurRadius:
+                                                                          2, // changes position of shadow
+                                                                    ),
+                                                                  ],
                                                                   color: Color
                                                                       .fromRGBO(
                                                                           245,
@@ -933,6 +943,16 @@ class _MyHomePageState extends State<Dashboard> {
                                                                         .all(8),
                                                                 decoration:
                                                                     BoxDecoration(
+                                                                  boxShadow: [
+                                                                    BoxShadow(
+                                                                      color: Colors
+                                                                          .grey,
+                                                                      spreadRadius:
+                                                                          1,
+                                                                      blurRadius:
+                                                                          2, // changes position of shadow
+                                                                    ),
+                                                                  ],
                                                                   color: Color
                                                                       .fromRGBO(
                                                                           245,
@@ -1026,6 +1046,16 @@ class _MyHomePageState extends State<Dashboard> {
                                                                         .all(8),
                                                                 decoration:
                                                                     BoxDecoration(
+                                                                  boxShadow: [
+                                                                    BoxShadow(
+                                                                      color: Colors
+                                                                          .grey,
+                                                                      spreadRadius:
+                                                                          1,
+                                                                      blurRadius:
+                                                                          2, // changes position of shadow
+                                                                    ),
+                                                                  ],
                                                                   color: Color
                                                                       .fromRGBO(
                                                                           245,
@@ -1293,6 +1323,16 @@ class _MyHomePageState extends State<Dashboard> {
                                                             Container(
                                                               width: 130,
                                                               decoration: BoxDecoration(
+                                                                  boxShadow: [
+                                                                    BoxShadow(
+                                                                      color: Colors
+                                                                          .grey,
+                                                                      spreadRadius:
+                                                                          1,
+                                                                      blurRadius:
+                                                                          2, // changes position of shadow
+                                                                    ),
+                                                                  ],
                                                                   color: Color
                                                                       .fromRGBO(
                                                                           245,
@@ -1322,6 +1362,13 @@ class _MyHomePageState extends State<Dashboard> {
                                                                       height:
                                                                           30,
                                                                       decoration: BoxDecoration(
+                                                                          boxShadow: [
+                                                                            BoxShadow(
+                                                                              color: Colors.grey,
+                                                                              spreadRadius: 1,
+                                                                              blurRadius: 2, // changes position of shadow
+                                                                            ),
+                                                                          ],
                                                                           color: Color.fromRGBO(
                                                                               200,
                                                                               251,
@@ -1370,6 +1417,13 @@ class _MyHomePageState extends State<Dashboard> {
                                                                       height:
                                                                           30,
                                                                       decoration: BoxDecoration(
+                                                                          boxShadow: [
+                                                                            BoxShadow(
+                                                                              color: Colors.grey,
+                                                                              spreadRadius: 1,
+                                                                              blurRadius: 2, // changes position of shadow
+                                                                            ),
+                                                                          ],
                                                                           color: Color.fromRGBO(
                                                                               200,
                                                                               251,
@@ -1418,6 +1472,13 @@ class _MyHomePageState extends State<Dashboard> {
                                                                       height:
                                                                           30,
                                                                       decoration: BoxDecoration(
+                                                                          boxShadow: [
+                                                                            BoxShadow(
+                                                                              color: Colors.grey,
+                                                                              spreadRadius: 1,
+                                                                              blurRadius: 2, // changes position of shadow
+                                                                            ),
+                                                                          ],
                                                                           color: Color.fromRGBO(
                                                                               200,
                                                                               251,
@@ -1457,6 +1518,16 @@ class _MyHomePageState extends State<Dashboard> {
                                                             Container(
                                                               width: 130,
                                                               decoration: BoxDecoration(
+                                                                  boxShadow: [
+                                                                    BoxShadow(
+                                                                      color: Colors
+                                                                          .grey,
+                                                                      spreadRadius:
+                                                                          1,
+                                                                      blurRadius:
+                                                                          2, // changes position of shadow
+                                                                    ),
+                                                                  ],
                                                                   color: Color
                                                                       .fromRGBO(
                                                                           245,
@@ -1486,6 +1557,13 @@ class _MyHomePageState extends State<Dashboard> {
                                                                       height:
                                                                           30,
                                                                       decoration: BoxDecoration(
+                                                                          boxShadow: [
+                                                                            BoxShadow(
+                                                                              color: Colors.grey,
+                                                                              spreadRadius: 1,
+                                                                              blurRadius: 2, // changes position of shadow
+                                                                            ),
+                                                                          ],
                                                                           color: Color.fromRGBO(
                                                                               224,
                                                                               253,
@@ -1534,6 +1612,13 @@ class _MyHomePageState extends State<Dashboard> {
                                                                       height:
                                                                           30,
                                                                       decoration: BoxDecoration(
+                                                                          boxShadow: [
+                                                                            BoxShadow(
+                                                                              color: Colors.grey,
+                                                                              spreadRadius: 1,
+                                                                              blurRadius: 2, // changes position of shadow
+                                                                            ),
+                                                                          ],
                                                                           color: Color.fromRGBO(
                                                                               224,
                                                                               253,
@@ -1582,6 +1667,13 @@ class _MyHomePageState extends State<Dashboard> {
                                                                       height:
                                                                           30,
                                                                       decoration: BoxDecoration(
+                                                                          boxShadow: [
+                                                                            BoxShadow(
+                                                                              color: Colors.grey,
+                                                                              spreadRadius: 1,
+                                                                              blurRadius: 2, // changes position of shadow
+                                                                            ),
+                                                                          ],
                                                                           color: Color.fromRGBO(
                                                                               224,
                                                                               253,
@@ -1621,6 +1713,16 @@ class _MyHomePageState extends State<Dashboard> {
                                                             Container(
                                                               width: 130,
                                                               decoration: BoxDecoration(
+                                                                  boxShadow: [
+                                                                    BoxShadow(
+                                                                      color: Colors
+                                                                          .grey,
+                                                                      spreadRadius:
+                                                                          1,
+                                                                      blurRadius:
+                                                                          2, // changes position of shadow
+                                                                    ),
+                                                                  ],
                                                                   color: Color
                                                                       .fromRGBO(
                                                                           245,
@@ -1650,6 +1752,13 @@ class _MyHomePageState extends State<Dashboard> {
                                                                       height:
                                                                           30,
                                                                       decoration: BoxDecoration(
+                                                                          boxShadow: [
+                                                                            BoxShadow(
+                                                                              color: Colors.grey,
+                                                                              spreadRadius: 1,
+                                                                              blurRadius: 2, // changes position of shadow
+                                                                            ),
+                                                                          ],
                                                                           color: Color.fromRGBO(
                                                                               245,
                                                                               253,
@@ -1698,6 +1807,13 @@ class _MyHomePageState extends State<Dashboard> {
                                                                       height:
                                                                           30,
                                                                       decoration: BoxDecoration(
+                                                                          boxShadow: [
+                                                                            BoxShadow(
+                                                                              color: Colors.grey,
+                                                                              spreadRadius: 1,
+                                                                              blurRadius: 2, // changes position of shadow
+                                                                            ),
+                                                                          ],
                                                                           color: Color.fromRGBO(
                                                                               245,
                                                                               253,
@@ -1746,6 +1862,13 @@ class _MyHomePageState extends State<Dashboard> {
                                                                       height:
                                                                           30,
                                                                       decoration: BoxDecoration(
+                                                                          boxShadow: [
+                                                                            BoxShadow(
+                                                                              color: Colors.grey,
+                                                                              spreadRadius: 1,
+                                                                              blurRadius: 2, // changes position of shadow
+                                                                            ),
+                                                                          ],
                                                                           color: Color.fromRGBO(
                                                                               245,
                                                                               253,
@@ -1820,7 +1943,7 @@ class _MyHomePageState extends State<Dashboard> {
                                     child: Flexible(
                                       child: Padding(
                                         padding:
-                                            const EdgeInsets.only(right: 33),
+                                            const EdgeInsets.only(right: 33.5),
                                         child: ElevatedButton(
                                           onPressed: () {
                                             // Handle button press
@@ -2026,7 +2149,13 @@ class _MyHomePageState extends State<Dashboard> {
                                                                                 Container(
                                                                               width: 165,
                                                                               height: 50,
-                                                                              decoration: BoxDecoration(color: Color.fromRGBO(200, 251, 253, 1), borderRadius: BorderRadius.circular(25.0), border: Border.all(color: Color.fromARGB(246, 245, 242, 242))),
+                                                                              decoration: BoxDecoration(boxShadow: [
+                                                                                BoxShadow(
+                                                                                  color: Colors.grey,
+                                                                                  spreadRadius: 1,
+                                                                                  blurRadius: 2, // changes position of shadow
+                                                                                ),
+                                                                              ], color: Color.fromRGBO(200, 251, 253, 1), borderRadius: BorderRadius.circular(25.0), border: Border.all(color: Color.fromARGB(246, 245, 242, 242))),
                                                                               child: Padding(
                                                                                 padding: const EdgeInsets.all(8.0),
                                                                                 child: Center(
@@ -2069,7 +2198,13 @@ class _MyHomePageState extends State<Dashboard> {
                                                                                 Container(
                                                                               width: 165,
                                                                               height: 50,
-                                                                              decoration: BoxDecoration(color: Color.fromRGBO(224, 253, 200, 1), borderRadius: BorderRadius.circular(25.0), border: Border.all(color: Color.fromARGB(246, 245, 242, 242))),
+                                                                              decoration: BoxDecoration(boxShadow: [
+                                                                                BoxShadow(
+                                                                                  color: Colors.grey,
+                                                                                  spreadRadius: 1,
+                                                                                  blurRadius: 2, // changes position of shadow
+                                                                                ),
+                                                                              ], color: Color.fromRGBO(224, 253, 200, 1), borderRadius: BorderRadius.circular(25.0), border: Border.all(color: Color.fromARGB(246, 245, 242, 242))),
                                                                               child: Padding(
                                                                                 padding: const EdgeInsets.all(8.0),
                                                                                 child: Center(
@@ -2112,7 +2247,13 @@ class _MyHomePageState extends State<Dashboard> {
                                                                                 Container(
                                                                               width: 165,
                                                                               height: 50,
-                                                                              decoration: BoxDecoration(color: Color.fromRGBO(245, 253, 200, 1), borderRadius: BorderRadius.circular(25.0), border: Border.all(color: Color.fromARGB(246, 245, 242, 242))),
+                                                                              decoration: BoxDecoration(boxShadow: [
+                                                                                BoxShadow(
+                                                                                  color: Colors.grey,
+                                                                                  spreadRadius: 1,
+                                                                                  blurRadius: 2, // changes position of shadow
+                                                                                ),
+                                                                              ], color: Color.fromRGBO(245, 253, 200, 1), borderRadius: BorderRadius.circular(25.0), border: Border.all(color: Color.fromARGB(246, 245, 242, 242))),
                                                                               child: Padding(
                                                                                 padding: const EdgeInsets.all(8.0),
                                                                                 child: Center(
@@ -2290,7 +2431,13 @@ class _MyHomePageState extends State<Dashboard> {
                                                                                 Container(
                                                                               width: 165,
                                                                               height: 50,
-                                                                              decoration: BoxDecoration(color: Color.fromRGBO(200, 251, 253, 1), borderRadius: BorderRadius.circular(25.0), border: Border.all(color: Color.fromARGB(246, 245, 242, 242))),
+                                                                              decoration: BoxDecoration(boxShadow: [
+                                                                                BoxShadow(
+                                                                                  color: Colors.grey,
+                                                                                  spreadRadius: 1,
+                                                                                  blurRadius: 2, // changes position of shadow
+                                                                                ),
+                                                                              ], color: Color.fromRGBO(200, 251, 253, 1), borderRadius: BorderRadius.circular(25.0), border: Border.all(color: Color.fromARGB(246, 245, 242, 242))),
                                                                               child: Padding(
                                                                                 padding: const EdgeInsets.all(8.0),
                                                                                 child: Center(
@@ -2333,7 +2480,13 @@ class _MyHomePageState extends State<Dashboard> {
                                                                                 Container(
                                                                               width: 165,
                                                                               height: 50,
-                                                                              decoration: BoxDecoration(color: Color.fromRGBO(224, 253, 200, 1), borderRadius: BorderRadius.circular(25.0), border: Border.all(color: Color.fromARGB(246, 245, 242, 242))),
+                                                                              decoration: BoxDecoration(boxShadow: [
+                                                                                BoxShadow(
+                                                                                  color: Colors.grey,
+                                                                                  spreadRadius: 1,
+                                                                                  blurRadius: 2, // changes position of shadow
+                                                                                ),
+                                                                              ], color: Color.fromRGBO(224, 253, 200, 1), borderRadius: BorderRadius.circular(25.0), border: Border.all(color: Color.fromARGB(246, 245, 242, 242))),
                                                                               child: Padding(
                                                                                 padding: const EdgeInsets.all(8.0),
                                                                                 child: Center(
@@ -2376,7 +2529,13 @@ class _MyHomePageState extends State<Dashboard> {
                                                                                 Container(
                                                                               width: 165,
                                                                               height: 50,
-                                                                              decoration: BoxDecoration(color: Color.fromRGBO(245, 253, 200, 1), borderRadius: BorderRadius.circular(25.0), border: Border.all(color: Color.fromARGB(246, 245, 242, 242))),
+                                                                              decoration: BoxDecoration(boxShadow: [
+                                                                                BoxShadow(
+                                                                                  color: Colors.grey,
+                                                                                  spreadRadius: 1,
+                                                                                  blurRadius: 2, // changes position of shadow
+                                                                                ),
+                                                                              ], color: Color.fromRGBO(245, 253, 200, 1), borderRadius: BorderRadius.circular(25.0), border: Border.all(color: Color.fromARGB(246, 245, 242, 242))),
                                                                               child: Padding(
                                                                                 padding: const EdgeInsets.all(8.0),
                                                                                 child: Center(
@@ -2554,7 +2713,13 @@ class _MyHomePageState extends State<Dashboard> {
                                                                                 Container(
                                                                               width: 165,
                                                                               height: 50,
-                                                                              decoration: BoxDecoration(color: Color.fromRGBO(200, 251, 253, 1), borderRadius: BorderRadius.circular(25.0), border: Border.all(color: Color.fromARGB(246, 245, 242, 242))),
+                                                                              decoration: BoxDecoration(boxShadow: [
+                                                                                BoxShadow(
+                                                                                  color: Colors.grey,
+                                                                                  spreadRadius: 1,
+                                                                                  blurRadius: 2, // changes position of shadow
+                                                                                ),
+                                                                              ], color: Color.fromRGBO(200, 251, 253, 1), borderRadius: BorderRadius.circular(25.0), border: Border.all(color: Color.fromARGB(246, 245, 242, 242))),
                                                                               child: Padding(
                                                                                 padding: const EdgeInsets.all(8.0),
                                                                                 child: Center(
@@ -2597,7 +2762,13 @@ class _MyHomePageState extends State<Dashboard> {
                                                                                 Container(
                                                                               width: 165,
                                                                               height: 50,
-                                                                              decoration: BoxDecoration(color: Color.fromRGBO(224, 253, 200, 1), borderRadius: BorderRadius.circular(25.0), border: Border.all(color: Color.fromARGB(246, 245, 242, 242))),
+                                                                              decoration: BoxDecoration(boxShadow: [
+                                                                                BoxShadow(
+                                                                                  color: Colors.grey,
+                                                                                  spreadRadius: 1,
+                                                                                  blurRadius: 2, // changes position of shadow
+                                                                                ),
+                                                                              ], color: Color.fromRGBO(224, 253, 200, 1), borderRadius: BorderRadius.circular(25.0), border: Border.all(color: Color.fromARGB(246, 245, 242, 242))),
                                                                               child: Padding(
                                                                                 padding: const EdgeInsets.all(8.0),
                                                                                 child: Center(
@@ -2640,7 +2811,13 @@ class _MyHomePageState extends State<Dashboard> {
                                                                                 Container(
                                                                               width: 165,
                                                                               height: 50,
-                                                                              decoration: BoxDecoration(color: Color.fromRGBO(245, 253, 200, 1), borderRadius: BorderRadius.circular(25.0), border: Border.all(color: Color.fromARGB(246, 245, 242, 242))),
+                                                                              decoration: BoxDecoration(boxShadow: [
+                                                                                BoxShadow(
+                                                                                  color: Colors.grey,
+                                                                                  spreadRadius: 1,
+                                                                                  blurRadius: 2, // changes position of shadow
+                                                                                ),
+                                                                              ], color: Color.fromRGBO(245, 253, 200, 1), borderRadius: BorderRadius.circular(25.0), border: Border.all(color: Color.fromARGB(246, 245, 242, 242))),
                                                                               child: Padding(
                                                                                 padding: const EdgeInsets.all(8.0),
                                                                                 child: Center(
