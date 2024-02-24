@@ -1913,8 +1913,8 @@ class _MyHomePageState extends State<Dashboard> {
                                                                           boxShadow: [
                                                                             BoxShadow(
                                                                               color: Colors.grey,
-                                                                              spreadRadius: 1,
-                                                                              blurRadius: 2, // changes position of shadow
+                                                                              spreadRadius: 0.5,
+                                                                              blurRadius: 1, // changes position of shadow
                                                                             ),
                                                                           ],
                                                                           color: Color.fromRGBO(
