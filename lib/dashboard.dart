@@ -81,58 +81,73 @@ class _MyHomePageState extends State<Dashboard> {
   }
 
   Widget buildVendorContainer(int value, String vendorName, String amount) {
+    bool isDisabled = selectedRadioValue != null && selectedRadioValue != value;
+
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: Container(
-        width: 165,
-        height: 50,
-        decoration: BoxDecoration(
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey,
-              spreadRadius: 1,
-              blurRadius: 2, // changes position of shadow
-            ),
-          ],
-          color: getVendorContainerColor(value),
-          borderRadius: BorderRadius.circular(25.0),
-          border: Border.all(color: Color.fromARGB(246, 245, 242, 242)),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Center(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                SizedBox(width: 5),
-                Radio(
-                  value: value,
-                  fillColor:
-                      MaterialStateColor.resolveWith((states) => Colors.white),
-                  groupValue: selectedRadioValue,
-                  onChanged: (val) {
-                    setState(() {
-                      selectedRadioValue = val as int;
-                      isButtonEnabled = true;
-                    });
-                  },
-                  activeColor: Colors.white,
-                ),
-                SizedBox(width: 5),
-                Text(vendorName,
+      child: Opacity(
+        opacity: isDisabled ? 0.5 : 1.0,
+        child: Container(
+          width: 165,
+          height: 50,
+          decoration: BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey,
+                spreadRadius: 1,
+                blurRadius: 2,
+              ),
+            ],
+            color: isDisabled ? Colors.grey : getVendorContainerColor(value),
+            borderRadius: BorderRadius.circular(25.0),
+            border: Border.all(color: Color.fromARGB(246, 245, 242, 242)),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Center(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  SizedBox(width: 5),
+                  Radio(
+                    value: value,
+                    fillColor: MaterialStateColor.resolveWith(
+                        (states) => Colors.white),
+                    groupValue: selectedRadioValue,
+                    onChanged: (val) {
+                      setState(() {
+                        if (selectedRadioValue == val) {
+                          selectedRadioValue =
+                              null; // Unselect if already selected
+                          isButtonEnabled = false; // Disable button
+                        } else {
+                          selectedRadioValue = val as int?;
+                          isButtonEnabled = true; // Enable button
+                        }
+                      });
+                    },
+                    activeColor: Colors.white,
+                  ),
+                  SizedBox(width: 5),
+                  Text(
+                    vendorName,
                     style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 9,
-                        color: Color.fromRGBO(128, 118, 118, 1))),
-                SizedBox(width: 10),
-                Text(
-                  amount,
-                  style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 9,
+                      color: Color.fromRGBO(128, 118, 118, 1),
+                    ),
+                  ),
+                  SizedBox(width: 10),
+                  Text(
+                    amount,
+                    style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 8,
-                      color: Color.fromRGBO(127, 106, 255, 1)),
-                ),
-              ],
+                      color: Color.fromRGBO(127, 106, 255, 1),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
@@ -140,59 +155,74 @@ class _MyHomePageState extends State<Dashboard> {
     );
   }
 
-  Widget buildVendorContainer1(int value1, String vendorName, String amount) {
+  Widget buildVendorContainer1(int value, String vendorName, String amount) {
+    bool isDisabled = selectedRadioValue != null && selectedRadioValue != value;
+
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: Container(
-        width: 165,
-        height: 50,
-        decoration: BoxDecoration(
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey,
-              spreadRadius: 1,
-              blurRadius: 2, // changes position of shadow
-            ),
-          ],
-          color: getVendorContainerColor(value1),
-          borderRadius: BorderRadius.circular(25.0),
-          border: Border.all(color: Color.fromARGB(246, 245, 242, 242)),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Center(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                SizedBox(width: 5),
-                Radio(
-                  value: value1,
-                  fillColor:
-                      MaterialStateColor.resolveWith((states) => Colors.white),
-                  groupValue: selectedRadioValue1,
-                  onChanged: (val) {
-                    setState(() {
-                      selectedRadioValue1 = val as int;
-                      isButtonEnabled1 = true;
-                    });
-                  },
-                  activeColor: Colors.white,
-                ),
-                SizedBox(width: 5),
-                Text(vendorName,
+      child: Opacity(
+        opacity: isDisabled ? 0.5 : 1.0,
+        child: Container(
+          width: 165,
+          height: 50,
+          decoration: BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey,
+                spreadRadius: 1,
+                blurRadius: 2,
+              ),
+            ],
+            color: isDisabled ? Colors.grey : getVendorContainerColor(value),
+            borderRadius: BorderRadius.circular(25.0),
+            border: Border.all(color: Color.fromARGB(246, 245, 242, 242)),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Center(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  SizedBox(width: 5),
+                  Radio(
+                    value: value,
+                    fillColor: MaterialStateColor.resolveWith(
+                        (states) => Colors.white),
+                    groupValue: selectedRadioValue,
+                    onChanged: (val) {
+                      setState(() {
+                        if (selectedRadioValue == val) {
+                          selectedRadioValue =
+                              null; // Unselect if already selected
+                          isButtonEnabled1 = false; // Disable button
+                        } else {
+                          selectedRadioValue = val as int?;
+                          isButtonEnabled1 = true; // Enable button
+                        }
+                      });
+                    },
+                    activeColor: Colors.white,
+                  ),
+                  SizedBox(width: 5),
+                  Text(
+                    vendorName,
                     style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 9,
-                        color: Color.fromRGBO(128, 118, 118, 1))),
-                SizedBox(width: 10),
-                Text(
-                  amount,
-                  style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 9,
+                      color: Color.fromRGBO(128, 118, 118, 1),
+                    ),
+                  ),
+                  SizedBox(width: 10),
+                  Text(
+                    amount,
+                    style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 8,
-                      color: Color.fromRGBO(127, 106, 255, 1)),
-                ),
-              ],
+                      color: Color.fromRGBO(127, 106, 255, 1),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
@@ -200,59 +230,74 @@ class _MyHomePageState extends State<Dashboard> {
     );
   }
 
-  Widget buildVendorContainer2(int value2, String vendorName, String amount) {
+  Widget buildVendorContainer2(int value, String vendorName, String amount) {
+    bool isDisabled = selectedRadioValue != null && selectedRadioValue != value;
+
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: Container(
-        width: 165,
-        height: 50,
-        decoration: BoxDecoration(
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey,
-              spreadRadius: 1,
-              blurRadius: 2, // changes position of shadow
-            ),
-          ],
-          color: getVendorContainerColor(value2),
-          borderRadius: BorderRadius.circular(25.0),
-          border: Border.all(color: Color.fromARGB(246, 245, 242, 242)),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Center(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                SizedBox(width: 5),
-                Radio(
-                  value: value2,
-                  fillColor:
-                      MaterialStateColor.resolveWith((states) => Colors.white),
-                  groupValue: selectedRadioValue2,
-                  onChanged: (val) {
-                    setState(() {
-                      selectedRadioValue2 = val as int;
-                      isButtonEnabled2 = true;
-                    });
-                  },
-                  activeColor: Colors.white,
-                ),
-                SizedBox(width: 5),
-                Text(vendorName,
+      child: Opacity(
+        opacity: isDisabled ? 0.5 : 1.0,
+        child: Container(
+          width: 165,
+          height: 50,
+          decoration: BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey,
+                spreadRadius: 1,
+                blurRadius: 2,
+              ),
+            ],
+            color: isDisabled ? Colors.grey : getVendorContainerColor(value),
+            borderRadius: BorderRadius.circular(25.0),
+            border: Border.all(color: Color.fromARGB(246, 245, 242, 242)),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Center(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  SizedBox(width: 5),
+                  Radio(
+                    value: value,
+                    fillColor: MaterialStateColor.resolveWith(
+                        (states) => Colors.white),
+                    groupValue: selectedRadioValue,
+                    onChanged: (val) {
+                      setState(() {
+                        if (selectedRadioValue == val) {
+                          selectedRadioValue =
+                              null; // Unselect if already selected
+                          isButtonEnabled2 = false; // Disable button
+                        } else {
+                          selectedRadioValue = val as int?;
+                          isButtonEnabled2 = true; // Enable button
+                        }
+                      });
+                    },
+                    activeColor: Colors.white,
+                  ),
+                  SizedBox(width: 5),
+                  Text(
+                    vendorName,
                     style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 9,
-                        color: Color.fromRGBO(128, 118, 118, 1))),
-                SizedBox(width: 10),
-                Text(
-                  amount,
-                  style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 9,
+                      color: Color.fromRGBO(128, 118, 118, 1),
+                    ),
+                  ),
+                  SizedBox(width: 10),
+                  Text(
+                    amount,
+                    style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 8,
-                      color: Color.fromRGBO(127, 106, 255, 1)),
-                ),
-              ],
+                      color: Color.fromRGBO(127, 106, 255, 1),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
@@ -2387,17 +2432,20 @@ class _MyHomePageState extends State<Dashboard> {
                                                                         Row(
                                                                           children: [
                                                                             buildVendorContainer(
-                                                                                1,
-                                                                                "Vendor 1",
-                                                                                "Xxxxx SAR"),
-                                                                            buildVendorContainer(
-                                                                                2,
-                                                                                "Vendor 2",
-                                                                                "Xxxxx SAR"),
-                                                                            buildVendorContainer(
-                                                                                3,
-                                                                                "Vendor 3",
-                                                                                "Xxxxx SAR"),
+                                                                              1,
+                                                                              "Vendor 1",
+                                                                              "Xxxxx SAR",
+                                                                            ),
+                                                                            buildVendorContainer1(
+                                                                              2,
+                                                                              "Vendor 1",
+                                                                              "Xxxxx SAR",
+                                                                            ),
+                                                                            buildVendorContainer2(
+                                                                              3,
+                                                                              "Vendor 1",
+                                                                              "Xxxxx SAR",
+                                                                            ),
                                                                           ],
                                                                         ),
                                                                         SizedBox(
@@ -2529,18 +2577,21 @@ class _MyHomePageState extends State<Dashboard> {
                                                                         ),
                                                                         Row(
                                                                           children: [
+                                                                            buildVendorContainer(
+                                                                              1,
+                                                                              "Vendor 1",
+                                                                              "Xxxxx SAR",
+                                                                            ),
                                                                             buildVendorContainer1(
-                                                                                1,
-                                                                                "Vendor 1",
-                                                                                "Xxxxx SAR"),
-                                                                            buildVendorContainer1(
-                                                                                2,
-                                                                                "Vendor 2",
-                                                                                "Xxxxx SAR"),
-                                                                            buildVendorContainer1(
-                                                                                3,
-                                                                                "Vendor 3",
-                                                                                "Xxxxx SAR"),
+                                                                              2,
+                                                                              "Vendor 1",
+                                                                              "Xxxxx SAR",
+                                                                            ),
+                                                                            buildVendorContainer2(
+                                                                              3,
+                                                                              "Vendor 1",
+                                                                              "Xxxxx SAR",
+                                                                            ),
                                                                           ],
                                                                         ),
                                                                         SizedBox(
@@ -2672,18 +2723,21 @@ class _MyHomePageState extends State<Dashboard> {
                                                                         ),
                                                                         Row(
                                                                           children: [
+                                                                            buildVendorContainer(
+                                                                              1,
+                                                                              "Vendor 1",
+                                                                              "Xxxxx SAR",
+                                                                            ),
+                                                                            buildVendorContainer1(
+                                                                              2,
+                                                                              "Vendor 1",
+                                                                              "Xxxxx SAR",
+                                                                            ),
                                                                             buildVendorContainer2(
-                                                                                1,
-                                                                                "Vendor 1",
-                                                                                "Xxxxx SAR"),
-                                                                            buildVendorContainer2(
-                                                                                2,
-                                                                                "Vendor 2",
-                                                                                "Xxxxx SAR"),
-                                                                            buildVendorContainer2(
-                                                                                3,
-                                                                                "Vendor 3",
-                                                                                "Xxxxx SAR"),
+                                                                              3,
+                                                                              "Vendor 1",
+                                                                              "Xxxxx SAR",
+                                                                            ),
                                                                           ],
                                                                         ),
                                                                         SizedBox(
