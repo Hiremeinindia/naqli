@@ -541,282 +541,253 @@ class _LoginPageState extends State<LoginPage> {
               height: 600,
               width: 295,
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Row(
-                    children: [
-                      Container(
-                        width: 90,
-                        height: 600,
-                        decoration: const BoxDecoration(
-                          color: Color.fromARGB(255, 128, 123, 229),
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(31),
-                            bottomLeft: Radius.circular(31),
-                          ),
-                        ),
-                        child: Align(
-                          alignment: Alignment.bottomCenter,
-                          child: Image.asset(
-                            'loginlogo.png',
-                            width: 100,
-                            height: 100,
-                          ),
-                        ),
+                  Container(
+                    width: 295,
+                    height: 600,
+                    decoration: const BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.only(
+                        topRight: Radius.circular(31),
+                        bottomRight: Radius.circular(31),
                       ),
-                      Container(
-                        width: 205,
-                        height: 600,
-                        decoration: const BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.only(
-                            topRight: Radius.circular(31),
-                            bottomRight: Radius.circular(31),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.only(
+                        left: 5.0,
+                        right: 5,
+                        top: 3,
+                        bottom: 20,
+                      ),
+                      child: Column(
+                        children: [
+                          Align(
+                            alignment: Alignment.topRight,
+                            child: IconButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              icon: Icon(Icons.cancel),
+                            ),
                           ),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.only(
-                            left: 5.0,
-                            right: 5,
-                            top: 3,
-                            bottom: 20,
+                          SizedBox(
+                            height: 30,
                           ),
-                          child: Column(
-                            children: [
-                              Align(
-                                alignment: Alignment.topRight,
-                                child: IconButton(
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
-                                  },
-                                  icon: Icon(Icons.cancel),
-                                ),
+                          Align(
+                            alignment: Alignment.center,
+                            child: SizedBox(
+                              height: 130,
+                              width: 130,
+                              child: Image.asset(
+                                'Naqli-final-logo.png',
+                                fit: BoxFit.contain,
                               ),
-                              SizedBox(
-                                height: 25,
-                              ),
-                              Align(
-                                alignment: Alignment.center,
-                                child: Text(
-                                  'Login',
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(
+                              left: 30.0,
+                              right: 20,
+                              top: 40,
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Email ID',
                                   style: TextStyle(
                                     fontFamily: 'Colfax',
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15,
                                   ),
                                   textScaleFactor:
                                       ScaleSize.textScaleFactor(context),
                                 ),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.only(
-                                  left: 30.0,
-                                  right: 20,
-                                  top: 40,
+                                SizedBox(
+                                  height: 10,
                                 ),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      'Email ID',
-                                      style: TextStyle(
-                                        fontFamily: 'Colfax',
-                                        fontSize: 15,
-                                      ),
-                                      textScaleFactor:
-                                          ScaleSize.textScaleFactor(context),
+                                TextField(
+                                  decoration: InputDecoration(
+                                    contentPadding: EdgeInsets.all(4.0),
+                                    border: OutlineInputBorder(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(8)),
                                     ),
-                                    SizedBox(
-                                      height: 10,
-                                    ),
-                                    TextField(
-                                      decoration: InputDecoration(
-                                        contentPadding: EdgeInsets.all(4.0),
-                                        border: OutlineInputBorder(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(5)),
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: 15,
-                                    ),
-                                    Text(
-                                      'Password',
-                                      style: TextStyle(
-                                        fontFamily: 'Colfax',
-                                        fontSize: 15,
-                                      ),
-                                      textScaleFactor:
-                                          ScaleSize.textScaleFactor(context),
-                                    ),
-                                    SizedBox(
-                                      height: 10,
-                                    ),
-                                    TextField(
-                                      decoration: InputDecoration(
-                                        contentPadding: EdgeInsets.all(4.0),
-                                        border: OutlineInputBorder(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(5)),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              SizedBox(
-                                height: 15,
-                              ),
-                              Padding(
-                                padding: EdgeInsets.only(
-                                  left: 30.0,
-                                  right: 20,
-                                ),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    SizedBox(
-                                      height: 20,
-                                      width: 63,
-                                      child: ElevatedButton(
-                                        onPressed: () {
-                                          showDialog(
-                                            context: context,
-                                            builder: (context) {
-                                              return MyHomePage();
-                                            },
-                                          );
-                                        },
-                                        style: ElevatedButton.styleFrom(
-                                          backgroundColor:
-                                              Color.fromRGBO(128, 123, 229, 1),
-                                          side: BorderSide(
-                                            color: Color.fromRGBO(
-                                                128, 123, 229, 1),
-                                          ),
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                          ),
-                                        ),
-                                        child: Text(
-                                          'Login',
-                                          style: TextStyle(
-                                            fontFamily: 'Colfax',
-                                            fontSize: 5,
-                                            color: Colors.white,
-                                          ),
-                                          textScaleFactor:
-                                              ScaleSize.textScaleFactor(
-                                                  context),
-                                        ),
-                                      ),
-                                    ),
-                                    InkWell(
-                                      child: Text(
-                                        'Forgot Password?',
-                                        style: TextStyle(
-                                          fontFamily: 'Colfax',
-                                          fontSize: 7,
-                                          color: Color.fromARGB(
-                                              255, 128, 123, 229),
-                                        ),
-                                        textScaleFactor:
-                                            ScaleSize.textScaleFactor(context),
-                                      ),
-                                      onTap: () {},
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Padding(
-                                padding: EdgeInsets.only(
-                                  left: 30.0,
-                                  right: 20,
-                                ),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      "Don't have an account?",
-                                      style: TextStyle(
-                                        fontFamily: 'Colfax',
-                                        fontSize: 8,
-                                        color: Colors.black,
-                                      ),
-                                      textScaleFactor:
-                                          ScaleSize.textScaleFactor(context),
-                                    ),
-                                    InkWell(
-                                      child: Text(
-                                        'Create One!',
-                                        style: TextStyle(
-                                          fontFamily: 'Colfax',
-                                          fontSize: 8,
-                                          color: Color.fromARGB(
-                                              255, 128, 123, 229),
-                                        ),
-                                        textScaleFactor:
-                                            ScaleSize.textScaleFactor(context),
-                                      ),
-                                      onTap: () {
-                                        showDialog(
-                                          context: context,
-                                          builder: (context) {
-                                            return CreateAccount();
-                                          },
-                                        );
-                                      },
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Padding(
-                                padding: EdgeInsets.only(
-                                  left: 30.0,
-                                  right: 20,
-                                ),
-                                child: Align(
-                                  alignment: Alignment.centerLeft,
-                                  child: InkWell(
-                                    child: Text(
-                                      'Use without Log in',
-                                      style: TextStyle(
-                                        fontFamily: 'Colfax',
-                                        fontSize: 8,
-                                        color:
-                                            Color.fromARGB(255, 128, 123, 229),
-                                      ),
-                                      textScaleFactor:
-                                          ScaleSize.textScaleFactor(context),
-                                    ),
-                                    onTap: () async {
-                                      _showOtpVerificationDialog();
-                                      if (isVerified) {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) => MyHomePage(),
-                                          ),
-                                        );
-                                      }
-                                    },
                                   ),
                                 ),
-                              ),
-                            ],
+                                SizedBox(
+                                  height: 15,
+                                ),
+                                Text(
+                                  'Password',
+                                  style: TextStyle(
+                                    fontFamily: 'Colfax',
+                                    fontSize: 15,
+                                  ),
+                                  textScaleFactor:
+                                      ScaleSize.textScaleFactor(context),
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                TextField(
+                                  decoration: InputDecoration(
+                                    contentPadding: EdgeInsets.all(4.0),
+                                    border: OutlineInputBorder(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(8)),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                      )
-                    ],
-                  ),
+                          SizedBox(
+                            height: 15,
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(
+                              left: 30.0,
+                              right: 20,
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                SizedBox(
+                                  height: 40,
+                                  width: 230,
+                                  child: ElevatedButton(
+                                    onPressed: () {
+                                      showDialog(
+                                        context: context,
+                                        builder: (context) {
+                                          return MyHomePage();
+                                        },
+                                      );
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor:
+                                          Color.fromRGBO(128, 123, 229, 1),
+                                      side: BorderSide(
+                                        color: Color.fromRGBO(128, 123, 229, 1),
+                                      ),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(7),
+                                      ),
+                                    ),
+                                    child: Text(
+                                      'Login',
+                                      style: TextStyle(
+                                        fontFamily: 'Colfax',
+                                        fontSize: 15,
+                                        color: Colors.white,
+                                      ),
+                                      textScaleFactor:
+                                          ScaleSize.textScaleFactor(context),
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(height: 17),
+                                InkWell(
+                                  child: Text(
+                                    'Forgot Password?',
+                                    style: TextStyle(
+                                      fontFamily: 'Colfax',
+                                      fontSize: 12,
+                                      color: Color.fromARGB(255, 128, 123, 229),
+                                    ),
+                                    textScaleFactor:
+                                        ScaleSize.textScaleFactor(context),
+                                  ),
+                                  onTap: () {},
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(
+                              left: 30.0,
+                              right: 20,
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  "Don't have an account?",
+                                  style: TextStyle(
+                                    fontFamily: 'Colfax',
+                                    fontSize: 12,
+                                    color: Colors.black,
+                                  ),
+                                  textScaleFactor:
+                                      ScaleSize.textScaleFactor(context),
+                                ),
+                                InkWell(
+                                  child: Text(
+                                    'Create One!',
+                                    style: TextStyle(
+                                      fontFamily: 'Colfax',
+                                      fontSize: 12,
+                                      color: Color.fromARGB(255, 128, 123, 229),
+                                    ),
+                                    textScaleFactor:
+                                        ScaleSize.textScaleFactor(context),
+                                  ),
+                                  onTap: () {
+                                    showDialog(
+                                      context: context,
+                                      builder: (context) {
+                                        return CreateAccount();
+                                      },
+                                    );
+                                  },
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(
+                              left: 30.0,
+                              right: 20,
+                            ),
+                            child: Align(
+                              alignment: Alignment.center,
+                              child: InkWell(
+                                child: Text(
+                                  'Use without Log in',
+                                  style: TextStyle(
+                                    fontFamily: 'Colfax',
+                                    fontSize: 12,
+                                    color: Color.fromARGB(255, 128, 123, 229),
+                                  ),
+                                  textScaleFactor:
+                                      ScaleSize.textScaleFactor(context),
+                                ),
+                                onTap: () async {
+                                  _showOtpVerificationDialog();
+                                  if (isVerified) {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => MyHomePage(),
+                                      ),
+                                    );
+                                  }
+                                },
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  )
                 ],
               ),
             ),
