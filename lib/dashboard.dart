@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:easy_sidemenu/easy_sidemenu.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/bookingdialog.dart';
 import 'package:flutter_application_1/echarts_data.dart';
 import 'package:flutter_application_1/homepage.dart';
 import 'package:graphic/graphic.dart';
@@ -2373,13 +2374,10 @@ class _MyHomePageState extends State<Dashboard> {
                                                                       children: [
                                                                         SizedBox(
                                                                           width:
-                                                                              10,
+                                                                              5,
                                                                         ),
                                                                         Column(
                                                                           children: [
-                                                                            SizedBox(
-                                                                              width: 10,
-                                                                            ),
                                                                             Transform.scale(
                                                                               scale: 1.0,
                                                                               child: Checkbox(
@@ -2476,14 +2474,20 @@ class _MyHomePageState extends State<Dashboard> {
                                                                         ),
                                                                         SizedBox(
                                                                           width:
-                                                                              150,
+                                                                              130,
                                                                           height:
-                                                                              50,
+                                                                              40,
                                                                           child:
                                                                               ElevatedButton(
                                                                             onPressed: isButtonEnabled
                                                                                 ? () {
-                                                                                    // Handle button press only if any radio button is selected
+                                                                                    showDialog(
+                                                                                      barrierDismissible: false,
+                                                                                      context: context,
+                                                                                      builder: (context) {
+                                                                                        return BookingDialog();
+                                                                                      },
+                                                                                    );
                                                                                     print('Elevated Button Pressed!');
                                                                                   }
                                                                                 : null,
@@ -2526,13 +2530,10 @@ class _MyHomePageState extends State<Dashboard> {
                                                                       children: [
                                                                         SizedBox(
                                                                           width:
-                                                                              10,
+                                                                              5,
                                                                         ),
                                                                         Column(
                                                                           children: [
-                                                                            SizedBox(
-                                                                              width: 10,
-                                                                            ),
                                                                             Checkbox(
                                                                                 value: checkbox2,
                                                                                 onChanged: (bool? value) {
@@ -2622,9 +2623,9 @@ class _MyHomePageState extends State<Dashboard> {
                                                                         ),
                                                                         SizedBox(
                                                                           width:
-                                                                              150,
+                                                                              130,
                                                                           height:
-                                                                              50,
+                                                                              40,
                                                                           child:
                                                                               ElevatedButton(
                                                                             onPressed: isButtonEnabled1
@@ -2672,13 +2673,10 @@ class _MyHomePageState extends State<Dashboard> {
                                                                       children: [
                                                                         SizedBox(
                                                                           width:
-                                                                              10,
+                                                                              5,
                                                                         ),
                                                                         Column(
                                                                           children: [
-                                                                            SizedBox(
-                                                                              width: 10,
-                                                                            ),
                                                                             Checkbox(
                                                                                 value: checkbox3,
                                                                                 onChanged: (bool? value) {
@@ -2768,9 +2766,9 @@ class _MyHomePageState extends State<Dashboard> {
                                                                         ),
                                                                         SizedBox(
                                                                           width:
-                                                                              150,
+                                                                              130,
                                                                           height:
-                                                                              50,
+                                                                              40,
                                                                           child:
                                                                               ElevatedButton(
                                                                             onPressed: isButtonEnabled2
