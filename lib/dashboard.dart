@@ -20,6 +20,7 @@ class Dashboard extends StatefulWidget {
 class _MyHomePageState extends State<Dashboard> {
   PageController page = PageController();
   SideMenuController sideMenu = SideMenuController();
+  final ScrollController _scrollController = ScrollController();
   bool value = false;
   bool checkbox1 = false;
   bool checkbox2 = false;
@@ -3638,475 +3639,962 @@ class _MyHomePageState extends State<Dashboard> {
                                 ),
                                 Row(
                                   children: [
-                                    Container(
-                                      height: 350,
-                                      decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        borderRadius:
-                                            BorderRadius.circular(12.0),
-                                      ),
-                                      width: 1060,
-                                      child: Column(
-                                        children: [
-                                          Container(
-                                            height: 70,
-                                            color: Color.fromRGBO(
-                                                75, 61, 82, 1), // Brown color
-                                            child: Center(
-                                              child: Row(
+                                    Column(
+                                      children: [
+                                        SizedBox(
+                                          width: 1065,
+                                          height: 260,
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Container(
+                                              height: 292,
+                                              decoration: BoxDecoration(
+                                                color: Colors.white,
+                                                borderRadius:
+                                                    BorderRadius.circular(12.0),
+                                              ),
+                                              width: 350,
+                                              child: Column(
                                                 children: [
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            8.0),
-                                                    child: Padding(
-                                                      padding:
-                                                          const EdgeInsets.only(
-                                                              left: 10),
-                                                      child: Text(
-                                                        'Booking ID',
-                                                        style: TextStyle(
-                                                          color: Colors.white,
-                                                          fontSize: 18,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                        ),
-                                                      ),
+                                                  // Add spacing between the brown container and the white container
+                                                  Container(
+                                                    height: 230,
+                                                    decoration: BoxDecoration(
+                                                      color: Colors.white,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              12.0),
                                                     ),
-                                                  ),
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            left: 90),
-                                                    child: Text(
-                                                      "Mode",
-                                                      style: TextStyle(
-                                                        color: Colors.white,
-                                                        fontSize: 15,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            left: 90),
-                                                    child: Text(
-                                                      "Booking Type",
-                                                      style: TextStyle(
-                                                        color: Colors.white,
-                                                        fontSize: 15,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            left: 90),
-                                                    child: Text(
-                                                      "Vendor",
-                                                      style: TextStyle(
-                                                        color: Colors.white,
-                                                        fontSize: 15,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            left: 90),
-                                                    child: Text(
-                                                      "Payment Status",
-                                                      style: TextStyle(
-                                                        color: Colors.white,
-                                                        fontSize: 15,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            left: 90),
-                                                    child: Text(
-                                                      "Status",
-                                                      style: TextStyle(
-                                                        color: Colors.white,
-                                                        fontSize: 15,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            left: 90),
-                                                    child: Text(
-                                                      "Actions",
-                                                      style: TextStyle(
-                                                        color: Colors.white,
-                                                        fontSize: 15,
-                                                      ),
+                                                    child: Table(
+                                                      // textDirection: TextDirection.rtl,
+                                                      // defaultVerticalAlignment: TableCellVerticalAlignment.bottom,
+                                                      // border:TableBorder.all(width: 2.0,color: Colors.red),
+                                                      children: [
+                                                        TableRow(children: [
+                                                          Container(
+                                                            color: Color.fromRGBO(
+                                                                75,
+                                                                61,
+                                                                82,
+                                                                1), // Brown color
+                                                            child: Padding(
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                      .all(8.0),
+                                                              child: Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                        .only(
+                                                                        left:
+                                                                            30),
+                                                                child: Text(
+                                                                  "Booking ID",
+                                                                  textScaleFactor:
+                                                                      1.5,
+                                                                  style: TextStyle(
+                                                                      color: Colors
+                                                                          .white,
+                                                                      fontSize:
+                                                                          10,
+                                                                      fontFamily:
+                                                                          "SFProText"),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                          Container(
+                                                            color:
+                                                                Color.fromRGBO(
+                                                                    75,
+                                                                    61,
+                                                                    82,
+                                                                    1),
+                                                            child: Padding(
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                      .all(8.0),
+                                                              child: Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                        .only(
+                                                                        left:
+                                                                            40),
+                                                                child: Text(
+                                                                  "Mode",
+                                                                  textScaleFactor:
+                                                                      1.5,
+                                                                  style: TextStyle(
+                                                                      color: Colors
+                                                                          .white,
+                                                                      fontSize:
+                                                                          10,
+                                                                      fontFamily:
+                                                                          "SFProText"),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                          Container(
+                                                            color:
+                                                                Color.fromRGBO(
+                                                                    75,
+                                                                    61,
+                                                                    82,
+                                                                    1),
+                                                            child: Padding(
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                      .all(8.0),
+                                                              child: Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                        .only(
+                                                                        left:
+                                                                            20),
+                                                                child: Text(
+                                                                  "Booking Type",
+                                                                  textScaleFactor:
+                                                                      1.5,
+                                                                  style: TextStyle(
+                                                                      color: Colors
+                                                                          .white,
+                                                                      fontSize:
+                                                                          10,
+                                                                      fontFamily:
+                                                                          "SFProText"),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                          Container(
+                                                            color:
+                                                                Color.fromRGBO(
+                                                                    75,
+                                                                    61,
+                                                                    82,
+                                                                    1),
+                                                            child: Padding(
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                      .all(8.0),
+                                                              child: Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                        .only(
+                                                                        left:
+                                                                            40),
+                                                                child: Text(
+                                                                  "Vendor",
+                                                                  textScaleFactor:
+                                                                      1.5,
+                                                                  style: TextStyle(
+                                                                      color: Colors
+                                                                          .white,
+                                                                      fontSize:
+                                                                          10,
+                                                                      fontFamily:
+                                                                          "SFProText"),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                          Container(
+                                                            color:
+                                                                Color.fromRGBO(
+                                                                    75,
+                                                                    61,
+                                                                    82,
+                                                                    1),
+                                                            child: Padding(
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                      .all(8.0),
+                                                              child: Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                        .only(
+                                                                        left:
+                                                                            10),
+                                                                child: Text(
+                                                                  "Payment Status",
+                                                                  textScaleFactor:
+                                                                      1.5,
+                                                                  style: TextStyle(
+                                                                      color: Colors
+                                                                          .white,
+                                                                      fontSize:
+                                                                          10,
+                                                                      fontFamily:
+                                                                          "SFProText"),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                          Container(
+                                                            color:
+                                                                Color.fromRGBO(
+                                                                    75,
+                                                                    61,
+                                                                    82,
+                                                                    1),
+                                                            child: Padding(
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                      .all(8.0),
+                                                              child: Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                        .only(
+                                                                        left:
+                                                                            40),
+                                                                child: Text(
+                                                                  "Status",
+                                                                  textScaleFactor:
+                                                                      1.5,
+                                                                  style: TextStyle(
+                                                                      color: Colors
+                                                                          .white,
+                                                                      fontSize:
+                                                                          10,
+                                                                      fontFamily:
+                                                                          "SFProText"),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                          Container(
+                                                            color:
+                                                                Color.fromRGBO(
+                                                                    75,
+                                                                    61,
+                                                                    82,
+                                                                    1),
+                                                            child: Padding(
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                      .all(8.0),
+                                                              child: Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                        .only(
+                                                                        left:
+                                                                            40),
+                                                                child: Text(
+                                                                  "Actions",
+                                                                  textScaleFactor:
+                                                                      1.5,
+                                                                  style: TextStyle(
+                                                                      color: Colors
+                                                                          .white,
+                                                                      fontSize:
+                                                                          10,
+                                                                      fontFamily:
+                                                                          "SFProText"),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ]),
+                                                        TableRow(children: [
+                                                          Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .only(
+                                                                    left: 20,
+                                                                    top: 20),
+                                                            child: Container(
+                                                              child: Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                        .all(
+                                                                        8.0),
+                                                                child: Text(
+                                                                  "NAQBOOK***",
+                                                                  textScaleFactor:
+                                                                      1.5,
+                                                                  style: TextStyle(
+                                                                      color: Colors
+                                                                          .black,
+                                                                      fontSize:
+                                                                          11,
+                                                                      fontFamily:
+                                                                          "SFProText"),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                          Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .only(
+                                                                    left: 35,
+                                                                    top: 20),
+                                                            child: Container(
+                                                              child: Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                        .all(
+                                                                        8.0),
+                                                                child: Text(
+                                                                  "Truck",
+                                                                  textScaleFactor:
+                                                                      1.5,
+                                                                  style: TextStyle(
+                                                                      color: Colors
+                                                                          .black,
+                                                                      fontSize:
+                                                                          11,
+                                                                      fontFamily:
+                                                                          "SFProText"),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                          Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .only(
+                                                                    left: 35,
+                                                                    top: 20),
+                                                            child: Container(
+                                                              child: Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                        .all(
+                                                                        8.0),
+                                                                child: Text(
+                                                                  "Single",
+                                                                  textScaleFactor:
+                                                                      1.5,
+                                                                  style: TextStyle(
+                                                                      color: Colors
+                                                                          .black,
+                                                                      fontSize:
+                                                                          11,
+                                                                      fontFamily:
+                                                                          "SFProText"),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                          Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .only(
+                                                                    left: 35,
+                                                                    top: 20),
+                                                            child: Container(
+                                                              child: Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                        .all(
+                                                                        8.0),
+                                                                child: Text(
+                                                                  "Vendor 1",
+                                                                  textScaleFactor:
+                                                                      1.5,
+                                                                  style: TextStyle(
+                                                                      color: Colors
+                                                                          .black,
+                                                                      fontSize:
+                                                                          11,
+                                                                      fontFamily:
+                                                                          "SFProText"),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                          Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .only(
+                                                                    left: 15,
+                                                                    top: 20),
+                                                            child: Container(
+                                                              child: Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                        .all(
+                                                                        8.0),
+                                                                child: SizedBox(
+                                                                  width: 120,
+                                                                  height: 30,
+                                                                  child:
+                                                                      ElevatedButton(
+                                                                    onPressed:
+                                                                        () {},
+                                                                    style: ElevatedButton
+                                                                        .styleFrom(
+                                                                      primary: Color.fromRGBO(
+                                                                          247,
+                                                                          230,
+                                                                          176,
+                                                                          1),
+                                                                      side:
+                                                                          BorderSide(
+                                                                        color: Color.fromRGBO(
+                                                                            247,
+                                                                            230,
+                                                                            176,
+                                                                            1),
+                                                                      ),
+                                                                    ),
+                                                                    child: Text(
+                                                                      'BalXXXX',
+                                                                      style:
+                                                                          TextStyle(
+                                                                        color: Colors
+                                                                            .black,
+                                                                        fontSize:
+                                                                            12,
+                                                                        fontFamily:
+                                                                            "Helvetica",
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                          Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .only(
+                                                                    left: 10,
+                                                                    top: 20),
+                                                            child: Container(
+                                                              child: Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                        .all(
+                                                                        8.0),
+                                                                child:
+                                                                    Image.asset(
+                                                                  'Group268',
+                                                                  width: 100,
+                                                                  height: 150,
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                          Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .only(
+                                                                    left: 37,
+                                                                    top: 10),
+                                                            child: Container(
+                                                              child: Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                        .all(
+                                                                        8.0),
+                                                                child: Row(
+                                                                  children: [
+                                                                    IconButton(
+                                                                        padding:
+                                                                            EdgeInsets
+                                                                                .zero,
+                                                                        constraints:
+                                                                            BoxConstraints(),
+                                                                        onPressed:
+                                                                            null,
+                                                                        icon:
+                                                                            Icon(
+                                                                          Icons
+                                                                              .edit_document,
+                                                                          color: Color.fromRGBO(
+                                                                              74,
+                                                                              60,
+                                                                              81,
+                                                                              1),
+                                                                        )),
+                                                                    IconButton(
+                                                                        padding:
+                                                                            EdgeInsets
+                                                                                .zero,
+                                                                        // constraints:
+                                                                        //     BoxConstraints(),
+                                                                        onPressed:
+                                                                            null,
+                                                                        icon: Icon(
+                                                                            Icons.delete)),
+                                                                  ],
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ]),
+                                                        TableRow(children: [
+                                                          Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .only(
+                                                                    left: 20,
+                                                                    top: 20),
+                                                            child: Container(
+                                                              child: Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                        .all(
+                                                                        8.0),
+                                                                child: Text(
+                                                                  "NAQBOOK***",
+                                                                  textScaleFactor:
+                                                                      1.5,
+                                                                  style: TextStyle(
+                                                                      color: Colors
+                                                                          .black,
+                                                                      fontSize:
+                                                                          11,
+                                                                      fontFamily:
+                                                                          "SFProText"),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                          Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .only(
+                                                                    left: 35,
+                                                                    top: 20),
+                                                            child: Container(
+                                                              child: Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                        .all(
+                                                                        8.0),
+                                                                child: Text(
+                                                                  "Bus",
+                                                                  textScaleFactor:
+                                                                      1.5,
+                                                                  style: TextStyle(
+                                                                      color: Colors
+                                                                          .black,
+                                                                      fontSize:
+                                                                          11,
+                                                                      fontFamily:
+                                                                          "SFProText"),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                          Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .only(
+                                                                    left: 35,
+                                                                    top: 20),
+                                                            child: Container(
+                                                              child: Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                        .all(
+                                                                        8.0),
+                                                                child: Text(
+                                                                  "Contract",
+                                                                  textScaleFactor:
+                                                                      1.5,
+                                                                  style: TextStyle(
+                                                                      color: Colors
+                                                                          .black,
+                                                                      fontSize:
+                                                                          11,
+                                                                      fontFamily:
+                                                                          "SFProText"),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                          Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .only(
+                                                                    left: 35,
+                                                                    top: 20),
+                                                            child: Container(
+                                                              child: Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                        .all(
+                                                                        8.0),
+                                                                child: Text(
+                                                                  "Vendor 2",
+                                                                  textScaleFactor:
+                                                                      1.5,
+                                                                  style: TextStyle(
+                                                                      color: Colors
+                                                                          .black,
+                                                                      fontSize:
+                                                                          11,
+                                                                      fontFamily:
+                                                                          "SFProText"),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                          Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .only(
+                                                                    left: 15,
+                                                                    top: 20),
+                                                            child: Container(
+                                                              child: Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                        .all(
+                                                                        8.0),
+                                                                child: SizedBox(
+                                                                  width: 120,
+                                                                  height: 30,
+                                                                  child:
+                                                                      ElevatedButton(
+                                                                    onPressed:
+                                                                        () {},
+                                                                    style: ElevatedButton
+                                                                        .styleFrom(
+                                                                      primary: Color.fromRGBO(
+                                                                          247,
+                                                                          230,
+                                                                          176,
+                                                                          1),
+                                                                      side:
+                                                                          BorderSide(
+                                                                        color: Color.fromRGBO(
+                                                                            247,
+                                                                            230,
+                                                                            176,
+                                                                            1),
+                                                                      ),
+                                                                    ),
+                                                                    child: Text(
+                                                                      'BalXXXX',
+                                                                      style:
+                                                                          TextStyle(
+                                                                        color: Colors
+                                                                            .black,
+                                                                        fontSize:
+                                                                            12,
+                                                                        fontFamily:
+                                                                            "Helvetica",
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                          Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .only(
+                                                                    left: 10,
+                                                                    top: 20),
+                                                            child: Container(
+                                                              child: Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                        .all(
+                                                                        8.0),
+                                                                child:
+                                                                    Image.asset(
+                                                                  'Group300',
+                                                                  width: 100,
+                                                                  height: 150,
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                          Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .only(
+                                                                    left: 37,
+                                                                    top: 10),
+                                                            child: Container(
+                                                              child: Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                        .all(
+                                                                        8.0),
+                                                                child: Row(
+                                                                  children: [
+                                                                    IconButton(
+                                                                        padding:
+                                                                            EdgeInsets
+                                                                                .zero,
+                                                                        constraints:
+                                                                            BoxConstraints(),
+                                                                        onPressed:
+                                                                            null,
+                                                                        icon:
+                                                                            Icon(
+                                                                          Icons
+                                                                              .edit_document,
+                                                                          color: Color.fromRGBO(
+                                                                              74,
+                                                                              60,
+                                                                              81,
+                                                                              1),
+                                                                        )),
+                                                                    IconButton(
+                                                                        padding:
+                                                                            EdgeInsets
+                                                                                .zero,
+                                                                        // constraints:
+                                                                        //     BoxConstraints(),
+                                                                        onPressed:
+                                                                            null,
+                                                                        icon: Icon(
+                                                                            Icons.delete)),
+                                                                  ],
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ]),
+                                                        TableRow(children: [
+                                                          Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .only(
+                                                                    left: 20,
+                                                                    top: 20),
+                                                            child: Container(
+                                                              child: Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                        .all(
+                                                                        8.0),
+                                                                child: Text(
+                                                                  "NAQBOOK***",
+                                                                  textScaleFactor:
+                                                                      1.5,
+                                                                  style: TextStyle(
+                                                                      color: Colors
+                                                                          .black,
+                                                                      fontSize:
+                                                                          11,
+                                                                      fontFamily:
+                                                                          "SFProText"),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                          Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .only(
+                                                                    left: 35,
+                                                                    top: 20),
+                                                            child: Container(
+                                                              child: Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                        .all(
+                                                                        8.0),
+                                                                child: Text(
+                                                                  "Equipment",
+                                                                  textScaleFactor:
+                                                                      1.5,
+                                                                  style: TextStyle(
+                                                                      color: Colors
+                                                                          .black,
+                                                                      fontSize:
+                                                                          11,
+                                                                      fontFamily:
+                                                                          "SFProText"),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                          Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .only(
+                                                                    left: 35,
+                                                                    top: 20),
+                                                            child: Container(
+                                                              child: Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                        .all(
+                                                                        8.0),
+                                                                child: Text(
+                                                                  "Single",
+                                                                  textScaleFactor:
+                                                                      1.5,
+                                                                  style: TextStyle(
+                                                                      color: Colors
+                                                                          .black,
+                                                                      fontSize:
+                                                                          11,
+                                                                      fontFamily:
+                                                                          "SFProText"),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                          Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .only(
+                                                                    left: 35,
+                                                                    top: 20),
+                                                            child: Container(
+                                                              child: Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                        .all(
+                                                                        8.0),
+                                                                child: Text(
+                                                                  "Vendor 2",
+                                                                  textScaleFactor:
+                                                                      1.5,
+                                                                  style: TextStyle(
+                                                                      color: Colors
+                                                                          .black,
+                                                                      fontSize:
+                                                                          11,
+                                                                      fontFamily:
+                                                                          "SFProText"),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                          Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .only(
+                                                                    left: 15,
+                                                                    top: 20),
+                                                            child: Container(
+                                                              child: Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                        .all(
+                                                                        8.0),
+                                                                child: SizedBox(
+                                                                  width: 120,
+                                                                  height: 30,
+                                                                  child:
+                                                                      ElevatedButton(
+                                                                    onPressed:
+                                                                        () {},
+                                                                    style: ElevatedButton
+                                                                        .styleFrom(
+                                                                      primary: Color
+                                                                          .fromRGBO(
+                                                                              87,
+                                                                              192,
+                                                                              18,
+                                                                              1),
+                                                                      side:
+                                                                          BorderSide(
+                                                                        color: Color.fromRGBO(
+                                                                            87,
+                                                                            192,
+                                                                            18,
+                                                                            1),
+                                                                      ),
+                                                                    ),
+                                                                    child: Text(
+                                                                      'Completed',
+                                                                      style:
+                                                                          TextStyle(
+                                                                        color: Colors
+                                                                            .white,
+                                                                        fontSize:
+                                                                            12,
+                                                                        fontFamily:
+                                                                            "Helvetica",
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                          Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .only(
+                                                                    left: 10,
+                                                                    top: 20),
+                                                            child: Container(
+                                                              child: Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                        .all(
+                                                                        8.0),
+                                                                child:
+                                                                    Image.asset(
+                                                                  'Group353',
+                                                                  width: 100,
+                                                                  height: 150,
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                          Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .only(
+                                                                    left: 37,
+                                                                    top: 10),
+                                                            child: Container(
+                                                              child: Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                        .all(
+                                                                        8.0),
+                                                                child: Row(
+                                                                  children: [
+                                                                    IconButton(
+                                                                        padding:
+                                                                            EdgeInsets
+                                                                                .zero,
+                                                                        constraints:
+                                                                            BoxConstraints(),
+                                                                        onPressed:
+                                                                            null,
+                                                                        icon:
+                                                                            Icon(
+                                                                          Icons
+                                                                              .edit_document,
+                                                                          color: Color.fromRGBO(
+                                                                              74,
+                                                                              60,
+                                                                              81,
+                                                                              1),
+                                                                        )),
+                                                                    IconButton(
+                                                                        padding:
+                                                                            EdgeInsets
+                                                                                .zero,
+                                                                        // constraints:
+                                                                        //     BoxConstraints(),
+                                                                        onPressed:
+                                                                            null,
+                                                                        icon: Icon(
+                                                                            Icons.delete)),
+                                                                  ],
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ]),
+                                                      ],
                                                     ),
                                                   ),
                                                 ],
                                               ),
                                             ),
                                           ),
-                                          SizedBox(
-                                            height: 6.0,
-                                          ), // Add spacing between the brown container and the white container
-                                          Container(
-                                            height: 215,
-                                            decoration: BoxDecoration(
-                                              color: Colors.white,
-                                              borderRadius:
-                                                  BorderRadius.circular(12.0),
-                                            ),
-                                            child: ListView(
-                                              children: [
-                                                SizedBox(
-                                                  height: 60,
-                                                  width: 100,
-                                                  child: ListTile(
-                                                    leading: Text(
-                                                      "NAQBOOK ***",
-                                                      style: TextStyle(
-                                                          fontSize: 15,
-                                                          fontFamily:
-                                                              "SFProText"),
-                                                    ),
-                                                    title: Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceEvenly,
-                                                      children: [
-                                                        Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                  .only(
-                                                                  left: 20,
-                                                                  right: 100),
-                                                          child: Text(
-                                                            'Truck',
-                                                            style:
-                                                                const TextStyle(
-                                                              fontSize: 15,
-                                                            ),
-                                                          ),
-                                                        ),
-                                                        Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                  .only(
-                                                                  left: 10,
-                                                                  right: 80),
-                                                          child: Text(
-                                                            'Single',
-                                                            style:
-                                                                const TextStyle(
-                                                              fontSize: 15,
-                                                            ),
-                                                          ),
-                                                        ),
-                                                        Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                  .only(
-                                                                  left: 15),
-                                                          child: Text(
-                                                            'Vendor 1',
-                                                            style:
-                                                                const TextStyle(
-                                                              fontSize: 15,
-                                                            ),
-                                                          ),
-                                                        ),
-                                                        SizedBox(
-                                                          width: 120,
-                                                          height: 40,
-                                                          child: ElevatedButton(
-                                                            onPressed:
-                                                                isButtonEnabled
-                                                                    ? () {
-                                                                        showDialog(
-                                                                          barrierDismissible:
-                                                                              false,
-                                                                          context:
-                                                                              context,
-                                                                          builder:
-                                                                              (context) {
-                                                                            return BookingDialog();
-                                                                          },
-                                                                        );
-                                                                        print(
-                                                                            'Elevated Button Pressed!');
-                                                                      }
-                                                                    : null,
-                                                            style:
-                                                                ElevatedButton
-                                                                    .styleFrom(
-                                                              primary: isButtonEnabled
-                                                                  ? Color
-                                                                      .fromRGBO(
-                                                                          98,
-                                                                          105,
-                                                                          254,
-                                                                          1)
-                                                                  : Colors.grey,
-                                                              side: BorderSide(
-                                                                color: isButtonEnabled
-                                                                    ? Color
-                                                                        .fromRGBO(
-                                                                            98,
-                                                                            105,
-                                                                            254,
-                                                                            1)
-                                                                    : Colors
-                                                                        .grey,
-                                                              ),
-                                                            ),
-                                                            child: Text(
-                                                              'Pay Now',
-                                                              style: TextStyle(
-                                                                color: Colors
-                                                                    .white,
-                                                                fontSize: 16,
-                                                                fontFamily:
-                                                                    "Helvetica",
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    trailing: Row(
-                                                      mainAxisSize:
-                                                          MainAxisSize.min,
-                                                      children: [
-                                                        Row(
-                                                          children: [
-                                                            IconButton(
-                                                              padding:
-                                                                  EdgeInsets
-                                                                      .zero,
-                                                              constraints:
-                                                                  BoxConstraints(),
-                                                              onPressed: null,
-                                                              icon: Icon(
-                                                                Icons
-                                                                    .edit_document,
-                                                                color: Color
-                                                                    .fromRGBO(
-                                                                        74,
-                                                                        60,
-                                                                        81,
-                                                                        1),
-                                                              ),
-                                                            ),
-                                                            IconButton(
-                                                              padding:
-                                                                  EdgeInsets
-                                                                      .zero,
-                                                              onPressed: null,
-                                                              icon: Icon(
-                                                                  Icons.delete),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                ),
-                                                Divider(
-                                                  thickness: 1,
-                                                  color: Color.fromRGBO(
-                                                      206, 203, 203, 1),
-                                                ),
-                                                SizedBox(
-                                                  height: 60,
-                                                  width: 100,
-                                                  child: ListTile(
-                                                    leading: CircleAvatar(),
-                                                    title: Text(
-                                                      'Pick Up Location',
-                                                      style: const TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        fontSize: 11,
-                                                      ),
-                                                    ),
-                                                    subtitle: Text(
-                                                      'Destination Location',
-                                                      style: TextStyle(
-                                                          fontSize: 10),
-                                                    ),
-                                                    trailing: Row(
-                                                      mainAxisSize:
-                                                          MainAxisSize.min,
-                                                      children: [
-                                                        SizedBox(
-                                                            width:
-                                                                30), // Add some space between "Truck" and "View" button
-                                                        GestureDetector(
-                                                          onTap: () {
-                                                            // Add your View button functionality here
-                                                            print(
-                                                                'View button pressed');
-                                                          },
-                                                          child: Container(
-                                                            height: 43,
-                                                            width: 80,
-                                                            padding:
-                                                                EdgeInsets.all(
-                                                                    8),
-                                                            decoration:
-                                                                BoxDecoration(
-                                                              boxShadow: [
-                                                                BoxShadow(
-                                                                  color: Colors
-                                                                      .grey,
-                                                                  spreadRadius:
-                                                                      1,
-                                                                  blurRadius:
-                                                                      2, // changes position of shadow
-                                                                ),
-                                                              ],
-                                                              color: Color
-                                                                  .fromRGBO(
-                                                                      98,
-                                                                      105,
-                                                                      254,
-                                                                      1),
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          5),
-                                                            ),
-                                                            child: Padding(
-                                                              padding:
-                                                                  const EdgeInsets
-                                                                      .all(8.0),
-                                                              child: Center(
-                                                                child: Text(
-                                                                  'Edit',
-                                                                  style:
-                                                                      TextStyle(
-                                                                    color: Colors
-                                                                        .white,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .bold,
-                                                                    fontSize: 9,
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                ),
-                                                Divider(
-                                                  thickness: 1,
-                                                  color: Color.fromRGBO(
-                                                      206, 203, 203, 1),
-                                                ),
-                                                SizedBox(
-                                                  height: 60,
-                                                  width: 100,
-                                                  child: ListTile(
-                                                    leading: CircleAvatar(),
-                                                    title: Text(
-                                                      'Balance Amount',
-                                                      style: const TextStyle(
-                                                        fontSize: 12,
-                                                      ),
-                                                    ),
-                                                    subtitle: Text(
-                                                      '07.02.2022',
-                                                      style: TextStyle(
-                                                          fontSize: 10),
-                                                    ),
-                                                    trailing: Row(
-                                                      mainAxisSize:
-                                                          MainAxisSize.min,
-                                                      children: [
-                                                        Row(
-                                                          crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .end,
-                                                          children: [
-                                                            Text("Trailer"),
-                                                          ],
-                                                        ),
-                                                        SizedBox(
-                                                            width:
-                                                                30), // Add some space between "Truck" and "View" button
-                                                        GestureDetector(
-                                                          onTap: () {
-                                                            // Add your View button functionality here
-                                                            print(
-                                                                'View button pressed');
-                                                          },
-                                                          child: Container(
-                                                            height: 43,
-                                                            width: 80,
-                                                            padding:
-                                                                EdgeInsets.all(
-                                                                    8),
-                                                            decoration:
-                                                                BoxDecoration(
-                                                              boxShadow: [
-                                                                BoxShadow(
-                                                                  color: Colors
-                                                                      .grey,
-                                                                  spreadRadius:
-                                                                      1,
-                                                                  blurRadius:
-                                                                      2, // changes position of shadow
-                                                                ),
-                                                              ],
-                                                              color: Color
-                                                                  .fromRGBO(
-                                                                      98,
-                                                                      105,
-                                                                      254,
-                                                                      1),
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          5),
-                                                            ),
-                                                            child: Padding(
-                                                              padding:
-                                                                  const EdgeInsets
-                                                                      .all(8.0),
-                                                              child: Center(
-                                                                child: Text(
-                                                                  'Pay',
-                                                                  style:
-                                                                      TextStyle(
-                                                                    color: Colors
-                                                                        .white,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .bold,
-                                                                    fontSize: 9,
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                ),
-                                                // Add more cards with your data as needed
-                                              ],
-                                            ),
-                                          ),
-                                        ],
-                                      ),
+                                        ),
+                                      ],
                                     ),
                                   ],
                                 ),
@@ -4132,4 +4620,88 @@ class _MyHomePageState extends State<Dashboard> {
       ),
     );
   }
+}
+
+class CandidateListSource extends DataTableSource {
+  final BuildContext context;
+
+  CandidateListSource({
+    required this.context,
+  });
+
+  @override
+  DataRow? getRow(int index) {
+    return DataRow.byIndex(
+      index: index,
+      cells: [
+        DataCell(
+          Text(""),
+          onTap: () {},
+        ),
+        DataCell(Text("NAQBOOK***")),
+        DataCell(Text('Truck')),
+        DataCell(Text('Single')),
+        DataCell(Text('Vendor 1')),
+        DataCell(
+          SizedBox(
+            width: 130,
+            height: 40,
+            child: ElevatedButton(
+              onPressed: () {},
+              child: Text(
+                'Bal XXXX',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 16,
+                  fontFamily: "Helvetica",
+                ),
+              ),
+            ),
+          ),
+        ),
+        DataCell(
+          Row(
+            children: [
+              IconButton(
+                  padding: EdgeInsets.zero,
+                  constraints: BoxConstraints(),
+                  onPressed: null,
+                  icon: Icon(
+                    Icons.edit_document,
+                    color: Color.fromRGBO(74, 60, 81, 1),
+                  )),
+              IconButton(
+                  padding: EdgeInsets.zero,
+                  // constraints:
+                  //     BoxConstraints(),
+                  onPressed: null,
+                  icon: Icon(Icons.delete)),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  static List<DataColumn> getColumns(BuildContext context) {
+    return [
+      DataColumn(label: SizedBox(width: 30, child: Text("Booking ID"))),
+      DataColumn(label: SizedBox(width: 30, child: Text("Mode"))),
+      DataColumn(label: SizedBox(width: 30, child: Text("Booking Type"))),
+      DataColumn(label: SizedBox(width: 30, child: Text("Vendor"))),
+      DataColumn(label: SizedBox(width: 30, child: Text("Payment Status"))),
+      DataColumn(label: SizedBox(width: 30, child: Text("Status"))),
+      DataColumn(label: SizedBox(width: 30, child: Text("Actions"))),
+    ];
+  }
+
+  @override
+  bool get isRowCountApproximate => false;
+
+  @override
+  int get selectedRowCount => 0;
+
+  @override
+  // TODO: implement rowCount
+  int get rowCount => throw UnimplementedError();
 }
