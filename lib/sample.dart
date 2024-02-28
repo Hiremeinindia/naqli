@@ -1,826 +1,1336 @@
-import 'dart:math';
-
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/Widgets/customButton.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_application_1/createAccount.dart';
-import 'package:flutter_application_1/homepage.dart';
 import 'package:sizer/sizer.dart';
 
-import '../main.dart';
+import 'loginPage.dart';
 
-// ignore: must_be_immutable
-class LoginPage1 extends StatefulWidget {
-  const LoginPage1();
+class MyHomePage1 extends StatefulWidget {
+  const MyHomePage1({
+    Key? key,
+  }) : super(key: key);
+
   @override
-  _LoginPage1State createState() => _LoginPage1State();
+  State<MyHomePage1> createState() => _MyHomePage1State();
 }
 
-class ScaleSize {
-  static double textScaleFactor(BuildContext context,
-      {double maxTextScaleFactor = 2}) {
-    final width = MediaQuery.of(context).size.width;
-    double val = (width / 1400) * maxTextScaleFactor;
-    return max(1, min(val, maxTextScaleFactor));
-  }
-}
-
-class _LoginPage1State extends State<LoginPage1> {
-  bool isVerified = false;
-  TextEditingController otpController = TextEditingController();
-
-  TextEditingController contactNumberController = TextEditingController();
-  void _showOtpVerificationDialog() {
-    print("track4");
-
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Center(
-              child: Text(
-            "Verify Account",
-            textScaleFactor: ScaleSize.textScaleFactor(context),
-            style: TextStyle(
-                fontFamily: 'Colfax',
-                fontSize: 15,
-                color: Colors.black,
-                fontWeight: FontWeight.bold),
-          )),
-          content: Container(
-            height: 150, // Set the desired height
-            width: 1000, // Set the desired width
-            child: Column(
-              children: [
-                Text(
-                  "Enter Mobile NO",
-                  textScaleFactor: ScaleSize.textScaleFactor(context),
-                  style: TextStyle(
-                    fontFamily: 'Colfax',
-                    fontSize: 10,
-                    color: Colors.black,
-                  ),
-                ),
-                SizedBox(height: 10),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SizedBox(
-                      height: 30,
-                      width: 200,
-                      child: TextField(
-                        controller: contactNumberController,
-                        keyboardType: TextInputType.number,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(),
-                        ),
-                      ),
-                    ),
-                    ElevatedButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                        _startPhoneAuth(contactNumberController.text);
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Color.fromRGBO(60, 55, 148, 1),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
-                      ),
-                      child: Text(
-                        "Get OTP",
-                        style: TextStyle(
-                          fontFamily: 'Colfax',
-                          fontSize: 10,
-                          color: Colors.white,
-                        ),
-                        textScaleFactor: ScaleSize.textScaleFactor(context),
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 10),
-              ],
-            ),
-          ),
-          actions: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  "Didn't receive an email? ",
-                  style: TextStyle(
-                    fontFamily: 'Colfax',
-                    fontSize: 7,
-                    color: Colors.black,
-                  ),
-                  textScaleFactor: ScaleSize.textScaleFactor(context),
-                ),
-                InkWell(
-                  onTap: () {
-                    // Implement the logic to resend the OTP
-                    // For now, let's close the dialog
-                    Navigator.pop(context);
-                  },
-                  child: Text(
-                    "Resend.",
-                    style: TextStyle(
-                        fontFamily: 'Colfax',
-                        fontSize: 7,
-                        color: Color.fromRGBO(60, 55, 148, 1),
-                        fontWeight: FontWeight.bold),
-                    textScaleFactor: ScaleSize.textScaleFactor(context),
-                  ),
-                ),
-              ],
-            ),
-          ],
-        );
-      },
-    );
-  }
-
-  void showErrorDialog(String errorMessage) {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text("Error"),
-        content: Text(errorMessage),
-        actions: [
-          ElevatedButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            child: Text("OK"),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Future<void> _startPhoneAuth(String phoneNumber) async {
-    print("track3");
-
-    FirebaseAuth _auth = FirebaseAuth.instance;
-
-    try {
-      await _auth.verifyPhoneNumber(
-        phoneNumber: "+91${contactNumberController.text}",
-        verificationCompleted: (PhoneAuthCredential credential) async {
-          await _auth.signInWithCredential(credential).then((value) {
-            Navigator.pop(context);
-            setState(() {
-              isVerified = true;
-            });
-          });
-        },
-        verificationFailed: (FirebaseAuthException e) {
-          // Handle the verification failure
-          print('Phone authentication failed: $e');
-          showErrorDialog(
-              "Invalid phone number format. Please enter a valid 10-digit phone number.");
-        },
-        codeSent: (String verificationId, [int? forceResendingToken]) {
-          // Store the verification ID for later use (e.g., resend OTP)
-          String storedVerificationId = verificationId;
-
-          showDialog(
-            context: context,
-            barrierDismissible: false,
-            builder: (context) => AlertDialog(
-              title: Text("Enter OTP"),
-              content: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  TextField(
-                    controller: otpController,
-                  ),
-                ],
-              ),
-              actions: [
-                ElevatedButton(
-                  onPressed: () {
-                    FirebaseAuth auth = FirebaseAuth.instance;
-                    String smsCode = otpController.text;
-                    PhoneAuthCredential _credential =
-                        PhoneAuthProvider.credential(
-                      verificationId: storedVerificationId,
-                      smsCode: smsCode,
-                    );
-
-                    auth.signInWithCredential(_credential).then((result) {
-                      // Check if the verification is successful
-                      if (result.user != null) {
-                        print("otp verified successfully");
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => MyHomePage(),
-                          ),
-                        );
-                        setState(() {
-                          isVerified = true;
-                        });
-                      } else {
-                        showErrorDialog(
-                            "Invalid verification code. Please enter the correct code.");
-                      }
-                    }).catchError((e) {
-                      print("Error signing in with credential: $e");
-                    });
-                  },
-                  child: Text("Done"),
-                ),
-              ],
-            ),
-          );
-        },
-        codeAutoRetrievalTimeout: (String verificationId) {
-          // Handle code auto retrieval timeout (optional)
-        },
-      );
-    } catch (e) {
-      print('Error during phone authentication: $e');
-    }
-  }
-
+class _MyHomePage1State extends State<MyHomePage1> {
   @override
   Widget build(BuildContext context) {
     return Sizer(builder: (context, orientation, deviceType) {
       return LayoutBuilder(
           builder: (BuildContext ctx, BoxConstraints constraints) {
         if (constraints.maxWidth >= 650) {
-          return Dialog(
-            child: Container(
-              height: 750,
-              width: 1100,
-              child: Column(
-                children: [
-                  Row(
-                    children: [
-                      Container(
-                        width: 550,
-                        height: 750,
-                        decoration: const BoxDecoration(
-                          color: Color.fromARGB(255, 128, 123, 229),
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(31),
-                            bottomLeft: Radius.circular(31),
-                          ),
-                        ),
-                        child: Align(
-                          alignment: Alignment.bottomCenter,
-                          child: Image.asset(
-                            'loginlogo.png',
-                            width: 500,
-                            height: 500,
-                          ),
+          return Scaffold(
+              appBar: PreferredSize(
+                  preferredSize: Size.fromHeight(100.0),
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 40, right: 100),
+                    child: AppBar(
+                      automaticallyImplyLeading: false,
+                      centerTitle: false,
+                      elevation: 0.0,
+                      title: Container(
+                        padding: const EdgeInsets.only(left: 150),
+                        child: Image.asset(
+                          'Naqli-final-logo.png',
+                          width: 150,
+                          height: 150,
                         ),
                       ),
-                      Container(
-                        width: 550,
-                        height: 750,
-                        decoration: const BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.only(
-                            topRight: Radius.circular(31),
-                            bottomRight: Radius.circular(31),
-                          ),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.only(
-                            left: 20.0,
-                            right: 20,
-                            top: 20,
-                            bottom: 80,
-                          ),
-                          child: Column(
+                      actions: [
+                        Padding(
+                          padding: EdgeInsets.only(right: 250.0, top: 10),
+                          child: Row(
                             children: [
-                              Align(
-                                alignment: Alignment.topRight,
-                                child: IconButton(
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
-                                  },
-                                  icon: Icon(Icons.cancel),
+                              const SizedBox(
+                                height: 30,
+                                child: Padding(
+                                  padding: EdgeInsets.only(left: 100, top: 5),
+                                  child: Text(
+                                    "Contact Us",
+                                    style: TextStyle(
+                                        fontFamily: 'Colfax', fontSize: 16),
+                                  ),
                                 ),
                               ),
                               SizedBox(
-                                height: 100,
+                                width: 10,
                               ),
-                              Align(
-                                alignment: Alignment.center,
+                              SizedBox(
+                                height: 30,
+                                child: VerticalDivider(
+                                  color: Colors.black,
+                                ),
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  showDialog(
+                                    context: context,
+                                    builder: (context) {
+                                      return LoginPage();
+                                    },
+                                  );
+                                },
                                 child: Text(
                                   'Login',
                                   style: TextStyle(
-                                    fontFamily: 'Colfax',
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                  textScaleFactor:
-                                      ScaleSize.textScaleFactor(context),
+                                      fontFamily: 'Colfax', fontSize: 16),
                                 ),
+                              ),
+                              SizedBox(width: 40),
+                              SizedBox(width: 8.0),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  )),
+              body: SingleChildScrollView(
+                child: Center(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Stack(
+                        alignment: Alignment.topCenter,
+                        children: [
+                          Column(
+                            children: [
+                              CarouselSlider(
+                                options: CarouselOptions(
+                                  height: 500,
+                                ),
+                                items: [
+                                  Container(
+                                    margin: EdgeInsets.all(6.0),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(8.0),
+                                      image: DecorationImage(
+                                        image: AssetImage('truckslide.jpg'),
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    margin: EdgeInsets.all(6.0),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(8.0),
+                                      image: DecorationImage(
+                                        image: AssetImage('truckslide.jpg'),
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
                               Padding(
                                 padding: const EdgeInsets.only(
-                                  left: 40.0,
-                                  right: 40,
-                                  top: 80,
-                                ),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      'Email ID',
-                                      style: TextStyle(
-                                        fontFamily: 'Colfax',
-                                        fontSize: 8,
-                                      ),
-                                      textScaleFactor:
-                                          ScaleSize.textScaleFactor(context),
-                                    ),
-                                    SizedBox(
-                                      height: 20,
-                                    ),
-                                    TextField(
-                                      decoration: InputDecoration(
-                                        contentPadding: EdgeInsets.all(5.0),
-                                        border: OutlineInputBorder(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(5)),
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: 20,
-                                    ),
-                                    Text(
-                                      'Password',
-                                      style: TextStyle(
-                                        fontFamily: 'Colfax',
-                                        fontSize: 8,
-                                      ),
-                                      textScaleFactor:
-                                          ScaleSize.textScaleFactor(context),
-                                    ),
-                                    SizedBox(
-                                      height: 20,
-                                    ),
-                                    TextField(
-                                      decoration: InputDecoration(
-                                        contentPadding: EdgeInsets.all(5.0),
-                                        border: OutlineInputBorder(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(5)),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
+                                    left: 450, right: 200, top: 200),
+                                child: Container(
+                                  height: 750,
                                 ),
                               ),
                               SizedBox(
                                 height: 20,
                               ),
-                              Padding(
-                                padding: const EdgeInsets.only(
-                                  left: 40.0,
-                                  right: 40,
-                                ),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    SizedBox(
-                                      height: 43,
-                                      width: 140,
-                                      child: ElevatedButton(
-                                        onPressed: () {
-                                          showDialog(
-                                            context: context,
-                                            builder: (context) {
-                                              return MyHomePage();
-                                            },
-                                          );
-                                        },
-                                        style: ElevatedButton.styleFrom(
-                                          backgroundColor:
-                                              Color.fromRGBO(128, 123, 229, 1),
-                                          side: BorderSide(
-                                            color: Color.fromRGBO(
-                                                128, 123, 229, 1),
-                                          ),
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(8),
-                                          ),
-                                        ),
-                                        child: Text(
-                                          'Login',
-                                          style: TextStyle(
-                                            fontFamily: 'Colfax',
-                                            fontSize: 8,
-                                            color: Colors.white,
-                                          ),
-                                          textScaleFactor:
-                                              ScaleSize.textScaleFactor(
-                                                  context),
-                                        ),
-                                      ),
-                                    ),
-                                    InkWell(
-                                      child: Text(
-                                        'Forgot Password?',
-                                        style: TextStyle(
-                                          fontFamily: 'Colfax',
-                                          fontSize: 8,
-                                          color: Color.fromARGB(
-                                              255, 128, 123, 229),
-                                        ),
-                                        textScaleFactor:
-                                            ScaleSize.textScaleFactor(context),
-                                      ),
-                                      onTap: () {},
-                                    ),
-                                  ],
+                              Container(
+                                height: 400,
+                                padding: EdgeInsets.all(16.0),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(1.0),
+                                  color: Color.fromARGB(255, 232, 229,
+                                      240), // Set the background color
                                 ),
                               ),
-                              SizedBox(
-                                height: 13,
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(
-                                  left: 40.0,
-                                  right: 40,
-                                ),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      "Don't have an account?",
-                                      style: TextStyle(
-                                        fontFamily: 'Colfax',
-                                        fontSize: 8,
-                                        color: Colors.black,
-                                      ),
-                                      textScaleFactor:
-                                          ScaleSize.textScaleFactor(context),
-                                    ),
-                                    InkWell(
-                                      child: Text(
-                                        'Create One!',
-                                        style: TextStyle(
-                                          fontFamily: 'Colfax',
-                                          fontSize: 8,
-                                          color: Color.fromARGB(
-                                              255, 128, 123, 229),
-                                        ),
-                                        textScaleFactor:
-                                            ScaleSize.textScaleFactor(context),
-                                      ),
-                                      onTap: () {
-                                        showDialog(
-                                          context: context,
-                                          builder: (context) {
-                                            return CreateAccount();
-                                          },
-                                        );
-                                      },
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(
-                                  left: 40.0,
-                                  right: 40,
-                                ),
-                                child: Align(
-                                  alignment: Alignment.centerLeft,
-                                  child: InkWell(
-                                    child: Text(
-                                      'Use without Log in',
-                                      style: TextStyle(
-                                        fontFamily: 'Colfax',
-                                        fontSize: 8,
-                                        color:
-                                            Color.fromARGB(255, 128, 123, 229),
-                                      ),
-                                      textScaleFactor:
-                                          ScaleSize.textScaleFactor(context),
-                                    ),
-                                    onTap: () async {
-                                      _showOtpVerificationDialog();
-                                      if (isVerified) {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) => MyHomePage(),
-                                          ),
-                                        );
-                                      }
-                                    },
-                                  ),
-                                ),
+                              Container(
+                                height: 50,
+                                color: Color.fromRGBO(13, 13, 255, 1),
                               ),
                             ],
                           ),
-                        ),
-                      )
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          );
-        } else {
-          return Dialog(
-            child: Container(
-              height: 600,
-              width: 295,
-              child: Column(
-                children: [
-                  Row(
-                    children: [
-                      Container(
-                        width: 90,
-                        height: 600,
-                        decoration: const BoxDecoration(
-                          color: Color.fromARGB(255, 128, 123, 229),
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(31),
-                            bottomLeft: Radius.circular(31),
+                          Positioned(
+                            top: 350,
+                            left: 360,
+                            child: Container(
+                              child: Column(
+                                children: [
+                                  Container(
+                                    width: 1170,
+                                    height: 350,
+                                    decoration: BoxDecoration(
+                                      color: Color.fromARGB(255, 232, 229, 240),
+                                      borderRadius: BorderRadius.circular(8.0),
+                                    ),
+                                    child: ListView(
+                                      // Use ListView instead of Column
+                                      shrinkWrap: true,
+                                      children: [
+                                        SizedBox(height: 10),
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 20),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              // Dropdown text field with location icon
+                                              SizedBox(width: 10),
+                                              // Vertical divider
+                                              SizedBox(width: 10),
+                                              // Location text
+                                              Align(
+                                                alignment: Alignment.topRight,
+                                                child: Container(
+                                                  padding: EdgeInsets.symmetric(
+                                                      horizontal: 10),
+                                                  decoration: BoxDecoration(
+                                                    border: Border.all(
+                                                        color: Colors.black,
+                                                        width: 1.0),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5.0),
+                                                  ),
+                                                  child: Row(
+                                                    children: [
+                                                      Icon(Icons
+                                                          .location_on_outlined),
+                                                      SizedBox(width: 5),
+                                                      Container(
+                                                        height: 30,
+                                                        width: 1,
+                                                        color: Colors.black,
+                                                      ),
+                                                      SizedBox(width: 5),
+                                                      // Replace the below DropdownButton with your actual dropdown widget
+                                                      DropdownButtonHideUnderline(
+                                                        child: DropdownButton<
+                                                            String>(
+                                                          value: 'Location',
+                                                          onChanged: (String?
+                                                              newValue) {
+                                                            // Handle dropdown value change
+                                                          },
+                                                          items: <String>[
+                                                            'Location',
+                                                            'Location1',
+                                                            'Location2'
+                                                          ].map<
+                                                              DropdownMenuItem<
+                                                                  String>>(
+                                                            (String value) {
+                                                              return DropdownMenuItem<
+                                                                  String>(
+                                                                value: value,
+                                                                child: Text(
+                                                                  value,
+                                                                  style: TextStyle(
+                                                                      fontFamily:
+                                                                          'Colfax',
+                                                                      fontSize:
+                                                                          16),
+                                                                ),
+                                                              );
+                                                            },
+                                                          ).toList(),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: 30,
+                                        ),
+                                        Row(
+                                          children: [
+                                            SizedBox(
+                                              width: 30,
+                                            ),
+                                            Container(
+                                              width: 200,
+                                              height: 200,
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(8.0),
+                                                border: Border.all(
+                                                  color: Colors
+                                                      .black, // Change border color as needed
+                                                  width:
+                                                      2.0, // Increase border width
+                                                ),
+                                              ),
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(8.0),
+                                                child: Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.end,
+                                                  children: [
+                                                    Divider(
+                                                      color: Colors.black,
+                                                    ),
+                                                    SizedBox(height: 2),
+                                                    Text(
+                                                      'Vehicle',
+                                                      style: TextStyle(
+                                                          fontFamily: 'Colfax',
+                                                          fontSize: 16),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              width: 20,
+                                            ),
+                                            Container(
+                                              width: 200,
+                                              height: 200,
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(8.0),
+                                                border: Border.all(
+                                                  color: Colors
+                                                      .black, // Change border color as needed
+                                                  width:
+                                                      2.0, // Increase border width
+                                                ),
+                                              ),
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(8.0),
+                                                child: Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.end,
+                                                  children: [
+                                                    Divider(
+                                                      color: Colors.black,
+                                                    ),
+                                                    SizedBox(height: 2),
+                                                    Text(
+                                                      'Bus',
+                                                      style: TextStyle(
+                                                          fontFamily: 'Colfax',
+                                                          fontSize: 16),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              width: 20,
+                                            ),
+                                            Container(
+                                              width: 200,
+                                              height: 200,
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(8.0),
+                                                border: Border.all(
+                                                  color: Colors
+                                                      .black, // Change border color as needed
+                                                  width:
+                                                      2.0, // Increase border width
+                                                ),
+                                              ),
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(8.0),
+                                                child: Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.end,
+                                                  children: [
+                                                    Divider(
+                                                      color: Colors.black,
+                                                    ),
+                                                    SizedBox(height: 2),
+                                                    Text(
+                                                      'Equipment-2',
+                                                      style: TextStyle(
+                                                          fontFamily: 'Colfax',
+                                                          fontSize: 16),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              width: 20,
+                                            ),
+                                            Container(
+                                              width: 200,
+                                              height: 200,
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(8.0),
+                                                border: Border.all(
+                                                  color: Colors
+                                                      .black, // Change border color as needed
+                                                  width:
+                                                      2.0, // Increase border width
+                                                ),
+                                              ),
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(8.0),
+                                                child: Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.end,
+                                                  children: [
+                                                    Divider(
+                                                      color: Colors.black,
+                                                    ),
+                                                    SizedBox(height: 2),
+                                                    Text(
+                                                      'Special',
+                                                      style: TextStyle(
+                                                          fontFamily: 'Colfax',
+                                                          fontSize: 16),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              width: 20,
+                                            ),
+                                            Container(
+                                              width: 200,
+                                              height: 200,
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(8.0),
+                                                border: Border.all(
+                                                  color: Colors
+                                                      .black, // Change border color as needed
+                                                  width:
+                                                      2.0, // Increase border width
+                                                ),
+                                                color: Color.fromRGBO(106, 102,
+                                                    209, 1), // RGB color fill
+                                              ),
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(8.0),
+                                                child: Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    Text(
+                                                      "Get an Estimate",
+                                                      style: TextStyle(
+                                                          color: Colors.white,
+                                                          fontFamily: 'Colfax',
+                                                          fontSize: 16
+                                                          // Add other text style properties as needed
+                                                          ),
+                                                    ),
+                                                    SizedBox(height: 20),
+                                                    Image.asset(
+                                                      'right-arrow.png',
+                                                      width: 30,
+                                                      height: 30,
+                                                      color: Colors.white,
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Column(
+                                    children: [
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                        children: [
+                                          Image.asset(
+                                            'Rectangle.png', // Replace with your image path
+                                            width: 500,
+                                            height: 270,
+                                            color: Colors.grey,
+                                          ),
+                                          SizedBox(
+                                              width:
+                                                  40), // Adjust this space as needed
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                "Naqli For Individuals",
+                                                style: TextStyle(
+                                                  fontFamily: 'Colfax',
+                                                  fontSize: 19,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                              SizedBox(height: 10),
+                                              Text(
+                                                "Lorem_ipsum_dolor_sit_amet_consectetur_adipiscing_elit_sed_do_eiusmod\n"
+                                                "tempor_incididunt_ut_labore_et_dolore_magna_aliqua.Ut_enim_ad_minim\n"
+                                                "veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea\n"
+                                                "commodo consequat. Duis aute irure dolor in reprehenderit in voluptate\n"
+                                                "velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat\n"
+                                                "cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est\n"
+                                                "laborum.",
+                                                style: TextStyle(
+                                                    fontFamily: 'Colfax',
+                                                    fontSize: 12),
+                                                textAlign: TextAlign.justify,
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                      // Repeat the above structure for other rows without unnecessary SizedBox
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                        children: [
+                                          Image.asset(
+                                            'Rectangle.png', // Replace with your image path
+                                            width: 500,
+                                            height: 270,
+                                            color: Colors.grey,
+                                          ),
+                                          SizedBox(
+                                              width:
+                                                  40), // Adjust this space as needed
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                "Naqli For Business",
+                                                style: TextStyle(
+                                                  fontFamily: 'Colfax',
+                                                  fontSize: 19,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                              SizedBox(height: 10),
+                                              Text(
+                                                "Lorem_ipsum_dolor_sit_amet_consectetur_adipiscing_elit_sed_do_eiusmod\n"
+                                                "tempor_incididunt_ut_labore_et_dolore_magna_aliqua.Ut_enim_ad_minim\n"
+                                                "veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea\n"
+                                                "commodo consequat. Duis aute irure dolor in reprehenderit in voluptate\n"
+                                                "velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat\n"
+                                                "cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est\n"
+                                                "laborum.",
+                                                style: TextStyle(
+                                                    fontFamily: 'Colfax',
+                                                    fontSize: 12),
+                                                textAlign: TextAlign.justify,
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                        children: [
+                                          Image.asset(
+                                            'Rectangle.png', // Replace with your image path
+                                            width: 500,
+                                            height: 270,
+                                            color: Colors.grey,
+                                          ),
+                                          SizedBox(
+                                              width:
+                                                  40), // Adjust this space as needed
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                "Naqli For Partner",
+                                                style: TextStyle(
+                                                  fontFamily: 'Colfax',
+                                                  fontSize: 19,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                              SizedBox(height: 10),
+                                              Text(
+                                                "Lorem_ipsum_dolor_sit_amet_consectetur_adipiscing_elit_sed_do_eiusmod\n"
+                                                "tempor_incididunt_ut_labore_et_dolore_magna_aliqua.Ut_enim_ad_minim\n"
+                                                "veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea\n"
+                                                "commodo consequat. Duis aute irure dolor in reprehenderit in voluptate\n"
+                                                "velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat\n"
+                                                "cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est\n"
+                                                "laborum.",
+                                                style: TextStyle(
+                                                    fontFamily: 'Colfax',
+                                                    fontSize: 12),
+                                                textAlign: TextAlign.justify,
+                                              ),
+                                            ],
+                                          ),
+                                          SizedBox(
+                                            height: 20,
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 20,
+                                  ),
+                                  Container(
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        // First Column - Image
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(right: 100),
+                                          child: Column(
+                                            children: [
+                                              Image.asset(
+                                                'Phone.png', // Replace with your image path
+                                                width: 350,
+                                                height: 300,
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        // Second Column - Text
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(right: 150),
+                                          child: Column(
+                                            children: [
+                                              Text(
+                                                'How to get Naqli in Action',
+                                                style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontWeight: FontWeight.bold,
+                                                    fontFamily: 'Colfax',
+                                                    fontSize: 20),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        // Third Column - Text
+                                        Column(
+                                          children: [
+                                            Text(
+                                              "Lorem ipsum dolor sit amet,\n"
+                                              "consectetur adipiscing elit, sed\n"
+                                              "do eiusmod tempor incididunt ut\n"
+                                              "labore et dolore magna aliqua.\n"
+                                              "Ut enim ad minim veniam, quis\n"
+                                              "nostrud exercitation ullamco\n"
+                                              "laboris nisi ut aliquip ex ea\n"
+                                              "commodo consequat. Duis aute\n"
+                                              "irure dolor in",
+                                              style: TextStyle(
+                                                fontFamily: 'Colfax',
+                                                fontSize: 19,
+                                                color: Colors.black,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
                           ),
-                        ),
-                        child: Align(
-                          alignment: Alignment.bottomCenter,
-                          child: Image.asset(
-                            'loginlogo.png',
-                            width: 100,
-                            height: 100,
-                          ),
-                        ),
+                        ],
                       ),
-                      Container(
-                        width: 205,
-                        height: 600,
-                        decoration: const BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.only(
-                            topRight: Radius.circular(31),
-                            bottomRight: Radius.circular(31),
+                    ],
+                  ),
+                ),
+              ));
+        } else {
+          return Scaffold(
+              appBar: PreferredSize(
+                preferredSize: Size.fromHeight(100.0),
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 5, right: 5, left: 5),
+                  child: AppBar(
+                    automaticallyImplyLeading: false,
+                    centerTitle: false,
+                    elevation: 0.0,
+                    title: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        SizedBox(
+                          height: 70,
+                          width: 70,
+                          child: Image.asset(
+                            'Naqli-final-logo.png',
+                            fit: BoxFit.contain,
                           ),
                         ),
-                        child: Padding(
-                          padding: const EdgeInsets.only(
-                            left: 5.0,
-                            right: 5,
-                            top: 3,
-                            bottom: 20,
-                          ),
-                          child: Column(
-                            children: [
-                              Align(
-                                alignment: Alignment.topRight,
-                                child: IconButton(
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
+                        Row(
+                          children: [
+                            Text(
+                              "Contact Us",
+                              style:
+                                  TextStyle(fontFamily: 'Colfax', fontSize: 15),
+                            ),
+                            SizedBox(
+                              width: 5,
+                            ),
+                            SizedBox(
+                              height: 30,
+                              child: VerticalDivider(
+                                color: Colors.black,
+                              ),
+                            ),
+                            InkWell(
+                              onTap: () {
+                                showDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    return LoginPage();
                                   },
-                                  icon: Icon(Icons.cancel),
+                                );
+                              },
+                              child: Text(
+                                'Login',
+                                style: TextStyle(
+                                    fontFamily: 'Colfax', fontSize: 16),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              body: SingleChildScrollView(
+                child: Center(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Stack(
+                        alignment: Alignment.topCenter,
+                        children: [
+                          Column(
+                            children: [
+                              CarouselSlider(
+                                options: CarouselOptions(
+                                  height: 500,
                                 ),
-                              ),
-                              SizedBox(
-                                height: 25,
-                              ),
-                              Align(
-                                alignment: Alignment.center,
-                                child: Text(
-                                  'Login',
-                                  style: TextStyle(
-                                    fontFamily: 'Colfax',
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
+                                items: [
+                                  Container(
+                                    margin: EdgeInsets.all(6.0),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(8.0),
+                                      image: DecorationImage(
+                                        image: AssetImage('truckslide.jpg'),
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
                                   ),
-                                  textScaleFactor:
-                                      ScaleSize.textScaleFactor(context),
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.only(
-                                  left: 30.0,
-                                  right: 20,
-                                  top: 40,
-                                ),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      'Email ID',
-                                      style: TextStyle(
-                                        fontFamily: 'Colfax',
-                                        fontSize: 15,
-                                      ),
-                                      textScaleFactor:
-                                          ScaleSize.textScaleFactor(context),
-                                    ),
-                                    SizedBox(
-                                      height: 10,
-                                    ),
-                                    TextField(
-                                      decoration: InputDecoration(
-                                        contentPadding: EdgeInsets.all(4.0),
-                                        border: OutlineInputBorder(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(5)),
-                                        ),
+                                  Container(
+                                    margin: EdgeInsets.all(6.0),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(8.0),
+                                      image: DecorationImage(
+                                        image: AssetImage('truckslide.jpg'),
+                                        fit: BoxFit.cover,
                                       ),
                                     ),
-                                    SizedBox(
-                                      height: 15,
-                                    ),
-                                    Text(
-                                      'Password',
-                                      style: TextStyle(
-                                        fontFamily: 'Colfax',
-                                        fontSize: 15,
-                                      ),
-                                      textScaleFactor:
-                                          ScaleSize.textScaleFactor(context),
-                                    ),
-                                    SizedBox(
-                                      height: 10,
-                                    ),
-                                    TextField(
-                                      decoration: InputDecoration(
-                                        contentPadding: EdgeInsets.all(4.0),
-                                        border: OutlineInputBorder(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(5)),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              SizedBox(
-                                height: 15,
-                              ),
-                              Padding(
-                                padding: EdgeInsets.only(
-                                  left: 30.0,
-                                  right: 20,
-                                ),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    SizedBox(
-                                      height: 20,
-                                      width: 63,
-                                      child: ElevatedButton(
-                                        onPressed: () {
-                                          showDialog(
-                                            context: context,
-                                            builder: (context) {
-                                              return MyHomePage();
-                                            },
-                                          );
-                                        },
-                                        style: ElevatedButton.styleFrom(
-                                          backgroundColor:
-                                              Color.fromRGBO(128, 123, 229, 1),
-                                          side: BorderSide(
-                                            color: Color.fromRGBO(
-                                                128, 123, 229, 1),
-                                          ),
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                          ),
-                                        ),
-                                        child: Text(
-                                          'Login',
-                                          style: TextStyle(
-                                            fontFamily: 'Colfax',
-                                            fontSize: 5,
-                                            color: Colors.white,
-                                          ),
-                                          textScaleFactor:
-                                              ScaleSize.textScaleFactor(
-                                                  context),
-                                        ),
-                                      ),
-                                    ),
-                                    InkWell(
-                                      child: Text(
-                                        'Forgot Password?',
-                                        style: TextStyle(
-                                          fontFamily: 'Colfax',
-                                          fontSize: 7,
-                                          color: Color.fromARGB(
-                                              255, 128, 123, 229),
-                                        ),
-                                        textScaleFactor:
-                                            ScaleSize.textScaleFactor(context),
-                                      ),
-                                      onTap: () {},
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Padding(
-                                padding: EdgeInsets.only(
-                                  left: 30.0,
-                                  right: 20,
-                                ),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      "Don't have an account?",
-                                      style: TextStyle(
-                                        fontFamily: 'Colfax',
-                                        fontSize: 8,
-                                        color: Colors.black,
-                                      ),
-                                      textScaleFactor:
-                                          ScaleSize.textScaleFactor(context),
-                                    ),
-                                    InkWell(
-                                      child: Text(
-                                        'Create One!',
-                                        style: TextStyle(
-                                          fontFamily: 'Colfax',
-                                          fontSize: 8,
-                                          color: Color.fromARGB(
-                                              255, 128, 123, 229),
-                                        ),
-                                        textScaleFactor:
-                                            ScaleSize.textScaleFactor(context),
-                                      ),
-                                      onTap: () {
-                                        showDialog(
-                                          context: context,
-                                          builder: (context) {
-                                            return CreateAccount();
-                                          },
-                                        );
-                                      },
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Padding(
-                                padding: EdgeInsets.only(
-                                  left: 30.0,
-                                  right: 20,
-                                ),
-                                child: Align(
-                                  alignment: Alignment.centerLeft,
-                                  child: InkWell(
-                                    child: Text(
-                                      'Use without Log in',
-                                      style: TextStyle(
-                                        fontFamily: 'Colfax',
-                                        fontSize: 8,
-                                        color:
-                                            Color.fromARGB(255, 128, 123, 229),
-                                      ),
-                                      textScaleFactor:
-                                          ScaleSize.textScaleFactor(context),
-                                    ),
-                                    onTap: () async {
-                                      _showOtpVerificationDialog();
-                                      if (isVerified) {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) => MyHomePage(),
-                                          ),
-                                        );
-                                      }
-                                    },
                                   ),
+                                ],
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    left: 450, right: 200, top: 200),
+                                child: Container(
+                                  height: 750,
                                 ),
+                              ),
+                              SizedBox(
+                                height: 20,
+                              ),
+                              Container(
+                                height: 400,
+                                padding: EdgeInsets.all(16.0),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(1.0),
+                                  color: Color.fromARGB(255, 232, 229,
+                                      240), // Set the background color
+                                ),
+                              ),
+                              Container(
+                                height: 50,
+                                color: Color.fromRGBO(13, 13, 255, 1),
                               ),
                             ],
                           ),
-                        ),
-                      )
+                          Positioned(
+                            top: 350,
+                            right: 8,
+                            left: 8,
+                            child: Container(
+                              child: Column(
+                                children: [
+                                  Container(
+                                    width: 450,
+                                    height: 750,
+                                    decoration: BoxDecoration(
+                                      color: Color.fromARGB(255, 232, 229, 240),
+                                      borderRadius: BorderRadius.circular(8.0),
+                                    ),
+                                    child: ListView(
+                                      // Use ListView instead of Column
+                                      shrinkWrap: true,
+                                      children: [
+                                        SizedBox(height: 10),
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 20),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              // Dropdown text field with location icon
+                                              SizedBox(width: 10),
+                                              // Vertical divider
+                                              SizedBox(width: 10),
+                                              // Location text
+                                              Align(
+                                                alignment: Alignment.topRight,
+                                                child: Container(
+                                                  padding: EdgeInsets.symmetric(
+                                                      horizontal: 10),
+                                                  decoration: BoxDecoration(
+                                                    border: Border.all(
+                                                        color: Colors.black,
+                                                        width: 1.0),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5.0),
+                                                  ),
+                                                  child: Row(
+                                                    children: [
+                                                      Icon(Icons
+                                                          .location_on_outlined),
+                                                      SizedBox(width: 5),
+                                                      Container(
+                                                        height: 30,
+                                                        width: 1,
+                                                        color: Colors.black,
+                                                      ),
+                                                      SizedBox(width: 5),
+                                                      // Replace the below DropdownButton with your actual dropdown widget
+                                                      DropdownButtonHideUnderline(
+                                                        child: DropdownButton<
+                                                            String>(
+                                                          value: 'Location',
+                                                          onChanged: (String?
+                                                              newValue) {
+                                                            // Handle dropdown value change
+                                                          },
+                                                          items: <String>[
+                                                            'Location',
+                                                            'Location1',
+                                                            'Location2'
+                                                          ].map<
+                                                              DropdownMenuItem<
+                                                                  String>>(
+                                                            (String value) {
+                                                              return DropdownMenuItem<
+                                                                  String>(
+                                                                value: value,
+                                                                child: Text(
+                                                                  value,
+                                                                  style: TextStyle(
+                                                                      fontFamily:
+                                                                          'Colfax',
+                                                                      fontSize:
+                                                                          16),
+                                                                ),
+                                                              );
+                                                            },
+                                                          ).toList(),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: 30,
+                                        ),
+                                        Column(
+                                          children: [
+                                            Row(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                SizedBox(
+                                                  width: 35,
+                                                ),
+                                                Container(
+                                                  width: 35.w,
+                                                  height: 200,
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8.0),
+                                                    border: Border.all(
+                                                      color: Colors
+                                                          .black, // Change border color as needed
+                                                      width:
+                                                          2.0, // Increase border width
+                                                    ),
+                                                  ),
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            8.0),
+                                                    child: Column(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment.end,
+                                                      children: [
+                                                        Divider(
+                                                          color: Colors.black,
+                                                        ),
+                                                        SizedBox(height: 2),
+                                                        Text(
+                                                          'Vehicle',
+                                                          style: TextStyle(
+                                                              fontFamily:
+                                                                  'Colfax',
+                                                              fontSize: 14),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  width: 25,
+                                                ),
+                                                Container(
+                                                  width: 35.w,
+                                                  height: 200,
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8.0),
+                                                    border: Border.all(
+                                                      color: Colors
+                                                          .black, // Change border color as needed
+                                                      width:
+                                                          2.0, // Increase border width
+                                                    ),
+                                                  ),
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            8.0),
+                                                    child: Column(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment.end,
+                                                      children: [
+                                                        Divider(
+                                                          color: Colors.black,
+                                                        ),
+                                                        SizedBox(height: 2),
+                                                        Text(
+                                                          'Bus',
+                                                          style: TextStyle(
+                                                              fontFamily:
+                                                                  'Colfax',
+                                                              fontSize: 14),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                            SizedBox(height: 25),
+                                            Row(children: [
+                                              SizedBox(width: 35),
+                                              Container(
+                                                width: 35.w,
+                                                height: 200,
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          8.0),
+                                                  border: Border.all(
+                                                    color: Colors
+                                                        .black, // Change border color as needed
+                                                    width:
+                                                        2.0, // Increase border width
+                                                  ),
+                                                ),
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(8.0),
+                                                  child: Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.end,
+                                                    children: [
+                                                      Divider(
+                                                        color: Colors.black,
+                                                      ),
+                                                      SizedBox(height: 2),
+                                                      Text(
+                                                        'Equipment-2',
+                                                        style: TextStyle(
+                                                            fontFamily:
+                                                                'Colfax',
+                                                            fontSize: 14),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                width: 25,
+                                              ),
+                                              Container(
+                                                width: 35.w,
+                                                height: 200,
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          8.0),
+                                                  border: Border.all(
+                                                    color: Colors
+                                                        .black, // Change border color as needed
+                                                    width:
+                                                        2.0, // Increase border width
+                                                  ),
+                                                ),
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(8.0),
+                                                  child: Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.end,
+                                                    children: [
+                                                      Divider(
+                                                        color: Colors.black,
+                                                      ),
+                                                      SizedBox(height: 2),
+                                                      Text(
+                                                        'Special',
+                                                        style: TextStyle(
+                                                            fontFamily:
+                                                                'Colfax',
+                                                            fontSize: 14),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                            ]),
+                                            SizedBox(height: 25),
+                                            Row(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.center,
+                                                children: [
+                                                  SizedBox(width: 30),
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            left: 100),
+                                                    child: Container(
+                                                      width: 35.w,
+                                                      height: 200,
+                                                      decoration: BoxDecoration(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(8.0),
+                                                        border: Border.all(
+                                                          color: Colors
+                                                              .black, // Change border color as needed
+                                                          width:
+                                                              2.0, // Increase border width
+                                                        ),
+                                                        color: Color.fromRGBO(
+                                                            106,
+                                                            102,
+                                                            209,
+                                                            1), // RGB color fill
+                                                      ),
+                                                      child: Align(
+                                                        alignment:
+                                                            Alignment.center,
+                                                        child: Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(8.0),
+                                                          child: Column(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .center,
+                                                            children: [
+                                                              Text(
+                                                                "Get an Estimate",
+                                                                style: TextStyle(
+                                                                    color: Colors
+                                                                        .white,
+                                                                    fontFamily:
+                                                                        'Colfax',
+                                                                    fontSize: 14
+                                                                    // Add other text style properties as needed
+                                                                    ),
+                                                              ),
+                                                              SizedBox(
+                                                                  height: 20),
+                                                              Image.asset(
+                                                                'right-arrow.png',
+                                                                width: 30,
+                                                                height: 30,
+                                                                color: Colors
+                                                                    .white,
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ])
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  SizedBox(height: 25),
+                                  Column(
+                                    children: [
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                        children: [
+                                          Image.asset(
+                                            'Rectangle.png', // Replace with your image path
+                                            width: 100,
+                                            height: 90,
+                                            color: Colors.grey,
+                                          ),
+                                          SizedBox(
+                                              width:
+                                                  7), // Adjust this space as needed
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                "Naqli For Individuals",
+                                                style: TextStyle(
+                                                  fontFamily: 'Colfax',
+                                                  fontSize: 10,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                              SizedBox(height: 5),
+                                              Text(
+                                                "Lorem_ipsum_dolor_sit_amet_consectetur_adipiscing_elit_sed_do_eiusmod\n"
+                                                "tempor_incididunt_ut_labore_et_dolore_magna_aliqua.Ut_enim_ad_minim\n"
+                                                "veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea\n"
+                                                "commodo consequat. Duis aute irure dolor in reprehenderit in voluptate\n"
+                                                "velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat\n"
+                                                "cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est\n"
+                                                "laborum.",
+                                                style: TextStyle(
+                                                    fontFamily: 'Colfax',
+                                                    fontSize: 7),
+                                                textAlign: TextAlign.justify,
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                      // Repeat the above structure for other rows without unnecessary SizedBox
+                                      SizedBox(height: 20),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                        children: [
+                                          Image.asset(
+                                            'Rectangle.png', // Replace with your image path
+                                            width: 100,
+                                            height: 90,
+                                            color: Colors.grey,
+                                          ),
+                                          SizedBox(
+                                              width:
+                                                  7), // Adjust this space as needed
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                "Naqli For Business",
+                                                style: TextStyle(
+                                                  fontFamily: 'Colfax',
+                                                  fontSize: 10,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                              SizedBox(height: 5),
+                                              Text(
+                                                "Lorem_ipsum_dolor_sit_amet_consectetur_adipiscing_elit_sed_do_eiusmod\n"
+                                                "tempor_incididunt_ut_labore_et_dolore_magna_aliqua.Ut_enim_ad_minim\n"
+                                                "veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea\n"
+                                                "commodo consequat. Duis aute irure dolor in reprehenderit in voluptate\n"
+                                                "velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat\n"
+                                                "cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est\n"
+                                                "laborum.",
+                                                style: TextStyle(
+                                                    fontFamily: 'Colfax',
+                                                    fontSize: 7),
+                                                textAlign: TextAlign.justify,
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                      SizedBox(height: 20),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                        children: [
+                                          Image.asset(
+                                            'Rectangle.png', // Replace with your image path
+                                            width: 100,
+                                            height: 90,
+                                            color: Colors.grey,
+                                          ),
+                                          SizedBox(
+                                              width:
+                                                  7), // Adjust this space as needed
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                "Naqli For Partner",
+                                                style: TextStyle(
+                                                  fontFamily: 'Colfax',
+                                                  fontSize: 10,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                              SizedBox(height: 5),
+                                              Text(
+                                                "Lorem_ipsum_dolor_sit_amet_consectetur_adipiscing_elit_sed_do_eiusmod\n"
+                                                "tempor_incididunt_ut_labore_et_dolore_magna_aliqua.Ut_enim_ad_minim\n"
+                                                "veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea\n"
+                                                "commodo consequat. Duis aute irure dolor in reprehenderit in voluptate\n"
+                                                "velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat\n"
+                                                "cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est\n"
+                                                "laborum.",
+                                                style: TextStyle(
+                                                    fontFamily: 'Colfax',
+                                                    fontSize: 7),
+                                                textAlign: TextAlign.justify,
+                                              ),
+                                            ],
+                                          ),
+                                          SizedBox(
+                                            height: 20,
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 75,
+                                  ),
+                                  Container(
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        // First Column - Image
+
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Image.asset(
+                                              'Phone.png', // Replace with your image path
+                                              width: 180,
+                                              height: 180,
+                                            ),
+                                          ],
+                                        ),
+
+                                        // Second Column - Text
+                                        SizedBox(height: 10),
+
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Text(
+                                              'How to get Naqli in Action',
+                                              style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontWeight: FontWeight.bold,
+                                                  fontFamily: 'Colfax',
+                                                  fontSize: 16),
+                                            ),
+                                          ],
+                                        ),
+
+                                        // Third Column - Text
+                                        SizedBox(height: 10),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Text(
+                                              "Lorem ipsum dolor sit amet,\n"
+                                              "consectetur adipiscing elit, sed\n"
+                                              "do eiusmod tempor incididunt ut\n"
+                                              "labore et dolore magna aliqua.\n"
+                                              "Ut enim ad minim veniam, quis\n"
+                                              "nostrud exercitation ullamco\n"
+                                              "laboris nisi ut aliquip ex ea\n"
+                                              "commodo consequat. Duis aute\n"
+                                              "irure dolor in",
+                                              style: TextStyle(
+                                                fontFamily: 'Colfax',
+                                                fontSize: 10,
+                                                color: Colors.black,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ],
                   ),
-                ],
-              ),
-            ),
-          );
+                ),
+              ));
         }
       });
     });
