@@ -4061,7 +4061,7 @@ class _MyHomePageState extends State<Dashboard> {
                                                                 const EdgeInsets
                                                                     .only(
                                                                     left: 10,
-                                                                    top: 20),
+                                                                    top: 18),
                                                             child: Container(
                                                               child: Padding(
                                                                 padding:
@@ -4070,9 +4070,9 @@ class _MyHomePageState extends State<Dashboard> {
                                                                         8.0),
                                                                 child:
                                                                     Image.asset(
-                                                                  'Group268',
-                                                                  width: 100,
-                                                                  height: 150,
+                                                                  'Group268.png',
+                                                                  width: 50,
+                                                                  height: 30,
                                                                 ),
                                                               ),
                                                             ),
@@ -4291,7 +4291,7 @@ class _MyHomePageState extends State<Dashboard> {
                                                                 const EdgeInsets
                                                                     .only(
                                                                     left: 10,
-                                                                    top: 20),
+                                                                    top: 18),
                                                             child: Container(
                                                               child: Padding(
                                                                 padding:
@@ -4300,9 +4300,9 @@ class _MyHomePageState extends State<Dashboard> {
                                                                         8.0),
                                                                 child:
                                                                     Image.asset(
-                                                                  'Group300',
-                                                                  width: 100,
-                                                                  height: 150,
+                                                                  'Group300.png',
+                                                                  width: 50,
+                                                                  height: 30,
                                                                 ),
                                                               ),
                                                             ),
@@ -4468,8 +4468,8 @@ class _MyHomePageState extends State<Dashboard> {
                                                             padding:
                                                                 const EdgeInsets
                                                                     .only(
-                                                                    left: 15,
-                                                                    top: 20),
+                                                                    left: 6,
+                                                                    top: 12),
                                                             child: Container(
                                                               child: Padding(
                                                                 padding:
@@ -4477,7 +4477,7 @@ class _MyHomePageState extends State<Dashboard> {
                                                                         .all(
                                                                         8.0),
                                                                 child: SizedBox(
-                                                                  width: 120,
+                                                                  width: 50,
                                                                   height: 30,
                                                                   child:
                                                                       ElevatedButton(
@@ -4522,7 +4522,7 @@ class _MyHomePageState extends State<Dashboard> {
                                                                 const EdgeInsets
                                                                     .only(
                                                                     left: 10,
-                                                                    top: 20),
+                                                                    top: 10),
                                                             child: Container(
                                                               child: Padding(
                                                                 padding:
@@ -4531,9 +4531,9 @@ class _MyHomePageState extends State<Dashboard> {
                                                                         8.0),
                                                                 child:
                                                                     Image.asset(
-                                                                  'Group353',
-                                                                  width: 100,
-                                                                  height: 150,
+                                                                  'Group353.png',
+                                                                  width: 50,
+                                                                  height: 30,
                                                                 ),
                                                               ),
                                                             ),
