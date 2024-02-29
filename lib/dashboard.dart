@@ -559,7 +559,6 @@ class _MyHomePageState extends State<Dashboard> {
                                         ),
                                         items: [
                                           SideMenuItem(
-                                            priority: 0,
                                             title: 'Dashboard',
                                             onTap: (page, _) {
                                               sideMenu.changePage(page);
@@ -3653,6 +3652,25 @@ class _MyHomePageState extends State<Dashboard> {
                                                           12.0),
                                                 ),
                                                 child: Table(
+                                                  border: TableBorder(
+                                                      horizontalInside:
+                                                          BorderSide(
+                                                              width: 0.1,
+                                                              color:
+                                                                  Color.fromRGBO(
+                                                                      80,
+                                                                      69,
+                                                                      74,
+                                                                      1),
+                                                              style: BorderStyle
+                                                                  .solid),
+                                                      verticalInside: BorderSide(
+                                                          width: 0.1,
+                                                          color: Color.fromRGBO(
+                                                              80, 69, 74, 1),
+                                                          style: BorderStyle
+                                                              .solid)),
+
                                                   // textDirection: TextDirection.rtl,
                                                   // defaultVerticalAlignment: TableCellVerticalAlignment.bottom,
                                                   // border:TableBorder.all(width: 2.0,color: Colors.red),
@@ -3964,7 +3982,7 @@ class _MyHomePageState extends State<Dashboard> {
                                                         height: 50,
                                                         child: Center(
                                                           child: Text(
-                                                            "Truck",
+                                                            "Bus",
                                                             textScaleFactor:
                                                                 1.5,
                                                             style: TextStyle(
@@ -3980,7 +3998,7 @@ class _MyHomePageState extends State<Dashboard> {
                                                         height: 50,
                                                         child: Center(
                                                           child: Text(
-                                                            "Single",
+                                                            "Contract",
                                                             textScaleFactor:
                                                                 1.5,
                                                             style: TextStyle(
@@ -3996,7 +4014,7 @@ class _MyHomePageState extends State<Dashboard> {
                                                         height: 50,
                                                         child: Center(
                                                           child: Text(
-                                                            "Vendor 1",
+                                                            "Vendor 2",
                                                             textScaleFactor:
                                                                 1.5,
                                                             style: TextStyle(
@@ -4055,7 +4073,7 @@ class _MyHomePageState extends State<Dashboard> {
                                                         height: 50,
                                                         child: Center(
                                                           child: Image.asset(
-                                                            'Group268.png',
+                                                            'Group300.png',
                                                             width: 50,
                                                             height: 30,
                                                           ),
@@ -4119,7 +4137,7 @@ class _MyHomePageState extends State<Dashboard> {
                                                         height: 50,
                                                         child: Center(
                                                           child: Text(
-                                                            "Truck",
+                                                            "Equipment",
                                                             textScaleFactor:
                                                                 1.5,
                                                             style: TextStyle(
@@ -4151,7 +4169,7 @@ class _MyHomePageState extends State<Dashboard> {
                                                         height: 50,
                                                         child: Center(
                                                           child: Text(
-                                                            "Vendor 1",
+                                                            "Vendor 2",
                                                             textScaleFactor:
                                                                 1.5,
                                                             style: TextStyle(
@@ -4177,17 +4195,17 @@ class _MyHomePageState extends State<Dashboard> {
                                                                       .styleFrom(
                                                                 primary: Color
                                                                     .fromRGBO(
-                                                                        247,
-                                                                        230,
-                                                                        176,
+                                                                        87,
+                                                                        192,
+                                                                        18,
                                                                         1),
                                                                 side:
                                                                     BorderSide(
                                                                   color: Color
                                                                       .fromRGBO(
-                                                                          247,
-                                                                          230,
-                                                                          176,
+                                                                          87,
+                                                                          192,
+                                                                          18,
                                                                           1),
                                                                 ),
                                                               ),
@@ -4210,7 +4228,7 @@ class _MyHomePageState extends State<Dashboard> {
                                                         height: 50,
                                                         child: Center(
                                                           child: Image.asset(
-                                                            'Group268.png',
+                                                            'Group353.png',
                                                             width: 50,
                                                             height: 30,
                                                           ),
