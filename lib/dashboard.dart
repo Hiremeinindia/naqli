@@ -3653,23 +3653,18 @@ class _MyHomePageState extends State<Dashboard> {
                                                 ),
                                                 child: Table(
                                                   border: TableBorder(
-                                                      horizontalInside:
-                                                          BorderSide(
-                                                              width: 0.1,
-                                                              color:
-                                                                  Color.fromRGBO(
-                                                                      80,
-                                                                      69,
-                                                                      74,
-                                                                      1),
-                                                              style: BorderStyle
-                                                                  .solid),
-                                                      verticalInside: BorderSide(
-                                                          width: 0.1,
-                                                          color: Color.fromRGBO(
-                                                              80, 69, 74, 1),
-                                                          style: BorderStyle
-                                                              .solid)),
+                                                    horizontalInside:
+                                                        BorderSide(
+                                                            width: 0.1,
+                                                            color:
+                                                                Color.fromRGBO(
+                                                                    80,
+                                                                    69,
+                                                                    74,
+                                                                    1),
+                                                            style: BorderStyle
+                                                                .solid),
+                                                  ),
 
                                                   // textDirection: TextDirection.rtl,
                                                   // defaultVerticalAlignment: TableCellVerticalAlignment.bottom,
@@ -3683,6 +3678,7 @@ class _MyHomePageState extends State<Dashboard> {
                                                             61,
                                                             82,
                                                             1), // Brown color
+
                                                         child: Center(
                                                           child: Text(
                                                             "Booking ID",
@@ -4302,585 +4298,922 @@ class _MyHomePageState extends State<Dashboard> {
                               ],
                             ),
                           ),
-                          Row(
-                            children: [
-                              Expanded(
-                                child: Column(
-                                  children: [
-                                    Padding(
-                                      padding:
-                                          const EdgeInsets.only(right: 110),
-                                      child: Expanded(
-                                        child: Container(
-                                          height: 230,
-                                          decoration: BoxDecoration(
-                                            color: Colors.white,
-                                            borderRadius:
-                                                BorderRadius.circular(12.0),
-                                          ),
-                                          child: Table(
-                                            // textDirection: TextDirection.rtl,
-                                            // defaultVerticalAlignment: TableCellVerticalAlignment.bottom,
-                                            // border:TableBorder.all(width: 2.0,color: Colors.red),
-                                            children: [
-                                              TableRow(children: [
-                                                Container(
-                                                  height: 60,
-                                                  color: Color.fromRGBO(75, 61,
-                                                      82, 1), // Brown color
-                                                  child: Center(
-                                                    child: Text(
-                                                      "Booking ID",
-                                                      textScaleFactor: 1.5,
-                                                      style: TextStyle(
-                                                          color: Colors.white,
-                                                          fontSize: 10,
-                                                          fontFamily:
-                                                              "SFProText"),
-                                                    ),
-                                                  ),
-                                                ),
-                                                Container(
-                                                  height: 60,
-                                                  color: Color.fromRGBO(
-                                                      75, 61, 82, 1),
-                                                  child: Center(
-                                                    child: Text(
-                                                      "Mode",
-                                                      textScaleFactor: 1.5,
-                                                      style: TextStyle(
-                                                          color: Colors.white,
-                                                          fontSize: 10,
-                                                          fontFamily:
-                                                              "SFProText"),
-                                                    ),
-                                                  ),
-                                                ),
-                                                Container(
-                                                  height: 60,
-                                                  color: Color.fromRGBO(
-                                                      75, 61, 82, 1),
-                                                  child: Center(
-                                                    child: Text(
-                                                      "Booking Type",
-                                                      textScaleFactor: 1.5,
-                                                      style: TextStyle(
-                                                          color: Colors.white,
-                                                          fontSize: 10,
-                                                          fontFamily:
-                                                              "SFProText"),
-                                                    ),
-                                                  ),
-                                                ),
-                                                Container(
-                                                  height: 60,
-                                                  color: Color.fromRGBO(
-                                                      75, 61, 82, 1),
-                                                  child: Center(
-                                                    child: Text(
-                                                      "Vendor",
-                                                      textScaleFactor: 1.5,
-                                                      style: TextStyle(
-                                                          color: Colors.white,
-                                                          fontSize: 10,
-                                                          fontFamily:
-                                                              "SFProText"),
-                                                    ),
-                                                  ),
-                                                ),
-                                                Container(
-                                                  height: 60,
-                                                  color: Color.fromRGBO(
-                                                      75, 61, 82, 1),
-                                                  child: Center(
-                                                    child: Text(
-                                                      "Payment Status",
-                                                      textScaleFactor: 1.5,
-                                                      style: TextStyle(
-                                                          color: Colors.white,
-                                                          fontSize: 10,
-                                                          fontFamily:
-                                                              "SFProText"),
-                                                    ),
-                                                  ),
-                                                ),
-                                                Container(
-                                                  height: 60,
-                                                  color: Color.fromRGBO(
-                                                      75, 61, 82, 1),
-                                                  child: Center(
-                                                    child: Text(
-                                                      "Status",
-                                                      textScaleFactor: 1.5,
-                                                      style: TextStyle(
-                                                          color: Colors.white,
-                                                          fontSize: 10,
-                                                          fontFamily:
-                                                              "SFProText"),
-                                                    ),
-                                                  ),
-                                                ),
-                                                Container(
-                                                  height: 60,
-                                                  color: Color.fromRGBO(
-                                                      75, 61, 82, 1),
-                                                  child: Center(
-                                                    child: Text(
-                                                      "Actions",
-                                                      textScaleFactor: 1.5,
-                                                      style: TextStyle(
-                                                          color: Colors.white,
-                                                          fontSize: 10,
-                                                          fontFamily:
-                                                              "SFProText"),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ]),
-                                              TableRow(children: [
-                                                Container(
-                                                  height: 50,
-                                                  child: Center(
-                                                    child: Text(
-                                                      "NAQBOOK***",
-                                                      textScaleFactor: 1.5,
-                                                      style: TextStyle(
-                                                          color: Colors.black,
-                                                          fontSize: 9,
-                                                          fontFamily:
-                                                              "SFProText"),
-                                                    ),
-                                                  ),
-                                                ),
-                                                Container(
-                                                  height: 50,
-                                                  child: Center(
-                                                    child: Text(
-                                                      "Truck",
-                                                      textScaleFactor: 1.5,
-                                                      style: TextStyle(
-                                                          color: Colors.black,
-                                                          fontSize: 9,
-                                                          fontFamily:
-                                                              "SFProText"),
-                                                    ),
-                                                  ),
-                                                ),
-                                                Container(
-                                                  height: 50,
-                                                  child: Center(
-                                                    child: Text(
-                                                      "Single",
-                                                      textScaleFactor: 1.5,
-                                                      style: TextStyle(
-                                                          color: Colors.black,
-                                                          fontSize: 9,
-                                                          fontFamily:
-                                                              "SFProText"),
-                                                    ),
-                                                  ),
-                                                ),
-                                                Container(
-                                                  height: 50,
-                                                  child: Center(
-                                                    child: Text(
-                                                      "Vendor 1",
-                                                      textScaleFactor: 1.5,
-                                                      style: TextStyle(
-                                                          color: Colors.black,
-                                                          fontSize: 9,
-                                                          fontFamily:
-                                                              "SFProText"),
-                                                    ),
-                                                  ),
-                                                ),
-                                                Container(
-                                                  height: 50,
-                                                  child: Center(
-                                                    child: SizedBox(
-                                                      width: 100,
-                                                      height: 30,
-                                                      child: ElevatedButton(
-                                                        onPressed: () {},
-                                                        style: ElevatedButton
-                                                            .styleFrom(
-                                                          primary:
-                                                              Color.fromRGBO(
-                                                                  247,
-                                                                  230,
-                                                                  176,
-                                                                  1),
-                                                          side: BorderSide(
-                                                            color:
-                                                                Color.fromRGBO(
-                                                                    247,
-                                                                    230,
-                                                                    176,
-                                                                    1),
-                                                          ),
-                                                        ),
-                                                        child: Text(
-                                                          'BalXXXX',
-                                                          style: TextStyle(
-                                                            color: Colors.black,
-                                                            fontSize: 12,
+                          Padding(
+                            padding: const EdgeInsets.only(left: 90, top: 90),
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: Column(
+                                    children: [
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(right: 110),
+                                        child: Expanded(
+                                          child: Container(
+                                            height: 420,
+                                            decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              borderRadius:
+                                                  BorderRadius.circular(12.0),
+                                            ),
+                                            child: Table(
+                                              border: TableBorder(
+                                                horizontalInside: BorderSide(
+                                                    width: 0.1,
+                                                    color: Color.fromRGBO(
+                                                        80, 69, 74, 1),
+                                                    style: BorderStyle.solid),
+                                              ),
+                                              // textDirection: TextDirection.rtl,
+                                              // defaultVerticalAlignment: TableCellVerticalAlignment.bottom,
+                                              // border:TableBorder.all(width: 2.0,color: Colors.red),
+                                              children: [
+                                                TableRow(children: [
+                                                  Container(
+                                                    height: 60,
+                                                    color: Color.fromRGBO(
+                                                        75,
+                                                        61,
+                                                        82,
+                                                        1), // Brown color
+                                                    child: Center(
+                                                      child: Text(
+                                                        "Booking ID",
+                                                        textScaleFactor: 1.5,
+                                                        style: TextStyle(
+                                                            color: Colors.white,
+                                                            fontSize: 10,
                                                             fontFamily:
-                                                                "Helvetica",
-                                                          ),
-                                                        ),
+                                                                "SFProText"),
                                                       ),
                                                     ),
                                                   ),
-                                                ),
-                                                Container(
-                                                  height: 50,
-                                                  child: Center(
-                                                    child: Image.asset(
-                                                      'Group268.png',
-                                                      width: 50,
-                                                      height: 30,
-                                                    ),
-                                                  ),
-                                                ),
-                                                Container(
-                                                  height: 50,
-                                                  child: Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
-                                                    children: [
-                                                      IconButton(
-                                                          padding:
-                                                              EdgeInsets.zero,
-                                                          constraints:
-                                                              BoxConstraints(),
-                                                          onPressed: null,
-                                                          icon: Icon(
-                                                            Icons.edit_document,
-                                                            color:
-                                                                Color.fromRGBO(
-                                                                    74,
-                                                                    60,
-                                                                    81,
-                                                                    1),
-                                                          )),
-                                                      IconButton(
-                                                          padding:
-                                                              EdgeInsets.zero,
-                                                          // constraints:
-                                                          //     BoxConstraints(),
-                                                          onPressed: null,
-                                                          icon: Icon(
-                                                              Icons.delete)),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ]),
-                                              TableRow(children: [
-                                                Container(
-                                                  height: 50,
-                                                  child: Center(
-                                                    child: Text(
-                                                      "NAQBOOK***",
-                                                      textScaleFactor: 1.5,
-                                                      style: TextStyle(
-                                                          color: Colors.black,
-                                                          fontSize: 9,
-                                                          fontFamily:
-                                                              "SFProText"),
-                                                    ),
-                                                  ),
-                                                ),
-                                                Container(
-                                                  height: 50,
-                                                  child: Center(
-                                                    child: Text(
-                                                      "Bus",
-                                                      textScaleFactor: 1.5,
-                                                      style: TextStyle(
-                                                          color: Colors.black,
-                                                          fontSize: 9,
-                                                          fontFamily:
-                                                              "SFProText"),
-                                                    ),
-                                                  ),
-                                                ),
-                                                Container(
-                                                  height: 50,
-                                                  child: Center(
-                                                    child: Text(
-                                                      "Contract",
-                                                      textScaleFactor: 1.5,
-                                                      style: TextStyle(
-                                                          color: Colors.black,
-                                                          fontSize: 9,
-                                                          fontFamily:
-                                                              "SFProText"),
-                                                    ),
-                                                  ),
-                                                ),
-                                                Container(
-                                                  height: 50,
-                                                  child: Center(
-                                                    child: Text(
-                                                      "Vendor 2",
-                                                      textScaleFactor: 1.5,
-                                                      style: TextStyle(
-                                                          color: Colors.black,
-                                                          fontSize: 9,
-                                                          fontFamily:
-                                                              "SFProText"),
-                                                    ),
-                                                  ),
-                                                ),
-                                                Container(
-                                                  height: 50,
-                                                  child: Center(
-                                                    child: SizedBox(
-                                                      width: 100,
-                                                      height: 30,
-                                                      child: ElevatedButton(
-                                                        onPressed: () {},
-                                                        style: ElevatedButton
-                                                            .styleFrom(
-                                                          primary:
-                                                              Color.fromRGBO(
-                                                                  247,
-                                                                  230,
-                                                                  176,
-                                                                  1),
-                                                          side: BorderSide(
-                                                            color:
-                                                                Color.fromRGBO(
-                                                                    247,
-                                                                    230,
-                                                                    176,
-                                                                    1),
-                                                          ),
-                                                        ),
-                                                        child: Text(
-                                                          'BalXXXX',
-                                                          style: TextStyle(
-                                                            color: Colors.black,
-                                                            fontSize: 12,
+                                                  Container(
+                                                    height: 60,
+                                                    color: Color.fromRGBO(
+                                                        75, 61, 82, 1),
+                                                    child: Center(
+                                                      child: Text(
+                                                        "Type",
+                                                        textScaleFactor: 1.5,
+                                                        style: TextStyle(
+                                                            color: Colors.white,
+                                                            fontSize: 10,
                                                             fontFamily:
-                                                                "Helvetica",
-                                                          ),
-                                                        ),
+                                                                "SFProText"),
                                                       ),
                                                     ),
                                                   ),
-                                                ),
-                                                Container(
-                                                  height: 50,
-                                                  child: Center(
-                                                    child: Image.asset(
-                                                      'Group300.png',
-                                                      width: 50,
-                                                      height: 30,
+                                                  Container(
+                                                    height: 60,
+                                                    color: Color.fromRGBO(
+                                                        75, 61, 82, 1),
+                                                    child: Center(
+                                                      child: Text(
+                                                        "Booking Status",
+                                                        textScaleFactor: 1.5,
+                                                        style: TextStyle(
+                                                            color: Colors.white,
+                                                            fontSize: 10,
+                                                            fontFamily:
+                                                                "SFProText"),
+                                                      ),
                                                     ),
                                                   ),
-                                                ),
-                                                Container(
-                                                  height: 50,
-                                                  child: Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
-                                                    children: [
-                                                      IconButton(
-                                                          padding:
-                                                              EdgeInsets.zero,
-                                                          constraints:
-                                                              BoxConstraints(),
-                                                          onPressed: null,
-                                                          icon: Icon(
-                                                            Icons.edit_document,
+                                                  Container(
+                                                    height: 60,
+                                                    color: Color.fromRGBO(
+                                                        75, 61, 82, 1),
+                                                    child: Center(
+                                                      child: Text(
+                                                        "Payment Made",
+                                                        textScaleFactor: 1.5,
+                                                        style: TextStyle(
+                                                            color: Colors.white,
+                                                            fontSize: 10,
+                                                            fontFamily:
+                                                                "SFProText"),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    height: 60,
+                                                    color: Color.fromRGBO(
+                                                        75, 61, 82, 1),
+                                                    child: Center(
+                                                      child: Text(
+                                                        "Pending Payment",
+                                                        textScaleFactor: 1.5,
+                                                        style: TextStyle(
+                                                            color: Colors.white,
+                                                            fontSize: 10,
+                                                            fontFamily:
+                                                                "SFProText"),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    height: 60,
+                                                    color: Color.fromRGBO(
+                                                        75, 61, 82, 1),
+                                                    child: Center(
+                                                      child: Text(
+                                                        "Actions",
+                                                        textScaleFactor: 1.5,
+                                                        style: TextStyle(
+                                                            color: Colors.white,
+                                                            fontSize: 10,
+                                                            fontFamily:
+                                                                "SFProText"),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ]),
+                                                TableRow(children: [
+                                                  Container(
+                                                    height: 50,
+                                                    child: Center(
+                                                      child: Text(
+                                                        "#8734562315",
+                                                        textScaleFactor: 1.5,
+                                                        style: TextStyle(
                                                             color:
                                                                 Color.fromRGBO(
-                                                                    74,
-                                                                    60,
-                                                                    81,
+                                                                    3, 1, 1, 1),
+                                                            fontSize: 9,
+                                                            fontFamily:
+                                                                "SFProText"),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    height: 50,
+                                                    child: Center(
+                                                      child: Text(
+                                                        "Single",
+                                                        textScaleFactor: 1.5,
+                                                        style: TextStyle(
+                                                            color:
+                                                                Color.fromRGBO(
+                                                                    3, 1, 1, 1),
+                                                            fontSize: 9,
+                                                            fontFamily:
+                                                                "SFProText"),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    height: 50,
+                                                    child: Center(
+                                                      child: Image.asset(
+                                                        'Group353.png',
+                                                        width: 50,
+                                                        height: 30,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    height: 50,
+                                                    child: Center(
+                                                      child: Text(
+                                                        "XXXXX SAR",
+                                                        textScaleFactor: 1.5,
+                                                        style: TextStyle(
+                                                            color:
+                                                                Color.fromRGBO(
+                                                                    3, 1, 1, 1),
+                                                            fontSize: 9,
+                                                            fontFamily:
+                                                                "SFProText"),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    height: 50,
+                                                    child: Center(
+                                                      child: Text(
+                                                        "Paid",
+                                                        textScaleFactor: 1.5,
+                                                        style: TextStyle(
+                                                            color:
+                                                                Color.fromRGBO(
+                                                                    46,
+                                                                    173,
+                                                                    11,
                                                                     1),
-                                                          )),
-                                                      IconButton(
-                                                          padding:
-                                                              EdgeInsets.zero,
-                                                          // constraints:
-                                                          //     BoxConstraints(),
-                                                          onPressed: null,
-                                                          icon: Icon(
-                                                              Icons.delete)),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ]),
-                                              TableRow(children: [
-                                                Container(
-                                                  height: 50,
-                                                  child: Center(
-                                                    child: Text(
-                                                      "NAQBOOK***",
-                                                      textScaleFactor: 1.5,
-                                                      style: TextStyle(
-                                                          color: Colors.black,
-                                                          fontSize: 9,
-                                                          fontFamily:
-                                                              "SFProText"),
+                                                            fontSize: 9,
+                                                            fontFamily:
+                                                                "SFProText"),
+                                                      ),
                                                     ),
                                                   ),
-                                                ),
-                                                Container(
-                                                  height: 50,
-                                                  child: Center(
-                                                    child: Text(
-                                                      "Equipment",
-                                                      textScaleFactor: 1.5,
-                                                      style: TextStyle(
-                                                          color: Colors.black,
-                                                          fontSize: 9,
-                                                          fontFamily:
-                                                              "SFProText"),
-                                                    ),
-                                                  ),
-                                                ),
-                                                Container(
-                                                  height: 50,
-                                                  child: Center(
-                                                    child: Text(
-                                                      "Single",
-                                                      textScaleFactor: 1.5,
-                                                      style: TextStyle(
-                                                          color: Colors.black,
-                                                          fontSize: 9,
-                                                          fontFamily:
-                                                              "SFProText"),
-                                                    ),
-                                                  ),
-                                                ),
-                                                Container(
-                                                  height: 50,
-                                                  child: Center(
-                                                    child: Text(
-                                                      "Vendor 2",
-                                                      textScaleFactor: 1.5,
-                                                      style: TextStyle(
-                                                          color: Colors.black,
-                                                          fontSize: 9,
-                                                          fontFamily:
-                                                              "SFProText"),
-                                                    ),
-                                                  ),
-                                                ),
-                                                Container(
-                                                  height: 50,
-                                                  child: Center(
-                                                    child: SizedBox(
-                                                      width: 100,
-                                                      height: 30,
-                                                      child: ElevatedButton(
-                                                        onPressed: () {},
-                                                        style: ElevatedButton
-                                                            .styleFrom(
-                                                          primary:
-                                                              Color.fromRGBO(
-                                                                  247,
-                                                                  230,
-                                                                  176,
-                                                                  1),
-                                                          side: BorderSide(
+                                                  Container(
+                                                    height: 50,
+                                                    child: Center(
+                                                      child: Text(
+                                                        "Completed",
+                                                        textScaleFactor: 1.5,
+                                                        style: TextStyle(
                                                             color:
                                                                 Color.fromRGBO(
-                                                                    87,
-                                                                    192,
+                                                                    124,
+                                                                    115,
+                                                                    115,
+                                                                    1),
+                                                            fontSize: 9,
+                                                            fontFamily:
+                                                                "SFProText"),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ]),
+                                                TableRow(children: [
+                                                  Container(
+                                                    height: 50,
+                                                    child: Center(
+                                                      child: Text(
+                                                        "#8734562315",
+                                                        textScaleFactor: 1.5,
+                                                        style: TextStyle(
+                                                            color:
+                                                                Color.fromRGBO(
+                                                                    3, 1, 1, 1),
+                                                            fontSize: 9,
+                                                            fontFamily:
+                                                                "SFProText"),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    height: 50,
+                                                    child: Center(
+                                                      child: Text(
+                                                        "Contract",
+                                                        textScaleFactor: 1.5,
+                                                        style: TextStyle(
+                                                            color:
+                                                                Color.fromRGBO(
+                                                                    3, 1, 1, 1),
+                                                            fontSize: 9,
+                                                            fontFamily:
+                                                                "SFProText"),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    height: 50,
+                                                    child: Center(
+                                                      child: Image.asset(
+                                                        'Group268.png',
+                                                        width: 50,
+                                                        height: 30,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    height: 50,
+                                                    child: Center(
+                                                      child: Text(
+                                                        "XXXXX SAR",
+                                                        textScaleFactor: 1.5,
+                                                        style: TextStyle(
+                                                            color:
+                                                                Color.fromRGBO(
+                                                                    3, 1, 1, 1),
+                                                            fontSize: 9,
+                                                            fontFamily:
+                                                                "SFProText"),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    height: 50,
+                                                    child: Center(
+                                                      child: Text(
+                                                        "XXXXX SAR",
+                                                        textScaleFactor: 1.5,
+                                                        style: TextStyle(
+                                                            color:
+                                                                Color.fromRGBO(
+                                                                    228,
                                                                     18,
+                                                                    17,
                                                                     1),
-                                                          ),
-                                                        ),
-                                                        child: Text(
-                                                          'Completed',
-                                                          style: TextStyle(
-                                                            color: Colors.black,
-                                                            fontSize: 12,
+                                                            fontSize: 9,
                                                             fontFamily:
-                                                                "Helvetica",
+                                                                "SFProText"),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    height: 50,
+                                                    child: Center(
+                                                      child: SizedBox(
+                                                        width: 95,
+                                                        height: 30,
+                                                        child: ElevatedButton(
+                                                          onPressed: () {},
+                                                          style: ElevatedButton
+                                                              .styleFrom(
+                                                            primary:
+                                                                Color.fromRGBO(
+                                                                    110,
+                                                                    90,
+                                                                    234,
+                                                                    1),
+                                                            side: BorderSide(
+                                                              color: Color
+                                                                  .fromRGBO(
+                                                                      110,
+                                                                      90,
+                                                                      234,
+                                                                      1),
+                                                            ),
+                                                          ),
+                                                          child: Text(
+                                                            'Pay Pal',
+                                                            style: TextStyle(
+                                                              color:
+                                                                  Colors.white,
+                                                              fontSize: 12,
+                                                              fontFamily:
+                                                                  "Helvetica",
+                                                            ),
                                                           ),
                                                         ),
                                                       ),
                                                     ),
                                                   ),
-                                                ),
-                                                Container(
-                                                  height: 50,
-                                                  child: Center(
-                                                    child: Image.asset(
-                                                      'Group353.png',
-                                                      width: 50,
-                                                      height: 30,
-                                                    ),
-                                                  ),
-                                                ),
-                                                Container(
-                                                  height: 50,
-                                                  child: Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
-                                                    children: [
-                                                      IconButton(
-                                                          padding:
-                                                              EdgeInsets.zero,
-                                                          constraints:
-                                                              BoxConstraints(),
-                                                          onPressed: null,
-                                                          icon: Icon(
-                                                            Icons.edit_document,
+                                                ]),
+                                                TableRow(children: [
+                                                  Container(
+                                                    height: 50,
+                                                    child: Center(
+                                                      child: Text(
+                                                        "#8867034541",
+                                                        textScaleFactor: 1.5,
+                                                        style: TextStyle(
                                                             color:
                                                                 Color.fromRGBO(
-                                                                    74,
-                                                                    60,
-                                                                    81,
-                                                                    1),
-                                                          )),
-                                                      IconButton(
-                                                          padding:
-                                                              EdgeInsets.zero,
-                                                          // constraints:
-                                                          //     BoxConstraints(),
-                                                          onPressed: null,
-                                                          icon: Icon(
-                                                              Icons.delete)),
-                                                    ],
+                                                                    3, 1, 1, 1),
+                                                            fontSize: 9,
+                                                            fontFamily:
+                                                                "SFProText"),
+                                                      ),
+                                                    ),
                                                   ),
-                                                ),
-                                              ]),
-                                            ],
+                                                  Container(
+                                                    height: 50,
+                                                    child: Center(
+                                                      child: Text(
+                                                        "Single",
+                                                        textScaleFactor: 1.5,
+                                                        style: TextStyle(
+                                                            color:
+                                                                Color.fromRGBO(
+                                                                    3, 1, 1, 1),
+                                                            fontSize: 9,
+                                                            fontFamily:
+                                                                "SFProText"),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    height: 50,
+                                                    child: Center(
+                                                      child: Image.asset(
+                                                        'Group353.png',
+                                                        width: 50,
+                                                        height: 30,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    height: 50,
+                                                    child: Center(
+                                                      child: Text(
+                                                        "XXXXX SAR",
+                                                        textScaleFactor: 1.5,
+                                                        style: TextStyle(
+                                                            color:
+                                                                Color.fromRGBO(
+                                                                    3, 1, 1, 1),
+                                                            fontSize: 9,
+                                                            fontFamily:
+                                                                "SFProText"),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    height: 50,
+                                                    child: Center(
+                                                      child: Text(
+                                                        "Paid",
+                                                        textScaleFactor: 1.5,
+                                                        style: TextStyle(
+                                                            color:
+                                                                Color.fromRGBO(
+                                                                    46,
+                                                                    173,
+                                                                    11,
+                                                                    1),
+                                                            fontSize: 9,
+                                                            fontFamily:
+                                                                "SFProText"),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    height: 50,
+                                                    child: Center(
+                                                      child: Text(
+                                                        "Completed",
+                                                        textScaleFactor: 1.5,
+                                                        style: TextStyle(
+                                                            color:
+                                                                Color.fromRGBO(
+                                                                    124,
+                                                                    115,
+                                                                    115,
+                                                                    1),
+                                                            fontSize: 9,
+                                                            fontFamily:
+                                                                "SFProText"),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ]),
+                                                TableRow(children: [
+                                                  Container(
+                                                    height: 50,
+                                                    child: Center(
+                                                      child: Text(
+                                                        "#8439841362",
+                                                        textScaleFactor: 1.5,
+                                                        style: TextStyle(
+                                                            color:
+                                                                Color.fromRGBO(
+                                                                    3, 1, 1, 1),
+                                                            fontSize: 9,
+                                                            fontFamily:
+                                                                "SFProText"),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    height: 50,
+                                                    child: Center(
+                                                      child: Text(
+                                                        "Contract",
+                                                        textScaleFactor: 1.5,
+                                                        style: TextStyle(
+                                                            color:
+                                                                Color.fromRGBO(
+                                                                    3, 1, 1, 1),
+                                                            fontSize: 9,
+                                                            fontFamily:
+                                                                "SFProText"),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    height: 50,
+                                                    child: Center(
+                                                      child: Image.asset(
+                                                        'Group353.png',
+                                                        width: 50,
+                                                        height: 30,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    height: 50,
+                                                    child: Center(
+                                                      child: Text(
+                                                        "XXXXX SAR",
+                                                        textScaleFactor: 1.5,
+                                                        style: TextStyle(
+                                                            color:
+                                                                Color.fromRGBO(
+                                                                    3, 1, 1, 1),
+                                                            fontSize: 9,
+                                                            fontFamily:
+                                                                "SFProText"),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    height: 50,
+                                                    child: Center(
+                                                      child: Text(
+                                                        "Paid",
+                                                        textScaleFactor: 1.5,
+                                                        style: TextStyle(
+                                                            color:
+                                                                Color.fromRGBO(
+                                                                    46,
+                                                                    173,
+                                                                    11,
+                                                                    1),
+                                                            fontSize: 9,
+                                                            fontFamily:
+                                                                "SFProText"),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    height: 50,
+                                                    child: Center(
+                                                      child: SizedBox(
+                                                        width: 95,
+                                                        height: 30,
+                                                        child: ElevatedButton(
+                                                          onPressed: () {},
+                                                          style: ElevatedButton
+                                                              .styleFrom(
+                                                            primary:
+                                                                Colors.white,
+                                                            side: BorderSide(
+                                                                color: Colors
+                                                                    .white),
+                                                          ),
+                                                          child: Text(
+                                                            'Running',
+                                                            style: TextStyle(
+                                                              color:
+                                                                  Colors.black,
+                                                              fontSize: 12,
+                                                              fontFamily:
+                                                                  "Helvetica",
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ]),
+                                                TableRow(children: [
+                                                  Container(
+                                                    height: 50,
+                                                    child: Center(
+                                                      child: Text(
+                                                        "#8081408245",
+                                                        textScaleFactor: 1.5,
+                                                        style: TextStyle(
+                                                            color:
+                                                                Color.fromRGBO(
+                                                                    3, 1, 1, 1),
+                                                            fontSize: 9,
+                                                            fontFamily:
+                                                                "SFProText"),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    height: 50,
+                                                    child: Center(
+                                                      child: Text(
+                                                        "Single",
+                                                        textScaleFactor: 1.5,
+                                                        style: TextStyle(
+                                                            color:
+                                                                Color.fromRGBO(
+                                                                    3, 1, 1, 1),
+                                                            fontSize: 9,
+                                                            fontFamily:
+                                                                "SFProText"),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    height: 50,
+                                                    child: Center(
+                                                      child: Image.asset(
+                                                        'Group268.png',
+                                                        width: 50,
+                                                        height: 30,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    height: 50,
+                                                    child: Center(
+                                                      child: Text(
+                                                        "XXXXX SAR",
+                                                        textScaleFactor: 1.5,
+                                                        style: TextStyle(
+                                                            color:
+                                                                Color.fromRGBO(
+                                                                    3, 1, 1, 1),
+                                                            fontSize: 9,
+                                                            fontFamily:
+                                                                "SFProText"),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    height: 50,
+                                                    child: Center(
+                                                      child: Text(
+                                                        "XXXXX SAR",
+                                                        textScaleFactor: 1.5,
+                                                        style: TextStyle(
+                                                            color:
+                                                                Color.fromRGBO(
+                                                                    228,
+                                                                    18,
+                                                                    17,
+                                                                    1),
+                                                            fontSize: 9,
+                                                            fontFamily:
+                                                                "SFProText"),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    height: 50,
+                                                    child: Center(
+                                                      child: SizedBox(
+                                                        width: 95,
+                                                        height: 30,
+                                                        child: ElevatedButton(
+                                                          onPressed: () {},
+                                                          style: ElevatedButton
+                                                              .styleFrom(
+                                                            primary:
+                                                                Color.fromRGBO(
+                                                                    110,
+                                                                    90,
+                                                                    234,
+                                                                    1),
+                                                            side: BorderSide(
+                                                              color: Color
+                                                                  .fromRGBO(
+                                                                      110,
+                                                                      90,
+                                                                      234,
+                                                                      1),
+                                                            ),
+                                                          ),
+                                                          child: Text(
+                                                            'Pay Pal',
+                                                            style: TextStyle(
+                                                              color:
+                                                                  Colors.white,
+                                                              fontSize: 12,
+                                                              fontFamily:
+                                                                  "Helvetica",
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ]),
+                                                TableRow(children: [
+                                                  Container(
+                                                    height: 50,
+                                                    child: Center(
+                                                      child: Text(
+                                                        "#8285746149",
+                                                        textScaleFactor: 1.5,
+                                                        style: TextStyle(
+                                                            color:
+                                                                Color.fromRGBO(
+                                                                    3, 1, 1, 1),
+                                                            fontSize: 9,
+                                                            fontFamily:
+                                                                "SFProText"),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    height: 50,
+                                                    child: Center(
+                                                      child: Text(
+                                                        "Contract",
+                                                        textScaleFactor: 1.5,
+                                                        style: TextStyle(
+                                                            color:
+                                                                Color.fromRGBO(
+                                                                    3, 1, 1, 1),
+                                                            fontSize: 9,
+                                                            fontFamily:
+                                                                "SFProText"),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    height: 50,
+                                                    child: Center(
+                                                      child: Image.asset(
+                                                        'Group353.png',
+                                                        width: 50,
+                                                        height: 30,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    height: 50,
+                                                    child: Center(
+                                                      child: Text(
+                                                        "XXXXX SAR",
+                                                        textScaleFactor: 1.5,
+                                                        style: TextStyle(
+                                                            color:
+                                                                Color.fromRGBO(
+                                                                    3, 1, 1, 1),
+                                                            fontSize: 9,
+                                                            fontFamily:
+                                                                "SFProText"),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    height: 50,
+                                                    child: Center(
+                                                      child: Text(
+                                                        "Paid",
+                                                        textScaleFactor: 1.5,
+                                                        style: TextStyle(
+                                                            color:
+                                                                Color.fromRGBO(
+                                                                    46,
+                                                                    173,
+                                                                    11,
+                                                                    1),
+                                                            fontSize: 9,
+                                                            fontFamily:
+                                                                "SFProText"),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    height: 50,
+                                                    child: Center(
+                                                      child: Text(
+                                                        "Completed",
+                                                        textScaleFactor: 1.5,
+                                                        style: TextStyle(
+                                                            color:
+                                                                Color.fromRGBO(
+                                                                    124,
+                                                                    115,
+                                                                    115,
+                                                                    1),
+                                                            fontSize: 9,
+                                                            fontFamily:
+                                                                "SFProText"),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ]),
+                                                TableRow(children: [
+                                                  Container(
+                                                    height: 50,
+                                                    child: Center(
+                                                      child: Text(
+                                                        "#8189472734",
+                                                        textScaleFactor: 1.5,
+                                                        style: TextStyle(
+                                                            color:
+                                                                Color.fromRGBO(
+                                                                    3, 1, 1, 1),
+                                                            fontSize: 9,
+                                                            fontFamily:
+                                                                "SFProText"),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    height: 50,
+                                                    child: Center(
+                                                      child: Text(
+                                                        "Contract",
+                                                        textScaleFactor: 1.5,
+                                                        style: TextStyle(
+                                                            color:
+                                                                Color.fromRGBO(
+                                                                    3, 1, 1, 1),
+                                                            fontSize: 9,
+                                                            fontFamily:
+                                                                "SFProText"),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    height: 50,
+                                                    child: Center(
+                                                      child: Image.asset(
+                                                        'Group268.png',
+                                                        width: 50,
+                                                        height: 30,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    height: 50,
+                                                    child: Center(
+                                                      child: Text(
+                                                        "XXXXX SAR",
+                                                        textScaleFactor: 1.5,
+                                                        style: TextStyle(
+                                                            color:
+                                                                Color.fromRGBO(
+                                                                    3, 1, 1, 1),
+                                                            fontSize: 9,
+                                                            fontFamily:
+                                                                "SFProText"),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    height: 50,
+                                                    child: Center(
+                                                      child: Text(
+                                                        "XXXXX SAR",
+                                                        textScaleFactor: 1.5,
+                                                        style: TextStyle(
+                                                            color:
+                                                                Color.fromRGBO(
+                                                                    228,
+                                                                    18,
+                                                                    17,
+                                                                    1),
+                                                            fontSize: 9,
+                                                            fontFamily:
+                                                                "SFProText"),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    height: 50,
+                                                    child: Center(
+                                                      child: SizedBox(
+                                                        width: 95,
+                                                        height: 30,
+                                                        child: ElevatedButton(
+                                                          onPressed: () {},
+                                                          style: ElevatedButton
+                                                              .styleFrom(
+                                                            primary:
+                                                                Color.fromRGBO(
+                                                                    110,
+                                                                    90,
+                                                                    234,
+                                                                    1),
+                                                            side: BorderSide(
+                                                              color: Color
+                                                                  .fromRGBO(
+                                                                      110,
+                                                                      90,
+                                                                      234,
+                                                                      1),
+                                                            ),
+                                                          ),
+                                                          child: Text(
+                                                            'Pay Pal',
+                                                            style: TextStyle(
+                                                              color:
+                                                                  Colors.white,
+                                                              fontSize: 12,
+                                                              fontFamily:
+                                                                  "Helvetica",
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ]),
+                                              ],
+                                            ),
                                           ),
                                         ),
                                       ),
-                                    ),
-                                    SizedBox(
-                                      height: 30,
-                                    ),
-                                    Padding(
-                                      padding:
-                                          const EdgeInsets.only(right: 110),
-                                      child: SingleChildScrollView(
-                                        scrollDirection: Axis.horizontal,
-                                        child: Container(
-                                          height:
-                                              10, // Adjust the height as needed
-                                          width:
-                                              1100, // Set the desired length of the scroll bar
-                                          color: Colors
-                                              .grey, // Background color of the scrollable area
+                                      SizedBox(
+                                        height: 100,
+                                      ),
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(right: 110),
+                                        child: SingleChildScrollView(
+                                          scrollDirection: Axis.horizontal,
+                                          child: Container(
+                                            height:
+                                                10, // Adjust the height as needed
+                                            width:
+                                                1100, // Set the desired length of the scroll bar
+                                            color: Colors
+                                                .grey, // Background color of the scrollable area
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                           Container(
                             color: Colors.pink,
