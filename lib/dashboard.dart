@@ -2864,6 +2864,19 @@ class _MyHomePageState extends State<Dashboard> {
                               children: [
                                 Row(
                                   children: [
+                                    Text(
+                                      "Recent Bookings",
+                                      style: TextStyle(
+                                          fontSize: 20,
+                                          fontFamily: "SFProText"),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                Row(
+                                  children: [
                                     Container(
                                       height: 292,
                                       decoration: BoxDecoration(
@@ -2958,7 +2971,7 @@ class _MyHomePageState extends State<Dashboard> {
                                                                 'View button pressed');
                                                           },
                                                           child: Container(
-                                                            height: 43,
+                                                            height: 42,
                                                             width: 80,
                                                             padding:
                                                                 EdgeInsets.all(
@@ -3000,7 +3013,7 @@ class _MyHomePageState extends State<Dashboard> {
                                                                     fontWeight:
                                                                         FontWeight
                                                                             .bold,
-                                                                    fontSize: 9,
+                                                                    fontSize: 8,
                                                                   ),
                                                                 ),
                                                               ),
@@ -3046,7 +3059,7 @@ class _MyHomePageState extends State<Dashboard> {
                                                                 'View button pressed');
                                                           },
                                                           child: Container(
-                                                            height: 43,
+                                                            height: 42,
                                                             width: 80,
                                                             padding:
                                                                 EdgeInsets.all(
@@ -3088,7 +3101,7 @@ class _MyHomePageState extends State<Dashboard> {
                                                                     fontWeight:
                                                                         FontWeight
                                                                             .bold,
-                                                                    fontSize: 9,
+                                                                    fontSize: 8,
                                                                   ),
                                                                 ),
                                                               ),
@@ -3142,7 +3155,7 @@ class _MyHomePageState extends State<Dashboard> {
                                                                 'View button pressed');
                                                           },
                                                           child: Container(
-                                                            height: 43,
+                                                            height: 42,
                                                             width: 80,
                                                             padding:
                                                                 EdgeInsets.all(
@@ -3184,7 +3197,7 @@ class _MyHomePageState extends State<Dashboard> {
                                                                     fontWeight:
                                                                         FontWeight
                                                                             .bold,
-                                                                    fontSize: 9,
+                                                                    fontSize: 8,
                                                                   ),
                                                                 ),
                                                               ),
@@ -3299,7 +3312,7 @@ class _MyHomePageState extends State<Dashboard> {
                                                                 'View button pressed');
                                                           },
                                                           child: Container(
-                                                            height: 43,
+                                                            height: 42,
                                                             width: 80,
                                                             padding:
                                                                 EdgeInsets.all(
@@ -3341,7 +3354,7 @@ class _MyHomePageState extends State<Dashboard> {
                                                                     fontWeight:
                                                                         FontWeight
                                                                             .bold,
-                                                                    fontSize: 9,
+                                                                    fontSize: 8,
                                                                   ),
                                                                 ),
                                                               ),
@@ -3387,7 +3400,7 @@ class _MyHomePageState extends State<Dashboard> {
                                                                 'View button pressed');
                                                           },
                                                           child: Container(
-                                                            height: 43,
+                                                            height: 42,
                                                             width: 80,
                                                             padding:
                                                                 EdgeInsets.all(
@@ -3429,7 +3442,7 @@ class _MyHomePageState extends State<Dashboard> {
                                                                     fontWeight:
                                                                         FontWeight
                                                                             .bold,
-                                                                    fontSize: 9,
+                                                                    fontSize: 8,
                                                                   ),
                                                                 ),
                                                               ),
@@ -3483,7 +3496,7 @@ class _MyHomePageState extends State<Dashboard> {
                                                                 'View button pressed');
                                                           },
                                                           child: Container(
-                                                            height: 43,
+                                                            height: 42,
                                                             width: 80,
                                                             padding:
                                                                 EdgeInsets.all(
@@ -3525,7 +3538,7 @@ class _MyHomePageState extends State<Dashboard> {
                                                                     fontWeight:
                                                                         FontWeight
                                                                             .bold,
-                                                                    fontSize: 9,
+                                                                    fontSize: 8,
                                                                   ),
                                                                 ),
                                                               ),
