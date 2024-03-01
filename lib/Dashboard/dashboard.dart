@@ -52,7 +52,7 @@ class _DashboardState extends State<Dashboard> {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(left: 90, top: 30),
+                    padding: const EdgeInsets.only(left: 135, top: 30),
                     child: Row(
                       children: [
                         Text("No of Bookings  "),
@@ -64,12 +64,19 @@ class _DashboardState extends State<Dashboard> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(left: 90, top: 10),
+                    padding: const EdgeInsets.only(left: 135, top: 10),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Container(
                           decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: Color.fromRGBO(216, 216, 216, 1),
+                                offset: Offset(0, 1),
+                                blurRadius: 0.1, // changes position of shadow
+                              ),
+                            ],
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(12.0),
                           ),
@@ -127,6 +134,13 @@ class _DashboardState extends State<Dashboard> {
                         Container(
                           decoration: BoxDecoration(
                             color: Colors.white,
+                            boxShadow: [
+                              BoxShadow(
+                                color: Color.fromRGBO(216, 216, 216, 1),
+                                offset: Offset(0, 1),
+                                blurRadius: 0.1, // changes position of shadow
+                              ),
+                            ],
                             borderRadius: BorderRadius.circular(12.0),
                           ),
                           margin: const EdgeInsets.only(top: 10),
@@ -298,6 +312,13 @@ class _DashboardState extends State<Dashboard> {
                           height: 250,
                           width: 163,
                           decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: Color.fromRGBO(216, 216, 216, 1),
+                                offset: Offset(0, 1),
+                                blurRadius: 0.1, // changes position of shadow
+                              ),
+                            ],
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(12.0),
                           ),
@@ -375,17 +396,24 @@ class _DashboardState extends State<Dashboard> {
                     ),
                   ),
                   SizedBox(
-                    height: 60,
+                    height: 40,
                   ),
                   Padding(
                     padding: const EdgeInsets.only(
-                      left: 90,
+                      left: 135,
                     ),
                     child: Row(
                       children: [
                         Container(
                           height: 292,
                           decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: Color.fromRGBO(216, 216, 216, 1),
+                                offset: Offset(0, 1),
+                                blurRadius: 0.1, // changes position of shadow
+                              ),
+                            ],
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(12.0),
                           ),
@@ -401,12 +429,16 @@ class _DashboardState extends State<Dashboard> {
                                     children: [
                                       Padding(
                                         padding: const EdgeInsets.all(8.0),
-                                        child: Text(
-                                          'Bookings',
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.bold,
+                                        child: Padding(
+                                          padding:
+                                              const EdgeInsets.only(left: 10),
+                                          child: Text(
+                                            'Bookings',
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.bold,
+                                            ),
                                           ),
                                         ),
                                       ),
@@ -459,7 +491,7 @@ class _DashboardState extends State<Dashboard> {
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.end,
                                               children: [
-                                                Text("Truck"),
+                                                Text("Truck11"),
                                               ],
                                             ),
                                             SizedBox(
@@ -471,16 +503,17 @@ class _DashboardState extends State<Dashboard> {
                                                 print('View button pressed');
                                               },
                                               child: Container(
-                                                height: 43,
-                                                width: 80,
+                                                height: 30,
+                                                width: 81,
                                                 padding: EdgeInsets.all(8),
                                                 decoration: BoxDecoration(
                                                   boxShadow: [
                                                     BoxShadow(
-                                                      color: Colors.grey,
-                                                      spreadRadius: 1,
+                                                      color: Color.fromRGBO(
+                                                          216, 216, 216, 1),
+                                                      offset: Offset(0, 1),
                                                       blurRadius:
-                                                          2, // changes position of shadow
+                                                          0.1, // changes position of shadow
                                                     ),
                                                   ],
                                                   color: Color.fromRGBO(
@@ -500,6 +533,7 @@ class _DashboardState extends State<Dashboard> {
                                                         fontWeight:
                                                             FontWeight.bold,
                                                         fontSize: 10,
+                                                        fontFamily: "SFProText",
                                                       ),
                                                     ),
                                                   ),
@@ -552,15 +586,16 @@ class _DashboardState extends State<Dashboard> {
                                               },
                                               child: Container(
                                                 height: 43,
-                                                width: 80,
+                                                width: 70,
                                                 padding: EdgeInsets.all(8),
                                                 decoration: BoxDecoration(
                                                   boxShadow: [
                                                     BoxShadow(
-                                                      color: Colors.grey,
-                                                      spreadRadius: 1,
+                                                      color: Color.fromRGBO(
+                                                          216, 216, 216, 1),
+                                                      offset: Offset(0, 1),
                                                       blurRadius:
-                                                          2, // changes position of shadow
+                                                          0.1, // changes position of shadow
                                                     ),
                                                   ],
                                                   color: Color.fromRGBO(
@@ -635,10 +670,11 @@ class _DashboardState extends State<Dashboard> {
                                                 decoration: BoxDecoration(
                                                   boxShadow: [
                                                     BoxShadow(
-                                                      color: Colors.grey,
-                                                      spreadRadius: 1,
+                                                      color: Color.fromRGBO(
+                                                          216, 216, 216, 1),
+                                                      offset: Offset(0, 1),
                                                       blurRadius:
-                                                          2, // changes position of shadow
+                                                          0.1, // changes position of shadow
                                                     ),
                                                   ],
                                                   color: Color.fromRGBO(
@@ -681,10 +717,17 @@ class _DashboardState extends State<Dashboard> {
                         Container(
                           height: 294,
                           decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: Color.fromRGBO(216, 216, 216, 1),
+                                offset: Offset(0, 1),
+                                blurRadius: 0.1, // changes position of shadow
+                              ),
+                            ],
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(12.0),
                           ),
-                          width: 613,
+                          width: 610,
                           child: Column(
                             children: [
                               Container(
@@ -696,12 +739,16 @@ class _DashboardState extends State<Dashboard> {
                                     children: [
                                       Padding(
                                         padding: const EdgeInsets.all(8.0),
-                                        child: Text(
-                                          'Pending Booking Approvals',
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.bold,
+                                        child: Padding(
+                                          padding:
+                                              const EdgeInsets.only(left: 10),
+                                          child: Text(
+                                            'Pending Booking Approvals',
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.bold,
+                                            ),
                                           ),
                                         ),
                                       ),
@@ -862,10 +909,11 @@ class _DashboardState extends State<Dashboard> {
                                               decoration: BoxDecoration(
                                                   boxShadow: [
                                                     BoxShadow(
-                                                      color: Colors.grey,
-                                                      spreadRadius: 1,
+                                                      color: Color.fromRGBO(
+                                                          216, 216, 216, 1),
+                                                      offset: Offset(0, 1),
                                                       blurRadius:
-                                                          2, // changes position of shadow
+                                                          0.1, // changes position of shadow
                                                     ),
                                                   ],
                                                   color: Color.fromRGBO(
@@ -888,11 +936,16 @@ class _DashboardState extends State<Dashboard> {
                                                       decoration: BoxDecoration(
                                                           boxShadow: [
                                                             BoxShadow(
-                                                              color:
-                                                                  Colors.grey,
-                                                              spreadRadius: 1,
+                                                              color: Color
+                                                                  .fromRGBO(
+                                                                      216,
+                                                                      216,
+                                                                      216,
+                                                                      1),
+                                                              offset:
+                                                                  Offset(0, 1),
                                                               blurRadius:
-                                                                  2, // changes position of shadow
+                                                                  0.1, // changes position of shadow
                                                             ),
                                                           ],
                                                           color: Color.fromRGBO(
@@ -963,11 +1016,16 @@ class _DashboardState extends State<Dashboard> {
                                                       decoration: BoxDecoration(
                                                           boxShadow: [
                                                             BoxShadow(
-                                                              color:
-                                                                  Colors.grey,
-                                                              spreadRadius: 1,
+                                                              color: Color
+                                                                  .fromRGBO(
+                                                                      216,
+                                                                      216,
+                                                                      216,
+                                                                      1),
+                                                              offset:
+                                                                  Offset(0, 1),
                                                               blurRadius:
-                                                                  2, // changes position of shadow
+                                                                  0.1, // changes position of shadow
                                                             ),
                                                           ],
                                                           color: Color.fromRGBO(
@@ -1038,11 +1096,16 @@ class _DashboardState extends State<Dashboard> {
                                                       decoration: BoxDecoration(
                                                           boxShadow: [
                                                             BoxShadow(
-                                                              color:
-                                                                  Colors.grey,
-                                                              spreadRadius: 1,
+                                                              color: Color
+                                                                  .fromRGBO(
+                                                                      216,
+                                                                      216,
+                                                                      216,
+                                                                      1),
+                                                              offset:
+                                                                  Offset(0, 1),
                                                               blurRadius:
-                                                                  2, // changes position of shadow
+                                                                  0.1, // changes position of shadow
                                                             ),
                                                           ],
                                                           color: Color.fromRGBO(
@@ -1108,10 +1171,11 @@ class _DashboardState extends State<Dashboard> {
                                               decoration: BoxDecoration(
                                                   boxShadow: [
                                                     BoxShadow(
-                                                      color: Colors.grey,
-                                                      spreadRadius: 1,
+                                                      color: Color.fromRGBO(
+                                                          216, 216, 216, 1),
+                                                      offset: Offset(0, 1),
                                                       blurRadius:
-                                                          2, // changes position of shadow
+                                                          0.1, // changes position of shadow
                                                     ),
                                                   ],
                                                   color: Color.fromRGBO(
@@ -1134,11 +1198,16 @@ class _DashboardState extends State<Dashboard> {
                                                       decoration: BoxDecoration(
                                                           boxShadow: [
                                                             BoxShadow(
-                                                              color:
-                                                                  Colors.grey,
-                                                              spreadRadius: 1,
+                                                              color: Color
+                                                                  .fromRGBO(
+                                                                      216,
+                                                                      216,
+                                                                      216,
+                                                                      1),
+                                                              offset:
+                                                                  Offset(0, 1),
                                                               blurRadius:
-                                                                  2, // changes position of shadow
+                                                                  0.1, // changes position of shadow
                                                             ),
                                                           ],
                                                           color: Color.fromRGBO(
@@ -1209,11 +1278,16 @@ class _DashboardState extends State<Dashboard> {
                                                       decoration: BoxDecoration(
                                                           boxShadow: [
                                                             BoxShadow(
-                                                              color:
-                                                                  Colors.grey,
-                                                              spreadRadius: 1,
+                                                              color: Color
+                                                                  .fromRGBO(
+                                                                      216,
+                                                                      216,
+                                                                      216,
+                                                                      1),
+                                                              offset:
+                                                                  Offset(0, 1),
                                                               blurRadius:
-                                                                  2, // changes position of shadow
+                                                                  0.1, // changes position of shadow
                                                             ),
                                                           ],
                                                           color: Color.fromRGBO(
@@ -1284,11 +1358,16 @@ class _DashboardState extends State<Dashboard> {
                                                       decoration: BoxDecoration(
                                                           boxShadow: [
                                                             BoxShadow(
-                                                              color:
-                                                                  Colors.grey,
-                                                              spreadRadius: 0.5,
+                                                              color: Color
+                                                                  .fromRGBO(
+                                                                      216,
+                                                                      216,
+                                                                      216,
+                                                                      1),
+                                                              offset:
+                                                                  Offset(0, 1),
                                                               blurRadius:
-                                                                  1, // changes position of shadow
+                                                                  0.1, // changes position of shadow
                                                             ),
                                                           ],
                                                           color: Color.fromRGBO(
@@ -1354,10 +1433,11 @@ class _DashboardState extends State<Dashboard> {
                                               decoration: BoxDecoration(
                                                   boxShadow: [
                                                     BoxShadow(
-                                                      color: Colors.grey,
-                                                      spreadRadius: 1,
+                                                      color: Color.fromRGBO(
+                                                          216, 216, 216, 1),
+                                                      offset: Offset(0, 1),
                                                       blurRadius:
-                                                          2, // changes position of shadow
+                                                          0.1, // changes position of shadow
                                                     ),
                                                   ],
                                                   color: Color.fromRGBO(
@@ -1380,11 +1460,16 @@ class _DashboardState extends State<Dashboard> {
                                                       decoration: BoxDecoration(
                                                           boxShadow: [
                                                             BoxShadow(
-                                                              color:
-                                                                  Colors.grey,
-                                                              spreadRadius: 1,
+                                                              color: Color
+                                                                  .fromRGBO(
+                                                                      216,
+                                                                      216,
+                                                                      216,
+                                                                      1),
+                                                              offset:
+                                                                  Offset(0, 1),
                                                               blurRadius:
-                                                                  2, // changes position of shadow
+                                                                  0.1, // changes position of shadow
                                                             ),
                                                           ],
                                                           color: Color.fromRGBO(
@@ -1455,11 +1540,16 @@ class _DashboardState extends State<Dashboard> {
                                                       decoration: BoxDecoration(
                                                           boxShadow: [
                                                             BoxShadow(
-                                                              color:
-                                                                  Colors.grey,
-                                                              spreadRadius: 1,
+                                                              color: Color
+                                                                  .fromRGBO(
+                                                                      216,
+                                                                      216,
+                                                                      216,
+                                                                      1),
+                                                              offset:
+                                                                  Offset(0, 1),
                                                               blurRadius:
-                                                                  2, // changes position of shadow
+                                                                  0.1, // changes position of shadow
                                                             ),
                                                           ],
                                                           color: Color.fromRGBO(
@@ -1530,11 +1620,16 @@ class _DashboardState extends State<Dashboard> {
                                                       decoration: BoxDecoration(
                                                           boxShadow: [
                                                             BoxShadow(
-                                                              color:
-                                                                  Colors.grey,
-                                                              spreadRadius: 1,
+                                                              color: Color
+                                                                  .fromRGBO(
+                                                                      216,
+                                                                      216,
+                                                                      216,
+                                                                      1),
+                                                              offset:
+                                                                  Offset(0, 1),
                                                               blurRadius:
-                                                                  2, // changes position of shadow
+                                                                  0.1, // changes position of shadow
                                                             ),
                                                           ],
                                                           color: Color.fromRGBO(
@@ -2092,10 +2187,11 @@ class _DashboardState extends State<Dashboard> {
                                                 decoration: BoxDecoration(
                                                   boxShadow: [
                                                     BoxShadow(
-                                                      color: Colors.grey,
-                                                      spreadRadius: 1,
+                                                      color: Color.fromRGBO(
+                                                          216, 216, 216, 1),
+                                                      offset: Offset(0, 1),
                                                       blurRadius:
-                                                          2, // changes position of shadow
+                                                          0.1, // changes position of shadow
                                                     ),
                                                   ],
                                                   color: Color.fromRGBO(
@@ -2172,10 +2268,11 @@ class _DashboardState extends State<Dashboard> {
                                                 decoration: BoxDecoration(
                                                   boxShadow: [
                                                     BoxShadow(
-                                                      color: Colors.grey,
-                                                      spreadRadius: 1,
+                                                      color: Color.fromRGBO(
+                                                          216, 216, 216, 1),
+                                                      offset: Offset(0, 1),
                                                       blurRadius:
-                                                          2, // changes position of shadow
+                                                          0.1, // changes position of shadow
                                                     ),
                                                   ],
                                                   color: Color.fromRGBO(
@@ -2250,10 +2347,11 @@ class _DashboardState extends State<Dashboard> {
                                                 decoration: BoxDecoration(
                                                   boxShadow: [
                                                     BoxShadow(
-                                                      color: Colors.grey,
-                                                      spreadRadius: 1,
+                                                      color: Color.fromRGBO(
+                                                          216, 216, 216, 1),
+                                                      offset: Offset(0, 1),
                                                       blurRadius:
-                                                          2, // changes position of shadow
+                                                          0.1, // changes position of shadow
                                                     ),
                                                   ],
                                                   color: Color.fromRGBO(
@@ -2477,10 +2575,11 @@ class _DashboardState extends State<Dashboard> {
                                               decoration: BoxDecoration(
                                                   boxShadow: [
                                                     BoxShadow(
-                                                      color: Colors.grey,
-                                                      spreadRadius: 1,
+                                                      color: Color.fromRGBO(
+                                                          216, 216, 216, 1),
+                                                      offset: Offset(0, 1),
                                                       blurRadius:
-                                                          2, // changes position of shadow
+                                                          0.1, // changes position of shadow
                                                     ),
                                                   ],
                                                   color: Color.fromRGBO(
@@ -2503,11 +2602,16 @@ class _DashboardState extends State<Dashboard> {
                                                       decoration: BoxDecoration(
                                                           boxShadow: [
                                                             BoxShadow(
-                                                              color:
-                                                                  Colors.grey,
-                                                              spreadRadius: 1,
+                                                              color: Color
+                                                                  .fromRGBO(
+                                                                      216,
+                                                                      216,
+                                                                      216,
+                                                                      1),
+                                                              offset:
+                                                                  Offset(0, 1),
                                                               blurRadius:
-                                                                  2, // changes position of shadow
+                                                                  0.1, // changes position of shadow
                                                             ),
                                                           ],
                                                           color: Color.fromRGBO(
@@ -2578,11 +2682,16 @@ class _DashboardState extends State<Dashboard> {
                                                       decoration: BoxDecoration(
                                                           boxShadow: [
                                                             BoxShadow(
-                                                              color:
-                                                                  Colors.grey,
-                                                              spreadRadius: 1,
+                                                              color: Color
+                                                                  .fromRGBO(
+                                                                      216,
+                                                                      216,
+                                                                      216,
+                                                                      1),
+                                                              offset:
+                                                                  Offset(0, 1),
                                                               blurRadius:
-                                                                  2, // changes position of shadow
+                                                                  0.1, // changes position of shadow
                                                             ),
                                                           ],
                                                           color: Color.fromRGBO(
@@ -2653,11 +2762,16 @@ class _DashboardState extends State<Dashboard> {
                                                       decoration: BoxDecoration(
                                                           boxShadow: [
                                                             BoxShadow(
-                                                              color:
-                                                                  Colors.grey,
-                                                              spreadRadius: 1,
+                                                              color: Color
+                                                                  .fromRGBO(
+                                                                      216,
+                                                                      216,
+                                                                      216,
+                                                                      1),
+                                                              offset:
+                                                                  Offset(0, 1),
                                                               blurRadius:
-                                                                  2, // changes position of shadow
+                                                                  0.1, // changes position of shadow
                                                             ),
                                                           ],
                                                           color: Color.fromRGBO(
@@ -2723,10 +2837,11 @@ class _DashboardState extends State<Dashboard> {
                                               decoration: BoxDecoration(
                                                   boxShadow: [
                                                     BoxShadow(
-                                                      color: Colors.grey,
-                                                      spreadRadius: 1,
+                                                      color: Color.fromRGBO(
+                                                          216, 216, 216, 1),
+                                                      offset: Offset(0, 1),
                                                       blurRadius:
-                                                          2, // changes position of shadow
+                                                          0.1, // changes position of shadow
                                                     ),
                                                   ],
                                                   color: Color.fromRGBO(
@@ -2749,11 +2864,16 @@ class _DashboardState extends State<Dashboard> {
                                                       decoration: BoxDecoration(
                                                           boxShadow: [
                                                             BoxShadow(
-                                                              color:
-                                                                  Colors.grey,
-                                                              spreadRadius: 1,
+                                                              color: Color
+                                                                  .fromRGBO(
+                                                                      216,
+                                                                      216,
+                                                                      216,
+                                                                      1),
+                                                              offset:
+                                                                  Offset(0, 1),
                                                               blurRadius:
-                                                                  2, // changes position of shadow
+                                                                  0.1, // changes position of shadow
                                                             ),
                                                           ],
                                                           color: Color.fromRGBO(
@@ -2824,11 +2944,16 @@ class _DashboardState extends State<Dashboard> {
                                                       decoration: BoxDecoration(
                                                           boxShadow: [
                                                             BoxShadow(
-                                                              color:
-                                                                  Colors.grey,
-                                                              spreadRadius: 1,
+                                                              color: Color
+                                                                  .fromRGBO(
+                                                                      216,
+                                                                      216,
+                                                                      216,
+                                                                      1),
+                                                              offset:
+                                                                  Offset(0, 1),
                                                               blurRadius:
-                                                                  2, // changes position of shadow
+                                                                  0.1, // changes position of shadow
                                                             ),
                                                           ],
                                                           color: Color.fromRGBO(
@@ -2899,11 +3024,16 @@ class _DashboardState extends State<Dashboard> {
                                                       decoration: BoxDecoration(
                                                           boxShadow: [
                                                             BoxShadow(
-                                                              color:
-                                                                  Colors.grey,
-                                                              spreadRadius: 0.5,
+                                                              color: Color
+                                                                  .fromRGBO(
+                                                                      216,
+                                                                      216,
+                                                                      216,
+                                                                      1),
+                                                              offset:
+                                                                  Offset(0, 1),
                                                               blurRadius:
-                                                                  1, // changes position of shadow
+                                                                  0.1, // changes position of shadow
                                                             ),
                                                           ],
                                                           color: Color.fromRGBO(
@@ -2969,10 +3099,11 @@ class _DashboardState extends State<Dashboard> {
                                               decoration: BoxDecoration(
                                                   boxShadow: [
                                                     BoxShadow(
-                                                      color: Colors.grey,
-                                                      spreadRadius: 1,
+                                                      color: Color.fromRGBO(
+                                                          216, 216, 216, 1),
+                                                      offset: Offset(0, 1),
                                                       blurRadius:
-                                                          2, // changes position of shadow
+                                                          0.1, // changes position of shadow
                                                     ),
                                                   ],
                                                   color: Color.fromRGBO(
@@ -2995,11 +3126,16 @@ class _DashboardState extends State<Dashboard> {
                                                       decoration: BoxDecoration(
                                                           boxShadow: [
                                                             BoxShadow(
-                                                              color:
-                                                                  Colors.grey,
-                                                              spreadRadius: 1,
+                                                              color: Color
+                                                                  .fromRGBO(
+                                                                      216,
+                                                                      216,
+                                                                      216,
+                                                                      1),
+                                                              offset:
+                                                                  Offset(0, 1),
                                                               blurRadius:
-                                                                  2, // changes position of shadow
+                                                                  0.1, // changes position of shadow
                                                             ),
                                                           ],
                                                           color: Color.fromRGBO(
@@ -3070,11 +3206,16 @@ class _DashboardState extends State<Dashboard> {
                                                       decoration: BoxDecoration(
                                                           boxShadow: [
                                                             BoxShadow(
-                                                              color:
-                                                                  Colors.grey,
-                                                              spreadRadius: 1,
+                                                              color: Color
+                                                                  .fromRGBO(
+                                                                      216,
+                                                                      216,
+                                                                      216,
+                                                                      1),
+                                                              offset:
+                                                                  Offset(0, 1),
                                                               blurRadius:
-                                                                  2, // changes position of shadow
+                                                                  0.1, // changes position of shadow
                                                             ),
                                                           ],
                                                           color: Color.fromRGBO(
@@ -3145,11 +3286,16 @@ class _DashboardState extends State<Dashboard> {
                                                       decoration: BoxDecoration(
                                                           boxShadow: [
                                                             BoxShadow(
-                                                              color:
-                                                                  Colors.grey,
-                                                              spreadRadius: 1,
+                                                              color: Color
+                                                                  .fromRGBO(
+                                                                      216,
+                                                                      216,
+                                                                      216,
+                                                                      1),
+                                                              offset:
+                                                                  Offset(0, 1),
                                                               blurRadius:
-                                                                  2, // changes position of shadow
+                                                                  0.1, // changes position of shadow
                                                             ),
                                                           ],
                                                           color: Color.fromRGBO(
