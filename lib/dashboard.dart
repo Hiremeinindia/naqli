@@ -1119,7 +1119,7 @@ class _MyHomePageState extends State<Dashboard> {
                                                                     'View button pressed');
                                                               },
                                                               child: Container(
-                                                                height: 43,
+                                                                height: 42,
                                                                 width: 80,
                                                                 padding:
                                                                     EdgeInsets
@@ -1165,7 +1165,7 @@ class _MyHomePageState extends State<Dashboard> {
                                                                         fontWeight:
                                                                             FontWeight.bold,
                                                                         fontSize:
-                                                                            10,
+                                                                            9,
                                                                       ),
                                                                     ),
                                                                   ),
@@ -1225,7 +1225,7 @@ class _MyHomePageState extends State<Dashboard> {
                                                                     'View button pressed');
                                                               },
                                                               child: Container(
-                                                                height: 43,
+                                                                height: 42,
                                                                 width: 80,
                                                                 padding:
                                                                     EdgeInsets
@@ -1271,7 +1271,7 @@ class _MyHomePageState extends State<Dashboard> {
                                                                         fontWeight:
                                                                             FontWeight.bold,
                                                                         fontSize:
-                                                                            10,
+                                                                            9,
                                                                       ),
                                                                     ),
                                                                   ),
@@ -4219,7 +4219,7 @@ class _MyHomePageState extends State<Dashboard> {
                                                                 ),
                                                               ),
                                                               child: Text(
-                                                                'BalXXXX',
+                                                                'Completed',
                                                                 style:
                                                                     TextStyle(
                                                                   color: Colors
