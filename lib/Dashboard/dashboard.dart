@@ -443,7 +443,7 @@ class _DashboardState extends State<Dashboard> {
                                       ),
                                       Padding(
                                         padding:
-                                            const EdgeInsets.only(left: 180),
+                                            const EdgeInsets.only(left: 170),
                                         child: Text(
                                           "view all",
                                           style: TextStyle(
@@ -496,7 +496,7 @@ class _DashboardState extends State<Dashboard> {
                                             SizedBox(
                                                 width:
                                                     30), // Add some space between "Truck" and "View" button
-                                            GestureDetector(
+                                            InkWell(
                                               onTap: () {
                                                 // Add your View button functionality here
                                                 print('View button pressed');
@@ -504,7 +504,6 @@ class _DashboardState extends State<Dashboard> {
                                               child: Container(
                                                 height: 30,
                                                 width: 81,
-                                                padding: EdgeInsets.all(8),
                                                 decoration: BoxDecoration(
                                                   boxShadow: [
                                                     BoxShadow(
@@ -520,20 +519,16 @@ class _DashboardState extends State<Dashboard> {
                                                   borderRadius:
                                                       BorderRadius.circular(5),
                                                 ),
-                                                child: Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(8.0),
-                                                  child: Center(
-                                                    child: Text(
-                                                      'View',
-                                                      style: TextStyle(
-                                                        color: Color.fromRGBO(
-                                                            127, 106, 255, 1),
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        fontSize: 10,
-                                                        fontFamily: "SFProText",
-                                                      ),
+                                                child: Center(
+                                                  child: Text(
+                                                    'View',
+                                                    style: TextStyle(
+                                                      color: Color.fromRGBO(
+                                                          127, 106, 255, 1),
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontSize: 10,
+                                                      fontFamily: "SFProText",
                                                     ),
                                                   ),
                                                 ),
@@ -556,7 +551,7 @@ class _DashboardState extends State<Dashboard> {
                                           'Equipment Hire',
                                           style: const TextStyle(
                                             fontWeight: FontWeight.bold,
-                                            fontSize: 11,
+                                            fontSize: 10.3,
                                           ),
                                         ),
                                         subtitle: Text(
@@ -578,15 +573,14 @@ class _DashboardState extends State<Dashboard> {
                                             SizedBox(
                                                 width:
                                                     30), // Add some space between "Truck" and "View" button
-                                            GestureDetector(
+                                            InkWell(
                                               onTap: () {
                                                 // Add your View button functionality here
                                                 print('View button pressed');
                                               },
                                               child: Container(
-                                                height: 43,
-                                                width: 70,
-                                                padding: EdgeInsets.all(8),
+                                                height: 30,
+                                                width: 81,
                                                 decoration: BoxDecoration(
                                                   boxShadow: [
                                                     BoxShadow(
@@ -602,19 +596,16 @@ class _DashboardState extends State<Dashboard> {
                                                   borderRadius:
                                                       BorderRadius.circular(5),
                                                 ),
-                                                child: Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(8.0),
-                                                  child: Center(
-                                                    child: Text(
-                                                      'View',
-                                                      style: TextStyle(
-                                                        color: Color.fromRGBO(
-                                                            127, 106, 255, 1),
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        fontSize: 10,
-                                                      ),
+                                                child: Center(
+                                                  child: Text(
+                                                    'View',
+                                                    style: TextStyle(
+                                                      color: Color.fromRGBO(
+                                                          127, 106, 255, 1),
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontSize: 10,
+                                                      fontFamily: "SFProText",
                                                     ),
                                                   ),
                                                 ),
@@ -657,15 +648,14 @@ class _DashboardState extends State<Dashboard> {
                                             SizedBox(
                                                 width:
                                                     30), // Add some space between "Truck" and "View" button
-                                            GestureDetector(
+                                            InkWell(
                                               onTap: () {
                                                 // Add your View button functionality here
                                                 print('View button pressed');
                                               },
                                               child: Container(
-                                                height: 43,
-                                                width: 80,
-                                                padding: EdgeInsets.all(8),
+                                                height: 30,
+                                                width: 81,
                                                 decoration: BoxDecoration(
                                                   boxShadow: [
                                                     BoxShadow(
@@ -681,19 +671,16 @@ class _DashboardState extends State<Dashboard> {
                                                   borderRadius:
                                                       BorderRadius.circular(5),
                                                 ),
-                                                child: Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(8.0),
-                                                  child: Center(
-                                                    child: Text(
-                                                      'View',
-                                                      style: TextStyle(
-                                                        color: Color.fromRGBO(
-                                                            127, 106, 255, 1),
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        fontSize: 10,
-                                                      ),
+                                                child: Center(
+                                                  child: Text(
+                                                    'View',
+                                                    style: TextStyle(
+                                                      color: Color.fromRGBO(
+                                                          127, 106, 255, 1),
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontSize: 10,
+                                                      fontFamily: "SFProText",
                                                     ),
                                                   ),
                                                 ),
@@ -753,7 +740,7 @@ class _DashboardState extends State<Dashboard> {
                                       ),
                                       Padding(
                                         padding:
-                                            const EdgeInsets.only(left: 300),
+                                            const EdgeInsets.only(left: 290),
                                         child: Text(
                                           "view all",
                                           style: TextStyle(
@@ -2302,6 +2289,94 @@ class _DashboardState extends State<Dashboard> {
                                             ),
                                           ],
                                         ),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 60,
+                                      width: 100,
+                                      child: Row(
+                                        children: [
+                                          ListTile(
+                                            leading: CircleAvatar(),
+                                            title: Text(
+                                              'Equipment Hire',
+                                              style: const TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 11,
+                                              ),
+                                            ),
+                                            subtitle: Text(
+                                              '10.02.2022',
+                                              style: TextStyle(fontSize: 10),
+                                            ),
+                                            trailing: Row(
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: [
+                                                Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.end,
+                                                  children: [
+                                                    Text("Heavy"),
+                                                    Text("Equipment"),
+                                                  ],
+                                                ),
+
+                                                SizedBox(
+                                                    width:
+                                                        30), // Add some space between "Truck" and "View" button
+                                                GestureDetector(
+                                                  onTap: () {
+                                                    // Add your View button functionality here
+                                                    print(
+                                                        'View button pressed');
+                                                  },
+                                                  child: Container(
+                                                    height: 43,
+                                                    width: 80,
+                                                    padding: EdgeInsets.all(8),
+                                                    decoration: BoxDecoration(
+                                                      boxShadow: [
+                                                        BoxShadow(
+                                                          color: Color.fromRGBO(
+                                                              216, 216, 216, 1),
+                                                          offset: Offset(0, 1),
+                                                          blurRadius:
+                                                              0.1, // changes position of shadow
+                                                        ),
+                                                      ],
+                                                      color: Color.fromRGBO(
+                                                          245, 243, 255, 1),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5),
+                                                    ),
+                                                    child: Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              8.0),
+                                                      child: Center(
+                                                        child: Text(
+                                                          'View',
+                                                          style: TextStyle(
+                                                            color:
+                                                                Color.fromRGBO(
+                                                                    127,
+                                                                    106,
+                                                                    255,
+                                                                    1),
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            fontSize: 10,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                     ),
                                     Divider(
