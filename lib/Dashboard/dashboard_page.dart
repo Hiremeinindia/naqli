@@ -230,7 +230,7 @@ class _MyHomePageState extends State<DashboardPage> {
                     child: Row(
                       children: [
                         Container(
-                          height: 1000, // Adjust the height as needed
+                          // Adjust the height as needed
                           width: 400,
                           color: Color.fromRGBO(234, 232, 235, 1),
                           child: Padding(
@@ -647,8 +647,8 @@ class _MyHomePageState extends State<DashboardPage> {
                         ),
                         Expanded(
                           child: PageView(controller: page, children: [
-                            Dashboard(),
                             TriggerBooking(),
+                            Dashboard(),
                             Bookings(),
                             Payments(),
                             Container(
