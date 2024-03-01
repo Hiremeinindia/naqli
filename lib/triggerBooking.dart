@@ -237,7 +237,6 @@ class TriggerBookingState extends State<TriggerBooking> {
                                         ),
                                         items: [
                                           SideMenuItem(
-                                            priority: 0,
                                             title: 'Dashboard',
                                             onTap: (page, _) {
                                               sideMenu.changePage(page);
@@ -246,7 +245,6 @@ class TriggerBookingState extends State<TriggerBooking> {
                                                 Icons.login_outlined),
                                           ),
                                           SideMenuItem(
-                                            priority: 1,
                                             title: 'Trigger Booking',
                                             onTap: (page, _) {
                                               sideMenu.changePage(page);
@@ -255,7 +253,6 @@ class TriggerBookingState extends State<TriggerBooking> {
                                                 Icons.person_2_outlined),
                                           ),
                                           SideMenuItem(
-                                            priority: 2,
                                             title: 'Bookings',
                                             onTap: (page, _) {
                                               sideMenu.changePage(page);
@@ -265,7 +262,6 @@ class TriggerBookingState extends State<TriggerBooking> {
                                             // Set the style property to change the text size
                                           ),
                                           SideMenuItem(
-                                            priority: 3,
                                             title: 'Payments',
                                             onTap: (page, _) {
                                               sideMenu.changePage(page);
@@ -274,7 +270,6 @@ class TriggerBookingState extends State<TriggerBooking> {
                                                 Icons.mode_comment_outlined),
                                           ),
                                           SideMenuItem(
-                                            priority: 4,
                                             title: 'Report an issue',
                                             onTap: (page, _) {
                                               sideMenu.changePage(page);
@@ -283,7 +278,6 @@ class TriggerBookingState extends State<TriggerBooking> {
                                                 Icons.mode_comment_outlined),
                                           ),
                                           SideMenuItem(
-                                            priority: 5,
                                             title: 'Help',
                                             onTap: (page, _) {
                                               sideMenu.changePage(page);
