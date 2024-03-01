@@ -135,25 +135,6 @@ class _MyHomePageState extends State<DashboardPage> {
                           ),
                           TextButton(
                             onPressed: () {
-                              // Handle the second button press
-                            },
-                            child: Text(
-                              'Enterprise',
-                              style: TextStyle(
-                                fontSize: 24,
-                                fontFamily: "Segoe UI",
-                                color: Color.fromRGBO(206, 203, 203, 1),
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 30,
-                            child: VerticalDivider(
-                              color: Color.fromRGBO(206, 203, 203, 1),
-                            ),
-                          ),
-                          TextButton(
-                            onPressed: () {
                               // Handle the third button press
                             },
                             child: Text(

@@ -1717,7 +1717,7 @@ class _DashboardState extends State<Dashboard> {
                     ),
                   ),
                   SizedBox(
-                    height: 20,
+                    height: 10,
                   ),
                   SizedBox(
                     width: 150,
@@ -1746,6 +1746,9 @@ class _DashboardState extends State<Dashboard> {
                         ),
                       ),
                     ),
+                  ),
+                  SizedBox(
+                    height: 10,
                   ),
                 ],
               ),
