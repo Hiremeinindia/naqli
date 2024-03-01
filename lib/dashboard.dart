@@ -483,7 +483,7 @@ class _MyHomePageState extends State<Dashboard> {
         ),
       ),
       body: SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
+        scrollDirection: Axis.vertical,
         child: Flexible(
           fit: FlexFit.tight,
           child: Padding(
@@ -1007,9 +1007,6 @@ class _MyHomePageState extends State<Dashboard> {
                                         )
                                       ],
                                     ),
-                                  ),
-                                  SizedBox(
-                                    height: 60,
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.only(
