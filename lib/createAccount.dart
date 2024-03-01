@@ -1,10 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter_application_1/dashboard.dart';
 import 'package:flutter_application_1/homepage.dart';
 import 'package:flutter_application_1/loginPage.dart';
 import 'package:sizer/sizer.dart';
+
+import 'Dashboard/dashboard_page.dart';
 
 class CreateAccount extends StatefulWidget {
   const CreateAccount();
@@ -138,7 +139,7 @@ class _CreateAccountState extends State<CreateAccount> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => Dashboard(),
+                            builder: (context) => DashboardPage(),
                           ),
                         );
                         setState(() {

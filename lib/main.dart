@@ -1,17 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/advancepayment.dart';
-import 'package:flutter_application_1/availableTruck.dart';
-import 'package:flutter_application_1/bookingSuccessful.dart';
-import 'package:flutter_application_1/bookingdialog.dart';
-import 'package:flutter_application_1/confirmtrip.dart';
-import 'package:flutter_application_1/createAccount.dart';
-import 'package:flutter_application_1/dashboard.dart';
-import 'package:flutter_application_1/homepage.dart';
-import 'package:flutter_application_1/loginPage.dart';
-import 'package:flutter_application_1/sample.dart';
-import 'package:flutter_application_1/triggerBooking.dart';
-import 'package:flutter_application_1/tripdetails.dart';
+
+import 'Dashboard/dashboard_page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -39,7 +29,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Dashboard(),
+      home: DashboardPage(),
     );
   }
 }
