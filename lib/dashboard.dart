@@ -483,7 +483,7 @@ class _MyHomePageState extends State<Dashboard> {
         ),
       ),
       body: SingleChildScrollView(
-        scrollDirection: Axis.vertical,
+        scrollDirection: Axis.horizontal,
         child: Flexible(
           fit: FlexFit.tight,
           child: Padding(
@@ -567,7 +567,6 @@ class _MyHomePageState extends State<Dashboard> {
                                                 Icons.login_outlined),
                                           ),
                                           SideMenuItem(
-                                            priority: 1,
                                             title: 'Trigger Booking',
                                             onTap: (page, _) {
                                               sideMenu.changePage(page);
@@ -576,7 +575,6 @@ class _MyHomePageState extends State<Dashboard> {
                                                 Icons.person_2_outlined),
                                           ),
                                           SideMenuItem(
-                                            priority: 2,
                                             title: 'Bookings',
                                             onTap: (page, _) {
                                               sideMenu.changePage(page);
@@ -586,7 +584,6 @@ class _MyHomePageState extends State<Dashboard> {
                                             // Set the style property to change the text size
                                           ),
                                           SideMenuItem(
-                                            priority: 3,
                                             title: 'Payments',
                                             onTap: (page, _) {
                                               sideMenu.changePage(page);
@@ -595,7 +592,6 @@ class _MyHomePageState extends State<Dashboard> {
                                                 Icons.mode_comment_outlined),
                                           ),
                                           SideMenuItem(
-                                            priority: 4,
                                             title: 'Report an issue',
                                             onTap: (page, _) {
                                               sideMenu.changePage(page);
@@ -604,7 +600,6 @@ class _MyHomePageState extends State<Dashboard> {
                                                 Icons.mode_comment_outlined),
                                           ),
                                           SideMenuItem(
-                                            priority: 5,
                                             title: 'Help',
                                             onTap: (page, _) {
                                               sideMenu.changePage(page);
@@ -1007,6 +1002,9 @@ class _MyHomePageState extends State<Dashboard> {
                                         )
                                       ],
                                     ),
+                                  ),
+                                  SizedBox(
+                                    height: 60,
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.only(
