@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
+import '../Widgets/customRadio.dart';
+import '../bookingdialog.dart';
 import '../homepage.dart';
 
 class TriggerBooking extends StatefulWidget {
@@ -10,6 +12,16 @@ class TriggerBooking extends StatefulWidget {
 }
 
 class _TriggerBookingState extends State<TriggerBooking> {
+  bool value = false;
+  bool isButtonEnabled = false;
+  bool isButtonEnabled1 = false;
+  bool isButtonEnabled2 = false;
+  int? selectedRadioValue;
+  int? selectedRadioValue1;
+  int? selectedRadioValue2;
+  bool checkbox1 = false;
+  bool checkbox2 = false;
+  bool checkbox3 = false;
   @override
   Widget build(BuildContext context) {
     return Sizer(builder: (context, orientation, deviceType) {
@@ -17,2296 +29,1944 @@ class _TriggerBookingState extends State<TriggerBooking> {
           builder: (BuildContext ctx, BoxConstraints constraints) {
         if (constraints.maxWidth >= 850) {
           return Padding(
-            padding: const EdgeInsets.only(left: 120, top: 100),
-            child: Column(
-              children: [
-                Row(
-                  children: [
-                    Text(
-                      "Recent Bookings",
-                      style: TextStyle(fontSize: 20, fontFamily: "SFProText"),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 5,
-                ),
-                Row(
-                  children: [
-                    Container(
-                      height: 292,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(12.0),
-                      ),
-                      width: 350,
-                      child: Column(
-                        children: [
-                          Container(
-                            height: 70,
-                            color: Color.fromRGBO(75, 61, 82, 1), // Brown color
-                            child: Center(
-                              child: Row(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(left: 10),
-                                      child: Text(
-                                        'Booking 1',
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 100),
-                                    child: Text(
-                                      "Booking ID XXXXX",
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 15,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
+            padding: const EdgeInsets.all(30.0),
+            child: Container(
+              height: 1000,
+              color: Color.fromRGBO(240, 237, 250, 1),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Container(
+                    width: 1200,
+                    color: Color.fromRGBO(240, 237, 250, 0.9),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          height: 60,
+                        ),
+                        Container(
+                          height: 316,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(12.0),
                           ),
-                          SizedBox(
-                            height: 6.0,
-                          ), // Add spacing between the brown container and the white container
-                          Container(
-                            height: 215,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(12.0),
-                            ),
-                            child: ListView(
-                              children: [
-                                SizedBox(
-                                  height: 60,
-                                  width: 100,
-                                  child: ListTile(
-                                    leading: CircleAvatar(),
-                                    title: Text(
-                                      'Truck',
-                                      style: const TextStyle(
-                                        fontSize: 12,
-                                      ),
-                                    ),
-                                    subtitle: Text(
-                                      'Truck no ******',
-                                      style: TextStyle(fontSize: 10),
-                                    ),
-                                    trailing: Row(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        SizedBox(
-                                            width:
-                                                30), // Add some space between "Truck" and "View" button
-                                        GestureDetector(
-                                          onTap: () {
-                                            // Add your View button functionality here
-                                            print('View button pressed');
-                                          },
-                                          child: Container(
-                                            height: 42,
-                                            width: 80,
-                                            padding: EdgeInsets.all(8),
-                                            decoration: BoxDecoration(
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  color: Colors.grey,
-                                                  spreadRadius: 1,
-                                                  blurRadius:
-                                                      2, // changes position of shadow
-                                                ),
-                                              ],
-                                              color: Color.fromRGBO(
-                                                  98, 105, 254, 1),
-                                              borderRadius:
-                                                  BorderRadius.circular(5),
-                                            ),
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.all(8.0),
-                                              child: Center(
-                                                child: Text(
-                                                  'View',
-                                                  style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 8,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
+                          width: 1200,
+                          child: Column(
+                            children: [
+                              Container(
+                                height: 70,
+                                color: Color.fromRGBO(
+                                    75, 61, 82, 1), // Brown color
+                                child: Center(
+                                  child: Row(
+                                    children: [
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(left: 60),
+                                        child: Text(
+                                          'Trigger Booking',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 23,
+                                            fontWeight: FontWeight.bold,
                                           ),
                                         ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                Divider(
-                                  thickness: 1,
-                                  color: Color.fromRGBO(206, 203, 203, 1),
-                                ),
-                                SizedBox(
-                                  height: 60,
-                                  width: 100,
-                                  child: ListTile(
-                                    leading: CircleAvatar(),
-                                    title: Text(
-                                      'Pick Up Location',
-                                      style: const TextStyle(
-                                        fontSize: 11,
                                       ),
-                                    ),
-                                    subtitle: Text(
-                                      'Destination Location',
-                                      style: TextStyle(fontSize: 10),
-                                    ),
-                                    trailing: Row(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        SizedBox(
-                                            width:
-                                                30), // Add some space between "Truck" and "View" button
-                                        GestureDetector(
-                                          onTap: () {
-                                            // Add your View button functionality here
-                                            print('View button pressed');
-                                          },
-                                          child: Container(
-                                            height: 42,
-                                            width: 80,
-                                            padding: EdgeInsets.all(8),
-                                            decoration: BoxDecoration(
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  color: Colors.grey,
-                                                  spreadRadius: 1,
-                                                  blurRadius:
-                                                      2, // changes position of shadow
-                                                ),
-                                              ],
-                                              color: Color.fromRGBO(
-                                                  98, 105, 254, 1),
-                                              borderRadius:
-                                                  BorderRadius.circular(5),
-                                            ),
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.all(8.0),
-                                              child: Center(
-                                                child: Text(
-                                                  'Edit',
-                                                  style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 8,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                Divider(
-                                  thickness: 1,
-                                  color: Color.fromRGBO(206, 203, 203, 1),
-                                ),
-                                SizedBox(
-                                  height: 60,
-                                  width: 100,
-                                  child: ListTile(
-                                    leading: CircleAvatar(),
-                                    title: Text(
-                                      'Balance Amount',
-                                      style: const TextStyle(
-                                        fontSize: 12,
-                                      ),
-                                    ),
-                                    subtitle: Text(
-                                      '07.02.2022',
-                                      style: TextStyle(fontSize: 10),
-                                    ),
-                                    trailing: Row(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        Row(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.end,
-                                          children: [
-                                            Text("Trailer"),
-                                          ],
-                                        ),
-                                        SizedBox(
-                                            width:
-                                                30), // Add some space between "Truck" and "View" button
-                                        GestureDetector(
-                                          onTap: () {
-                                            // Add your View button functionality here
-                                            print('View button pressed');
-                                          },
-                                          child: Container(
-                                            height: 42,
-                                            width: 80,
-                                            padding: EdgeInsets.all(8),
-                                            decoration: BoxDecoration(
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  color: Colors.grey,
-                                                  spreadRadius: 1,
-                                                  blurRadius:
-                                                      2, // changes position of shadow
-                                                ),
-                                              ],
-                                              color: Color.fromRGBO(
-                                                  98, 105, 254, 1),
-                                              borderRadius:
-                                                  BorderRadius.circular(5),
-                                            ),
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.all(8.0),
-                                              child: Center(
-                                                child: Text(
-                                                  'Pay',
-                                                  style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 8,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                // Add more cards with your data as needed
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(
-                      width: 90,
-                    ),
-                    Container(
-                      height: 292,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(12.0),
-                      ),
-                      width: 350,
-                      child: Column(
-                        children: [
-                          Container(
-                            height: 70,
-                            color: Color.fromRGBO(75, 61, 82, 1), // Brown color
-                            child: Center(
-                              child: Row(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(left: 10),
-                                      child: Text(
-                                        'Booking 2',
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold,
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(left: 800),
+                                        child: Text(
+                                          "Actions",
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 20,
+                                              fontFamily: "Helvetica",
+                                              fontWeight: FontWeight.bold),
                                         ),
                                       ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 100),
-                                    child: Text(
-                                      "Booking ID XXXXX",
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 15,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 6.0,
-                          ), // Add spacing between the brown container and the white container
-                          Container(
-                            height: 215,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(12.0),
-                            ),
-                            child: ListView(
-                              children: [
-                                SizedBox(
-                                  height: 60,
-                                  width: 100,
-                                  child: ListTile(
-                                    leading: CircleAvatar(),
-                                    title: Text(
-                                      'Truck',
-                                      style: const TextStyle(
-                                        fontSize: 12,
-                                      ),
-                                    ),
-                                    subtitle: Text(
-                                      'Truck no ******',
-                                      style: TextStyle(fontSize: 10),
-                                    ),
-                                    trailing: Row(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        SizedBox(
-                                            width:
-                                                30), // Add some space between "Truck" and "View" button
-                                        GestureDetector(
-                                          onTap: () {
-                                            // Add your View button functionality here
-                                            print('View button pressed');
-                                          },
-                                          child: Container(
-                                            height: 42,
-                                            width: 80,
-                                            padding: EdgeInsets.all(8),
-                                            decoration: BoxDecoration(
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  color: Colors.grey,
-                                                  spreadRadius: 1,
-                                                  blurRadius:
-                                                      2, // changes position of shadow
-                                                ),
-                                              ],
-                                              color: Color.fromRGBO(
-                                                  98, 105, 254, 1),
-                                              borderRadius:
-                                                  BorderRadius.circular(5),
-                                            ),
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.all(8.0),
-                                              child: Center(
-                                                child: Text(
-                                                  'View',
-                                                  style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 8,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                Divider(
-                                  thickness: 1,
-                                  color: Color.fromRGBO(206, 203, 203, 1),
-                                ),
-                                SizedBox(
-                                  height: 60,
-                                  width: 100,
-                                  child: ListTile(
-                                    leading: CircleAvatar(),
-                                    title: Text(
-                                      'Pick Up Location',
-                                      style: const TextStyle(
-                                        fontSize: 11,
-                                      ),
-                                    ),
-                                    subtitle: Text(
-                                      'Destination Location',
-                                      style: TextStyle(fontSize: 10),
-                                    ),
-                                    trailing: Row(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        SizedBox(
-                                            width:
-                                                30), // Add some space between "Truck" and "View" button
-                                        GestureDetector(
-                                          onTap: () {
-                                            // Add your View button functionality here
-                                            print('View button pressed');
-                                          },
-                                          child: Container(
-                                            height: 42,
-                                            width: 80,
-                                            padding: EdgeInsets.all(8),
-                                            decoration: BoxDecoration(
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  color: Colors.grey,
-                                                  spreadRadius: 1,
-                                                  blurRadius:
-                                                      2, // changes position of shadow
-                                                ),
-                                              ],
-                                              color: Color.fromRGBO(
-                                                  98, 105, 254, 1),
-                                              borderRadius:
-                                                  BorderRadius.circular(5),
-                                            ),
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.all(8.0),
-                                              child: Center(
-                                                child: Text(
-                                                  'Edit',
-                                                  style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 8,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                Divider(
-                                  thickness: 1,
-                                  color: Color.fromRGBO(206, 203, 203, 1),
-                                ),
-                                SizedBox(
-                                  height: 60,
-                                  width: 100,
-                                  child: ListTile(
-                                    leading: CircleAvatar(),
-                                    title: Text(
-                                      'Balance Amount',
-                                      style: const TextStyle(
-                                        fontSize: 12,
-                                      ),
-                                    ),
-                                    subtitle: Text(
-                                      '07.02.2022',
-                                      style: TextStyle(fontSize: 10),
-                                    ),
-                                    trailing: Row(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        Row(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.end,
-                                          children: [
-                                            Text("Trailer"),
-                                          ],
-                                        ),
-                                        SizedBox(
-                                            width:
-                                                30), // Add some space between "Truck" and "View" button
-                                        GestureDetector(
-                                          onTap: () {
-                                            // Add your View button functionality here
-                                            print('View button pressed');
-                                          },
-                                          child: Container(
-                                            height: 42,
-                                            width: 80,
-                                            padding: EdgeInsets.all(8),
-                                            decoration: BoxDecoration(
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  color: Colors.grey,
-                                                  spreadRadius: 1,
-                                                  blurRadius:
-                                                      2, // changes position of shadow
-                                                ),
-                                              ],
-                                              color: Color.fromRGBO(
-                                                  98, 105, 254, 1),
-                                              borderRadius:
-                                                  BorderRadius.circular(5),
-                                            ),
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.all(8.0),
-                                              child: Center(
-                                                child: Text(
-                                                  'Pay',
-                                                  style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 8,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                // Add more cards with your data as needed
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(
-                      width: 85,
-                    ),
-                    Container(
-                      height: 290,
-                      width: 200,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(12.0),
-                      ),
-                      child: Column(
-                        children: [
-                          GestureDetector(
-                            onTap: () {
-                              // Navigate to a different screen when the brown container is pressed
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => MyHomePage(),
-                                ),
-                              );
-                            },
-                            child: Container(
-                              height: 70,
-
-                              color:
-                                  Color.fromRGBO(75, 61, 82, 1), // Brown color
-                              child: Center(
-                                child: Text(
-                                  'New Booking',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
+                                    ],
                                   ),
                                 ),
                               ),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 8.0,
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => MyHomePage(),
-                                ),
-                              );
-                            },
-                            child: Container(
-                              height: 70,
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(12.0),
-                              ),
-                              child: Padding(
+                              // Add spacing between the brown container and the white container
+                              Padding(
                                 padding: const EdgeInsets.all(8.0),
-                                child: ColorFiltered(
-                                  colorFilter: ColorFilter.mode(
-                                    Color.fromRGBO(183, 174, 185, 1),
-                                    BlendMode.srcIn,
+                                child: Container(
+                                  height: 230,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    // Set a common borderRadius for all containers
                                   ),
-                                  child: Transform.translate(
-                                    offset: Offset(
-                                        0, 50), // Adjust the Y offset as needed
-                                    child: Image.asset(
-                                      'add.png',
-                                      width: 120,
-                                      height: 170,
-                                    ),
-                                  ),
+                                  child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        // Row(
+                                        //   children: [
+                                        //     SizedBox(
+                                        //       width: 5,
+                                        //     ),
+                                        //     Column(
+                                        //       children: [
+                                        //         Transform
+                                        //             .scale(
+                                        //           scale:
+                                        //               1.0,
+                                        //           child:
+                                        //               Checkbox(
+                                        //             value:
+                                        //                 checkbox1,
+                                        //             onChanged:
+                                        //                 (bool?
+                                        //                     value) {
+                                        //               setState(
+                                        //                   () {
+                                        //                 checkbox1 =
+                                        //                     value ?? false;
+                                        //                 if (checkbox1) {
+                                        //                   // If checkbox1 is selected, disable the other checkboxes
+                                        //                   checkbox2 = false;
+                                        //                   checkbox3 = false;
+                                        //                   // You can add additional logic or actions here
+                                        //                   enablePayNowButton();
+                                        //                 } else {
+                                        //                   disablePayNowButton();
+                                        //                 }
+                                        //               });
+                                        //             },
+                                        //           ),
+                                        //         ),
+                                        //       ],
+                                        //     ),
+                                        //     SizedBox(
+                                        //         width: 10),
+                                        //     Column(
+                                        //       crossAxisAlignment:
+                                        //           CrossAxisAlignment
+                                        //               .start,
+                                        //       children: [
+                                        //         Text(
+                                        //           'Trip 1',
+                                        //           style:
+                                        //               const TextStyle(
+                                        //             fontWeight:
+                                        //                 FontWeight.bold,
+                                        //             fontSize:
+                                        //                 16,
+                                        //           ),
+                                        //         ),
+                                        //         SizedBox(
+                                        //           height: 3,
+                                        //         ),
+                                        //         Text(
+                                        //           "Booking ID Xxxxxx",
+                                        //           style: TextStyle(
+                                        //               fontFamily:
+                                        //                   "SFProText",
+                                        //               fontSize:
+                                        //                   14),
+                                        //         ),
+                                        //       ],
+                                        //     ),
+                                        //     SizedBox(
+                                        //       width: 100,
+                                        //     ),
+                                        //     Row(
+                                        //       children: [
+                                        //         buildVendorContainer(
+                                        //           1,
+                                        //           "Vendor 1",
+                                        //           "Xxxxx SAR",
+                                        //         ),
+                                        //         buildVendorContainer1(
+                                        //           2,
+                                        //           "Vendor 1",
+                                        //           "Xxxxx SAR",
+                                        //         ),
+                                        //         buildVendorContainer2(
+                                        //           3,
+                                        //           "Vendor 1",
+                                        //           "Xxxxx SAR",
+                                        //         ),
+                                        //       ],
+                                        //     ),
+                                        //     SizedBox(
+                                        //       width: 20,
+                                        //     ),
+                                        //     Row(
+                                        //       children: [
+                                        //         IconButton(
+                                        //           padding:
+                                        //               EdgeInsets
+                                        //                   .zero,
+                                        //           constraints:
+                                        //               BoxConstraints(),
+                                        //           onPressed:
+                                        //               null,
+                                        //           icon:
+                                        //               Icon(
+                                        //             Icons
+                                        //                 .edit_document,
+                                        //             color: Color.fromRGBO(
+                                        //                 74,
+                                        //                 60,
+                                        //                 81,
+                                        //                 1),
+                                        //           ),
+                                        //         ),
+                                        //         IconButton(
+                                        //           padding:
+                                        //               EdgeInsets
+                                        //                   .zero,
+                                        //           onPressed:
+                                        //               null,
+                                        //           icon: Icon(
+                                        //               Icons
+                                        //                   .delete),
+                                        //         ),
+                                        //       ],
+                                        //     ),
+                                        //     SizedBox(
+                                        //       width: 20,
+                                        //     ),
+                                        //     SizedBox(
+                                        //       width: 130,
+                                        //       height: 40,
+                                        //       child:
+                                        //           ElevatedButton(
+                                        //         onPressed:
+                                        //             isButtonEnabled
+                                        //                 ? () {
+                                        //                     showDialog(
+                                        //                       barrierDismissible: false,
+                                        //                       context: context,
+                                        //                       builder: (context) {
+                                        //                         return BookingDialog();
+                                        //                       },
+                                        //                     );
+                                        //                     print('Elevated Button Pressed!');
+                                        //                   }
+                                        //                 : null,
+                                        //         style: ElevatedButton
+                                        //             .styleFrom(
+                                        //           primary: isButtonEnabled
+                                        //               ? Color.fromRGBO(
+                                        //                   98,
+                                        //                   105,
+                                        //                   254,
+                                        //                   1)
+                                        //               : Colors
+                                        //                   .grey,
+                                        //           side:
+                                        //               BorderSide(
+                                        //             color: isButtonEnabled
+                                        //                 ? Color.fromRGBO(
+                                        //                     98,
+                                        //                     105,
+                                        //                     254,
+                                        //                     1)
+                                        //                 : Colors.grey,
+                                        //           ),
+                                        //         ),
+                                        //         child: Text(
+                                        //           'Pay Now',
+                                        //           style:
+                                        //               TextStyle(
+                                        //             color: Colors
+                                        //                 .white,
+                                        //             fontSize:
+                                        //                 16,
+                                        //             fontFamily:
+                                        //                 "Helvetica",
+                                        //           ),
+                                        //         ),
+                                        //       ),
+                                        //     ),
+                                        //   ],
+                                        // ),
+                                        Row(
+                                          children: [
+                                            Row(
+                                              children: [
+                                                Checkbox(
+                                                  value: checkbox1,
+                                                  onChanged: (bool? newValue) {
+                                                    setState(() {
+                                                      value = newValue!;
+                                                    });
+                                                  },
+                                                ),
+                                                Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      'Trip 1',
+                                                      style: const TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        fontSize: 16,
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      height: 3,
+                                                    ),
+                                                    Text(
+                                                      "Booking ID Xxxxxx",
+                                                      style: TextStyle(
+                                                          fontFamily:
+                                                              "SFProText",
+                                                          fontSize: 14),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                            Row(
+                                              children: [
+                                                CustomRadio(
+                                                    onChanged: (val) {
+                                                      // setState(
+                                                      //     () {
+                                                      //   if (selectedRadioValue ==
+                                                      //       val) {
+                                                      //     // Disable button
+                                                      //   } else {
+                                                      //     selectedRadioValue =
+                                                      //         val as int?;
+                                                      //     isButtonEnabled1 =
+                                                      //         true; // Enable button
+                                                      //   }
+                                                      // });
+                                                      setState(() {
+                                                        selectedRadioValue =
+                                                            null; // Unselect if already selected
+                                                        isButtonEnabled = true;
+                                                      });
+                                                    },
+                                                    groupValue:
+                                                        selectedRadioValue,
+                                                    value: 1,
+                                                    colors: Color.fromRGBO(
+                                                        200, 251, 253, 1),
+                                                    text1: 'vendor1',
+                                                    textcolor1: Colors.black54,
+                                                    text2: "Xxxxx SAR",
+                                                    textcolor2: Colors.black38),
+                                                CustomRadio(
+                                                    onChanged: (val) {
+                                                      setState(() {
+                                                        selectedRadioValue =
+                                                            null; // Unselect if already selected
+                                                        isButtonEnabled = true;
+                                                      });
+                                                    },
+                                                    groupValue:
+                                                        selectedRadioValue,
+                                                    value: 2,
+                                                    colors: Color.fromRGBO(
+                                                        224, 253, 200, 1),
+                                                    text1: 'vendor1',
+                                                    textcolor1: Colors.black54,
+                                                    text2: "Xxxxx SAR",
+                                                    textcolor2: Colors.black38),
+                                                CustomRadio(
+                                                    onChanged: (val) {
+                                                      setState(() {
+                                                        selectedRadioValue =
+                                                            null; // Unselect if already selected
+                                                        isButtonEnabled = true;
+                                                      });
+                                                    },
+                                                    groupValue:
+                                                        selectedRadioValue,
+                                                    value: 3,
+                                                    colors: Color.fromRGBO(
+                                                        245, 253, 200, 1),
+                                                    text1: 'vendor3',
+                                                    textcolor1: Colors.black54,
+                                                    text2: "Xxxxx SAR",
+                                                    textcolor2: Colors.black38),
+                                              ],
+                                            ),
+                                            Row(
+                                              children: [
+                                                IconButton(
+                                                  padding: EdgeInsets.zero,
+                                                  constraints: BoxConstraints(),
+                                                  onPressed: null,
+                                                  icon: Icon(
+                                                    Icons.edit_document,
+                                                    color: Color.fromRGBO(
+                                                        74, 60, 81, 1),
+                                                  ),
+                                                ),
+                                                IconButton(
+                                                  padding: EdgeInsets.zero,
+                                                  onPressed: null,
+                                                  icon: Icon(Icons.delete),
+                                                ),
+                                              ],
+                                            ),
+                                            SizedBox(
+                                              width: 130,
+                                              height: 40,
+                                              child: ElevatedButton(
+                                                onPressed: isButtonEnabled
+                                                    ? () {
+                                                        showDialog(
+                                                          barrierDismissible:
+                                                              false,
+                                                          context: context,
+                                                          builder: (context) {
+                                                            return BookingDialog();
+                                                          },
+                                                        );
+                                                        print(
+                                                            'Elevated Button Pressed!');
+                                                      }
+                                                    : null,
+                                                style: ElevatedButton.styleFrom(
+                                                  primary: isButtonEnabled
+                                                      ? Color.fromRGBO(
+                                                          98, 105, 254, 1)
+                                                      : Colors.grey,
+                                                  side: BorderSide(
+                                                    color: isButtonEnabled
+                                                        ? Color.fromRGBO(
+                                                            98, 105, 254, 1)
+                                                        : Colors.grey,
+                                                  ),
+                                                ),
+                                                child: Text(
+                                                  'Pay Now',
+                                                  style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 16,
+                                                    fontFamily: "Helvetica",
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          width: 20,
+                                        ),
+                                        SizedBox(
+                                          width: 1184,
+                                          child: Divider(
+                                            color: Color.fromRGBO(
+                                                206, 203, 203, 1),
+                                          ),
+                                        ),
+                                        // Row(
+                                        //   children: [
+                                        //     SizedBox(
+                                        //       width: 5,
+                                        //     ),
+                                        //     Column(
+                                        //       children: [
+                                        //         Checkbox(
+                                        //             value:
+                                        //                 checkbox2,
+                                        //             onChanged:
+                                        //                 (bool?
+                                        //                     value) {
+                                        //               setState(
+                                        //                   () {
+                                        //                 checkbox2 =
+                                        //                     value ?? false;
+                                        //                 if (checkbox2) {
+                                        //                   // If checkbox1 is selected, disable the other checkboxes
+                                        //                   checkbox1 = false;
+                                        //                   checkbox3 = false;
+                                        //                   // You can add additional logic or actions here
+                                        //                 }
+                                        //               });
+                                        //             }),
+                                        //       ],
+                                        //     ),
+                                        //     SizedBox(
+                                        //         width: 10),
+                                        //     Column(
+                                        //       crossAxisAlignment:
+                                        //           CrossAxisAlignment
+                                        //               .start,
+                                        //       children: [
+                                        //         Text(
+                                        //           'Equipment Hire',
+                                        //           style:
+                                        //               const TextStyle(
+                                        //             fontWeight:
+                                        //                 FontWeight.bold,
+                                        //             fontSize:
+                                        //                 16,
+                                        //           ),
+                                        //         ),
+                                        //         SizedBox(
+                                        //           height: 3,
+                                        //         ),
+                                        //         Text(
+                                        //           "Booking ID Xxxxxx",
+                                        //           style: TextStyle(
+                                        //               fontFamily:
+                                        //                   "SFProText",
+                                        //               fontSize:
+                                        //                   14),
+                                        //         )
+                                        //       ],
+                                        //     ),
+                                        //     SizedBox(
+                                        //       width: 100,
+                                        //     ),
+                                        //     Row(
+                                        //       children: [
+                                        //         buildVendorContainer(
+                                        //           1,
+                                        //           "Vendor 1",
+                                        //           "Xxxxx SAR",
+                                        //         ),
+                                        //         buildVendorContainer1(
+                                        //           2,
+                                        //           "Vendor 1",
+                                        //           "Xxxxx SAR",
+                                        //         ),
+                                        //         buildVendorContainer2(
+                                        //           3,
+                                        //           "Vendor 1",
+                                        //           "Xxxxx SAR",
+                                        //         ),
+                                        //       ],
+                                        //     ),
+                                        //     SizedBox(
+                                        //       width: 20,
+                                        //     ),
+                                        //     Row(
+                                        //       children: [
+                                        //         IconButton(
+                                        //           padding:
+                                        //               EdgeInsets
+                                        //                   .zero,
+                                        //           constraints:
+                                        //               BoxConstraints(),
+                                        //           onPressed:
+                                        //               null,
+                                        //           icon:
+                                        //               Icon(
+                                        //             Icons
+                                        //                 .edit_document,
+                                        //             color: Color.fromRGBO(
+                                        //                 74,
+                                        //                 60,
+                                        //                 81,
+                                        //                 1),
+                                        //           ),
+                                        //         ),
+                                        //         IconButton(
+                                        //           padding:
+                                        //               EdgeInsets
+                                        //                   .zero,
+                                        //           onPressed:
+                                        //               null,
+                                        //           icon: Icon(
+                                        //               Icons
+                                        //                   .delete),
+                                        //         ),
+                                        //       ],
+                                        //     ),
+                                        //     SizedBox(
+                                        //       width: 20,
+                                        //     ),
+                                        //     SizedBox(
+                                        //       width: 130,
+                                        //       height: 40,
+                                        //       child:
+                                        //           ElevatedButton(
+                                        //         onPressed:
+                                        //             isButtonEnabled1
+                                        //                 ? () {
+                                        //                     // Handle button press only if any radio button is selected
+                                        //                     print('Elevated Button Pressed!');
+                                        //                   }
+                                        //                 : null,
+                                        //         style: ElevatedButton
+                                        //             .styleFrom(
+                                        //           primary: isButtonEnabled1
+                                        //               ? Color.fromRGBO(
+                                        //                   98,
+                                        //                   105,
+                                        //                   254,
+                                        //                   1)
+                                        //               : Colors
+                                        //                   .grey,
+                                        //           side:
+                                        //               BorderSide(
+                                        //             color: isButtonEnabled1
+                                        //                 ? Color.fromRGBO(
+                                        //                     98,
+                                        //                     105,
+                                        //                     254,
+                                        //                     1)
+                                        //                 : Colors.grey,
+                                        //           ),
+                                        //         ),
+                                        //         child: Text(
+                                        //           'Pay Now',
+                                        //           style:
+                                        //               TextStyle(
+                                        //             color: Colors
+                                        //                 .white,
+                                        //             fontSize:
+                                        //                 16,
+                                        //             fontFamily:
+                                        //                 "Helvetica",
+                                        //           ),
+                                        //         ),
+                                        //       ),
+                                        //     ),
+                                        //   ],
+                                        // ),
+                                        Row(
+                                          children: [
+                                            Row(
+                                              children: [
+                                                Checkbox(
+                                                  value: checkbox1,
+                                                  onChanged: (bool? newValue) {
+                                                    setState(() {
+                                                      value = newValue!;
+                                                    });
+                                                  },
+                                                ),
+                                                Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      'Trip 1',
+                                                      style: const TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        fontSize: 16,
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      height: 3,
+                                                    ),
+                                                    Text(
+                                                      "Booking ID Xxxxxx",
+                                                      style: TextStyle(
+                                                          fontFamily:
+                                                              "SFProText",
+                                                          fontSize: 14),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                            Row(
+                                              children: [
+                                                CustomRadio(
+                                                    onChanged: (val) {
+                                                      setState(() {
+                                                        selectedRadioValue1 =
+                                                            null; // Unselect if already selected
+                                                        isButtonEnabled1 = true;
+                                                      });
+                                                    },
+                                                    groupValue:
+                                                        selectedRadioValue1,
+                                                    value: 1,
+                                                    colors: Color.fromRGBO(
+                                                        200, 251, 253, 1),
+                                                    text1: 'vendor1',
+                                                    textcolor1: Colors.black54,
+                                                    text2: "Xxxxx SAR",
+                                                    textcolor2: Colors.black38),
+                                                CustomRadio(
+                                                    onChanged: (val) {
+                                                      setState(() {
+                                                        selectedRadioValue1 =
+                                                            null; // Unselect if already selected
+                                                        isButtonEnabled1 = true;
+                                                      });
+                                                    },
+                                                    groupValue:
+                                                        selectedRadioValue1,
+                                                    value: 2,
+                                                    colors: Color.fromRGBO(
+                                                        224, 253, 200, 1),
+                                                    text1: 'vendor1',
+                                                    textcolor1: Colors.black54,
+                                                    text2: "Xxxxx SAR",
+                                                    textcolor2: Colors.black38),
+                                                CustomRadio(
+                                                    onChanged: (val) {
+                                                      setState(() {
+                                                        selectedRadioValue1 =
+                                                            null; // Unselect if already selected
+                                                        isButtonEnabled1 = true;
+                                                      });
+                                                    },
+                                                    groupValue:
+                                                        selectedRadioValue1,
+                                                    value: 3,
+                                                    colors: Color.fromRGBO(
+                                                        245, 253, 200, 1),
+                                                    text1: 'vendor3',
+                                                    textcolor1: Colors.black54,
+                                                    text2: "Xxxxx SAR",
+                                                    textcolor2: Colors.black38),
+                                              ],
+                                            ),
+                                            Row(
+                                              children: [
+                                                IconButton(
+                                                  padding: EdgeInsets.zero,
+                                                  constraints: BoxConstraints(),
+                                                  onPressed: null,
+                                                  icon: Icon(
+                                                    Icons.edit_document,
+                                                    color: Color.fromRGBO(
+                                                        74, 60, 81, 1),
+                                                  ),
+                                                ),
+                                                IconButton(
+                                                  padding: EdgeInsets.zero,
+                                                  onPressed: null,
+                                                  icon: Icon(Icons.delete),
+                                                ),
+                                              ],
+                                            ),
+                                            SizedBox(
+                                              width: 130,
+                                              height: 40,
+                                              child: ElevatedButton(
+                                                onPressed: isButtonEnabled1
+                                                    ? () {
+                                                        showDialog(
+                                                          barrierDismissible:
+                                                              false,
+                                                          context: context,
+                                                          builder: (context) {
+                                                            return BookingDialog();
+                                                          },
+                                                        );
+                                                        print(
+                                                            'Elevated Button Pressed!');
+                                                      }
+                                                    : null,
+                                                style: ElevatedButton.styleFrom(
+                                                  primary: isButtonEnabled1
+                                                      ? Color.fromRGBO(
+                                                          98, 105, 254, 1)
+                                                      : Colors.grey,
+                                                  side: BorderSide(
+                                                    color: isButtonEnabled
+                                                        ? Color.fromRGBO(
+                                                            98, 105, 254, 1)
+                                                        : Colors.grey,
+                                                  ),
+                                                ),
+                                                child: Text(
+                                                  'Pay Now',
+                                                  style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 16,
+                                                    fontFamily: "Helvetica",
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          width: 20,
+                                        ),
+                                        SizedBox(
+                                          width: 1184,
+                                          child: Divider(
+                                            color: Color.fromRGBO(
+                                                206, 203, 203, 1),
+                                          ),
+                                        ),
+                                        Row(
+                                          children: [
+                                            Row(
+                                              children: [
+                                                Checkbox(
+                                                  value: checkbox1,
+                                                  onChanged: (bool? newValue) {
+                                                    setState(() {
+                                                      value = newValue!;
+                                                    });
+                                                  },
+                                                ),
+                                                Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      'Trip 1',
+                                                      style: const TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        fontSize: 16,
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      height: 3,
+                                                    ),
+                                                    Text(
+                                                      "Booking ID Xxxxxx",
+                                                      style: TextStyle(
+                                                          fontFamily:
+                                                              "SFProText",
+                                                          fontSize: 14),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                            Row(
+                                              children: [
+                                                CustomRadio(
+                                                    onChanged: (val) {
+                                                      setState(() {
+                                                        selectedRadioValue2 =
+                                                            null; // Unselect if already selected
+                                                        isButtonEnabled2 = true;
+                                                      });
+                                                    },
+                                                    groupValue:
+                                                        selectedRadioValue2,
+                                                    value: 1,
+                                                    colors: Color.fromRGBO(
+                                                        200, 251, 253, 1),
+                                                    text1: 'vendor1',
+                                                    textcolor1: Colors.black54,
+                                                    text2: "Xxxxx SAR",
+                                                    textcolor2: Colors.black38),
+                                                CustomRadio(
+                                                    onChanged: (val) {
+                                                      setState(() {
+                                                        selectedRadioValue2 =
+                                                            null; // Unselect if already selected
+                                                        isButtonEnabled2 = true;
+                                                      });
+                                                    },
+                                                    groupValue:
+                                                        selectedRadioValue2,
+                                                    value: 2,
+                                                    colors: Color.fromRGBO(
+                                                        224, 253, 200, 1),
+                                                    text1: 'vendor1',
+                                                    textcolor1: Colors.black54,
+                                                    text2: "Xxxxx SAR",
+                                                    textcolor2: Colors.black38),
+                                                CustomRadio(
+                                                    onChanged: (val) {
+                                                      setState(() {
+                                                        selectedRadioValue2 =
+                                                            null; // Unselect if already selected
+                                                        isButtonEnabled2 = true;
+                                                      });
+                                                    },
+                                                    groupValue:
+                                                        selectedRadioValue2,
+                                                    value: 3,
+                                                    colors: Color.fromRGBO(
+                                                        245, 253, 200, 1),
+                                                    text1: 'vendor3',
+                                                    textcolor1: Colors.black54,
+                                                    text2: "Xxxxx SAR",
+                                                    textcolor2: Colors.black38),
+                                              ],
+                                            ),
+                                            Row(
+                                              children: [
+                                                IconButton(
+                                                  padding: EdgeInsets.zero,
+                                                  constraints: BoxConstraints(),
+                                                  onPressed: null,
+                                                  icon: Icon(
+                                                    Icons.edit_document,
+                                                    color: Color.fromRGBO(
+                                                        74, 60, 81, 1),
+                                                  ),
+                                                ),
+                                                IconButton(
+                                                  padding: EdgeInsets.zero,
+                                                  onPressed: null,
+                                                  icon: Icon(Icons.delete),
+                                                ),
+                                              ],
+                                            ),
+                                            SizedBox(
+                                              width: 130,
+                                              height: 40,
+                                              child: ElevatedButton(
+                                                onPressed: isButtonEnabled2
+                                                    ? () {
+                                                        showDialog(
+                                                          barrierDismissible:
+                                                              false,
+                                                          context: context,
+                                                          builder: (context) {
+                                                            return BookingDialog();
+                                                          },
+                                                        );
+                                                        print(
+                                                            'Elevated Button Pressed!');
+                                                      }
+                                                    : null,
+                                                style: ElevatedButton.styleFrom(
+                                                  primary: isButtonEnabled2
+                                                      ? Color.fromRGBO(
+                                                          98, 105, 254, 1)
+                                                      : Colors.grey,
+                                                  side: BorderSide(
+                                                    color: isButtonEnabled2
+                                                        ? Color.fromRGBO(
+                                                            98, 105, 254, 1)
+                                                        : Colors.grey,
+                                                  ),
+                                                ),
+                                                child: Text(
+                                                  'Pay Now',
+                                                  style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 16,
+                                                    fontFamily: "Helvetica",
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ]),
                                 ),
                               ),
-                            ),
+                            ],
                           ),
-                        ],
+                        ),
+                        SizedBox(
+                          height: 200,
+                        ),
+                        SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Container(
+                            height: 10, // Adjust the height as needed
+                            width:
+                                1200, // Set the desired length of the scroll bar
+                            color: Colors
+                                .grey, // Background color of the scrollable area
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 40,
+                  ),
+                  SizedBox(
+                    width: 150,
+                    height: 50,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        // Handle button press
+                        print('Elevated Button Pressed!');
+                      },
+                      style: ElevatedButton.styleFrom(
+                        primary: Color.fromRGBO(98, 105, 254, 1),
+                        side: BorderSide(
+                          color: Color.fromRGBO(98, 105, 254, 1),
+                        ),
                       ),
-                    )
-                  ],
-                ),
-                SizedBox(
-                  height: 30,
-                ),
-                Row(
-                  children: [
-                    Expanded(
-                      child: Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(right: 110),
-                            child: Expanded(
-                              child: Container(
-                                height: 230,
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(12.0),
-                                ),
-                                child: Table(
-                                  border: TableBorder(
-                                    horizontalInside: BorderSide(
-                                        width: 0.1,
-                                        color: Color.fromRGBO(80, 69, 74, 1),
-                                        style: BorderStyle.solid),
-                                  ),
-
-                                  // textDirection: TextDirection.rtl,
-                                  // defaultVerticalAlignment: TableCellVerticalAlignment.bottom,
-                                  // border:TableBorder.all(width: 2.0,color: Colors.red),
-                                  children: [
-                                    TableRow(children: [
-                                      Container(
-                                        height: 60,
-                                        color: Color.fromRGBO(
-                                            75, 61, 82, 1), // Brown color
-
-                                        child: Center(
-                                          child: Text(
-                                            "Booking ID",
-                                            textScaleFactor: 1.5,
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 10,
-                                                fontFamily: "SFProText"),
-                                          ),
-                                        ),
-                                      ),
-                                      Container(
-                                        height: 60,
-                                        color: Color.fromRGBO(75, 61, 82, 1),
-                                        child: Center(
-                                          child: Text(
-                                            "Mode",
-                                            textScaleFactor: 1.5,
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 10,
-                                                fontFamily: "SFProText"),
-                                          ),
-                                        ),
-                                      ),
-                                      Container(
-                                        height: 60,
-                                        color: Color.fromRGBO(75, 61, 82, 1),
-                                        child: Center(
-                                          child: Text(
-                                            "Booking Type",
-                                            textScaleFactor: 1.5,
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 10,
-                                                fontFamily: "SFProText"),
-                                          ),
-                                        ),
-                                      ),
-                                      Container(
-                                        height: 60,
-                                        color: Color.fromRGBO(75, 61, 82, 1),
-                                        child: Center(
-                                          child: Text(
-                                            "Vendor",
-                                            textScaleFactor: 1.5,
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 10,
-                                                fontFamily: "SFProText"),
-                                          ),
-                                        ),
-                                      ),
-                                      Container(
-                                        height: 60,
-                                        color: Color.fromRGBO(75, 61, 82, 1),
-                                        child: Center(
-                                          child: Text(
-                                            "Payment Status",
-                                            textScaleFactor: 1.5,
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 10,
-                                                fontFamily: "SFProText"),
-                                          ),
-                                        ),
-                                      ),
-                                      Container(
-                                        height: 60,
-                                        color: Color.fromRGBO(75, 61, 82, 1),
-                                        child: Center(
-                                          child: Text(
-                                            "Status",
-                                            textScaleFactor: 1.5,
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 10,
-                                                fontFamily: "SFProText"),
-                                          ),
-                                        ),
-                                      ),
-                                      Container(
-                                        height: 60,
-                                        color: Color.fromRGBO(75, 61, 82, 1),
-                                        child: Center(
-                                          child: Text(
-                                            "Actions",
-                                            textScaleFactor: 1.5,
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 10,
-                                                fontFamily: "SFProText"),
-                                          ),
-                                        ),
-                                      ),
-                                    ]),
-                                    TableRow(children: [
-                                      Container(
-                                        height: 50,
-                                        child: Center(
-                                          child: Text(
-                                            "NAQBOOK***",
-                                            textScaleFactor: 1.5,
-                                            style: TextStyle(
-                                                color: Colors.black,
-                                                fontSize: 9,
-                                                fontFamily: "SFProText"),
-                                          ),
-                                        ),
-                                      ),
-                                      Container(
-                                        height: 50,
-                                        child: Center(
-                                          child: Text(
-                                            "Truck",
-                                            textScaleFactor: 1.5,
-                                            style: TextStyle(
-                                                color: Colors.black,
-                                                fontSize: 9,
-                                                fontFamily: "SFProText"),
-                                          ),
-                                        ),
-                                      ),
-                                      Container(
-                                        height: 50,
-                                        child: Center(
-                                          child: Text(
-                                            "Single",
-                                            textScaleFactor: 1.5,
-                                            style: TextStyle(
-                                                color: Colors.black,
-                                                fontSize: 9,
-                                                fontFamily: "SFProText"),
-                                          ),
-                                        ),
-                                      ),
-                                      Container(
-                                        height: 50,
-                                        child: Center(
-                                          child: Text(
-                                            "Vendor 1",
-                                            textScaleFactor: 1.5,
-                                            style: TextStyle(
-                                                color: Colors.black,
-                                                fontSize: 9,
-                                                fontFamily: "SFProText"),
-                                          ),
-                                        ),
-                                      ),
-                                      Container(
-                                        height: 50,
-                                        child: Center(
-                                          child: SizedBox(
-                                            width: 100,
-                                            height: 30,
-                                            child: ElevatedButton(
-                                              onPressed: () {},
-                                              style: ElevatedButton.styleFrom(
-                                                primary: Color.fromRGBO(
-                                                    247, 230, 176, 1),
-                                                side: BorderSide(
-                                                  color: Color.fromRGBO(
-                                                      247, 230, 176, 1),
-                                                ),
-                                              ),
-                                              child: Text(
-                                                'BalXXXX',
-                                                style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontSize: 12,
-                                                  fontFamily: "Helvetica",
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      Container(
-                                        height: 50,
-                                        child: Center(
-                                          child: Image.asset(
-                                            'Group268.png',
-                                            width: 50,
-                                            height: 30,
-                                          ),
-                                        ),
-                                      ),
-                                      Container(
-                                        height: 50,
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            IconButton(
-                                                padding: EdgeInsets.zero,
-                                                constraints: BoxConstraints(),
-                                                onPressed: null,
-                                                icon: Icon(
-                                                  Icons.edit_document,
-                                                  color: Color.fromRGBO(
-                                                      74, 60, 81, 1),
-                                                )),
-                                            IconButton(
-                                                padding: EdgeInsets.zero,
-                                                // constraints:
-                                                //     BoxConstraints(),
-                                                onPressed: null,
-                                                icon: Icon(Icons.delete)),
-                                          ],
-                                        ),
-                                      ),
-                                    ]),
-                                    TableRow(children: [
-                                      Container(
-                                        height: 50,
-                                        child: Center(
-                                          child: Text(
-                                            "NAQBOOK***",
-                                            textScaleFactor: 1.5,
-                                            style: TextStyle(
-                                                color: Colors.black,
-                                                fontSize: 9,
-                                                fontFamily: "SFProText"),
-                                          ),
-                                        ),
-                                      ),
-                                      Container(
-                                        height: 50,
-                                        child: Center(
-                                          child: Text(
-                                            "Bus",
-                                            textScaleFactor: 1.5,
-                                            style: TextStyle(
-                                                color: Colors.black,
-                                                fontSize: 9,
-                                                fontFamily: "SFProText"),
-                                          ),
-                                        ),
-                                      ),
-                                      Container(
-                                        height: 50,
-                                        child: Center(
-                                          child: Text(
-                                            "Contract",
-                                            textScaleFactor: 1.5,
-                                            style: TextStyle(
-                                                color: Colors.black,
-                                                fontSize: 9,
-                                                fontFamily: "SFProText"),
-                                          ),
-                                        ),
-                                      ),
-                                      Container(
-                                        height: 50,
-                                        child: Center(
-                                          child: Text(
-                                            "Vendor 2",
-                                            textScaleFactor: 1.5,
-                                            style: TextStyle(
-                                                color: Colors.black,
-                                                fontSize: 9,
-                                                fontFamily: "SFProText"),
-                                          ),
-                                        ),
-                                      ),
-                                      Container(
-                                        height: 50,
-                                        child: Center(
-                                          child: SizedBox(
-                                            width: 100,
-                                            height: 30,
-                                            child: ElevatedButton(
-                                              onPressed: () {},
-                                              style: ElevatedButton.styleFrom(
-                                                primary: Color.fromRGBO(
-                                                    247, 230, 176, 1),
-                                                side: BorderSide(
-                                                  color: Color.fromRGBO(
-                                                      247, 230, 176, 1),
-                                                ),
-                                              ),
-                                              child: Text(
-                                                'BalXXXX',
-                                                style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontSize: 12,
-                                                  fontFamily: "Helvetica",
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      Container(
-                                        height: 50,
-                                        child: Center(
-                                          child: Image.asset(
-                                            'Group300.png',
-                                            width: 50,
-                                            height: 30,
-                                          ),
-                                        ),
-                                      ),
-                                      Container(
-                                        height: 50,
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            IconButton(
-                                                padding: EdgeInsets.zero,
-                                                constraints: BoxConstraints(),
-                                                onPressed: null,
-                                                icon: Icon(
-                                                  Icons.edit_document,
-                                                  color: Color.fromRGBO(
-                                                      74, 60, 81, 1),
-                                                )),
-                                            IconButton(
-                                                padding: EdgeInsets.zero,
-                                                // constraints:
-                                                //     BoxConstraints(),
-                                                onPressed: null,
-                                                icon: Icon(Icons.delete)),
-                                          ],
-                                        ),
-                                      ),
-                                    ]),
-                                    TableRow(children: [
-                                      Container(
-                                        height: 50,
-                                        child: Center(
-                                          child: Text(
-                                            "NAQBOOK***",
-                                            textScaleFactor: 1.5,
-                                            style: TextStyle(
-                                                color: Colors.black,
-                                                fontSize: 9,
-                                                fontFamily: "SFProText"),
-                                          ),
-                                        ),
-                                      ),
-                                      Container(
-                                        height: 50,
-                                        child: Center(
-                                          child: Text(
-                                            "Equipment",
-                                            textScaleFactor: 1.5,
-                                            style: TextStyle(
-                                                color: Colors.black,
-                                                fontSize: 9,
-                                                fontFamily: "SFProText"),
-                                          ),
-                                        ),
-                                      ),
-                                      Container(
-                                        height: 50,
-                                        child: Center(
-                                          child: Text(
-                                            "Single",
-                                            textScaleFactor: 1.5,
-                                            style: TextStyle(
-                                                color: Colors.black,
-                                                fontSize: 9,
-                                                fontFamily: "SFProText"),
-                                          ),
-                                        ),
-                                      ),
-                                      Container(
-                                        height: 50,
-                                        child: Center(
-                                          child: Text(
-                                            "Vendor 2",
-                                            textScaleFactor: 1.5,
-                                            style: TextStyle(
-                                                color: Colors.black,
-                                                fontSize: 9,
-                                                fontFamily: "SFProText"),
-                                          ),
-                                        ),
-                                      ),
-                                      Container(
-                                        height: 50,
-                                        child: Center(
-                                          child: SizedBox(
-                                            width: 100,
-                                            height: 30,
-                                            child: ElevatedButton(
-                                              onPressed: () {},
-                                              style: ElevatedButton.styleFrom(
-                                                primary: Color.fromRGBO(
-                                                    87, 192, 18, 1),
-                                                side: BorderSide(
-                                                  color: Color.fromRGBO(
-                                                      87, 192, 18, 1),
-                                                ),
-                                              ),
-                                              child: Text(
-                                                'BalXXXX',
-                                                style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontSize: 12,
-                                                  fontFamily: "Helvetica",
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      Container(
-                                        height: 50,
-                                        child: Center(
-                                          child: Image.asset(
-                                            'Group353.png',
-                                            width: 50,
-                                            height: 30,
-                                          ),
-                                        ),
-                                      ),
-                                      Container(
-                                        height: 50,
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            IconButton(
-                                                padding: EdgeInsets.zero,
-                                                constraints: BoxConstraints(),
-                                                onPressed: null,
-                                                icon: Icon(
-                                                  Icons.edit_document,
-                                                  color: Color.fromRGBO(
-                                                      74, 60, 81, 1),
-                                                )),
-                                            IconButton(
-                                                padding: EdgeInsets.zero,
-                                                // constraints:
-                                                //     BoxConstraints(),
-                                                onPressed: null,
-                                                icon: Icon(Icons.delete)),
-                                          ],
-                                        ),
-                                      ),
-                                    ]),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 30,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(right: 110),
-                            child: SingleChildScrollView(
-                              scrollDirection: Axis.horizontal,
-                              child: Container(
-                                height: 10, // Adjust the height as needed
-                                width:
-                                    1100, // Set the desired length of the scroll bar
-                                color: Colors
-                                    .grey, // Background color of the scrollable area
-                              ),
-                            ),
-                          ),
-                        ],
+                      child: Text(
+                        'Confirm Booking',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 13.4,
+                        ),
                       ),
                     ),
-                  ],
-                ),
-              ],
+                  )
+                ],
+              ),
             ),
           );
         } else {
           return Padding(
-            padding: const EdgeInsets.only(left: 120, top: 100),
-            child: Column(
-              children: [
-                Row(
-                  children: [
-                    Text(
-                      "Recent Bookings",
-                      style: TextStyle(fontSize: 20, fontFamily: "SFProText"),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 5,
-                ),
-                Row(
-                  children: [
-                    Container(
-                      height: 292,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(12.0),
-                      ),
-                      width: 350,
-                      child: Column(
-                        children: [
-                          Container(
-                            height: 70,
-                            color: Color.fromRGBO(75, 61, 82, 1), // Brown color
-                            child: Center(
-                              child: Row(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(left: 10),
-                                      child: Text(
-                                        'Booking 1',
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 100),
-                                    child: Text(
-                                      "Booking ID XXXXX",
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 15,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
+            padding: const EdgeInsets.all(30.0),
+            child: Container(
+              height: 1000,
+              color: Color.fromRGBO(240, 237, 250, 1),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Container(
+                    width: 1200,
+                    color: Color.fromRGBO(240, 237, 250, 0.9),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          height: 60,
+                        ),
+                        Container(
+                          height: 316,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(12.0),
                           ),
-                          SizedBox(
-                            height: 6.0,
-                          ), // Add spacing between the brown container and the white container
-                          Container(
-                            height: 215,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(12.0),
-                            ),
-                            child: ListView(
-                              children: [
-                                SizedBox(
-                                  height: 60,
-                                  width: 100,
-                                  child: ListTile(
-                                    leading: CircleAvatar(),
-                                    title: Text(
-                                      'Truck',
-                                      style: const TextStyle(
-                                        fontSize: 12,
-                                      ),
-                                    ),
-                                    subtitle: Text(
-                                      'Truck no ******',
-                                      style: TextStyle(fontSize: 10),
-                                    ),
-                                    trailing: Row(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        SizedBox(
-                                            width:
-                                                30), // Add some space between "Truck" and "View" button
-                                        GestureDetector(
-                                          onTap: () {
-                                            // Add your View button functionality here
-                                            print('View button pressed');
-                                          },
-                                          child: Container(
-                                            height: 42,
-                                            width: 80,
-                                            padding: EdgeInsets.all(8),
-                                            decoration: BoxDecoration(
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  color: Colors.grey,
-                                                  spreadRadius: 1,
-                                                  blurRadius:
-                                                      2, // changes position of shadow
-                                                ),
-                                              ],
-                                              color: Color.fromRGBO(
-                                                  98, 105, 254, 1),
-                                              borderRadius:
-                                                  BorderRadius.circular(5),
-                                            ),
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.all(8.0),
-                                              child: Center(
-                                                child: Text(
-                                                  'View',
-                                                  style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 8,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
+                          width: 1200,
+                          child: Column(
+                            children: [
+                              Container(
+                                height: 70,
+                                color: Color.fromRGBO(
+                                    75, 61, 82, 1), // Brown color
+                                child: Center(
+                                  child: Row(
+                                    children: [
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(left: 60),
+                                        child: Text(
+                                          'Trigger Booking',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 23,
+                                            fontWeight: FontWeight.bold,
                                           ),
                                         ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                Divider(
-                                  thickness: 1,
-                                  color: Color.fromRGBO(206, 203, 203, 1),
-                                ),
-                                SizedBox(
-                                  height: 60,
-                                  width: 100,
-                                  child: ListTile(
-                                    leading: CircleAvatar(),
-                                    title: Text(
-                                      'Pick Up Location',
-                                      style: const TextStyle(
-                                        fontSize: 11,
                                       ),
-                                    ),
-                                    subtitle: Text(
-                                      'Destination Location',
-                                      style: TextStyle(fontSize: 10),
-                                    ),
-                                    trailing: Row(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        SizedBox(
-                                            width:
-                                                30), // Add some space between "Truck" and "View" button
-                                        GestureDetector(
-                                          onTap: () {
-                                            // Add your View button functionality here
-                                            print('View button pressed');
-                                          },
-                                          child: Container(
-                                            height: 42,
-                                            width: 80,
-                                            padding: EdgeInsets.all(8),
-                                            decoration: BoxDecoration(
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  color: Colors.grey,
-                                                  spreadRadius: 1,
-                                                  blurRadius:
-                                                      2, // changes position of shadow
-                                                ),
-                                              ],
-                                              color: Color.fromRGBO(
-                                                  98, 105, 254, 1),
-                                              borderRadius:
-                                                  BorderRadius.circular(5),
-                                            ),
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.all(8.0),
-                                              child: Center(
-                                                child: Text(
-                                                  'Edit',
-                                                  style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 8,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                Divider(
-                                  thickness: 1,
-                                  color: Color.fromRGBO(206, 203, 203, 1),
-                                ),
-                                SizedBox(
-                                  height: 60,
-                                  width: 100,
-                                  child: ListTile(
-                                    leading: CircleAvatar(),
-                                    title: Text(
-                                      'Balance Amount',
-                                      style: const TextStyle(
-                                        fontSize: 12,
-                                      ),
-                                    ),
-                                    subtitle: Text(
-                                      '07.02.2022',
-                                      style: TextStyle(fontSize: 10),
-                                    ),
-                                    trailing: Row(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        Row(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.end,
-                                          children: [
-                                            Text("Trailer"),
-                                          ],
-                                        ),
-                                        SizedBox(
-                                            width:
-                                                30), // Add some space between "Truck" and "View" button
-                                        GestureDetector(
-                                          onTap: () {
-                                            // Add your View button functionality here
-                                            print('View button pressed');
-                                          },
-                                          child: Container(
-                                            height: 42,
-                                            width: 80,
-                                            padding: EdgeInsets.all(8),
-                                            decoration: BoxDecoration(
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  color: Colors.grey,
-                                                  spreadRadius: 1,
-                                                  blurRadius:
-                                                      2, // changes position of shadow
-                                                ),
-                                              ],
-                                              color: Color.fromRGBO(
-                                                  98, 105, 254, 1),
-                                              borderRadius:
-                                                  BorderRadius.circular(5),
-                                            ),
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.all(8.0),
-                                              child: Center(
-                                                child: Text(
-                                                  'Pay',
-                                                  style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 8,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                // Add more cards with your data as needed
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(
-                      width: 90,
-                    ),
-                    Container(
-                      height: 292,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(12.0),
-                      ),
-                      width: 350,
-                      child: Column(
-                        children: [
-                          Container(
-                            height: 70,
-                            color: Color.fromRGBO(75, 61, 82, 1), // Brown color
-                            child: Center(
-                              child: Row(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(left: 10),
-                                      child: Text(
-                                        'Booking 2',
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold,
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(left: 800),
+                                        child: Text(
+                                          "Actions",
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 20,
+                                              fontFamily: "Helvetica",
+                                              fontWeight: FontWeight.bold),
                                         ),
                                       ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 100),
-                                    child: Text(
-                                      "Booking ID XXXXX",
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 15,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 6.0,
-                          ), // Add spacing between the brown container and the white container
-                          Container(
-                            height: 215,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(12.0),
-                            ),
-                            child: ListView(
-                              children: [
-                                SizedBox(
-                                  height: 60,
-                                  width: 100,
-                                  child: ListTile(
-                                    leading: CircleAvatar(),
-                                    title: Text(
-                                      'Truck',
-                                      style: const TextStyle(
-                                        fontSize: 12,
-                                      ),
-                                    ),
-                                    subtitle: Text(
-                                      'Truck no ******',
-                                      style: TextStyle(fontSize: 10),
-                                    ),
-                                    trailing: Row(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        SizedBox(
-                                            width:
-                                                30), // Add some space between "Truck" and "View" button
-                                        GestureDetector(
-                                          onTap: () {
-                                            // Add your View button functionality here
-                                            print('View button pressed');
-                                          },
-                                          child: Container(
-                                            height: 42,
-                                            width: 80,
-                                            padding: EdgeInsets.all(8),
-                                            decoration: BoxDecoration(
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  color: Colors.grey,
-                                                  spreadRadius: 1,
-                                                  blurRadius:
-                                                      2, // changes position of shadow
-                                                ),
-                                              ],
-                                              color: Color.fromRGBO(
-                                                  98, 105, 254, 1),
-                                              borderRadius:
-                                                  BorderRadius.circular(5),
-                                            ),
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.all(8.0),
-                                              child: Center(
-                                                child: Text(
-                                                  'View',
-                                                  style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 8,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                Divider(
-                                  thickness: 1,
-                                  color: Color.fromRGBO(206, 203, 203, 1),
-                                ),
-                                SizedBox(
-                                  height: 60,
-                                  width: 100,
-                                  child: ListTile(
-                                    leading: CircleAvatar(),
-                                    title: Text(
-                                      'Pick Up Location',
-                                      style: const TextStyle(
-                                        fontSize: 11,
-                                      ),
-                                    ),
-                                    subtitle: Text(
-                                      'Destination Location',
-                                      style: TextStyle(fontSize: 10),
-                                    ),
-                                    trailing: Row(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        SizedBox(
-                                            width:
-                                                30), // Add some space between "Truck" and "View" button
-                                        GestureDetector(
-                                          onTap: () {
-                                            // Add your View button functionality here
-                                            print('View button pressed');
-                                          },
-                                          child: Container(
-                                            height: 42,
-                                            width: 80,
-                                            padding: EdgeInsets.all(8),
-                                            decoration: BoxDecoration(
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  color: Colors.grey,
-                                                  spreadRadius: 1,
-                                                  blurRadius:
-                                                      2, // changes position of shadow
-                                                ),
-                                              ],
-                                              color: Color.fromRGBO(
-                                                  98, 105, 254, 1),
-                                              borderRadius:
-                                                  BorderRadius.circular(5),
-                                            ),
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.all(8.0),
-                                              child: Center(
-                                                child: Text(
-                                                  'Edit',
-                                                  style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 8,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                Divider(
-                                  thickness: 1,
-                                  color: Color.fromRGBO(206, 203, 203, 1),
-                                ),
-                                SizedBox(
-                                  height: 60,
-                                  width: 100,
-                                  child: ListTile(
-                                    leading: CircleAvatar(),
-                                    title: Text(
-                                      'Balance Amount',
-                                      style: const TextStyle(
-                                        fontSize: 12,
-                                      ),
-                                    ),
-                                    subtitle: Text(
-                                      '07.02.2022',
-                                      style: TextStyle(fontSize: 10),
-                                    ),
-                                    trailing: Row(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        Row(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.end,
-                                          children: [
-                                            Text("Trailer"),
-                                          ],
-                                        ),
-                                        SizedBox(
-                                            width:
-                                                30), // Add some space between "Truck" and "View" button
-                                        GestureDetector(
-                                          onTap: () {
-                                            // Add your View button functionality here
-                                            print('View button pressed');
-                                          },
-                                          child: Container(
-                                            height: 42,
-                                            width: 80,
-                                            padding: EdgeInsets.all(8),
-                                            decoration: BoxDecoration(
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  color: Colors.grey,
-                                                  spreadRadius: 1,
-                                                  blurRadius:
-                                                      2, // changes position of shadow
-                                                ),
-                                              ],
-                                              color: Color.fromRGBO(
-                                                  98, 105, 254, 1),
-                                              borderRadius:
-                                                  BorderRadius.circular(5),
-                                            ),
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.all(8.0),
-                                              child: Center(
-                                                child: Text(
-                                                  'Pay',
-                                                  style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 8,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                // Add more cards with your data as needed
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(
-                      width: 85,
-                    ),
-                    Container(
-                      height: 290,
-                      width: 200,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(12.0),
-                      ),
-                      child: Column(
-                        children: [
-                          GestureDetector(
-                            onTap: () {
-                              // Navigate to a different screen when the brown container is pressed
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => MyHomePage(),
-                                ),
-                              );
-                            },
-                            child: Container(
-                              height: 70,
-
-                              color:
-                                  Color.fromRGBO(75, 61, 82, 1), // Brown color
-                              child: Center(
-                                child: Text(
-                                  'New Booking',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
+                                    ],
                                   ),
                                 ),
                               ),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 8.0,
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => MyHomePage(),
-                                ),
-                              );
-                            },
-                            child: Container(
-                              height: 70,
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(12.0),
-                              ),
-                              child: Padding(
+                              // Add spacing between the brown container and the white container
+                              Padding(
                                 padding: const EdgeInsets.all(8.0),
-                                child: ColorFiltered(
-                                  colorFilter: ColorFilter.mode(
-                                    Color.fromRGBO(183, 174, 185, 1),
-                                    BlendMode.srcIn,
+                                child: Container(
+                                  height: 230,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    // Set a common borderRadius for all containers
                                   ),
-                                  child: Transform.translate(
-                                    offset: Offset(
-                                        0, 50), // Adjust the Y offset as needed
-                                    child: Image.asset(
-                                      'add.png',
-                                      width: 120,
-                                      height: 170,
-                                    ),
-                                  ),
+                                  child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        // Row(
+                                        //   children: [
+                                        //     SizedBox(
+                                        //       width: 5,
+                                        //     ),
+                                        //     Column(
+                                        //       children: [
+                                        //         Transform
+                                        //             .scale(
+                                        //           scale:
+                                        //               1.0,
+                                        //           child:
+                                        //               Checkbox(
+                                        //             value:
+                                        //                 checkbox1,
+                                        //             onChanged:
+                                        //                 (bool?
+                                        //                     value) {
+                                        //               setState(
+                                        //                   () {
+                                        //                 checkbox1 =
+                                        //                     value ?? false;
+                                        //                 if (checkbox1) {
+                                        //                   // If checkbox1 is selected, disable the other checkboxes
+                                        //                   checkbox2 = false;
+                                        //                   checkbox3 = false;
+                                        //                   // You can add additional logic or actions here
+                                        //                   enablePayNowButton();
+                                        //                 } else {
+                                        //                   disablePayNowButton();
+                                        //                 }
+                                        //               });
+                                        //             },
+                                        //           ),
+                                        //         ),
+                                        //       ],
+                                        //     ),
+                                        //     SizedBox(
+                                        //         width: 10),
+                                        //     Column(
+                                        //       crossAxisAlignment:
+                                        //           CrossAxisAlignment
+                                        //               .start,
+                                        //       children: [
+                                        //         Text(
+                                        //           'Trip 1',
+                                        //           style:
+                                        //               const TextStyle(
+                                        //             fontWeight:
+                                        //                 FontWeight.bold,
+                                        //             fontSize:
+                                        //                 16,
+                                        //           ),
+                                        //         ),
+                                        //         SizedBox(
+                                        //           height: 3,
+                                        //         ),
+                                        //         Text(
+                                        //           "Booking ID Xxxxxx",
+                                        //           style: TextStyle(
+                                        //               fontFamily:
+                                        //                   "SFProText",
+                                        //               fontSize:
+                                        //                   14),
+                                        //         ),
+                                        //       ],
+                                        //     ),
+                                        //     SizedBox(
+                                        //       width: 100,
+                                        //     ),
+                                        //     Row(
+                                        //       children: [
+                                        //         buildVendorContainer(
+                                        //           1,
+                                        //           "Vendor 1",
+                                        //           "Xxxxx SAR",
+                                        //         ),
+                                        //         buildVendorContainer1(
+                                        //           2,
+                                        //           "Vendor 1",
+                                        //           "Xxxxx SAR",
+                                        //         ),
+                                        //         buildVendorContainer2(
+                                        //           3,
+                                        //           "Vendor 1",
+                                        //           "Xxxxx SAR",
+                                        //         ),
+                                        //       ],
+                                        //     ),
+                                        //     SizedBox(
+                                        //       width: 20,
+                                        //     ),
+                                        //     Row(
+                                        //       children: [
+                                        //         IconButton(
+                                        //           padding:
+                                        //               EdgeInsets
+                                        //                   .zero,
+                                        //           constraints:
+                                        //               BoxConstraints(),
+                                        //           onPressed:
+                                        //               null,
+                                        //           icon:
+                                        //               Icon(
+                                        //             Icons
+                                        //                 .edit_document,
+                                        //             color: Color.fromRGBO(
+                                        //                 74,
+                                        //                 60,
+                                        //                 81,
+                                        //                 1),
+                                        //           ),
+                                        //         ),
+                                        //         IconButton(
+                                        //           padding:
+                                        //               EdgeInsets
+                                        //                   .zero,
+                                        //           onPressed:
+                                        //               null,
+                                        //           icon: Icon(
+                                        //               Icons
+                                        //                   .delete),
+                                        //         ),
+                                        //       ],
+                                        //     ),
+                                        //     SizedBox(
+                                        //       width: 20,
+                                        //     ),
+                                        //     SizedBox(
+                                        //       width: 130,
+                                        //       height: 40,
+                                        //       child:
+                                        //           ElevatedButton(
+                                        //         onPressed:
+                                        //             isButtonEnabled
+                                        //                 ? () {
+                                        //                     showDialog(
+                                        //                       barrierDismissible: false,
+                                        //                       context: context,
+                                        //                       builder: (context) {
+                                        //                         return BookingDialog();
+                                        //                       },
+                                        //                     );
+                                        //                     print('Elevated Button Pressed!');
+                                        //                   }
+                                        //                 : null,
+                                        //         style: ElevatedButton
+                                        //             .styleFrom(
+                                        //           primary: isButtonEnabled
+                                        //               ? Color.fromRGBO(
+                                        //                   98,
+                                        //                   105,
+                                        //                   254,
+                                        //                   1)
+                                        //               : Colors
+                                        //                   .grey,
+                                        //           side:
+                                        //               BorderSide(
+                                        //             color: isButtonEnabled
+                                        //                 ? Color.fromRGBO(
+                                        //                     98,
+                                        //                     105,
+                                        //                     254,
+                                        //                     1)
+                                        //                 : Colors.grey,
+                                        //           ),
+                                        //         ),
+                                        //         child: Text(
+                                        //           'Pay Now',
+                                        //           style:
+                                        //               TextStyle(
+                                        //             color: Colors
+                                        //                 .white,
+                                        //             fontSize:
+                                        //                 16,
+                                        //             fontFamily:
+                                        //                 "Helvetica",
+                                        //           ),
+                                        //         ),
+                                        //       ),
+                                        //     ),
+                                        //   ],
+                                        // ),
+                                        Row(
+                                          children: [
+                                            Row(
+                                              children: [
+                                                Checkbox(
+                                                  value: checkbox1,
+                                                  onChanged: (bool? newValue) {
+                                                    setState(() {
+                                                      value = newValue!;
+                                                    });
+                                                  },
+                                                ),
+                                                Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      'Trip 1',
+                                                      style: const TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        fontSize: 16,
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      height: 3,
+                                                    ),
+                                                    Text(
+                                                      "Booking ID Xxxxxx",
+                                                      style: TextStyle(
+                                                          fontFamily:
+                                                              "SFProText",
+                                                          fontSize: 14),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                            Row(
+                                              children: [
+                                                CustomRadio(
+                                                    onChanged: (val) {
+                                                      // setState(
+                                                      //     () {
+                                                      //   if (selectedRadioValue ==
+                                                      //       val) {
+                                                      //     // Disable button
+                                                      //   } else {
+                                                      //     selectedRadioValue =
+                                                      //         val as int?;
+                                                      //     isButtonEnabled1 =
+                                                      //         true; // Enable button
+                                                      //   }
+                                                      // });
+                                                      setState(() {
+                                                        selectedRadioValue =
+                                                            null; // Unselect if already selected
+                                                        isButtonEnabled = true;
+                                                      });
+                                                    },
+                                                    groupValue:
+                                                        selectedRadioValue,
+                                                    value: 1,
+                                                    colors: Color.fromRGBO(
+                                                        200, 251, 253, 1),
+                                                    text1: 'vendor1',
+                                                    textcolor1: Colors.black54,
+                                                    text2: "Xxxxx SAR",
+                                                    textcolor2: Colors.black38),
+                                                CustomRadio(
+                                                    onChanged: (val) {
+                                                      setState(() {
+                                                        selectedRadioValue =
+                                                            null; // Unselect if already selected
+                                                        isButtonEnabled = true;
+                                                      });
+                                                    },
+                                                    groupValue:
+                                                        selectedRadioValue,
+                                                    value: 2,
+                                                    colors: Color.fromRGBO(
+                                                        224, 253, 200, 1),
+                                                    text1: 'vendor1',
+                                                    textcolor1: Colors.black54,
+                                                    text2: "Xxxxx SAR",
+                                                    textcolor2: Colors.black38),
+                                                CustomRadio(
+                                                    onChanged: (val) {
+                                                      setState(() {
+                                                        selectedRadioValue =
+                                                            null; // Unselect if already selected
+                                                        isButtonEnabled = true;
+                                                      });
+                                                    },
+                                                    groupValue:
+                                                        selectedRadioValue,
+                                                    value: 3,
+                                                    colors: Color.fromRGBO(
+                                                        245, 253, 200, 1),
+                                                    text1: 'vendor3',
+                                                    textcolor1: Colors.black54,
+                                                    text2: "Xxxxx SAR",
+                                                    textcolor2: Colors.black38),
+                                              ],
+                                            ),
+                                            Row(
+                                              children: [
+                                                IconButton(
+                                                  padding: EdgeInsets.zero,
+                                                  constraints: BoxConstraints(),
+                                                  onPressed: null,
+                                                  icon: Icon(
+                                                    Icons.edit_document,
+                                                    color: Color.fromRGBO(
+                                                        74, 60, 81, 1),
+                                                  ),
+                                                ),
+                                                IconButton(
+                                                  padding: EdgeInsets.zero,
+                                                  onPressed: null,
+                                                  icon: Icon(Icons.delete),
+                                                ),
+                                              ],
+                                            ),
+                                            SizedBox(
+                                              width: 130,
+                                              height: 40,
+                                              child: ElevatedButton(
+                                                onPressed: isButtonEnabled
+                                                    ? () {
+                                                        showDialog(
+                                                          barrierDismissible:
+                                                              false,
+                                                          context: context,
+                                                          builder: (context) {
+                                                            return BookingDialog();
+                                                          },
+                                                        );
+                                                        print(
+                                                            'Elevated Button Pressed!');
+                                                      }
+                                                    : null,
+                                                style: ElevatedButton.styleFrom(
+                                                  primary: isButtonEnabled
+                                                      ? Color.fromRGBO(
+                                                          98, 105, 254, 1)
+                                                      : Colors.grey,
+                                                  side: BorderSide(
+                                                    color: isButtonEnabled
+                                                        ? Color.fromRGBO(
+                                                            98, 105, 254, 1)
+                                                        : Colors.grey,
+                                                  ),
+                                                ),
+                                                child: Text(
+                                                  'Pay Now',
+                                                  style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 16,
+                                                    fontFamily: "Helvetica",
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          width: 20,
+                                        ),
+                                        SizedBox(
+                                          width: 1184,
+                                          child: Divider(
+                                            color: Color.fromRGBO(
+                                                206, 203, 203, 1),
+                                          ),
+                                        ),
+                                        // Row(
+                                        //   children: [
+                                        //     SizedBox(
+                                        //       width: 5,
+                                        //     ),
+                                        //     Column(
+                                        //       children: [
+                                        //         Checkbox(
+                                        //             value:
+                                        //                 checkbox2,
+                                        //             onChanged:
+                                        //                 (bool?
+                                        //                     value) {
+                                        //               setState(
+                                        //                   () {
+                                        //                 checkbox2 =
+                                        //                     value ?? false;
+                                        //                 if (checkbox2) {
+                                        //                   // If checkbox1 is selected, disable the other checkboxes
+                                        //                   checkbox1 = false;
+                                        //                   checkbox3 = false;
+                                        //                   // You can add additional logic or actions here
+                                        //                 }
+                                        //               });
+                                        //             }),
+                                        //       ],
+                                        //     ),
+                                        //     SizedBox(
+                                        //         width: 10),
+                                        //     Column(
+                                        //       crossAxisAlignment:
+                                        //           CrossAxisAlignment
+                                        //               .start,
+                                        //       children: [
+                                        //         Text(
+                                        //           'Equipment Hire',
+                                        //           style:
+                                        //               const TextStyle(
+                                        //             fontWeight:
+                                        //                 FontWeight.bold,
+                                        //             fontSize:
+                                        //                 16,
+                                        //           ),
+                                        //         ),
+                                        //         SizedBox(
+                                        //           height: 3,
+                                        //         ),
+                                        //         Text(
+                                        //           "Booking ID Xxxxxx",
+                                        //           style: TextStyle(
+                                        //               fontFamily:
+                                        //                   "SFProText",
+                                        //               fontSize:
+                                        //                   14),
+                                        //         )
+                                        //       ],
+                                        //     ),
+                                        //     SizedBox(
+                                        //       width: 100,
+                                        //     ),
+                                        //     Row(
+                                        //       children: [
+                                        //         buildVendorContainer(
+                                        //           1,
+                                        //           "Vendor 1",
+                                        //           "Xxxxx SAR",
+                                        //         ),
+                                        //         buildVendorContainer1(
+                                        //           2,
+                                        //           "Vendor 1",
+                                        //           "Xxxxx SAR",
+                                        //         ),
+                                        //         buildVendorContainer2(
+                                        //           3,
+                                        //           "Vendor 1",
+                                        //           "Xxxxx SAR",
+                                        //         ),
+                                        //       ],
+                                        //     ),
+                                        //     SizedBox(
+                                        //       width: 20,
+                                        //     ),
+                                        //     Row(
+                                        //       children: [
+                                        //         IconButton(
+                                        //           padding:
+                                        //               EdgeInsets
+                                        //                   .zero,
+                                        //           constraints:
+                                        //               BoxConstraints(),
+                                        //           onPressed:
+                                        //               null,
+                                        //           icon:
+                                        //               Icon(
+                                        //             Icons
+                                        //                 .edit_document,
+                                        //             color: Color.fromRGBO(
+                                        //                 74,
+                                        //                 60,
+                                        //                 81,
+                                        //                 1),
+                                        //           ),
+                                        //         ),
+                                        //         IconButton(
+                                        //           padding:
+                                        //               EdgeInsets
+                                        //                   .zero,
+                                        //           onPressed:
+                                        //               null,
+                                        //           icon: Icon(
+                                        //               Icons
+                                        //                   .delete),
+                                        //         ),
+                                        //       ],
+                                        //     ),
+                                        //     SizedBox(
+                                        //       width: 20,
+                                        //     ),
+                                        //     SizedBox(
+                                        //       width: 130,
+                                        //       height: 40,
+                                        //       child:
+                                        //           ElevatedButton(
+                                        //         onPressed:
+                                        //             isButtonEnabled1
+                                        //                 ? () {
+                                        //                     // Handle button press only if any radio button is selected
+                                        //                     print('Elevated Button Pressed!');
+                                        //                   }
+                                        //                 : null,
+                                        //         style: ElevatedButton
+                                        //             .styleFrom(
+                                        //           primary: isButtonEnabled1
+                                        //               ? Color.fromRGBO(
+                                        //                   98,
+                                        //                   105,
+                                        //                   254,
+                                        //                   1)
+                                        //               : Colors
+                                        //                   .grey,
+                                        //           side:
+                                        //               BorderSide(
+                                        //             color: isButtonEnabled1
+                                        //                 ? Color.fromRGBO(
+                                        //                     98,
+                                        //                     105,
+                                        //                     254,
+                                        //                     1)
+                                        //                 : Colors.grey,
+                                        //           ),
+                                        //         ),
+                                        //         child: Text(
+                                        //           'Pay Now',
+                                        //           style:
+                                        //               TextStyle(
+                                        //             color: Colors
+                                        //                 .white,
+                                        //             fontSize:
+                                        //                 16,
+                                        //             fontFamily:
+                                        //                 "Helvetica",
+                                        //           ),
+                                        //         ),
+                                        //       ),
+                                        //     ),
+                                        //   ],
+                                        // ),
+                                        Row(
+                                          children: [
+                                            Row(
+                                              children: [
+                                                Checkbox(
+                                                  value: checkbox1,
+                                                  onChanged: (bool? newValue) {
+                                                    setState(() {
+                                                      value = newValue!;
+                                                    });
+                                                  },
+                                                ),
+                                                Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      'Trip 1',
+                                                      style: const TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        fontSize: 16,
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      height: 3,
+                                                    ),
+                                                    Text(
+                                                      "Booking ID Xxxxxx",
+                                                      style: TextStyle(
+                                                          fontFamily:
+                                                              "SFProText",
+                                                          fontSize: 14),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                            Row(
+                                              children: [
+                                                CustomRadio(
+                                                    onChanged: (val) {
+                                                      setState(() {
+                                                        selectedRadioValue1 =
+                                                            null; // Unselect if already selected
+                                                        isButtonEnabled1 = true;
+                                                      });
+                                                    },
+                                                    groupValue:
+                                                        selectedRadioValue1,
+                                                    value: 1,
+                                                    colors: Color.fromRGBO(
+                                                        200, 251, 253, 1),
+                                                    text1: 'vendor1',
+                                                    textcolor1: Colors.black54,
+                                                    text2: "Xxxxx SAR",
+                                                    textcolor2: Colors.black38),
+                                                CustomRadio(
+                                                    onChanged: (val) {
+                                                      setState(() {
+                                                        selectedRadioValue1 =
+                                                            null; // Unselect if already selected
+                                                        isButtonEnabled1 = true;
+                                                      });
+                                                    },
+                                                    groupValue:
+                                                        selectedRadioValue1,
+                                                    value: 2,
+                                                    colors: Color.fromRGBO(
+                                                        224, 253, 200, 1),
+                                                    text1: 'vendor1',
+                                                    textcolor1: Colors.black54,
+                                                    text2: "Xxxxx SAR",
+                                                    textcolor2: Colors.black38),
+                                                CustomRadio(
+                                                    onChanged: (val) {
+                                                      setState(() {
+                                                        selectedRadioValue1 =
+                                                            null; // Unselect if already selected
+                                                        isButtonEnabled1 = true;
+                                                      });
+                                                    },
+                                                    groupValue:
+                                                        selectedRadioValue1,
+                                                    value: 3,
+                                                    colors: Color.fromRGBO(
+                                                        245, 253, 200, 1),
+                                                    text1: 'vendor3',
+                                                    textcolor1: Colors.black54,
+                                                    text2: "Xxxxx SAR",
+                                                    textcolor2: Colors.black38),
+                                              ],
+                                            ),
+                                            Row(
+                                              children: [
+                                                IconButton(
+                                                  padding: EdgeInsets.zero,
+                                                  constraints: BoxConstraints(),
+                                                  onPressed: null,
+                                                  icon: Icon(
+                                                    Icons.edit_document,
+                                                    color: Color.fromRGBO(
+                                                        74, 60, 81, 1),
+                                                  ),
+                                                ),
+                                                IconButton(
+                                                  padding: EdgeInsets.zero,
+                                                  onPressed: null,
+                                                  icon: Icon(Icons.delete),
+                                                ),
+                                              ],
+                                            ),
+                                            SizedBox(
+                                              width: 130,
+                                              height: 40,
+                                              child: ElevatedButton(
+                                                onPressed: isButtonEnabled1
+                                                    ? () {
+                                                        showDialog(
+                                                          barrierDismissible:
+                                                              false,
+                                                          context: context,
+                                                          builder: (context) {
+                                                            return BookingDialog();
+                                                          },
+                                                        );
+                                                        print(
+                                                            'Elevated Button Pressed!');
+                                                      }
+                                                    : null,
+                                                style: ElevatedButton.styleFrom(
+                                                  primary: isButtonEnabled1
+                                                      ? Color.fromRGBO(
+                                                          98, 105, 254, 1)
+                                                      : Colors.grey,
+                                                  side: BorderSide(
+                                                    color: isButtonEnabled
+                                                        ? Color.fromRGBO(
+                                                            98, 105, 254, 1)
+                                                        : Colors.grey,
+                                                  ),
+                                                ),
+                                                child: Text(
+                                                  'Pay Now',
+                                                  style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 16,
+                                                    fontFamily: "Helvetica",
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          width: 20,
+                                        ),
+                                        SizedBox(
+                                          width: 1184,
+                                          child: Divider(
+                                            color: Color.fromRGBO(
+                                                206, 203, 203, 1),
+                                          ),
+                                        ),
+                                        Row(
+                                          children: [
+                                            Row(
+                                              children: [
+                                                Checkbox(
+                                                  value: checkbox1,
+                                                  onChanged: (bool? newValue) {
+                                                    setState(() {
+                                                      value = newValue!;
+                                                    });
+                                                  },
+                                                ),
+                                                Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      'Trip 1',
+                                                      style: const TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        fontSize: 16,
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      height: 3,
+                                                    ),
+                                                    Text(
+                                                      "Booking ID Xxxxxx",
+                                                      style: TextStyle(
+                                                          fontFamily:
+                                                              "SFProText",
+                                                          fontSize: 14),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                            Row(
+                                              children: [
+                                                CustomRadio(
+                                                    onChanged: (val) {
+                                                      setState(() {
+                                                        selectedRadioValue2 =
+                                                            null; // Unselect if already selected
+                                                        isButtonEnabled2 = true;
+                                                      });
+                                                    },
+                                                    groupValue:
+                                                        selectedRadioValue2,
+                                                    value: 1,
+                                                    colors: Color.fromRGBO(
+                                                        200, 251, 253, 1),
+                                                    text1: 'vendor1',
+                                                    textcolor1: Colors.black54,
+                                                    text2: "Xxxxx SAR",
+                                                    textcolor2: Colors.black38),
+                                                CustomRadio(
+                                                    onChanged: (val) {
+                                                      setState(() {
+                                                        selectedRadioValue2 =
+                                                            null; // Unselect if already selected
+                                                        isButtonEnabled2 = true;
+                                                      });
+                                                    },
+                                                    groupValue:
+                                                        selectedRadioValue2,
+                                                    value: 2,
+                                                    colors: Color.fromRGBO(
+                                                        224, 253, 200, 1),
+                                                    text1: 'vendor1',
+                                                    textcolor1: Colors.black54,
+                                                    text2: "Xxxxx SAR",
+                                                    textcolor2: Colors.black38),
+                                                CustomRadio(
+                                                    onChanged: (val) {
+                                                      setState(() {
+                                                        selectedRadioValue2 =
+                                                            null; // Unselect if already selected
+                                                        isButtonEnabled2 = true;
+                                                      });
+                                                    },
+                                                    groupValue:
+                                                        selectedRadioValue2,
+                                                    value: 3,
+                                                    colors: Color.fromRGBO(
+                                                        245, 253, 200, 1),
+                                                    text1: 'vendor3',
+                                                    textcolor1: Colors.black54,
+                                                    text2: "Xxxxx SAR",
+                                                    textcolor2: Colors.black38),
+                                              ],
+                                            ),
+                                            Row(
+                                              children: [
+                                                IconButton(
+                                                  padding: EdgeInsets.zero,
+                                                  constraints: BoxConstraints(),
+                                                  onPressed: null,
+                                                  icon: Icon(
+                                                    Icons.edit_document,
+                                                    color: Color.fromRGBO(
+                                                        74, 60, 81, 1),
+                                                  ),
+                                                ),
+                                                IconButton(
+                                                  padding: EdgeInsets.zero,
+                                                  onPressed: null,
+                                                  icon: Icon(Icons.delete),
+                                                ),
+                                              ],
+                                            ),
+                                            SizedBox(
+                                              width: 130,
+                                              height: 40,
+                                              child: ElevatedButton(
+                                                onPressed: isButtonEnabled2
+                                                    ? () {
+                                                        showDialog(
+                                                          barrierDismissible:
+                                                              false,
+                                                          context: context,
+                                                          builder: (context) {
+                                                            return BookingDialog();
+                                                          },
+                                                        );
+                                                        print(
+                                                            'Elevated Button Pressed!');
+                                                      }
+                                                    : null,
+                                                style: ElevatedButton.styleFrom(
+                                                  primary: isButtonEnabled2
+                                                      ? Color.fromRGBO(
+                                                          98, 105, 254, 1)
+                                                      : Colors.grey,
+                                                  side: BorderSide(
+                                                    color: isButtonEnabled2
+                                                        ? Color.fromRGBO(
+                                                            98, 105, 254, 1)
+                                                        : Colors.grey,
+                                                  ),
+                                                ),
+                                                child: Text(
+                                                  'Pay Now',
+                                                  style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 16,
+                                                    fontFamily: "Helvetica",
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ]),
                                 ),
                               ),
-                            ),
+                            ],
                           ),
-                        ],
+                        ),
+                        SizedBox(
+                          height: 200,
+                        ),
+                        SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Container(
+                            height: 10, // Adjust the height as needed
+                            width:
+                                1200, // Set the desired length of the scroll bar
+                            color: Colors
+                                .grey, // Background color of the scrollable area
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 40,
+                  ),
+                  SizedBox(
+                    width: 150,
+                    height: 50,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        // Handle button press
+                        print('Elevated Button Pressed!');
+                      },
+                      style: ElevatedButton.styleFrom(
+                        primary: Color.fromRGBO(98, 105, 254, 1),
+                        side: BorderSide(
+                          color: Color.fromRGBO(98, 105, 254, 1),
+                        ),
                       ),
-                    )
-                  ],
-                ),
-                SizedBox(
-                  height: 30,
-                ),
-                Row(
-                  children: [
-                    Expanded(
-                      child: Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(right: 110),
-                            child: Expanded(
-                              child: Container(
-                                height: 230,
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(12.0),
-                                ),
-                                child: Table(
-                                  border: TableBorder(
-                                    horizontalInside: BorderSide(
-                                        width: 0.1,
-                                        color: Color.fromRGBO(80, 69, 74, 1),
-                                        style: BorderStyle.solid),
-                                  ),
-
-                                  // textDirection: TextDirection.rtl,
-                                  // defaultVerticalAlignment: TableCellVerticalAlignment.bottom,
-                                  // border:TableBorder.all(width: 2.0,color: Colors.red),
-                                  children: [
-                                    TableRow(children: [
-                                      Container(
-                                        height: 60,
-                                        color: Color.fromRGBO(
-                                            75, 61, 82, 1), // Brown color
-
-                                        child: Center(
-                                          child: Text(
-                                            "Booking ID",
-                                            textScaleFactor: 1.5,
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 10,
-                                                fontFamily: "SFProText"),
-                                          ),
-                                        ),
-                                      ),
-                                      Container(
-                                        height: 60,
-                                        color: Color.fromRGBO(75, 61, 82, 1),
-                                        child: Center(
-                                          child: Text(
-                                            "Mode",
-                                            textScaleFactor: 1.5,
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 10,
-                                                fontFamily: "SFProText"),
-                                          ),
-                                        ),
-                                      ),
-                                      Container(
-                                        height: 60,
-                                        color: Color.fromRGBO(75, 61, 82, 1),
-                                        child: Center(
-                                          child: Text(
-                                            "Booking Type",
-                                            textScaleFactor: 1.5,
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 10,
-                                                fontFamily: "SFProText"),
-                                          ),
-                                        ),
-                                      ),
-                                      Container(
-                                        height: 60,
-                                        color: Color.fromRGBO(75, 61, 82, 1),
-                                        child: Center(
-                                          child: Text(
-                                            "Vendor",
-                                            textScaleFactor: 1.5,
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 10,
-                                                fontFamily: "SFProText"),
-                                          ),
-                                        ),
-                                      ),
-                                      Container(
-                                        height: 60,
-                                        color: Color.fromRGBO(75, 61, 82, 1),
-                                        child: Center(
-                                          child: Text(
-                                            "Payment Status",
-                                            textScaleFactor: 1.5,
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 10,
-                                                fontFamily: "SFProText"),
-                                          ),
-                                        ),
-                                      ),
-                                      Container(
-                                        height: 60,
-                                        color: Color.fromRGBO(75, 61, 82, 1),
-                                        child: Center(
-                                          child: Text(
-                                            "Status",
-                                            textScaleFactor: 1.5,
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 10,
-                                                fontFamily: "SFProText"),
-                                          ),
-                                        ),
-                                      ),
-                                      Container(
-                                        height: 60,
-                                        color: Color.fromRGBO(75, 61, 82, 1),
-                                        child: Center(
-                                          child: Text(
-                                            "Actions",
-                                            textScaleFactor: 1.5,
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 10,
-                                                fontFamily: "SFProText"),
-                                          ),
-                                        ),
-                                      ),
-                                    ]),
-                                    TableRow(children: [
-                                      Container(
-                                        height: 50,
-                                        child: Center(
-                                          child: Text(
-                                            "NAQBOOK***",
-                                            textScaleFactor: 1.5,
-                                            style: TextStyle(
-                                                color: Colors.black,
-                                                fontSize: 9,
-                                                fontFamily: "SFProText"),
-                                          ),
-                                        ),
-                                      ),
-                                      Container(
-                                        height: 50,
-                                        child: Center(
-                                          child: Text(
-                                            "Truck",
-                                            textScaleFactor: 1.5,
-                                            style: TextStyle(
-                                                color: Colors.black,
-                                                fontSize: 9,
-                                                fontFamily: "SFProText"),
-                                          ),
-                                        ),
-                                      ),
-                                      Container(
-                                        height: 50,
-                                        child: Center(
-                                          child: Text(
-                                            "Single",
-                                            textScaleFactor: 1.5,
-                                            style: TextStyle(
-                                                color: Colors.black,
-                                                fontSize: 9,
-                                                fontFamily: "SFProText"),
-                                          ),
-                                        ),
-                                      ),
-                                      Container(
-                                        height: 50,
-                                        child: Center(
-                                          child: Text(
-                                            "Vendor 1",
-                                            textScaleFactor: 1.5,
-                                            style: TextStyle(
-                                                color: Colors.black,
-                                                fontSize: 9,
-                                                fontFamily: "SFProText"),
-                                          ),
-                                        ),
-                                      ),
-                                      Container(
-                                        height: 50,
-                                        child: Center(
-                                          child: SizedBox(
-                                            width: 100,
-                                            height: 30,
-                                            child: ElevatedButton(
-                                              onPressed: () {},
-                                              style: ElevatedButton.styleFrom(
-                                                primary: Color.fromRGBO(
-                                                    247, 230, 176, 1),
-                                                side: BorderSide(
-                                                  color: Color.fromRGBO(
-                                                      247, 230, 176, 1),
-                                                ),
-                                              ),
-                                              child: Text(
-                                                'BalXXXX',
-                                                style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontSize: 12,
-                                                  fontFamily: "Helvetica",
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      Container(
-                                        height: 50,
-                                        child: Center(
-                                          child: Image.asset(
-                                            'Group268.png',
-                                            width: 50,
-                                            height: 30,
-                                          ),
-                                        ),
-                                      ),
-                                      Container(
-                                        height: 50,
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            IconButton(
-                                                padding: EdgeInsets.zero,
-                                                constraints: BoxConstraints(),
-                                                onPressed: null,
-                                                icon: Icon(
-                                                  Icons.edit_document,
-                                                  color: Color.fromRGBO(
-                                                      74, 60, 81, 1),
-                                                )),
-                                            IconButton(
-                                                padding: EdgeInsets.zero,
-                                                // constraints:
-                                                //     BoxConstraints(),
-                                                onPressed: null,
-                                                icon: Icon(Icons.delete)),
-                                          ],
-                                        ),
-                                      ),
-                                    ]),
-                                    TableRow(children: [
-                                      Container(
-                                        height: 50,
-                                        child: Center(
-                                          child: Text(
-                                            "NAQBOOK***",
-                                            textScaleFactor: 1.5,
-                                            style: TextStyle(
-                                                color: Colors.black,
-                                                fontSize: 9,
-                                                fontFamily: "SFProText"),
-                                          ),
-                                        ),
-                                      ),
-                                      Container(
-                                        height: 50,
-                                        child: Center(
-                                          child: Text(
-                                            "Bus",
-                                            textScaleFactor: 1.5,
-                                            style: TextStyle(
-                                                color: Colors.black,
-                                                fontSize: 9,
-                                                fontFamily: "SFProText"),
-                                          ),
-                                        ),
-                                      ),
-                                      Container(
-                                        height: 50,
-                                        child: Center(
-                                          child: Text(
-                                            "Contract",
-                                            textScaleFactor: 1.5,
-                                            style: TextStyle(
-                                                color: Colors.black,
-                                                fontSize: 9,
-                                                fontFamily: "SFProText"),
-                                          ),
-                                        ),
-                                      ),
-                                      Container(
-                                        height: 50,
-                                        child: Center(
-                                          child: Text(
-                                            "Vendor 2",
-                                            textScaleFactor: 1.5,
-                                            style: TextStyle(
-                                                color: Colors.black,
-                                                fontSize: 9,
-                                                fontFamily: "SFProText"),
-                                          ),
-                                        ),
-                                      ),
-                                      Container(
-                                        height: 50,
-                                        child: Center(
-                                          child: SizedBox(
-                                            width: 100,
-                                            height: 30,
-                                            child: ElevatedButton(
-                                              onPressed: () {},
-                                              style: ElevatedButton.styleFrom(
-                                                primary: Color.fromRGBO(
-                                                    247, 230, 176, 1),
-                                                side: BorderSide(
-                                                  color: Color.fromRGBO(
-                                                      247, 230, 176, 1),
-                                                ),
-                                              ),
-                                              child: Text(
-                                                'BalXXXX',
-                                                style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontSize: 12,
-                                                  fontFamily: "Helvetica",
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      Container(
-                                        height: 50,
-                                        child: Center(
-                                          child: Image.asset(
-                                            'Group300.png',
-                                            width: 50,
-                                            height: 30,
-                                          ),
-                                        ),
-                                      ),
-                                      Container(
-                                        height: 50,
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            IconButton(
-                                                padding: EdgeInsets.zero,
-                                                constraints: BoxConstraints(),
-                                                onPressed: null,
-                                                icon: Icon(
-                                                  Icons.edit_document,
-                                                  color: Color.fromRGBO(
-                                                      74, 60, 81, 1),
-                                                )),
-                                            IconButton(
-                                                padding: EdgeInsets.zero,
-                                                // constraints:
-                                                //     BoxConstraints(),
-                                                onPressed: null,
-                                                icon: Icon(Icons.delete)),
-                                          ],
-                                        ),
-                                      ),
-                                    ]),
-                                    TableRow(children: [
-                                      Container(
-                                        height: 50,
-                                        child: Center(
-                                          child: Text(
-                                            "NAQBOOK***",
-                                            textScaleFactor: 1.5,
-                                            style: TextStyle(
-                                                color: Colors.black,
-                                                fontSize: 9,
-                                                fontFamily: "SFProText"),
-                                          ),
-                                        ),
-                                      ),
-                                      Container(
-                                        height: 50,
-                                        child: Center(
-                                          child: Text(
-                                            "Equipment",
-                                            textScaleFactor: 1.5,
-                                            style: TextStyle(
-                                                color: Colors.black,
-                                                fontSize: 9,
-                                                fontFamily: "SFProText"),
-                                          ),
-                                        ),
-                                      ),
-                                      Container(
-                                        height: 50,
-                                        child: Center(
-                                          child: Text(
-                                            "Single",
-                                            textScaleFactor: 1.5,
-                                            style: TextStyle(
-                                                color: Colors.black,
-                                                fontSize: 9,
-                                                fontFamily: "SFProText"),
-                                          ),
-                                        ),
-                                      ),
-                                      Container(
-                                        height: 50,
-                                        child: Center(
-                                          child: Text(
-                                            "Vendor 2",
-                                            textScaleFactor: 1.5,
-                                            style: TextStyle(
-                                                color: Colors.black,
-                                                fontSize: 9,
-                                                fontFamily: "SFProText"),
-                                          ),
-                                        ),
-                                      ),
-                                      Container(
-                                        height: 50,
-                                        child: Center(
-                                          child: SizedBox(
-                                            width: 100,
-                                            height: 30,
-                                            child: ElevatedButton(
-                                              onPressed: () {},
-                                              style: ElevatedButton.styleFrom(
-                                                primary: Color.fromRGBO(
-                                                    87, 192, 18, 1),
-                                                side: BorderSide(
-                                                  color: Color.fromRGBO(
-                                                      87, 192, 18, 1),
-                                                ),
-                                              ),
-                                              child: Text(
-                                                'BalXXXX',
-                                                style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontSize: 12,
-                                                  fontFamily: "Helvetica",
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      Container(
-                                        height: 50,
-                                        child: Center(
-                                          child: Image.asset(
-                                            'Group353.png',
-                                            width: 50,
-                                            height: 30,
-                                          ),
-                                        ),
-                                      ),
-                                      Container(
-                                        height: 50,
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            IconButton(
-                                                padding: EdgeInsets.zero,
-                                                constraints: BoxConstraints(),
-                                                onPressed: null,
-                                                icon: Icon(
-                                                  Icons.edit_document,
-                                                  color: Color.fromRGBO(
-                                                      74, 60, 81, 1),
-                                                )),
-                                            IconButton(
-                                                padding: EdgeInsets.zero,
-                                                // constraints:
-                                                //     BoxConstraints(),
-                                                onPressed: null,
-                                                icon: Icon(Icons.delete)),
-                                          ],
-                                        ),
-                                      ),
-                                    ]),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 30,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(right: 110),
-                            child: SingleChildScrollView(
-                              scrollDirection: Axis.horizontal,
-                              child: Container(
-                                height: 10, // Adjust the height as needed
-                                width:
-                                    1100, // Set the desired length of the scroll bar
-                                color: Colors
-                                    .grey, // Background color of the scrollable area
-                              ),
-                            ),
-                          ),
-                        ],
+                      child: Text(
+                        'Confirm Booking',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 13.4,
+                        ),
                       ),
                     ),
-                  ],
-                ),
-              ],
+                  )
+                ],
+              ),
             ),
           );
         }

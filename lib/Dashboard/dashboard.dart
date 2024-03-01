@@ -46,7 +46,6 @@ class _DashboardState extends State<Dashboard> {
           return Padding(
             padding: const EdgeInsets.all(5.0),
             child: Container(
-              width: 1200,
               color: Color.fromRGBO(240, 237, 250, 0.9),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
