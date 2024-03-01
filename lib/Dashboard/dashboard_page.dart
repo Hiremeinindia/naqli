@@ -101,7 +101,7 @@ class _MyHomePageState extends State<DashboardPage> {
             appBar: PreferredSize(
               preferredSize: Size.fromHeight(75),
               child: Material(
-                elevation: 5,
+                elevation: 3,
                 child: Padding(
                   padding: EdgeInsets.fromLTRB(5.w, 0, 2.5.w, 0),
                   child: Row(
@@ -110,7 +110,6 @@ class _MyHomePageState extends State<DashboardPage> {
                       Image.asset(
                         'Naqli-final-logo.png',
                         width: 10.w,
-                        height: 8.h,
                       ),
                       Row(
                         children: [
@@ -124,6 +123,25 @@ class _MyHomePageState extends State<DashboardPage> {
                                 fontSize: 24,
                                 fontFamily: "Segoe UI",
                                 color: Color.fromRGBO(112, 112, 112, 1),
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 30,
+                            child: VerticalDivider(
+                              color: Color.fromRGBO(206, 203, 203, 1),
+                            ),
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              // Handle the second button press
+                            },
+                            child: Text(
+                              'Enterprise',
+                              style: TextStyle(
+                                fontSize: 24,
+                                fontFamily: "Segoe UI",
+                                color: Color.fromRGBO(206, 203, 203, 1),
                               ),
                             ),
                           ),
@@ -201,12 +219,10 @@ class _MyHomePageState extends State<DashboardPage> {
                 ),
               ),
             ),
-            body: SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
+            body: Center(
               child: Padding(
                 padding: EdgeInsets.fromLTRB(6.w, 6.h, 6.w, 6.h),
                 child: Container(
-                    width: 1700,
                     color: Color.fromRGBO(240, 237, 250, 1),
                     child: Row(
                       children: [
@@ -215,123 +231,121 @@ class _MyHomePageState extends State<DashboardPage> {
                           width: 400,
                           color: Color.fromRGBO(234, 232, 235, 1),
                           child: Padding(
-                            padding: const EdgeInsets.all(30.0),
-                            child: Column(
-                              children: [
-                                Container(
-                                  height: 350,
-                                  width: 400,
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(12.0),
-                                  ),
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(
-                                        30.0), // Adjust the radius as needed
-                                    child: Image.asset(
-                                      'Circleavatar.png',
-                                      width: 550,
-                                      height:
-                                          400, // Adjust the height as needed
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: 500,
-                                  height: 370,
-                                  child: Card(
-                                    elevation: 10,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(10),
-                                    ),
-                                    color: Color.fromRGBO(240, 237, 250, 1),
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 30, top: 50),
-                                      child: SideMenu(
-                                        controller: sideMenu,
-                                        style: SideMenuStyle(
-                                          displayMode: SideMenuDisplayMode.auto,
-                                          selectedColor:
-                                              Color.fromRGBO(98, 105, 254, 1),
-                                          unselectedTitleTextStyle:
-                                              const TextStyle(
-                                            fontFamily: 'Poppins',
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.w600,
-                                            color: Color.fromRGBO(
-                                                128, 118, 118, 1),
-                                          ),
-                                          selectedTitleTextStyle:
-                                              const TextStyle(
-                                                  fontFamily: 'Poppins',
-                                                  color: Colors.white,
-                                                  fontSize: 14,
-                                                  fontWeight: FontWeight.w600),
-                                          unselectedIconColor:
-                                              Color.fromRGBO(128, 118, 118, 1),
-                                          selectedIconColor:
-                                              const Color.fromARGB(
-                                                  255, 64, 114, 61),
+                            padding:
+                                EdgeInsets.fromLTRB(1.5.w, 4.h, 1.5.w, 4.h),
+                            child: Card(
+                              elevation: 1,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              color: Color.fromARGB(255, 240, 237, 250),
+                              child: Expanded(
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius:
+                                            BorderRadius.circular(12.0),
+                                      ),
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(
+                                            30.0), // Adjust the radius as needed
+                                        child: Image.asset(
+                                          'Circleavatar.png',
+                                          width:
+                                              550, // Adjust the height as needed
+                                          fit: BoxFit.cover,
                                         ),
-                                        items: [
-                                          SideMenuItem(
-                                            title: 'Dashboard',
-                                            onTap: (page, _) {
-                                              sideMenu.changePage(page);
-                                            },
-                                            icon: const Icon(
-                                                Icons.login_outlined),
-                                          ),
-                                          SideMenuItem(
-                                            title: 'Trigger Booking',
-                                            onTap: (page, _) {
-                                              sideMenu.changePage(page);
-                                            },
-                                            icon: const Icon(
-                                                Icons.person_2_outlined),
-                                          ),
-                                          SideMenuItem(
-                                            title: 'Bookings',
-                                            onTap: (page, _) {
-                                              sideMenu.changePage(page);
-                                            },
-                                            icon: const Icon(
-                                                Icons.person_2_outlined),
-                                            // Set the style property to change the text size
-                                          ),
-                                          SideMenuItem(
-                                            title: 'Payments',
-                                            onTap: (page, _) {
-                                              sideMenu.changePage(page);
-                                            },
-                                            icon: const Icon(
-                                                Icons.mode_comment_outlined),
-                                          ),
-                                          SideMenuItem(
-                                            title: 'Report an issue',
-                                            onTap: (page, _) {
-                                              sideMenu.changePage(page);
-                                            },
-                                            icon: const Icon(
-                                                Icons.mode_comment_outlined),
-                                          ),
-                                          SideMenuItem(
-                                            title: 'Help',
-                                            onTap: (page, _) {
-                                              sideMenu.changePage(page);
-                                            },
-                                            icon: const Icon(
-                                                Icons.inbox_outlined),
-                                          ),
-                                        ],
                                       ),
                                     ),
-                                  ),
-                                )
-                                // Add other widgets if needed below the image
-                              ],
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: 1.5, top: 20),
+                                      child: SizedBox(
+                                        height: 30.h,
+                                        child: SideMenu(
+                                          controller: sideMenu,
+                                          style: SideMenuStyle(
+                                            displayMode:
+                                                SideMenuDisplayMode.auto,
+                                            selectedColor:
+                                                Color.fromRGBO(98, 105, 254, 1),
+                                            unselectedTitleTextStyle:
+                                                const TextStyle(
+                                              fontFamily: 'SFProText',
+                                              fontSize: 14,
+                                              color: Color.fromRGBO(
+                                                  128, 118, 118, 1),
+                                            ),
+                                            selectedTitleTextStyle:
+                                                const TextStyle(
+                                                    fontFamily: 'SFProText',
+                                                    color: Colors.white,
+                                                    fontSize: 14,
+                                                    fontWeight:
+                                                        FontWeight.w600),
+                                            unselectedIconColor: Color.fromRGBO(
+                                                128, 118, 118, 1),
+                                            selectedIconColor: Colors.white,
+                                          ),
+                                          items: [
+                                            SideMenuItem(
+                                              title: 'Dashboard',
+                                              onTap: (page, _) {
+                                                sideMenu.changePage(page);
+                                              },
+                                              icon: const Icon(
+                                                  Icons.login_outlined),
+                                            ),
+                                            SideMenuItem(
+                                              title: 'Trigger Booking',
+                                              onTap: (page, _) {
+                                                sideMenu.changePage(page);
+                                              },
+                                              icon: const Icon(
+                                                  Icons.person_2_outlined),
+                                            ),
+                                            SideMenuItem(
+                                              title: 'Bookings',
+                                              onTap: (page, _) {
+                                                sideMenu.changePage(page);
+                                              },
+                                              icon: const Icon(
+                                                  Icons.person_2_outlined),
+                                              // Set the style property to change the text size
+                                            ),
+                                            SideMenuItem(
+                                              title: 'Payments',
+                                              onTap: (page, _) {
+                                                sideMenu.changePage(page);
+                                              },
+                                              icon: const Icon(
+                                                  Icons.mode_comment_outlined),
+                                            ),
+                                            SideMenuItem(
+                                              title: 'Report an issue',
+                                              onTap: (page, _) {
+                                                sideMenu.changePage(page);
+                                              },
+                                              icon: const Icon(
+                                                  Icons.mode_comment_outlined),
+                                            ),
+                                            SideMenuItem(
+                                              title: 'Help',
+                                              onTap: (page, _) {
+                                                sideMenu.changePage(page);
+                                              },
+                                              icon: const Icon(
+                                                  Icons.inbox_outlined),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
                             ),
                           ),
                         ),
