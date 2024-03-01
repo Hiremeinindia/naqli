@@ -231,8 +231,7 @@ class _MyHomePageState extends State<DashboardPage> {
                           width: 400,
                           color: Color.fromRGBO(234, 232, 235, 1),
                           child: Padding(
-                            padding:
-                                EdgeInsets.fromLTRB(1.5.w, 4.h, 1.5.w, 4.h),
+                            padding: EdgeInsets.fromLTRB(2.w, 4.h, 2.w, 4.h),
                             child: Card(
                               elevation: 1,
                               shape: RoundedRectangleBorder(
