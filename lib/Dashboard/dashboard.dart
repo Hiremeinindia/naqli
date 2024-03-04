@@ -204,6 +204,11 @@ class _DashboardState extends State<Dashboard> {
                                                       .contentColorBlue,
                                                   text: 'First',
                                                   isSquare: true,
+                                                  textStyle: TextStyle(
+                                                    fontSize:
+                                                        5, // Adjust the font size as needed
+                                                    // Add more styling options if necessary
+                                                  ),
                                                 ),
                                                 SizedBox(
                                                   height: 4,
@@ -213,15 +218,11 @@ class _DashboardState extends State<Dashboard> {
                                                       .contentColorYellow,
                                                   text: 'Second',
                                                   isSquare: true,
-                                                ),
-                                                SizedBox(
-                                                  height: 4,
-                                                ),
-                                                Indicator(
-                                                  color: AppColors
-                                                      .contentColorPurple,
-                                                  text: 'Third',
-                                                  isSquare: true,
+                                                  textStyle: TextStyle(
+                                                    fontSize:
+                                                        5, // Adjust the font size as needed
+                                                    // Add more styling options if necessary
+                                                  ),
                                                 ),
                                                 SizedBox(
                                                   height: 4,
@@ -229,8 +230,27 @@ class _DashboardState extends State<Dashboard> {
                                                 Indicator(
                                                   color: AppColors
                                                       .contentColorGreen,
+                                                  text: 'Third',
+                                                  isSquare: true,
+                                                  textStyle: TextStyle(
+                                                    fontSize:
+                                                        5, // Adjust the font size as needed
+                                                    // Add more styling options if necessary
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  height: 4,
+                                                ),
+                                                Indicator(
+                                                  color: AppColors
+                                                      .contentColorPurple,
                                                   text: 'Fourth',
                                                   isSquare: true,
+                                                  textStyle: TextStyle(
+                                                    fontSize:
+                                                        5, // Adjust the font size as needed
+                                                    // Add more styling options if necessary
+                                                  ),
                                                 ),
                                                 SizedBox(
                                                   height: 18,

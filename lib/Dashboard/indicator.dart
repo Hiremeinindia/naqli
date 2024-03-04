@@ -8,6 +8,7 @@ class Indicator extends StatelessWidget {
     required this.isSquare,
     this.size = 16,
     this.textColor,
+    required TextStyle textStyle,
   });
   final Color color;
   final String text;
@@ -33,7 +34,7 @@ class Indicator extends StatelessWidget {
         Text(
           text,
           style: TextStyle(
-            fontSize: 16,
+            fontSize: 9,
             fontWeight: FontWeight.bold,
             color: textColor,
           ),
