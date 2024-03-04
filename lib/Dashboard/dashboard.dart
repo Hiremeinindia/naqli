@@ -54,7 +54,7 @@ class _DashboardState extends State<Dashboard> {
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           Padding(
-                            padding: const EdgeInsets.only(left: 90, top: 30),
+                            padding: const EdgeInsets.only(left: 100, top: 30),
                             child: Row(
                               children: [
                                 Text("No of Bookings  "),
@@ -66,7 +66,7 @@ class _DashboardState extends State<Dashboard> {
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsets.only(left: 90, top: 10),
+                            padding: const EdgeInsets.only(left: 100, top: 10),
                             child: Row(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
@@ -394,7 +394,7 @@ class _DashboardState extends State<Dashboard> {
                           ),
                           Padding(
                             padding: const EdgeInsets.only(
-                              left: 135,
+                              left: 105,
                             ),
                             child: Row(
                               children: [
