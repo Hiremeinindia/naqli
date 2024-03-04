@@ -2,7 +2,6 @@ import 'package:easy_sidemenu/easy_sidemenu.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/Dashboard/dashboard.dart';
-import 'package:flutter_application_1/Dashboard/side_drawer.dart';
 
 import 'package:sizer/sizer.dart';
 import 'bookings.dart';
@@ -10,7 +9,7 @@ import 'payments.dart';
 import 'trigger_booking.dart';
 
 class DashboardPage extends StatefulWidget {
-  DashboardPage();
+  const DashboardPage({Key? key}) : super(key: key);
 
   @override
   State<DashboardPage> createState() => _MyHomePageState();
@@ -18,9 +17,7 @@ class DashboardPage extends StatefulWidget {
 
 class _MyHomePageState extends State<DashboardPage> {
   PageController page = PageController();
-  PageController pageElse = PageController();
   SideMenuController sideMenu = SideMenuController();
-  SideMenuController sideMenu1 = SideMenuController();
   bool value = false;
   String month = '';
   bool checkbox1 = false;
@@ -91,11 +88,6 @@ class _MyHomePageState extends State<DashboardPage> {
       page.jumpToPage(p0);
     });
     super.initState();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
   }
 
   void enablePayNowButton() {
@@ -573,10 +565,12 @@ class _MyHomePageState extends State<DashboardPage> {
                 ),
               ),
             ),
-            body: Center(
+            body: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
               child: Padding(
-                padding: EdgeInsets.fromLTRB(6.w, 3.h, 6.w, 3.h),
+                padding: EdgeInsets.fromLTRB(6.w, 6.h, 6.w, 6.h),
                 child: Container(
+                    width: 1700,
                     color: Color.fromRGBO(240, 237, 250, 1),
                     child: Expanded(child: _currentContent)),
               ),
