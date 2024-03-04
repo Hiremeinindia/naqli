@@ -706,13 +706,10 @@ class _CreateAccountState extends State<CreateAccount> {
                                 }
                               },
                               style: ElevatedButton.styleFrom(
-                                fixedSize:
-                                    const Size.fromWidth(double.infinity),
                                 backgroundColor:
                                     Color.fromARGB(255, 128, 123, 229),
                                 shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(
-                                      5), // Adjust border radius as needed
+                                  borderRadius: BorderRadius.circular(5),
                                 ),
                               ),
                               child: Text(

@@ -566,14 +566,14 @@ class _DashboardState extends State<Dashboard> {
                                               child: ListTile(
                                                 leading: CircleAvatar(),
                                                 title: Text(
-                                                  'Equipment Hire',
+                                                  'Equipment hire',
                                                   style: const TextStyle(
                                                     fontWeight: FontWeight.bold,
-                                                    fontSize: 10.3,
+                                                    fontSize: 11,
                                                   ),
                                                 ),
                                                 subtitle: Text(
-                                                  '10.02.2022',
+                                                  '18.02.2022',
                                                   style:
                                                       TextStyle(fontSize: 10),
                                                 ),
@@ -582,15 +582,18 @@ class _DashboardState extends State<Dashboard> {
                                                       MainAxisSize.min,
                                                   children: [
                                                     Column(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .end,
                                                       children: [
-                                                        Text("Heavy"),
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .only(
+                                                            top: 10,
+                                                          ),
+                                                          child: Text("Heavy"),
+                                                        ),
                                                         Text("Equipment"),
                                                       ],
                                                     ),
-
                                                     SizedBox(
                                                         width:
                                                             30), // Add some space between "Truck" and "View" button
@@ -679,9 +682,16 @@ class _DashboardState extends State<Dashboard> {
                                                     Row(
                                                       crossAxisAlignment:
                                                           CrossAxisAlignment
-                                                              .end,
+                                                              .start,
                                                       children: [
-                                                        Text("Trailer"),
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .only(
+                                                                  right: 10),
+                                                          child:
+                                                              Text("Trailer"),
+                                                        ),
                                                       ],
                                                     ),
                                                     SizedBox(
@@ -1806,7 +1816,8 @@ class _DashboardState extends State<Dashboard> {
                                     print('Elevated Button Pressed!');
                                   },
                                   style: ElevatedButton.styleFrom(
-                                    primary: Color.fromRGBO(98, 105, 254, 1),
+                                    backgroundColor:
+                                        Color.fromRGBO(98, 105, 254, 1),
                                     side: BorderSide(
                                       color: Color.fromRGBO(98, 105, 254, 1),
                                     ),
@@ -3590,7 +3601,8 @@ class _DashboardState extends State<Dashboard> {
                                     print('Elevated Button Pressed!');
                                   },
                                   style: ElevatedButton.styleFrom(
-                                    primary: Color.fromRGBO(98, 105, 254, 1),
+                                    backgroundColor:
+                                        Color.fromRGBO(98, 105, 254, 1),
                                     side: BorderSide(
                                       color: Color.fromRGBO(98, 105, 254, 1),
                                     ),

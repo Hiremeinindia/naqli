@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
@@ -337,7 +336,7 @@ class _PaymentsState extends State<Payments> {
                                             child: ElevatedButton(
                                               onPressed: () {},
                                               style: ElevatedButton.styleFrom(
-                                                primary: Color.fromRGBO(
+                                                backgroundColor: Color.fromRGBO(
                                                     110, 90, 234, 1),
                                                 side: BorderSide(
                                                   color: Color.fromRGBO(
@@ -515,7 +514,7 @@ class _PaymentsState extends State<Payments> {
                                             child: ElevatedButton(
                                               onPressed: () {},
                                               style: ElevatedButton.styleFrom(
-                                                primary: Colors.white,
+                                                backgroundColor: Colors.white,
                                                 side: BorderSide(
                                                     color: Colors.white),
                                               ),
@@ -608,7 +607,7 @@ class _PaymentsState extends State<Payments> {
                                             child: ElevatedButton(
                                               onPressed: () {},
                                               style: ElevatedButton.styleFrom(
-                                                primary: Color.fromRGBO(
+                                                backgroundColor: Color.fromRGBO(
                                                     110, 90, 234, 1),
                                                 side: BorderSide(
                                                   color: Color.fromRGBO(
@@ -786,7 +785,7 @@ class _PaymentsState extends State<Payments> {
                                             child: ElevatedButton(
                                               onPressed: () {},
                                               style: ElevatedButton.styleFrom(
-                                                primary: Color.fromRGBO(
+                                                backgroundColor: Color.fromRGBO(
                                                     110, 90, 234, 1),
                                                 side: BorderSide(
                                                   color: Color.fromRGBO(
@@ -1158,7 +1157,7 @@ class _PaymentsState extends State<Payments> {
                                             child: ElevatedButton(
                                               onPressed: () {},
                                               style: ElevatedButton.styleFrom(
-                                                primary: Color.fromRGBO(
+                                                backgroundColor: Color.fromRGBO(
                                                     110, 90, 234, 1),
                                                 side: BorderSide(
                                                   color: Color.fromRGBO(
@@ -1336,7 +1335,7 @@ class _PaymentsState extends State<Payments> {
                                             child: ElevatedButton(
                                               onPressed: () {},
                                               style: ElevatedButton.styleFrom(
-                                                primary: Colors.white,
+                                                backgroundColor: Colors.white,
                                                 side: BorderSide(
                                                     color: Colors.white),
                                               ),
@@ -1429,7 +1428,7 @@ class _PaymentsState extends State<Payments> {
                                             child: ElevatedButton(
                                               onPressed: () {},
                                               style: ElevatedButton.styleFrom(
-                                                primary: Color.fromRGBO(
+                                                backgroundColor: Color.fromRGBO(
                                                     110, 90, 234, 1),
                                                 side: BorderSide(
                                                   color: Color.fromRGBO(
@@ -1607,7 +1606,7 @@ class _PaymentsState extends State<Payments> {
                                             child: ElevatedButton(
                                               onPressed: () {},
                                               style: ElevatedButton.styleFrom(
-                                                primary: Color.fromRGBO(
+                                                backgroundColor: Color.fromRGBO(
                                                     110, 90, 234, 1),
                                                 side: BorderSide(
                                                   color: Color.fromRGBO(

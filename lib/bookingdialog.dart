@@ -187,7 +187,7 @@ class _BookingDialogState extends State<BookingDialog> {
                           );
                         },
                         style: ElevatedButton.styleFrom(
-                          primary: Color.fromRGBO(98, 105, 254, 1),
+                          backgroundColor: Color.fromRGBO(98, 105, 254, 1),
                           side: BorderSide(
                             color: Color.fromRGBO(98, 105, 254, 1),
                           ),
@@ -210,7 +210,7 @@ class _BookingDialogState extends State<BookingDialog> {
                           // Handle Pay button click
                         },
                         style: ElevatedButton.styleFrom(
-                          primary: Color.fromRGBO(98, 105, 254, 1),
+                          backgroundColor: Color.fromRGBO(98, 105, 254, 1),
                           side: BorderSide(
                             color: Color.fromRGBO(98, 105, 254, 1),
                           ),

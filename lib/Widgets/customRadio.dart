@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sizer/sizer.dart';
 
 @immutable
 class CustomRadio extends StatelessWidget {
@@ -26,14 +27,13 @@ class CustomRadio extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 165,
-      height: 50,
+      height: 35,
       decoration: BoxDecoration(
           color: colors,
-          borderRadius: BorderRadius.circular(22.0),
+          borderRadius: BorderRadius.circular(15.0),
           border: Border.all(color: Colors.grey)),
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: EdgeInsets.fromLTRB(0.1.w, 1.5.h, 1.w, 1.5.h),
         child: Center(
           child: Row(
             children: [
@@ -45,18 +45,22 @@ class CustomRadio extends StatelessWidget {
               ),
               Text(text1!,
                   style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 9,
-                      color: textcolor1)),
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'SFProText',
+                    fontSize: 9,
+                    color: Colors.black54,
+                  )),
               SizedBox(
                 width: 10,
               ),
               Text(
                 text2!,
                 style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 8,
-                    color: textcolor2),
+                  fontWeight: FontWeight.bold,
+                  fontFamily: 'SFProText',
+                  fontSize: 8,
+                  color: Color.fromRGBO(143, 142, 151, 1),
+                ),
               ),
             ],
           ),
