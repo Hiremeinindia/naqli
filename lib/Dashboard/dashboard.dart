@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/Widgets/customButton.dart';
 import 'package:flutter_application_1/echarts_data.dart';
 import 'package:graphic/graphic.dart';
 import 'package:sizer/sizer.dart';
@@ -442,14 +443,24 @@ class _DashboardState extends State<Dashboard> {
                                               ),
                                               Padding(
                                                 padding: const EdgeInsets.only(
-                                                    left: 170),
+                                                    left: 140),
                                                 child: Text(
-                                                  "view all",
+                                                  "View all",
                                                   style: TextStyle(
                                                     color: Colors.white,
                                                     fontSize: 15,
                                                   ),
                                                 ),
+                                              ),
+                                              IconButton(
+                                                icon: Icon(
+                                                  Icons.arrow_forward_ios,
+                                                  color: Colors.white,
+                                                ),
+                                                onPressed: () {
+                                                  // Add your onPressed functionality here
+                                                  print('Arrow button pressed');
+                                                },
                                               ),
                                             ],
                                           ),
@@ -823,14 +834,24 @@ class _DashboardState extends State<Dashboard> {
                                               ),
                                               Padding(
                                                 padding: const EdgeInsets.only(
-                                                    left: 290),
+                                                    left: 240),
                                                 child: Text(
-                                                  "view all",
+                                                  "View all",
                                                   style: TextStyle(
                                                     color: Colors.white,
                                                     fontSize: 15,
                                                   ),
                                                 ),
+                                              ),
+                                              IconButton(
+                                                icon: Icon(
+                                                  Icons.arrow_forward_ios,
+                                                  color: Colors.white,
+                                                ),
+                                                onPressed: () {
+                                                  // Add your onPressed functionality here
+                                                  print('Arrow button pressed');
+                                                },
                                               ),
                                             ],
                                           ),
@@ -1820,35 +1841,10 @@ class _DashboardState extends State<Dashboard> {
                           SizedBox(
                             height: 10,
                           ),
-                          SizedBox(
-                            width: 150,
-                            height: 50,
-                            child: Flexible(
-                              child: Padding(
-                                padding: const EdgeInsets.only(right: 33.5),
-                                child: ElevatedButton(
-                                  onPressed: () {
-                                    // Handle button press
-                                    print('Elevated Button Pressed!');
-                                  },
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor:
-                                        Color.fromRGBO(98, 105, 254, 1),
-                                    side: BorderSide(
-                                      color: Color.fromRGBO(98, 105, 254, 1),
-                                    ),
-                                  ),
-                                  child: Text(
-                                    'Book New',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 15,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
+                          CustomButton(
+                            onPressed: () {},
+                            text: 'Book New',
+                          )
                         ],
                       ),
                     ),
@@ -3605,35 +3601,10 @@ class _DashboardState extends State<Dashboard> {
                           SizedBox(
                             height: 10,
                           ),
-                          SizedBox(
-                            width: 150,
-                            height: 50,
-                            child: Flexible(
-                              child: Padding(
-                                padding: const EdgeInsets.only(right: 33.5),
-                                child: ElevatedButton(
-                                  onPressed: () {
-                                    // Handle button press
-                                    print('Elevated Button Pressed!');
-                                  },
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor:
-                                        Color.fromRGBO(98, 105, 254, 1),
-                                    side: BorderSide(
-                                      color: Color.fromRGBO(98, 105, 254, 1),
-                                    ),
-                                  ),
-                                  child: Text(
-                                    'Book New',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 15,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
+                          CustomButton(
+                            onPressed: () {},
+                            text: 'Book New',
+                          )
                         ],
                       ),
                     ),
