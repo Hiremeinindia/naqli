@@ -12,8 +12,8 @@ import 'payments.dart';
 import 'trigger_booking.dart';
 
 class SideDrawer extends StatefulWidget {
-  SideDrawer(this.pageElse);
-  PageController pageElse;
+  SideDrawer();
+
   @override
   State<SideDrawer> createState() => _SideDrawerState();
 }

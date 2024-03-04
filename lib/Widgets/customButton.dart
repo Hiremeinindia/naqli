@@ -20,23 +20,27 @@ final class CustomButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 30,
+      height: 40,
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
-          fixedSize: const Size.fromWidth(double.infinity),
-          backgroundColor: Colors.indigo.shade900,
+          elevation: 2,
+          backgroundColor: Color.fromRGBO(98, 106, 254, 1),
           shape: RoundedRectangleBorder(
+            side: BorderSide(color: const Color.fromRGBO(112, 112, 112, 1)),
             borderRadius:
-                BorderRadius.circular(0.1), // Adjust border radius as needed
+                BorderRadius.circular(20), // Adjust border radius as needed
           ),
         ),
-        child: Text(
-          text!,
-          style: TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.normal,
-            color: Colors.white,
+        child: Padding(
+          padding: EdgeInsets.fromLTRB(0, 4, 0, 4),
+          child: Text(
+            text!,
+            style: TextStyle(
+              fontFamily: 'Helvetica',
+              color: Colors.white,
+              fontSize: 15,
+            ),
           ),
         ),
       ),

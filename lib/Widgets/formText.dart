@@ -18,6 +18,12 @@ class FormTextStyle {
       color: Color.fromARGB(255, 53, 68, 157),
       fontWeight: FontWeight.w500,
       fontFamily: 'Poppins');
+  static TextStyle buttonText = TextStyle(
+    fontFamily: 'Helvetica',
+    fontWeight: FontWeight.bold,
+    color: Colors.white,
+    fontSize: 13,
+  );
 }
 
 class TabelText {

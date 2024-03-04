@@ -1,20 +1,11 @@
-import 'dart:math';
-
 import 'package:easy_sidemenu/easy_sidemenu.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/Dashboard/dashboard.dart';
 import 'package:flutter_application_1/Dashboard/side_drawer.dart';
-import 'package:flutter_application_1/Widgets/customRadio.dart';
-import 'package:flutter_application_1/bookingdialog.dart';
-import 'package:flutter_application_1/echarts_data.dart';
-import 'package:flutter_application_1/homepage.dart';
-import 'package:graphic/graphic.dart';
-import 'package:flutter/gestures.dart';
-import 'package:quiver/iterables.dart';
+
 import 'package:sizer/sizer.dart';
 import 'bookings.dart';
-import 'page_view_container.dart';
 import 'payments.dart';
 import 'trigger_booking.dart';
 
@@ -43,6 +34,49 @@ class _MyHomePageState extends State<DashboardPage> {
   int? selectedRadioValue2;
   bool payNowButtonEnabled = false;
   String? selectedValue;
+  Widget _currentContent = Dashboard(); // Initial content
+
+  void _handleItem1Tap() {
+    setState(() {
+      _currentContent = Dashboard();
+    });
+    Navigator.pop(context);
+  }
+
+  void _handleItem2Tap() {
+    setState(() {
+      _currentContent = TriggerBooking();
+    });
+    Navigator.pop(context);
+  }
+
+  void _handleItem3Tap() {
+    setState(() {
+      _currentContent = Bookings();
+    });
+    Navigator.pop(context);
+  }
+
+  void _handleItem4Tap() {
+    setState(() {
+      _currentContent = Payments();
+    });
+    Navigator.pop(context);
+  }
+
+  void _handleItem5Tap() {
+    setState(() {
+      _currentContent = TriggerBooking();
+    });
+    Navigator.pop(context);
+  }
+
+  void _handleItem6Tap() {
+    setState(() {
+      _currentContent = TriggerBooking();
+    });
+    Navigator.pop(context);
+  }
 
   void handleRadioValueChanged(String? newValue) {
     setState(() {
@@ -55,9 +89,6 @@ class _MyHomePageState extends State<DashboardPage> {
   void initState() {
     sideMenu.addListener((p0) {
       page.jumpToPage(p0);
-    });
-    sideMenu1.addListener((p0) {
-      pageElse.jumpToPage(p0);
     });
     super.initState();
   }
@@ -132,28 +163,9 @@ class _MyHomePageState extends State<DashboardPage> {
                             child: Text(
                               'User',
                               style: TextStyle(
-                                fontSize: 24,
-                                fontFamily: "Segoe UI",
+                                fontSize: 20,
+                                fontFamily: "HelveticaNeue",
                                 color: Color.fromRGBO(112, 112, 112, 1),
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 30,
-                            child: VerticalDivider(
-                              color: Color.fromRGBO(206, 203, 203, 1),
-                            ),
-                          ),
-                          TextButton(
-                            onPressed: () {
-                              // Handle the second button press
-                            },
-                            child: Text(
-                              'Enterprise',
-                              style: TextStyle(
-                                fontSize: 24,
-                                fontFamily: "Segoe UI",
-                                color: Color.fromRGBO(206, 203, 203, 1),
                               ),
                             ),
                           ),
@@ -170,8 +182,8 @@ class _MyHomePageState extends State<DashboardPage> {
                             child: Text(
                               'Partner',
                               style: TextStyle(
-                                fontSize: 24,
-                                fontFamily: "Segoe UI",
+                                fontSize: 16,
+                                fontFamily: "HelveticaNeue",
                                 color: Color.fromRGBO(206, 203, 203, 1),
                               ),
                             ),
@@ -382,74 +394,125 @@ class _MyHomePageState extends State<DashboardPage> {
         } else {
           return Scaffold(
             drawer: Drawer(
-              child: SideMenu(
-                controller: sideMenu1,
-                style: SideMenuStyle(
-                  displayMode: SideMenuDisplayMode.auto,
-                  selectedColor: Color.fromRGBO(98, 105, 254, 1),
-                  unselectedTitleTextStyle: const TextStyle(
-                    fontFamily: 'SFProText',
-                    fontSize: 14,
-                    color: Color.fromRGBO(128, 118, 118, 1),
+              child: ListView(
+                  padding: EdgeInsets.only(
+                    top: 3.h,
                   ),
-                  selectedTitleTextStyle: const TextStyle(
-                      fontFamily: 'SFProText',
-                      color: Colors.white,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w600),
-                  unselectedIconColor: Color.fromRGBO(128, 118, 118, 1),
-                  selectedIconColor: Colors.white,
-                ),
-                items: [
-                  SideMenuItem(
-                    title: 'Dashboard',
-                    onTap: (pageElse, _) {
-                      Navigator.pop(context);
-                      sideMenu.changePage(pageElse);
-                    },
-                    icon: const Icon(Icons.login_outlined),
-                  ),
-                  SideMenuItem(
-                    title: 'Trigger Booking',
-                    onTap: (pageElse, _) {
-                      Navigator.pop(context);
-                      sideMenu.changePage(pageElse);
-                    },
-                    icon: const Icon(Icons.person_2_outlined),
-                  ),
-                  SideMenuItem(
-                    title: 'Bookings',
-                    onTap: (pageElse, _) {
-                      Navigator.pop(context);
-                      sideMenu.changePage(pageElse);
-                    },
-                    icon: const Icon(Icons.person_2_outlined),
-                    // Set the style property to change the text size
-                  ),
-                  SideMenuItem(
-                    title: 'Payments',
-                    onTap: (pageElse, _) {
-                      Navigator.pop(context);
-                      sideMenu.changePage(pageElse);
-                    },
-                    icon: const Icon(Icons.mode_comment_outlined),
-                  ),
-                  SideMenuItem(
-                    title: 'Report an issue',
-                    onTap: (pageElse, _) {
-                      sideMenu.changePage(pageElse);
-                    },
-                    icon: const Icon(Icons.mode_comment_outlined),
-                  ),
-                  SideMenuItem(
-                    title: 'Help',
-                    onTap: (pageElse, _) {
-                      sideMenu.changePage(pageElse);
-                    },
-                    icon: const Icon(Icons.inbox_outlined),
-                  ),
-                ],
-              ),
+                  children: <Widget>[
+                    Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(12.0),
+                      ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(
+                            30.0), // Adjust the radius as needed
+                        child: Image.asset(
+                          'Circleavatar.png',
+                          width: 550, // Adjust the height as needed
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 2.h,
+                    ),
+                    ListTile(
+                        hoverColor: Colors.indigo.shade100,
+                        title: Text(
+                          'Dashboard',
+                          style: TextStyle(color: Colors.black),
+                        ),
+                        onTap: _handleItem1Tap),
+                    SizedBox(
+                      height: 2.h,
+                    ),
+                    ListTile(
+                        hoverColor: Colors.indigo.shade100,
+                        title: Text(
+                          'Trigger Booking',
+                          style: TextStyle(color: Colors.black),
+                        ),
+                        onTap: _handleItem2Tap),
+                    SizedBox(
+                      height: 2.h,
+                    ),
+                    ListTile(
+                        hoverColor: Colors.indigo.shade100,
+                        title: Text(
+                          'Bookings',
+                          style: TextStyle(color: Colors.black),
+                        ),
+                        onTap: _handleItem3Tap),
+                    SizedBox(
+                      height: 2.h,
+                    ),
+                    ListTile(
+                        hoverColor: Colors.indigo.shade100,
+                        title: Text(
+                          'Payments',
+                          style: TextStyle(color: Colors.black),
+                        ),
+                        onTap: _handleItem4Tap),
+                    SizedBox(
+                      height: 2.h,
+                    ),
+                    ListTile(
+                        hoverColor: Colors.indigo.shade100,
+                        title: Text(
+                          'Report an issue',
+                          style: TextStyle(color: Colors.black),
+                        ),
+                        onTap: _handleItem5Tap),
+                    SizedBox(
+                      height: 2.h,
+                    ),
+                    ListTile(
+                        hoverColor: Colors.indigo.shade100,
+                        title: Text(
+                          'Help',
+                          style: TextStyle(color: Colors.black),
+                        ),
+                        onTap: _handleItem6Tap),
+                    SizedBox(
+                      height: 30,
+                      width: 170,
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 13, top: 5),
+                        child: Text(
+                          "Hello Faizal!",
+                          style: TextStyle(
+                            fontFamily: 'Colfax',
+                            fontSize: 16,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      padding: EdgeInsets.only(left: 20.0, top: 10),
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.notifications,
+                            color: Color.fromRGBO(106, 102, 209, 1),
+                          ),
+                          SizedBox(
+                            height: 30,
+                            child: Padding(
+                              padding: EdgeInsets.only(left: 15, top: 5),
+                              child: Text(
+                                "Contact Us",
+                                style: TextStyle(
+                                  fontFamily: 'Colfax',
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ]),
             ),
             appBar: PreferredSize(
               preferredSize: Size.fromHeight(60),
@@ -460,7 +523,7 @@ class _MyHomePageState extends State<DashboardPage> {
                   child: Padding(
                     padding: EdgeInsets.fromLTRB(2.5.w, 0, 2.5.w, 0),
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Builder(
                             builder: (context) => IconButton(
@@ -482,25 +545,6 @@ class _MyHomePageState extends State<DashboardPage> {
                               fontSize: 20,
                               fontFamily: "HelveticaNeue",
                               color: Color.fromRGBO(112, 112, 112, 1),
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 30,
-                          child: VerticalDivider(
-                            color: Color.fromRGBO(206, 203, 203, 1),
-                          ),
-                        ),
-                        TextButton(
-                          onPressed: () {
-                            // Handle the second button press
-                          },
-                          child: Text(
-                            'Enterprise',
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontFamily: "HelveticaNeue",
-                              color: Color.fromRGBO(206, 203, 203, 1),
                             ),
                           ),
                         ),
@@ -534,20 +578,7 @@ class _MyHomePageState extends State<DashboardPage> {
                 padding: EdgeInsets.fromLTRB(6.w, 3.h, 6.w, 3.h),
                 child: Container(
                     color: Color.fromRGBO(240, 237, 250, 1),
-                    child: Expanded(
-                      child: PageView(controller: pageElse, children: [
-                        Dashboard(),
-                        TriggerBooking(),
-                        Bookings(),
-                        Payments(),
-                        Container(
-                          color: Colors.pink,
-                        ),
-                        Container(
-                          color: Colors.deepOrangeAccent,
-                        ),
-                      ]),
-                    )),
+                    child: Expanded(child: _currentContent)),
               ),
             ),
           );

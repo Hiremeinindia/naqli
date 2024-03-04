@@ -1,21 +1,6 @@
 import 'package:flutter/material.dart';
 
 class Sample extends StatelessWidget {
-  // Define functions for handling onTap for each drawer item
-  void _handleItem1Tap(BuildContext context) {
-    // Replace this with your desired action
-    print('Item 1 tapped');
-    // Close the drawer
-    Navigator.pop(context);
-  }
-
-  void _handleItem2Tap(BuildContext context) {
-    // Replace this with your desired action
-    print('Item 2 tapped');
-    // Close the drawer
-    Navigator.pop(context);
-  }
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -23,20 +8,32 @@ class Sample extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(
-        onItem1Tap: _handleItem1Tap,
-        onItem2Tap: _handleItem2Tap,
-      ),
+      home: MyHomePage(),
     );
   }
 }
 
-class MyHomePage extends StatelessWidget {
-  final void Function(BuildContext) onItem1Tap;
-  final void Function(BuildContext) onItem2Tap;
+class MyHomePage extends StatefulWidget {
+  @override
+  _MyHomePageState createState() => _MyHomePageState();
+}
 
-  MyHomePage({Key? key, required this.onItem1Tap, required this.onItem2Tap})
-      : super(key: key);
+class _MyHomePageState extends State<MyHomePage> {
+  String _currentContent = 'Home Page Content';
+
+  void _handleItem1Tap() {
+    setState(() {
+      _currentContent = 'Item 1 Content';
+    });
+    Navigator.pop(context);
+  }
+
+  void _handleItem2Tap() {
+    setState(() {
+      _currentContent = 'Item 2 Content';
+    });
+    Navigator.pop(context);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -62,23 +59,17 @@ class MyHomePage extends StatelessWidget {
             ),
             ListTile(
               title: Text('Item 1'),
-              onTap: () {
-                // Call the function passed to handle item 1 tap
-                onItem1Tap(context);
-              },
+              onTap: _handleItem1Tap,
             ),
             ListTile(
               title: Text('Item 2'),
-              onTap: () {
-                // Call the function passed to handle item 2 tap
-                onItem2Tap(context);
-              },
+              onTap: _handleItem2Tap,
             ),
           ],
         ),
       ),
       body: Center(
-        child: Text('Home Page Content'),
+        child: Text(_currentContent),
       ),
     );
   }
