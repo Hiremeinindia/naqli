@@ -24,7 +24,7 @@ final class CustomButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
-          fixedSize: const Size.fromWidth(double.infinity),
+          // fixedSize: ui.Size.fromWidth(double.infinity),
           backgroundColor: Colors.indigo.shade900,
           shape: RoundedRectangleBorder(
             borderRadius:
