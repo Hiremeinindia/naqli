@@ -493,7 +493,14 @@ class _DashboardState extends State<Dashboard> {
                                                           CrossAxisAlignment
                                                               .end,
                                                       children: [
-                                                        Text("Truck11"),
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .only(
+                                                                  right: 10,
+                                                                  bottom: 5),
+                                                          child: Text("Truck"),
+                                                        ),
                                                       ],
                                                     ),
                                                     SizedBox(
@@ -566,7 +573,7 @@ class _DashboardState extends State<Dashboard> {
                                               child: ListTile(
                                                 leading: CircleAvatar(),
                                                 title: Text(
-                                                  'Equipment hire',
+                                                  'Equipment Hire',
                                                   style: const TextStyle(
                                                     fontWeight: FontWeight.bold,
                                                     fontSize: 11,
@@ -587,11 +594,19 @@ class _DashboardState extends State<Dashboard> {
                                                           padding:
                                                               const EdgeInsets
                                                                   .only(
-                                                            top: 10,
+                                                            top: 13,
                                                           ),
-                                                          child: Text("Heavy"),
+                                                          child: Text(
+                                                            "Heavy",
+                                                            style: TextStyle(
+                                                                fontSize: 10),
+                                                          ),
                                                         ),
-                                                        Text("Equipment"),
+                                                        Text(
+                                                          "Equipment",
+                                                          style: TextStyle(
+                                                              fontSize: 10),
+                                                        ),
                                                       ],
                                                     ),
                                                     SizedBox(
@@ -688,7 +703,8 @@ class _DashboardState extends State<Dashboard> {
                                                           padding:
                                                               const EdgeInsets
                                                                   .only(
-                                                                  right: 10),
+                                                                  right: 10,
+                                                                  bottom: 10),
                                                           child:
                                                               Text("Trailer"),
                                                         ),
