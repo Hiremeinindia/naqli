@@ -2,6 +2,8 @@ import 'dart:ui';
 
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/Dashboard/app_colors.dart';
+import 'package:flutter_application_1/Dashboard/indicator.dart';
 import 'package:flutter_application_1/Widgets/customButton.dart';
 import 'package:flutter_application_1/echarts_data.dart';
 import 'package:graphic/graphic.dart';
@@ -17,6 +19,72 @@ class Dashboard extends StatefulWidget {
 
 class _DashboardState extends State<Dashboard> {
   String month = '';
+  int touchedIndex = -1;
+  List<PieChartSectionData> showingSections() {
+    return List.generate(4, (i) {
+      final isTouched = i == touchedIndex;
+      final fontSize = isTouched ? 25.0 : 16.0;
+      final radius = isTouched ? 60.0 : 50.0;
+      const shadows = [Shadow(color: Colors.black, blurRadius: 2)];
+      switch (i) {
+        case 0:
+          return PieChartSectionData(
+            color: AppColors.contentColorBlue,
+            value: 40,
+            title: '40%',
+            radius: radius,
+            titleStyle: TextStyle(
+              fontSize: fontSize,
+              fontWeight: FontWeight.bold,
+              color: AppColors.mainTextColor1,
+              shadows: shadows,
+            ),
+          );
+        case 1:
+          return PieChartSectionData(
+            color: AppColors.contentColorYellow,
+            value: 30,
+            title: '30%',
+            radius: radius,
+            titleStyle: TextStyle(
+              fontSize: fontSize,
+              fontWeight: FontWeight.bold,
+              color: AppColors.mainTextColor1,
+              shadows: shadows,
+            ),
+          );
+        case 2:
+          return PieChartSectionData(
+            color: AppColors.contentColorPurple,
+            value: 15,
+            title: '15%',
+            radius: radius,
+            titleStyle: TextStyle(
+              fontSize: fontSize,
+              fontWeight: FontWeight.bold,
+              color: AppColors.mainTextColor1,
+              shadows: shadows,
+            ),
+          );
+        case 3:
+          return PieChartSectionData(
+            color: AppColors.contentColorGreen,
+            value: 15,
+            title: '15%',
+            radius: radius,
+            titleStyle: TextStyle(
+              fontSize: fontSize,
+              fontWeight: FontWeight.bold,
+              color: AppColors.mainTextColor1,
+              shadows: shadows,
+            ),
+          );
+        default:
+          throw Error();
+      }
+    });
+  }
+
   void tapOnPieChart(FlTouchEvent event, PieTouchResponse? response) {
     if (response != null) {
       final sectionIndex = response.touchedSection!.touchedSectionIndex;
@@ -81,51 +149,118 @@ class _DashboardState extends State<Dashboard> {
                                   height: 250,
                                   child: Stack(
                                     children: [
-                                      Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            vertical: 10, horizontal: 80),
-                                        child: PieChart(
-                                          swapAnimationDuration:
-                                              const Duration(seconds: 1),
-                                          swapAnimationCurve:
-                                              Curves.easeInOutQuint,
-                                          PieChartData(
-                                            pieTouchData: PieTouchData(
-                                              touchCallback: tapOnPieChart,
+                                      AspectRatio(
+                                        aspectRatio: 1.3,
+                                        child: Row(
+                                          children: <Widget>[
+                                            const SizedBox(
+                                              height: 18,
                                             ),
-                                            sections: [
-                                              PieChartSectionData(
-                                                  color: Colors.orange),
-                                              PieChartSectionData(
-                                                  color: Colors.grey),
-                                              PieChartSectionData(
-                                                  color: Colors.green),
-                                              PieChartSectionData(
-                                                  color: Colors.red),
-                                              PieChartSectionData(
-                                                  color: Colors.yellow),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                      Positioned.fill(
-                                        child: Center(
-                                          child: Column(
-                                            children: [
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.all(8.0),
-                                                child: Text(
-                                                  '29% Completed Successfully',
-                                                  style: TextStyle(
-                                                    fontSize: 10,
-                                                    fontWeight: FontWeight.bold,
-                                                    color: Colors.black,
+                                            Expanded(
+                                              child: AspectRatio(
+                                                aspectRatio: 1,
+                                                child: PieChart(
+                                                  PieChartData(
+                                                    pieTouchData: PieTouchData(
+                                                      touchCallback:
+                                                          (FlTouchEvent event,
+                                                              pieTouchResponse) {
+                                                        setState(() {
+                                                          if (!event
+                                                                  .isInterestedForInteractions ||
+                                                              pieTouchResponse ==
+                                                                  null ||
+                                                              pieTouchResponse
+                                                                      .touchedSection ==
+                                                                  null) {
+                                                            touchedIndex = -1;
+                                                            return;
+                                                          }
+                                                          touchedIndex =
+                                                              pieTouchResponse
+                                                                  .touchedSection!
+                                                                  .touchedSectionIndex;
+                                                        });
+                                                      },
+                                                    ),
+                                                    borderData: FlBorderData(
+                                                      show: false,
+                                                    ),
+                                                    sectionsSpace: 0,
+                                                    centerSpaceRadius: 40,
+                                                    sections: showingSections(),
                                                   ),
                                                 ),
                                               ),
-                                            ],
-                                          ),
+                                            ),
+                                            const Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.end,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: <Widget>[
+                                                Indicator(
+                                                  color: AppColors
+                                                      .contentColorBlue,
+                                                  text: 'First',
+                                                  isSquare: true,
+                                                  textStyle: TextStyle(
+                                                    fontSize:
+                                                        5, // Adjust the font size as needed
+                                                    // Add more styling options if necessary
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  height: 4,
+                                                ),
+                                                Indicator(
+                                                  color: AppColors
+                                                      .contentColorYellow,
+                                                  text: 'Second',
+                                                  isSquare: true,
+                                                  textStyle: TextStyle(
+                                                    fontSize:
+                                                        5, // Adjust the font size as needed
+                                                    // Add more styling options if necessary
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  height: 4,
+                                                ),
+                                                Indicator(
+                                                  color: AppColors
+                                                      .contentColorGreen,
+                                                  text: 'Third',
+                                                  isSquare: true,
+                                                  textStyle: TextStyle(
+                                                    fontSize:
+                                                        5, // Adjust the font size as needed
+                                                    // Add more styling options if necessary
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  height: 4,
+                                                ),
+                                                Indicator(
+                                                  color: AppColors
+                                                      .contentColorPurple,
+                                                  text: 'Fourth',
+                                                  isSquare: true,
+                                                  textStyle: TextStyle(
+                                                    fontSize:
+                                                        5, // Adjust the font size as needed
+                                                    // Add more styling options if necessary
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  height: 18,
+                                                ),
+                                              ],
+                                            ),
+                                            const SizedBox(
+                                              width: 28,
+                                            ),
+                                          ],
                                         ),
                                       ),
                                     ],
