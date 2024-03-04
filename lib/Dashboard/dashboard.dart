@@ -2,8 +2,8 @@ import 'dart:ui';
 
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/Dashboard/app_colors.dart';
-import 'package:flutter_application_1/Dashboard/indicator.dart';
+import 'package:flutter_application_1/pieChart/app_colors.dart';
+import 'package:flutter_application_1/pieChart/indicator.dart';
 import 'package:flutter_application_1/Widgets/customButton.dart';
 import 'package:flutter_application_1/echarts_data.dart';
 import 'package:graphic/graphic.dart';
@@ -552,7 +552,7 @@ class _DashboardState extends State<Dashboard> {
                                   child: Column(
                                     children: [
                                       Container(
-                                        height: 70,
+                                        height: 50,
                                         color: Color.fromRGBO(
                                             75, 61, 82, 1), // Brown color
                                         child: Center(
@@ -591,6 +591,7 @@ class _DashboardState extends State<Dashboard> {
                                                 icon: Icon(
                                                   Icons.arrow_forward_ios,
                                                   color: Colors.white,
+                                                  size: 15,
                                                 ),
                                                 onPressed: () {
                                                   // Add your onPressed functionality here
@@ -943,7 +944,7 @@ class _DashboardState extends State<Dashboard> {
                                   child: Column(
                                     children: [
                                       Container(
-                                        height: 70,
+                                        height: 50,
                                         color: Color.fromRGBO(
                                             75, 61, 82, 1), // Brown color
                                         child: Center(
@@ -982,6 +983,7 @@ class _DashboardState extends State<Dashboard> {
                                                 icon: Icon(
                                                   Icons.arrow_forward_ios,
                                                   color: Colors.white,
+                                                  size: 15,
                                                 ),
                                                 onPressed: () {
                                                   // Add your onPressed functionality here
