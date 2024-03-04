@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/Widgets/formText.dart';
 import 'package:flutter_application_1/echarts_data.dart';
 import 'package:graphic/graphic.dart';
 import 'package:sizer/sizer.dart';
@@ -443,17 +444,11 @@ class _DashboardState extends State<Dashboard> {
                                               width: 100,
                                               child: ListTile(
                                                 leading: CircleAvatar(),
-                                                title: Text(
-                                                  'Trip 1',
-                                                  style: const TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 12,
-                                                  ),
-                                                ),
+                                                title: Text('Trip 1',
+                                                    style: TabelText.text1),
                                                 subtitle: Text(
                                                   '18.02.2022',
-                                                  style:
-                                                      TextStyle(fontSize: 10),
+                                                  style: TabelText.text2,
                                                 ),
                                                 trailing: Row(
                                                   mainAxisSize:
@@ -464,7 +459,11 @@ class _DashboardState extends State<Dashboard> {
                                                           CrossAxisAlignment
                                                               .end,
                                                       children: [
-                                                        Text("Truck11"),
+                                                        Text(
+                                                          "Truck11",
+                                                          style:
+                                                              TabelText.text2,
+                                                        ),
                                                       ],
                                                     ),
                                                     SizedBox(
@@ -536,17 +535,11 @@ class _DashboardState extends State<Dashboard> {
                                               width: 100,
                                               child: ListTile(
                                                 leading: CircleAvatar(),
-                                                title: Text(
-                                                  'Equipment Hire',
-                                                  style: const TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 10.3,
-                                                  ),
-                                                ),
+                                                title: Text('Equipment Hire',
+                                                    style: TabelText.text1),
                                                 subtitle: Text(
                                                   '10.02.2022',
-                                                  style:
-                                                      TextStyle(fontSize: 10),
+                                                  style: TabelText.text2,
                                                 ),
                                                 trailing: Row(
                                                   mainAxisSize:
@@ -557,8 +550,16 @@ class _DashboardState extends State<Dashboard> {
                                                           CrossAxisAlignment
                                                               .end,
                                                       children: [
-                                                        Text("Heavy"),
-                                                        Text("Equipment"),
+                                                        Text(
+                                                          "Heavy",
+                                                          style:
+                                                              TabelText.text2,
+                                                        ),
+                                                        Text(
+                                                          "Equipment",
+                                                          style:
+                                                              TabelText.text2,
+                                                        ),
                                                       ],
                                                     ),
 
@@ -633,15 +634,11 @@ class _DashboardState extends State<Dashboard> {
                                                 leading: CircleAvatar(),
                                                 title: Text(
                                                   'Fletch Skinner',
-                                                  style: const TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 12,
-                                                  ),
+                                                  style: TabelText.text1,
                                                 ),
                                                 subtitle: Text(
                                                   '07.02.2022',
-                                                  style:
-                                                      TextStyle(fontSize: 10),
+                                                  style: TabelText.text2,
                                                 ),
                                                 trailing: Row(
                                                   mainAxisSize:
@@ -652,7 +649,11 @@ class _DashboardState extends State<Dashboard> {
                                                           CrossAxisAlignment
                                                               .end,
                                                       children: [
-                                                        Text("Trailer"),
+                                                        Text(
+                                                          "Trailer",
+                                                          style:
+                                                              TabelText.text2,
+                                                        ),
                                                       ],
                                                     ),
                                                     SizedBox(
@@ -753,21 +754,10 @@ class _DashboardState extends State<Dashboard> {
                                             mainAxisAlignment:
                                                 MainAxisAlignment.spaceBetween,
                                             children: [
-                                              Text(
-                                                'Pending Booking Approvals',
-                                                style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 18,
-                                                  fontWeight: FontWeight.bold,
-                                                ),
-                                              ),
-                                              Text(
-                                                "view all",
-                                                style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 15,
-                                                ),
-                                              ),
+                                              Text('Pending Booking Approvals',
+                                                  style: TabelText.headerText),
+                                              Text("view all",
+                                                  style: TabelText.headerText),
                                             ],
                                           ),
                                         ),
@@ -806,17 +796,14 @@ class _DashboardState extends State<Dashboard> {
                                                           CrossAxisAlignment
                                                               .start,
                                                       children: [
+                                                        Text('Trip1',
+                                                            style: TabelText
+                                                                .text1),
                                                         Text(
-                                                          'Trip1',
+                                                          "Booking ID Xxxxxx",
                                                           style:
-                                                              const TextStyle(
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                            fontSize: 12,
-                                                          ),
-                                                        ),
-                                                        Text(
-                                                            "Booking ID Xxxxxx")
+                                                              TabelText.text2,
+                                                        )
                                                       ],
                                                     )
                                                   ],
@@ -853,14 +840,13 @@ class _DashboardState extends State<Dashboard> {
                                                         Text(
                                                           'Equipment Hire',
                                                           style:
-                                                              const TextStyle(
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                            fontSize: 12,
-                                                          ),
+                                                              TabelText.text1,
                                                         ),
                                                         Text(
-                                                            "Booking ID Xxxxxx")
+                                                          "Booking ID Xxxxxx",
+                                                          style:
+                                                              TabelText.text2,
+                                                        )
                                                       ],
                                                     )
                                                   ],
@@ -899,14 +885,13 @@ class _DashboardState extends State<Dashboard> {
                                                         Text(
                                                           'Bus Trip',
                                                           style:
-                                                              const TextStyle(
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                            fontSize: 12,
-                                                          ),
+                                                              TabelText.text1,
                                                         ),
                                                         Text(
-                                                            "Booking ID Xxxxxx")
+                                                          "Booking ID Xxxxxx",
+                                                          style:
+                                                              TabelText.text2,
+                                                        )
                                                       ],
                                                     )
                                                   ],
@@ -1768,7 +1753,7 @@ class _DashboardState extends State<Dashboard> {
                               print('Elevated Button Pressed!');
                             },
                             style: ElevatedButton.styleFrom(
-                              primary: Color.fromRGBO(98, 105, 254, 1),
+                              backgroundColor: Color.fromRGBO(98, 105, 254, 1),
                               side: BorderSide(
                                 color: Color.fromRGBO(98, 105, 254, 1),
                               ),
@@ -3543,7 +3528,7 @@ class _DashboardState extends State<Dashboard> {
                               print('Elevated Button Pressed!');
                             },
                             style: ElevatedButton.styleFrom(
-                              primary: Color.fromRGBO(98, 105, 254, 1),
+                              backgroundColor: Color.fromRGBO(98, 105, 254, 1),
                               side: BorderSide(
                                 color: Color.fromRGBO(98, 105, 254, 1),
                               ),

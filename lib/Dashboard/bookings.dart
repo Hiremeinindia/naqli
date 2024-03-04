@@ -828,7 +828,7 @@ class _BookingsState extends State<Bookings> {
                                             child: ElevatedButton(
                                               onPressed: () {},
                                               style: ElevatedButton.styleFrom(
-                                                primary: Color.fromRGBO(
+                                                backgroundColor: Color.fromRGBO(
                                                     247, 230, 176, 1),
                                                 side: BorderSide(
                                                   color: Color.fromRGBO(
@@ -944,7 +944,7 @@ class _BookingsState extends State<Bookings> {
                                             child: ElevatedButton(
                                               onPressed: () {},
                                               style: ElevatedButton.styleFrom(
-                                                primary: Color.fromRGBO(
+                                                backgroundColor: Color.fromRGBO(
                                                     247, 230, 176, 1),
                                                 side: BorderSide(
                                                   color: Color.fromRGBO(
@@ -1060,7 +1060,7 @@ class _BookingsState extends State<Bookings> {
                                             child: ElevatedButton(
                                               onPressed: () {},
                                               style: ElevatedButton.styleFrom(
-                                                primary: Color.fromRGBO(
+                                                backgroundColor: Color.fromRGBO(
                                                     247, 230, 176, 1),
                                                 side: BorderSide(
                                                   color: Color.fromRGBO(
@@ -1956,7 +1956,7 @@ class _BookingsState extends State<Bookings> {
                                             child: ElevatedButton(
                                               onPressed: () {},
                                               style: ElevatedButton.styleFrom(
-                                                primary: Color.fromRGBO(
+                                                backgroundColor: Color.fromRGBO(
                                                     247, 230, 176, 1),
                                                 side: BorderSide(
                                                   color: Color.fromRGBO(
@@ -2072,7 +2072,7 @@ class _BookingsState extends State<Bookings> {
                                             child: ElevatedButton(
                                               onPressed: () {},
                                               style: ElevatedButton.styleFrom(
-                                                primary: Color.fromRGBO(
+                                                backgroundColor: Color.fromRGBO(
                                                     247, 230, 176, 1),
                                                 side: BorderSide(
                                                   color: Color.fromRGBO(
@@ -2188,7 +2188,7 @@ class _BookingsState extends State<Bookings> {
                                             child: ElevatedButton(
                                               onPressed: () {},
                                               style: ElevatedButton.styleFrom(
-                                                primary: Color.fromRGBO(
+                                                backgroundColor: Color.fromRGBO(
                                                     247, 230, 176, 1),
                                                 side: BorderSide(
                                                   color: Color.fromRGBO(

@@ -381,7 +381,8 @@ class _ConfirmTrip extends State<ConfirmTrip> {
                                       // Handle Create Request button click
                                     },
                                     style: ElevatedButton.styleFrom(
-                                      primary: Color.fromRGBO(106, 102, 209, 1),
+                                      backgroundColor:
+                                          Color.fromRGBO(106, 102, 209, 1),
                                       side: BorderSide(
                                         color: Color.fromRGBO(106, 102, 209, 1),
                                       ),
@@ -408,7 +409,8 @@ class _ConfirmTrip extends State<ConfirmTrip> {
                                     // Handle Cancel button click
                                   },
                                   style: ElevatedButton.styleFrom(
-                                    primary: Color.fromRGBO(112, 112, 112, 1),
+                                    backgroundColor:
+                                        Color.fromRGBO(112, 112, 112, 1),
                                     side: BorderSide(
                                         color:
                                             Color.fromRGBO(112, 112, 112, 1)),

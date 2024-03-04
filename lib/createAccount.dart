@@ -136,12 +136,12 @@ class _CreateAccountState extends State<CreateAccount> {
                       // Check if the verification is successful
                       if (result.user != null) {
                         print("otp verified successfully");
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => DashboardPage(),
-                          ),
-                        );
+                        // Navigator.push(
+                        //   context,
+                        //   MaterialPageRoute(
+                        //     builder: (context) => DashboardPage(),
+                        //   ),
+                        // );
                         setState(() {
                           isVerified = true;
                         });

@@ -19,3 +19,23 @@ class FormTextStyle {
       fontWeight: FontWeight.w500,
       fontFamily: 'Poppins');
 }
+
+class TabelText {
+  static TextStyle headerText = TextStyle(
+    color: Colors.white,
+    fontFamily: 'SFProTextMedium',
+    fontSize: 17,
+  );
+  static TextStyle text1 = TextStyle(
+    color: Colors.black54,
+    fontFamily: 'SFProTextMedium',
+    fontWeight: FontWeight.bold,
+    fontSize: 12,
+  );
+  static TextStyle text2 = TextStyle(
+    fontFamily: 'SFProText',
+    fontWeight: FontWeight.bold,
+    color: Color.fromRGBO(143, 142, 151, 1),
+    fontSize: 10,
+  );
+}
