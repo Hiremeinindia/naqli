@@ -7,6 +7,7 @@ import 'package:graphic/graphic.dart';
 import 'package:sizer/sizer.dart';
 
 import '../Widgets/customButton.dart';
+import '../Widgets/formText.dart';
 import '../homepage.dart';
 
 class Dashboard extends StatefulWidget {
