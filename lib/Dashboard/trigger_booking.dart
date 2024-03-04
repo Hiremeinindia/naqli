@@ -140,7 +140,7 @@ class _TriggerBookingState extends State<TriggerBooking> {
                                                   // });
                                                   setState(() {
                                                     selectedRadioValue =
-                                                        null; // Unselect if already selected
+                                                        val; // Unselect if already selected
                                                     isButtonEnabled = true;
                                                   });
                                                 },
@@ -159,7 +159,7 @@ class _TriggerBookingState extends State<TriggerBooking> {
                                                 onChanged: (val) {
                                                   setState(() {
                                                     selectedRadioValue =
-                                                        null; // Unselect if already selected
+                                                        val; // Unselect if already selected
                                                     isButtonEnabled = true;
                                                   });
                                                 },
@@ -178,7 +178,7 @@ class _TriggerBookingState extends State<TriggerBooking> {
                                                 onChanged: (val) {
                                                   setState(() {
                                                     selectedRadioValue =
-                                                        null; // Unselect if already selected
+                                                        val; // Unselect if already selected
                                                     isButtonEnabled = true;
                                                   });
                                                 },
@@ -317,7 +317,7 @@ class _TriggerBookingState extends State<TriggerBooking> {
                                                   // });
                                                   setState(() {
                                                     selectedRadioValue1 =
-                                                        null; // Unselect if already selected
+                                                        val; // Unselect if already selected
                                                     isButtonEnabled1 = true;
                                                   });
                                                 },
@@ -336,7 +336,7 @@ class _TriggerBookingState extends State<TriggerBooking> {
                                                 onChanged: (val) {
                                                   setState(() {
                                                     selectedRadioValue1 =
-                                                        null; // Unselect if already selected
+                                                        val; // Unselect if already selected
                                                     isButtonEnabled1 = true;
                                                   });
                                                 },
@@ -355,7 +355,7 @@ class _TriggerBookingState extends State<TriggerBooking> {
                                                 onChanged: (val) {
                                                   setState(() {
                                                     selectedRadioValue1 =
-                                                        null; // Unselect if already selected
+                                                        val; // Unselect if already selected
                                                     isButtonEnabled1 = true;
                                                   });
                                                 },
@@ -494,7 +494,7 @@ class _TriggerBookingState extends State<TriggerBooking> {
                                                   // });
                                                   setState(() {
                                                     selectedRadioValue2 =
-                                                        null; // Unselect if already selected
+                                                        val; // Unselect if already selected
                                                     isButtonEnabled2 = true;
                                                   });
                                                 },
@@ -513,7 +513,7 @@ class _TriggerBookingState extends State<TriggerBooking> {
                                                 onChanged: (val) {
                                                   setState(() {
                                                     selectedRadioValue2 =
-                                                        null; // Unselect if already selected
+                                                        val; // Unselect if already selected
                                                     isButtonEnabled2 = true;
                                                   });
                                                 },
@@ -532,7 +532,7 @@ class _TriggerBookingState extends State<TriggerBooking> {
                                                 onChanged: (val) {
                                                   setState(() {
                                                     selectedRadioValue2 =
-                                                        null; // Unselect if already selected
+                                                        val; // Unselect if already selected
                                                     isButtonEnabled2 = true;
                                                   });
                                                 },
