@@ -6,7 +6,7 @@ import 'package:flutter_application_1/homepage.dart';
 import 'package:flutter_application_1/loginPage.dart';
 
 class BookingDialog extends StatefulWidget {
-  const BookingDialog();
+  BookingDialog();
 
   @override
   _BookingDialogState createState() => _BookingDialogState();
@@ -179,7 +179,6 @@ class _BookingDialogState extends State<BookingDialog> {
                       ElevatedButton(
                         onPressed: () {
                           showDialog(
-                            barrierDismissible: false,
                             context: context,
                             builder: (context) {
                               return BookingSuccessful();
