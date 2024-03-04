@@ -33,7 +33,7 @@ class CustomRadio extends StatelessWidget {
           borderRadius: BorderRadius.circular(15.0),
           border: Border.all(color: Colors.grey)),
       child: Padding(
-        padding: EdgeInsets.fromLTRB(0.1.w, 1.5.h, 1.w, 1.5.h),
+        padding: EdgeInsets.fromLTRB(0.1.w, 1.h, 1.w, 1.h),
         child: Center(
           child: Row(
             children: [
