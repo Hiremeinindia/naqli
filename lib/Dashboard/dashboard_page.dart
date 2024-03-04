@@ -565,15 +565,11 @@ class _MyHomePageState extends State<DashboardPage> {
                 ),
               ),
             ),
-            body: SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Padding(
-                padding: EdgeInsets.fromLTRB(6.w, 6.h, 6.w, 6.h),
-                child: Container(
-                    width: 1700,
-                    color: Color.fromRGBO(240, 237, 250, 1),
-                    child: Expanded(child: _currentContent)),
-              ),
+            body: Padding(
+              padding: EdgeInsets.fromLTRB(6.w, 3.h, 6.w, 3.h),
+              child: Container(
+                  color: Color.fromRGBO(240, 237, 250, 1),
+                  child: Expanded(child: _currentContent)),
             ),
           );
         }
