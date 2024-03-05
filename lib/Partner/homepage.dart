@@ -192,137 +192,256 @@ class _MyHomePageState extends State<HomePagePartner> {
                   ),
                 ),
               ),
-              body: Center(
-                child: Padding(
-                  padding: EdgeInsets.fromLTRB(6.w, 3.h, 6.w, 3.h),
-                  child: Column(
-                    children: [
-                      CarouselSlider(
-                        options: CarouselOptions(
-                          height: 500,
+              body: SingleChildScrollView(
+                scrollDirection: Axis.vertical,
+                child: Center(
+                  child: Padding(
+                    padding: EdgeInsets.fromLTRB(6.w, 3.h, 6.w, 3.h),
+                    child: Column(
+                      children: [
+                        CarouselSlider(
+                          options: CarouselOptions(
+                            height: 500,
+                          ),
+                          items: [
+                            Container(
+                              margin: EdgeInsets.all(6.0),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8.0),
+                                image: DecorationImage(
+                                  image: AssetImage('Group716.png'),
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ),
+                            Container(
+                              margin: EdgeInsets.all(6.0),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8.0),
+                                image: DecorationImage(
+                                  image: AssetImage('Group716.png'),
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                        items: [
-                          Container(
-                            margin: EdgeInsets.all(6.0),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8.0),
-                              image: DecorationImage(
-                                image: AssetImage('Group716.png'),
-                                fit: BoxFit.cover,
+                        Padding(
+                          padding: const EdgeInsets.only(top: 5),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Column(
+                                children: [
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        "Sign Up Now",
+                                        style: TextStyle(
+                                            color: Color.fromRGBO(20, 3, 3, 1),
+                                            fontSize: 55,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      SizedBox(width: 150),
+                                      IconButton(
+                                        icon: Icon(
+                                          Icons.arrow_forward,
+                                          color: Color.fromRGBO(20, 3, 3, 1),
+                                          size: 71,
+                                        ),
+                                        onPressed: () {
+                                          // Add your onPressed functionality here
+                                          print('Sign Up Arrow button pressed');
+                                        },
+                                      ),
+                                    ],
+                                  ),
+                                  // Adjust the height between "Sign Up Now" and its divider
+                                  Padding(
+                                    padding: const EdgeInsets.only(right: 20),
+                                    child: SizedBox(
+                                      width: 580,
+                                      child: Divider(
+                                        color: Color.fromRGBO(20, 3, 3,
+                                            1), // Set the color of the divider
+                                        thickness:
+                                            2, // Set the thickness of the divider
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
-                            ),
-                          ),
-                          Container(
-                            margin: EdgeInsets.all(6.0),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8.0),
-                              image: DecorationImage(
-                                image: AssetImage('Group716.png'),
-                                fit: BoxFit.cover,
+
+                              SizedBox(
+                                  width:
+                                      100), // Adjust the height between the divider and "Log in"
+                              Column(
+                                children: [
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        "Log in",
+                                        style: TextStyle(
+                                            color: Color.fromRGBO(20, 3, 3, 1),
+                                            fontSize: 55,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      SizedBox(width: 200),
+                                      IconButton(
+                                        icon: Icon(
+                                          Icons.arrow_forward,
+                                          color: Color.fromRGBO(20, 3, 3, 1),
+                                          size: 71,
+                                        ),
+                                        onPressed: () {
+                                          // Add your onPressed functionality here
+                                          print('Log in Arrow button pressed');
+                                        },
+                                      ),
+                                    ],
+                                  ),
+                                  // Adjust the height between "Log in" and its divider
+                                  Padding(
+                                    padding: const EdgeInsets.only(right: 20),
+                                    child: SizedBox(
+                                      width: 440,
+                                      child: Divider(
+                                        color: Color.fromRGBO(20, 3, 3,
+                                            1), // Set the color of the divider
+                                        thickness:
+                                            2, // Set the thickness of the divider
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
-                            ),
+                            ],
                           ),
-                        ],
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 50),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                        ),
+                        SizedBox(
+                          height: 300,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 40),
+                          child: Text(
+                            "Naqli Advantage",
+                            style: TextStyle(
+                                fontSize: 44,
+                                fontFamily: "HelveticaNeue",
+                                fontWeight: FontWeight.bold,
+                                color: Color.fromRGBO(20, 3, 3, 1)),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 50,
+                        ),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             Column(
+                              crossAxisAlignment: CrossAxisAlignment
+                                  .center, // Adjust this line for proper alignment
                               children: [
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      "Sign Up Now",
-                                      style: TextStyle(
-                                          color: Color.fromRGBO(20, 3, 3, 1),
-                                          fontSize: 55,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    SizedBox(width: 250),
-                                    IconButton(
-                                      icon: Icon(
-                                        Icons.arrow_forward,
-                                        color: Color.fromRGBO(20, 3, 3, 1),
-                                        size: 71,
-                                      ),
-                                      onPressed: () {
-                                        // Add your onPressed functionality here
-                                        print('Sign Up Arrow button pressed');
-                                      },
-                                    ),
-                                  ],
+                                Image.asset(
+                                  'delivery.png',
                                 ),
                                 SizedBox(
-                                    height:
-                                        5), // Adjust the height between "Sign Up Now" and its divider
-                                Padding(
-                                  padding: const EdgeInsets.only(right: 20),
-                                  child: SizedBox(
-                                    width: 630,
-                                    child: Divider(
-                                      color: Color.fromRGBO(20, 3, 3,
-                                          1), // Set the color of the divider
-                                      thickness:
-                                          2, // Set the thickness of the divider
-                                    ),
+                                  height: 20,
+                                ),
+                                Text(
+                                  "Regular trips",
+                                  style: TextStyle(
+                                      fontFamily: "HelveticaNeue",
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                Text(
+                                  "With our growing presence\n"
+                                  "across multiple cities we\n"
+                                  "always have our hands full\n"
+                                  "This means you will never\n"
+                                  "run out of trips.\n",
+                                  style: TextStyle(
+                                    fontFamily: "HelveticaNeue",
+                                    fontSize: 18,
                                   ),
                                 ),
                               ],
                             ),
-
-                            SizedBox(
-                                width:
-                                    100), // Adjust the height between the divider and "Log in"
                             Column(
+                              crossAxisAlignment: CrossAxisAlignment
+                                  .center, // Adjust this line for proper alignment
                               children: [
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      "Log in",
-                                      style: TextStyle(
-                                          color: Color.fromRGBO(20, 3, 3, 1),
-                                          fontSize: 55,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    SizedBox(width: 250),
-                                    IconButton(
-                                      icon: Icon(
-                                        Icons.arrow_forward,
-                                        color: Color.fromRGBO(20, 3, 3, 1),
-                                        size: 71,
-                                      ),
-                                      onPressed: () {
-                                        // Add your onPressed functionality here
-                                        print('Log in Arrow button pressed');
-                                      },
-                                    ),
-                                  ],
+                                Image.asset(
+                                  'stock.png',
                                 ),
                                 SizedBox(
-                                    height:
-                                        5), // Adjust the height between "Log in" and its divider
-                                Padding(
-                                  padding: const EdgeInsets.only(right: 20),
-                                  child: SizedBox(
-                                    width: 470,
-                                    child: Divider(
-                                      color: Color.fromRGBO(20, 3, 3,
-                                          1), // Set the color of the divider
-                                      thickness:
-                                          2, // Set the thickness of the divider
-                                    ),
+                                  height: 20,
+                                ),
+                                Text(
+                                  "Better Earning",
+                                  style: TextStyle(
+                                      fontFamily: "HelveticaNeue",
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                Text(
+                                  "Earn more by partnering\n"
+                                  "with the best! Regular trips\n"
+                                  "and efficient service can\n"
+                                  "This means you will never\n"
+                                  "grow your earnings!\n",
+                                  style: TextStyle(
+                                    fontFamily: "HelveticaNeue",
+                                    fontSize: 18,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment
+                                  .center, // Adjust this line for proper alignment
+                              children: [
+                                Image.asset(
+                                  'payment.png',
+                                ),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                Text(
+                                  "On_Time Payment",
+                                  style: TextStyle(
+                                      fontFamily: "HelveticaNeue",
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                Text(
+                                  "Be assured to receive all\n"
+                                  "payments on time & get the best\n"
+                                  "in class support.\n",
+                                  style: TextStyle(
+                                    fontFamily: "HelveticaNeue",
+                                    fontSize: 18,
                                   ),
                                 ),
                               ],
                             ),
                           ],
-                        ),
-                      )
-                    ],
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ));
