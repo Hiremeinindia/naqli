@@ -535,7 +535,7 @@ class _DashboardState extends State<Dashboard> {
                             child: Row(
                               children: [
                                 Container(
-                                  height: 292,
+                                  height: 275,
                                   decoration: BoxDecoration(
                                     boxShadow: [
                                       BoxShadow(
@@ -927,7 +927,7 @@ class _DashboardState extends State<Dashboard> {
                                   width: 50,
                                 ),
                                 Container(
-                                  height: 294,
+                                  height: 275,
                                   decoration: BoxDecoration(
                                     boxShadow: [
                                       BoxShadow(
@@ -1157,7 +1157,7 @@ class _DashboardState extends State<Dashboard> {
                                                               offset:
                                                                   Offset(0, 1),
                                                               blurRadius:
-                                                                  0.1, // changes position of shadow
+                                                                  2.0, // changes position of shadow
                                                             ),
                                                           ],
                                                           color: Color.fromRGBO(
@@ -1194,7 +1194,7 @@ class _DashboardState extends State<Dashboard> {
                                                                               0,
                                                                               1),
                                                                       blurRadius:
-                                                                          0.1, // changes position of shadow
+                                                                          2.0, // changes position of shadow
                                                                     ),
                                                                   ],
                                                                   color: Color
@@ -1273,7 +1273,7 @@ class _DashboardState extends State<Dashboard> {
                                                                               0,
                                                                               1),
                                                                       blurRadius:
-                                                                          0.1, // changes position of shadow
+                                                                          2.0, // changes position of shadow
                                                                     ),
                                                                   ],
                                                                   color: Color
@@ -1352,7 +1352,7 @@ class _DashboardState extends State<Dashboard> {
                                                                               0,
                                                                               1),
                                                                       blurRadius:
-                                                                          0.1, // changes position of shadow
+                                                                          2.0, // changes position of shadow
                                                                     ),
                                                                   ],
                                                                   color: Color
@@ -1381,6 +1381,274 @@ class _DashboardState extends State<Dashboard> {
                                                                     children: [
                                                                       Text(
                                                                           "Vendor 1",
+                                                                          style: const TextStyle(
+                                                                              fontWeight: FontWeight.bold,
+                                                                              fontSize: 9,
+                                                                              color: Color.fromRGBO(128, 118, 118, 1))),
+                                                                      SizedBox(
+                                                                        width:
+                                                                            10,
+                                                                      ),
+                                                                      Text(
+                                                                        "Xxxxx SAR",
+                                                                        style: const TextStyle(
+                                                                            fontWeight: FontWeight
+                                                                                .bold,
+                                                                            fontSize:
+                                                                                8,
+                                                                            color: Color.fromRGBO(
+                                                                                127,
+                                                                                106,
+                                                                                255,
+                                                                                1)),
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                    Container(
+                                                      width: 130,
+                                                      decoration: BoxDecoration(
+                                                          boxShadow: [
+                                                            BoxShadow(
+                                                              color: Color
+                                                                  .fromRGBO(
+                                                                      216,
+                                                                      216,
+                                                                      216,
+                                                                      1),
+                                                              offset:
+                                                                  Offset(0, 1),
+                                                              blurRadius:
+                                                                  2.0, // changes position of shadow
+                                                            ),
+                                                          ],
+                                                          color: Color.fromRGBO(
+                                                              245, 243, 255, 1),
+                                                          border: Border.all(
+                                                              color: Color
+                                                                  .fromARGB(
+                                                                      246,
+                                                                      245,
+                                                                      242,
+                                                                      242))),
+                                                      child: Column(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceEvenly,
+                                                        children: [
+                                                          Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .all(8.0),
+                                                            child: Container(
+                                                              width: 120,
+                                                              height: 30,
+                                                              decoration: BoxDecoration(
+                                                                  boxShadow: [
+                                                                    BoxShadow(
+                                                                      color: Color.fromRGBO(
+                                                                          216,
+                                                                          216,
+                                                                          216,
+                                                                          1),
+                                                                      offset:
+                                                                          Offset(
+                                                                              0,
+                                                                              1),
+                                                                      blurRadius:
+                                                                          2.0, // changes position of shadow
+                                                                    ),
+                                                                  ],
+                                                                  color: Color
+                                                                      .fromRGBO(
+                                                                          224,
+                                                                          253,
+                                                                          200,
+                                                                          1),
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              12.0),
+                                                                  border: Border.all(
+                                                                      color: Color.fromARGB(
+                                                                          246,
+                                                                          245,
+                                                                          242,
+                                                                          242))),
+                                                              child: Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                        .all(
+                                                                        8.0),
+                                                                child: Center(
+                                                                  child: Row(
+                                                                    children: [
+                                                                      Text(
+                                                                          "Vendor 2",
+                                                                          style: const TextStyle(
+                                                                              fontWeight: FontWeight.bold,
+                                                                              fontSize: 9,
+                                                                              color: Color.fromRGBO(128, 118, 118, 1))),
+                                                                      SizedBox(
+                                                                        width:
+                                                                            10,
+                                                                      ),
+                                                                      Text(
+                                                                        "Xxxxx SAR",
+                                                                        style: const TextStyle(
+                                                                            fontWeight: FontWeight
+                                                                                .bold,
+                                                                            fontSize:
+                                                                                8,
+                                                                            color: Color.fromRGBO(
+                                                                                127,
+                                                                                106,
+                                                                                255,
+                                                                                1)),
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                          SizedBox(
+                                                            height: 10,
+                                                          ),
+                                                          Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .all(8.0),
+                                                            child: Container(
+                                                              width: 120,
+                                                              height: 30,
+                                                              decoration: BoxDecoration(
+                                                                  boxShadow: [
+                                                                    BoxShadow(
+                                                                      color: Color.fromRGBO(
+                                                                          216,
+                                                                          216,
+                                                                          216,
+                                                                          1),
+                                                                      offset:
+                                                                          Offset(
+                                                                              0,
+                                                                              1),
+                                                                      blurRadius:
+                                                                          2.0, // changes position of shadow
+                                                                    ),
+                                                                  ],
+                                                                  color: Color
+                                                                      .fromRGBO(
+                                                                          224,
+                                                                          253,
+                                                                          200,
+                                                                          1),
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              12.0),
+                                                                  border: Border.all(
+                                                                      color: Color.fromARGB(
+                                                                          246,
+                                                                          245,
+                                                                          242,
+                                                                          242))),
+                                                              child: Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                        .all(
+                                                                        8.0),
+                                                                child: Center(
+                                                                  child: Row(
+                                                                    children: [
+                                                                      Text(
+                                                                          "Vendor 2",
+                                                                          style: const TextStyle(
+                                                                              fontWeight: FontWeight.bold,
+                                                                              fontSize: 9,
+                                                                              color: Color.fromRGBO(128, 118, 118, 1))),
+                                                                      SizedBox(
+                                                                        width:
+                                                                            10,
+                                                                      ),
+                                                                      Text(
+                                                                        "Xxxxx SAR",
+                                                                        style: const TextStyle(
+                                                                            fontWeight: FontWeight
+                                                                                .bold,
+                                                                            fontSize:
+                                                                                8,
+                                                                            color: Color.fromRGBO(
+                                                                                127,
+                                                                                106,
+                                                                                255,
+                                                                                1)),
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                          SizedBox(
+                                                            height: 10,
+                                                          ),
+                                                          Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .all(8.0),
+                                                            child: Container(
+                                                              width: 120,
+                                                              height: 30,
+                                                              decoration: BoxDecoration(
+                                                                  boxShadow: [
+                                                                    BoxShadow(
+                                                                      color: Color.fromRGBO(
+                                                                          216,
+                                                                          216,
+                                                                          216,
+                                                                          1),
+                                                                      offset:
+                                                                          Offset(
+                                                                              0,
+                                                                              1),
+                                                                      blurRadius:
+                                                                          2.0, // changes position of shadow
+                                                                    ),
+                                                                  ],
+                                                                  color: Color
+                                                                      .fromRGBO(
+                                                                          224,
+                                                                          253,
+                                                                          200,
+                                                                          1),
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              12.0),
+                                                                  border: Border.all(
+                                                                      color: Color.fromARGB(
+                                                                          246,
+                                                                          245,
+                                                                          242,
+                                                                          242))),
+                                                              child: Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                        .all(
+                                                                        8.0),
+                                                                child: Center(
+                                                                  child: Row(
+                                                                    children: [
+                                                                      Text(
+                                                                          "Vendor 2",
                                                                           style: const TextStyle(
                                                                               fontWeight: FontWeight.bold,
                                                                               fontSize: 9,
@@ -1462,275 +1730,7 @@ class _DashboardState extends State<Dashboard> {
                                                                               0,
                                                                               1),
                                                                       blurRadius:
-                                                                          0.1, // changes position of shadow
-                                                                    ),
-                                                                  ],
-                                                                  color: Color
-                                                                      .fromRGBO(
-                                                                          224,
-                                                                          253,
-                                                                          200,
-                                                                          1),
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              12.0),
-                                                                  border: Border.all(
-                                                                      color: Color.fromARGB(
-                                                                          246,
-                                                                          245,
-                                                                          242,
-                                                                          242))),
-                                                              child: Padding(
-                                                                padding:
-                                                                    const EdgeInsets
-                                                                        .all(
-                                                                        8.0),
-                                                                child: Center(
-                                                                  child: Row(
-                                                                    children: [
-                                                                      Text(
-                                                                          "Vendor 2",
-                                                                          style: const TextStyle(
-                                                                              fontWeight: FontWeight.bold,
-                                                                              fontSize: 9,
-                                                                              color: Color.fromRGBO(128, 118, 118, 1))),
-                                                                      SizedBox(
-                                                                        width:
-                                                                            10,
-                                                                      ),
-                                                                      Text(
-                                                                        "Xxxxx SAR",
-                                                                        style: const TextStyle(
-                                                                            fontWeight: FontWeight
-                                                                                .bold,
-                                                                            fontSize:
-                                                                                8,
-                                                                            color: Color.fromRGBO(
-                                                                                127,
-                                                                                106,
-                                                                                255,
-                                                                                1)),
-                                                                      ),
-                                                                    ],
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                          SizedBox(
-                                                            height: 10,
-                                                          ),
-                                                          Padding(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                    .all(8.0),
-                                                            child: Container(
-                                                              width: 120,
-                                                              height: 30,
-                                                              decoration: BoxDecoration(
-                                                                  boxShadow: [
-                                                                    BoxShadow(
-                                                                      color: Color.fromRGBO(
-                                                                          216,
-                                                                          216,
-                                                                          216,
-                                                                          1),
-                                                                      offset:
-                                                                          Offset(
-                                                                              0,
-                                                                              1),
-                                                                      blurRadius:
-                                                                          0.1, // changes position of shadow
-                                                                    ),
-                                                                  ],
-                                                                  color: Color
-                                                                      .fromRGBO(
-                                                                          224,
-                                                                          253,
-                                                                          200,
-                                                                          1),
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              12.0),
-                                                                  border: Border.all(
-                                                                      color: Color.fromARGB(
-                                                                          246,
-                                                                          245,
-                                                                          242,
-                                                                          242))),
-                                                              child: Padding(
-                                                                padding:
-                                                                    const EdgeInsets
-                                                                        .all(
-                                                                        8.0),
-                                                                child: Center(
-                                                                  child: Row(
-                                                                    children: [
-                                                                      Text(
-                                                                          "Vendor 2",
-                                                                          style: const TextStyle(
-                                                                              fontWeight: FontWeight.bold,
-                                                                              fontSize: 9,
-                                                                              color: Color.fromRGBO(128, 118, 118, 1))),
-                                                                      SizedBox(
-                                                                        width:
-                                                                            10,
-                                                                      ),
-                                                                      Text(
-                                                                        "Xxxxx SAR",
-                                                                        style: const TextStyle(
-                                                                            fontWeight: FontWeight
-                                                                                .bold,
-                                                                            fontSize:
-                                                                                8,
-                                                                            color: Color.fromRGBO(
-                                                                                127,
-                                                                                106,
-                                                                                255,
-                                                                                1)),
-                                                                      ),
-                                                                    ],
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                          SizedBox(
-                                                            height: 10,
-                                                          ),
-                                                          Padding(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                    .all(8.0),
-                                                            child: Container(
-                                                              width: 120,
-                                                              height: 30,
-                                                              decoration: BoxDecoration(
-                                                                  boxShadow: [
-                                                                    BoxShadow(
-                                                                      color: Color.fromRGBO(
-                                                                          216,
-                                                                          216,
-                                                                          216,
-                                                                          1),
-                                                                      offset:
-                                                                          Offset(
-                                                                              0,
-                                                                              1),
-                                                                      blurRadius:
-                                                                          0.1, // changes position of shadow
-                                                                    ),
-                                                                  ],
-                                                                  color: Color
-                                                                      .fromRGBO(
-                                                                          224,
-                                                                          253,
-                                                                          200,
-                                                                          1),
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              12.0),
-                                                                  border: Border.all(
-                                                                      color: Color.fromARGB(
-                                                                          246,
-                                                                          245,
-                                                                          242,
-                                                                          242))),
-                                                              child: Padding(
-                                                                padding:
-                                                                    const EdgeInsets
-                                                                        .all(
-                                                                        8.0),
-                                                                child: Center(
-                                                                  child: Row(
-                                                                    children: [
-                                                                      Text(
-                                                                          "Vendor 2",
-                                                                          style: const TextStyle(
-                                                                              fontWeight: FontWeight.bold,
-                                                                              fontSize: 9,
-                                                                              color: Color.fromRGBO(128, 118, 118, 1))),
-                                                                      SizedBox(
-                                                                        width:
-                                                                            10,
-                                                                      ),
-                                                                      Text(
-                                                                        "Xxxxx SAR",
-                                                                        style: const TextStyle(
-                                                                            fontWeight: FontWeight
-                                                                                .bold,
-                                                                            fontSize:
-                                                                                8,
-                                                                            color: Color.fromRGBO(
-                                                                                127,
-                                                                                106,
-                                                                                255,
-                                                                                1)),
-                                                                      ),
-                                                                    ],
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                    Container(
-                                                      width: 130,
-                                                      decoration: BoxDecoration(
-                                                          boxShadow: [
-                                                            BoxShadow(
-                                                              color: Color
-                                                                  .fromRGBO(
-                                                                      216,
-                                                                      216,
-                                                                      216,
-                                                                      1),
-                                                              offset:
-                                                                  Offset(0, 1),
-                                                              blurRadius:
-                                                                  0.1, // changes position of shadow
-                                                            ),
-                                                          ],
-                                                          color: Color.fromRGBO(
-                                                              245, 243, 255, 1),
-                                                          border: Border.all(
-                                                              color: Color
-                                                                  .fromARGB(
-                                                                      246,
-                                                                      245,
-                                                                      242,
-                                                                      242))),
-                                                      child: Column(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .spaceEvenly,
-                                                        children: [
-                                                          Padding(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                    .all(8.0),
-                                                            child: Container(
-                                                              width: 120,
-                                                              height: 30,
-                                                              decoration: BoxDecoration(
-                                                                  boxShadow: [
-                                                                    BoxShadow(
-                                                                      color: Color.fromRGBO(
-                                                                          216,
-                                                                          216,
-                                                                          216,
-                                                                          1),
-                                                                      offset:
-                                                                          Offset(
-                                                                              0,
-                                                                              1),
-                                                                      blurRadius:
-                                                                          0.1, // changes position of shadow
+                                                                          2.0, // changes position of shadow
                                                                     ),
                                                                   ],
                                                                   color: Color
@@ -1809,7 +1809,7 @@ class _DashboardState extends State<Dashboard> {
                                                                               0,
                                                                               1),
                                                                       blurRadius:
-                                                                          0.1, // changes position of shadow
+                                                                          2.0, // changes position of shadow
                                                                     ),
                                                                   ],
                                                                   color: Color
@@ -1888,7 +1888,7 @@ class _DashboardState extends State<Dashboard> {
                                                                               0,
                                                                               1),
                                                                       blurRadius:
-                                                                          0.1, // changes position of shadow
+                                                                          2.0, // changes position of shadow
                                                                     ),
                                                                   ],
                                                                   color: Color
@@ -2698,7 +2698,7 @@ class _DashboardState extends State<Dashboard> {
                                   width: 50,
                                 ),
                                 Container(
-                                  height: 294,
+                                  height: 290,
                                   decoration: BoxDecoration(
                                     boxShadow: [
                                       BoxShadow(
