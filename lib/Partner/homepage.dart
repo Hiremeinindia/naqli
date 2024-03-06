@@ -453,67 +453,6 @@ class _MyHomePageState extends State<HomePagePartner> {
               ));
         } else {
           return Scaffold(
-            drawer: Drawer(
-              child: ListView(
-                  padding: EdgeInsets.only(
-                    top: 3.h,
-                  ),
-                  children: <Widget>[
-                    Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(12.0),
-                      ),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(
-                            30.0), // Adjust the radius as needed
-                        child: Image.asset(
-                          'Circleavatar.png',
-                          width: 550, // Adjust the height as needed
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 30,
-                      width: 170,
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 13, top: 5),
-                        child: Text(
-                          "Hello Faizal!",
-                          style: TextStyle(
-                            fontFamily: 'Colfax',
-                            fontSize: 16,
-                          ),
-                        ),
-                      ),
-                    ),
-                    Container(
-                      padding: EdgeInsets.only(left: 20.0, top: 10),
-                      child: Row(
-                        children: [
-                          Icon(
-                            Icons.notifications,
-                            color: Color.fromRGBO(106, 102, 209, 1),
-                          ),
-                          SizedBox(
-                            height: 30,
-                            child: Padding(
-                              padding: EdgeInsets.only(left: 15, top: 5),
-                              child: Text(
-                                "Contact Us",
-                                style: TextStyle(
-                                  fontFamily: 'Colfax',
-                                  fontSize: 16,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ]),
-            ),
             appBar: PreferredSize(
               preferredSize: Size.fromHeight(60),
               child: Container(
@@ -524,18 +463,12 @@ class _MyHomePageState extends State<HomePagePartner> {
                     padding: EdgeInsets.fromLTRB(2.5.w, 0, 2.5.w, 0),
                     child: Row(
                       children: [
-                        Builder(
-                            builder: (context) => IconButton(
-                                  onPressed: () {
-                                    Scaffold.of(context).openDrawer();
-                                  },
-                                  icon: Icon(
-                                    Icons.menu_rounded,
-                                    color: Colors.indigo.shade900,
-                                  ),
-                                )),
+                        Image.asset(
+                          'Naqli-final-logo.png',
+                          width: 10.w,
+                        ),
                         Padding(
-                          padding: EdgeInsets.fromLTRB(4.5.w, 0, 0, 0),
+                          padding: EdgeInsets.fromLTRB(4.0.w, 0, 0, 0),
                           child: TextButton(
                             onPressed: () {
                               // Handle the first button press
@@ -551,7 +484,7 @@ class _MyHomePageState extends State<HomePagePartner> {
                           ),
                         ),
                         SizedBox(
-                          height: 30,
+                          height: 20,
                           child: VerticalDivider(
                             color: Color.fromRGBO(206, 203, 203, 1),
                           ),
@@ -568,6 +501,51 @@ class _MyHomePageState extends State<HomePagePartner> {
                               fontWeight: FontWeight.bold,
                               color: Color.fromRGBO(112, 112, 112, 1),
                             ),
+                          ),
+                        ),
+                        Container(
+                          padding: EdgeInsets.only(left: 35.0, top: 10),
+                          child: Row(
+                            children: [
+                              Icon(
+                                Icons.notifications,
+                                color: Color.fromRGBO(106, 102, 209, 1),
+                              ),
+                              SizedBox(
+                                height: 30,
+                                child: Padding(
+                                  padding: EdgeInsets.only(left: 10, top: 5),
+                                  child: Text(
+                                    "Contact Us",
+                                    style: TextStyle(
+                                      fontFamily: 'Colfax',
+                                      fontSize: 12,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                height: 20,
+                                child: VerticalDivider(
+                                  color: Color.fromRGBO(206, 203, 203, 1),
+                                ),
+                              ),
+                              SizedBox(
+                                height: 30,
+                                child: Padding(
+                                  padding: const EdgeInsets.only(
+                                    top: 5,
+                                  ),
+                                  child: Text(
+                                    "Hello Faizal!",
+                                    style: TextStyle(
+                                      fontFamily: 'Colfax',
+                                      fontSize: 12,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ],
