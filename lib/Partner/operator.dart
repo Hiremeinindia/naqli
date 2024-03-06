@@ -257,7 +257,7 @@ class _OperatorState extends State<Operator> {
     return Sizer(builder: (context, orientation, deviceType) {
       return LayoutBuilder(
           builder: (BuildContext ctx, BoxConstraints constraints) {
-        if (constraints.maxWidth >= 650) {
+        if (constraints.maxWidth >= 900) {
           return Dialog(
             child: Container(
               width: 1100,
@@ -278,11 +278,15 @@ class _OperatorState extends State<Operator> {
                   key: _formKey,
                   child: Column(
                     children: [
-                      Text(
-                        'Driver/Owner',
-                        style: TextStyle(
-                          fontFamily: 'ColfaxBold',
-                          fontSize: 30,
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 30),
+                        child: Text(
+                          'Driver/Owner',
+                          style: TextStyle(
+                              fontFamily: 'HelveticaNeue',
+                              fontSize: 44,
+                              fontWeight: FontWeight.bold,
+                              color: Color.fromRGBO(106, 102, 209, 1)),
                         ),
                       ),
                       SizedBox(
@@ -306,7 +310,10 @@ class _OperatorState extends State<Operator> {
                                 controller: firstNameController,
                                 validator: nameValidator,
                                 decoration: InputDecoration(
-                                  hintStyle: TextStyle(fontSize: 16),
+                                  hintStyle: TextStyle(
+                                      fontSize: 14,
+                                      fontFamily: "Helvetica",
+                                      color: Color.fromRGBO(133, 139, 145, 1)),
                                   hintText: 'First Name',
                                   contentPadding: EdgeInsets.all(5.0),
                                   border: OutlineInputBorder(
@@ -325,7 +332,10 @@ class _OperatorState extends State<Operator> {
                                 controller: lastNameController,
                                 validator: nameValidator,
                                 decoration: InputDecoration(
-                                  hintStyle: TextStyle(fontSize: 16),
+                                  hintStyle: TextStyle(
+                                      fontSize: 14,
+                                      fontFamily: "Helvetica",
+                                      color: Color.fromRGBO(133, 139, 145, 1)),
                                   hintText: 'Last Name',
                                   contentPadding: EdgeInsets.all(5.0),
                                   border: OutlineInputBorder(
@@ -352,7 +362,10 @@ class _OperatorState extends State<Operator> {
                                 controller: emailController,
                                 validator: emailValidator,
                                 decoration: InputDecoration(
-                                  hintStyle: TextStyle(fontSize: 16),
+                                  hintStyle: TextStyle(
+                                      fontSize: 14,
+                                      fontFamily: "Helvetica",
+                                      color: Color.fromRGBO(133, 139, 145, 1)),
                                   hintText: 'Email address',
                                   contentPadding: EdgeInsets.all(5.0),
                                   border: OutlineInputBorder(
@@ -411,7 +424,11 @@ class _OperatorState extends State<Operator> {
                                     controller: passwordController,
                                     validator: validatePassword,
                                     decoration: InputDecoration(
-                                      hintStyle: TextStyle(fontSize: 16),
+                                      hintStyle: TextStyle(
+                                          fontSize: 14,
+                                          fontFamily: "Helvetica",
+                                          color:
+                                              Color.fromRGBO(133, 139, 145, 1)),
                                       hintText: 'Enter your mobile no',
                                       contentPadding: EdgeInsets.all(5.0),
                                       border: OutlineInputBorder(
@@ -435,7 +452,11 @@ class _OperatorState extends State<Operator> {
                                         return null;
                                     },
                                     decoration: InputDecoration(
-                                      hintStyle: TextStyle(fontSize: 16),
+                                      hintStyle: TextStyle(
+                                          fontSize: 14,
+                                          fontFamily: "Helvetica",
+                                          color:
+                                              Color.fromRGBO(133, 139, 145, 1)),
                                       hintText: 'DD/MM/YYYY',
                                       labelText: 'Date of birth',
                                       contentPadding: EdgeInsets.all(5.0),
@@ -486,27 +507,24 @@ class _OperatorState extends State<Operator> {
                                 ),
                                 SizedBox(
                                   height: 45,
-                                  child: DropdownButtonFormField(
-                                    decoration: InputDecoration(
-                                      contentPadding: EdgeInsets.all(5.0),
-                                      border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(5)),
+                                  width: 160,
+                                  child: Expanded(
+                                    child: ElevatedButton(
+                                      child: Text(
+                                        'Upload a file',
+                                        style: TextStyle(
+                                            color: Color.fromRGBO(20, 3, 3, 1)),
                                       ),
+                                      style: ElevatedButton.styleFrom(
+                                        elevation: 2,
+                                        backgroundColor: Colors.white,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(5),
+                                        ),
+                                      ),
+                                      onPressed: () {},
                                     ),
-                                    value: selectedCity,
-                                    onChanged: (String? newValue) {
-                                      setState(() {
-                                        selectedCity = newValue;
-                                      });
-                                    },
-                                    items: cities.map<DropdownMenuItem<String>>(
-                                        (String value) {
-                                      return DropdownMenuItem<String>(
-                                        value: value,
-                                        child: Text(value),
-                                      );
-                                    }).toList(),
                                   ),
                                 ),
                                 SizedBox(
@@ -514,34 +532,24 @@ class _OperatorState extends State<Operator> {
                                 ),
                                 SizedBox(
                                   height: 45,
-                                  child: DropdownButtonFormField<String>(
-                                    value: selectedOption,
-                                    decoration: InputDecoration(
-                                      contentPadding: EdgeInsets.all(5.0),
-                                      border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(5)),
+                                  width: 160,
+                                  child: Expanded(
+                                    child: ElevatedButton(
+                                      child: Text(
+                                        'Upload a file',
+                                        style: TextStyle(
+                                            color: Color.fromRGBO(20, 3, 3, 1)),
                                       ),
+                                      style: ElevatedButton.styleFrom(
+                                        elevation: 2,
+                                        backgroundColor: Colors.white,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(5),
+                                        ),
+                                      ),
+                                      onPressed: () {},
                                     ),
-                                    onChanged: (String? newValue) {
-                                      setState(() {
-                                        selectedOption = newValue;
-                                      });
-                                    },
-                                    items: [
-                                      DropdownMenuItem<String>(
-                                        value: 'National ID',
-                                        child: Text('National ID'),
-                                      ),
-                                      DropdownMenuItem<String>(
-                                        value: 'Iqama No.',
-                                        child: Text('Iqama No.'),
-                                      ),
-                                      DropdownMenuItem<String>(
-                                        value: 'Visit Visa / Border No',
-                                        child: Text('Visit Visa / Border No'),
-                                      ),
-                                    ],
                                   ),
                                 ),
                                 SizedBox(
@@ -598,7 +606,11 @@ class _OperatorState extends State<Operator> {
                                     validator: validatePassword,
                                     controller: confirmPasswordController,
                                     decoration: InputDecoration(
-                                      hintStyle: TextStyle(fontSize: 16),
+                                      hintStyle: TextStyle(
+                                          fontSize: 14,
+                                          fontFamily: "Helvetica",
+                                          color:
+                                              Color.fromRGBO(133, 139, 145, 1)),
                                       hintText: 'XXXXXXXXXX',
                                       contentPadding: EdgeInsets.all(5.0),
                                       border: OutlineInputBorder(
@@ -621,7 +633,11 @@ class _OperatorState extends State<Operator> {
                                     },
                                     controller: alternateNumberController,
                                     decoration: InputDecoration(
-                                      hintStyle: TextStyle(fontSize: 16),
+                                      hintStyle: TextStyle(
+                                          fontSize: 14,
+                                          fontFamily: "Helvetica",
+                                          color:
+                                              Color.fromRGBO(133, 139, 145, 1)),
                                       hintText: 'XXXXXXXXXX',
                                       contentPadding: EdgeInsets.all(5.0),
                                       border: OutlineInputBorder(
@@ -687,17 +703,23 @@ class _OperatorState extends State<Operator> {
                                 ),
                                 SizedBox(
                                   height: 45,
-                                  child: TextFormField(
-                                    validator: nameValidator,
-                                    controller: address2Controller,
-                                    decoration: InputDecoration(
-                                      hintStyle: TextStyle(fontSize: 16),
-                                      hintText: 'Address',
-                                      contentPadding: EdgeInsets.all(5.0),
-                                      border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(5)),
+                                  width: 160,
+                                  child: Expanded(
+                                    child: ElevatedButton(
+                                      child: Text(
+                                        'Upload a file',
+                                        style: TextStyle(
+                                            color: Color.fromRGBO(20, 3, 3, 1)),
                                       ),
+                                      style: ElevatedButton.styleFrom(
+                                        elevation: 2,
+                                        backgroundColor: Colors.white,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(5),
+                                        ),
+                                      ),
+                                      onPressed: () {},
                                     ),
                                   ),
                                 ),
@@ -706,20 +728,23 @@ class _OperatorState extends State<Operator> {
                                 ),
                                 SizedBox(
                                   height: 45,
-                                  child: TextFormField(
-                                    validator: (value) {
-                                      if (value!.length != 10)
-                                        return 'Mobile Number must be of 10 digit';
-                                      else
-                                        return null;
-                                    },
-                                    controller: idNumberController,
-                                    decoration: InputDecoration(
-                                      contentPadding: EdgeInsets.all(5.0),
-                                      border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(5)),
+                                  width: 160,
+                                  child: Expanded(
+                                    child: ElevatedButton(
+                                      child: Text(
+                                        'Upload a file',
+                                        style: TextStyle(
+                                            color: Color.fromRGBO(20, 3, 3, 1)),
                                       ),
+                                      style: ElevatedButton.styleFrom(
+                                        elevation: 2,
+                                        backgroundColor: Colors.white,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(5),
+                                        ),
+                                      ),
+                                      onPressed: () {},
                                     ),
                                   ),
                                 ),
@@ -732,7 +757,7 @@ class _OperatorState extends State<Operator> {
                         ],
                       ),
                       SizedBox(
-                        height: 20,
+                        height: 27,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -764,10 +789,10 @@ class _OperatorState extends State<Operator> {
                                   child: Text(
                                     'Submit',
                                     style: TextStyle(
-                                      fontFamily: 'Colfax',
-                                      fontSize: 16,
-                                      color: Colors.white,
-                                    ),
+                                        fontFamily: 'Colfax',
+                                        fontSize: 16,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold),
                                   ),
                                 ),
                               ),
