@@ -4,6 +4,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/Dashboard/dashboard.dart';
+import 'package:flutter_application_1/Partner/operator.dart';
 
 import 'package:sizer/sizer.dart';
 
@@ -251,8 +252,13 @@ class _MyHomePageState extends State<HomePagePartner> {
                                           size: 71,
                                         ),
                                         onPressed: () {
-                                          // Add your onPressed functionality here
-                                          print('Sign Up Arrow button pressed');
+                                          showDialog(
+                                            barrierDismissible: false,
+                                            context: context,
+                                            builder: (context) {
+                                              return (Operator());
+                                            },
+                                          ); // Add your onPressed functionality here
                                         },
                                       ),
                                     ],
@@ -261,7 +267,7 @@ class _MyHomePageState extends State<HomePagePartner> {
                                   Padding(
                                     padding: const EdgeInsets.only(right: 20),
                                     child: SizedBox(
-                                      width: 580,
+                                      width: 550,
                                       child: Divider(
                                         color: Color.fromRGBO(20, 3, 3,
                                             1), // Set the color of the divider
@@ -306,7 +312,7 @@ class _MyHomePageState extends State<HomePagePartner> {
                                   Padding(
                                     padding: const EdgeInsets.only(right: 20),
                                     child: SizedBox(
-                                      width: 440,
+                                      width: 430,
                                       child: Divider(
                                         color: Color.fromRGBO(20, 3, 3,
                                             1), // Set the color of the divider

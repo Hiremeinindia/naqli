@@ -1,3 +1,5 @@
+// ignore_for_file: dead_code
+
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_application_1/createAccount.dart';
@@ -40,7 +42,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                       actions: [
                         Padding(
-                          padding: EdgeInsets.only(right: 250.0, top: 10),
+                          padding: EdgeInsets.only(right: 248.0, top: 10),
                           child: Row(
                             children: [
                               const SizedBox(
@@ -134,7 +136,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 height: 20,
                               ),
                               Container(
-                                height: 400,
+                                height: 40.h,
                                 padding: EdgeInsets.all(16.0),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(1.0),
@@ -149,8 +151,9 @@ class _MyHomePageState extends State<MyHomePage> {
                             ],
                           ),
                           Positioned(
-                            top: 350,
-                            left: 360,
+                            top: 310,
+                            left: 15.w,
+                            right: 15.w,
                             child: Container(
                               child: Column(
                                 children: [
@@ -250,397 +253,426 @@ class _MyHomePageState extends State<MyHomePage> {
                                             SizedBox(
                                               width: 30,
                                             ),
-                                            Container(
-                                              width: 200,
-                                              height: 200,
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(8.0),
-                                                border: Border.all(
-                                                  color: Colors
-                                                      .black, // Change border color as needed
-                                                  width:
-                                                      2.0, // Increase border width
+                                            Expanded(
+                                              child: Container(
+                                                width: 200,
+                                                height: 200,
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          8.0),
+                                                  border: Border.all(
+                                                    color: Colors
+                                                        .black, // Change border color as needed
+                                                    width:
+                                                        2.0, // Increase border width
+                                                  ),
                                                 ),
-                                              ),
-                                              child: Padding(
-                                                padding:
-                                                    const EdgeInsets.all(8.0),
-                                                child: Column(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.end,
-                                                  children: [
-                                                    Divider(
-                                                      color: Colors.black,
-                                                    ),
-                                                    SizedBox(height: 2),
-                                                    Text(
-                                                      'Vehicle',
-                                                      style: TextStyle(
-                                                          fontFamily: 'Colfax',
-                                                          fontSize: 16),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              width: 30,
-                                            ),
-                                            Container(
-                                              width: 200,
-                                              height: 200,
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(8.0),
-                                                border: Border.all(
-                                                  color: Colors
-                                                      .black, // Change border color as needed
-                                                  width:
-                                                      2.0, // Increase border width
-                                                ),
-                                              ),
-                                              child: Padding(
-                                                padding:
-                                                    const EdgeInsets.all(8.0),
-                                                child: Column(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.end,
-                                                  children: [
-                                                    Divider(
-                                                      color: Colors.black,
-                                                    ),
-                                                    SizedBox(height: 2),
-                                                    Text(
-                                                      'Bus',
-                                                      style: TextStyle(
-                                                          fontFamily: 'Colfax',
-                                                          fontSize: 16),
-                                                    ),
-                                                  ],
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(8.0),
+                                                  child: Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.end,
+                                                    children: [
+                                                      Divider(
+                                                        color: Colors.black,
+                                                      ),
+                                                      SizedBox(height: 2),
+                                                      Text(
+                                                        'Vehicle',
+                                                        style: TextStyle(
+                                                            fontFamily:
+                                                                'Colfax',
+                                                            fontSize: 16),
+                                                      ),
+                                                    ],
+                                                  ),
                                                 ),
                                               ),
                                             ),
                                             SizedBox(
-                                              width: 30,
+                                              width: 20,
                                             ),
-                                            Container(
-                                              width: 200,
-                                              height: 200,
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(8.0),
-                                                border: Border.all(
-                                                  color: Colors
-                                                      .black, // Change border color as needed
-                                                  width:
-                                                      2.0, // Increase border width
+                                            Expanded(
+                                              child: Container(
+                                                width: 200,
+                                                height: 200,
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          8.0),
+                                                  border: Border.all(
+                                                    color: Colors
+                                                        .black, // Change border color as needed
+                                                    width:
+                                                        2.0, // Increase border width
+                                                  ),
                                                 ),
-                                              ),
-                                              child: Padding(
-                                                padding:
-                                                    const EdgeInsets.all(8.0),
-                                                child: Column(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.end,
-                                                  children: [
-                                                    Divider(
-                                                      color: Colors.black,
-                                                    ),
-                                                    SizedBox(height: 2),
-                                                    Text(
-                                                      'Equipment-2',
-                                                      style: TextStyle(
-                                                          fontFamily: 'Colfax',
-                                                          fontSize: 16),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              width: 30,
-                                            ),
-                                            Container(
-                                              width: 200,
-                                              height: 200,
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(8.0),
-                                                border: Border.all(
-                                                  color: Colors
-                                                      .black, // Change border color as needed
-                                                  width:
-                                                      2.0, // Increase border width
-                                                ),
-                                              ),
-                                              child: Padding(
-                                                padding:
-                                                    const EdgeInsets.all(8.0),
-                                                child: Column(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.end,
-                                                  children: [
-                                                    Divider(
-                                                      color: Colors.black,
-                                                    ),
-                                                    SizedBox(height: 2),
-                                                    Text(
-                                                      'Special',
-                                                      style: TextStyle(
-                                                          fontFamily: 'Colfax',
-                                                          fontSize: 16),
-                                                    ),
-                                                  ],
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(8.0),
+                                                  child: Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.end,
+                                                    children: [
+                                                      Divider(
+                                                        color: Colors.black,
+                                                      ),
+                                                      SizedBox(height: 2),
+                                                      Text(
+                                                        'Bus',
+                                                        style: TextStyle(
+                                                            fontFamily:
+                                                                'Colfax',
+                                                            fontSize: 16),
+                                                      ),
+                                                    ],
+                                                  ),
                                                 ),
                                               ),
                                             ),
                                             SizedBox(
-                                              width: 30,
+                                              width: 20,
                                             ),
-                                            Container(
-                                              width: 200,
-                                              height: 200,
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(8.0),
-                                                border: Border.all(
-                                                  color: Colors
-                                                      .black, // Change border color as needed
-                                                  width:
-                                                      2.0, // Increase border width
+                                            Expanded(
+                                              child: Container(
+                                                width: 200,
+                                                height: 200,
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          8.0),
+                                                  border: Border.all(
+                                                    color: Colors
+                                                        .black, // Change border color as needed
+                                                    width:
+                                                        2.0, // Increase border width
+                                                  ),
                                                 ),
-                                                color: Color.fromRGBO(106, 102,
-                                                    209, 1), // RGB color fill
-                                              ),
-                                              child: Padding(
-                                                padding:
-                                                    const EdgeInsets.all(8.0),
-                                                child: Column(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  children: [
-                                                    Text(
-                                                      "Get an Estimate",
-                                                      style: TextStyle(
-                                                          color: Colors.white,
-                                                          fontFamily: 'Colfax',
-                                                          fontSize: 16
-                                                          // Add other text style properties as needed
-                                                          ),
-                                                    ),
-                                                    SizedBox(height: 20),
-                                                    Image.asset(
-                                                      'right-arrow.png',
-                                                      width: 30,
-                                                      height: 30,
-                                                      color: Colors.white,
-                                                    ),
-                                                  ],
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(8.0),
+                                                  child: Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.end,
+                                                    children: [
+                                                      Divider(
+                                                        color: Colors.black,
+                                                      ),
+                                                      SizedBox(height: 2),
+                                                      Text(
+                                                        'Equipment-2',
+                                                        style: TextStyle(
+                                                            fontFamily:
+                                                                'Colfax',
+                                                            fontSize: 16),
+                                                      ),
+                                                    ],
+                                                  ),
                                                 ),
                                               ),
+                                            ),
+                                            SizedBox(
+                                              width: 20,
+                                            ),
+                                            Expanded(
+                                              child: Container(
+                                                width: 200,
+                                                height: 200,
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          8.0),
+                                                  border: Border.all(
+                                                    color: Colors
+                                                        .black, // Change border color as needed
+                                                    width:
+                                                        2.0, // Increase border width
+                                                  ),
+                                                ),
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(8.0),
+                                                  child: Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.end,
+                                                    children: [
+                                                      Divider(
+                                                        color: Colors.black,
+                                                      ),
+                                                      SizedBox(height: 2),
+                                                      Text(
+                                                        'Special',
+                                                        style: TextStyle(
+                                                            fontFamily:
+                                                                'Colfax',
+                                                            fontSize: 16),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              width: 20,
+                                            ),
+                                            Expanded(
+                                              child: Container(
+                                                width: 200,
+                                                height: 200,
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          8.0),
+                                                  border: Border.all(
+                                                    color: Colors
+                                                        .black, // Change border color as needed
+                                                    width:
+                                                        2.0, // Increase border width
+                                                  ),
+                                                  color: Color.fromRGBO(
+                                                      106,
+                                                      102,
+                                                      209,
+                                                      1), // RGB color fill
+                                                ),
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(8.0),
+                                                  child: Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      Text(
+                                                        "Get an Estimate",
+                                                        style: TextStyle(
+                                                            color: Colors.white,
+                                                            fontFamily:
+                                                                'Colfax',
+                                                            fontSize: 16
+                                                            // Add other text style properties as needed
+                                                            ),
+                                                      ),
+                                                      SizedBox(height: 20),
+                                                      Image.asset(
+                                                        'right-arrow.png',
+                                                        width: 30,
+                                                        height: 30,
+                                                        color: Colors.white,
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              width: 20,
                                             ),
                                           ],
                                         ),
                                       ],
                                     ),
                                   ),
+                                  SizedBox(height: 9.h),
                                   Column(
                                     children: [
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceEvenly,
-                                        children: [
-                                          Image.asset(
-                                            'Rectangle.png', // Replace with your image path
-                                            width: 500,
-                                            height: 270,
-                                            color: Colors.grey,
-                                          ),
-                                          SizedBox(
-                                              width:
-                                                  40), // Adjust this space as needed
-                                          Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                "Naqli For Individuals",
-                                                style: TextStyle(
-                                                  fontFamily: 'Colfax',
-                                                  fontSize: 19,
-                                                  fontWeight: FontWeight.bold,
-                                                ),
+                                      Padding(
+                                        padding: EdgeInsets.only(left: 6.5.w),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Image.asset(
+                                              'Rectangle.png', // Replace with your image path
+                                              width: 19.w,
+                                              height: 12.h,
+                                              color: Colors.grey,
+                                            ),
+                                            SizedBox(
+                                                width: 4.5
+                                                    .w), // Adjust this space as needed
+                                            Container(
+                                              height: 25.h,
+                                              width: 40.w,
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    "Naqli For Individuals",
+                                                    style: TextStyle(
+                                                      fontFamily: 'Colfax',
+                                                      fontSize: 15,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                    ),
+                                                  ),
+                                                  SizedBox(height: 1.h),
+                                                  SizedBox(
+                                                    width: 620,
+                                                    child: Text(
+                                                      "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Ut enim ad mini veniam  quis nostrud exercitation ullamco laboris nisi ut aliquip ex eacommodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident sunt in culpa qui officia deserunt mollit anim id est laborum..",
+                                                      style: TextStyle(
+                                                          fontFamily: 'Colfax',
+                                                          fontSize: 12),
+                                                    ),
+                                                  ),
+                                                ],
                                               ),
-                                              SizedBox(height: 10),
-                                              Text(
-                                                "Lorem_ipsum_dolor_sit_amet_consectetur_adipiscing_elit_sed_do_eiusmod\n"
-                                                "tempor_incididunt_ut_labore_et_dolore_magna_aliqua.Ut_enim_ad_minim\n"
-                                                "veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea\n"
-                                                "commodo consequat. Duis aute irure dolor in reprehenderit in voluptate\n"
-                                                "velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat\n"
-                                                "cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est\n"
-                                                "laborum.",
-                                                style: TextStyle(
-                                                    fontFamily: 'Colfax',
-                                                    fontSize: 12),
-                                                textAlign: TextAlign.justify,
-                                              ),
-                                            ],
-                                          ),
-                                        ],
+                                            ),
+                                          ],
+                                        ),
                                       ),
-                                      // Repeat the above structure for other rows without unnecessary SizedBox
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceEvenly,
-                                        children: [
-                                          Image.asset(
-                                            'Rectangle.png', // Replace with your image path
-                                            width: 500,
-                                            height: 270,
-                                            color: Colors.grey,
-                                          ),
-                                          SizedBox(
-                                              width:
-                                                  40), // Adjust this space as needed
-                                          Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                "Naqli For Business",
-                                                style: TextStyle(
-                                                  fontFamily: 'Colfax',
-                                                  fontSize: 19,
-                                                  fontWeight: FontWeight.bold,
-                                                ),
+                                      SizedBox(
+                                          height: 2
+                                              .h), // Repeat the above structure for other rows without unnecessary SizedBox
+                                      Padding(
+                                        padding: EdgeInsets.only(
+                                          left: 6.5.w,
+                                        ),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Image.asset(
+                                              'Rectangle.png', // Replace with your image path
+                                              width: 19.w,
+                                              height: 14.h,
+                                              color: Colors.grey,
+                                            ),
+                                            SizedBox(
+                                                width: 4.5
+                                                    .w), // Adjust this space as needed
+                                            Container(
+                                              height: 25.h,
+                                              width: 40.w,
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    "Naqli For Business",
+                                                    style: TextStyle(
+                                                      fontFamily: 'Colfax',
+                                                      fontSize: 15,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                    ),
+                                                  ),
+                                                  SizedBox(height: 1.h),
+                                                  SizedBox(
+                                                    width: 620,
+                                                    child: Text(
+                                                      "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Ut enim ad mini veniam  quis nostrud exercitation ullamco laboris nisi ut aliquip ex eacommodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident sunt in culpa qui officia deserunt mollit anim id est laborum..",
+                                                      style: TextStyle(
+                                                          fontFamily: 'Colfax',
+                                                          fontSize: 12),
+                                                    ),
+                                                  ),
+                                                ],
                                               ),
-                                              SizedBox(height: 10),
-                                              Text(
-                                                "Lorem_ipsum_dolor_sit_amet_consectetur_adipiscing_elit_sed_do_eiusmod\n"
-                                                "tempor_incididunt_ut_labore_et_dolore_magna_aliqua.Ut_enim_ad_minim\n"
-                                                "veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea\n"
-                                                "commodo consequat. Duis aute irure dolor in reprehenderit in voluptate\n"
-                                                "velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat\n"
-                                                "cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est\n"
-                                                "laborum.",
-                                                style: TextStyle(
-                                                    fontFamily: 'Colfax',
-                                                    fontSize: 12),
-                                                textAlign: TextAlign.justify,
-                                              ),
-                                            ],
-                                          ),
-                                        ],
+                                            ),
+                                          ],
+                                        ),
                                       ),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceEvenly,
-                                        children: [
-                                          Image.asset(
-                                            'Rectangle.png', // Replace with your image path
-                                            width: 500,
-                                            height: 270,
-                                            color: Colors.grey,
-                                          ),
-                                          SizedBox(
-                                              width:
-                                                  40), // Adjust this space as needed
-                                          Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                "Naqli For Partner",
-                                                style: TextStyle(
-                                                  fontFamily: 'Colfax',
-                                                  fontSize: 19,
-                                                  fontWeight: FontWeight.bold,
-                                                ),
+                                      SizedBox(height: 2.h),
+                                      Padding(
+                                        padding: EdgeInsets.only(left: 6.5.w),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Image.asset(
+                                              'Rectangle.png', // Replace with your image path
+                                              width: 19.w,
+                                              height: 14.h,
+                                              color: Colors.grey,
+                                            ),
+                                            SizedBox(
+                                                width: 4.5
+                                                    .w), // Adjust this space as needed
+                                            Container(
+                                              height: 25.h,
+                                              width: 40.w,
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    "Naqli For Partner",
+                                                    style: TextStyle(
+                                                      fontFamily: 'Colfax',
+                                                      fontSize: 15,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                    ),
+                                                  ),
+                                                  SizedBox(height: 1.h),
+                                                  SizedBox(
+                                                    width: 620,
+                                                    child: Text(
+                                                      "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Ut enim ad mini veniam  quis nostrud exercitation ullamco laboris nisi ut aliquip ex eacommodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident sunt in culpa qui officia deserunt mollit anim id est laborum..",
+                                                      style: TextStyle(
+                                                          fontFamily: 'Colfax',
+                                                          fontSize: 12),
+                                                    ),
+                                                  ),
+                                                ],
                                               ),
-                                              SizedBox(height: 10),
-                                              Text(
-                                                "Lorem_ipsum_dolor_sit_amet_consectetur_adipiscing_elit_sed_do_eiusmod\n"
-                                                "tempor_incididunt_ut_labore_et_dolore_magna_aliqua.Ut_enim_ad_minim\n"
-                                                "veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea\n"
-                                                "commodo consequat. Duis aute irure dolor in reprehenderit in voluptate\n"
-                                                "velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat\n"
-                                                "cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est\n"
-                                                "laborum.",
-                                                style: TextStyle(
-                                                    fontFamily: 'Colfax',
-                                                    fontSize: 12),
-                                                textAlign: TextAlign.justify,
-                                              ),
-                                            ],
-                                          ),
-                                          SizedBox(
-                                            height: 20,
-                                          ),
-                                        ],
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     ],
                                   ),
                                   SizedBox(
-                                    height: 20,
+                                    height: 65,
                                   ),
                                   Container(
                                     child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
                                       children: [
                                         // First Column - Image
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(right: 100),
-                                          child: Column(
-                                            children: [
-                                              Image.asset(
-                                                'Phone.png', // Replace with your image path
-                                                width: 350,
-                                                height: 300,
-                                              ),
-                                            ],
-                                          ),
+                                        Image.asset(
+                                          'Phone.png', // Replace with your image path
+                                          width: 25.w,
+                                          height: 25.h,
                                         ),
+                                        // Adjust the width as needed
+
                                         // Second Column - Text
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(right: 150),
-                                          child: Column(
-                                            children: [
-                                              Text(
-                                                'How to get Naqli in Action',
-                                                style: TextStyle(
-                                                    color: Colors.black,
-                                                    fontWeight: FontWeight.bold,
-                                                    fontFamily: 'Colfax',
-                                                    fontSize: 20),
-                                              ),
-                                            ],
+
+                                        SizedBox(
+                                          width: 11.5.w,
+                                          child: Text(
+                                            'How to get Naqli in Action',
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontWeight: FontWeight.bold,
+                                                fontFamily: 'Colfax',
+                                                fontSize: 15),
                                           ),
                                         ),
+
+                                        // Spacer for even distribution
+                                        SizedBox(width: 5.5.w),
                                         // Third Column - Text
-                                        Column(
-                                          children: [
-                                            Text(
-                                              "Lorem ipsum dolor sit amet,\n"
-                                              "consectetur adipiscing elit, sed\n"
-                                              "do eiusmod tempor incididunt ut\n"
-                                              "labore et dolore magna aliqua.\n"
-                                              "Ut enim ad minim veniam, quis\n"
-                                              "nostrud exercitation ullamco\n"
-                                              "laboris nisi ut aliquip ex ea\n"
-                                              "commodo consequat. Duis aute\n"
-                                              "irure dolor in",
-                                              style: TextStyle(
+
+                                        SizedBox(
+                                          width: 19.5.w,
+                                          child: Text(
+                                            "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Ut enim ad mini veniam  quis nostrud exercitation ullamco laboris nisi ut aliquip ex eacommodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident sunt in culpa qui officia deserunt mollit anim id est laborum..",
+                                            style: TextStyle(
                                                 fontFamily: 'Colfax',
-                                                fontSize: 19,
-                                                color: Colors.black,
-                                              ),
-                                            ),
-                                          ],
+                                                fontSize: 9),
+                                          ),
                                         ),
                                       ],
                                     ),
@@ -778,14 +810,14 @@ class _MyHomePageState extends State<MyHomePage> {
                           ),
                           Positioned(
                             top: 350,
-                            right: 8,
-                            left: 8,
+                            right: 7,
+                            left: 7,
                             child: Container(
                               child: Column(
                                 children: [
                                   Container(
                                     width: 450,
-                                    height: 1170,
+                                    height: 700,
                                     decoration: BoxDecoration(
                                       color: Color.fromARGB(255, 232, 229, 240),
                                       borderRadius: BorderRadius.circular(8.0),
@@ -872,20 +904,21 @@ class _MyHomePageState extends State<MyHomePage> {
                                           ),
                                         ),
                                         SizedBox(
-                                          height: 30,
+                                          height: 20,
                                         ),
                                         Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
                                           children: [
                                             Row(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
                                               children: [
-                                                SizedBox(
-                                                  width: 42,
-                                                ),
                                                 Container(
-                                                  width: 35.w,
-                                                  height: 200,
+                                                  width: 145,
+                                                  height: 180,
                                                   decoration: BoxDecoration(
                                                     borderRadius:
                                                         BorderRadius.circular(
@@ -914,18 +947,18 @@ class _MyHomePageState extends State<MyHomePage> {
                                                           style: TextStyle(
                                                               fontFamily:
                                                                   'Colfax',
-                                                              fontSize: 16),
+                                                              fontSize: 14),
                                                         ),
                                                       ],
                                                     ),
                                                   ),
                                                 ),
                                                 SizedBox(
-                                                  width: 30,
+                                                  width: 25,
                                                 ),
                                                 Container(
-                                                  width: 35.w,
-                                                  height: 200,
+                                                  width: 145,
+                                                  height: 180,
                                                   decoration: BoxDecoration(
                                                     borderRadius:
                                                         BorderRadius.circular(
@@ -954,162 +987,156 @@ class _MyHomePageState extends State<MyHomePage> {
                                                           style: TextStyle(
                                                               fontFamily:
                                                                   'Colfax',
-                                                              fontSize: 16),
+                                                              fontSize: 14),
                                                         ),
                                                       ],
                                                     ),
                                                   ),
                                                 ),
-                                                SizedBox(
-                                                  width: 30,
-                                                ),
                                               ],
                                             ),
-                                            SizedBox(height: 20),
-                                            Row(children: [
-                                              SizedBox(width: 42),
-                                              Container(
-                                                width: 35.w,
-                                                height: 200,
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          8.0),
-                                                  border: Border.all(
-                                                    color: Colors
-                                                        .black, // Change border color as needed
-                                                    width:
-                                                        2.0, // Increase border width
-                                                  ),
-                                                ),
-                                                child: Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(8.0),
-                                                  child: Column(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment.end,
-                                                    children: [
-                                                      Divider(
-                                                        color: Colors.black,
-                                                      ),
-                                                      SizedBox(height: 2),
-                                                      Text(
-                                                        'Equipment-2',
-                                                        style: TextStyle(
-                                                            fontFamily:
-                                                                'Colfax',
-                                                            fontSize: 16),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                width: 30,
-                                              ),
-                                              Container(
-                                                width: 35.w,
-                                                height: 200,
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          8.0),
-                                                  border: Border.all(
-                                                    color: Colors
-                                                        .black, // Change border color as needed
-                                                    width:
-                                                        2.0, // Increase border width
-                                                  ),
-                                                ),
-                                                child: Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(8.0),
-                                                  child: Column(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment.end,
-                                                    children: [
-                                                      Divider(
-                                                        color: Colors.black,
-                                                      ),
-                                                      SizedBox(height: 2),
-                                                      Text(
-                                                        'Special',
-                                                        style: TextStyle(
-                                                            fontFamily:
-                                                                'Colfax',
-                                                            fontSize: 16),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                width: 30,
-                                              ),
-                                            ]),
-                                            SizedBox(height: 20),
+                                            SizedBox(height: 25),
                                             Row(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.center,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
                                                 children: [
-                                                  SizedBox(width: 30),
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            left: 100),
-                                                    child: Container(
-                                                      width: 35.w,
-                                                      height: 200,
-                                                      decoration: BoxDecoration(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(8.0),
-                                                        border: Border.all(
-                                                          color: Colors
-                                                              .black, // Change border color as needed
-                                                          width:
-                                                              2.0, // Increase border width
-                                                        ),
-                                                        color: Color.fromRGBO(
-                                                            106,
-                                                            102,
-                                                            209,
-                                                            1), // RGB color fill
+                                                  Container(
+                                                    width: 145,
+                                                    height: 180,
+                                                    decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              8.0),
+                                                      border: Border.all(
+                                                        color: Colors
+                                                            .black, // Change border color as needed
+                                                        width:
+                                                            2.0, // Increase border width
                                                       ),
-                                                      child: Align(
-                                                        alignment:
-                                                            Alignment.center,
-                                                        child: Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                  .all(8.0),
-                                                          child: Column(
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .center,
-                                                            children: [
-                                                              Text(
-                                                                "Get an Estimate",
-                                                                style: TextStyle(
-                                                                    color: Colors
-                                                                        .white,
-                                                                    fontFamily:
-                                                                        'Colfax',
-                                                                    fontSize: 16
-                                                                    // Add other text style properties as needed
-                                                                    ),
-                                                              ),
-                                                              SizedBox(
-                                                                  height: 20),
-                                                              Image.asset(
-                                                                'right-arrow.png',
-                                                                width: 30,
-                                                                height: 30,
-                                                                color: Colors
-                                                                    .white,
-                                                              ),
-                                                            ],
+                                                    ),
+                                                    child: Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              8.0),
+                                                      child: Column(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .end,
+                                                        children: [
+                                                          Divider(
+                                                            color: Colors.black,
                                                           ),
+                                                          SizedBox(height: 2),
+                                                          Text(
+                                                            'Equipment-2',
+                                                            style: TextStyle(
+                                                                fontFamily:
+                                                                    'Colfax',
+                                                                fontSize: 14),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  SizedBox(
+                                                    width: 25,
+                                                  ),
+                                                  Container(
+                                                    width: 145,
+                                                    height: 180,
+                                                    decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              8.0),
+                                                      border: Border.all(
+                                                        color: Colors
+                                                            .black, // Change border color as needed
+                                                        width:
+                                                            2.0, // Increase border width
+                                                      ),
+                                                    ),
+                                                    child: Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              8.0),
+                                                      child: Column(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .end,
+                                                        children: [
+                                                          Divider(
+                                                            color: Colors.black,
+                                                          ),
+                                                          SizedBox(height: 2),
+                                                          Text(
+                                                            'Special',
+                                                            style: TextStyle(
+                                                                fontFamily:
+                                                                    'Colfax',
+                                                                fontSize: 14),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ]),
+                                            SizedBox(height: 25),
+                                            Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Container(
+                                                    width: 150,
+                                                    height: 180,
+                                                    decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              8.0),
+                                                      border: Border.all(
+                                                        color: Colors
+                                                            .black, // Change border color as needed
+                                                        width:
+                                                            2.0, // Increase border width
+                                                      ),
+                                                      color: Color.fromRGBO(
+                                                          106,
+                                                          102,
+                                                          209,
+                                                          1), // RGB color fill
+                                                    ),
+                                                    child: Align(
+                                                      alignment:
+                                                          Alignment.center,
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child: Column(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .center,
+                                                          children: [
+                                                            Text(
+                                                              "Get an Estimate",
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .white,
+                                                                  fontFamily:
+                                                                      'Colfax',
+                                                                  fontSize: 14
+                                                                  // Add other text style properties as needed
+                                                                  ),
+                                                            ),
+                                                            SizedBox(
+                                                                height: 20),
+                                                            Image.asset(
+                                                              'right-arrow.png',
+                                                              width: 30,
+                                                              height: 30,
+                                                              color:
+                                                                  Colors.white,
+                                                            ),
+                                                          ],
                                                         ),
                                                       ),
                                                     ),
@@ -1120,21 +1147,29 @@ class _MyHomePageState extends State<MyHomePage> {
                                       ],
                                     ),
                                   ),
+                                  SizedBox(height: 10),
                                   Column(
                                     children: [
                                       Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceEvenly,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
                                         children: [
-                                          Image.asset(
-                                            'Rectangle.png', // Replace with your image path
-                                            width: 500,
-                                            height: 270,
-                                            color: Colors.grey,
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                bottom: 30),
+                                            child: Image.asset(
+                                              'Rectangle.png', // Replace with your image path
+                                              width: 65,
+                                              height: 120,
+                                              color: Colors.grey,
+                                            ),
                                           ),
+
                                           SizedBox(
                                               width:
-                                                  40), // Adjust this space as needed
+                                                  5), // Adjust this space as needed
                                           Column(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
@@ -1143,85 +1178,95 @@ class _MyHomePageState extends State<MyHomePage> {
                                                 "Naqli For Individuals",
                                                 style: TextStyle(
                                                   fontFamily: 'Colfax',
-                                                  fontSize: 19,
+                                                  fontSize: 10,
                                                   fontWeight: FontWeight.bold,
                                                 ),
                                               ),
-                                              SizedBox(height: 10),
-                                              Text(
-                                                "Lorem_ipsum_dolor_sit_amet_consectetur_adipiscing_elit_sed_do_eiusmod\n"
-                                                "tempor_incididunt_ut_labore_et_dolore_magna_aliqua.Ut_enim_ad_minim\n"
-                                                "veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea\n"
-                                                "commodo consequat. Duis aute irure dolor in reprehenderit in voluptate\n"
-                                                "velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat\n"
-                                                "cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est\n"
-                                                "laborum.",
-                                                style: TextStyle(
-                                                    fontFamily: 'Colfax',
-                                                    fontSize: 12),
-                                                textAlign: TextAlign.justify,
+                                              SizedBox(height: 5),
+                                              SizedBox(
+                                                height: 112,
+                                                width: 250,
+                                                child: Text(
+                                                  "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Ut enim ad mini veniam  quis nostrud exercitation ullamco laboris nisi ut aliquip ex eacommodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident sunt in culpa qui officia deserunt mollit anim id est laborum..",
+                                                  style: TextStyle(
+                                                      fontFamily: 'Colfax',
+                                                      fontSize: 8),
+                                                ),
                                               ),
                                             ],
                                           ),
                                         ],
                                       ),
                                       // Repeat the above structure for other rows without unnecessary SizedBox
+                                      SizedBox(height: 2),
                                       Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceEvenly,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
                                         children: [
-                                          Image.asset(
-                                            'Rectangle.png', // Replace with your image path
-                                            width: 500,
-                                            height: 270,
-                                            color: Colors.grey,
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                bottom: 30),
+                                            child: Image.asset(
+                                              'Rectangle.png', // Replace with your image path
+                                              width: 65,
+                                              height: 110,
+                                              color: Colors.grey,
+                                            ),
                                           ),
                                           SizedBox(
                                               width:
-                                                  40), // Adjust this space as needed
+                                                  5), // Adjust this space as needed
                                           Column(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
                                             children: [
                                               Text(
                                                 "Naqli For Business",
                                                 style: TextStyle(
                                                   fontFamily: 'Colfax',
-                                                  fontSize: 19,
+                                                  fontSize: 10,
                                                   fontWeight: FontWeight.bold,
                                                 ),
                                               ),
-                                              SizedBox(height: 10),
-                                              Text(
-                                                "Lorem_ipsum_dolor_sit_amet_consectetur_adipiscing_elit_sed_do_eiusmod\n"
-                                                "tempor_incididunt_ut_labore_et_dolore_magna_aliqua.Ut_enim_ad_minim\n"
-                                                "veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea\n"
-                                                "commodo consequat. Duis aute irure dolor in reprehenderit in voluptate\n"
-                                                "velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat\n"
-                                                "cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est\n"
-                                                "laborum.",
-                                                style: TextStyle(
-                                                    fontFamily: 'Colfax',
-                                                    fontSize: 12),
-                                                textAlign: TextAlign.justify,
+                                              SizedBox(height: 5),
+                                              SizedBox(
+                                                height: 112,
+                                                width: 250,
+                                                child: Text(
+                                                  "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Ut enim ad mini veniam  quis nostrud exercitation ullamco laboris nisi ut aliquip ex eacommodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident sunt in culpa qui officia deserunt mollit anim id est laborum..",
+                                                  style: TextStyle(
+                                                      fontFamily: 'Colfax',
+                                                      fontSize: 8),
+                                                ),
                                               ),
                                             ],
                                           ),
                                         ],
                                       ),
+                                      SizedBox(height: 2),
                                       Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceEvenly,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
                                         children: [
-                                          Image.asset(
-                                            'Rectangle.png', // Replace with your image path
-                                            width: 500,
-                                            height: 270,
-                                            color: Colors.grey,
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                bottom: 30),
+                                            child: Image.asset(
+                                              'Rectangle.png', // Replace with your image path
+                                              width: 65,
+                                              height: 110,
+                                              color: Colors.grey,
+                                            ),
                                           ),
                                           SizedBox(
                                               width:
-                                                  40), // Adjust this space as needed
+                                                  5), // Adjust this space as needed
                                           Column(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
@@ -1230,28 +1275,22 @@ class _MyHomePageState extends State<MyHomePage> {
                                                 "Naqli For Partner",
                                                 style: TextStyle(
                                                   fontFamily: 'Colfax',
-                                                  fontSize: 19,
+                                                  fontSize: 10,
                                                   fontWeight: FontWeight.bold,
                                                 ),
                                               ),
-                                              SizedBox(height: 10),
-                                              Text(
-                                                "Lorem_ipsum_dolor_sit_amet_consectetur_adipiscing_elit_sed_do_eiusmod\n"
-                                                "tempor_incididunt_ut_labore_et_dolore_magna_aliqua.Ut_enim_ad_minim\n"
-                                                "veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea\n"
-                                                "commodo consequat. Duis aute irure dolor in reprehenderit in voluptate\n"
-                                                "velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat\n"
-                                                "cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est\n"
-                                                "laborum.",
-                                                style: TextStyle(
-                                                    fontFamily: 'Colfax',
-                                                    fontSize: 12),
-                                                textAlign: TextAlign.justify,
+                                              SizedBox(height: 5),
+                                              SizedBox(
+                                                height: 112,
+                                                width: 250,
+                                                child: Text(
+                                                  "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Ut enim ad mini veniam  quis nostrud exercitation ullamco laboris nisi ut aliquip ex eacommodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident sunt in culpa qui officia deserunt mollit anim id est laborum..",
+                                                  style: TextStyle(
+                                                      fontFamily: 'Colfax',
+                                                      fontSize: 8),
+                                                ),
                                               ),
                                             ],
-                                          ),
-                                          SizedBox(
-                                            height: 20,
                                           ),
                                         ],
                                       ),
@@ -1261,43 +1300,47 @@ class _MyHomePageState extends State<MyHomePage> {
                                     height: 20,
                                   ),
                                   Container(
-                                    child: Row(
+                                    child: Column(
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
                                       children: [
                                         // First Column - Image
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(right: 100),
-                                          child: Column(
-                                            children: [
-                                              Image.asset(
-                                                'Phone.png', // Replace with your image path
-                                                width: 350,
-                                                height: 300,
-                                              ),
-                                            ],
-                                          ),
+
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Image.asset(
+                                              'Phone.png', // Replace with your image path
+                                              width: 160,
+                                              height: 160,
+                                            ),
+                                          ],
                                         ),
+
                                         // Second Column - Text
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(right: 150),
-                                          child: Column(
-                                            children: [
-                                              Text(
-                                                'How to get Naqli in Action',
-                                                style: TextStyle(
-                                                    color: Colors.black,
-                                                    fontWeight: FontWeight.bold,
-                                                    fontFamily: 'Colfax',
-                                                    fontSize: 20),
-                                              ),
-                                            ],
-                                          ),
+                                        SizedBox(height: 10),
+
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Text(
+                                              'How to get Naqli in Action',
+                                              style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontWeight: FontWeight.bold,
+                                                  fontFamily: 'Colfax',
+                                                  fontSize: 16),
+                                            ),
+                                          ],
                                         ),
+
                                         // Third Column - Text
-                                        Column(
+                                        SizedBox(height: 10),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
                                           children: [
                                             Text(
                                               "Lorem ipsum dolor sit amet,\n"
@@ -1311,7 +1354,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                               "irure dolor in",
                                               style: TextStyle(
                                                 fontFamily: 'Colfax',
-                                                fontSize: 19,
+                                                fontSize: 10,
                                                 color: Colors.black,
                                               ),
                                             ),
