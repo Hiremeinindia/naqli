@@ -7,16 +7,16 @@ import 'package:sizer/sizer.dart';
 
 import 'loginPage.dart';
 
-class MyHomePage1 extends StatefulWidget {
-  const MyHomePage1({
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({
     Key? key,
   }) : super(key: key);
 
   @override
-  State<MyHomePage1> createState() => _MyHomePageState();
+  State<MyHomePage> createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage1> {
+class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Sizer(builder: (context, orientation, deviceType) {
@@ -42,7 +42,7 @@ class _MyHomePageState extends State<MyHomePage1> {
                       ),
                       actions: [
                         Padding(
-                          padding: EdgeInsets.only(right: 250.0, top: 10),
+                          padding: EdgeInsets.only(right: 248.0, top: 10),
                           child: Row(
                             children: [
                               const SizedBox(
@@ -136,7 +136,7 @@ class _MyHomePageState extends State<MyHomePage1> {
                                 height: 20,
                               ),
                               Container(
-                                height: 400,
+                                height: 40.h,
                                 padding: EdgeInsets.all(16.0),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(1.0),
@@ -475,164 +475,182 @@ class _MyHomePageState extends State<MyHomePage1> {
                                       ],
                                     ),
                                   ),
-                                  SizedBox(height: 8.h),
+                                  SizedBox(height: 9.h),
                                   Column(
                                     children: [
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceEvenly,
-                                        children: [
-                                          Image.asset(
-                                            'Rectangle.png', // Replace with your image path
-                                            width: 500,
-                                            height: 270,
-                                            color: Colors.grey,
-                                          ),
-                                          SizedBox(
-                                              width:
-                                                  40), // Adjust this space as needed
-                                          Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                "Naqli For Individuals",
-                                                style: TextStyle(
-                                                  fontFamily: 'Colfax',
-                                                  fontSize: 19,
-                                                  fontWeight: FontWeight.bold,
-                                                ),
+                                      Padding(
+                                        padding: EdgeInsets.only(left: 6.5.w),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Image.asset(
+                                              'Rectangle.png', // Replace with your image path
+                                              width: 19.w,
+                                              height: 12.h,
+                                              color: Colors.grey,
+                                            ),
+                                            SizedBox(
+                                                width: 4.5
+                                                    .w), // Adjust this space as needed
+                                            Container(
+                                              height: 25.h,
+                                              width: 40.w,
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    "Naqli For Individuals",
+                                                    style: TextStyle(
+                                                      fontFamily: 'Colfax',
+                                                      fontSize: 15,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                    ),
+                                                  ),
+                                                  SizedBox(height: 1.h),
+                                                  SizedBox(
+                                                    width: 620,
+                                                    child: Text(
+                                                      "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Ut enim ad mini veniam  quis nostrud exercitation ullamco laboris nisi ut aliquip ex eacommodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident sunt in culpa qui officia deserunt mollit anim id est laborum..",
+                                                      style: TextStyle(
+                                                          fontFamily: 'Colfax',
+                                                          fontSize: 12),
+                                                    ),
+                                                  ),
+                                                ],
                                               ),
-                                              SizedBox(height: 10),
-                                              Text(
-                                                "Lorem_ipsum_dolor_sit_amet_consectetur_adipiscing_elit_sed_do_eiusmod\n"
-                                                "tempor_incididunt_ut_labore_et_dolore_magna_aliqua.Ut_enim_ad_minim\n"
-                                                "veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea\n"
-                                                "commodo consequat. Duis aute irure dolor in reprehenderit in voluptate\n"
-                                                "velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat\n"
-                                                "cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est\n"
-                                                "laborum.",
-                                                style: TextStyle(
-                                                    fontFamily: 'Colfax',
-                                                    fontSize: 12),
-                                                textAlign: TextAlign.justify,
-                                              ),
-                                            ],
-                                          ),
-                                        ],
+                                            ),
+                                          ],
+                                        ),
                                       ),
-                                      // Repeat the above structure for other rows without unnecessary SizedBox
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceEvenly,
-                                        children: [
-                                          Image.asset(
-                                            'Rectangle.png', // Replace with your image path
-                                            width: 500,
-                                            height: 270,
-                                            color: Colors.grey,
-                                          ),
-                                          SizedBox(
-                                              width:
-                                                  40), // Adjust this space as needed
-                                          Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                "Naqli For Business",
-                                                style: TextStyle(
-                                                  fontFamily: 'Colfax',
-                                                  fontSize: 19,
-                                                  fontWeight: FontWeight.bold,
-                                                ),
+                                      SizedBox(
+                                          height: 2
+                                              .h), // Repeat the above structure for other rows without unnecessary SizedBox
+                                      Padding(
+                                        padding: EdgeInsets.only(
+                                          left: 6.5.w,
+                                        ),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Image.asset(
+                                              'Rectangle.png', // Replace with your image path
+                                              width: 19.w,
+                                              height: 14.h,
+                                              color: Colors.grey,
+                                            ),
+                                            SizedBox(
+                                                width: 4.5
+                                                    .w), // Adjust this space as needed
+                                            Container(
+                                              height: 25.h,
+                                              width: 40.w,
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    "Naqli For Business",
+                                                    style: TextStyle(
+                                                      fontFamily: 'Colfax',
+                                                      fontSize: 15,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                    ),
+                                                  ),
+                                                  SizedBox(height: 1.h),
+                                                  SizedBox(
+                                                    width: 620,
+                                                    child: Text(
+                                                      "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Ut enim ad mini veniam  quis nostrud exercitation ullamco laboris nisi ut aliquip ex eacommodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident sunt in culpa qui officia deserunt mollit anim id est laborum..",
+                                                      style: TextStyle(
+                                                          fontFamily: 'Colfax',
+                                                          fontSize: 12),
+                                                    ),
+                                                  ),
+                                                ],
                                               ),
-                                              SizedBox(height: 10),
-                                              Text(
-                                                "Lorem_ipsum_dolor_sit_amet_consectetur_adipiscing_elit_sed_do_eiusmod\n"
-                                                "tempor_incididunt_ut_labore_et_dolore_magna_aliqua.Ut_enim_ad_minim\n"
-                                                "veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea\n"
-                                                "commodo consequat. Duis aute irure dolor in reprehenderit in voluptate\n"
-                                                "velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat\n"
-                                                "cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est\n"
-                                                "laborum.",
-                                                style: TextStyle(
-                                                    fontFamily: 'Colfax',
-                                                    fontSize: 12),
-                                                textAlign: TextAlign.justify,
-                                              ),
-                                            ],
-                                          ),
-                                        ],
+                                            ),
+                                          ],
+                                        ),
                                       ),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceEvenly,
-                                        children: [
-                                          Image.asset(
-                                            'Rectangle.png', // Replace with your image path
-                                            width: 500,
-                                            height: 270,
-                                            color: Colors.grey,
-                                          ),
-                                          SizedBox(
-                                              width:
-                                                  40), // Adjust this space as needed
-                                          Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                "Naqli For Partner",
-                                                style: TextStyle(
-                                                  fontFamily: 'Colfax',
-                                                  fontSize: 19,
-                                                  fontWeight: FontWeight.bold,
-                                                ),
+                                      SizedBox(height: 2.h),
+                                      Padding(
+                                        padding: EdgeInsets.only(left: 6.5.w),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Image.asset(
+                                              'Rectangle.png', // Replace with your image path
+                                              width: 19.w,
+                                              height: 14.h,
+                                              color: Colors.grey,
+                                            ),
+                                            SizedBox(
+                                                width: 4.5
+                                                    .w), // Adjust this space as needed
+                                            Container(
+                                              height: 25.h,
+                                              width: 40.w,
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    "Naqli For Partner",
+                                                    style: TextStyle(
+                                                      fontFamily: 'Colfax',
+                                                      fontSize: 15,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                    ),
+                                                  ),
+                                                  SizedBox(height: 1.h),
+                                                  SizedBox(
+                                                    width: 620,
+                                                    child: Text(
+                                                      "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Ut enim ad mini veniam  quis nostrud exercitation ullamco laboris nisi ut aliquip ex eacommodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident sunt in culpa qui officia deserunt mollit anim id est laborum..",
+                                                      style: TextStyle(
+                                                          fontFamily: 'Colfax',
+                                                          fontSize: 12),
+                                                    ),
+                                                  ),
+                                                ],
                                               ),
-                                              SizedBox(height: 10),
-                                              Text(
-                                                "Lorem_ipsum_dolor_sit_amet_consectetur_adipiscing_elit_sed_do_eiusmod\n"
-                                                "tempor_incididunt_ut_labore_et_dolore_magna_aliqua.Ut_enim_ad_minim\n"
-                                                "veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea\n"
-                                                "commodo consequat. Duis aute irure dolor in reprehenderit in voluptate\n"
-                                                "velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat\n"
-                                                "cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est\n"
-                                                "laborum.",
-                                                style: TextStyle(
-                                                    fontFamily: 'Colfax',
-                                                    fontSize: 12),
-                                                textAlign: TextAlign.justify,
-                                              ),
-                                            ],
-                                          ),
-                                          SizedBox(
-                                            height: 20,
-                                          ),
-                                        ],
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     ],
                                   ),
                                   SizedBox(
-                                    height: 7.h,
+                                    height: 65,
                                   ),
                                   Container(
                                     child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
                                       children: [
                                         // First Column - Image
                                         Image.asset(
                                           'Phone.png', // Replace with your image path
-                                          width: 28.w,
-                                          height: 28.h,
+                                          width: 25.w,
+                                          height: 25.h,
                                         ),
-                                        SizedBox(
-                                            width:
-                                                10), // Adjust the width as needed
+                                        // Adjust the width as needed
 
                                         // Second Column - Text
-                                        Expanded(
+
+                                        SizedBox(
+                                          width: 11.5.w,
                                           child: Text(
                                             'How to get Naqli in Action',
                                             style: TextStyle(
@@ -644,18 +662,16 @@ class _MyHomePageState extends State<MyHomePage1> {
                                         ),
 
                                         // Spacer for even distribution
-                                        Spacer(),
-
+                                        SizedBox(width: 5.5.w),
                                         // Third Column - Text
-                                        Expanded(
-                                          child: SizedBox(
-                                            width: 88,
-                                            child: Text(
-                                              "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Ut enim ad mini veniam  quis nostrud exercitation ullamco laboris nisi ut aliquip ex eacommodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident sunt in culpa qui officia deserunt mollit anim id est laborum..",
-                                              style: TextStyle(
-                                                  fontFamily: 'Colfax',
-                                                  fontSize: 8),
-                                            ),
+
+                                        SizedBox(
+                                          width: 19.5.w,
+                                          child: Text(
+                                            "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Ut enim ad mini veniam  quis nostrud exercitation ullamco laboris nisi ut aliquip ex eacommodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident sunt in culpa qui officia deserunt mollit anim id est laborum..",
+                                            style: TextStyle(
+                                                fontFamily: 'Colfax',
+                                                fontSize: 9),
                                           ),
                                         ),
                                       ],
@@ -1027,7 +1043,7 @@ class _MyHomePageState extends State<MyHomePage1> {
                                                   ),
                                                   Container(
                                                     width: 145,
-                                                    height: 170,
+                                                    height: 180,
                                                     decoration: BoxDecoration(
                                                       borderRadius:
                                                           BorderRadius.circular(
@@ -1066,67 +1082,61 @@ class _MyHomePageState extends State<MyHomePage1> {
                                                 ]),
                                             SizedBox(height: 25),
                                             Row(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.center,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
                                                 children: [
-                                                  SizedBox(width: 30),
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            left: 100),
-                                                    child: Container(
-                                                      width: 150,
-                                                      height: 180,
-                                                      decoration: BoxDecoration(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(8.0),
-                                                        border: Border.all(
-                                                          color: Colors
-                                                              .black, // Change border color as needed
-                                                          width:
-                                                              2.0, // Increase border width
-                                                        ),
-                                                        color: Color.fromRGBO(
-                                                            106,
-                                                            102,
-                                                            209,
-                                                            1), // RGB color fill
+                                                  Container(
+                                                    width: 150,
+                                                    height: 180,
+                                                    decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              8.0),
+                                                      border: Border.all(
+                                                        color: Colors
+                                                            .black, // Change border color as needed
+                                                        width:
+                                                            2.0, // Increase border width
                                                       ),
-                                                      child: Align(
-                                                        alignment:
-                                                            Alignment.center,
-                                                        child: Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                  .all(8.0),
-                                                          child: Column(
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .center,
-                                                            children: [
-                                                              Text(
-                                                                "Get an Estimate",
-                                                                style: TextStyle(
-                                                                    color: Colors
-                                                                        .white,
-                                                                    fontFamily:
-                                                                        'Colfax',
-                                                                    fontSize: 14
-                                                                    // Add other text style properties as needed
-                                                                    ),
-                                                              ),
-                                                              SizedBox(
-                                                                  height: 20),
-                                                              Image.asset(
-                                                                'right-arrow.png',
-                                                                width: 30,
-                                                                height: 30,
-                                                                color: Colors
-                                                                    .white,
-                                                              ),
-                                                            ],
-                                                          ),
+                                                      color: Color.fromRGBO(
+                                                          106,
+                                                          102,
+                                                          209,
+                                                          1), // RGB color fill
+                                                    ),
+                                                    child: Align(
+                                                      alignment:
+                                                          Alignment.center,
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child: Column(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .center,
+                                                          children: [
+                                                            Text(
+                                                              "Get an Estimate",
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .white,
+                                                                  fontFamily:
+                                                                      'Colfax',
+                                                                  fontSize: 14
+                                                                  // Add other text style properties as needed
+                                                                  ),
+                                                            ),
+                                                            SizedBox(
+                                                                height: 20),
+                                                            Image.asset(
+                                                              'right-arrow.png',
+                                                              width: 30,
+                                                              height: 30,
+                                                              color:
+                                                                  Colors.white,
+                                                            ),
+                                                          ],
                                                         ),
                                                       ),
                                                     ),
@@ -1260,8 +1270,6 @@ class _MyHomePageState extends State<MyHomePage1> {
                                           Column(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
                                             children: [
                                               Text(
                                                 "Naqli For Partner",
@@ -1284,7 +1292,6 @@ class _MyHomePageState extends State<MyHomePage1> {
                                               ),
                                             ],
                                           ),
-                                          SizedBox(height: 4),
                                         ],
                                       ),
                                     ],

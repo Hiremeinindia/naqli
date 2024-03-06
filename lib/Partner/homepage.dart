@@ -261,7 +261,7 @@ class _MyHomePageState extends State<HomePagePartner> {
                                   Padding(
                                     padding: const EdgeInsets.only(right: 20),
                                     child: SizedBox(
-                                      width: 580,
+                                      width: 550,
                                       child: Divider(
                                         color: Color.fromRGBO(20, 3, 3,
                                             1), // Set the color of the divider
@@ -306,7 +306,7 @@ class _MyHomePageState extends State<HomePagePartner> {
                                   Padding(
                                     padding: const EdgeInsets.only(right: 20),
                                     child: SizedBox(
-                                      width: 440,
+                                      width: 430,
                                       child: Divider(
                                         color: Color.fromRGBO(20, 3, 3,
                                             1), // Set the color of the divider
