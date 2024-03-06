@@ -32,6 +32,11 @@ class TabelText {
     fontFamily: 'SFProTextMedium',
     fontSize: 17,
   );
+  static TextStyle tableText = TextStyle(
+    color: Colors.black,
+    fontFamily: 'SFProText',
+    fontSize: 14,
+  );
   static TextStyle text1 = TextStyle(
     color: Colors.black54,
     fontFamily: 'SFProTextMedium',
@@ -42,6 +47,12 @@ class TabelText {
     fontFamily: 'SFProText',
     fontWeight: FontWeight.bold,
     color: Color.fromRGBO(143, 142, 151, 1),
+    fontSize: 10,
+  );
+  static TextStyle text3 = TextStyle(
+    fontFamily: 'SFProText',
+    fontWeight: FontWeight.bold,
+    color: Colors.white,
     fontSize: 10,
   );
 }

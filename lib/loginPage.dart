@@ -252,15 +252,15 @@ class _LoginPageState extends State<LoginPage> {
         if (constraints.maxWidth >= 650) {
           return Dialog(
             child: Container(
-              height: 750,
-              width: 1100,
+              height: 81.h,
+              width: 57.w,
               child: Column(
                 children: [
                   Row(
                     children: [
                       Container(
-                        width: 550,
-                        height: 750,
+                        width: 28.w,
+                        height: 81.h,
                         decoration: const BoxDecoration(
                           color: Color.fromARGB(255, 128, 123, 229),
                           borderRadius: BorderRadius.only(
@@ -272,14 +272,14 @@ class _LoginPageState extends State<LoginPage> {
                           alignment: Alignment.bottomCenter,
                           child: Image.asset(
                             'loginlogo.png',
-                            width: 500,
-                            height: 500,
+                            width: 34.w,
+                            height: 48.h,
                           ),
                         ),
                       ),
                       Container(
-                        width: 550,
-                        height: 750,
+                        width: 29.w,
+                        height: 81.h,
                         decoration: const BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.only(
@@ -314,7 +314,7 @@ class _LoginPageState extends State<LoginPage> {
                                   'Login',
                                   style: TextStyle(
                                     fontFamily: 'Colfax',
-                                    fontSize: 20,
+                                    fontSize: 18,
                                     fontWeight: FontWeight.bold,
                                   ),
                                   textScaleFactor:
@@ -322,10 +322,10 @@ class _LoginPageState extends State<LoginPage> {
                                 ),
                               ),
                               Padding(
-                                padding: const EdgeInsets.only(
-                                  left: 40.0,
-                                  right: 40,
-                                  top: 80,
+                                padding: EdgeInsets.only(
+                                  left: 2.w,
+                                  right: 2.w,
+                                  top: 4.h,
                                 ),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -382,17 +382,17 @@ class _LoginPageState extends State<LoginPage> {
                                 height: 20,
                               ),
                               Padding(
-                                padding: const EdgeInsets.only(
-                                  left: 40.0,
-                                  right: 40,
+                                padding: EdgeInsets.only(
+                                  left: 2.w,
+                                  right: 2.w,
                                 ),
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     SizedBox(
-                                      height: 43,
-                                      width: 140,
+                                      height: 4.h,
+                                      width: 9.w,
                                       child: ElevatedButton(
                                         onPressed: () {
                                           showDialog(
@@ -418,7 +418,7 @@ class _LoginPageState extends State<LoginPage> {
                                           'Login',
                                           style: TextStyle(
                                             fontFamily: 'Colfax',
-                                            fontSize: 8,
+                                            fontSize: 7,
                                             color: Colors.white,
                                           ),
                                           textScaleFactor:
@@ -427,19 +427,24 @@ class _LoginPageState extends State<LoginPage> {
                                         ),
                                       ),
                                     ),
-                                    InkWell(
-                                      child: Text(
-                                        'Forgot Password?',
-                                        style: TextStyle(
-                                          fontFamily: 'Colfax',
-                                          fontSize: 8,
-                                          color: Color.fromARGB(
-                                              255, 128, 123, 229),
+                                    SizedBox(
+                                      height: 5.h,
+                                      width: 7.5.w,
+                                      child: InkWell(
+                                        child: Text(
+                                          'Forgot Password?',
+                                          style: TextStyle(
+                                            fontFamily: 'Colfax',
+                                            fontSize: 8,
+                                            color: Color.fromARGB(
+                                                255, 128, 123, 229),
+                                          ),
+                                          textScaleFactor:
+                                              ScaleSize.textScaleFactor(
+                                                  context),
                                         ),
-                                        textScaleFactor:
-                                            ScaleSize.textScaleFactor(context),
+                                        onTap: () {},
                                       ),
-                                      onTap: () {},
                                     ),
                                   ],
                                 ),
@@ -448,22 +453,24 @@ class _LoginPageState extends State<LoginPage> {
                                 height: 13,
                               ),
                               Padding(
-                                padding: const EdgeInsets.only(
-                                  left: 40.0,
-                                  right: 40,
+                                padding: EdgeInsets.only(
+                                  left: 2.w,
+                                  right: 4.w,
                                 ),
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
-                                    Text(
-                                      "Don't have an account?",
-                                      style: TextStyle(
-                                        fontFamily: 'Colfax',
-                                        fontSize: 8,
-                                        color: Colors.black,
+                                    Flexible(
+                                      child: Text(
+                                        "Don't have an account?",
+                                        style: TextStyle(
+                                          fontFamily: 'Colfax',
+                                          fontSize: 8,
+                                          color: Colors.black,
+                                        ),
+                                        textScaleFactor:
+                                            ScaleSize.textScaleFactor(context),
                                       ),
-                                      textScaleFactor:
-                                          ScaleSize.textScaleFactor(context),
                                     ),
                                     InkWell(
                                       child: Text(
@@ -493,9 +500,9 @@ class _LoginPageState extends State<LoginPage> {
                                 height: 10,
                               ),
                               Padding(
-                                padding: const EdgeInsets.only(
-                                  left: 40.0,
-                                  right: 40,
+                                padding: EdgeInsets.only(
+                                  left: 2.w,
+                                  right: 5.w,
                                 ),
                                 child: Align(
                                   alignment: Alignment.centerLeft,

@@ -51,7 +51,11 @@ class _TriggerBookingState extends State<TriggerBooking> {
                         child: Container(
                           decoration: BoxDecoration(
                             color: Colors.white,
-                            borderRadius: BorderRadius.circular(12.0),
+                            borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(0),
+                                topRight: Radius.circular(0),
+                                bottomLeft: Radius.circular(12),
+                                bottomRight: Radius.circular(12)),
                           ),
                           width: 1200,
                           child: Column(
@@ -652,7 +656,11 @@ class _TriggerBookingState extends State<TriggerBooking> {
                                 child: Container(
                                   decoration: BoxDecoration(
                                     color: Colors.white,
-                                    borderRadius: BorderRadius.circular(12.0),
+                                    borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(0),
+                                        topRight: Radius.circular(0),
+                                        bottomLeft: Radius.circular(12),
+                                        bottomRight: Radius.circular(12)),
                                   ),
                                   width: 1200,
                                   child: Column(
