@@ -4,6 +4,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/Dashboard/dashboard.dart';
+import 'package:flutter_application_1/Partner/operator.dart';
 
 import 'package:sizer/sizer.dart';
 
@@ -251,8 +252,13 @@ class _MyHomePageState extends State<HomePagePartner> {
                                           size: 71,
                                         ),
                                         onPressed: () {
-                                          // Add your onPressed functionality here
-                                          print('Sign Up Arrow button pressed');
+                                          showDialog(
+                                            barrierDismissible: false,
+                                            context: context,
+                                            builder: (context) {
+                                              return (Operator());
+                                            },
+                                          ); // Add your onPressed functionality here
                                         },
                                       ),
                                     ],
