@@ -57,182 +57,40 @@ class _BookingsState extends State<Bookings> {
                                           bottomLeft: Radius.circular(12),
                                           bottomRight: Radius.circular(12)),
                                     ),
-                                    child: Column(
-                                      children: [
-                                        Container(
-                                          height: 55,
-                                          color: Color.fromRGBO(
-                                              75, 61, 82, 1), // Brown color
-                                          child: Padding(
-                                            padding: EdgeInsets.fromLTRB(
-                                                1.5.w, 1.5.h, 1.5.w, 1.5.h),
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                Text('Booking 1',
-                                                    style:
-                                                        TabelText.headerText),
-                                                Text("Booking iD XXXXXX",
-                                                    style: TabelText.text3),
-                                              ],
+                                    child: Expanded(
+                                      child: Column(
+                                        children: [
+                                          Container(
+                                            height: 55,
+                                            color: Color.fromRGBO(
+                                                75, 61, 82, 1), // Brown color
+                                            child: Padding(
+                                              padding: EdgeInsets.fromLTRB(
+                                                  1.5.w, 1.5.h, 1.5.w, 1.5.h),
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Text('Booking 1',
+                                                      style:
+                                                          TabelText.headerText),
+                                                  Text("Booking iD XXXXXX",
+                                                      style: TabelText.text3),
+                                                ],
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                        // Add spacing between the brown container and the white container
+                                          // Add spacing between the brown container and the white container
 
-                                        Padding(
-                                          padding: EdgeInsets.fromLTRB(
-                                              1.w, 2.h, 1.w, 1.h),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Row(
-                                                children: [
-                                                  SizedBox(
-                                                      width: 35,
-                                                      height: 35,
-                                                      child: SizedBox(
-                                                          width: 35,
-                                                          height: 35,
-                                                          child:
-                                                              CircleAvatar())),
-                                                  SizedBox(
-                                                    width: 1.w,
-                                                  ),
-                                                  Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Text('Truck',
-                                                          style:
-                                                              TabelText.text1),
-                                                      SizedBox(
-                                                        height: 3,
-                                                      ),
-                                                      Text(
-                                                        "Truck no ******",
-                                                        style: TabelText.text2,
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ],
-                                              ),
-                                              ViewButton(
-                                                text: 'View',
-                                                onPressed: () {},
-                                                colors: Color.fromRGBO(
-                                                    98, 106, 254, 1),
-                                              )
-                                            ],
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          width: 1184,
-                                          child: Divider(
-                                            color: Color.fromRGBO(
-                                                206, 203, 203, 1),
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: EdgeInsets.fromLTRB(
-                                              1.w, 1.h, 1.w, 1.h),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Row(
-                                                children: [
-                                                  SizedBox(
-                                                      width: 35,
-                                                      height: 35,
-                                                      child: CircleAvatar()),
-                                                  SizedBox(
-                                                    width: 1.w,
-                                                  ),
-                                                  Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Text('Pick Up Location',
-                                                          style:
-                                                              TabelText.text1),
-                                                      SizedBox(
-                                                        height: 3,
-                                                      ),
-                                                      Text(
-                                                        "Destination Location",
-                                                        style: TabelText.text2,
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ],
-                                              ),
-                                              ViewButton(
-                                                text: 'Edit',
-                                                onPressed: () {},
-                                                colors: Color.fromRGBO(
-                                                    98, 106, 254, 1),
-                                              )
-                                            ],
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          width: 1184,
-                                          child: Divider(
-                                            color: Color.fromRGBO(
-                                                206, 203, 203, 1),
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: EdgeInsets.fromLTRB(
-                                              1.w, 1.h, 1.w, 2.h),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Row(
-                                                children: [
-                                                  SizedBox(
-                                                      width: 35,
-                                                      height: 35,
-                                                      child: CircleAvatar()),
-                                                  SizedBox(
-                                                    width: 1.w,
-                                                  ),
-                                                  Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Text('Balance Amount',
-                                                          style:
-                                                              TabelText.text1),
-                                                      SizedBox(
-                                                        height: 3,
-                                                      ),
-                                                      Text(
-                                                        "07.02.2022",
-                                                        style: TabelText.text2,
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ],
-                                              ),
-                                              ViewButton(
-                                                text: 'Pay',
-                                                onPressed: () {},
-                                                colors: Color.fromRGBO(
-                                                    98, 106, 254, 1),
-                                              )
-                                            ],
-                                          ),
-                                        ),
-                                      ],
+                                          SizedBox(
+                                            height: 200,
+                                            child: ListView(
+                                              children: [_booking1Table()],
+                                            ),
+                                          )
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -249,182 +107,40 @@ class _BookingsState extends State<Bookings> {
                                           bottomLeft: Radius.circular(12),
                                           bottomRight: Radius.circular(12)),
                                     ),
-                                    child: Column(
-                                      children: [
-                                        Container(
-                                          height: 55,
-                                          color: Color.fromRGBO(
-                                              75, 61, 82, 1), // Brown color
-                                          child: Padding(
-                                            padding: EdgeInsets.fromLTRB(
-                                                1.5.w, 1.5.h, 1.5.w, 1.5.h),
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                Text('Booking 1',
-                                                    style:
-                                                        TabelText.headerText),
-                                                Text("Booking iD XXXXXX",
-                                                    style: TabelText.text3),
-                                              ],
+                                    child: Expanded(
+                                      child: Column(
+                                        children: [
+                                          Container(
+                                            height: 55,
+                                            color: Color.fromRGBO(
+                                                75, 61, 82, 1), // Brown color
+                                            child: Padding(
+                                              padding: EdgeInsets.fromLTRB(
+                                                  1.5.w, 1.5.h, 1.5.w, 1.5.h),
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Text('Booking 2',
+                                                      style:
+                                                          TabelText.headerText),
+                                                  Text("Booking iD XXXXXX",
+                                                      style: TabelText.text3),
+                                                ],
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                        // Add spacing between the brown container and the white container
+                                          // Add spacing between the brown container and the white container
 
-                                        Padding(
-                                          padding: EdgeInsets.fromLTRB(
-                                              1.w, 2.h, 1.w, 1.h),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Row(
-                                                children: [
-                                                  SizedBox(
-                                                      width: 35,
-                                                      height: 35,
-                                                      child: SizedBox(
-                                                          width: 35,
-                                                          height: 35,
-                                                          child:
-                                                              CircleAvatar())),
-                                                  SizedBox(
-                                                    width: 1.w,
-                                                  ),
-                                                  Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Text('Truck',
-                                                          style:
-                                                              TabelText.text1),
-                                                      SizedBox(
-                                                        height: 3,
-                                                      ),
-                                                      Text(
-                                                        "Truck no ******",
-                                                        style: TabelText.text2,
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ],
-                                              ),
-                                              ViewButton(
-                                                text: 'View',
-                                                onPressed: () {},
-                                                colors: Color.fromRGBO(
-                                                    98, 106, 254, 1),
-                                              )
-                                            ],
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          width: 1184,
-                                          child: Divider(
-                                            color: Color.fromRGBO(
-                                                206, 203, 203, 1),
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: EdgeInsets.fromLTRB(
-                                              1.w, 1.h, 1.w, 1.h),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Row(
-                                                children: [
-                                                  SizedBox(
-                                                      width: 35,
-                                                      height: 35,
-                                                      child: CircleAvatar()),
-                                                  SizedBox(
-                                                    width: 1.w,
-                                                  ),
-                                                  Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Text('Pick Up Location',
-                                                          style:
-                                                              TabelText.text1),
-                                                      SizedBox(
-                                                        height: 3,
-                                                      ),
-                                                      Text(
-                                                        "Destination Location",
-                                                        style: TabelText.text2,
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ],
-                                              ),
-                                              ViewButton(
-                                                text: 'Edit',
-                                                onPressed: () {},
-                                                colors: Color.fromRGBO(
-                                                    98, 106, 254, 1),
-                                              )
-                                            ],
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          width: 1184,
-                                          child: Divider(
-                                            color: Color.fromRGBO(
-                                                206, 203, 203, 1),
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: EdgeInsets.fromLTRB(
-                                              1.w, 1.h, 1.w, 2.h),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Row(
-                                                children: [
-                                                  SizedBox(
-                                                      width: 35,
-                                                      height: 35,
-                                                      child: CircleAvatar()),
-                                                  SizedBox(
-                                                    width: 1.w,
-                                                  ),
-                                                  Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Text('Balance Amount',
-                                                          style:
-                                                              TabelText.text1),
-                                                      SizedBox(
-                                                        height: 3,
-                                                      ),
-                                                      Text(
-                                                        "07.02.2022",
-                                                        style: TabelText.text2,
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ],
-                                              ),
-                                              ViewButton(
-                                                text: 'Pay',
-                                                onPressed: () {},
-                                                colors: Color.fromRGBO(
-                                                    98, 106, 254, 1),
-                                              )
-                                            ],
-                                          ),
-                                        ),
-                                      ],
+                                          SizedBox(
+                                            height: 200,
+                                            child: ListView(
+                                              children: [_booking1Table()],
+                                            ),
+                                          )
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -526,446 +242,188 @@ class _BookingsState extends State<Bookings> {
                   borderRadius: BorderRadius.circular(12.0),
                 ),
                 child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      Scrollbar(
-                        controller: _book1Scroll,
-                        thumbVisibility:
-                            true, // Set to true to always show the scrollbar
-                        child: SingleChildScrollView(
+                  child: Expanded(
+                    child: Column(
+                      children: [
+                        Scrollbar(
                           controller: _book1Scroll,
-                          scrollDirection: Axis.horizontal,
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(0),
-                                  topRight: Radius.circular(0),
-                                  bottomLeft: Radius.circular(12),
-                                  bottomRight: Radius.circular(12)),
-                            ),
-                            width: 800,
-                            child: Column(
-                              children: [
-                                Container(
-                                  height: 55,
-                                  color: Color.fromRGBO(
-                                      75, 61, 82, 1), // Brown color
-                                  child: Padding(
-                                    padding: EdgeInsets.fromLTRB(
-                                        1.5.w, 1.5.h, 1.5.w, 1.5.h),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text('Booking 1',
-                                            style: TabelText.headerText),
-                                        Text("Booking iD XXXXXX",
-                                            style: TabelText.text3),
-                                      ],
+                          thumbVisibility:
+                              true, // Set to true to always show the scrollbar
+                          child: SingleChildScrollView(
+                            controller: _book1Scroll,
+                            scrollDirection: Axis.horizontal,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(0),
+                                    topRight: Radius.circular(0),
+                                    bottomLeft: Radius.circular(12),
+                                    bottomRight: Radius.circular(12)),
+                              ),
+                              width: 800,
+                              child: Expanded(
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      height: 55,
+                                      color: Color.fromRGBO(
+                                          75, 61, 82, 1), // Brown color
+                                      child: Padding(
+                                        padding: EdgeInsets.fromLTRB(
+                                            1.5.w, 1.5.h, 1.5.w, 1.5.h),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text('Booking 1',
+                                                style: TabelText.headerText),
+                                            Text("Booking iD XXXXXX",
+                                                style: TabelText.text3),
+                                          ],
+                                        ),
+                                      ),
                                     ),
-                                  ),
-                                ),
-                                // Add spacing between the brown container and the white container
+                                    // Add spacing between the brown container and the white container
 
-                                Padding(
-                                  padding:
-                                      EdgeInsets.fromLTRB(4.w, 2.h, 4.w, 1.h),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Row(
-                                        children: [
-                                          SizedBox(
-                                              width: 35,
-                                              height: 35,
-                                              child: CircleAvatar()),
-                                          SizedBox(
-                                            width: 1.w,
-                                          ),
-                                          Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text('Truck',
-                                                  style: TabelText.text1),
-                                              SizedBox(
-                                                height: 3,
-                                              ),
-                                              Text(
-                                                "Truck no ******",
-                                                style: TabelText.text2,
-                                              ),
-                                            ],
-                                          ),
-                                        ],
+                                    SizedBox(
+                                      height: 220,
+                                      child: ListView(
+                                        children: [_booking1Table()],
                                       ),
-                                      ViewButton(
-                                        text: 'View',
-                                        onPressed: () {},
-                                        colors: Color.fromRGBO(98, 106, 254, 1),
-                                      )
-                                    ],
-                                  ),
+                                    )
+                                  ],
                                 ),
-                                SizedBox(
-                                  width: 1184,
-                                  child: Divider(
-                                    color: Color.fromRGBO(206, 203, 203, 1),
-                                  ),
-                                ),
-                                Padding(
-                                  padding:
-                                      EdgeInsets.fromLTRB(4.w, 1.h, 4.w, 1.h),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Row(
-                                        children: [
-                                          SizedBox(
-                                              width: 35,
-                                              height: 35,
-                                              child: CircleAvatar()),
-                                          SizedBox(
-                                            width: 1.w,
-                                          ),
-                                          Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text('Pick Up Location',
-                                                  style: TabelText.text1),
-                                              SizedBox(
-                                                height: 3,
-                                              ),
-                                              Text(
-                                                "Destination Location",
-                                                style: TabelText.text2,
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                      ViewButton(
-                                        text: 'Edit',
-                                        onPressed: () {},
-                                        colors: Color.fromRGBO(98, 106, 254, 1),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: 1184,
-                                  child: Divider(
-                                    color: Color.fromRGBO(206, 203, 203, 1),
-                                  ),
-                                ),
-                                Padding(
-                                  padding:
-                                      EdgeInsets.fromLTRB(4.w, 1.h, 4.w, 2.h),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Row(
-                                        children: [
-                                          SizedBox(
-                                              width: 35,
-                                              height: 35,
-                                              child: CircleAvatar()),
-                                          SizedBox(
-                                            width: 1.w,
-                                          ),
-                                          Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text('Balance Amount',
-                                                  style: TabelText.text1),
-                                              SizedBox(
-                                                height: 3,
-                                              ),
-                                              Text(
-                                                "07.02.2022",
-                                                style: TabelText.text2,
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                      ViewButton(
-                                        text: 'Pay',
-                                        onPressed: () {},
-                                        colors: Color.fromRGBO(98, 106, 254, 1),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              ],
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                      SizedBox(
-                        height: 4.h,
-                      ),
-                      Scrollbar(
-                        controller: _book2Scroll,
-                        thumbVisibility:
-                            true, // Set to true to always show the scrollbar
-                        child: SingleChildScrollView(
+                        SizedBox(
+                          height: 4.h,
+                        ),
+                        Scrollbar(
                           controller: _book2Scroll,
-                          scrollDirection: Axis.horizontal,
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(0),
-                                  topRight: Radius.circular(0),
-                                  bottomLeft: Radius.circular(12),
-                                  bottomRight: Radius.circular(12)),
+                          thumbVisibility:
+                              true, // Set to true to always show the scrollbar
+                          child: SingleChildScrollView(
+                            controller: _book2Scroll,
+                            scrollDirection: Axis.horizontal,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(0),
+                                    topRight: Radius.circular(0),
+                                    bottomLeft: Radius.circular(12),
+                                    bottomRight: Radius.circular(12)),
+                              ),
+                              width: 800,
+                              child: Column(
+                                children: [
+                                  Container(
+                                    height: 55,
+                                    color: Color.fromRGBO(
+                                        75, 61, 82, 1), // Brown color
+                                    child: Padding(
+                                      padding: EdgeInsets.fromLTRB(
+                                          1.5.w, 1.5.h, 1.5.w, 1.5.h),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text('Booking 2',
+                                              style: TabelText.headerText),
+                                          Text("Booking iD XXXXXX",
+                                              style: TabelText.text3),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  // Add spacing between the brown container and the white container
+                                  SizedBox(
+                                    height: 220,
+                                    child: ListView(
+                                      children: [_booking1Table()],
+                                    ),
+                                  )
+                                ],
+                              ),
                             ),
-                            width: 800,
-                            child: Column(
-                              children: [
-                                Container(
-                                  height: 55,
-                                  color: Color.fromRGBO(
-                                      75, 61, 82, 1), // Brown color
-                                  child: Padding(
-                                    padding: EdgeInsets.fromLTRB(
-                                        1.5.w, 1.5.h, 1.5.w, 1.5.h),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text('Booking 1',
-                                            style: TabelText.headerText),
-                                        Text("Booking iD XXXXXX",
-                                            style: TabelText.text3),
-                                      ],
+                          ),
+                        ),
+                        SizedBox(
+                          height: 4.h,
+                        ),
+                        Container(
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(0),
+                                topRight: Radius.circular(0),
+                                bottomLeft: Radius.circular(12),
+                                bottomRight: Radius.circular(12)),
+                          ),
+                          child: Column(
+                            children: [
+                              Container(
+                                height: 55,
+
+                                color: Color.fromRGBO(
+                                    75, 61, 82, 1), // Brown color
+                                child: Center(
+                                  child: Text('New Booking',
+                                      style: TabelText.headerText),
+                                ),
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => MyHomePage(),
+                                    ),
+                                  );
+                                },
+                                child: Align(
+                                  alignment: Alignment.center,
+                                  child: Container(
+                                    height: 195,
+                                    child: Image.asset(
+                                      color: Color.fromRGBO(225, 225, 225, 1),
+                                      'add.png',
+                                      width: 60,
                                     ),
                                   ),
                                 ),
-                                // Add spacing between the brown container and the white container
-
-                                Padding(
-                                  padding:
-                                      EdgeInsets.fromLTRB(4.w, 2.h, 4.w, 1.h),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Row(
-                                        children: [
-                                          SizedBox(
-                                              width: 35,
-                                              height: 35,
-                                              child: SizedBox(
-                                                  width: 35,
-                                                  height: 35,
-                                                  child: CircleAvatar())),
-                                          SizedBox(
-                                            width: 1.w,
-                                          ),
-                                          Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text('Truck',
-                                                  style: TabelText.text1),
-                                              SizedBox(
-                                                height: 3,
-                                              ),
-                                              Text(
-                                                "Truck no ******",
-                                                style: TabelText.text2,
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                      ViewButton(
-                                        text: 'View',
-                                        onPressed: () {},
-                                        colors: Color.fromRGBO(98, 106, 254, 1),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: 1184,
-                                  child: Divider(
-                                    color: Color.fromRGBO(206, 203, 203, 1),
-                                  ),
-                                ),
-                                Padding(
-                                  padding:
-                                      EdgeInsets.fromLTRB(4.w, 1.h, 4.w, 1.h),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Row(
-                                        children: [
-                                          SizedBox(
-                                              width: 35,
-                                              height: 35,
-                                              child: CircleAvatar()),
-                                          SizedBox(
-                                            width: 1.w,
-                                          ),
-                                          Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text('Pick Up Location',
-                                                  style: TabelText.text1),
-                                              SizedBox(
-                                                height: 3,
-                                              ),
-                                              Text(
-                                                "Destination Location",
-                                                style: TabelText.text2,
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                      ViewButton(
-                                        text: 'Edit',
-                                        onPressed: () {},
-                                        colors: Color.fromRGBO(98, 106, 254, 1),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: 1184,
-                                  child: Divider(
-                                    color: Color.fromRGBO(206, 203, 203, 1),
-                                  ),
-                                ),
-                                Padding(
-                                  padding:
-                                      EdgeInsets.fromLTRB(4.w, 1.h, 4.w, 2.h),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Row(
-                                        children: [
-                                          SizedBox(
-                                              width: 35,
-                                              height: 35,
-                                              child: CircleAvatar()),
-                                          SizedBox(
-                                            width: 1.w,
-                                          ),
-                                          Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text('Balance Amount',
-                                                  style: TabelText.text1),
-                                              SizedBox(
-                                                height: 3,
-                                              ),
-                                              Text(
-                                                "07.02.2022",
-                                                style: TabelText.text2,
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                      ViewButton(
-                                        text: 'Pay',
-                                        onPressed: () {},
-                                        colors: Color.fromRGBO(98, 106, 254, 1),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
                         ),
-                      ),
-                      SizedBox(
-                        height: 4.h,
-                      ),
-                      Container(
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(0),
-                              topRight: Radius.circular(0),
-                              bottomLeft: Radius.circular(12),
-                              bottomRight: Radius.circular(12)),
+                        SizedBox(
+                          height: 4.h,
                         ),
-                        child: Column(
-                          children: [
-                            Container(
-                              height: 55,
-
-                              color:
-                                  Color.fromRGBO(75, 61, 82, 1), // Brown color
-                              child: Center(
-                                child: Text('New Booking',
-                                    style: TabelText.headerText),
-                              ),
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => MyHomePage(),
-                                  ),
-                                );
-                              },
-                              child: Align(
-                                alignment: Alignment.center,
-                                child: Container(
-                                  height: 195,
-                                  child: Image.asset(
-                                    color: Color.fromRGBO(225, 225, 225, 1),
-                                    'add.png',
-                                    width: 60,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(
-                        height: 4.h,
-                      ),
-                      Scrollbar(
-                        controller: _book3Scroll,
-                        thumbVisibility:
-                            true, // Set to true to always show the scrollbar
-                        child: SingleChildScrollView(
+                        Scrollbar(
                           controller: _book3Scroll,
-                          scrollDirection: Axis.horizontal,
-                          child: Container(
-                            width: 800,
-                            height: 230,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(12.0),
-                            ),
-                            child: ListView(
-                              children: [_createDataTable()],
+                          thumbVisibility:
+                              true, // Set to true to always show the scrollbar
+                          child: SingleChildScrollView(
+                            controller: _book3Scroll,
+                            scrollDirection: Axis.horizontal,
+                            child: Container(
+                              width: 950,
+                              height: 230,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(12.0),
+                              ),
+                              child: ListView(
+                                children: [_createDataTable()],
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -1117,6 +575,160 @@ class _BookingsState extends State<Bookings> {
                   onPressed: null,
                   icon: Icon(Icons.delete)),
             ],
+          ),
+        ),
+      ]),
+    ];
+  }
+
+  DataTable _booking1Table() {
+    return DataTable(
+        columnSpacing: 15,
+        dataRowHeight: 65,
+        headingRowHeight: 0,
+        columns: _booking1Columns(),
+        rows: _booking1Rows());
+  }
+
+  List<DataColumn> _booking1Columns() {
+    return [
+      DataColumn(
+        label: SizedBox(),
+        numeric: true,
+      ),
+      DataColumn(label: SizedBox(), numeric: false),
+      DataColumn(label: SizedBox(), numeric: true),
+    ];
+  }
+
+  // List<DataRow> _createRows() {
+  //   return _books
+  //       .map((book) => DataRow(cells: [
+  //             DataCell(Text('#' + book['id'].toString())),
+  //             DataCell(Text(book['title'])),
+  //             DataCell(Text(book['author']))
+  //           ]))
+  //       .toList();
+  // }
+  List<DataRow> _booking1Rows() {
+    return [
+      DataRow(cells: [
+        DataCell(
+          TableCell(
+            verticalAlignment: TableCellVerticalAlignment.middle,
+            child: SizedBox(
+              width: 35,
+              height: 35,
+              child: SizedBox(
+                width: 35,
+                height: 35,
+                child: CircleAvatar(),
+              ),
+            ),
+          ),
+        ),
+        DataCell(
+          TableCell(
+            verticalAlignment: TableCellVerticalAlignment.middle,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('Truck', style: TabelText.text1),
+                SizedBox(height: 3),
+                Text("Truck no ******", style: TabelText.text2),
+              ],
+            ),
+          ),
+        ),
+        DataCell(
+          TableCell(
+            verticalAlignment: TableCellVerticalAlignment.middle,
+            child: ViewButton(
+              text: 'View',
+              onPressed: () {},
+              colors: Color.fromRGBO(98, 106, 254, 1),
+            ),
+          ),
+        ),
+      ]),
+      DataRow(cells: [
+        DataCell(
+          TableCell(
+            verticalAlignment: TableCellVerticalAlignment.middle,
+            child: SizedBox(
+              width: 35,
+              height: 35,
+              child: SizedBox(
+                width: 35,
+                height: 35,
+                child: CircleAvatar(),
+              ),
+            ),
+          ),
+        ),
+        DataCell(
+          TableCell(
+            verticalAlignment: TableCellVerticalAlignment.middle,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('Pick Up Location', style: TabelText.text1),
+                SizedBox(height: 3),
+                Text("Destination Location", style: TabelText.text2),
+              ],
+            ),
+          ),
+        ),
+        DataCell(
+          TableCell(
+            verticalAlignment: TableCellVerticalAlignment.middle,
+            child: ViewButton(
+              text: 'Edit',
+              onPressed: () {},
+              colors: Color.fromRGBO(98, 106, 254, 1),
+            ),
+          ),
+        ),
+      ]),
+      DataRow(cells: [
+        DataCell(
+          TableCell(
+            verticalAlignment: TableCellVerticalAlignment.middle,
+            child: SizedBox(
+              width: 35,
+              height: 35,
+              child: SizedBox(
+                width: 35,
+                height: 35,
+                child: CircleAvatar(),
+              ),
+            ),
+          ),
+        ),
+        DataCell(
+          TableCell(
+            verticalAlignment: TableCellVerticalAlignment.middle,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text('Balance Amount', style: TabelText.text1),
+                SizedBox(height: 3),
+                Text("07.02.2022", style: TabelText.text2),
+              ],
+            ),
+          ),
+        ),
+        DataCell(
+          TableCell(
+            verticalAlignment: TableCellVerticalAlignment.middle,
+            child: ViewButton(
+              text: 'Pay',
+              onPressed: () {},
+              colors: Color.fromRGBO(98, 106, 254, 1),
+            ),
           ),
         ),
       ]),
