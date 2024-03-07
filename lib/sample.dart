@@ -1,40 +1,246 @@
-import 'dart:ui';
+import 'dart:math';
 
-import 'package:fl_chart/fl_chart.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/Widgets/formText.dart';
-import 'package:flutter_application_1/echarts_data.dart';
-import 'package:graphic/graphic.dart';
+import 'package:flutter_application_1/Widgets/customButton.dart';
+import 'package:flutter_application_1/createAccount.dart';
+import 'package:flutter_application_1/homepage.dart';
 import 'package:sizer/sizer.dart';
 
-import '../homepage.dart';
+import '../main.dart';
 
-class Sample extends StatefulWidget {
-  Sample();
+// ignore: must_be_immutable
+class LoginPage1 extends StatefulWidget {
+  const LoginPage1();
   @override
-  State<Sample> createState() => _SampleState();
+  _LoginPage1State createState() => _LoginPage1State();
 }
 
-class _SampleState extends State<Sample> {
-  String month = '';
-  void tapOnPieChart(FlTouchEvent event, PieTouchResponse? response) {
-    if (response != null) {
-      final sectionIndex = response.touchedSection!.touchedSectionIndex;
-      final value = response.touchedSection!.touchedSection!.value;
-      if (sectionIndex == 0) {
-        month = 'January - $value';
-      } else if (sectionIndex == 1) {
-        month = 'February - $value';
-      } else if (sectionIndex == 2) {
-        month = 'March - $value';
-      } else if (sectionIndex == 3) {
-        month = 'April - $value';
-      } else if (sectionIndex == 4) {
-        month = 'May - $value';
-      }
-      setState(() {});
-      print('Tapped on section: $sectionIndex');
-      // You can add your custom logic here to respond to the tap on the Pie Chart
+class ScaleSize {
+  static double textScaleFactor(BuildContext context,
+      {double maxTextScaleFactor = 2}) {
+    final width = MediaQuery.of(context).size.width;
+    double val = (width / 1400) * maxTextScaleFactor;
+    return max(1, min(val, maxTextScaleFactor));
+  }
+}
+
+class _LoginPage1State extends State<LoginPage1> {
+  bool isVerified = false;
+  TextEditingController otpController = TextEditingController();
+
+  TextEditingController contactNumberController = TextEditingController();
+  void _showOtpVerificationDialog() {
+    print("track4");
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Center(
+              child: Text(
+            "Verify Account",
+            textScaleFactor: ScaleSize.textScaleFactor(context),
+            style: TextStyle(
+                fontFamily: 'Colfax',
+                fontSize: 15,
+                color: Colors.black,
+                fontWeight: FontWeight.bold),
+          )),
+          content: Container(
+            height: 150, // Set the desired height
+            width: 1000, // Set the desired width
+            child: Column(
+              children: [
+                Text(
+                  "Enter Mobile NO",
+                  textScaleFactor: ScaleSize.textScaleFactor(context),
+                  style: TextStyle(
+                    fontFamily: 'Colfax',
+                    fontSize: 10,
+                    color: Colors.black,
+                  ),
+                ),
+                SizedBox(height: 10),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      height: 30,
+                      width: 200,
+                      child: TextField(
+                        controller: contactNumberController,
+                        keyboardType: TextInputType.number,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                        ),
+                      ),
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                        _startPhoneAuth(contactNumberController.text);
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Color.fromRGBO(60, 55, 148, 1),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                      ),
+                      child: Text(
+                        "Get OTP",
+                        style: TextStyle(
+                          fontFamily: 'Colfax',
+                          fontSize: 10,
+                          color: Colors.white,
+                        ),
+                        textScaleFactor: ScaleSize.textScaleFactor(context),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 10),
+              ],
+            ),
+          ),
+          actions: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "Didn't receive an email? ",
+                  style: TextStyle(
+                    fontFamily: 'Colfax',
+                    fontSize: 7,
+                    color: Colors.black,
+                  ),
+                  textScaleFactor: ScaleSize.textScaleFactor(context),
+                ),
+                InkWell(
+                  onTap: () {
+                    // Implement the logic to resend the OTP
+                    // For now, let's close the dialog
+                    Navigator.pop(context);
+                  },
+                  child: Text(
+                    "Resend.",
+                    style: TextStyle(
+                        fontFamily: 'Colfax',
+                        fontSize: 7,
+                        color: Color.fromRGBO(60, 55, 148, 1),
+                        fontWeight: FontWeight.bold),
+                    textScaleFactor: ScaleSize.textScaleFactor(context),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void showErrorDialog(String errorMessage) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text("Error"),
+        content: Text(errorMessage),
+        actions: [
+          ElevatedButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            child: Text("OK"),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Future<void> _startPhoneAuth(String phoneNumber) async {
+    print("track3");
+
+    FirebaseAuth _auth = FirebaseAuth.instance;
+
+    try {
+      await _auth.verifyPhoneNumber(
+        phoneNumber: "+91${contactNumberController.text}",
+        verificationCompleted: (PhoneAuthCredential credential) async {
+          await _auth.signInWithCredential(credential).then((value) {
+            Navigator.pop(context);
+            setState(() {
+              isVerified = true;
+            });
+          });
+        },
+        verificationFailed: (FirebaseAuthException e) {
+          // Handle the verification failure
+          print('Phone authentication failed: $e');
+          showErrorDialog(
+              "Invalid phone number format. Please enter a valid 10-digit phone number.");
+        },
+        codeSent: (String verificationId, [int? forceResendingToken]) {
+          // Store the verification ID for later use (e.g., resend OTP)
+          String storedVerificationId = verificationId;
+
+          showDialog(
+            context: context,
+            barrierDismissible: false,
+            builder: (context) => AlertDialog(
+              title: Text("Enter OTP"),
+              content: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  TextField(
+                    controller: otpController,
+                  ),
+                ],
+              ),
+              actions: [
+                ElevatedButton(
+                  onPressed: () {
+                    FirebaseAuth auth = FirebaseAuth.instance;
+                    String smsCode = otpController.text;
+                    PhoneAuthCredential _credential =
+                        PhoneAuthProvider.credential(
+                      verificationId: storedVerificationId,
+                      smsCode: smsCode,
+                    );
+
+                    auth.signInWithCredential(_credential).then((result) {
+                      // Check if the verification is successful
+                      if (result.user != null) {
+                        print("otp verified successfully");
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => MyHomePage(),
+                          ),
+                        );
+                        setState(() {
+                          isVerified = true;
+                        });
+                      } else {
+                        showErrorDialog(
+                            "Invalid verification code. Please enter the correct code.");
+                      }
+                    }).catchError((e) {
+                      print("Error signing in with credential: $e");
+                    });
+                  },
+                  child: Text("Done"),
+                ),
+              ],
+            ),
+          );
+        },
+        codeAutoRetrievalTimeout: (String verificationId) {
+          // Handle code auto retrieval timeout (optional)
+        },
+      );
+    } catch (e) {
+      print('Error during phone authentication: $e');
     }
   }
 
@@ -43,3508 +249,518 @@ class _SampleState extends State<Sample> {
     return Sizer(builder: (context, orientation, deviceType) {
       return LayoutBuilder(
           builder: (BuildContext ctx, BoxConstraints constraints) {
-        if (constraints.maxWidth >= 850) {
-          return SingleChildScrollView(
-              child: Container(
-                  color: Color.fromRGBO(255, 255, 255, 200),
-                  padding: EdgeInsets.fromLTRB(3.w, 7.h, 3.w, 2.5.h),
-                  child: Column(children: [
-                    Container(
-                      padding: EdgeInsets.fromLTRB(3.w, 3.h, 3.w, 3.h),
-                      color: Color.fromRGBO(255, 255, 255, 157),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          Row(
+        if (constraints.maxWidth >= 1180) {
+          return Dialog(
+            child: Container(
+              height: 750,
+              width: 1100,
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      Container(
+                        width: 550,
+                        height: 750,
+                        decoration: const BoxDecoration(
+                          color: Color.fromARGB(255, 128, 123, 229),
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(31),
+                            bottomLeft: Radius.circular(31),
+                          ),
+                        ),
+                        child: Align(
+                          alignment: Alignment.bottomCenter,
+                          child: Image.asset(
+                            'loginlogo.png',
+                            width: 500,
+                            height: 500,
+                          ),
+                        ),
+                      ),
+                      Container(
+                        width: 550,
+                        height: 750,
+                        decoration: const BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.only(
+                            topRight: Radius.circular(31),
+                            bottomRight: Radius.circular(31),
+                          ),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                            left: 20.0,
+                            right: 20,
+                            top: 20,
+                            bottom: 80,
+                          ),
+                          child: Column(
                             children: [
-                              Text("No of Bookings  "),
-                              Text(
-                                "103",
-                                style: TextStyle(fontWeight: FontWeight.bold),
+                              SizedBox(
+                                height: 100,
+                              ),
+                              Align(
+                                alignment: Alignment.center,
+                                child: Text(
+                                  'Login',
+                                  style: TextStyle(
+                                    fontFamily: 'Colfax',
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                  textScaleFactor:
+                                      ScaleSize.textScaleFactor(context),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                  left: 40.0,
+                                  right: 40,
+                                  top: 80,
+                                ),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Email ID',
+                                      style: TextStyle(
+                                        fontFamily: 'Colfax',
+                                        fontSize: 8,
+                                      ),
+                                      textScaleFactor:
+                                          ScaleSize.textScaleFactor(context),
+                                    ),
+                                    SizedBox(
+                                      height: 20,
+                                    ),
+                                    TextField(
+                                      decoration: InputDecoration(
+                                        contentPadding: EdgeInsets.all(5.0),
+                                        border: OutlineInputBorder(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(5)),
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 20,
+                                    ),
+                                    Text(
+                                      'Password',
+                                      style: TextStyle(
+                                        fontFamily: 'Colfax',
+                                        fontSize: 8,
+                                      ),
+                                      textScaleFactor:
+                                          ScaleSize.textScaleFactor(context),
+                                    ),
+                                    SizedBox(
+                                      height: 20,
+                                    ),
+                                    TextField(
+                                      decoration: InputDecoration(
+                                        contentPadding: EdgeInsets.all(5.0),
+                                        border: OutlineInputBorder(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(5)),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              SizedBox(
+                                height: 20,
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                  left: 40.0,
+                                  right: 40,
+                                ),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    SizedBox(
+                                      height: 43,
+                                      width: 140,
+                                      child: ElevatedButton(
+                                        onPressed: () {
+                                          showDialog(
+                                            context: context,
+                                            builder: (context) {
+                                              return MyHomePage();
+                                            },
+                                          );
+                                        },
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor:
+                                              Color.fromRGBO(128, 123, 229, 1),
+                                          side: BorderSide(
+                                            color: Color.fromRGBO(
+                                                128, 123, 229, 1),
+                                          ),
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                          ),
+                                        ),
+                                        child: Text(
+                                          'Login',
+                                          style: TextStyle(
+                                            fontFamily: 'Colfax',
+                                            fontSize: 8,
+                                            color: Colors.white,
+                                          ),
+                                          textScaleFactor:
+                                              ScaleSize.textScaleFactor(
+                                                  context),
+                                        ),
+                                      ),
+                                    ),
+                                    InkWell(
+                                      child: Text(
+                                        'Forgot Password?',
+                                        style: TextStyle(
+                                          fontFamily: 'Colfax',
+                                          fontSize: 8,
+                                          color: Color.fromARGB(
+                                              255, 128, 123, 229),
+                                        ),
+                                        textScaleFactor:
+                                            ScaleSize.textScaleFactor(context),
+                                      ),
+                                      onTap: () {},
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              SizedBox(
+                                height: 13,
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                  left: 40.0,
+                                  right: 40,
+                                ),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "Don't have an account?",
+                                      style: TextStyle(
+                                        fontFamily: 'Colfax',
+                                        fontSize: 8,
+                                        color: Colors.black,
+                                      ),
+                                      textScaleFactor:
+                                          ScaleSize.textScaleFactor(context),
+                                    ),
+                                    InkWell(
+                                      child: Text(
+                                        'Create One!',
+                                        style: TextStyle(
+                                          fontFamily: 'Colfax',
+                                          fontSize: 8,
+                                          color: Color.fromARGB(
+                                              255, 128, 123, 229),
+                                        ),
+                                        textScaleFactor:
+                                            ScaleSize.textScaleFactor(context),
+                                      ),
+                                      onTap: () {
+                                        showDialog(
+                                          context: context,
+                                          builder: (context) {
+                                            return CreateAccount();
+                                          },
+                                        );
+                                      },
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                  left: 40.0,
+                                  right: 40,
+                                ),
+                                child: Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: InkWell(
+                                    child: Text(
+                                      'Use without Log in',
+                                      style: TextStyle(
+                                        fontFamily: 'Colfax',
+                                        fontSize: 8,
+                                        color:
+                                            Color.fromARGB(255, 128, 123, 229),
+                                      ),
+                                      textScaleFactor:
+                                          ScaleSize.textScaleFactor(context),
+                                    ),
+                                    onTap: () async {
+                                      _showOtpVerificationDialog();
+                                      if (isVerified) {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => MyHomePage(),
+                                          ),
+                                        );
+                                      }
+                                    },
+                                  ),
+                                ),
                               ),
                             ],
                           ),
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Expanded(
-                                child: Container(
-                                  padding:
-                                      EdgeInsets.fromLTRB(6.w, 3.h, 6.w, 3.h),
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(12.0),
-                                  ),
-                                  margin: const EdgeInsets.only(top: 10),
-                                  child: Column(
-                                    children: [
-                                      Text(
-                                        '29% Completed Successfully',
-                                        style: TextStyle(
-                                          fontSize: 10,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.black,
-                                        ),
-                                      ),
-                                      Container(
-                                        height: 150,
-                                        child: PieChart(
-                                          swapAnimationDuration:
-                                              const Duration(seconds: 1),
-                                          swapAnimationCurve:
-                                              Curves.easeInOutQuint,
-                                          PieChartData(
-                                            pieTouchData: PieTouchData(
-                                              touchCallback: tapOnPieChart,
-                                            ),
-                                            sections: [
-                                              PieChartSectionData(
-                                                  color: Colors.orange),
-                                              PieChartSectionData(
-                                                  color: Colors.grey),
-                                              PieChartSectionData(
-                                                  color: Colors.green),
-                                              PieChartSectionData(
-                                                  color: Colors.red),
-                                              PieChartSectionData(
-                                                  color: Colors.yellow),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          );
+        } else {
+          return Dialog(
+            child: Container(
+              height: 600,
+              width: 295,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    width: 295,
+                    height: 600,
+                    decoration: const BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(30),
+                          topRight: Radius.circular(30),
+                          bottomLeft: Radius.circular(30),
+                          bottomRight: Radius.circular(30)),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.only(
+                        left: 5.0,
+                        right: 5,
+                        top: 3,
+                        bottom: 20,
+                      ),
+                      child: Column(
+                        children: [
+                          SizedBox(
+                            height: 30,
+                          ),
+                          Align(
+                            alignment: Alignment.center,
+                            child: SizedBox(
+                              height: 130,
+                              width: 130,
+                              child: Image.asset(
+                                'Naqli-final-logo.png',
+                                fit: BoxFit.contain,
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(
+                              left: 30.0,
+                              right: 20,
+                              top: 40,
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Email ID',
+                                  style: TextStyle(
+                                    fontFamily: 'Colfax',
+                                    fontSize: 15,
                                   ),
                                 ),
-                              ),
-                              SizedBox(
-                                width: 5.w,
-                              ),
-                              Expanded(
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(12.0),
-                                  ),
-                                  height: 220,
-                                  child: Chart(
-                                    data: lineMarkerData,
-                                    variables: {
-                                      'day': Variable(
-                                        accessor: (Map datum) =>
-                                            datum['day'] as String,
-                                        scale: OrdinalScale(inflate: true),
-                                      ),
-                                      'value': Variable(
-                                        accessor: (Map datum) =>
-                                            datum['value'] as num,
-                                        scale: LinearScale(
-                                          max: 15,
-                                          min: -3,
-                                          tickCount: 7,
-                                          formatter: (v) => '${v.toInt()} ℃',
-                                        ),
-                                      ),
-                                      'group': Variable(
-                                        accessor: (Map datum) =>
-                                            datum['group'] as String,
-                                      ),
-                                    },
-                                    marks: [
-                                      LineMark(
-                                        position: Varset('day') *
-                                            Varset('value') /
-                                            Varset('group'),
-                                        color: ColorEncode(
-                                          variable: 'group',
-                                          values: [
-                                            const Color(0xff5470c6),
-                                            const Color(0xff91cc75),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                    axes: [
-                                      Defaults.horizontalAxis,
-                                      Defaults.verticalAxis,
-                                    ],
-                                    selections: {
-                                      'tooltipMouse': PointSelection(on: {
-                                        GestureType.hover,
-                                      }, devices: {
-                                        PointerDeviceKind.mouse
-                                      }, variable: 'day', dim: Dim.x),
-                                      'tooltipTouch': PointSelection(on: {
-                                        GestureType.scaleUpdate,
-                                        GestureType.tapDown,
-                                        GestureType.longPressMoveUpdate
-                                      }, devices: {
-                                        PointerDeviceKind.touch
-                                      }, variable: 'day', dim: Dim.x),
-                                    },
-                                    tooltip: TooltipGuide(
-                                      followPointer: [true, true],
-                                      align: Alignment.topLeft,
-                                      variables: ['group', 'value'],
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                TextField(
+                                  decoration: InputDecoration(
+                                    contentPadding: EdgeInsets.all(4.0),
+                                    border: OutlineInputBorder(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(8)),
                                     ),
-                                    crosshair: CrosshairGuide(
-                                      followPointer: [false, true],
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 15,
+                                ),
+                                Text(
+                                  'Password',
+                                  style: TextStyle(
+                                    fontFamily: 'Colfax',
+                                    fontSize: 15,
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                TextField(
+                                  decoration: InputDecoration(
+                                    contentPadding: EdgeInsets.all(4.0),
+                                    border: OutlineInputBorder(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(8)),
                                     ),
-                                    annotations: [
-                                      LineAnnotation(
-                                        dim: Dim.y,
-                                        value: 6.14,
-                                        style: PaintStyle(
-                                          strokeColor: const Color(0xff5470c6)
-                                              .withAlpha(100),
-                                          dash: [2],
-                                        ),
-                                      ),
-                                      LineAnnotation(
-                                        dim: Dim.y,
-                                        value: 3.57,
-                                        style: PaintStyle(
-                                          strokeColor: const Color(0xff91cc75)
-                                              .withAlpha(100),
-                                          dash: [2],
-                                        ),
-                                      ),
-                                      CustomAnnotation(
-                                          renderer: (offset, _) => [
-                                                CircleElement(
-                                                    center: offset,
-                                                    radius: 5,
-                                                    style: PaintStyle(
-                                                        fillColor: const Color(
-                                                            0xff5470c6)))
-                                              ],
-                                          values: ['Mar', -3]),
-                                      CustomAnnotation(
-                                          renderer: (offset, _) => [
-                                                CircleElement(
-                                                    center: offset,
-                                                    radius: 5,
-                                                    style: PaintStyle(
-                                                        fillColor: const Color(
-                                                            0xff5470c6)))
-                                              ],
-                                          values: ['Jul', -7]),
-                                      CustomAnnotation(
-                                          renderer: (offset, _) => [
-                                                CircleElement(
-                                                    center: offset,
-                                                    radius: 5,
-                                                    style: PaintStyle(
-                                                        fillColor: const Color(
-                                                            0xff91cc75)))
-                                              ],
-                                          values: ['Feb', 2]),
-                                      CustomAnnotation(
-                                          renderer: (offset, _) => [
-                                                CircleElement(
-                                                    center: offset,
-                                                    radius: 5,
-                                                    style: PaintStyle(
-                                                        fillColor: const Color(
-                                                            0xff91cc75)))
-                                              ],
-                                          values: ['Apr', -5]),
-                                      TagAnnotation(
-                                        label: Label(
-                                            '13',
-                                            LabelStyle(
-                                              textStyle: Defaults.textStyle,
-                                              offset: const Offset(0, -10),
-                                            )),
-                                        values: ['Mar', -13],
-                                      ),
-                                      TagAnnotation(
-                                        label: Label(
-                                            '9',
-                                            LabelStyle(
-                                              textStyle: Defaults.textStyle,
-                                              offset: const Offset(0, -10),
-                                            )),
-                                        values: ['July', -9],
-                                      ),
-                                      TagAnnotation(
-                                        label: Label(
-                                            '-2',
-                                            LabelStyle(
-                                              textStyle: Defaults.textStyle,
-                                              offset: const Offset(0, -10),
-                                            )),
-                                        values: ['Feb', -2],
-                                      ),
-                                      TagAnnotation(
-                                        label: Label(
-                                            '5',
-                                            LabelStyle(
-                                              textStyle: Defaults.textStyle,
-                                              offset: const Offset(0, -10),
-                                            )),
-                                        values: ['Apr', -5],
-                                      ),
-                                    ],
                                   ),
                                 ),
-                              ),
-                              SizedBox(
-                                width: 5.w,
-                              ),
-                              Expanded(
-                                child: Container(
-                                  height: 250,
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(12.0),
-                                  ),
-                                  child: Column(
-                                    children: [
-                                      GestureDetector(
-                                        onTap: () {
-                                          // Navigate to a different screen when the brown container is pressed
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                                  MyHomePage(),
-                                            ),
-                                          );
-                                        },
-                                        child: Container(
-                                          height: 55,
-
-                                          color: Color.fromRGBO(
-                                              75, 61, 82, 1), // Brown color
-                                          child: Center(
-                                            child: Text(
-                                              'New Booking',
-                                              style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 18,
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: 8.0,
-                                      ),
-                                      GestureDetector(
-                                        onTap: () {
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                                  MyHomePage(),
-                                            ),
-                                          );
-                                        },
-                                        child: Container(
-                                          height: 70,
-                                          decoration: BoxDecoration(
-                                            color: Colors.white,
-                                            borderRadius:
-                                                BorderRadius.circular(12.0),
-                                          ),
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: ColorFiltered(
-                                              colorFilter: ColorFilter.mode(
-                                                Color.fromRGBO(
-                                                    183, 174, 185, 1),
-                                                BlendMode.srcIn,
-                                              ),
-                                              child: Transform.translate(
-                                                offset: Offset(0,
-                                                    50), // Adjust the Y offset as needed
-                                                child: Image.asset(
-                                                  'add.png',
-                                                  width: 120,
-                                                  height: 170,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              )
-                            ],
+                              ],
+                            ),
                           ),
                           SizedBox(
-                            height: 5.h,
+                            height: 15,
                           ),
-                          Row(
-                            children: [
-                              Expanded(
-                                child: Container(
-                                  height: 292,
-                                  decoration: BoxDecoration(
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Color.fromRGBO(216, 216, 216, 1),
-                                        offset: Offset(0, 1),
-                                        blurRadius:
-                                            0.1, // changes position of shadow
+                          Padding(
+                            padding: EdgeInsets.only(
+                              left: 30.0,
+                              right: 20,
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                SizedBox(
+                                  height: 40,
+                                  width: 230,
+                                  child: ElevatedButton(
+                                    onPressed: () {
+                                      showDialog(
+                                        context: context,
+                                        builder: (context) {
+                                          return MyHomePage();
+                                        },
+                                      );
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor:
+                                          Color.fromRGBO(128, 123, 229, 1),
+                                      side: BorderSide(
+                                        color: Color.fromRGBO(128, 123, 229, 1),
                                       ),
-                                    ],
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(12.0),
-                                  ),
-                                  child: Column(
-                                    children: [
-                                      Container(
-                                        height: 55,
-                                        color: Color.fromRGBO(
-                                            75, 61, 82, 1), // Brown color
-                                        child: Padding(
-                                          padding: EdgeInsets.fromLTRB(
-                                              1.5.w, 1.5.h, 1.5.w, 1.5.h),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Text(
-                                                'Bookings',
-                                                style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 18,
-                                                  fontWeight: FontWeight.bold,
-                                                ),
-                                              ),
-                                              Text(
-                                                "view all",
-                                                style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 15,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(7),
                                       ),
-                                      SizedBox(
-                                        height: 6.0,
-                                      ), // Add spacing between the brown container and the white container
-                                      Container(
-                                        height: 215,
-                                        decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          borderRadius:
-                                              BorderRadius.circular(12.0),
-                                        ),
-                                        child: ListView(
-                                          children: [
-                                            SizedBox(
-                                              height: 60,
-                                              width: 100,
-                                              child: ListTile(
-                                                leading: CircleAvatar(),
-                                                title: Text('Trip 1',
-                                                    style: TabelText.text1),
-                                                subtitle: Text(
-                                                  '18.02.2022',
-                                                  style: TabelText.text2,
-                                                ),
-                                                trailing: Row(
-                                                  mainAxisSize:
-                                                      MainAxisSize.min,
-                                                  children: [
-                                                    Row(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .end,
-                                                      children: [
-                                                        Text(
-                                                          "Truck11",
-                                                          style:
-                                                              TabelText.text2,
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    SizedBox(
-                                                        width:
-                                                            30), // Add some space between "Truck" and "View" button
-                                                    InkWell(
-                                                      onTap: () {
-                                                        // Add your View button functionality here
-                                                        print(
-                                                            'View button pressed');
-                                                      },
-                                                      child: Container(
-                                                        height: 30,
-                                                        width: 81,
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          boxShadow: [
-                                                            BoxShadow(
-                                                              color: Color
-                                                                  .fromRGBO(
-                                                                      216,
-                                                                      216,
-                                                                      216,
-                                                                      1),
-                                                              offset:
-                                                                  Offset(0, 1),
-                                                              blurRadius:
-                                                                  0.1, // changes position of shadow
-                                                            ),
-                                                          ],
-                                                          color: Color.fromRGBO(
-                                                              245, 243, 255, 1),
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(5),
-                                                        ),
-                                                        child: Center(
-                                                          child: Text(
-                                                            'View',
-                                                            style: TextStyle(
-                                                              color: Color
-                                                                  .fromRGBO(
-                                                                      127,
-                                                                      106,
-                                                                      255,
-                                                                      1),
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold,
-                                                              fontSize: 10,
-                                                              fontFamily:
-                                                                  "SFProText",
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            ),
-                                            Divider(
-                                              thickness: 1,
-                                              color: Color.fromRGBO(
-                                                  206, 203, 203, 1),
-                                            ),
-                                            SizedBox(
-                                              height: 60,
-                                              width: 100,
-                                              child: ListTile(
-                                                leading: CircleAvatar(),
-                                                title: Text('Equipment Hire',
-                                                    style: TabelText.text1),
-                                                subtitle: Text(
-                                                  '10.02.2022',
-                                                  style: TabelText.text2,
-                                                ),
-                                                trailing: Row(
-                                                  mainAxisSize:
-                                                      MainAxisSize.min,
-                                                  children: [
-                                                    Column(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .end,
-                                                      children: [
-                                                        Text(
-                                                          "Heavy",
-                                                          style:
-                                                              TabelText.text2,
-                                                        ),
-                                                        Text(
-                                                          "Equipment",
-                                                          style:
-                                                              TabelText.text2,
-                                                        ),
-                                                      ],
-                                                    ),
-
-                                                    SizedBox(
-                                                        width:
-                                                            30), // Add some space between "Truck" and "View" button
-                                                    InkWell(
-                                                      onTap: () {
-                                                        // Add your View button functionality here
-                                                        print(
-                                                            'View button pressed');
-                                                      },
-                                                      child: Container(
-                                                        height: 30,
-                                                        width: 81,
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          boxShadow: [
-                                                            BoxShadow(
-                                                              color: Color
-                                                                  .fromRGBO(
-                                                                      216,
-                                                                      216,
-                                                                      216,
-                                                                      1),
-                                                              offset:
-                                                                  Offset(0, 1),
-                                                              blurRadius:
-                                                                  0.1, // changes position of shadow
-                                                            ),
-                                                          ],
-                                                          color: Color.fromRGBO(
-                                                              245, 243, 255, 1),
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(5),
-                                                        ),
-                                                        child: Center(
-                                                          child: Text(
-                                                            'View',
-                                                            style: TextStyle(
-                                                              color: Color
-                                                                  .fromRGBO(
-                                                                      127,
-                                                                      106,
-                                                                      255,
-                                                                      1),
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold,
-                                                              fontSize: 10,
-                                                              fontFamily:
-                                                                  "SFProText",
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            ),
-                                            Divider(
-                                              thickness: 1,
-                                              color: Color.fromRGBO(
-                                                  206, 203, 203, 1),
-                                            ),
-                                            SizedBox(
-                                              height: 60,
-                                              width: 100,
-                                              child: ListTile(
-                                                leading: CircleAvatar(),
-                                                title: Text(
-                                                  'Fletch Skinner',
-                                                  style: TabelText.text1,
-                                                ),
-                                                subtitle: Text(
-                                                  '07.02.2022',
-                                                  style: TabelText.text2,
-                                                ),
-                                                trailing: Row(
-                                                  mainAxisSize:
-                                                      MainAxisSize.min,
-                                                  children: [
-                                                    Row(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .end,
-                                                      children: [
-                                                        Text(
-                                                          "Trailer",
-                                                          style:
-                                                              TabelText.text2,
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    SizedBox(
-                                                        width:
-                                                            30), // Add some space between "Truck" and "View" button
-                                                    InkWell(
-                                                      onTap: () {
-                                                        // Add your View button functionality here
-                                                        print(
-                                                            'View button pressed');
-                                                      },
-                                                      child: Container(
-                                                        height: 30,
-                                                        width: 81,
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          boxShadow: [
-                                                            BoxShadow(
-                                                              color: Color
-                                                                  .fromRGBO(
-                                                                      216,
-                                                                      216,
-                                                                      216,
-                                                                      1),
-                                                              offset:
-                                                                  Offset(0, 1),
-                                                              blurRadius:
-                                                                  0.1, // changes position of shadow
-                                                            ),
-                                                          ],
-                                                          color: Color.fromRGBO(
-                                                              245, 243, 255, 1),
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(5),
-                                                        ),
-                                                        child: Center(
-                                                          child: Text(
-                                                            'View',
-                                                            style: TextStyle(
-                                                              color: Color
-                                                                  .fromRGBO(
-                                                                      127,
-                                                                      106,
-                                                                      255,
-                                                                      1),
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold,
-                                                              fontSize: 10,
-                                                              fontFamily:
-                                                                  "SFProText",
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            ),
-                                            // Add more cards with your data as needed
-                                          ],
-                                        ),
+                                    ),
+                                    child: Text(
+                                      'Login',
+                                      style: TextStyle(
+                                        fontFamily: 'Colfax',
+                                        fontSize: 15,
+                                        color: Colors.white,
                                       ),
-                                    ],
+                                    ),
                                   ),
                                 ),
-                              ),
-                              SizedBox(
-                                width: 5.w,
-                              ),
-                              Expanded(
-                                child: Container(
-                                  height: 294,
-                                  decoration: BoxDecoration(
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Color.fromRGBO(216, 216, 216, 1),
-                                        offset: Offset(0, 1),
-                                        blurRadius:
-                                            0.1, // changes position of shadow
-                                      ),
-                                    ],
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(12.0),
+                                SizedBox(height: 17),
+                                InkWell(
+                                  child: Text(
+                                    'Forgot Password?',
+                                    style: TextStyle(
+                                      fontFamily: 'Colfax',
+                                      fontSize: 12,
+                                      color: Color.fromARGB(255, 128, 123, 229),
+                                    ),
                                   ),
-                                  child: Column(
-                                    children: [
-                                      Container(
-                                        height: 55,
-                                        color: Color.fromRGBO(
-                                            75, 61, 82, 1), // Brown color
-                                        child: Padding(
-                                          padding: EdgeInsets.fromLTRB(
-                                              1.5.w, 1.5.h, 1.5.w, 1.5.h),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Text('Pending Booking Approvals',
-                                                  style: TabelText.headerText),
-                                              Text("view all",
-                                                  style: TabelText.headerText),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                      // Add spacing between the brown container and the white container
-                                      Container(
-                                        height: 224,
-                                        decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          // Set a common borderRadius for all containers
-                                        ),
-                                        child: Row(
-                                          children: [
-                                            Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.spaceEvenly,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Row(
-                                                  children: [
-                                                    SizedBox(
-                                                      width: 10,
-                                                    ),
-                                                    Column(
-                                                      children: [
-                                                        SizedBox(
-                                                          width: 10,
-                                                        ),
-                                                        CircleAvatar(),
-                                                      ],
-                                                    ),
-                                                    SizedBox(width: 10),
-                                                    Column(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        Text('Trip1',
-                                                            style: TabelText
-                                                                .text1),
-                                                        Text(
-                                                          "Booking ID Xxxxxx",
-                                                          style:
-                                                              TabelText.text2,
-                                                        )
-                                                      ],
-                                                    )
-                                                  ],
-                                                ),
-                                                SizedBox(
-                                                  width: 20,
-                                                ),
-                                                SizedBox(
-                                                  width: 220,
-                                                  child: Divider(
-                                                    color: Color.fromRGBO(
-                                                        206, 203, 203, 1),
-                                                  ),
-                                                ),
-                                                Row(
-                                                  children: [
-                                                    SizedBox(
-                                                      width: 10,
-                                                    ),
-                                                    Column(
-                                                      children: [
-                                                        SizedBox(
-                                                          width: 10,
-                                                        ),
-                                                        CircleAvatar(),
-                                                      ],
-                                                    ),
-                                                    SizedBox(width: 10),
-                                                    Column(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        Text(
-                                                          'Equipment Hire',
-                                                          style:
-                                                              TabelText.text1,
-                                                        ),
-                                                        Text(
-                                                          "Booking ID Xxxxxx",
-                                                          style:
-                                                              TabelText.text2,
-                                                        )
-                                                      ],
-                                                    )
-                                                  ],
-                                                ),
-                                                SizedBox(
-                                                  width: 20,
-                                                ),
-                                                SizedBox(
-                                                  width: 220,
-                                                  child: Divider(
-                                                    color: Color.fromRGBO(
-                                                        206, 203, 203, 1),
-                                                  ),
-                                                ),
-                                                Row(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    SizedBox(
-                                                      width: 10,
-                                                    ),
-                                                    Column(
-                                                      children: [
-                                                        SizedBox(
-                                                          width: 10,
-                                                        ),
-                                                        CircleAvatar(),
-                                                      ],
-                                                    ),
-                                                    SizedBox(width: 10),
-                                                    Column(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        Text(
-                                                          'Bus Trip',
-                                                          style:
-                                                              TabelText.text1,
-                                                        ),
-                                                        Text(
-                                                          "Booking ID Xxxxxx",
-                                                          style:
-                                                              TabelText.text2,
-                                                        )
-                                                      ],
-                                                    )
-                                                  ],
-                                                ),
-                                              ],
-                                            ),
-                                            Expanded(
-                                              child: Container(
-                                                height: 250,
-                                                width: 400,
-                                                color: Color.fromARGB(
-                                                    246, 245, 242, 242),
-                                                child: Row(
-                                                  children: [
-                                                    Container(
-                                                      width: 130,
-                                                      decoration: BoxDecoration(
-                                                          boxShadow: [
-                                                            BoxShadow(
-                                                              color: Color
-                                                                  .fromRGBO(
-                                                                      216,
-                                                                      216,
-                                                                      216,
-                                                                      1),
-                                                              offset:
-                                                                  Offset(0, 1),
-                                                              blurRadius:
-                                                                  0.1, // changes position of shadow
-                                                            ),
-                                                          ],
-                                                          color: Color.fromRGBO(
-                                                              245, 243, 255, 1),
-                                                          border: Border.all(
-                                                              color: Color
-                                                                  .fromARGB(
-                                                                      246,
-                                                                      245,
-                                                                      242,
-                                                                      242))),
-                                                      child: Column(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .spaceEvenly,
-                                                        children: [
-                                                          Padding(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                    .all(8.0),
-                                                            child: Container(
-                                                              width: 120,
-                                                              height: 30,
-                                                              decoration: BoxDecoration(
-                                                                  boxShadow: [
-                                                                    BoxShadow(
-                                                                      color: Color.fromRGBO(
-                                                                          216,
-                                                                          216,
-                                                                          216,
-                                                                          1),
-                                                                      offset:
-                                                                          Offset(
-                                                                              0,
-                                                                              1),
-                                                                      blurRadius:
-                                                                          0.1, // changes position of shadow
-                                                                    ),
-                                                                  ],
-                                                                  color: Color
-                                                                      .fromRGBO(
-                                                                          200,
-                                                                          251,
-                                                                          253,
-                                                                          1),
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              12.0),
-                                                                  border: Border.all(
-                                                                      color: Color.fromARGB(
-                                                                          246,
-                                                                          245,
-                                                                          242,
-                                                                          242))),
-                                                              child: Padding(
-                                                                padding:
-                                                                    const EdgeInsets
-                                                                        .all(
-                                                                        8.0),
-                                                                child: Center(
-                                                                  child: Row(
-                                                                    children: [
-                                                                      Text(
-                                                                          "Vendor 1",
-                                                                          style: const TextStyle(
-                                                                              fontWeight: FontWeight.bold,
-                                                                              fontSize: 9,
-                                                                              color: Color.fromRGBO(128, 118, 118, 1))),
-                                                                      SizedBox(
-                                                                        width:
-                                                                            10,
-                                                                      ),
-                                                                      Text(
-                                                                        "Xxxxx SAR",
-                                                                        style: const TextStyle(
-                                                                            fontWeight: FontWeight
-                                                                                .bold,
-                                                                            fontSize:
-                                                                                8,
-                                                                            color: Color.fromRGBO(
-                                                                                127,
-                                                                                106,
-                                                                                255,
-                                                                                1)),
-                                                                      ),
-                                                                    ],
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                          SizedBox(
-                                                            height: 10,
-                                                          ),
-                                                          Padding(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                    .all(8.0),
-                                                            child: Container(
-                                                              width: 150,
-                                                              height: 30,
-                                                              decoration: BoxDecoration(
-                                                                  boxShadow: [
-                                                                    BoxShadow(
-                                                                      color: Color.fromRGBO(
-                                                                          216,
-                                                                          216,
-                                                                          216,
-                                                                          1),
-                                                                      offset:
-                                                                          Offset(
-                                                                              0,
-                                                                              1),
-                                                                      blurRadius:
-                                                                          0.1, // changes position of shadow
-                                                                    ),
-                                                                  ],
-                                                                  color: Color
-                                                                      .fromRGBO(
-                                                                          200,
-                                                                          251,
-                                                                          253,
-                                                                          1),
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              12.0),
-                                                                  border: Border.all(
-                                                                      color: Color.fromARGB(
-                                                                          246,
-                                                                          245,
-                                                                          242,
-                                                                          242))),
-                                                              child: Padding(
-                                                                padding:
-                                                                    const EdgeInsets
-                                                                        .all(
-                                                                        8.0),
-                                                                child: Center(
-                                                                  child: Row(
-                                                                    children: [
-                                                                      Text(
-                                                                          "Vendor 1",
-                                                                          style: const TextStyle(
-                                                                              fontWeight: FontWeight.bold,
-                                                                              fontSize: 9,
-                                                                              color: Color.fromRGBO(128, 118, 118, 1))),
-                                                                      SizedBox(
-                                                                        width:
-                                                                            10,
-                                                                      ),
-                                                                      Text(
-                                                                        "Xxxxx SAR",
-                                                                        style: const TextStyle(
-                                                                            fontWeight: FontWeight
-                                                                                .bold,
-                                                                            fontSize:
-                                                                                8,
-                                                                            color: Color.fromRGBO(
-                                                                                127,
-                                                                                106,
-                                                                                255,
-                                                                                1)),
-                                                                      ),
-                                                                    ],
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                          SizedBox(
-                                                            height: 10,
-                                                          ),
-                                                          Padding(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                    .all(8.0),
-                                                            child: Container(
-                                                              width: 120,
-                                                              height: 30,
-                                                              decoration: BoxDecoration(
-                                                                  boxShadow: [
-                                                                    BoxShadow(
-                                                                      color: Color.fromRGBO(
-                                                                          216,
-                                                                          216,
-                                                                          216,
-                                                                          1),
-                                                                      offset:
-                                                                          Offset(
-                                                                              0,
-                                                                              1),
-                                                                      blurRadius:
-                                                                          0.1, // changes position of shadow
-                                                                    ),
-                                                                  ],
-                                                                  color: Color
-                                                                      .fromRGBO(
-                                                                          200,
-                                                                          251,
-                                                                          253,
-                                                                          1),
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              12.0),
-                                                                  border: Border.all(
-                                                                      color: Color.fromARGB(
-                                                                          246,
-                                                                          245,
-                                                                          242,
-                                                                          242))),
-                                                              child: Padding(
-                                                                padding:
-                                                                    const EdgeInsets
-                                                                        .all(
-                                                                        8.0),
-                                                                child: Center(
-                                                                  child: Row(
-                                                                    children: [
-                                                                      Text(
-                                                                          "Vendor 1",
-                                                                          style: const TextStyle(
-                                                                              fontWeight: FontWeight.bold,
-                                                                              fontSize: 9,
-                                                                              color: Color.fromRGBO(128, 118, 118, 1))),
-                                                                      SizedBox(
-                                                                        width:
-                                                                            10,
-                                                                      ),
-                                                                      Text(
-                                                                        "Xxxxx SAR",
-                                                                        style: const TextStyle(
-                                                                            fontWeight: FontWeight
-                                                                                .bold,
-                                                                            fontSize:
-                                                                                8,
-                                                                            color: Color.fromRGBO(
-                                                                                127,
-                                                                                106,
-                                                                                255,
-                                                                                1)),
-                                                                      ),
-                                                                    ],
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                    Container(
-                                                      width: 130,
-                                                      decoration: BoxDecoration(
-                                                          boxShadow: [
-                                                            BoxShadow(
-                                                              color: Color
-                                                                  .fromRGBO(
-                                                                      216,
-                                                                      216,
-                                                                      216,
-                                                                      1),
-                                                              offset:
-                                                                  Offset(0, 1),
-                                                              blurRadius:
-                                                                  0.1, // changes position of shadow
-                                                            ),
-                                                          ],
-                                                          color: Color.fromRGBO(
-                                                              245, 243, 255, 1),
-                                                          border: Border.all(
-                                                              color: Color
-                                                                  .fromARGB(
-                                                                      246,
-                                                                      245,
-                                                                      242,
-                                                                      242))),
-                                                      child: Column(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .spaceEvenly,
-                                                        children: [
-                                                          Padding(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                    .all(8.0),
-                                                            child: Container(
-                                                              width: 120,
-                                                              height: 30,
-                                                              decoration: BoxDecoration(
-                                                                  boxShadow: [
-                                                                    BoxShadow(
-                                                                      color: Color.fromRGBO(
-                                                                          216,
-                                                                          216,
-                                                                          216,
-                                                                          1),
-                                                                      offset:
-                                                                          Offset(
-                                                                              0,
-                                                                              1),
-                                                                      blurRadius:
-                                                                          0.1, // changes position of shadow
-                                                                    ),
-                                                                  ],
-                                                                  color: Color
-                                                                      .fromRGBO(
-                                                                          224,
-                                                                          253,
-                                                                          200,
-                                                                          1),
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              12.0),
-                                                                  border: Border.all(
-                                                                      color: Color.fromARGB(
-                                                                          246,
-                                                                          245,
-                                                                          242,
-                                                                          242))),
-                                                              child: Padding(
-                                                                padding:
-                                                                    const EdgeInsets
-                                                                        .all(
-                                                                        8.0),
-                                                                child: Center(
-                                                                  child: Row(
-                                                                    children: [
-                                                                      Text(
-                                                                          "Vendor 2",
-                                                                          style: const TextStyle(
-                                                                              fontWeight: FontWeight.bold,
-                                                                              fontSize: 9,
-                                                                              color: Color.fromRGBO(128, 118, 118, 1))),
-                                                                      SizedBox(
-                                                                        width:
-                                                                            10,
-                                                                      ),
-                                                                      Text(
-                                                                        "Xxxxx SAR",
-                                                                        style: const TextStyle(
-                                                                            fontWeight: FontWeight
-                                                                                .bold,
-                                                                            fontSize:
-                                                                                8,
-                                                                            color: Color.fromRGBO(
-                                                                                127,
-                                                                                106,
-                                                                                255,
-                                                                                1)),
-                                                                      ),
-                                                                    ],
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                          SizedBox(
-                                                            height: 10,
-                                                          ),
-                                                          Padding(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                    .all(8.0),
-                                                            child: Container(
-                                                              width: 120,
-                                                              height: 30,
-                                                              decoration: BoxDecoration(
-                                                                  boxShadow: [
-                                                                    BoxShadow(
-                                                                      color: Color.fromRGBO(
-                                                                          216,
-                                                                          216,
-                                                                          216,
-                                                                          1),
-                                                                      offset:
-                                                                          Offset(
-                                                                              0,
-                                                                              1),
-                                                                      blurRadius:
-                                                                          0.1, // changes position of shadow
-                                                                    ),
-                                                                  ],
-                                                                  color: Color
-                                                                      .fromRGBO(
-                                                                          224,
-                                                                          253,
-                                                                          200,
-                                                                          1),
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              12.0),
-                                                                  border: Border.all(
-                                                                      color: Color.fromARGB(
-                                                                          246,
-                                                                          245,
-                                                                          242,
-                                                                          242))),
-                                                              child: Padding(
-                                                                padding:
-                                                                    const EdgeInsets
-                                                                        .all(
-                                                                        8.0),
-                                                                child: Center(
-                                                                  child: Row(
-                                                                    children: [
-                                                                      Text(
-                                                                          "Vendor 2",
-                                                                          style: const TextStyle(
-                                                                              fontWeight: FontWeight.bold,
-                                                                              fontSize: 9,
-                                                                              color: Color.fromRGBO(128, 118, 118, 1))),
-                                                                      SizedBox(
-                                                                        width:
-                                                                            10,
-                                                                      ),
-                                                                      Text(
-                                                                        "Xxxxx SAR",
-                                                                        style: const TextStyle(
-                                                                            fontWeight: FontWeight
-                                                                                .bold,
-                                                                            fontSize:
-                                                                                8,
-                                                                            color: Color.fromRGBO(
-                                                                                127,
-                                                                                106,
-                                                                                255,
-                                                                                1)),
-                                                                      ),
-                                                                    ],
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                          SizedBox(
-                                                            height: 10,
-                                                          ),
-                                                          Padding(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                    .all(8.0),
-                                                            child: Container(
-                                                              width: 120,
-                                                              height: 30,
-                                                              decoration: BoxDecoration(
-                                                                  boxShadow: [
-                                                                    BoxShadow(
-                                                                      color: Color.fromRGBO(
-                                                                          216,
-                                                                          216,
-                                                                          216,
-                                                                          1),
-                                                                      offset:
-                                                                          Offset(
-                                                                              0,
-                                                                              1),
-                                                                      blurRadius:
-                                                                          0.1, // changes position of shadow
-                                                                    ),
-                                                                  ],
-                                                                  color: Color
-                                                                      .fromRGBO(
-                                                                          224,
-                                                                          253,
-                                                                          200,
-                                                                          1),
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              12.0),
-                                                                  border: Border.all(
-                                                                      color: Color.fromARGB(
-                                                                          246,
-                                                                          245,
-                                                                          242,
-                                                                          242))),
-                                                              child: Padding(
-                                                                padding:
-                                                                    const EdgeInsets
-                                                                        .all(
-                                                                        8.0),
-                                                                child: Center(
-                                                                  child: Row(
-                                                                    children: [
-                                                                      Text(
-                                                                          "Vendor 2",
-                                                                          style: const TextStyle(
-                                                                              fontWeight: FontWeight.bold,
-                                                                              fontSize: 9,
-                                                                              color: Color.fromRGBO(128, 118, 118, 1))),
-                                                                      SizedBox(
-                                                                        width:
-                                                                            10,
-                                                                      ),
-                                                                      Text(
-                                                                        "Xxxxx SAR",
-                                                                        style: const TextStyle(
-                                                                            fontWeight: FontWeight
-                                                                                .bold,
-                                                                            fontSize:
-                                                                                8,
-                                                                            color: Color.fromRGBO(
-                                                                                127,
-                                                                                106,
-                                                                                255,
-                                                                                1)),
-                                                                      ),
-                                                                    ],
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                    Container(
-                                                      width: 130,
-                                                      decoration: BoxDecoration(
-                                                          boxShadow: [
-                                                            BoxShadow(
-                                                              color: Color
-                                                                  .fromRGBO(
-                                                                      216,
-                                                                      216,
-                                                                      216,
-                                                                      1),
-                                                              offset:
-                                                                  Offset(0, 1),
-                                                              blurRadius:
-                                                                  0.1, // changes position of shadow
-                                                            ),
-                                                          ],
-                                                          color: Color.fromRGBO(
-                                                              245, 243, 255, 1),
-                                                          border: Border.all(
-                                                              color: Color
-                                                                  .fromARGB(
-                                                                      246,
-                                                                      245,
-                                                                      242,
-                                                                      242))),
-                                                      child: Column(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .spaceEvenly,
-                                                        children: [
-                                                          Padding(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                    .all(8.0),
-                                                            child: Container(
-                                                              width: 120,
-                                                              height: 30,
-                                                              decoration: BoxDecoration(
-                                                                  boxShadow: [
-                                                                    BoxShadow(
-                                                                      color: Color.fromRGBO(
-                                                                          216,
-                                                                          216,
-                                                                          216,
-                                                                          1),
-                                                                      offset:
-                                                                          Offset(
-                                                                              0,
-                                                                              1),
-                                                                      blurRadius:
-                                                                          0.1, // changes position of shadow
-                                                                    ),
-                                                                  ],
-                                                                  color: Color
-                                                                      .fromRGBO(
-                                                                          245,
-                                                                          253,
-                                                                          200,
-                                                                          1),
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              12.0),
-                                                                  border: Border.all(
-                                                                      color: Color.fromARGB(
-                                                                          246,
-                                                                          245,
-                                                                          242,
-                                                                          242))),
-                                                              child: Padding(
-                                                                padding:
-                                                                    const EdgeInsets
-                                                                        .all(
-                                                                        8.0),
-                                                                child: Center(
-                                                                  child: Row(
-                                                                    children: [
-                                                                      Text(
-                                                                          "Vendor 3",
-                                                                          style: const TextStyle(
-                                                                              fontWeight: FontWeight.bold,
-                                                                              fontSize: 9,
-                                                                              color: Color.fromRGBO(128, 118, 118, 1))),
-                                                                      SizedBox(
-                                                                        width:
-                                                                            10,
-                                                                      ),
-                                                                      Text(
-                                                                        "Xxxxx SAR",
-                                                                        style: const TextStyle(
-                                                                            fontWeight: FontWeight
-                                                                                .bold,
-                                                                            fontSize:
-                                                                                8,
-                                                                            color: Color.fromRGBO(
-                                                                                127,
-                                                                                106,
-                                                                                255,
-                                                                                1)),
-                                                                      ),
-                                                                    ],
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                          SizedBox(
-                                                            height: 10,
-                                                          ),
-                                                          Padding(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                    .all(8.0),
-                                                            child: Container(
-                                                              width: 120,
-                                                              height: 30,
-                                                              decoration: BoxDecoration(
-                                                                  boxShadow: [
-                                                                    BoxShadow(
-                                                                      color: Color.fromRGBO(
-                                                                          216,
-                                                                          216,
-                                                                          216,
-                                                                          1),
-                                                                      offset:
-                                                                          Offset(
-                                                                              0,
-                                                                              1),
-                                                                      blurRadius:
-                                                                          0.1, // changes position of shadow
-                                                                    ),
-                                                                  ],
-                                                                  color: Color
-                                                                      .fromRGBO(
-                                                                          245,
-                                                                          253,
-                                                                          200,
-                                                                          1),
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              12.0),
-                                                                  border: Border.all(
-                                                                      color: Color.fromARGB(
-                                                                          246,
-                                                                          245,
-                                                                          242,
-                                                                          242))),
-                                                              child: Padding(
-                                                                padding:
-                                                                    const EdgeInsets
-                                                                        .all(
-                                                                        8.0),
-                                                                child: Center(
-                                                                  child: Row(
-                                                                    children: [
-                                                                      Text(
-                                                                          "Vendor 3",
-                                                                          style: const TextStyle(
-                                                                              fontWeight: FontWeight.bold,
-                                                                              fontSize: 9,
-                                                                              color: Color.fromRGBO(128, 118, 118, 1))),
-                                                                      SizedBox(
-                                                                        width:
-                                                                            10,
-                                                                      ),
-                                                                      Text(
-                                                                        "Xxxxx SAR",
-                                                                        style: const TextStyle(
-                                                                            fontWeight: FontWeight
-                                                                                .bold,
-                                                                            fontSize:
-                                                                                8,
-                                                                            color: Color.fromRGBO(
-                                                                                127,
-                                                                                106,
-                                                                                255,
-                                                                                1)),
-                                                                      ),
-                                                                    ],
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                          SizedBox(
-                                                            height: 10,
-                                                          ),
-                                                          Padding(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                    .all(8.0),
-                                                            child: Container(
-                                                              width: 120,
-                                                              height: 30,
-                                                              decoration: BoxDecoration(
-                                                                  boxShadow: [
-                                                                    BoxShadow(
-                                                                      color: Color.fromRGBO(
-                                                                          216,
-                                                                          216,
-                                                                          216,
-                                                                          1),
-                                                                      offset:
-                                                                          Offset(
-                                                                              0,
-                                                                              1),
-                                                                      blurRadius:
-                                                                          0.1, // changes position of shadow
-                                                                    ),
-                                                                  ],
-                                                                  color: Color
-                                                                      .fromRGBO(
-                                                                          245,
-                                                                          253,
-                                                                          200,
-                                                                          1),
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              12.0),
-                                                                  border: Border.all(
-                                                                      color: Color.fromARGB(
-                                                                          246,
-                                                                          245,
-                                                                          242,
-                                                                          242))),
-                                                              child: Padding(
-                                                                padding:
-                                                                    const EdgeInsets
-                                                                        .all(
-                                                                        8.0),
-                                                                child: Center(
-                                                                  child: Row(
-                                                                    children: [
-                                                                      Text(
-                                                                          "Vendor 3",
-                                                                          style: const TextStyle(
-                                                                              fontWeight: FontWeight.bold,
-                                                                              fontSize: 9,
-                                                                              color: Color.fromRGBO(128, 118, 118, 1))),
-                                                                      SizedBox(
-                                                                        width:
-                                                                            10,
-                                                                      ),
-                                                                      Text(
-                                                                        "Xxxxx SAR",
-                                                                        style: const TextStyle(
-                                                                            fontWeight: FontWeight
-                                                                                .bold,
-                                                                            fontSize:
-                                                                                8,
-                                                                            color: Color.fromRGBO(
-                                                                                127,
-                                                                                106,
-                                                                                255,
-                                                                                1)),
-                                                                      ),
-                                                                    ],
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            )
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  ),
+                                  onTap: () {},
                                 ),
-                              ),
-                            ],
-                          ),
-                          Center(
-                            child: SingleChildScrollView(
-                              scrollDirection: Axis.horizontal,
-                              child: Container(
-                                height: 10, // Adjust the height as needed
-                                width:
-                                    1200, // Set the desired length of the scroll bar
-                                color: Colors
-                                    .grey, // Background color of the scrollable area
-                              ),
+                              ],
                             ),
                           ),
                           SizedBox(
                             height: 10,
                           ),
+                          Padding(
+                            padding: EdgeInsets.only(
+                              left: 30.0,
+                              right: 20,
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  "Don't have an account?",
+                                  style: TextStyle(
+                                    fontFamily: 'Colfax',
+                                    fontSize: 12,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                                InkWell(
+                                  child: Text(
+                                    'Create One!',
+                                    style: TextStyle(
+                                      fontFamily: 'Colfax',
+                                      fontSize: 12,
+                                      color: Color.fromARGB(255, 128, 123, 229),
+                                    ),
+                                  ),
+                                  onTap: () {
+                                    showDialog(
+                                      context: context,
+                                      builder: (context) {
+                                        return CreateAccount();
+                                      },
+                                    );
+                                  },
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(
+                              left: 30.0,
+                              right: 20,
+                            ),
+                            child: Align(
+                              alignment: Alignment.center,
+                              child: InkWell(
+                                child: Text(
+                                  'Use without Log in',
+                                  style: TextStyle(
+                                    fontFamily: 'Colfax',
+                                    fontSize: 12,
+                                    color: Color.fromARGB(255, 128, 123, 229),
+                                  ),
+                                ),
+                                onTap: () async {
+                                  _showOtpVerificationDialog();
+                                  if (isVerified) {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => MyHomePage(),
+                                      ),
+                                    );
+                                  }
+                                },
+                              ),
+                            ),
+                          ),
                         ],
                       ),
                     ),
-                    SizedBox(
-                      width: 150,
-                      height: 50,
-                      child: Flexible(
-                        child: Padding(
-                          padding: const EdgeInsets.only(right: 33.5),
-                          child: ElevatedButton(
-                            onPressed: () {
-                              // Handle button press
-                              print('Elevated Button Pressed!');
-                            },
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Color.fromRGBO(98, 105, 254, 1),
-                              side: BorderSide(
-                                color: Color.fromRGBO(98, 105, 254, 1),
-                              ),
-                            ),
-                            child: Text(
-                              'Book New',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 15,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ])));
-        } else {
-          return SingleChildScrollView(
-              child: Container(
-                  color: Color.fromRGBO(255, 255, 255, 200),
-                  padding: EdgeInsets.fromLTRB(3.w, 7.h, 3.w, 2.5.h),
-                  child: Column(children: [
-                    Scrollbar(
-                      showTrackOnHover: true,
-                      scrollbarOrientation: ScrollbarOrientation.bottom,
-                      thickness: 10,
-                      child: Container(
-                        padding: EdgeInsets.fromLTRB(3.w, 3.h, 3.w, 3.h),
-                        color: Color.fromRGBO(255, 255, 255, 157),
-                        child: Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              Row(
-                                children: [
-                                  Text("No of Bookings  "),
-                                  Text(
-                                    "103",
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.bold),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(
-                                height: 5.h,
-                              ),
-                              Container(
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(12.0),
-                                ),
-                                margin: const EdgeInsets.only(top: 10),
-                                height: 250,
-                                child: Stack(
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 10, horizontal: 80),
-                                      child: PieChart(
-                                        swapAnimationDuration:
-                                            const Duration(seconds: 1),
-                                        swapAnimationCurve:
-                                            Curves.easeInOutQuint,
-                                        PieChartData(
-                                          pieTouchData: PieTouchData(
-                                            touchCallback: tapOnPieChart,
-                                          ),
-                                          sections: [
-                                            PieChartSectionData(
-                                                color: Colors.orange),
-                                            PieChartSectionData(
-                                                color: Colors.grey),
-                                            PieChartSectionData(
-                                                color: Colors.green),
-                                            PieChartSectionData(
-                                                color: Colors.red),
-                                            PieChartSectionData(
-                                                color: Colors.yellow),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                    Positioned.fill(
-                                      child: Center(
-                                        child: Column(
-                                          children: [
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.all(8.0),
-                                              child: Text(
-                                                '29% Completed Successfully',
-                                                style: TextStyle(
-                                                  fontSize: 10,
-                                                  fontWeight: FontWeight.bold,
-                                                  color: Colors.black,
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              SizedBox(
-                                height: 5.h,
-                              ),
-                              Container(
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(12.0),
-                                ),
-                                margin: const EdgeInsets.only(top: 10),
-                                height: 250,
-                                child: Chart(
-                                  data: lineMarkerData,
-                                  variables: {
-                                    'day': Variable(
-                                      accessor: (Map datum) =>
-                                          datum['day'] as String,
-                                      scale: OrdinalScale(inflate: true),
-                                    ),
-                                    'value': Variable(
-                                      accessor: (Map datum) =>
-                                          datum['value'] as num,
-                                      scale: LinearScale(
-                                        max: 15,
-                                        min: -3,
-                                        tickCount: 7,
-                                        formatter: (v) => '${v.toInt()} ℃',
-                                      ),
-                                    ),
-                                    'group': Variable(
-                                      accessor: (Map datum) =>
-                                          datum['group'] as String,
-                                    ),
-                                  },
-                                  marks: [
-                                    LineMark(
-                                      position: Varset('day') *
-                                          Varset('value') /
-                                          Varset('group'),
-                                      color: ColorEncode(
-                                        variable: 'group',
-                                        values: [
-                                          const Color(0xff5470c6),
-                                          const Color(0xff91cc75),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                  axes: [
-                                    Defaults.horizontalAxis,
-                                    Defaults.verticalAxis,
-                                  ],
-                                  selections: {
-                                    'tooltipMouse': PointSelection(on: {
-                                      GestureType.hover,
-                                    }, devices: {
-                                      PointerDeviceKind.mouse
-                                    }, variable: 'day', dim: Dim.x),
-                                    'tooltipTouch': PointSelection(on: {
-                                      GestureType.scaleUpdate,
-                                      GestureType.tapDown,
-                                      GestureType.longPressMoveUpdate
-                                    }, devices: {
-                                      PointerDeviceKind.touch
-                                    }, variable: 'day', dim: Dim.x),
-                                  },
-                                  tooltip: TooltipGuide(
-                                    followPointer: [true, true],
-                                    align: Alignment.topLeft,
-                                    variables: ['group', 'value'],
-                                  ),
-                                  crosshair: CrosshairGuide(
-                                    followPointer: [false, true],
-                                  ),
-                                  annotations: [
-                                    LineAnnotation(
-                                      dim: Dim.y,
-                                      value: 6.14,
-                                      style: PaintStyle(
-                                        strokeColor: const Color(0xff5470c6)
-                                            .withAlpha(100),
-                                        dash: [2],
-                                      ),
-                                    ),
-                                    LineAnnotation(
-                                      dim: Dim.y,
-                                      value: 3.57,
-                                      style: PaintStyle(
-                                        strokeColor: const Color(0xff91cc75)
-                                            .withAlpha(100),
-                                        dash: [2],
-                                      ),
-                                    ),
-                                    CustomAnnotation(
-                                        renderer: (offset, _) => [
-                                              CircleElement(
-                                                  center: offset,
-                                                  radius: 5,
-                                                  style: PaintStyle(
-                                                      fillColor: const Color(
-                                                          0xff5470c6)))
-                                            ],
-                                        values: ['Mar', -3]),
-                                    CustomAnnotation(
-                                        renderer: (offset, _) => [
-                                              CircleElement(
-                                                  center: offset,
-                                                  radius: 5,
-                                                  style: PaintStyle(
-                                                      fillColor: const Color(
-                                                          0xff5470c6)))
-                                            ],
-                                        values: ['Jul', -7]),
-                                    CustomAnnotation(
-                                        renderer: (offset, _) => [
-                                              CircleElement(
-                                                  center: offset,
-                                                  radius: 5,
-                                                  style: PaintStyle(
-                                                      fillColor: const Color(
-                                                          0xff91cc75)))
-                                            ],
-                                        values: ['Feb', 2]),
-                                    CustomAnnotation(
-                                        renderer: (offset, _) => [
-                                              CircleElement(
-                                                  center: offset,
-                                                  radius: 5,
-                                                  style: PaintStyle(
-                                                      fillColor: const Color(
-                                                          0xff91cc75)))
-                                            ],
-                                        values: ['Apr', -5]),
-                                    TagAnnotation(
-                                      label: Label(
-                                          '13',
-                                          LabelStyle(
-                                            textStyle: Defaults.textStyle,
-                                            offset: const Offset(0, -10),
-                                          )),
-                                      values: ['Mar', -13],
-                                    ),
-                                    TagAnnotation(
-                                      label: Label(
-                                          '9',
-                                          LabelStyle(
-                                            textStyle: Defaults.textStyle,
-                                            offset: const Offset(0, -10),
-                                          )),
-                                      values: ['July', -9],
-                                    ),
-                                    TagAnnotation(
-                                      label: Label(
-                                          '-2',
-                                          LabelStyle(
-                                            textStyle: Defaults.textStyle,
-                                            offset: const Offset(0, -10),
-                                          )),
-                                      values: ['Feb', -2],
-                                    ),
-                                    TagAnnotation(
-                                      label: Label(
-                                          '5',
-                                          LabelStyle(
-                                            textStyle: Defaults.textStyle,
-                                            offset: const Offset(0, -10),
-                                          )),
-                                      values: ['Apr', -5],
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              SizedBox(
-                                height: 5.h,
-                              ),
-                              Container(
-                                height: 250,
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(12.0),
-                                ),
-                                child: Column(
-                                  children: [
-                                    GestureDetector(
-                                      onTap: () {
-                                        // Navigate to a different screen when the brown container is pressed
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) => MyHomePage(),
-                                          ),
-                                        );
-                                      },
-                                      child: Container(
-                                        height: 55,
-
-                                        color: Color.fromRGBO(
-                                            75, 61, 82, 1), // Brown color
-                                        child: Center(
-                                          child: Text(
-                                            'New Booking',
-                                            style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 18,
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: 8.0,
-                                    ),
-                                    GestureDetector(
-                                      onTap: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) => MyHomePage(),
-                                          ),
-                                        );
-                                      },
-                                      child: Container(
-                                        height: 70,
-                                        decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          borderRadius:
-                                              BorderRadius.circular(12.0),
-                                        ),
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: ColorFiltered(
-                                            colorFilter: ColorFilter.mode(
-                                              Color.fromRGBO(183, 174, 185, 1),
-                                              BlendMode.srcIn,
-                                            ),
-                                            child: Transform.translate(
-                                              offset: Offset(0,
-                                                  50), // Adjust the Y offset as needed
-                                              child: Image.asset(
-                                                'add.png',
-                                                width: 120,
-                                                height: 170,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              SizedBox(
-                                height: 5.h,
-                              ),
-                              Container(
-                                height: 292,
-                                decoration: BoxDecoration(
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Color.fromRGBO(216, 216, 216, 1),
-                                      offset: Offset(0, 1),
-                                      blurRadius:
-                                          0.1, // changes position of shadow
-                                    ),
-                                  ],
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(12.0),
-                                ),
-                                child: Column(
-                                  children: [
-                                    Container(
-                                      height: 55,
-                                      color: Color.fromRGBO(
-                                          75, 61, 82, 1), // Brown color
-                                      child: Padding(
-                                        padding: EdgeInsets.fromLTRB(
-                                            1.5.w, 1.5.h, 1.5.w, 1.5.h),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Text(
-                                              'Bookings',
-                                              style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 18,
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                            ),
-                                            Text(
-                                              "view all",
-                                              style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 15,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: 6.0,
-                                    ), // Add spacing between the brown container and the white container
-                                    Container(
-                                      height: 215,
-                                      decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        borderRadius:
-                                            BorderRadius.circular(12.0),
-                                      ),
-                                      child: ListView(
-                                        children: [
-                                          SizedBox(
-                                            height: 60,
-                                            width: 100,
-                                            child: ListTile(
-                                              leading: CircleAvatar(),
-                                              title: Text(
-                                                'Trip 1',
-                                                style: const TextStyle(
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 12,
-                                                ),
-                                              ),
-                                              subtitle: Text(
-                                                '18.02.2022',
-                                                style: TextStyle(fontSize: 10),
-                                              ),
-                                              trailing: Row(
-                                                mainAxisSize: MainAxisSize.min,
-                                                children: [
-                                                  Row(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment.end,
-                                                    children: [
-                                                      Text("Truck11"),
-                                                    ],
-                                                  ),
-                                                  SizedBox(
-                                                      width:
-                                                          30), // Add some space between "Truck" and "View" button
-                                                  InkWell(
-                                                    onTap: () {
-                                                      // Add your View button functionality here
-                                                      print(
-                                                          'View button pressed');
-                                                    },
-                                                    child: Container(
-                                                      height: 30,
-                                                      width: 81,
-                                                      decoration: BoxDecoration(
-                                                        boxShadow: [
-                                                          BoxShadow(
-                                                            color:
-                                                                Color.fromRGBO(
-                                                                    216,
-                                                                    216,
-                                                                    216,
-                                                                    1),
-                                                            offset:
-                                                                Offset(0, 1),
-                                                            blurRadius:
-                                                                0.1, // changes position of shadow
-                                                          ),
-                                                        ],
-                                                        color: Color.fromRGBO(
-                                                            245, 243, 255, 1),
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(5),
-                                                      ),
-                                                      child: Center(
-                                                        child: Text(
-                                                          'View',
-                                                          style: TextStyle(
-                                                            color:
-                                                                Color.fromRGBO(
-                                                                    127,
-                                                                    106,
-                                                                    255,
-                                                                    1),
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                            fontSize: 10,
-                                                            fontFamily:
-                                                                "SFProText",
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                          Divider(
-                                            thickness: 1,
-                                            color: Color.fromRGBO(
-                                                206, 203, 203, 1),
-                                          ),
-                                          SizedBox(
-                                            height: 60,
-                                            width: 100,
-                                            child: ListTile(
-                                              leading: CircleAvatar(),
-                                              title: Text(
-                                                'Equipment Hire',
-                                                style: const TextStyle(
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 10.3,
-                                                ),
-                                              ),
-                                              subtitle: Text(
-                                                '10.02.2022',
-                                                style: TextStyle(fontSize: 10),
-                                              ),
-                                              trailing: Row(
-                                                mainAxisSize: MainAxisSize.min,
-                                                children: [
-                                                  Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment.end,
-                                                    children: [
-                                                      Text("Heavy"),
-                                                      Text("Equipment"),
-                                                    ],
-                                                  ),
-
-                                                  SizedBox(
-                                                      width:
-                                                          30), // Add some space between "Truck" and "View" button
-                                                  InkWell(
-                                                    onTap: () {
-                                                      // Add your View button functionality here
-                                                      print(
-                                                          'View button pressed');
-                                                    },
-                                                    child: Container(
-                                                      height: 30,
-                                                      width: 81,
-                                                      decoration: BoxDecoration(
-                                                        boxShadow: [
-                                                          BoxShadow(
-                                                            color:
-                                                                Color.fromRGBO(
-                                                                    216,
-                                                                    216,
-                                                                    216,
-                                                                    1),
-                                                            offset:
-                                                                Offset(0, 1),
-                                                            blurRadius:
-                                                                0.1, // changes position of shadow
-                                                          ),
-                                                        ],
-                                                        color: Color.fromRGBO(
-                                                            245, 243, 255, 1),
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(5),
-                                                      ),
-                                                      child: Center(
-                                                        child: Text(
-                                                          'View',
-                                                          style: TextStyle(
-                                                            color:
-                                                                Color.fromRGBO(
-                                                                    127,
-                                                                    106,
-                                                                    255,
-                                                                    1),
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                            fontSize: 10,
-                                                            fontFamily:
-                                                                "SFProText",
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                          Divider(
-                                            thickness: 1,
-                                            color: Color.fromRGBO(
-                                                206, 203, 203, 1),
-                                          ),
-                                          SizedBox(
-                                            height: 60,
-                                            width: 100,
-                                            child: ListTile(
-                                              leading: CircleAvatar(),
-                                              title: Text(
-                                                'Fletch Skinner',
-                                                style: const TextStyle(
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 12,
-                                                ),
-                                              ),
-                                              subtitle: Text(
-                                                '07.02.2022',
-                                                style: TextStyle(fontSize: 10),
-                                              ),
-                                              trailing: Row(
-                                                mainAxisSize: MainAxisSize.min,
-                                                children: [
-                                                  Row(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment.end,
-                                                    children: [
-                                                      Text("Trailer"),
-                                                    ],
-                                                  ),
-                                                  SizedBox(
-                                                      width:
-                                                          30), // Add some space between "Truck" and "View" button
-                                                  InkWell(
-                                                    onTap: () {
-                                                      // Add your View button functionality here
-                                                      print(
-                                                          'View button pressed');
-                                                    },
-                                                    child: Container(
-                                                      height: 30,
-                                                      width: 81,
-                                                      decoration: BoxDecoration(
-                                                        boxShadow: [
-                                                          BoxShadow(
-                                                            color:
-                                                                Color.fromRGBO(
-                                                                    216,
-                                                                    216,
-                                                                    216,
-                                                                    1),
-                                                            offset:
-                                                                Offset(0, 1),
-                                                            blurRadius:
-                                                                0.1, // changes position of shadow
-                                                          ),
-                                                        ],
-                                                        color: Color.fromRGBO(
-                                                            245, 243, 255, 1),
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(5),
-                                                      ),
-                                                      child: Center(
-                                                        child: Text(
-                                                          'View',
-                                                          style: TextStyle(
-                                                            color:
-                                                                Color.fromRGBO(
-                                                                    127,
-                                                                    106,
-                                                                    255,
-                                                                    1),
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                            fontSize: 10,
-                                                            fontFamily:
-                                                                "SFProText",
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                          // Add more cards with your data as needed
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              SizedBox(
-                                height: 5.h,
-                              ),
-                              Container(
-                                height: 294,
-                                decoration: BoxDecoration(
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Color.fromRGBO(216, 216, 216, 1),
-                                      offset: Offset(0, 1),
-                                      blurRadius:
-                                          0.1, // changes position of shadow
-                                    ),
-                                  ],
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(12.0),
-                                ),
-                                child: Column(
-                                  children: [
-                                    Container(
-                                      height: 55,
-                                      color: Color.fromRGBO(
-                                          75, 61, 82, 1), // Brown color
-                                      child: Padding(
-                                        padding: EdgeInsets.fromLTRB(
-                                            1.5.w, 1.5.h, 1.5.w, 1.5.h),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Text(
-                                              'Pending Booking Approvals',
-                                              style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 18,
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                            ),
-                                            Text(
-                                              "view all",
-                                              style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 15,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                    // Add spacing between the brown container and the white container
-                                    Container(
-                                      height: 224,
-                                      decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        // Set a common borderRadius for all containers
-                                      ),
-                                      child: Row(
-                                        children: [
-                                          Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceEvenly,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Row(
-                                                children: [
-                                                  SizedBox(
-                                                    width: 10,
-                                                  ),
-                                                  Column(
-                                                    children: [
-                                                      SizedBox(
-                                                        width: 10,
-                                                      ),
-                                                      CircleAvatar(),
-                                                    ],
-                                                  ),
-                                                  SizedBox(width: 10),
-                                                  Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Text(
-                                                        'Trip1',
-                                                        style: const TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          fontSize: 12,
-                                                        ),
-                                                      ),
-                                                      Text("Booking ID Xxxxxx")
-                                                    ],
-                                                  )
-                                                ],
-                                              ),
-                                              SizedBox(
-                                                width: 20,
-                                              ),
-                                              SizedBox(
-                                                width: 220,
-                                                child: Divider(
-                                                  color: Color.fromRGBO(
-                                                      206, 203, 203, 1),
-                                                ),
-                                              ),
-                                              Row(
-                                                children: [
-                                                  SizedBox(
-                                                    width: 10,
-                                                  ),
-                                                  Column(
-                                                    children: [
-                                                      SizedBox(
-                                                        width: 10,
-                                                      ),
-                                                      CircleAvatar(),
-                                                    ],
-                                                  ),
-                                                  SizedBox(width: 10),
-                                                  Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Text(
-                                                        'Equipment Hire',
-                                                        style: const TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          fontSize: 12,
-                                                        ),
-                                                      ),
-                                                      Text("Booking ID Xxxxxx")
-                                                    ],
-                                                  )
-                                                ],
-                                              ),
-                                              SizedBox(
-                                                width: 20,
-                                              ),
-                                              SizedBox(
-                                                width: 220,
-                                                child: Divider(
-                                                  color: Color.fromRGBO(
-                                                      206, 203, 203, 1),
-                                                ),
-                                              ),
-                                              Row(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  SizedBox(
-                                                    width: 10,
-                                                  ),
-                                                  Column(
-                                                    children: [
-                                                      SizedBox(
-                                                        width: 10,
-                                                      ),
-                                                      CircleAvatar(),
-                                                    ],
-                                                  ),
-                                                  SizedBox(width: 10),
-                                                  Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Text(
-                                                        'Bus Trip',
-                                                        style: const TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          fontSize: 12,
-                                                        ),
-                                                      ),
-                                                      Text("Booking ID Xxxxxx")
-                                                    ],
-                                                  )
-                                                ],
-                                              ),
-                                            ],
-                                          ),
-                                          Expanded(
-                                            child: Container(
-                                              height: 250,
-                                              width: 400,
-                                              color: Color.fromARGB(
-                                                  246, 245, 242, 242),
-                                              child: Row(
-                                                children: [
-                                                  Container(
-                                                    width: 130,
-                                                    decoration: BoxDecoration(
-                                                        boxShadow: [
-                                                          BoxShadow(
-                                                            color:
-                                                                Color.fromRGBO(
-                                                                    216,
-                                                                    216,
-                                                                    216,
-                                                                    1),
-                                                            offset:
-                                                                Offset(0, 1),
-                                                            blurRadius:
-                                                                0.1, // changes position of shadow
-                                                          ),
-                                                        ],
-                                                        color: Color.fromRGBO(
-                                                            245, 243, 255, 1),
-                                                        border: Border.all(
-                                                            color:
-                                                                Color.fromARGB(
-                                                                    246,
-                                                                    245,
-                                                                    242,
-                                                                    242))),
-                                                    child: Column(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceEvenly,
-                                                      children: [
-                                                        Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                  .all(8.0),
-                                                          child: Container(
-                                                            width: 120,
-                                                            height: 30,
-                                                            decoration: BoxDecoration(
-                                                                boxShadow: [
-                                                                  BoxShadow(
-                                                                    color: Color
-                                                                        .fromRGBO(
-                                                                            216,
-                                                                            216,
-                                                                            216,
-                                                                            1),
-                                                                    offset:
-                                                                        Offset(
-                                                                            0,
-                                                                            1),
-                                                                    blurRadius:
-                                                                        0.1, // changes position of shadow
-                                                                  ),
-                                                                ],
-                                                                color:
-                                                                    Color
-                                                                        .fromRGBO(
-                                                                            200,
-                                                                            251,
-                                                                            253,
-                                                                            1),
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            12.0),
-                                                                border: Border.all(
-                                                                    color: Color
-                                                                        .fromARGB(
-                                                                            246,
-                                                                            245,
-                                                                            242,
-                                                                            242))),
-                                                            child: Padding(
-                                                              padding:
-                                                                  const EdgeInsets
-                                                                      .all(8.0),
-                                                              child: Center(
-                                                                child: Row(
-                                                                  children: [
-                                                                    Text(
-                                                                        "Vendor 1",
-                                                                        style: const TextStyle(
-                                                                            fontWeight: FontWeight
-                                                                                .bold,
-                                                                            fontSize:
-                                                                                9,
-                                                                            color: Color.fromRGBO(
-                                                                                128,
-                                                                                118,
-                                                                                118,
-                                                                                1))),
-                                                                    SizedBox(
-                                                                      width: 10,
-                                                                    ),
-                                                                    Text(
-                                                                      "Xxxxx SAR",
-                                                                      style: const TextStyle(
-                                                                          fontWeight: FontWeight
-                                                                              .bold,
-                                                                          fontSize:
-                                                                              8,
-                                                                          color: Color.fromRGBO(
-                                                                              127,
-                                                                              106,
-                                                                              255,
-                                                                              1)),
-                                                                    ),
-                                                                  ],
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                        SizedBox(
-                                                          height: 10,
-                                                        ),
-                                                        Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                  .all(8.0),
-                                                          child: Container(
-                                                            width: 150,
-                                                            height: 30,
-                                                            decoration: BoxDecoration(
-                                                                boxShadow: [
-                                                                  BoxShadow(
-                                                                    color: Color
-                                                                        .fromRGBO(
-                                                                            216,
-                                                                            216,
-                                                                            216,
-                                                                            1),
-                                                                    offset:
-                                                                        Offset(
-                                                                            0,
-                                                                            1),
-                                                                    blurRadius:
-                                                                        0.1, // changes position of shadow
-                                                                  ),
-                                                                ],
-                                                                color:
-                                                                    Color
-                                                                        .fromRGBO(
-                                                                            200,
-                                                                            251,
-                                                                            253,
-                                                                            1),
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            12.0),
-                                                                border: Border.all(
-                                                                    color: Color
-                                                                        .fromARGB(
-                                                                            246,
-                                                                            245,
-                                                                            242,
-                                                                            242))),
-                                                            child: Padding(
-                                                              padding:
-                                                                  const EdgeInsets
-                                                                      .all(8.0),
-                                                              child: Center(
-                                                                child: Row(
-                                                                  children: [
-                                                                    Text(
-                                                                        "Vendor 1",
-                                                                        style: const TextStyle(
-                                                                            fontWeight: FontWeight
-                                                                                .bold,
-                                                                            fontSize:
-                                                                                9,
-                                                                            color: Color.fromRGBO(
-                                                                                128,
-                                                                                118,
-                                                                                118,
-                                                                                1))),
-                                                                    SizedBox(
-                                                                      width: 10,
-                                                                    ),
-                                                                    Text(
-                                                                      "Xxxxx SAR",
-                                                                      style: const TextStyle(
-                                                                          fontWeight: FontWeight
-                                                                              .bold,
-                                                                          fontSize:
-                                                                              8,
-                                                                          color: Color.fromRGBO(
-                                                                              127,
-                                                                              106,
-                                                                              255,
-                                                                              1)),
-                                                                    ),
-                                                                  ],
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                        SizedBox(
-                                                          height: 10,
-                                                        ),
-                                                        Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                  .all(8.0),
-                                                          child: Container(
-                                                            width: 120,
-                                                            height: 30,
-                                                            decoration: BoxDecoration(
-                                                                boxShadow: [
-                                                                  BoxShadow(
-                                                                    color: Color
-                                                                        .fromRGBO(
-                                                                            216,
-                                                                            216,
-                                                                            216,
-                                                                            1),
-                                                                    offset:
-                                                                        Offset(
-                                                                            0,
-                                                                            1),
-                                                                    blurRadius:
-                                                                        0.1, // changes position of shadow
-                                                                  ),
-                                                                ],
-                                                                color:
-                                                                    Color
-                                                                        .fromRGBO(
-                                                                            200,
-                                                                            251,
-                                                                            253,
-                                                                            1),
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            12.0),
-                                                                border: Border.all(
-                                                                    color: Color
-                                                                        .fromARGB(
-                                                                            246,
-                                                                            245,
-                                                                            242,
-                                                                            242))),
-                                                            child: Padding(
-                                                              padding:
-                                                                  const EdgeInsets
-                                                                      .all(8.0),
-                                                              child: Center(
-                                                                child: Row(
-                                                                  children: [
-                                                                    Text(
-                                                                        "Vendor 1",
-                                                                        style: const TextStyle(
-                                                                            fontWeight: FontWeight
-                                                                                .bold,
-                                                                            fontSize:
-                                                                                9,
-                                                                            color: Color.fromRGBO(
-                                                                                128,
-                                                                                118,
-                                                                                118,
-                                                                                1))),
-                                                                    SizedBox(
-                                                                      width: 10,
-                                                                    ),
-                                                                    Text(
-                                                                      "Xxxxx SAR",
-                                                                      style: const TextStyle(
-                                                                          fontWeight: FontWeight
-                                                                              .bold,
-                                                                          fontSize:
-                                                                              8,
-                                                                          color: Color.fromRGBO(
-                                                                              127,
-                                                                              106,
-                                                                              255,
-                                                                              1)),
-                                                                    ),
-                                                                  ],
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                  Container(
-                                                    width: 130,
-                                                    decoration: BoxDecoration(
-                                                        boxShadow: [
-                                                          BoxShadow(
-                                                            color:
-                                                                Color.fromRGBO(
-                                                                    216,
-                                                                    216,
-                                                                    216,
-                                                                    1),
-                                                            offset:
-                                                                Offset(0, 1),
-                                                            blurRadius:
-                                                                0.1, // changes position of shadow
-                                                          ),
-                                                        ],
-                                                        color: Color.fromRGBO(
-                                                            245, 243, 255, 1),
-                                                        border: Border.all(
-                                                            color:
-                                                                Color.fromARGB(
-                                                                    246,
-                                                                    245,
-                                                                    242,
-                                                                    242))),
-                                                    child: Column(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceEvenly,
-                                                      children: [
-                                                        Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                  .all(8.0),
-                                                          child: Container(
-                                                            width: 120,
-                                                            height: 30,
-                                                            decoration: BoxDecoration(
-                                                                boxShadow: [
-                                                                  BoxShadow(
-                                                                    color: Color
-                                                                        .fromRGBO(
-                                                                            216,
-                                                                            216,
-                                                                            216,
-                                                                            1),
-                                                                    offset:
-                                                                        Offset(
-                                                                            0,
-                                                                            1),
-                                                                    blurRadius:
-                                                                        0.1, // changes position of shadow
-                                                                  ),
-                                                                ],
-                                                                color:
-                                                                    Color
-                                                                        .fromRGBO(
-                                                                            224,
-                                                                            253,
-                                                                            200,
-                                                                            1),
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            12.0),
-                                                                border: Border.all(
-                                                                    color: Color
-                                                                        .fromARGB(
-                                                                            246,
-                                                                            245,
-                                                                            242,
-                                                                            242))),
-                                                            child: Padding(
-                                                              padding:
-                                                                  const EdgeInsets
-                                                                      .all(8.0),
-                                                              child: Center(
-                                                                child: Row(
-                                                                  children: [
-                                                                    Text(
-                                                                        "Vendor 2",
-                                                                        style: const TextStyle(
-                                                                            fontWeight: FontWeight
-                                                                                .bold,
-                                                                            fontSize:
-                                                                                9,
-                                                                            color: Color.fromRGBO(
-                                                                                128,
-                                                                                118,
-                                                                                118,
-                                                                                1))),
-                                                                    SizedBox(
-                                                                      width: 10,
-                                                                    ),
-                                                                    Text(
-                                                                      "Xxxxx SAR",
-                                                                      style: const TextStyle(
-                                                                          fontWeight: FontWeight
-                                                                              .bold,
-                                                                          fontSize:
-                                                                              8,
-                                                                          color: Color.fromRGBO(
-                                                                              127,
-                                                                              106,
-                                                                              255,
-                                                                              1)),
-                                                                    ),
-                                                                  ],
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                        SizedBox(
-                                                          height: 10,
-                                                        ),
-                                                        Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                  .all(8.0),
-                                                          child: Container(
-                                                            width: 120,
-                                                            height: 30,
-                                                            decoration: BoxDecoration(
-                                                                boxShadow: [
-                                                                  BoxShadow(
-                                                                    color: Color
-                                                                        .fromRGBO(
-                                                                            216,
-                                                                            216,
-                                                                            216,
-                                                                            1),
-                                                                    offset:
-                                                                        Offset(
-                                                                            0,
-                                                                            1),
-                                                                    blurRadius:
-                                                                        0.1, // changes position of shadow
-                                                                  ),
-                                                                ],
-                                                                color:
-                                                                    Color
-                                                                        .fromRGBO(
-                                                                            224,
-                                                                            253,
-                                                                            200,
-                                                                            1),
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            12.0),
-                                                                border: Border.all(
-                                                                    color: Color
-                                                                        .fromARGB(
-                                                                            246,
-                                                                            245,
-                                                                            242,
-                                                                            242))),
-                                                            child: Padding(
-                                                              padding:
-                                                                  const EdgeInsets
-                                                                      .all(8.0),
-                                                              child: Center(
-                                                                child: Row(
-                                                                  children: [
-                                                                    Text(
-                                                                        "Vendor 2",
-                                                                        style: const TextStyle(
-                                                                            fontWeight: FontWeight
-                                                                                .bold,
-                                                                            fontSize:
-                                                                                9,
-                                                                            color: Color.fromRGBO(
-                                                                                128,
-                                                                                118,
-                                                                                118,
-                                                                                1))),
-                                                                    SizedBox(
-                                                                      width: 10,
-                                                                    ),
-                                                                    Text(
-                                                                      "Xxxxx SAR",
-                                                                      style: const TextStyle(
-                                                                          fontWeight: FontWeight
-                                                                              .bold,
-                                                                          fontSize:
-                                                                              8,
-                                                                          color: Color.fromRGBO(
-                                                                              127,
-                                                                              106,
-                                                                              255,
-                                                                              1)),
-                                                                    ),
-                                                                  ],
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                        SizedBox(
-                                                          height: 10,
-                                                        ),
-                                                        Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                  .all(8.0),
-                                                          child: Container(
-                                                            width: 120,
-                                                            height: 30,
-                                                            decoration: BoxDecoration(
-                                                                boxShadow: [
-                                                                  BoxShadow(
-                                                                    color: Color
-                                                                        .fromRGBO(
-                                                                            216,
-                                                                            216,
-                                                                            216,
-                                                                            1),
-                                                                    offset:
-                                                                        Offset(
-                                                                            0,
-                                                                            1),
-                                                                    blurRadius:
-                                                                        0.1, // changes position of shadow
-                                                                  ),
-                                                                ],
-                                                                color:
-                                                                    Color
-                                                                        .fromRGBO(
-                                                                            224,
-                                                                            253,
-                                                                            200,
-                                                                            1),
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            12.0),
-                                                                border: Border.all(
-                                                                    color: Color
-                                                                        .fromARGB(
-                                                                            246,
-                                                                            245,
-                                                                            242,
-                                                                            242))),
-                                                            child: Padding(
-                                                              padding:
-                                                                  const EdgeInsets
-                                                                      .all(8.0),
-                                                              child: Center(
-                                                                child: Row(
-                                                                  children: [
-                                                                    Text(
-                                                                        "Vendor 2",
-                                                                        style: const TextStyle(
-                                                                            fontWeight: FontWeight
-                                                                                .bold,
-                                                                            fontSize:
-                                                                                9,
-                                                                            color: Color.fromRGBO(
-                                                                                128,
-                                                                                118,
-                                                                                118,
-                                                                                1))),
-                                                                    SizedBox(
-                                                                      width: 10,
-                                                                    ),
-                                                                    Text(
-                                                                      "Xxxxx SAR",
-                                                                      style: const TextStyle(
-                                                                          fontWeight: FontWeight
-                                                                              .bold,
-                                                                          fontSize:
-                                                                              8,
-                                                                          color: Color.fromRGBO(
-                                                                              127,
-                                                                              106,
-                                                                              255,
-                                                                              1)),
-                                                                    ),
-                                                                  ],
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                  Container(
-                                                    width: 130,
-                                                    decoration: BoxDecoration(
-                                                        boxShadow: [
-                                                          BoxShadow(
-                                                            color:
-                                                                Color.fromRGBO(
-                                                                    216,
-                                                                    216,
-                                                                    216,
-                                                                    1),
-                                                            offset:
-                                                                Offset(0, 1),
-                                                            blurRadius:
-                                                                0.1, // changes position of shadow
-                                                          ),
-                                                        ],
-                                                        color: Color.fromRGBO(
-                                                            245, 243, 255, 1),
-                                                        border: Border.all(
-                                                            color:
-                                                                Color.fromARGB(
-                                                                    246,
-                                                                    245,
-                                                                    242,
-                                                                    242))),
-                                                    child: Column(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceEvenly,
-                                                      children: [
-                                                        Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                  .all(8.0),
-                                                          child: Container(
-                                                            width: 120,
-                                                            height: 30,
-                                                            decoration: BoxDecoration(
-                                                                boxShadow: [
-                                                                  BoxShadow(
-                                                                    color: Color
-                                                                        .fromRGBO(
-                                                                            216,
-                                                                            216,
-                                                                            216,
-                                                                            1),
-                                                                    offset:
-                                                                        Offset(
-                                                                            0,
-                                                                            1),
-                                                                    blurRadius:
-                                                                        0.1, // changes position of shadow
-                                                                  ),
-                                                                ],
-                                                                color:
-                                                                    Color
-                                                                        .fromRGBO(
-                                                                            245,
-                                                                            253,
-                                                                            200,
-                                                                            1),
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            12.0),
-                                                                border: Border.all(
-                                                                    color: Color
-                                                                        .fromARGB(
-                                                                            246,
-                                                                            245,
-                                                                            242,
-                                                                            242))),
-                                                            child: Padding(
-                                                              padding:
-                                                                  const EdgeInsets
-                                                                      .all(8.0),
-                                                              child: Center(
-                                                                child: Row(
-                                                                  children: [
-                                                                    Text(
-                                                                        "Vendor 3",
-                                                                        style: const TextStyle(
-                                                                            fontWeight: FontWeight
-                                                                                .bold,
-                                                                            fontSize:
-                                                                                9,
-                                                                            color: Color.fromRGBO(
-                                                                                128,
-                                                                                118,
-                                                                                118,
-                                                                                1))),
-                                                                    SizedBox(
-                                                                      width: 10,
-                                                                    ),
-                                                                    Text(
-                                                                      "Xxxxx SAR",
-                                                                      style: const TextStyle(
-                                                                          fontWeight: FontWeight
-                                                                              .bold,
-                                                                          fontSize:
-                                                                              8,
-                                                                          color: Color.fromRGBO(
-                                                                              127,
-                                                                              106,
-                                                                              255,
-                                                                              1)),
-                                                                    ),
-                                                                  ],
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                        SizedBox(
-                                                          height: 10,
-                                                        ),
-                                                        Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                  .all(8.0),
-                                                          child: Container(
-                                                            width: 120,
-                                                            height: 30,
-                                                            decoration: BoxDecoration(
-                                                                boxShadow: [
-                                                                  BoxShadow(
-                                                                    color: Color
-                                                                        .fromRGBO(
-                                                                            216,
-                                                                            216,
-                                                                            216,
-                                                                            1),
-                                                                    offset:
-                                                                        Offset(
-                                                                            0,
-                                                                            1),
-                                                                    blurRadius:
-                                                                        0.1, // changes position of shadow
-                                                                  ),
-                                                                ],
-                                                                color:
-                                                                    Color
-                                                                        .fromRGBO(
-                                                                            245,
-                                                                            253,
-                                                                            200,
-                                                                            1),
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            12.0),
-                                                                border: Border.all(
-                                                                    color: Color
-                                                                        .fromARGB(
-                                                                            246,
-                                                                            245,
-                                                                            242,
-                                                                            242))),
-                                                            child: Padding(
-                                                              padding:
-                                                                  const EdgeInsets
-                                                                      .all(8.0),
-                                                              child: Center(
-                                                                child: Row(
-                                                                  children: [
-                                                                    Text(
-                                                                        "Vendor 3",
-                                                                        style: const TextStyle(
-                                                                            fontWeight: FontWeight
-                                                                                .bold,
-                                                                            fontSize:
-                                                                                9,
-                                                                            color: Color.fromRGBO(
-                                                                                128,
-                                                                                118,
-                                                                                118,
-                                                                                1))),
-                                                                    SizedBox(
-                                                                      width: 10,
-                                                                    ),
-                                                                    Text(
-                                                                      "Xxxxx SAR",
-                                                                      style: const TextStyle(
-                                                                          fontWeight: FontWeight
-                                                                              .bold,
-                                                                          fontSize:
-                                                                              8,
-                                                                          color: Color.fromRGBO(
-                                                                              127,
-                                                                              106,
-                                                                              255,
-                                                                              1)),
-                                                                    ),
-                                                                  ],
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                        SizedBox(
-                                                          height: 10,
-                                                        ),
-                                                        Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                  .all(8.0),
-                                                          child: Container(
-                                                            width: 120,
-                                                            height: 30,
-                                                            decoration: BoxDecoration(
-                                                                boxShadow: [
-                                                                  BoxShadow(
-                                                                    color: Color
-                                                                        .fromRGBO(
-                                                                            216,
-                                                                            216,
-                                                                            216,
-                                                                            1),
-                                                                    offset:
-                                                                        Offset(
-                                                                            0,
-                                                                            1),
-                                                                    blurRadius:
-                                                                        0.1, // changes position of shadow
-                                                                  ),
-                                                                ],
-                                                                color:
-                                                                    Color
-                                                                        .fromRGBO(
-                                                                            245,
-                                                                            253,
-                                                                            200,
-                                                                            1),
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            12.0),
-                                                                border: Border.all(
-                                                                    color: Color
-                                                                        .fromARGB(
-                                                                            246,
-                                                                            245,
-                                                                            242,
-                                                                            242))),
-                                                            child: Padding(
-                                                              padding:
-                                                                  const EdgeInsets
-                                                                      .all(8.0),
-                                                              child: Center(
-                                                                child: Row(
-                                                                  children: [
-                                                                    Text(
-                                                                        "Vendor 3",
-                                                                        style: const TextStyle(
-                                                                            fontWeight: FontWeight
-                                                                                .bold,
-                                                                            fontSize:
-                                                                                9,
-                                                                            color: Color.fromRGBO(
-                                                                                128,
-                                                                                118,
-                                                                                118,
-                                                                                1))),
-                                                                    SizedBox(
-                                                                      width: 10,
-                                                                    ),
-                                                                    Text(
-                                                                      "Xxxxx SAR",
-                                                                      style: const TextStyle(
-                                                                          fontWeight: FontWeight
-                                                                              .bold,
-                                                                          fontSize:
-                                                                              8,
-                                                                          color: Color.fromRGBO(
-                                                                              127,
-                                                                              106,
-                                                                              255,
-                                                                              1)),
-                                                                    ),
-                                                                  ],
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              SizedBox(
-                                height: 5.h,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      width: 150,
-                      height: 50,
-                      child: Flexible(
-                        child: Padding(
-                          padding: const EdgeInsets.only(right: 33.5),
-                          child: ElevatedButton(
-                            onPressed: () {
-                              // Handle button press
-                              print('Elevated Button Pressed!');
-                            },
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Color.fromRGBO(98, 105, 254, 1),
-                              side: BorderSide(
-                                color: Color.fromRGBO(98, 105, 254, 1),
-                              ),
-                            ),
-                            child: Text(
-                              'Book New',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 15,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ])));
+                  )
+                ],
+              ),
+            ),
+          );
         }
       });
     });
