@@ -27,6 +27,16 @@ class FormTextStyle {
 }
 
 class TabelText {
+  static TextStyle headerText2 = TextStyle(
+    color: Color.fromRGBO(124, 115, 115, 1),
+    fontFamily: 'Helvetica',
+    fontSize: 13,
+  );
+  static TextStyle headerText1 = TextStyle(
+    color: Color.fromRGBO(75, 61, 82, 1),
+    fontFamily: 'Helvetica',
+    fontSize: 16,
+  );
   static TextStyle headerText = TextStyle(
     color: Colors.white,
     fontFamily: 'SFProTextMedium',
@@ -53,6 +63,17 @@ class TabelText {
     fontFamily: 'SFProText',
     fontWeight: FontWeight.bold,
     color: Colors.white,
+    fontSize: 10,
+  );
+  static TextStyle tableText1 = TextStyle(
+    color: Color.fromRGBO(80, 69, 74, 1),
+    fontFamily: 'SFProText',
+    fontSize: 20,
+  );
+  static TextStyle text4 = TextStyle(
+    fontFamily: 'SFProText',
+    fontWeight: FontWeight.bold,
+    color: Color.fromRGBO(152, 135, 135, 1),
     fontSize: 10,
   );
 }
