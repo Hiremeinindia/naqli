@@ -527,7 +527,7 @@ class _MyHomePageState extends State<HomePagePartner> {
                           ),
                         ),
                         Container(
-                          padding: EdgeInsets.only(left: 35.0, top: 10),
+                          padding: EdgeInsets.only(left: 25.0, top: 10),
                           child: Row(
                             children: [
                               Icon(
