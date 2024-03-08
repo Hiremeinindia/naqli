@@ -9,6 +9,7 @@ class Payments extends StatefulWidget {
 }
 
 class _PaymentsState extends State<Payments> {
+  final ScrollController _paymentScroll = ScrollController();
   DataTable _createDataTable() {
     return DataTable(
         headingRowHeight: 65,
@@ -108,7 +109,7 @@ class _PaymentsState extends State<Payments> {
           child: Column(
             children: [
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(12.0),
                 child: Text('SAR 3000', style: TabelText.tableText1),
               ),
               Padding(
@@ -277,24 +278,35 @@ class _PaymentsState extends State<Payments> {
                           Expanded(
                             child: Column(
                               children: [
-                                Container(
-                                  height: 300,
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.grey.withOpacity(
-                                            0.5), // Adjust the shadow color and opacity
-                                        blurRadius:
-                                            5.0, // Adjust the blur radius for a more visible shadow
+                                Scrollbar(
+                                  controller: _paymentScroll,
+                                  thumbVisibility:
+                                      true, // Set to true to always show the scrollbar
+                                  child: SingleChildScrollView(
+                                    scrollDirection: Axis.horizontal,
+                                    controller: _paymentScroll,
+                                    child: Container(
+                                      height: 300,
+                                      width: 1200,
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.grey.withOpacity(
+                                                0.5), // Adjust the shadow color and opacity
+                                            blurRadius:
+                                                5.0, // Adjust the blur radius for a more visible shadow
+                                          ),
+                                        ],
+                                        borderRadius:
+                                            BorderRadius.circular(12.0),
                                       ),
-                                    ],
-                                    borderRadius: BorderRadius.circular(12.0),
-                                  ),
-                                  child: SizedBox(
-                                    height: 220,
-                                    child: ListView(
-                                      children: [_createDataTable()],
+                                      child: SizedBox(
+                                        height: 220,
+                                        child: ListView(
+                                          children: [_createDataTable()],
+                                        ),
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -382,24 +394,33 @@ class _PaymentsState extends State<Payments> {
                     Expanded(
                       child: Column(
                         children: [
-                          Container(
-                            height: 300,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(
-                                      0.5), // Adjust the shadow color and opacity
-                                  blurRadius:
-                                      5.0, // Adjust the blur radius for a more visible shadow
+                          Scrollbar(
+                            controller: _paymentScroll,
+                            thumbVisibility:
+                                true, // Set to true to always show the scrollbar
+                            child: SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              controller: _paymentScroll,
+                              child: Container(
+                                height: 300,
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey.withOpacity(
+                                          0.5), // Adjust the shadow color and opacity
+                                      blurRadius:
+                                          5.0, // Adjust the blur radius for a more visible shadow
+                                    ),
+                                  ],
+                                  borderRadius: BorderRadius.circular(12.0),
                                 ),
-                              ],
-                              borderRadius: BorderRadius.circular(12.0),
-                            ),
-                            child: SizedBox(
-                              height: 220,
-                              child: ListView(
-                                children: [_createDataTable()],
+                                child: SizedBox(
+                                  height: 220,
+                                  child: ListView(
+                                    children: [_createDataTable()],
+                                  ),
+                                ),
                               ),
                             ),
                           ),
