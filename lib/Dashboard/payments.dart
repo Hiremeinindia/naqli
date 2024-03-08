@@ -23,49 +23,48 @@ class _PaymentsState extends State<Payments> {
   List<DataColumn> _createColumns() {
     return [
       DataColumn(
-        label: Center(
-          child: Padding(
-            padding: EdgeInsets.all(8.0),
+        label: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Center(
             child: Text('Booking ID', style: TabelText.headerText),
           ),
         ),
       ),
       DataColumn(
-        label: Center(
-          child: Padding(
-            padding: EdgeInsets.all(6.0),
-            child: Text('Booking Type', style: TabelText.headerText),
-          ),
+        label: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child:
+              Center(child: Text('Booking Type', style: TabelText.headerText)),
         ),
       ),
       DataColumn(
         label: Center(
           child: Padding(
-            padding: EdgeInsets.all(22.0),
+            padding: const EdgeInsets.only(left: 40),
             child: Text('Contract', style: TabelText.headerText),
           ),
         ),
       ),
       DataColumn(
-        label: Center(
-          child: Padding(
-            padding: EdgeInsets.all(8.0),
+        label: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Center(
             child: Text('Status', style: TabelText.headerText),
           ),
         ),
       ),
       DataColumn(
-        label: Center(
-          child: Padding(
-            padding: EdgeInsets.all(8.0),
+        label: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Center(
             child: Text('Payment Made', style: TabelText.headerText),
           ),
         ),
       ),
       DataColumn(
-        label: Center(
-          child: Padding(
-            padding: EdgeInsets.all(8.0),
+        label: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Center(
             child: Text('Pending Payment', style: TabelText.headerText),
           ),
         ),
@@ -109,7 +108,10 @@ class _PaymentsState extends State<Payments> {
           child: Column(
             children: [
               Text('SAR 3000', style: TabelText.tableText1),
-              Text('Per Month - August 2024', style: TabelText.text4),
+              Padding(
+                padding: const EdgeInsets.only(left: 12),
+                child: Text('Per Month-August 2024', style: TabelText.text4),
+              ),
             ],
           ),
         )),
@@ -222,51 +224,47 @@ class _PaymentsState extends State<Payments> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.only(right: 110),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Container(
-                              height: 50,
-                              width: 193,
-                              padding: EdgeInsets.all(8.0),
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                  color: Colors.grey,
-                                  width: 1.0,
-                                ),
-                                borderRadius: BorderRadius.circular(8.0),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Container(
+                            height: 50,
+                            width: 193,
+                            padding: EdgeInsets.all(8.0),
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: Colors.grey,
+                                width: 1.0,
                               ),
-                              child: DropdownButtonHideUnderline(
-                                child: DropdownButton<String>(
-                                  value: 'All',
-                                  onChanged: (String? newValue) {
-                                    // Handle dropdown value change
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                            child: DropdownButtonHideUnderline(
+                              child: DropdownButton<String>(
+                                value: 'All',
+                                onChanged: (String? newValue) {
+                                  // Handle dropdown value change
+                                },
+                                items: <String>[
+                                  'All',
+                                  'Completed',
+                                  'Incomplete Booking',
+                                  'Pending Payment',
+                                ].map<DropdownMenuItem<String>>(
+                                  (String value) {
+                                    return DropdownMenuItem<String>(
+                                      value: value,
+                                      child: Text(
+                                        value,
+                                        style: TextStyle(
+                                            fontFamily: 'Colfax', fontSize: 16),
+                                      ),
+                                    );
                                   },
-                                  items: <String>[
-                                    'All',
-                                    'Completed',
-                                    'Incomplete Booking',
-                                    'Pending Payment',
-                                  ].map<DropdownMenuItem<String>>(
-                                    (String value) {
-                                      return DropdownMenuItem<String>(
-                                        value: value,
-                                        child: Text(
-                                          value,
-                                          style: TextStyle(
-                                              fontFamily: 'Colfax',
-                                              fontSize: 16),
-                                        ),
-                                      );
-                                    },
-                                  ).toList(),
-                                ),
+                                ).toList(),
                               ),
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                       SizedBox(
                         height: 20,
@@ -276,24 +274,24 @@ class _PaymentsState extends State<Payments> {
                           Expanded(
                             child: Column(
                               children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(right: 110),
-                                  child: Expanded(
-                                    child: Container(
-                                        height: 300,
-                                        decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          borderRadius:
-                                              BorderRadius.circular(12.0),
-                                        ),
-                                        child: SizedBox(
-                                          height: 220,
-                                          child: ListView(
-                                            children: [_createDataTable()],
-                                          ),
-                                        )),
-                                  ),
-                                ),
+                                Container(
+                                    height: 300,
+                                    decoration: BoxDecoration(
+                                      boxShadow: [
+                                        BoxShadow(
+                                            color: Colors.white,
+                                            blurRadius:
+                                                2.0 // changes position of shadow
+                                            ),
+                                      ],
+                                      borderRadius: BorderRadius.circular(12.0),
+                                    ),
+                                    child: SizedBox(
+                                      height: 220,
+                                      child: ListView(
+                                        children: [_createDataTable()],
+                                      ),
+                                    )),
                                 SizedBox(
                                   height: 150,
                                 ),
@@ -303,8 +301,7 @@ class _PaymentsState extends State<Payments> {
                                     scrollDirection: Axis.horizontal,
                                     child: Container(
                                       height: 10, // Adjust the height as needed
-                                      width:
-                                          1100, // Set the desired length of the scroll bar
+                                      // Set the desired length of the scroll bar
                                       color: Colors
                                           .grey, // Background color of the scrollable area
                                     ),
