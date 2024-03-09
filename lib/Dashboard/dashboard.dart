@@ -121,6 +121,7 @@ class _DashboardState extends State<Dashboard> {
         if (constraints.maxWidth >= 850) {
           return SingleChildScrollView(
               child: Container(
+            height: 100.h,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20.0),
               color: Color.fromRGBO(255, 255, 255, 0.925),
@@ -139,7 +140,7 @@ class _DashboardState extends State<Dashboard> {
                   ],
                 ),
                 SizedBox(
-                  width: 4.w,
+                  height: 4.h,
                 ),
                 Row(
                   children: [
@@ -151,6 +152,16 @@ class _DashboardState extends State<Dashboard> {
                             Container(
                               height: 250,
                               decoration: BoxDecoration(
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Color.fromRGBO(240, 240, 240, 1)
+                                        .withOpacity(0.1),
+                                    offset: Offset(0, 0),
+                                    spreadRadius: 2.0,
+                                    blurRadius:
+                                        0.01, // changes position of shadow
+                                  ),
+                                ],
                                 color: Colors.white,
                                 borderRadius: BorderRadius.circular(12.0),
                               ),
@@ -266,6 +277,16 @@ class _DashboardState extends State<Dashboard> {
                                 scrollDirection: Axis.horizontal,
                                 child: Container(
                                   decoration: BoxDecoration(
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Color.fromRGBO(240, 240, 240, 1)
+                                            .withOpacity(0.1),
+                                        offset: Offset(0, 0),
+                                        spreadRadius: 2.0,
+                                        blurRadius:
+                                            0.01, // changes position of shadow
+                                      ),
+                                    ],
                                     color: Colors.white,
                                     borderRadius: BorderRadius.only(
                                         topLeft: Radius.circular(0),
@@ -273,11 +294,11 @@ class _DashboardState extends State<Dashboard> {
                                         bottomLeft: Radius.circular(12),
                                         bottomRight: Radius.circular(12)),
                                   ),
-                                  width: 380,
+                                  width: 378,
                                   child: Column(
                                     children: [
                                       Container(
-                                        width: 450,
+                                        width: 378,
                                         height: 55,
                                         color: Color.fromRGBO(
                                             75, 61, 82, 1), // Brown color
@@ -325,6 +346,16 @@ class _DashboardState extends State<Dashboard> {
                               Expanded(
                                 child: Container(
                                   decoration: BoxDecoration(
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Color.fromRGBO(240, 240, 240, 1)
+                                            .withOpacity(0.1),
+                                        offset: Offset(0, 0),
+                                        spreadRadius: 2.0,
+                                        blurRadius:
+                                            0.01, // changes position of shadow
+                                      ),
+                                    ],
                                     color: Colors.white,
                                     borderRadius: BorderRadius.circular(12.0),
                                   ),
@@ -498,6 +529,16 @@ class _DashboardState extends State<Dashboard> {
                                 height: 250,
                                 width: 180,
                                 decoration: BoxDecoration(
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Color.fromRGBO(240, 240, 240, 1)
+                                          .withOpacity(0.1),
+                                      offset: Offset(0, 0),
+                                      spreadRadius: 2.0,
+                                      blurRadius:
+                                          0.01, // changes position of shadow
+                                    ),
+                                  ],
                                   color: Colors.white,
                                   borderRadius: BorderRadius.circular(12.0),
                                 ),
@@ -557,6 +598,16 @@ class _DashboardState extends State<Dashboard> {
                               scrollDirection: Axis.horizontal,
                               child: Container(
                                 decoration: BoxDecoration(
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Color.fromRGBO(240, 240, 240, 1)
+                                          .withOpacity(0.1),
+                                      offset: Offset(0, 0),
+                                      spreadRadius: 2.0,
+                                      blurRadius:
+                                          0.01, // changes position of shadow
+                                    ),
+                                  ],
                                   color: Colors.white,
                                   borderRadius: BorderRadius.only(
                                       topLeft: Radius.circular(0),
@@ -603,9 +654,6 @@ class _DashboardState extends State<Dashboard> {
                       ),
                     )
                   ],
-                ),
-                SizedBox(
-                  height: 5.h,
                 ),
               ],
             ),

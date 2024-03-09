@@ -31,7 +31,7 @@ class _BookingsState extends State<Bookings> {
                 borderRadius: BorderRadius.circular(20.0),
                 color: Color.fromRGBO(255, 255, 255, 0.925),
               ),
-              padding: EdgeInsets.fromLTRB(3.w, 3.h, 3.w, 3.h),
+              padding: EdgeInsets.fromLTRB(3.w, 5.h, 3.w, 3.h),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -623,7 +623,7 @@ class _BookingsState extends State<Bookings> {
         DataCell(
           TableCell(
             verticalAlignment: TableCellVerticalAlignment.middle,
-            child: ViewButton(
+            child: EditButton(
               text: 'View',
               onPressed: () {},
               colors: Color.fromRGBO(98, 106, 254, 1),
@@ -663,7 +663,7 @@ class _BookingsState extends State<Bookings> {
         DataCell(
           TableCell(
             verticalAlignment: TableCellVerticalAlignment.middle,
-            child: ViewButton(
+            child: EditButton(
               text: 'Edit',
               onPressed: () {},
               colors: Color.fromRGBO(98, 106, 254, 1),
@@ -703,7 +703,7 @@ class _BookingsState extends State<Bookings> {
         DataCell(
           TableCell(
             verticalAlignment: TableCellVerticalAlignment.middle,
-            child: ViewButton(
+            child: EditButton(
               text: 'Pay',
               onPressed: () {},
               colors: Color.fromRGBO(98, 106, 254, 1),
