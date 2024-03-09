@@ -31,10 +31,10 @@ final class ColorContainer extends StatelessWidget {
             ),
           ],
           color: colors,
-          borderRadius: BorderRadius.circular(12.0),
+          borderRadius: BorderRadius.circular(15.0),
           border: Border.all(color: Color.fromARGB(246, 245, 242, 242))),
       child: Padding(
-        padding: EdgeInsets.fromLTRB(1.w, 1.h, 1.w, 1.h),
+        padding: EdgeInsets.fromLTRB(1.w, 0.5.h, 1.w, 0.5.h),
         child: Center(
           child: Row(
             children: [
