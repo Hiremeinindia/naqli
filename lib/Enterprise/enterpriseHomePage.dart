@@ -7,16 +7,16 @@ import 'package:sizer/sizer.dart';
 
 import '../SuperUser/loginPage.dart';
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({
+class enterpriseMyHomePage extends StatefulWidget {
+  const enterpriseMyHomePage({
     Key? key,
   }) : super(key: key);
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<enterpriseMyHomePage> createState() => _enterpriseMyHomePage();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _enterpriseMyHomePage extends State<enterpriseMyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Sizer(builder: (context, orientation, deviceType) {
@@ -70,7 +70,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                   showDialog(
                                     context: context,
                                     builder: (context) {
-                                      return LoginPage();
+                                      return enterpriseMyHomePage();
                                     },
                                   );
                                 },
@@ -729,7 +729,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 showDialog(
                                   context: context,
                                   builder: (context) {
-                                    return LoginPage();
+                                    return enterpriseMyHomePage();
                                   },
                                 );
                               },

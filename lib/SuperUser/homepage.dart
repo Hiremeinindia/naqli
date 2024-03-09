@@ -7,16 +7,16 @@ import 'package:sizer/sizer.dart';
 
 import 'loginPage.dart';
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({
+class superuserMyHomePage extends StatefulWidget {
+  const superuserMyHomePage({
     Key? key,
   }) : super(key: key);
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<superuserMyHomePage> createState() => _superuserMyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _superuserMyHomePageState extends State<superuserMyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Sizer(builder: (context, orientation, deviceType) {
@@ -70,7 +70,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                   showDialog(
                                     context: context,
                                     builder: (context) {
-                                      return LoginPage();
+                                      return superuserLoginPage();
                                     },
                                   );
                                 },
@@ -325,7 +325,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                                         MainAxisAlignment.end,
                                                     children: [
                                                       Image.asset(
-                                                        'Group1496.png',
+                                                        'bus.png',
                                                         width: 150,
                                                         height: 139,
                                                       ),
@@ -376,7 +376,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                                         MainAxisAlignment.end,
                                                     children: [
                                                       Image.asset(
-                                                        'Group1660.png',
+                                                        'Group1496.png',
                                                         width: 150,
                                                         height: 139,
                                                       ),
@@ -427,7 +427,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                                         MainAxisAlignment.end,
                                                     children: [
                                                       Image.asset(
-                                                        'Group1716.png',
+                                                        'Group1660.png',
                                                         width: 150,
                                                         height: 139,
                                                       ),
@@ -437,6 +437,57 @@ class _MyHomePageState extends State<MyHomePage> {
                                                       SizedBox(height: 2),
                                                       Text(
                                                         'Special',
+                                                        style: TextStyle(
+                                                            fontFamily:
+                                                                'Colfax',
+                                                            fontSize: 16),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              width: 20,
+                                            ),
+                                            Expanded(
+                                              child: Container(
+                                                width: 200,
+                                                height: 200,
+                                                decoration: BoxDecoration(
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                      color: Color.fromRGBO(
+                                                          216, 216, 216, 1),
+                                                      offset: Offset(0, 1),
+                                                      blurRadius:
+                                                          0.01, // changes position of shadow
+                                                    ),
+                                                  ],
+                                                  color: Color.fromRGBO(
+                                                      247, 246, 255, 1),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          8.0),
+                                                ),
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(8.0),
+                                                  child: Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.end,
+                                                    children: [
+                                                      Image.asset(
+                                                        'Group1716.png',
+                                                        width: 150,
+                                                        height: 139,
+                                                      ),
+                                                      Divider(
+                                                        color: Colors.black,
+                                                      ),
+                                                      SizedBox(height: 2),
+                                                      Text(
+                                                        'Others',
                                                         style: TextStyle(
                                                             fontFamily:
                                                                 'Colfax',
@@ -553,7 +604,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 showDialog(
                                   context: context,
                                   builder: (context) {
-                                    return LoginPage();
+                                    return superuserLoginPage();
                                   },
                                 );
                               },

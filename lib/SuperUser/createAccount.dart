@@ -1,19 +1,20 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter_application_1/Dashboard/dashboard_page.dart';
+
+import 'package:flutter_application_1/SuperUser/Dashboard/dashboard_page.dart';
 import 'package:flutter_application_1/SuperUser/homepage.dart';
 import 'package:flutter_application_1/SuperUser/loginPage.dart';
 import 'package:sizer/sizer.dart';
 
-class CreateAccount extends StatefulWidget {
-  const CreateAccount();
+class superuserCreateAccount extends StatefulWidget {
+  const superuserCreateAccount();
 
   @override
-  _CreateAccountState createState() => _CreateAccountState();
+  _superuserCreateAccountState createState() => _superuserCreateAccountState();
 }
 
-class _CreateAccountState extends State<CreateAccount> {
+class _superuserCreateAccountState extends State<superuserCreateAccount> {
   final _formKey = GlobalKey<FormState>();
 
   List<String> cities = ['City 1', 'City 2', 'City 3', 'City 4'];
@@ -138,7 +139,7 @@ class _CreateAccountState extends State<CreateAccount> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => DashboardPage(),
+                            builder: (context) => superuserDashboardPage(),
                           ),
                         );
                         setState(() {
@@ -775,7 +776,7 @@ class _CreateAccountState extends State<CreateAccount> {
                               showDialog(
                                 context: context,
                                 builder: (context) {
-                                  return LoginPage();
+                                  return superuserLoginPage();
                                 },
                               );
                             },
@@ -1300,7 +1301,7 @@ class _CreateAccountState extends State<CreateAccount> {
                               showDialog(
                                 context: context,
                                 builder: (context) {
-                                  return LoginPage();
+                                  return superuserLoginPage();
                                 },
                               );
                             },

@@ -1,19 +1,22 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter_application_1/Dashboard/dashboard_page.dart';
+import 'package:flutter_application_1/Enterprise/Dashboard/dashboard_page.dart';
+import 'package:flutter_application_1/Enterprise/enterpriseLoginPage.dart';
+import 'package:flutter_application_1/SuperUser/Dashboard/dashboard_page.dart';
+
 import 'package:flutter_application_1/SuperUser/homepage.dart';
 import 'package:flutter_application_1/SuperUser/loginPage.dart';
 import 'package:sizer/sizer.dart';
 
-class CreateAccount extends StatefulWidget {
-  const CreateAccount();
+class enterpriseCreateAccount extends StatefulWidget {
+  const enterpriseCreateAccount();
 
   @override
-  _CreateAccountState createState() => _CreateAccountState();
+  _enterpriseCreateAccount createState() => _enterpriseCreateAccount();
 }
 
-class _CreateAccountState extends State<CreateAccount> {
+class _enterpriseCreateAccount extends State<enterpriseCreateAccount> {
   final _formKey = GlobalKey<FormState>();
 
   List<String> cities = ['City 1', 'City 2', 'City 3', 'City 4'];
@@ -138,7 +141,7 @@ class _CreateAccountState extends State<CreateAccount> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => DashboardPage(),
+                            builder: (context) => enterDashboardPage(),
                           ),
                         );
                         setState(() {
@@ -775,7 +778,7 @@ class _CreateAccountState extends State<CreateAccount> {
                               showDialog(
                                 context: context,
                                 builder: (context) {
-                                  return LoginPage();
+                                  return enterpriseLoginPage();
                                 },
                               );
                             },
@@ -1300,7 +1303,7 @@ class _CreateAccountState extends State<CreateAccount> {
                               showDialog(
                                 context: context,
                                 builder: (context) {
-                                  return LoginPage();
+                                  return enterpriseLoginPage();
                                 },
                               );
                             },
