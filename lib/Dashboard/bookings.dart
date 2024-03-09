@@ -25,197 +25,153 @@ class _BookingsState extends State<Bookings> {
           builder: (BuildContext ctx, BoxConstraints constraints) {
         if (constraints.maxWidth >= 950) {
           return SingleChildScrollView(
-            child: Expanded(
-              child: Container(
-                color: Color.fromRGBO(255, 255, 255, 200),
-                padding: EdgeInsets.fromLTRB(3.w, 7.h, 3.w, 0),
-                child: Scrollbar(
-                  controller: _scrollController,
-                  thumbVisibility: true,
-                  child: SingleChildScrollView(
-                    controller: _scrollController,
-                    scrollDirection: Axis.horizontal,
-                    child: Container(
-                      width: 1200,
-                      padding: EdgeInsets.fromLTRB(35, 5.h, 35, 3.h),
-                      decoration: BoxDecoration(
-                        color: Colors.deepPurple,
-                        borderRadius: BorderRadius.circular(12.0),
-                      ),
-                      child: Expanded(
-                        child: Column(
-                          children: [
-                            Row(
+            child: Container(
+              height: 100.h,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20.0),
+                color: Color.fromRGBO(255, 255, 255, 0.925),
+              ),
+              padding: EdgeInsets.fromLTRB(3.w, 3.h, 3.w, 3.h),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(0),
+                                topRight: Radius.circular(0),
+                                bottomLeft: Radius.circular(12),
+                                bottomRight: Radius.circular(12)),
+                          ),
+                          child: Expanded(
+                            child: Column(
                               children: [
-                                Expanded(
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.only(
-                                          topLeft: Radius.circular(0),
-                                          topRight: Radius.circular(0),
-                                          bottomLeft: Radius.circular(12),
-                                          bottomRight: Radius.circular(12)),
-                                    ),
-                                    child: Expanded(
-                                      child: Column(
-                                        children: [
-                                          Container(
-                                            height: 55,
-                                            color: Color.fromRGBO(
-                                                75, 61, 82, 1), // Brown color
-                                            child: Padding(
-                                              padding: EdgeInsets.fromLTRB(
-                                                  1.5.w, 1.5.h, 1.5.w, 1.5.h),
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Text('Booking 1',
-                                                      style:
-                                                          TabelText.headerText),
-                                                  Text("Booking iD XXXXXX",
-                                                      style: TabelText.text3),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                          // Add spacing between the brown container and the white container
-
-                                          SizedBox(
-                                            height: 200,
-                                            child: ListView(
-                                              children: [_booking1Table()],
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: 4.5.w,
-                                ),
-                                Expanded(
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.only(
-                                          topLeft: Radius.circular(0),
-                                          topRight: Radius.circular(0),
-                                          bottomLeft: Radius.circular(12),
-                                          bottomRight: Radius.circular(12)),
-                                    ),
-                                    child: Expanded(
-                                      child: Column(
-                                        children: [
-                                          Container(
-                                            height: 55,
-                                            color: Color.fromRGBO(
-                                                75, 61, 82, 1), // Brown color
-                                            child: Padding(
-                                              padding: EdgeInsets.fromLTRB(
-                                                  1.5.w, 1.5.h, 1.5.w, 1.5.h),
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Text('Booking 2',
-                                                      style:
-                                                          TabelText.headerText),
-                                                  Text("Booking iD XXXXXX",
-                                                      style: TabelText.text3),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                          // Add spacing between the brown container and the white container
-
-                                          SizedBox(
-                                            height: 200,
-                                            child: ListView(
-                                              children: [_booking1Table()],
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: 4.5.w,
-                                ),
                                 Container(
-                                  width: 200,
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.only(
-                                        topLeft: Radius.circular(0),
-                                        topRight: Radius.circular(0),
-                                        bottomLeft: Radius.circular(12),
-                                        bottomRight: Radius.circular(12)),
-                                  ),
-                                  child: Column(
-                                    children: [
-                                      Container(
-                                        height: 55,
-
-                                        color: Color.fromRGBO(
-                                            75, 61, 82, 1), // Brown color
-                                        child: Center(
-                                          child: Text('New Booking',
-                                              style: TabelText.headerText),
-                                        ),
-                                      ),
-                                      GestureDetector(
-                                        onTap: () {
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                                  MyHomePage(),
-                                            ),
-                                          );
-                                        },
-                                        child: Align(
-                                          alignment: Alignment.center,
-                                          child: Container(
-                                            height: 195,
-                                            child: Image.asset(
-                                              color: Color.fromRGBO(
-                                                  225, 225, 225, 1),
-                                              'add.png',
-                                              width: 60,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
+                                  height: 55,
+                                  color: Color.fromRGBO(
+                                      75, 61, 82, 1), // Brown color
+                                  child: Padding(
+                                    padding: EdgeInsets.fromLTRB(
+                                        1.5.w, 1.5.h, 1.5.w, 1.5.h),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text('Booking 1',
+                                            style: TabelText.headerText),
+                                        Text("Booking iD XXXXXX",
+                                            style: TabelText.text3),
+                                      ],
+                                    ),
                                   ),
                                 ),
+                                // Add spacing between the brown container and the white container
+
+                                SizedBox(
+                                  height: 200,
+                                  child: ListView(
+                                    children: [_booking1Table()],
+                                  ),
+                                )
                               ],
                             ),
-                            SizedBox(
-                              height: 4.h,
-                            ),
-                            Scrollbar(
-                              controller: _book3Scroll,
-                              thumbVisibility:
-                                  true, // Set to true to always show the scrollbar
-                              child: SingleChildScrollView(
-                                controller: _book3Scroll,
-                                scrollDirection: Axis.horizontal,
-                                child: Container(
-                                  width: 1150,
-                                  height: 210,
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(12.0),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        width: 4.5.w,
+                      ),
+                      Expanded(
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(0),
+                                topRight: Radius.circular(0),
+                                bottomLeft: Radius.circular(12),
+                                bottomRight: Radius.circular(12)),
+                          ),
+                          child: Expanded(
+                            child: Column(
+                              children: [
+                                Container(
+                                  height: 55,
+                                  color: Color.fromRGBO(
+                                      75, 61, 82, 1), // Brown color
+                                  child: Padding(
+                                    padding: EdgeInsets.fromLTRB(
+                                        1.5.w, 1.5.h, 1.5.w, 1.5.h),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text('Booking 2',
+                                            style: TabelText.headerText),
+                                        Text("Booking iD XXXXXX",
+                                            style: TabelText.text3),
+                                      ],
+                                    ),
                                   ),
+                                ),
+                                // Add spacing between the brown container and the white container
+
+                                SizedBox(
+                                  height: 200,
                                   child: ListView(
-                                    children: [_createDataTable()],
+                                    children: [_booking1Table()],
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        width: 4.5.w,
+                      ),
+                      Container(
+                        width: 200,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(0),
+                              topRight: Radius.circular(0),
+                              bottomLeft: Radius.circular(12),
+                              bottomRight: Radius.circular(12)),
+                        ),
+                        child: Column(
+                          children: [
+                            Container(
+                              height: 55,
+
+                              color:
+                                  Color.fromRGBO(75, 61, 82, 1), // Brown color
+                              child: Center(
+                                child: Text('New Booking',
+                                    style: TabelText.headerText),
+                              ),
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => MyHomePage(),
+                                  ),
+                                );
+                              },
+                              child: Align(
+                                alignment: Alignment.center,
+                                child: Container(
+                                  height: 195,
+                                  child: Image.asset(
+                                    color: Color.fromRGBO(225, 225, 225, 1),
+                                    'add.png',
+                                    width: 60,
                                   ),
                                 ),
                               ),
@@ -223,9 +179,32 @@ class _BookingsState extends State<Bookings> {
                           ],
                         ),
                       ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 4.h,
+                  ),
+                  Scrollbar(
+                    controller: _book3Scroll,
+                    thumbVisibility:
+                        true, // Set to true to always show the scrollbar
+                    child: SingleChildScrollView(
+                      controller: _book3Scroll,
+                      scrollDirection: Axis.horizontal,
+                      child: Container(
+                        width: 1150,
+                        height: 210,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(12.0),
+                        ),
+                        child: ListView(
+                          children: [_createDataTable()],
+                        ),
+                      ),
                     ),
                   ),
-                ),
+                ],
               ),
             ),
           );
