@@ -4,7 +4,8 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_application_1/Dashboard/dashboard.dart';
+import 'package:flutter_application_1/Partner/Dashboard/dashboard.dart';
+
 import 'package:flutter_application_1/Partner/operator.dart';
 
 import 'package:sizer/sizer.dart';

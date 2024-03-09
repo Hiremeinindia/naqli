@@ -2,21 +2,21 @@ import 'package:easy_sidemenu/easy_sidemenu.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/Dashboard/dashboard.dart';
+import 'package:flutter_application_1/SuperUser/Dashboard/dashboard.dart';
 
 import 'package:sizer/sizer.dart';
 import 'bookings.dart';
 import 'payments.dart';
 import 'trigger_booking.dart';
 
-class DashboardPage extends StatefulWidget {
-  const DashboardPage({Key? key}) : super(key: key);
+class superuserDashboardPage extends StatefulWidget {
+  const superuserDashboardPage({Key? key}) : super(key: key);
 
   @override
-  State<DashboardPage> createState() => _MyHomePageState();
+  State<superuserDashboardPage> createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<DashboardPage> {
+class _MyHomePageState extends State<superuserDashboardPage> {
   PageController page = PageController();
   SideMenuController sideMenu = SideMenuController();
   bool value = false;
@@ -337,14 +337,6 @@ class _MyHomePageState extends State<DashboardPage> {
                                       ),
                                       SideMenuItem(
                                         title: 'Payments',
-                                        onTap: (page, _) {
-                                          sideMenu.changePage(page);
-                                        },
-                                        icon: const Icon(
-                                            Icons.mode_comment_outlined),
-                                      ),
-                                      SideMenuItem(
-                                        title: 'Report an issue',
                                         onTap: (page, _) {
                                           sideMenu.changePage(page);
                                         },
