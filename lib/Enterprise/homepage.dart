@@ -2,10 +2,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:flutter_application_1/createAccount.dart';
+import 'package:flutter_application_1/SuperUser/createAccount.dart';
 import 'package:sizer/sizer.dart';
 
-import 'loginPage.dart';
+import '../SuperUser/loginPage.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({

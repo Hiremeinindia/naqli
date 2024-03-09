@@ -6,7 +6,8 @@ import 'package:flutter_application_1/Partner/homepage.dart';
 import 'package:flutter_application_1/Partner/joinUs.dart';
 import 'package:flutter_application_1/Partner/operator.dart';
 import 'package:flutter_application_1/advancepayment.dart';
-import 'package:flutter_application_1/homepage.dart';
+import 'package:flutter_application_1/SuperUser/createAccount.dart';
+import 'package:flutter_application_1/SuperUser/homepage.dart';
 import 'package:flutter_application_1/sample.dart';
 import 'package:flutter_application_1/sample.dart';
 
@@ -38,7 +39,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Partner(),
+      home: MyHomePage(),
     );
   }
 }
