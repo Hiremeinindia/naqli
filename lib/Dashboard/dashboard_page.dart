@@ -471,58 +471,10 @@ class _MyHomePageState extends State<DashboardPage> {
                     ListTile(
                         hoverColor: Colors.indigo.shade100,
                         title: Text(
-                          'Report an issue',
-                          style: TextStyle(color: Colors.black),
-                        ),
-                        onTap: _handleItem5Tap),
-                    SizedBox(
-                      height: 2.h,
-                    ),
-                    ListTile(
-                        hoverColor: Colors.indigo.shade100,
-                        title: Text(
                           'Help',
                           style: TextStyle(color: Colors.black),
                         ),
                         onTap: _handleItem6Tap),
-                    SizedBox(
-                      height: 30,
-                      width: 170,
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 13, top: 5),
-                        child: Text(
-                          "Hello Faizal!",
-                          style: TextStyle(
-                            fontFamily: 'Colfax',
-                            fontSize: 16,
-                          ),
-                        ),
-                      ),
-                    ),
-                    Container(
-                      padding: EdgeInsets.only(left: 20.0, top: 10),
-                      child: Row(
-                        children: [
-                          Icon(
-                            Icons.notifications,
-                            color: Color.fromRGBO(106, 102, 209, 1),
-                          ),
-                          SizedBox(
-                            height: 30,
-                            child: Padding(
-                              padding: EdgeInsets.only(left: 15, top: 5),
-                              child: Text(
-                                "Contact Us",
-                                style: TextStyle(
-                                  fontFamily: 'Colfax',
-                                  fontSize: 16,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
                   ]),
             ),
             appBar: PreferredSize(

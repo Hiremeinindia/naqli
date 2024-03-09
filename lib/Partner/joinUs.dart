@@ -1,65 +1,12 @@
 import 'package:flutter/material.dart';
-<<<<<<< HEAD
-
-class Sample extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('DataCell Color Example'),
-        ),
-        body: Center(
-          child: DataTable(
-            columns: <DataColumn>[
-              DataColumn(
-                label: Text('Name'),
-              ),
-              DataColumn(
-                label: Text('Age'),
-              ),
-            ],
-            rows: <DataRow>[
-              DataRow(
-                cells: <DataCell>[
-                  DataCell(
-                    Container(
-                      color: Colors.blue, // Set your desired color here
-                      child: Text('John'),
-                    ),
-                  ),
-                  DataCell(
-                    Text('30'),
-                  ),
-                ],
-              ),
-              DataRow(
-                cells: <DataCell>[
-                  DataCell(
-                    Container(
-                      color: Colors.green, // Set your desired color here
-                      child: Text('Alice'),
-                    ),
-                  ),
-                  DataCell(
-                    Text('25'),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-=======
 import 'package:sizer/sizer.dart';
 
-class Partner1 extends StatefulWidget {
+class Partner extends StatefulWidget {
   @override
   _State createState() => _State();
 }
 
-class _State extends State<Partner1> {
+class _State extends State<Partner> {
   late int _selectedValue = 0;
   @override
   Widget build(BuildContext context) {
@@ -135,7 +82,7 @@ class _State extends State<Partner1> {
                               child: Padding(
                                 padding: EdgeInsets.only(top: 10),
                                 child: Text(
-                                  "Contect us",
+                                  "Contact us",
                                   style: TextStyle(fontSize: 16),
                                 ),
                               ),
@@ -836,6 +783,5 @@ class _State extends State<Partner1> {
         }
       });
     });
->>>>>>> d3f35bf36d566e464263f8908feda60cf042ecb4
   }
 }
