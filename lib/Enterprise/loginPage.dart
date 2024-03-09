@@ -3,11 +3,11 @@ import 'dart:math';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/Widgets/customButton.dart';
-import 'package:flutter_application_1/createAccount.dart';
-import 'package:flutter_application_1/homepage.dart';
+import 'package:flutter_application_1/SuperUser/createAccount.dart';
+import 'package:flutter_application_1/SuperUser/homepage.dart';
 import 'package:sizer/sizer.dart';
 
-import '../main.dart';
+import '../../main.dart';
 
 // ignore: must_be_immutable
 class LoginPage extends StatefulWidget {

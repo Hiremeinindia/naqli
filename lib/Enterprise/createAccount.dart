@@ -1,11 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter_application_1/homepage.dart';
-import 'package:flutter_application_1/loginPage.dart';
+import 'package:flutter_application_1/Dashboard/dashboard_page.dart';
+import 'package:flutter_application_1/SuperUser/homepage.dart';
+import 'package:flutter_application_1/SuperUser/loginPage.dart';
 import 'package:sizer/sizer.dart';
-
-import 'Dashboard/dashboard_page.dart';
 
 class CreateAccount extends StatefulWidget {
   const CreateAccount();
@@ -646,12 +645,16 @@ class _CreateAccountState extends State<CreateAccount> {
                                     },
                                     items: [
                                       DropdownMenuItem<String>(
-                                        value: 'Individual',
-                                        child: Text('Individual'),
+                                        value: 'User',
+                                        child: Text('User'),
                                       ),
                                       DropdownMenuItem<String>(
-                                        value: 'Company',
-                                        child: Text('Company'),
+                                        value: 'SuperUser',
+                                        child: Text('SuperUser'),
+                                      ),
+                                      DropdownMenuItem<String>(
+                                        value: 'Enterprise',
+                                        child: Text('Enterprise'),
                                       ),
                                     ],
                                   ),
