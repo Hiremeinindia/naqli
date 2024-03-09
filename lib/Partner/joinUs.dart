@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
-class Partner1 extends StatefulWidget {
+class Partner extends StatefulWidget {
   @override
   _State createState() => _State();
 }
 
-class _State extends State<Partner1> {
+class _State extends State<Partner> {
   late int _selectedValue = 0;
   @override
   Widget build(BuildContext context) {
@@ -82,7 +82,7 @@ class _State extends State<Partner1> {
                               child: Padding(
                                 padding: EdgeInsets.only(top: 10),
                                 child: Text(
-                                  "Contect us",
+                                  "Contact us",
                                   style: TextStyle(fontSize: 16),
                                 ),
                               ),
