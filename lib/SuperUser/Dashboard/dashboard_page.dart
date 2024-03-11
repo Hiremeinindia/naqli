@@ -3,10 +3,9 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'package:flutter_application_1/Partner/Dashboard/dashboard.dart';
-
 import 'package:sizer/sizer.dart';
 import 'bookings.dart';
+import 'dashboard.dart';
 import 'payments.dart';
 import 'trigger_booking.dart';
 
@@ -252,8 +251,8 @@ class _MyHomePageState extends State<DashboardPage> {
                             boxShadow: <BoxShadow>[
                               BoxShadow(
                                   color: Color.fromARGB(255, 216, 214, 214),
-                                  blurRadius: 0.1,
-                                  spreadRadius: 1,
+                                  blurRadius: 10,
+                                  spreadRadius: 5,
                                   offset: Offset(1, 0.75))
                             ],
                             borderRadius: BorderRadius.circular(20.0),
@@ -345,6 +344,14 @@ class _MyHomePageState extends State<DashboardPage> {
                                             Icons.mode_comment_outlined),
                                       ),
                                       SideMenuItem(
+                                        title: 'Report an issue',
+                                        onTap: (page, _) {
+                                          sideMenu.changePage(page);
+                                        },
+                                        icon: const Icon(
+                                            Icons.mode_comment_outlined),
+                                      ),
+                                      SideMenuItem(
                                         title: 'Help',
                                         onTap: (page, _) {
                                           sideMenu.changePage(page);
@@ -366,8 +373,8 @@ class _MyHomePageState extends State<DashboardPage> {
                                 boxShadow: <BoxShadow>[
                                   BoxShadow(
                                     color: Color.fromARGB(255, 202, 200, 200),
-                                    blurRadius: 0.1,
-                                    spreadRadius: 1,
+                                    blurRadius: 25,
+                                    spreadRadius: 5,
                                   )
                                 ],
                                 borderRadius: BorderRadius.circular(20.0),
@@ -491,93 +498,36 @@ class _MyHomePageState extends State<DashboardPage> {
                                     color: Colors.indigo.shade900,
                                   ),
                                 )),
-                        Image.asset(
-                          'Naqli-final-logo.png',
-                          width: 10.w,
-                        ),
-                        Padding(
-                          padding: EdgeInsets.fromLTRB(2.0.w, 0, 0, 0),
-                          child: TextButton(
-                            onPressed: () {
-                              // Handle the first button press
-                            },
-                            child: Text(
-                              'User',
-                              style: TextStyle(
-                                fontSize: 12,
-                                fontFamily: "HelveticaNeue",
-                                color: Color.fromRGBO(206, 203, 203, 1),
-                              ),
+                        TextButton(
+                          onPressed: () {
+                            // Handle the first button press
+                          },
+                          child: Text(
+                            'User',
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontFamily: "HelveticaNeue",
+                              color: Color.fromRGBO(112, 112, 112, 1),
                             ),
                           ),
                         ),
                         SizedBox(
-                          width: 2,
-                          height: 20, // Adjust this value to reduce space
+                          height: 30,
                           child: VerticalDivider(
                             color: Color.fromRGBO(206, 203, 203, 1),
                           ),
                         ),
-                        Padding(
-                          padding: EdgeInsets.fromLTRB(1.0.w, 0, 0, 0),
-                          child: TextButton(
-                            onPressed: () {
-                              // Handle the third button press
-                            },
-                            child: Text(
-                              'Partner',
-                              style: TextStyle(
-                                fontSize: 12,
-                                fontFamily: "HelveticaNeue",
-                                fontWeight: FontWeight.bold,
-                                color: Color.fromRGBO(112, 112, 112, 1),
-                              ),
+                        TextButton(
+                          onPressed: () {
+                            // Handle the third button press
+                          },
+                          child: Text(
+                            'Partner',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontFamily: "HelveticaNeue",
+                              color: Color.fromRGBO(206, 203, 203, 1),
                             ),
-                          ),
-                        ),
-                        Container(
-                          padding: EdgeInsets.only(left: 5.0, top: 10),
-                          child: Row(
-                            children: [
-                              Icon(
-                                Icons.notifications,
-                                color: Color.fromRGBO(106, 102, 209, 1),
-                              ),
-                              SizedBox(
-                                height: 30,
-                                child: Padding(
-                                  padding: EdgeInsets.only(left: 3, top: 5),
-                                  child: Text(
-                                    "Contact Us",
-                                    style: TextStyle(
-                                      fontFamily: 'Colfax',
-                                      fontSize: 12,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              SizedBox(
-                                height: 20,
-                                child: VerticalDivider(
-                                  color: Color.fromRGBO(206, 203, 203, 1),
-                                ),
-                              ),
-                              SizedBox(
-                                height: 30,
-                                child: Padding(
-                                  padding: const EdgeInsets.only(
-                                    top: 5,
-                                  ),
-                                  child: Text(
-                                    "Hello Faizal!",
-                                    style: TextStyle(
-                                      fontFamily: 'Colfax',
-                                      fontSize: 12,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
                           ),
                         ),
                       ],

@@ -1,3 +1,4 @@
+import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/Widgets/customButton.dart';
 import 'package:flutter_application_1/Widgets/customRadio.dart';
@@ -210,25 +211,24 @@ class _TriggerBookingState extends State<TriggerBooking> {
                                             text2: "Xxxxx SAR",
                                             textcolor2: Colors.black38),
                                         SizedBox(
-                                          width: 1.w,
+                                          width: 2.w,
                                         ),
                                         IconButton(
-                                          padding: EdgeInsets.zero,
-                                          constraints: BoxConstraints(),
-                                          onPressed: null,
-                                          icon: Icon(
-                                            Icons.edit_document,
-                                            color:
-                                                Color.fromRGBO(74, 60, 81, 1),
-                                          ),
-                                        ),
-                                        IconButton(
-                                          padding: EdgeInsets.zero,
-                                          onPressed: null,
-                                          icon: Icon(Icons.delete),
-                                        ),
+                                            padding: EdgeInsets.zero,
+                                            constraints: BoxConstraints(),
+                                            onPressed: () {},
+                                            icon: Image.asset('editicon.png')),
                                         SizedBox(
                                           width: 1.w,
+                                        ),
+                                        IconButton(
+                                            padding: EdgeInsets.zero,
+                                            constraints: BoxConstraints(),
+                                            onPressed: () {},
+                                            icon:
+                                                Image.asset('deleteicon.png')),
+                                        SizedBox(
+                                          width: 2.w,
                                         ),
                                         SizedBox(
                                           height: 30,
@@ -236,7 +236,6 @@ class _TriggerBookingState extends State<TriggerBooking> {
                                             onPressed: isButtonEnabled
                                                 ? () {
                                                     showDialog(
-                                                      barrierDismissible: false,
                                                       context: context,
                                                       builder: (context) {
                                                         return BookingDialog();
@@ -246,19 +245,24 @@ class _TriggerBookingState extends State<TriggerBooking> {
                                                 : null,
                                             style: isButtonEnabled
                                                 ? ElevatedButton.styleFrom(
+                                                    elevation: 2,
                                                     backgroundColor:
                                                         Color.fromRGBO(
                                                             212, 213, 248, 1),
                                                     side: BorderSide(
-                                                      color: Colors.grey,
+                                                      color: Color.fromARGB(255,
+                                                              196, 196, 196)
+                                                          .withOpacity(0.1),
                                                     ),
                                                   )
                                                 : ElevatedButton.styleFrom(
+                                                    elevation: 2,
                                                     backgroundColor:
-                                                        Color.fromRGBO(212, 213,
-                                                            248, 0.897),
+                                                        Color.fromRGBO(
+                                                            212, 213, 248, 1),
                                                     side: BorderSide(
-                                                      color: Colors.grey,
+                                                      color: Colors.grey
+                                                          .withOpacity(0.2),
                                                     ),
                                                   ),
                                             child: Text(
@@ -289,6 +293,9 @@ class _TriggerBookingState extends State<TriggerBooking> {
                                     Row(
                                       children: [
                                         Checkbox(
+                                          splashRadius: 1,
+                                          shape: RoundedRectangleBorder(
+                                              side: BorderSide()),
                                           value: checkbox2,
                                           onChanged: (bool? newValue) {
                                             setState(() {
@@ -387,25 +394,24 @@ class _TriggerBookingState extends State<TriggerBooking> {
                                             text2: "Xxxxx SAR",
                                             textcolor2: Colors.black38),
                                         SizedBox(
-                                          width: 1.w,
+                                          width: 2.w,
                                         ),
                                         IconButton(
-                                          padding: EdgeInsets.zero,
-                                          constraints: BoxConstraints(),
-                                          onPressed: null,
-                                          icon: Icon(
-                                            Icons.edit_document,
-                                            color:
-                                                Color.fromRGBO(74, 60, 81, 1),
-                                          ),
-                                        ),
-                                        IconButton(
-                                          padding: EdgeInsets.zero,
-                                          onPressed: null,
-                                          icon: Icon(Icons.delete),
-                                        ),
+                                            padding: EdgeInsets.zero,
+                                            constraints: BoxConstraints(),
+                                            onPressed: () {},
+                                            icon: Image.asset('editicon.png')),
                                         SizedBox(
                                           width: 1.w,
+                                        ),
+                                        IconButton(
+                                            padding: EdgeInsets.zero,
+                                            constraints: BoxConstraints(),
+                                            onPressed: () {},
+                                            icon:
+                                                Image.asset('deleteicon.png')),
+                                        SizedBox(
+                                          width: 2.w,
                                         ),
                                         SizedBox(
                                           height: 30,
@@ -424,19 +430,24 @@ class _TriggerBookingState extends State<TriggerBooking> {
                                                 : null,
                                             style: isButtonEnabled1
                                                 ? ElevatedButton.styleFrom(
+                                                    elevation: 2,
                                                     backgroundColor:
                                                         Color.fromRGBO(
                                                             212, 213, 248, 1),
                                                     side: BorderSide(
-                                                      color: Colors.grey,
+                                                      color: Color.fromARGB(255,
+                                                              196, 196, 196)
+                                                          .withOpacity(0.1),
                                                     ),
                                                   )
                                                 : ElevatedButton.styleFrom(
+                                                    elevation: 2,
                                                     backgroundColor:
-                                                        Color.fromRGBO(212, 213,
-                                                            248, 0.897),
+                                                        Color.fromRGBO(
+                                                            212, 213, 248, 1),
                                                     side: BorderSide(
-                                                      color: Colors.grey,
+                                                      color: Colors.grey
+                                                          .withOpacity(0.2),
                                                     ),
                                                   ),
                                             child: Text(
@@ -467,6 +478,9 @@ class _TriggerBookingState extends State<TriggerBooking> {
                                     Row(
                                       children: [
                                         Checkbox(
+                                          splashRadius: 1,
+                                          shape: RoundedRectangleBorder(
+                                              side: BorderSide()),
                                           value: checkbox3,
                                           onChanged: (bool? newValue) {
                                             setState(() {
@@ -565,25 +579,24 @@ class _TriggerBookingState extends State<TriggerBooking> {
                                             text2: "Xxxxx SAR",
                                             textcolor2: Colors.black38),
                                         SizedBox(
-                                          width: 1.w,
+                                          width: 2.w,
                                         ),
                                         IconButton(
-                                          padding: EdgeInsets.zero,
-                                          constraints: BoxConstraints(),
-                                          onPressed: null,
-                                          icon: Icon(
-                                            Icons.edit_document,
-                                            color:
-                                                Color.fromRGBO(74, 60, 81, 1),
-                                          ),
-                                        ),
-                                        IconButton(
-                                          padding: EdgeInsets.zero,
-                                          onPressed: null,
-                                          icon: Icon(Icons.delete),
-                                        ),
+                                            padding: EdgeInsets.zero,
+                                            constraints: BoxConstraints(),
+                                            onPressed: () {},
+                                            icon: Image.asset('editicon.png')),
                                         SizedBox(
                                           width: 1.w,
+                                        ),
+                                        IconButton(
+                                            padding: EdgeInsets.zero,
+                                            constraints: BoxConstraints(),
+                                            onPressed: () {},
+                                            icon:
+                                                Image.asset('deleteicon.png')),
+                                        SizedBox(
+                                          width: 2.w,
                                         ),
                                         SizedBox(
                                           height: 30,
@@ -600,19 +613,24 @@ class _TriggerBookingState extends State<TriggerBooking> {
                                                 : null,
                                             style: isButtonEnabled2
                                                 ? ElevatedButton.styleFrom(
+                                                    elevation: 2,
                                                     backgroundColor:
                                                         Color.fromRGBO(
                                                             212, 213, 248, 1),
                                                     side: BorderSide(
-                                                      color: Colors.grey,
+                                                      color: Color.fromARGB(255,
+                                                              196, 196, 196)
+                                                          .withOpacity(0.1),
                                                     ),
                                                   )
                                                 : ElevatedButton.styleFrom(
+                                                    elevation: 2,
                                                     backgroundColor:
-                                                        Color.fromRGBO(212, 213,
-                                                            248, 0.897),
+                                                        Color.fromRGBO(
+                                                            212, 213, 248, 1),
                                                     side: BorderSide(
-                                                      color: Colors.grey,
+                                                      color: Colors.grey
+                                                          .withOpacity(0.2),
                                                     ),
                                                   ),
                                             child: Text(
@@ -828,8 +846,6 @@ class _TriggerBookingState extends State<TriggerBooking> {
                                                     onPressed: isButtonEnabled
                                                         ? () {
                                                             showDialog(
-                                                              barrierDismissible:
-                                                                  false,
                                                               context: context,
                                                               builder:
                                                                   (context) {
