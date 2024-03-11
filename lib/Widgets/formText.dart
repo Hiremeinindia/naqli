@@ -40,7 +40,7 @@ class TabelText {
   static TextStyle headerText = TextStyle(
     color: Colors.white,
     fontFamily: 'SFProTextMedium',
-    fontSize: 15,
+    fontSize: 17,
   );
   static TextStyle tableText = TextStyle(
     color: Colors.black,
@@ -75,5 +75,15 @@ class TabelText {
     fontWeight: FontWeight.bold,
     color: Color.fromRGBO(152, 135, 135, 1),
     fontSize: 10,
+  );
+  static TextStyle tableText3 = TextStyle(
+    color: Color.fromRGBO(80, 69, 74, 1),
+    fontFamily: 'Helvetica',
+    fontSize: 18,
+  );
+  static TextStyle tableText4 = TextStyle(
+    color: Colors.grey,
+    fontFamily: 'Helvetica',
+    fontSize: 16,
   );
 }
