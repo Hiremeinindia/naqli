@@ -30,17 +30,17 @@ class TabelText {
   static TextStyle headerText2 = TextStyle(
     color: Color.fromRGBO(124, 115, 115, 1),
     fontFamily: 'Helvetica',
-    fontSize: 13,
+    fontSize: 9,
   );
   static TextStyle headerText1 = TextStyle(
     color: Color.fromRGBO(75, 61, 82, 1),
     fontFamily: 'Helvetica',
-    fontSize: 16,
+    fontSize: 12,
   );
   static TextStyle headerText = TextStyle(
     color: Colors.white,
     fontFamily: 'SFProTextMedium',
-    fontSize: 17,
+    fontSize: 15,
   );
   static TextStyle tableText = TextStyle(
     color: Colors.black,
@@ -68,7 +68,7 @@ class TabelText {
   static TextStyle tableText1 = TextStyle(
     color: Color.fromRGBO(80, 69, 74, 1),
     fontFamily: 'SFProText',
-    fontSize: 20,
+    fontSize: 15,
   );
   static TextStyle text4 = TextStyle(
     fontFamily: 'SFProText',

@@ -327,7 +327,16 @@ class _MyHomePageState extends State<enterDashboardPage> {
                                             const Icon(Icons.person_2_outlined),
                                       ),
                                       SideMenuItem(
-                                        title: 'Bookings',
+                                        title: 'Bookings Manager',
+                                        onTap: (page, _) {
+                                          sideMenu.changePage(page);
+                                        },
+                                        icon:
+                                            const Icon(Icons.person_2_outlined),
+                                        // Set the style property to change the text size
+                                      ),
+                                      SideMenuItem(
+                                        title: 'Contracts',
                                         onTap: (page, _) {
                                           sideMenu.changePage(page);
                                         },
@@ -337,6 +346,14 @@ class _MyHomePageState extends State<enterDashboardPage> {
                                       ),
                                       SideMenuItem(
                                         title: 'Payments',
+                                        onTap: (page, _) {
+                                          sideMenu.changePage(page);
+                                        },
+                                        icon: const Icon(
+                                            Icons.mode_comment_outlined),
+                                      ),
+                                      SideMenuItem(
+                                        title: 'Users',
                                         onTap: (page, _) {
                                           sideMenu.changePage(page);
                                         },
