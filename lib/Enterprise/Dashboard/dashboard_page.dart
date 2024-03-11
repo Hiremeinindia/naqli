@@ -3,10 +3,9 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'package:flutter_application_1/Partner/Dashboard/dashboard.dart';
-
 import 'package:sizer/sizer.dart';
 import 'bookings.dart';
+import 'dashboard.dart';
 import 'payments.dart';
 import 'trigger_booking.dart';
 
@@ -252,8 +251,8 @@ class _MyHomePageState extends State<enterDashboardPage> {
                             boxShadow: <BoxShadow>[
                               BoxShadow(
                                   color: Color.fromARGB(255, 216, 214, 214),
-                                  blurRadius: 0.1,
-                                  spreadRadius: 1,
+                                  blurRadius: 10,
+                                  spreadRadius: 5,
                                   offset: Offset(1, 0.75))
                             ],
                             borderRadius: BorderRadius.circular(20.0),
@@ -366,8 +365,8 @@ class _MyHomePageState extends State<enterDashboardPage> {
                                 boxShadow: <BoxShadow>[
                                   BoxShadow(
                                     color: Color.fromARGB(255, 202, 200, 200),
-                                    blurRadius: 0.1,
-                                    spreadRadius: 1,
+                                    blurRadius: 25,
+                                    spreadRadius: 5,
                                   )
                                 ],
                                 borderRadius: BorderRadius.circular(20.0),
