@@ -109,6 +109,9 @@ class _TriggerBookingState extends State<TriggerBooking> {
                                     Row(
                                       children: [
                                         Checkbox(
+                                          splashRadius: 1,
+                                          shape: RoundedRectangleBorder(
+                                              side: BorderSide()),
                                           value: checkbox1,
                                           onChanged: (bool? newValue) {
                                             setState(() {
