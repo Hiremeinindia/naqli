@@ -2,6 +2,7 @@ import 'package:easy_sidemenu/easy_sidemenu.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/Enterprise/Dashboard/contracts.dart';
 
 import 'package:sizer/sizer.dart';
 import '../../Widgets/customButton.dart';
@@ -59,19 +60,26 @@ class _MyHomePageState extends State<enterDashboardPage> {
 
   void _handleItem4Tap() {
     setState(() {
-      _currentContent = Payments();
+      _currentContent = Contracts();
     });
     Navigator.pop(context);
   }
 
   void _handleItem5Tap() {
     setState(() {
-      _currentContent = TriggerBooking();
+      _currentContent = Payments();
     });
     Navigator.pop(context);
   }
 
   void _handleItem6Tap() {
+    setState(() {
+      _currentContent = TriggerBooking();
+    });
+    Navigator.pop(context);
+  }
+
+  void _handleItem7Tap() {
     setState(() {
       _currentContent = TriggerBooking();
     });
@@ -407,11 +415,16 @@ class _MyHomePageState extends State<enterDashboardPage> {
                                   Dashboard(),
                                   TriggerBooking(),
                                   Bookings(),
+                                  Contracts(),
                                   Payments(),
                                   Container(
                                     color: Colors.pink,
                                   ),
-                                  Users()
+                                  Users(),
+                                  Container(
+                                    color:
+                                        const Color.fromARGB(255, 121, 64, 255),
+                                  ),
                                 ]),
                               ),
                               SizedBox(
@@ -480,7 +493,17 @@ class _MyHomePageState extends State<enterDashboardPage> {
                     ListTile(
                         hoverColor: Colors.indigo.shade100,
                         title: Text(
-                          'Bookings',
+                          'Booking Manager',
+                          style: TextStyle(color: Colors.black),
+                        ),
+                        onTap: _handleItem3Tap),
+                    SizedBox(
+                      height: 2.h,
+                    ),
+                    ListTile(
+                        hoverColor: Colors.indigo.shade100,
+                        title: Text(
+                          'Contracts',
                           style: TextStyle(color: Colors.black),
                         ),
                         onTap: _handleItem3Tap),
