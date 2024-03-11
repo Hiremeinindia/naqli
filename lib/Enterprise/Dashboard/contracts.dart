@@ -410,9 +410,9 @@ class _PaymentsState extends State<Payments> {
                                         boxShadow: [
                                           BoxShadow(
                                             color: Colors.grey.withOpacity(
-                                                0.5), // Adjust the shadow color and opacity
+                                                0.1), // Adjust the shadow color and opacity
                                             blurRadius:
-                                                5.0, // Adjust the blur radius for a more visible shadow
+                                                0.1, // Adjust the blur radius for a more visible shadow
                                           ),
                                         ],
                                         borderRadius:
