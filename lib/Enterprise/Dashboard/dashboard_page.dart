@@ -2,23 +2,22 @@ import 'package:easy_sidemenu/easy_sidemenu.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter_application_1/Dashboard/dashboard.dart';
+
+import 'package:flutter_application_1/Partner/Dashboard/dashboard.dart';
 
 import 'package:sizer/sizer.dart';
-import '../Widgets/customButton.dart';
 import 'bookings.dart';
 import 'payments.dart';
 import 'trigger_booking.dart';
 
-class DashboardPage extends StatefulWidget {
-  const DashboardPage({Key? key}) : super(key: key);
+class enterDashboardPage extends StatefulWidget {
+  const enterDashboardPage({Key? key}) : super(key: key);
 
   @override
-  State<DashboardPage> createState() => _MyHomePageState();
+  State<enterDashboardPage> createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<DashboardPage> {
+class _MyHomePageState extends State<enterDashboardPage> {
   PageController page = PageController();
   SideMenuController sideMenu = SideMenuController();
   bool value = false;
@@ -65,6 +64,13 @@ class _MyHomePageState extends State<DashboardPage> {
   }
 
   void _handleItem5Tap() {
+    setState(() {
+      _currentContent = TriggerBooking();
+    });
+    Navigator.pop(context);
+  }
+
+  void _handleItem6Tap() {
     setState(() {
       _currentContent = TriggerBooking();
     });
@@ -231,156 +237,159 @@ class _MyHomePageState extends State<DashboardPage> {
                 ),
               ),
             ),
-            body: Expanded(
-              child: Padding(
-                padding: EdgeInsets.fromLTRB(6.w, 6.h, 6.w, 6.h),
-                child: Container(
-                  color: Color.fromRGBO(245, 243, 255, 1),
-                  child: Row(
-                    children: [
-                      Container(
-                        width: 375,
-                        decoration: BoxDecoration(
-                          boxShadow: <BoxShadow>[
-                            BoxShadow(
-                                color: Color.fromARGB(255, 216, 214, 214),
-                                blurRadius: 10,
-                                spreadRadius: 1,
-                                offset: Offset(1, 1))
-                          ],
-                          borderRadius: BorderRadius.circular(20.0),
-                          color: Color.fromRGBO(236, 233, 250, 1),
-                        ),
-                        child: Column(
-                          children: [
-                            Card(
-                              elevation: 1,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                              color: Colors.white,
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(
-                                    30.0), // Adjust the radius as needed
-                                child: Image.asset(
-                                  'Circleavatar.png',
-                                  width: 380, // Adjust the height as needed
-                                  fit: BoxFit.cover,
+            body: Padding(
+              padding: EdgeInsets.fromLTRB(1.w, 2.h, 1.w, 2.h),
+              child: Expanded(
+                child: Padding(
+                  padding: EdgeInsets.fromLTRB(3.w, 6.h, 3.w, 6.h),
+                  child: Container(
+                    color: Color.fromRGBO(245, 243, 255, 1),
+                    child: Row(
+                      children: [
+                        Container(
+                          width: 330,
+                          decoration: BoxDecoration(
+                            boxShadow: <BoxShadow>[
+                              BoxShadow(
+                                  color: Color.fromARGB(255, 216, 214, 214),
+                                  blurRadius: 0.1,
+                                  spreadRadius: 1,
+                                  offset: Offset(1, 0.75))
+                            ],
+                            borderRadius: BorderRadius.circular(20.0),
+                            color: Color.fromRGBO(236, 233, 250, 1),
+                          ),
+                          child: Column(
+                            children: [
+                              Card(
+                                elevation: 1,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
                                 ),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 30.h,
-                              child: SideMenu(
-                                controller: sideMenu,
-                                style: SideMenuStyle(
-                                  displayMode: SideMenuDisplayMode.auto,
-                                  selectedColor:
-                                      Color.fromRGBO(98, 105, 254, 1),
-                                  unselectedTitleTextStyle: const TextStyle(
-                                    fontFamily: 'SFProText',
-                                    fontSize: 23,
-                                    color: Color.fromRGBO(128, 118, 118, 1),
-                                  ),
-                                  selectedTitleTextStyle: const TextStyle(
-                                    fontFamily: 'SFProText',
-                                    color: Colors.white,
-                                    fontSize: 23,
-                                  ),
-                                  unselectedIconColor:
-                                      Color.fromRGBO(128, 118, 118, 1),
-                                  selectedIconColor: Colors.white,
-                                ),
-                                items: [
-                                  SideMenuItem(
-                                    title: 'Dashboard',
-                                    onTap: (page, _) {
-                                      sideMenu.changePage(page);
-                                    },
-                                    icon: const Icon(Icons.login_outlined),
-                                  ),
-                                  SideMenuItem(
-                                    title: 'Trigger Booking',
-                                    onTap: (page, _) {
-                                      sideMenu.changePage(page);
-                                    },
-                                    icon: const Icon(Icons.person_2_outlined),
-                                  ),
-                                  SideMenuItem(
-                                    title: 'Booking Manager',
-                                    onTap: (page, _) {
-                                      sideMenu.changePage(page);
-                                    },
-                                    icon: const Icon(Icons.person_2_outlined),
-                                    // Set the style property to change the text size
-                                  ),
-                                  SideMenuItem(
-                                    title: 'Payments',
-                                    onTap: (page, _) {
-                                      sideMenu.changePage(page);
-                                    },
-                                    icon:
-                                        const Icon(Icons.mode_comment_outlined),
-                                  ),
-                                  SideMenuItem(
-                                    title: 'Help',
-                                    onTap: (page, _) {
-                                      sideMenu.changePage(page);
-                                    },
-                                    icon: const Icon(Icons.inbox_outlined),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            SingleChildScrollView(
-                              child: Padding(
-                                padding:
-                                    EdgeInsets.fromLTRB(4.w, 5.h, 3.w, 2.h),
-                                child: Container(
-                                  height: 67.h,
-                                  decoration: BoxDecoration(
-                                    boxShadow: <BoxShadow>[
-                                      BoxShadow(
-                                        color: Color.fromRGBO(199, 199, 199, 1)
-                                            .withOpacity(0.5),
-                                        blurRadius: 15,
-                                        spreadRadius: 3,
-                                      )
-                                    ],
-                                    borderRadius: BorderRadius.circular(20.0),
-                                    color: Color.fromRGBO(255, 255, 255, 0.00),
-                                  ),
-                                  child: PageView(controller: page, children: [
-                                    Dashboard(),
-                                    TriggerBooking(),
-                                    Bookings(),
-                                    Payments(),
-                                    Container(
-                                      color: Colors.deepOrangeAccent,
+                                color: Color.fromARGB(255, 240, 237, 250),
+                                child: Expanded(
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(12.0),
                                     ),
-                                  ]),
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(
+                                          30.0), // Adjust the radius as needed
+                                      child: Image.asset(
+                                        'Circleavatar.png',
+                                        width:
+                                            550, // Adjust the height as needed
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                  ),
                                 ),
                               ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(bottom: 1.h, right: 3.w),
-                              child: CustomButton(
-                                onPressed: () {},
-                                text: 'Confirm Booking',
+                              Padding(
+                                padding:
+                                    const EdgeInsets.only(left: 1.5, top: 20),
+                                child: SizedBox(
+                                  height: 30.h,
+                                  child: SideMenu(
+                                    controller: sideMenu,
+                                    style: SideMenuStyle(
+                                      displayMode: SideMenuDisplayMode.auto,
+                                      selectedColor:
+                                          Color.fromRGBO(98, 105, 254, 1),
+                                      unselectedTitleTextStyle: const TextStyle(
+                                        fontFamily: 'SFProText',
+                                        fontSize: 14,
+                                        color: Color.fromRGBO(128, 118, 118, 1),
+                                      ),
+                                      selectedTitleTextStyle: const TextStyle(
+                                          fontFamily: 'SFProText',
+                                          color: Colors.white,
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w600),
+                                      unselectedIconColor:
+                                          Color.fromRGBO(128, 118, 118, 1),
+                                      selectedIconColor: Colors.white,
+                                    ),
+                                    items: [
+                                      SideMenuItem(
+                                        title: 'Dashboard',
+                                        onTap: (page, _) {
+                                          sideMenu.changePage(page);
+                                        },
+                                        icon: const Icon(Icons.login_outlined),
+                                      ),
+                                      SideMenuItem(
+                                        title: 'Trigger Booking',
+                                        onTap: (page, _) {
+                                          sideMenu.changePage(page);
+                                        },
+                                        icon:
+                                            const Icon(Icons.person_2_outlined),
+                                      ),
+                                      SideMenuItem(
+                                        title: 'Bookings',
+                                        onTap: (page, _) {
+                                          sideMenu.changePage(page);
+                                        },
+                                        icon:
+                                            const Icon(Icons.person_2_outlined),
+                                        // Set the style property to change the text size
+                                      ),
+                                      SideMenuItem(
+                                        title: 'Payments',
+                                        onTap: (page, _) {
+                                          sideMenu.changePage(page);
+                                        },
+                                        icon: const Icon(
+                                            Icons.mode_comment_outlined),
+                                      ),
+                                      SideMenuItem(
+                                        title: 'Help',
+                                        onTap: (page, _) {
+                                          sideMenu.changePage(page);
+                                        },
+                                        icon: const Icon(Icons.inbox_outlined),
+                                      ),
+                                    ],
+                                  ),
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
+                        Expanded(
+                          child: Padding(
+                            padding: EdgeInsets.fromLTRB(5.w, 5.h, 5.w, 5.h),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                boxShadow: <BoxShadow>[
+                                  BoxShadow(
+                                    color: Color.fromARGB(255, 202, 200, 200),
+                                    blurRadius: 0.1,
+                                    spreadRadius: 1,
+                                  )
+                                ],
+                                borderRadius: BorderRadius.circular(20.0),
+                                color: Color.fromRGBO(255, 255, 255, 0.00),
+                              ),
+                              child: PageView(controller: page, children: [
+                                Dashboard(),
+                                TriggerBooking(),
+                                Bookings(),
+                                Payments(),
+                                Container(
+                                  color: Colors.pink,
+                                ),
+                                Container(
+                                  color: Colors.deepOrangeAccent,
+                                ),
+                              ]),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -435,7 +444,7 @@ class _MyHomePageState extends State<DashboardPage> {
                     ListTile(
                         hoverColor: Colors.indigo.shade100,
                         title: Text(
-                          'Booking Manager',
+                          'Bookings',
                           style: TextStyle(color: Colors.black),
                         ),
                         onTap: _handleItem3Tap),
@@ -458,7 +467,7 @@ class _MyHomePageState extends State<DashboardPage> {
                           'Help',
                           style: TextStyle(color: Colors.black),
                         ),
-                        onTap: _handleItem5Tap),
+                        onTap: _handleItem6Tap),
                   ]),
             ),
             appBar: PreferredSize(
@@ -482,36 +491,93 @@ class _MyHomePageState extends State<DashboardPage> {
                                     color: Colors.indigo.shade900,
                                   ),
                                 )),
-                        TextButton(
-                          onPressed: () {
-                            // Handle the first button press
-                          },
-                          child: Text(
-                            'User',
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontFamily: "HelveticaNeue",
-                              color: Color.fromRGBO(112, 112, 112, 1),
+                        Image.asset(
+                          'Naqli-final-logo.png',
+                          width: 10.w,
+                        ),
+                        Padding(
+                          padding: EdgeInsets.fromLTRB(2.0.w, 0, 0, 0),
+                          child: TextButton(
+                            onPressed: () {
+                              // Handle the first button press
+                            },
+                            child: Text(
+                              'User',
+                              style: TextStyle(
+                                fontSize: 12,
+                                fontFamily: "HelveticaNeue",
+                                color: Color.fromRGBO(206, 203, 203, 1),
+                              ),
                             ),
                           ),
                         ),
                         SizedBox(
-                          height: 30,
+                          width: 2,
+                          height: 20, // Adjust this value to reduce space
                           child: VerticalDivider(
                             color: Color.fromRGBO(206, 203, 203, 1),
                           ),
                         ),
-                        TextButton(
-                          onPressed: () {
-                            // Handle the third button press
-                          },
-                          child: Text(
-                            'Partner',
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontFamily: "HelveticaNeue",
-                              color: Color.fromRGBO(206, 203, 203, 1),
+                        Padding(
+                          padding: EdgeInsets.fromLTRB(1.0.w, 0, 0, 0),
+                          child: TextButton(
+                            onPressed: () {
+                              // Handle the third button press
+                            },
+                            child: Text(
+                              'Partner',
+                              style: TextStyle(
+                                fontSize: 12,
+                                fontFamily: "HelveticaNeue",
+                                fontWeight: FontWeight.bold,
+                                color: Color.fromRGBO(112, 112, 112, 1),
+                              ),
                             ),
+                          ),
+                        ),
+                        Container(
+                          padding: EdgeInsets.only(left: 5.0, top: 10),
+                          child: Row(
+                            children: [
+                              Icon(
+                                Icons.notifications,
+                                color: Color.fromRGBO(106, 102, 209, 1),
+                              ),
+                              SizedBox(
+                                height: 30,
+                                child: Padding(
+                                  padding: EdgeInsets.only(left: 3, top: 5),
+                                  child: Text(
+                                    "Contact Us",
+                                    style: TextStyle(
+                                      fontFamily: 'Colfax',
+                                      fontSize: 12,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                height: 20,
+                                child: VerticalDivider(
+                                  color: Color.fromRGBO(206, 203, 203, 1),
+                                ),
+                              ),
+                              SizedBox(
+                                height: 30,
+                                child: Padding(
+                                  padding: const EdgeInsets.only(
+                                    top: 5,
+                                  ),
+                                  child: Text(
+                                    "Hello Faizal!",
+                                    style: TextStyle(
+                                      fontFamily: 'Colfax',
+                                      fontSize: 12,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ],

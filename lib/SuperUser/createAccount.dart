@@ -1,19 +1,20 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/widgets.dart';
+
+import 'package:flutter_application_1/SuperUser/Dashboard/dashboard_page.dart';
 import 'package:flutter_application_1/SuperUser/homepage.dart';
 import 'package:flutter_application_1/SuperUser/loginPage.dart';
 import 'package:sizer/sizer.dart';
 
-class Operator extends StatefulWidget {
-  const Operator();
+class superuserCreateAccount extends StatefulWidget {
+  const superuserCreateAccount();
 
   @override
-  _OperatorState createState() => _OperatorState();
+  _superuserCreateAccountState createState() => _superuserCreateAccountState();
 }
 
-class _OperatorState extends State<Operator> {
+class _superuserCreateAccountState extends State<superuserCreateAccount> {
   final _formKey = GlobalKey<FormState>();
 
   List<String> cities = ['City 1', 'City 2', 'City 3', 'City 4'];
@@ -135,7 +136,12 @@ class _OperatorState extends State<Operator> {
                       // Check if the verification is successful
                       if (result.user != null) {
                         print("otp verified successfully");
-
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => superuserDashboardPage(),
+                          ),
+                        );
                         setState(() {
                           isVerified = true;
                         });
@@ -257,7 +263,7 @@ class _OperatorState extends State<Operator> {
     return Sizer(builder: (context, orientation, deviceType) {
       return LayoutBuilder(
           builder: (BuildContext ctx, BoxConstraints constraints) {
-        if (constraints.maxWidth >= 900) {
+        if (constraints.maxWidth >= 650) {
           return Dialog(
             child: Container(
               width: 1100,
@@ -278,15 +284,11 @@ class _OperatorState extends State<Operator> {
                   key: _formKey,
                   child: Column(
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 30),
-                        child: Text(
-                          'Driver/Owner',
-                          style: TextStyle(
-                              fontFamily: 'HelveticaNeue',
-                              fontSize: 44,
-                              fontWeight: FontWeight.bold,
-                              color: Color.fromRGBO(106, 102, 209, 1)),
+                      Text(
+                        'Create your account',
+                        style: TextStyle(
+                          fontFamily: 'ColfaxBold',
+                          fontSize: 30,
                         ),
                       ),
                       SizedBox(
@@ -295,28 +297,19 @@ class _OperatorState extends State<Operator> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          Text(
-                            'Name',
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontFamily: 'Colfax',
-                            ),
-                          ),
-                          SizedBox(width: 95),
+                          Text('First Name '),
+                          SizedBox(width: 75),
                           Expanded(
                             child: SizedBox(
                               height: 45,
+                              width: 100,
                               child: TextFormField(
                                 controller: firstNameController,
                                 validator: nameValidator,
                                 decoration: InputDecoration(
-                                  hintStyle: TextStyle(
-                                      fontSize: 14,
-                                      fontFamily: "Helvetica",
-                                      color: Color.fromRGBO(133, 139, 145, 1)),
+                                  hintStyle: TextStyle(fontSize: 16),
                                   hintText: 'First Name',
-                                  contentPadding: EdgeInsets.symmetric(
-                                      vertical: 2.0, horizontal: 10.0),
+                                  contentPadding: EdgeInsets.all(5.0),
                                   border: OutlineInputBorder(
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(5)),
@@ -333,13 +326,9 @@ class _OperatorState extends State<Operator> {
                                 controller: lastNameController,
                                 validator: nameValidator,
                                 decoration: InputDecoration(
-                                  hintStyle: TextStyle(
-                                      fontSize: 14,
-                                      fontFamily: "Helvetica",
-                                      color: Color.fromRGBO(133, 139, 145, 1)),
+                                  hintStyle: TextStyle(fontSize: 16),
                                   hintText: 'Last Name',
-                                  contentPadding: EdgeInsets.symmetric(
-                                      vertical: 2.0, horizontal: 10.0),
+                                  contentPadding: EdgeInsets.all(5.0),
                                   border: OutlineInputBorder(
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(5)),
@@ -353,10 +342,10 @@ class _OperatorState extends State<Operator> {
                       SizedBox(height: 15),
                       Row(
                         children: [
-                          Text('Email ID',
+                          Text('Email Address',
                               style: TextStyle(
                                   fontFamily: 'Colfax', fontSize: 16)),
-                          SizedBox(width: 78),
+                          SizedBox(width: 40),
                           Expanded(
                             child: SizedBox(
                               height: 45,
@@ -364,13 +353,9 @@ class _OperatorState extends State<Operator> {
                                 controller: emailController,
                                 validator: emailValidator,
                                 decoration: InputDecoration(
-                                  hintStyle: TextStyle(
-                                      fontSize: 14,
-                                      fontFamily: "Helvetica",
-                                      color: Color.fromRGBO(133, 139, 145, 1)),
+                                  hintStyle: TextStyle(fontSize: 16),
                                   hintText: 'Email address',
-                                  contentPadding: EdgeInsets.symmetric(
-                                      vertical: 2.0, horizontal: 10.0),
+                                  contentPadding: EdgeInsets.all(5.0),
                                   border: OutlineInputBorder(
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(5)),
@@ -389,26 +374,24 @@ class _OperatorState extends State<Operator> {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text('Mobile No', style: TextStyle(fontSize: 16)),
+                              Text('Password', style: TextStyle(fontSize: 16)),
                               SizedBox(
                                 height: 40,
                               ),
-                              Text('Date of birth',
+                              Text('Contact Number',
                                   style: TextStyle(fontSize: 16)),
                               SizedBox(
                                 height: 40,
                               ),
-                              Text('Unit Type', style: TextStyle(fontSize: 16)),
+                              Text('Address 1', style: TextStyle(fontSize: 16)),
                               SizedBox(
                                 height: 40,
                               ),
-                              Text('Driving License',
-                                  style: TextStyle(fontSize: 16)),
+                              Text('City', style: TextStyle(fontSize: 16)),
                               SizedBox(
                                 height: 40,
                               ),
-                              Text('National ID',
-                                  style: TextStyle(fontSize: 16)),
+                              Text('Govt ID', style: TextStyle(fontSize: 16)),
                             ],
                           ),
                           SizedBox(
@@ -427,14 +410,9 @@ class _OperatorState extends State<Operator> {
                                     controller: passwordController,
                                     validator: validatePassword,
                                     decoration: InputDecoration(
-                                      hintStyle: TextStyle(
-                                          fontSize: 14,
-                                          fontFamily: "Helvetica",
-                                          color:
-                                              Color.fromRGBO(133, 139, 145, 1)),
-                                      hintText: 'Enter your mobile no',
-                                      contentPadding: EdgeInsets.symmetric(
-                                          vertical: 2.0, horizontal: 10.0),
+                                      hintStyle: TextStyle(fontSize: 16),
+                                      hintText: 'Password',
+                                      contentPadding: EdgeInsets.all(5.0),
                                       border: OutlineInputBorder(
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(5)),
@@ -456,15 +434,9 @@ class _OperatorState extends State<Operator> {
                                         return null;
                                     },
                                     decoration: InputDecoration(
-                                      hintStyle: TextStyle(
-                                          fontSize: 14,
-                                          fontFamily: "Helvetica",
-                                          color:
-                                              Color.fromRGBO(133, 139, 145, 1)),
-                                      hintText: 'DD/MM/YYYY',
-                                      labelText: 'Date of birth',
-                                      contentPadding: EdgeInsets.symmetric(
-                                          vertical: 2.0, horizontal: 10.0),
+                                      hintStyle: TextStyle(fontSize: 16),
+                                      hintText: 'Phone Number',
+                                      contentPadding: EdgeInsets.all(5.0),
                                       border: OutlineInputBorder(
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(5)),
@@ -477,11 +449,57 @@ class _OperatorState extends State<Operator> {
                                 ),
                                 SizedBox(
                                   height: 45,
+                                  child: TextFormField(
+                                    controller: addressController,
+                                    validator: nameValidator,
+                                    decoration: InputDecoration(
+                                      hintStyle: TextStyle(fontSize: 16),
+                                      hintText: 'Address',
+                                      contentPadding: EdgeInsets.all(5.0),
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(5)),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 15,
+                                ),
+                                SizedBox(
+                                  height: 45,
+                                  child: DropdownButtonFormField(
+                                    decoration: InputDecoration(
+                                      contentPadding: EdgeInsets.all(5.0),
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(5)),
+                                      ),
+                                    ),
+                                    value: selectedCity,
+                                    onChanged: (String? newValue) {
+                                      setState(() {
+                                        selectedCity = newValue;
+                                      });
+                                    },
+                                    items: cities.map<DropdownMenuItem<String>>(
+                                        (String value) {
+                                      return DropdownMenuItem<String>(
+                                        value: value,
+                                        child: Text(value),
+                                      );
+                                    }).toList(),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 15,
+                                ),
+                                SizedBox(
+                                  height: 45,
                                   child: DropdownButtonFormField<String>(
                                     value: selectedOption,
                                     decoration: InputDecoration(
-                                      contentPadding: EdgeInsets.symmetric(
-                                          vertical: 2.0, horizontal: 10.0),
+                                      contentPadding: EdgeInsets.all(5.0),
                                       border: OutlineInputBorder(
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(5)),
@@ -494,68 +512,18 @@ class _OperatorState extends State<Operator> {
                                     },
                                     items: [
                                       DropdownMenuItem<String>(
-                                        value: 'Vehicle',
-                                        child: Text('Vehicle'),
+                                        value: 'National ID',
+                                        child: Text('National ID'),
                                       ),
                                       DropdownMenuItem<String>(
-                                        value: 'Bus',
-                                        child: Text('Bus'),
+                                        value: 'Iqama No.',
+                                        child: Text('Iqama No.'),
                                       ),
                                       DropdownMenuItem<String>(
-                                        value: 'Equipment',
-                                        child: Text('Equipment'),
+                                        value: 'Visit Visa / Border No',
+                                        child: Text('Visit Visa / Border No'),
                                       ),
                                     ],
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 15,
-                                ),
-                                SizedBox(
-                                  height: 45,
-                                  width: 160,
-                                  child: Expanded(
-                                    child: ElevatedButton(
-                                      child: Text(
-                                        'Upload a file',
-                                        style: TextStyle(
-                                            color: Color.fromRGBO(20, 3, 3, 1)),
-                                      ),
-                                      style: ElevatedButton.styleFrom(
-                                        elevation: 2,
-                                        backgroundColor: Colors.white,
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(5),
-                                        ),
-                                      ),
-                                      onPressed: () {},
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 15,
-                                ),
-                                SizedBox(
-                                  height: 45,
-                                  width: 160,
-                                  child: Expanded(
-                                    child: ElevatedButton(
-                                      child: Text(
-                                        'Upload a file',
-                                        style: TextStyle(
-                                            color: Color.fromRGBO(20, 3, 3, 1)),
-                                      ),
-                                      style: ElevatedButton.styleFrom(
-                                        elevation: 2,
-                                        backgroundColor: Colors.white,
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(5),
-                                        ),
-                                      ),
-                                      onPressed: () {},
-                                    ),
                                   ),
                                 ),
                                 SizedBox(
@@ -570,33 +538,26 @@ class _OperatorState extends State<Operator> {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text('Iqama No.', style: TextStyle(fontSize: 16)),
-                              SizedBox(
-                                height: 40,
-                              ),
-                              Text('Panel Information',
+                              Text('Confirm Password',
                                   style: TextStyle(fontSize: 16)),
                               SizedBox(
                                 height: 40,
                               ),
-                              Text('Classification',
+                              Text('Alternate Number',
                                   style: TextStyle(fontSize: 16)),
                               SizedBox(
-                                height: 30,
+                                height: 40,
                               ),
-                              Text('ID Copy', style: TextStyle(fontSize: 16)),
+                              Text('Address 2', style: TextStyle(fontSize: 16)),
                               SizedBox(
-                                height: 34,
+                                height: 40,
                               ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text('Picture of',
-                                      style: TextStyle(fontSize: 15)),
-                                  Text('Equipment/Vehicle',
-                                      style: TextStyle(fontSize: 15)),
-                                ],
+                              Text('Account Type',
+                                  style: TextStyle(fontSize: 16)),
+                              SizedBox(
+                                height: 40,
                               ),
+                              Text('ID Number', style: TextStyle(fontSize: 16)),
                             ],
                           ),
                           SizedBox(
@@ -612,12 +573,8 @@ class _OperatorState extends State<Operator> {
                                     validator: validatePassword,
                                     controller: confirmPasswordController,
                                     decoration: InputDecoration(
-                                      hintStyle: TextStyle(
-                                          fontSize: 14,
-                                          fontFamily: "Helvetica",
-                                          color:
-                                              Color.fromRGBO(133, 139, 145, 1)),
-                                      hintText: 'XXXXXXXXXX',
+                                      hintStyle: TextStyle(fontSize: 16),
+                                      hintText: 'Password',
                                       contentPadding: EdgeInsets.all(5.0),
                                       border: OutlineInputBorder(
                                           borderRadius: BorderRadius.all(
@@ -639,12 +596,8 @@ class _OperatorState extends State<Operator> {
                                     },
                                     controller: alternateNumberController,
                                     decoration: InputDecoration(
-                                      hintStyle: TextStyle(
-                                          fontSize: 14,
-                                          fontFamily: "Helvetica",
-                                          color:
-                                              Color.fromRGBO(133, 139, 145, 1)),
-                                      hintText: 'XXXXXXXXXX',
+                                      hintStyle: TextStyle(fontSize: 16),
+                                      hintText: 'Phone Number',
                                       contentPadding: EdgeInsets.all(5.0),
                                       border: OutlineInputBorder(
                                         borderRadius: BorderRadius.all(
@@ -656,68 +609,19 @@ class _OperatorState extends State<Operator> {
                                 SizedBox(
                                   height: 15,
                                 ),
-                                Row(
-                                  children: [
-                                    Expanded(
-                                      child: SizedBox(
-                                        height: 45,
-                                        child: DropdownButtonFormField<String>(
-                                          value: selectedOption,
-                                          decoration: InputDecoration(
-                                            contentPadding: EdgeInsets.all(5.0),
-                                            border: OutlineInputBorder(
-                                              borderRadius: BorderRadius.all(
-                                                Radius.circular(5),
-                                              ),
-                                            ),
-                                          ),
-                                          onChanged: (String? newValue) {
-                                            setState(() {
-                                              selectedOption = newValue;
-                                            });
-                                          },
-                                          items: [
-                                            DropdownMenuItem<String>(
-                                              value: 'Vehicle',
-                                              child: Text('Vehicle'),
-                                            ),
-                                            DropdownMenuItem<String>(
-                                              value: 'Bus',
-                                              child: Text('Bus'),
-                                            ),
-                                            DropdownMenuItem<String>(
-                                              value: 'Equipment',
-                                              child: Text('Equipment'),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                    // Adjust the space between the dropdown and the icon
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 15,
-                                ),
                                 SizedBox(
                                   height: 45,
-                                  width: 160,
-                                  child: Expanded(
-                                    child: ElevatedButton(
-                                      child: Text(
-                                        'Upload a file',
-                                        style: TextStyle(
-                                            color: Color.fromRGBO(20, 3, 3, 1)),
+                                  child: TextFormField(
+                                    validator: nameValidator,
+                                    controller: address2Controller,
+                                    decoration: InputDecoration(
+                                      hintStyle: TextStyle(fontSize: 16),
+                                      hintText: 'Address',
+                                      contentPadding: EdgeInsets.all(5.0),
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(5)),
                                       ),
-                                      style: ElevatedButton.styleFrom(
-                                        elevation: 2,
-                                        backgroundColor: Colors.white,
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(5),
-                                        ),
-                                      ),
-                                      onPressed: () {},
                                     ),
                                   ),
                                 ),
@@ -726,23 +630,55 @@ class _OperatorState extends State<Operator> {
                                 ),
                                 SizedBox(
                                   height: 45,
-                                  width: 160,
-                                  child: Expanded(
-                                    child: ElevatedButton(
-                                      child: Text(
-                                        'Upload a file',
-                                        style: TextStyle(
-                                            color: Color.fromRGBO(20, 3, 3, 1)),
+                                  child: DropdownButtonFormField<String>(
+                                    value: selectedType,
+                                    decoration: InputDecoration(
+                                      contentPadding: EdgeInsets.all(5.0),
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(5)),
                                       ),
-                                      style: ElevatedButton.styleFrom(
-                                        elevation: 2,
-                                        backgroundColor: Colors.white,
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(5),
-                                        ),
+                                    ),
+                                    onChanged: (String? newValue) {
+                                      setState(() {
+                                        selectedType = newValue;
+                                      });
+                                    },
+                                    items: [
+                                      DropdownMenuItem<String>(
+                                        value: 'User',
+                                        child: Text('User'),
                                       ),
-                                      onPressed: () {},
+                                      DropdownMenuItem<String>(
+                                        value: 'SuperUser',
+                                        child: Text('SuperUser'),
+                                      ),
+                                      DropdownMenuItem<String>(
+                                        value: 'Enterprise',
+                                        child: Text('Enterprise'),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 15,
+                                ),
+                                SizedBox(
+                                  height: 45,
+                                  child: TextFormField(
+                                    validator: (value) {
+                                      if (value!.length != 10)
+                                        return 'Mobile Number must be of 10 digit';
+                                      else
+                                        return null;
+                                    },
+                                    controller: idNumberController,
+                                    decoration: InputDecoration(
+                                      contentPadding: EdgeInsets.all(5.0),
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(5)),
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -755,43 +691,73 @@ class _OperatorState extends State<Operator> {
                         ],
                       ),
                       SizedBox(
-                        height: 27,
+                        height: 20,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           SizedBox(
                             height: 45,
-                            width: 200,
-                            child: Expanded(
-                              child: ElevatedButton(
-                                onPressed: () async {
-                                  if (_formKey.currentState!.validate()) {
-                                    print("track1");
-                                    await _startPhoneAuth(
-                                        contactNumberController.text);
-                                    // _showOtpVerificationDialog();
-                                    // Save user data and start phone authentication
-                                    await _saveUserDataToFirestore();
-                                  }
-                                },
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor:
-                                      Color.fromARGB(255, 128, 123, 229),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(5),
-                                  ),
+                            child: ElevatedButton(
+                              onPressed: () async {
+                                if (_formKey.currentState!.validate()) {
+                                  print("track1");
+                                  await _startPhoneAuth(
+                                      contactNumberController.text);
+                                  // _showOtpVerificationDialog();
+                                  // Save user data and start phone authentication
+                                  await _saveUserDataToFirestore();
+                                }
+                              },
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor:
+                                    Color.fromARGB(255, 128, 123, 229),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(5),
                                 ),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Text(
-                                    'Submit',
-                                    style: TextStyle(
-                                        fontFamily: 'Colfax',
-                                        fontSize: 16,
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold),
-                                  ),
+                              ),
+                              child: Text(
+                                'Create Account',
+                                style: TextStyle(
+                                  fontFamily: 'Colfax',
+                                  fontSize: 16,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 30,
+                          ),
+                          SizedBox(
+                            height: 45,
+                            child: ElevatedButton(
+                              onPressed: () async {
+                                if (_formKey.currentState!.validate()) {
+                                  print("track1");
+                                  await _startPhoneAuth(
+                                      contactNumberController.text);
+                                  // _showOtpVerificationDialog();
+                                  // Save user data and start phone authentication
+                                  await _saveUserDataToFirestore();
+                                }
+                              },
+                              style: ElevatedButton.styleFrom(
+                                fixedSize:
+                                    const Size.fromWidth(double.infinity),
+                                backgroundColor:
+                                    Color.fromARGB(112, 112, 112, 1),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(
+                                      5), // Adjust border radius as needed
+                                ),
+                              ),
+                              child: Text(
+                                'Cancel',
+                                style: TextStyle(
+                                  fontFamily: 'Colfax',
+                                  fontSize: 16,
+                                  color: Colors.white,
                                 ),
                               ),
                             ),
@@ -800,6 +766,29 @@ class _OperatorState extends State<Operator> {
                       ),
                       SizedBox(
                         height: 15,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text('Already have an account? '),
+                          InkWell(
+                            onTap: () {
+                              showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return superuserLoginPage();
+                                },
+                              );
+                            },
+                            child: Text(
+                              'Sign In',
+                              style: TextStyle(
+                                color: Colors.blue,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
@@ -832,7 +821,7 @@ class _OperatorState extends State<Operator> {
                       SingleChildScrollView(
                         scrollDirection: Axis.horizontal,
                         child: Text(
-                          'Driver/Owner',
+                          'Create your account',
                           style: TextStyle(
                             fontFamily: 'ColfaxBold',
                             fontSize: 15,
@@ -854,15 +843,12 @@ class _OperatorState extends State<Operator> {
                                 controller: firstNameController,
                                 validator: nameValidator,
                                 decoration: InputDecoration(
-                                  hintStyle: TextStyle(fontSize: 12),
+                                  hintStyle: TextStyle(fontSize: 15),
                                   hintText: 'First Name',
-                                  contentPadding: EdgeInsets.symmetric(
-                                      vertical: 2.0,
-                                      horizontal:
-                                          10.0), // Adjust padding as needed
+                                  contentPadding: EdgeInsets.all(2.0),
                                   border: OutlineInputBorder(
                                     borderRadius:
-                                        BorderRadius.all(Radius.circular(5)),
+                                        BorderRadius.all(Radius.circular(2.0)),
                                   ),
                                 ),
                               ),
@@ -882,13 +868,12 @@ class _OperatorState extends State<Operator> {
                                 controller: lastNameController,
                                 validator: nameValidator,
                                 decoration: InputDecoration(
-                                  hintStyle: TextStyle(fontSize: 12),
+                                  hintStyle: TextStyle(fontSize: 15),
                                   hintText: 'Last Name',
-                                  contentPadding: EdgeInsets.symmetric(
-                                      vertical: 2.0, horizontal: 10.0),
+                                  contentPadding: EdgeInsets.all(1.0),
                                   border: OutlineInputBorder(
                                     borderRadius:
-                                        BorderRadius.all(Radius.circular(5)),
+                                        BorderRadius.all(Radius.circular(2.0)),
                                   ),
                                 ),
                               ),
@@ -899,7 +884,7 @@ class _OperatorState extends State<Operator> {
                       SizedBox(height: 10),
                       Row(
                         children: [
-                          SizedBox(width: 150, child: Text('Email ID')),
+                          SizedBox(width: 150, child: Text('Email Address')),
                           SizedBox(width: 5),
                           Expanded(
                             child: SizedBox(
@@ -908,10 +893,121 @@ class _OperatorState extends State<Operator> {
                                 controller: emailController,
                                 validator: emailValidator,
                                 decoration: InputDecoration(
-                                  hintStyle: TextStyle(fontSize: 12),
+                                  hintStyle: TextStyle(fontSize: 15),
                                   hintText: 'Email address',
-                                  contentPadding: EdgeInsets.symmetric(
-                                      vertical: 2.0, horizontal: 10.0),
+                                  contentPadding: EdgeInsets.all(2.0),
+                                  border: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(2)),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Row(
+                        children: [
+                          SizedBox(width: 150, child: Text('Password')),
+                          SizedBox(width: 5),
+                          Expanded(
+                            child: SizedBox(
+                              height: 40,
+                              child: TextFormField(
+                                controller: emailController,
+                                validator: emailValidator,
+                                decoration: InputDecoration(
+                                  hintStyle: TextStyle(fontSize: 15),
+                                  hintText: 'Password',
+                                  contentPadding: EdgeInsets.all(2.0),
+                                  border: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(2)),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 10),
+                      Row(
+                        children: [
+                          SizedBox(width: 150, child: Text('Confirm Password')),
+                          SizedBox(width: 5),
+                          Expanded(
+                            child: SizedBox(
+                              height: 40,
+                              child: TextFormField(
+                                controller: emailController,
+                                validator: emailValidator,
+                                decoration: InputDecoration(
+                                  hintStyle: TextStyle(fontSize: 15),
+                                  hintText: 'Password',
+                                  contentPadding: EdgeInsets.all(2.0),
+                                  border: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(2)),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 10),
+                      Row(
+                        children: [
+                          SizedBox(width: 150, child: Text('Contact Number')),
+                          SizedBox(width: 5),
+                          Expanded(
+                            child: SizedBox(
+                              height: 40,
+                              child: TextFormField(
+                                controller: contactNumberController,
+                                validator: (value) {
+                                  if (value!.length != 10)
+                                    return 'Mobile Number must be of 10 digit';
+                                  else
+                                    return null;
+                                },
+                                decoration: InputDecoration(
+                                  hintStyle: TextStyle(fontSize: 15),
+                                  hintText: 'Phone Number',
+                                  contentPadding: EdgeInsets.all(5.0),
+                                  border: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(5)),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 10),
+                      Row(
+                        children: [
+                          SizedBox(width: 150, child: Text('Alternate Number')),
+                          SizedBox(width: 5),
+                          Expanded(
+                            child: SizedBox(
+                              height: 40,
+                              child: TextFormField(
+                                validator: (value) {
+                                  if (value!.length != 10)
+                                    return 'Mobile Number must be of 10 digit';
+                                  else
+                                    return null;
+                                },
+                                controller: alternateNumberController,
+                                decoration: InputDecoration(
+                                  hintStyle: TextStyle(fontSize: 15),
+                                  hintText: 'Phone Number',
+                                  contentPadding: EdgeInsets.all(5.0),
                                   border: OutlineInputBorder(
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(5)),
@@ -927,17 +1023,18 @@ class _OperatorState extends State<Operator> {
                       ),
                       Row(
                         children: [
-                          SizedBox(width: 150, child: Text('Mobile No')),
+                          SizedBox(width: 150, child: Text('Address 1')),
                           SizedBox(width: 5),
                           Expanded(
                             child: SizedBox(
                               height: 40,
                               child: TextFormField(
+                                controller: addressController,
+                                validator: nameValidator,
                                 decoration: InputDecoration(
-                                  hintStyle: TextStyle(fontSize: 12),
-                                  hintText: 'Enter your mobile no',
-                                  contentPadding: EdgeInsets.symmetric(
-                                      vertical: 2.0, horizontal: 10.0),
+                                  hintStyle: TextStyle(fontSize: 15),
+                                  hintText: 'Address',
+                                  contentPadding: EdgeInsets.all(5.0),
                                   border: OutlineInputBorder(
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(5)),
@@ -951,17 +1048,18 @@ class _OperatorState extends State<Operator> {
                       SizedBox(height: 10),
                       Row(
                         children: [
-                          SizedBox(width: 150, child: Text('Iqama No')),
+                          SizedBox(width: 150, child: Text('Address 2')),
                           SizedBox(width: 5),
                           Expanded(
                             child: SizedBox(
                               height: 40,
                               child: TextFormField(
+                                controller: addressController,
+                                validator: nameValidator,
                                 decoration: InputDecoration(
-                                  hintStyle: TextStyle(fontSize: 12),
-                                  hintText: 'XXXXXXXXXX',
-                                  contentPadding: EdgeInsets.symmetric(
-                                      vertical: 2.0, horizontal: 10.0),
+                                  hintStyle: TextStyle(fontSize: 15),
+                                  hintText: 'Address',
+                                  contentPadding: EdgeInsets.all(5.0),
                                   border: OutlineInputBorder(
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(5)),
@@ -975,22 +1073,32 @@ class _OperatorState extends State<Operator> {
                       SizedBox(height: 10),
                       Row(
                         children: [
-                          SizedBox(width: 150, child: Text('Date of birth')),
+                          SizedBox(width: 150, child: Text('Çity')),
                           SizedBox(width: 5),
                           Expanded(
                             child: SizedBox(
                               height: 40,
-                              child: TextFormField(
+                              child: DropdownButtonFormField(
                                 decoration: InputDecoration(
-                                  hintStyle: TextStyle(fontSize: 12),
-                                  hintText: 'DD/MM/YYYY',
-                                  contentPadding: EdgeInsets.symmetric(
-                                      vertical: 2.0, horizontal: 10.0),
+                                  contentPadding: EdgeInsets.all(5.0),
                                   border: OutlineInputBorder(
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(5)),
                                   ),
                                 ),
+                                value: selectedCity,
+                                onChanged: (String? newValue) {
+                                  setState(() {
+                                    selectedCity = newValue;
+                                  });
+                                },
+                                items: cities.map<DropdownMenuItem<String>>(
+                                    (String value) {
+                                  return DropdownMenuItem<String>(
+                                    value: value,
+                                    child: Text(value),
+                                  );
+                                }).toList(),
                               ),
                             ),
                           ),
@@ -999,39 +1107,51 @@ class _OperatorState extends State<Operator> {
                       SizedBox(height: 10),
                       Row(
                         children: [
-                          SizedBox(
-                              width: 150, child: Text('Panel Information')),
+                          SizedBox(width: 150, child: Text('Account Type')),
                           SizedBox(width: 5),
                           Expanded(
                             child: SizedBox(
                               height: 40,
-                              child: TextFormField(
+                              child: DropdownButtonFormField(
+                                value: selectedType,
                                 decoration: InputDecoration(
-                                  hintStyle: TextStyle(fontSize: 12),
-                                  hintText: 'XXXXXXXXXX',
-                                  contentPadding: EdgeInsets.symmetric(
-                                      vertical: 2.0, horizontal: 10.0),
+                                  contentPadding: EdgeInsets.all(5.0),
                                   border: OutlineInputBorder(
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(5)),
                                   ),
                                 ),
+                                onChanged: (String? newValue) {
+                                  setState(() {
+                                    selectedType = newValue;
+                                  });
+                                },
+                                items: [
+                                  DropdownMenuItem<String>(
+                                    value: 'Individual',
+                                    child: Text('Individual',
+                                        style: TextStyle(fontSize: 8.sp)),
+                                  ),
+                                  DropdownMenuItem<String>(
+                                    value: 'Company',
+                                    child: Text('Company',
+                                        style: TextStyle(fontSize: 8.sp)),
+                                  ),
+                                ],
                               ),
                             ),
                           ),
                         ],
                       ),
-                      SizedBox(
-                        height: 10,
-                      ),
+                      SizedBox(height: 10),
                       Row(
                         children: [
-                          SizedBox(width: 150, child: Text('Unit Type')),
+                          SizedBox(width: 150, child: Text('Govt ID')),
                           SizedBox(width: 5),
                           Expanded(
                             child: SizedBox(
                               height: 40,
-                              child: DropdownButtonFormField<String>(
+                              child: DropdownButtonFormField(
                                 value: selectedOption,
                                 decoration: InputDecoration(
                                   contentPadding: EdgeInsets.all(5.0),
@@ -1047,16 +1167,25 @@ class _OperatorState extends State<Operator> {
                                 },
                                 items: [
                                   DropdownMenuItem<String>(
-                                    value: 'Vehicle',
-                                    child: Text('Vehicle'),
+                                    value: 'National ID',
+                                    child: Text(
+                                      'National ID',
+                                      style: TextStyle(fontSize: 8.sp),
+                                    ),
                                   ),
                                   DropdownMenuItem<String>(
-                                    value: 'Bus',
-                                    child: Text('Bus'),
+                                    value: 'Iqama No.',
+                                    child: Text(
+                                      'Iqama No.',
+                                      style: TextStyle(fontSize: 8.sp),
+                                    ),
                                   ),
                                   DropdownMenuItem<String>(
-                                    value: 'Equipment',
-                                    child: Text('Equipment'),
+                                    value: 'Visit Visa / Border No',
+                                    child: Text(
+                                      'Visit Visa / Border No',
+                                      style: TextStyle(fontSize: 5.sp),
+                                    ),
                                   ),
                                 ],
                               ),
@@ -1067,169 +1196,22 @@ class _OperatorState extends State<Operator> {
                       SizedBox(height: 10),
                       Row(
                         children: [
-                          SizedBox(width: 150, child: Text('Classification')),
+                          SizedBox(width: 150, child: Text('ID Number')),
                           SizedBox(width: 5),
                           Expanded(
                             child: SizedBox(
                               height: 40,
-                              child: DropdownButtonFormField<String>(
-                                value: selectedOption,
+                              child: TextFormField(
+                                controller: addressController,
+                                validator: nameValidator,
                                 decoration: InputDecoration(
+                                  hintStyle: TextStyle(fontSize: 13),
+                                  hintText: 'ID Number',
                                   contentPadding: EdgeInsets.all(5.0),
                                   border: OutlineInputBorder(
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(5)),
                                   ),
-                                ),
-                                onChanged: (String? newValue) {
-                                  setState(() {
-                                    selectedOption = newValue;
-                                  });
-                                },
-                                items: [
-                                  DropdownMenuItem<String>(
-                                    value: 'Vehicle',
-                                    child: Text('Vehicle'),
-                                  ),
-                                  DropdownMenuItem<String>(
-                                    value: 'Bus',
-                                    child: Text('Bus'),
-                                  ),
-                                  DropdownMenuItem<String>(
-                                    value: 'Equipment',
-                                    child: Text('Equipment'),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 10),
-                      Row(
-                        children: [
-                          SizedBox(width: 150, child: Text('Driving License')),
-                          SizedBox(width: 5),
-                          Expanded(
-                            child: SizedBox(
-                              height: 40,
-                              width: 160,
-                              child: Expanded(
-                                child: ElevatedButton(
-                                  child: Text(
-                                    'Upload a file',
-                                    style: TextStyle(
-                                        color: Color.fromRGBO(20, 3, 3, 1)),
-                                  ),
-                                  style: ElevatedButton.styleFrom(
-                                    elevation: 2,
-                                    backgroundColor: Colors.white,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(5),
-                                    ),
-                                  ),
-                                  onPressed: () {},
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 10),
-                      Row(
-                        children: [
-                          SizedBox(width: 150, child: Text('ID Copy')),
-                          SizedBox(width: 5),
-                          Expanded(
-                            child: SizedBox(
-                              height: 40,
-                              width: 160,
-                              child: Expanded(
-                                child: ElevatedButton(
-                                  child: Text(
-                                    'Upload a file',
-                                    style: TextStyle(
-                                        color: Color.fromRGBO(20, 3, 3, 1)),
-                                  ),
-                                  style: ElevatedButton.styleFrom(
-                                    elevation: 2,
-                                    backgroundColor: Colors.white,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(5),
-                                    ),
-                                  ),
-                                  onPressed: () {},
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 10),
-                      Row(
-                        children: [
-                          SizedBox(width: 150, child: Text('National ID')),
-                          SizedBox(width: 5),
-                          Expanded(
-                            child: SizedBox(
-                              height: 40,
-                              width: 160,
-                              child: Expanded(
-                                child: ElevatedButton(
-                                  child: Text(
-                                    'Upload a file',
-                                    style: TextStyle(
-                                        color: Color.fromRGBO(20, 3, 3, 1)),
-                                  ),
-                                  style: ElevatedButton.styleFrom(
-                                    elevation: 2,
-                                    backgroundColor: Colors.white,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(5),
-                                    ),
-                                  ),
-                                  onPressed: () {},
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 10),
-                      Row(
-                        children: [
-                          SizedBox(
-                            width: 150,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text('Picture of',
-                                    style: TextStyle(fontSize: 15)),
-                                Text('Equipment/Vehicle',
-                                    style: TextStyle(fontSize: 15)),
-                              ],
-                            ),
-                          ),
-                          SizedBox(width: 5),
-                          Expanded(
-                            child: SizedBox(
-                              height: 40,
-                              width: 160,
-                              child: Expanded(
-                                child: ElevatedButton(
-                                  child: Text(
-                                    'Upload a file',
-                                    style: TextStyle(
-                                        color: Color.fromRGBO(20, 3, 3, 1)),
-                                  ),
-                                  style: ElevatedButton.styleFrom(
-                                    elevation: 2,
-                                    backgroundColor: Colors.white,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(5),
-                                    ),
-                                  ),
-                                  onPressed: () {},
                                 ),
                               ),
                             ),
@@ -1264,12 +1246,70 @@ class _OperatorState extends State<Operator> {
                                 ),
                               ),
                               child: Text(
-                                'Submit',
+                                'Create Account',
                                 style: TextStyle(
                                   fontFamily: 'Colfax',
                                   fontSize: 16,
                                   color: Colors.white,
                                 ),
+                              ),
+                            ),
+                          ),
+                          SizedBox(width: 7),
+                          SizedBox(
+                            height: 40,
+                            child: ElevatedButton(
+                              onPressed: () async {
+                                if (_formKey.currentState!.validate()) {
+                                  print("track1");
+                                  await _startPhoneAuth(
+                                      contactNumberController.text);
+                                  // _showOtpVerificationDialog();
+                                  // Save user data and start phone authentication
+                                  await _saveUserDataToFirestore();
+                                }
+                              },
+                              style: ElevatedButton.styleFrom(
+                                fixedSize:
+                                    const Size.fromWidth(double.infinity),
+                                backgroundColor:
+                                    Color.fromARGB(112, 112, 112, 1),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(
+                                      5), // Adjust border radius as needed
+                                ),
+                              ),
+                              child: Text(
+                                'Cancel',
+                                style: TextStyle(
+                                  fontFamily: 'Colfax',
+                                  fontSize: 10,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 10),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text('Already have an account? '),
+                          InkWell(
+                            onTap: () {
+                              showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return superuserLoginPage();
+                                },
+                              );
+                            },
+                            child: Text(
+                              'Sign In',
+                              style: TextStyle(
+                                color: Colors.blue,
+                                fontWeight: FontWeight.bold,
                               ),
                             ),
                           ),

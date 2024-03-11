@@ -1,11 +1,8 @@
 import 'package:easy_sidemenu/easy_sidemenu.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/Dashboard/dashboard_page.dart';
+
 import 'package:sizer/sizer.dart';
 
-import '../Widgets/customRadio.dart';
-import '../bookingdialog.dart';
-import '../homepage.dart';
 import 'bookings.dart';
 import 'dashboard.dart';
 import 'payments.dart';

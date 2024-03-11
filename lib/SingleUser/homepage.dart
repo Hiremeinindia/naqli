@@ -2,21 +2,22 @@
 
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:flutter_application_1/createAccount.dart';
+import 'package:flutter_application_1/SingleUser/loginPage.dart';
+import 'package:flutter_application_1/SuperUser/createAccount.dart';
 import 'package:sizer/sizer.dart';
 
-import 'loginPage.dart';
+import '../SuperUser/loginPage.dart';
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({
+class singleuserMyHomePage extends StatefulWidget {
+  const singleuserMyHomePage({
     Key? key,
   }) : super(key: key);
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<singleuserMyHomePage> createState() => _singleuserMyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _singleuserMyHomePageState extends State<singleuserMyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Sizer(builder: (context, orientation, deviceType) {
@@ -70,7 +71,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                   showDialog(
                                     context: context,
                                     builder: (context) {
-                                      return LoginPage();
+                                      return singleuserLoginPage();
                                     },
                                   );
                                 },
@@ -729,7 +730,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 showDialog(
                                   context: context,
                                   builder: (context) {
-                                    return LoginPage();
+                                    return singleuserLoginPage();
                                   },
                                 );
                               },

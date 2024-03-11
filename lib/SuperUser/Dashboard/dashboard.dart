@@ -6,15 +6,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_application_1/Widgets/colorContainer.dart';
+import 'package:flutter_application_1/Widgets/formText.dart';
 import 'package:flutter_application_1/pieChart/app_colors.dart';
 import 'package:flutter_application_1/pieChart/indicator.dart';
 import 'package:flutter_application_1/Widgets/customButton.dart';
 import 'package:flutter_application_1/echarts_data.dart';
 import 'package:graphic/graphic.dart';
 import 'package:sizer/sizer.dart';
-
-import '../Widgets/formText.dart';
-import '../homepage.dart';
 
 class Dashboard extends StatefulWidget {
   Dashboard();

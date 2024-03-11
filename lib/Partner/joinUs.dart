@@ -199,7 +199,7 @@ class _State extends State<Partner> {
                                         });
                                       },
                                     ),
-                                    Text('Enterprice')
+                                    Text('Enterprise')
                                   ],
                                 ),
                                 Row(
@@ -347,7 +347,7 @@ class _State extends State<Partner> {
                             padding: EdgeInsets.only(left: 117),
                             child: Row(
                               children: [
-                                Text('Email (Opational)',
+                                Text('Email (Optional)',
                                     style: TextStyle(
                                       fontSize: 14,
                                       fontWeight: FontWeight.bold,
