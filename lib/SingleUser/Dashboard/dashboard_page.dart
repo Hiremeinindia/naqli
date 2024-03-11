@@ -3,10 +3,9 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'package:flutter_application_1/SingleUser/Dashboard/dashboard.dart';
-
 import 'package:sizer/sizer.dart';
 import 'bookings.dart';
+import 'dashboard.dart';
 import 'payments.dart';
 import 'trigger_booking.dart';
 

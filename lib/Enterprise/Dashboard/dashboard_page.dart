@@ -3,10 +3,9 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'package:flutter_application_1/Partner/Dashboard/dashboard.dart';
-
 import 'package:sizer/sizer.dart';
 import 'bookings.dart';
+import 'dashboard.dart';
 import 'payments.dart';
 import 'trigger_booking.dart';
 
@@ -252,8 +251,8 @@ class _MyHomePageState extends State<enterDashboardPage> {
                             boxShadow: <BoxShadow>[
                               BoxShadow(
                                   color: Color.fromARGB(255, 216, 214, 214),
-                                  blurRadius: 0.1,
-                                  spreadRadius: 1,
+                                  blurRadius: 10,
+                                  spreadRadius: 5,
                                   offset: Offset(1, 0.75))
                             ],
                             borderRadius: BorderRadius.circular(20.0),
@@ -328,7 +327,16 @@ class _MyHomePageState extends State<enterDashboardPage> {
                                             const Icon(Icons.person_2_outlined),
                                       ),
                                       SideMenuItem(
-                                        title: 'Bookings',
+                                        title: 'Bookings Manager',
+                                        onTap: (page, _) {
+                                          sideMenu.changePage(page);
+                                        },
+                                        icon:
+                                            const Icon(Icons.person_2_outlined),
+                                        // Set the style property to change the text size
+                                      ),
+                                      SideMenuItem(
+                                        title: 'Contracts',
                                         onTap: (page, _) {
                                           sideMenu.changePage(page);
                                         },
@@ -338,6 +346,14 @@ class _MyHomePageState extends State<enterDashboardPage> {
                                       ),
                                       SideMenuItem(
                                         title: 'Payments',
+                                        onTap: (page, _) {
+                                          sideMenu.changePage(page);
+                                        },
+                                        icon: const Icon(
+                                            Icons.mode_comment_outlined),
+                                      ),
+                                      SideMenuItem(
+                                        title: 'Users',
                                         onTap: (page, _) {
                                           sideMenu.changePage(page);
                                         },
@@ -366,8 +382,8 @@ class _MyHomePageState extends State<enterDashboardPage> {
                                 boxShadow: <BoxShadow>[
                                   BoxShadow(
                                     color: Color.fromARGB(255, 202, 200, 200),
-                                    blurRadius: 0.1,
-                                    spreadRadius: 1,
+                                    blurRadius: 25,
+                                    spreadRadius: 5,
                                   )
                                 ],
                                 borderRadius: BorderRadius.circular(20.0),
