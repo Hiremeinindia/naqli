@@ -13,7 +13,7 @@ class CustomRadio extends StatelessWidget {
   int? groupValue;
   void Function(int?)? onChanged;
   CustomRadio({
-    super.key,
+    Key? key,
     this.text1,
     this.text2,
     this.value,
@@ -22,7 +22,7 @@ class CustomRadio extends StatelessWidget {
     this.textcolor1,
     this.textcolor2,
     this.colors,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -49,13 +49,16 @@ class CustomRadio extends StatelessWidget {
                 scale: 0.7,
                 child: Radio<int?>(
                   splashRadius: 5,
-                  fillColor: MaterialStateProperty.all(
-                      Color.fromRGBO(208, 205, 205, 1)),
+                  fillColor: MaterialStateProperty.resolveWith((states) {
+                    if (states.contains(MaterialState.selected)) {
+                      return Color.fromRGBO(98, 105, 254, 1);
+                    }
+                    return Color.fromRGBO(208, 205, 205, 1);
+                  }),
                   hoverColor: Color.fromRGBO(98, 105, 254, 1).withOpacity(.8),
                   value: value,
                   groupValue: groupValue,
                   onChanged: onChanged,
-                  activeColor: Color.fromRGBO(98, 105, 254, 1),
                 ),
               ),
               Text(text1!,
