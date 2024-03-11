@@ -139,7 +139,7 @@ class _superuserCreateAccountState extends State<superuserCreateAccount> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => superuserDashboardPage(),
+                            builder: (context) => DashboardPage(),
                           ),
                         );
                         setState(() {

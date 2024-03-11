@@ -179,7 +179,6 @@ class _BookingDialogState extends State<BookingDialog> {
                       ElevatedButton(
                         onPressed: () {
                           showDialog(
-                            barrierDismissible: false,
                             context: context,
                             builder: (context) {
                               return BookingSuccessful();
