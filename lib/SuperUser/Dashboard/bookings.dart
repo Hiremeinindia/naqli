@@ -39,6 +39,15 @@ class _BookingsState extends State<Bookings> {
                       Expanded(
                         child: Container(
                           decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: Color.fromRGBO(240, 240, 240, 1)
+                                    .withOpacity(0.1),
+                                offset: Offset(0, 0),
+                                spreadRadius: 2.0,
+                                blurRadius: 0.01, // changes position of shadow
+                              ),
+                            ],
                             color: Colors.white,
                             borderRadius: BorderRadius.only(
                                 topLeft: Radius.circular(0),
@@ -87,6 +96,15 @@ class _BookingsState extends State<Bookings> {
                       Expanded(
                         child: Container(
                           decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: Color.fromRGBO(240, 240, 240, 1)
+                                    .withOpacity(0.1),
+                                offset: Offset(0, 0),
+                                spreadRadius: 2.0,
+                                blurRadius: 0.01, // changes position of shadow
+                              ),
+                            ],
                             color: Colors.white,
                             borderRadius: BorderRadius.only(
                                 topLeft: Radius.circular(0),
@@ -135,6 +153,15 @@ class _BookingsState extends State<Bookings> {
                       Container(
                         width: 200,
                         decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                              color: Color.fromRGBO(240, 240, 240, 1)
+                                  .withOpacity(0.1),
+                              offset: Offset(0, 0),
+                              spreadRadius: 2.0,
+                              blurRadius: 0.01, // changes position of shadow
+                            ),
+                          ],
                           color: Colors.white,
                           borderRadius: BorderRadius.only(
                               topLeft: Radius.circular(0),
@@ -194,6 +221,15 @@ class _BookingsState extends State<Bookings> {
                         width: 1150,
                         height: 210,
                         decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                              color: Color.fromRGBO(240, 240, 240, 1)
+                                  .withOpacity(0.1),
+                              offset: Offset(0, 0),
+                              spreadRadius: 2.0,
+                              blurRadius: 0.01, // changes position of shadow
+                            ),
+                          ],
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(12.0),
                         ),
@@ -468,17 +504,16 @@ class _BookingsState extends State<Bookings> {
               IconButton(
                   padding: EdgeInsets.zero,
                   constraints: BoxConstraints(),
-                  onPressed: null,
-                  icon: Icon(
-                    Icons.edit_document,
-                    color: Color.fromRGBO(74, 60, 81, 1),
-                  )),
+                  onPressed: () {},
+                  icon: Image.asset('editicon.png')),
+              SizedBox(
+                width: 1.w,
+              ),
               IconButton(
                   padding: EdgeInsets.zero,
-                  // constraints:
-                  //     BoxConstraints(),
-                  onPressed: null,
-                  icon: Icon(Icons.delete)),
+                  constraints: BoxConstraints(),
+                  onPressed: () {},
+                  icon: Image.asset('deleteicon.png')),
             ],
           ),
         ),
@@ -505,17 +540,16 @@ class _BookingsState extends State<Bookings> {
               IconButton(
                   padding: EdgeInsets.zero,
                   constraints: BoxConstraints(),
-                  onPressed: null,
-                  icon: Icon(
-                    Icons.edit_document,
-                    color: Color.fromRGBO(74, 60, 81, 1),
-                  )),
+                  onPressed: () {},
+                  icon: Image.asset('editicon.png')),
+              SizedBox(
+                width: 1.w,
+              ),
               IconButton(
                   padding: EdgeInsets.zero,
-                  // constraints:
-                  //     BoxConstraints(),
-                  onPressed: null,
-                  icon: Icon(Icons.delete)),
+                  constraints: BoxConstraints(),
+                  onPressed: () {},
+                  icon: Image.asset('deleteicon.png')),
             ],
           ),
         ),
@@ -542,17 +576,16 @@ class _BookingsState extends State<Bookings> {
               IconButton(
                   padding: EdgeInsets.zero,
                   constraints: BoxConstraints(),
-                  onPressed: null,
-                  icon: Icon(
-                    Icons.edit_document,
-                    color: Color.fromRGBO(74, 60, 81, 1),
-                  )),
+                  onPressed: () {},
+                  icon: Image.asset('editicon.png')),
+              SizedBox(
+                width: 1.w,
+              ),
               IconButton(
                   padding: EdgeInsets.zero,
-                  // constraints:
-                  //     BoxConstraints(),
-                  onPressed: null,
-                  icon: Icon(Icons.delete)),
+                  constraints: BoxConstraints(),
+                  onPressed: () {},
+                  icon: Image.asset('deleteicon.png')),
             ],
           ),
         ),
