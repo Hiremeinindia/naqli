@@ -6,13 +6,13 @@ import 'package:flutter_application_1/Widgets/formText.dart';
 import 'package:flutter_application_1/bookingdialog.dart';
 import 'package:sizer/sizer.dart';
 
-class TriggerBooking extends StatefulWidget {
-  TriggerBooking();
+class Users extends StatefulWidget {
+  Users();
   @override
-  State<TriggerBooking> createState() => _TriggerBookingState();
+  State<Users> createState() => _UsersState();
 }
 
-class _TriggerBookingState extends State<TriggerBooking> {
+class _UsersState extends State<Users> {
   bool value = false;
   bool isButtonEnabled = false;
   bool isButtonEnabled1 = false;

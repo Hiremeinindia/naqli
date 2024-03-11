@@ -5,10 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/Enterprise/Dashboard/contracts.dart';
 
 import 'package:sizer/sizer.dart';
+import '../../Widgets/customButton.dart';
 import 'bookings.dart';
 import 'dashboard.dart';
 import 'payments.dart';
 import 'trigger_booking.dart';
+import 'users.dart';
 
 class enterDashboardPage extends StatefulWidget {
   const enterDashboardPage({Key? key}) : super(key: key);
@@ -244,181 +246,199 @@ class _MyHomePageState extends State<enterDashboardPage> {
                 ),
               ),
             ),
-            body: Padding(
-              padding: EdgeInsets.fromLTRB(1.w, 2.h, 1.w, 2.h),
-              child: Expanded(
-                child: Padding(
-                  padding: EdgeInsets.fromLTRB(3.w, 6.h, 3.w, 6.h),
-                  child: Container(
-                    color: Color.fromRGBO(245, 243, 255, 1),
-                    child: Row(
-                      children: [
-                        Container(
-                          width: 330,
-                          decoration: BoxDecoration(
-                            boxShadow: <BoxShadow>[
-                              BoxShadow(
-                                  color: Color.fromARGB(255, 216, 214, 214),
-                                  blurRadius: 10,
-                                  spreadRadius: 5,
-                                  offset: Offset(1, 0.75))
-                            ],
-                            borderRadius: BorderRadius.circular(20.0),
-                            color: Color.fromRGBO(236, 233, 250, 1),
+            body: Expanded(
+              child: Padding(
+                padding: EdgeInsets.fromLTRB(6.w, 6.h, 6.w, 6.h),
+                child: Container(
+                  color: Color.fromRGBO(245, 243, 255, 1).withOpacity(0.5),
+                  child: Row(
+                    children: [
+                      Container(
+                        padding: EdgeInsets.fromLTRB(0, 0, 0, 0.1.h),
+                        height: 850,
+                        width: 340,
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: Color.fromARGB(255, 216, 214, 214)
+                                .withOpacity(0.5),
                           ),
-                          child: Column(
-                            children: [
-                              Card(
-                                elevation: 1,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                color: Color.fromARGB(255, 240, 237, 250),
-                                child: Expanded(
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.circular(12.0),
-                                    ),
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(
-                                          30.0), // Adjust the radius as needed
-                                      child: Image.asset(
-                                        'Circleavatar.png',
-                                        width:
-                                            550, // Adjust the height as needed
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.only(left: 1.5, top: 20),
-                                child: SizedBox(
-                                  height: 30.h,
-                                  child: SideMenu(
-                                    controller: sideMenu,
-                                    style: SideMenuStyle(
-                                      displayMode: SideMenuDisplayMode.auto,
-                                      selectedColor:
-                                          Color.fromRGBO(98, 105, 254, 1),
-                                      unselectedTitleTextStyle: const TextStyle(
-                                        fontFamily: 'SFProText',
-                                        fontSize: 14,
-                                        color: Color.fromRGBO(128, 118, 118, 1),
-                                      ),
-                                      selectedTitleTextStyle: const TextStyle(
-                                          fontFamily: 'SFProText',
-                                          color: Colors.white,
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w600),
-                                      unselectedIconColor:
-                                          Color.fromRGBO(128, 118, 118, 1),
-                                      selectedIconColor: Colors.white,
-                                    ),
-                                    items: [
-                                      SideMenuItem(
-                                        title: 'Dashboard',
-                                        onTap: (page, _) {
-                                          sideMenu.changePage(page);
-                                        },
-                                        icon: const Icon(Icons.login_outlined),
-                                      ),
-                                      SideMenuItem(
-                                        title: 'Trigger Booking',
-                                        onTap: (page, _) {
-                                          sideMenu.changePage(page);
-                                        },
-                                        icon:
-                                            const Icon(Icons.person_2_outlined),
-                                      ),
-                                      SideMenuItem(
-                                        title: 'Bookings Manager',
-                                        onTap: (page, _) {
-                                          sideMenu.changePage(page);
-                                        },
-                                        icon:
-                                            const Icon(Icons.person_2_outlined),
-                                        // Set the style property to change the text size
-                                      ),
-                                      SideMenuItem(
-                                        title: 'Contracts',
-                                        onTap: (page, _) {
-                                          sideMenu.changePage(page);
-                                        },
-                                        icon:
-                                            const Icon(Icons.person_2_outlined),
-                                        // Set the style property to change the text size
-                                      ),
-                                      SideMenuItem(
-                                        title: 'Payments',
-                                        onTap: (page, _) {
-                                          sideMenu.changePage(page);
-                                        },
-                                        icon: const Icon(
-                                            Icons.mode_comment_outlined),
-                                      ),
-                                      SideMenuItem(
-                                        title: 'Users',
-                                        onTap: (page, _) {
-                                          sideMenu.changePage(page);
-                                        },
-                                        icon: const Icon(
-                                            Icons.mode_comment_outlined),
-                                      ),
-                                      SideMenuItem(
-                                        title: 'Help',
-                                        onTap: (page, _) {
-                                          sideMenu.changePage(page);
-                                        },
-                                        icon: const Icon(Icons.inbox_outlined),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Expanded(
-                          child: Padding(
-                            padding: EdgeInsets.fromLTRB(5.w, 5.h, 5.w, 5.h),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                boxShadow: <BoxShadow>[
-                                  BoxShadow(
-                                    color: Color.fromARGB(255, 202, 200, 200),
-                                    blurRadius: 25,
-                                    spreadRadius: 5,
-                                  )
-                                ],
-                                borderRadius: BorderRadius.circular(20.0),
-                                color: Color.fromRGBO(255, 255, 255, 0.00),
-                              ),
-                              child: PageView(controller: page, children: [
-                                Dashboard(),
-                                TriggerBooking(),
-                                Bookings(),
-                                Contracts(),
-                                Payments(),
-                                Container(
-                                  color: Colors.pink,
-                                ),
-                                Container(
-                                  color: Colors.deepOrangeAccent,
-                                ),
-                                Container(
-                                  color:
-                                      const Color.fromARGB(255, 121, 64, 255),
-                                ),
-                              ]),
+                          boxShadow: <BoxShadow>[
+                            BoxShadow(
+                              color: Color.fromARGB(255, 199, 198, 198)
+                                  .withOpacity(0.5),
+                              blurRadius: 10,
+                              spreadRadius: 4,
+                              offset: Offset(0, 0.5), // Bottom side shadow
                             ),
+                            BoxShadow(
+                              color: Color.fromARGB(255, 255, 255, 255)
+                                  .withOpacity(0.1),
+                              blurRadius: 1,
+                              spreadRadius: 0, // Bottom side shadow
+                            ),
+                          ],
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(10),
+                            bottomLeft: Radius.circular(10),
+                            topRight: Radius.circular(0),
+                            bottomRight: Radius.circular(10),
+                          ),
+                          color: Color.fromRGBO(236, 233, 250, 1),
+                        ),
+                        child: Column(
+                          children: [
+                            Container(
+                              height: 370,
+                              decoration: BoxDecoration(
+                                color: Color.fromRGBO(255, 255, 255, 1),
+                                borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(7),
+                                  bottomLeft: Radius.circular(7),
+                                  topRight: Radius.circular(0),
+                                  bottomRight: Radius.circular(7),
+                                ),
+                              ),
+                              child: Image.asset(
+                                'Circleavatar.png',
+                                width: 550, // Adjust the height as needed
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(left: 2.5.w, top: 20),
+                              child: SizedBox(
+                                height: 30.h,
+                                child: SideMenu(
+                                  controller: sideMenu,
+                                  style: SideMenuStyle(
+                                    displayMode: SideMenuDisplayMode.auto,
+                                    selectedColor:
+                                        Color.fromRGBO(98, 105, 254, 1),
+                                    unselectedTitleTextStyle: const TextStyle(
+                                      fontFamily: 'SFProText',
+                                      fontSize: 14,
+                                      color: Color.fromRGBO(128, 118, 118, 1),
+                                    ),
+                                    selectedTitleTextStyle: const TextStyle(
+                                        fontFamily: 'SFProText',
+                                        color: Colors.white,
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w600),
+                                    unselectedIconColor:
+                                        Color.fromRGBO(128, 118, 118, 1),
+                                    selectedIconColor: Colors.white,
+                                  ),
+                                  items: [
+                                    SideMenuItem(
+                                      title: 'Dashboard',
+                                      onTap: (page, _) {
+                                        sideMenu.changePage(page);
+                                      },
+                                      icon: const Icon(Icons.login_outlined),
+                                    ),
+                                    SideMenuItem(
+                                      title: 'Trigger Booking',
+                                      onTap: (page, _) {
+                                        sideMenu.changePage(page);
+                                      },
+                                      icon: const Icon(Icons.person_2_outlined),
+                                    ),
+                                    SideMenuItem(
+                                      title: 'Bookings Manager',
+                                      onTap: (page, _) {
+                                        sideMenu.changePage(page);
+                                      },
+                                      icon: const Icon(Icons.person_2_outlined),
+                                      // Set the style property to change the text size
+                                    ),
+                                    SideMenuItem(
+                                      title: 'Contracts',
+                                      onTap: (page, _) {
+                                        sideMenu.changePage(page);
+                                      },
+                                      icon: const Icon(Icons.person_2_outlined),
+                                      // Set the style property to change the text size
+                                    ),
+                                    SideMenuItem(
+                                      title: 'Payments',
+                                      onTap: (page, _) {
+                                        sideMenu.changePage(page);
+                                      },
+                                      icon: const Icon(
+                                          Icons.mode_comment_outlined),
+                                    ),
+                                    SideMenuItem(
+                                      title: 'Users',
+                                      onTap: (page, _) {
+                                        sideMenu.changePage(page);
+                                      },
+                                      icon: const Icon(
+                                          Icons.mode_comment_outlined),
+                                    ),
+                                    SideMenuItem(
+                                      title: 'Help',
+                                      onTap: (page, _) {
+                                        sideMenu.changePage(page);
+                                      },
+                                      icon: const Icon(Icons.inbox_outlined),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Expanded(
+                          child: SingleChildScrollView(
+                        child: Padding(
+                          padding: EdgeInsets.fromLTRB(4.w, 4.5.h, 3.w, 2.h),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Container(
+                                height: 630,
+                                decoration: BoxDecoration(
+                                  boxShadow: <BoxShadow>[
+                                    BoxShadow(
+                                      color: Color.fromRGBO(199, 199, 199, 1)
+                                          .withOpacity(0.5),
+                                      blurRadius: 15,
+                                      spreadRadius: 3,
+                                    )
+                                  ],
+                                  borderRadius: BorderRadius.circular(20.0),
+                                  color: Color.fromRGBO(255, 255, 255, 0.00),
+                                ),
+                                child: PageView(controller: page, children: [
+                                  Dashboard(),
+                                  TriggerBooking(),
+                                  Bookings(),
+                                  Contracts(),
+                                  Payments(),
+                                  Container(
+                                    color: Colors.pink,
+                                  ),
+                                  Users(),
+                                  Container(
+                                    color:
+                                        const Color.fromARGB(255, 121, 64, 255),
+                                  ),
+                                ]),
+                              ),
+                              SizedBox(
+                                height: 2.h,
+                              ),
+                              CustomButton(
+                                onPressed: () {},
+                                text: 'Confirm Booking',
+                              ),
+                            ],
                           ),
                         ),
-                      ],
-                    ),
+                      )),
+                    ],
                   ),
                 ),
               ),

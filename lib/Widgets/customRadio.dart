@@ -27,19 +27,20 @@ class CustomRadio extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 40,
+      height: 37,
       decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
-              color: Color.fromRGBO(206, 205, 205, 1),
+              color: Color.fromRGBO(206, 205, 205, 1).withOpacity(0.5),
               offset: Offset(0, 1),
-              spreadRadius: 1,
-              blurRadius: 5, // changes position of shadow
+              spreadRadius: 0.5,
+              blurRadius: 2, // changes position of shadow
             ),
           ],
           color: colors,
-          borderRadius: BorderRadius.circular(20.0),
-          border: Border.all(color: Color.fromRGBO(216, 216, 216, 1))),
+          borderRadius: BorderRadius.circular(19.0),
+          border: Border.all(
+              color: Color.fromRGBO(216, 216, 216, 1).withOpacity(0.5))),
       child: Padding(
         padding: EdgeInsets.fromLTRB(0.1.w, 1.h, 1.w, 1.h),
         child: Center(
