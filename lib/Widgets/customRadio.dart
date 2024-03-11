@@ -27,21 +27,36 @@ class CustomRadio extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 35,
+      height: 40,
       decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: Color.fromRGBO(206, 205, 205, 1),
+              offset: Offset(0, 1),
+              spreadRadius: 1,
+              blurRadius: 5, // changes position of shadow
+            ),
+          ],
           color: colors,
-          borderRadius: BorderRadius.circular(15.0),
-          border: Border.all(color: Colors.grey)),
+          borderRadius: BorderRadius.circular(20.0),
+          border: Border.all(color: Color.fromRGBO(216, 216, 216, 1))),
       child: Padding(
         padding: EdgeInsets.fromLTRB(0.1.w, 1.h, 1.w, 1.h),
         child: Center(
           child: Row(
             children: [
-              Radio<int?>(
-                value: value,
-                groupValue: groupValue,
-                onChanged: onChanged,
-                activeColor: Color.fromRGBO(98, 105, 254, 1),
+              Transform.scale(
+                scale: 0.7,
+                child: Radio<int?>(
+                  splashRadius: 5,
+                  fillColor: MaterialStateProperty.all(
+                      Color.fromRGBO(208, 205, 205, 1)),
+                  hoverColor: Color.fromRGBO(98, 105, 254, 1).withOpacity(.8),
+                  value: value,
+                  groupValue: groupValue,
+                  onChanged: onChanged,
+                  activeColor: Color.fromRGBO(98, 105, 254, 1),
+                ),
               ),
               Text(text1!,
                   style: TextStyle(

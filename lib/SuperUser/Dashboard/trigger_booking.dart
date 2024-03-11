@@ -56,9 +56,11 @@ class _TriggerBookingState extends State<TriggerBooking> {
                       decoration: BoxDecoration(
                         boxShadow: [
                           BoxShadow(
-                            color: Color.fromRGBO(216, 216, 216, 1),
-                            offset: Offset(0, 1),
-                            blurRadius: 0.1, // changes position of shadow
+                            color: Color.fromRGBO(240, 240, 240, 1)
+                                .withOpacity(0.1),
+                            offset: Offset(0, 0),
+                            spreadRadius: 2.0,
+                            blurRadius: 0.01, // changes position of shadow
                           ),
                         ],
                         color: Colors.white,
@@ -162,7 +164,7 @@ class _TriggerBookingState extends State<TriggerBooking> {
                                             value: 1,
                                             colors: Color.fromRGBO(
                                                 200, 251, 253, 1),
-                                            text1: 'vendor1',
+                                            text1: 'Vendor 3',
                                             textcolor1: Colors.black54,
                                             text2: "Xxxxx SAR",
                                             textcolor2: Colors.black38),
@@ -181,7 +183,7 @@ class _TriggerBookingState extends State<TriggerBooking> {
                                             value: 2,
                                             colors: Color.fromRGBO(
                                                 224, 253, 200, 1),
-                                            text1: 'vendor1',
+                                            text1: 'Vendor 2',
                                             textcolor1: Colors.black54,
                                             text2: "Xxxxx SAR",
                                             textcolor2: Colors.black38),
@@ -200,7 +202,7 @@ class _TriggerBookingState extends State<TriggerBooking> {
                                             value: 3,
                                             colors: Color.fromRGBO(
                                                 245, 253, 200, 1),
-                                            text1: 'vendor3',
+                                            text1: 'Vendor 3',
                                             textcolor1: Colors.black54,
                                             text2: "Xxxxx SAR",
                                             textcolor2: Colors.black38),
@@ -339,7 +341,7 @@ class _TriggerBookingState extends State<TriggerBooking> {
                                             value: 1,
                                             colors: Color.fromRGBO(
                                                 200, 251, 253, 1),
-                                            text1: 'vendor1',
+                                            text1: 'Vendor 3',
                                             textcolor1: Colors.black54,
                                             text2: "Xxxxx SAR",
                                             textcolor2: Colors.black38),
@@ -358,7 +360,7 @@ class _TriggerBookingState extends State<TriggerBooking> {
                                             value: 2,
                                             colors: Color.fromRGBO(
                                                 224, 253, 200, 1),
-                                            text1: 'vendor1',
+                                            text1: 'Vendor 2',
                                             textcolor1: Colors.black54,
                                             text2: "Xxxxx SAR",
                                             textcolor2: Colors.black38),
@@ -377,7 +379,7 @@ class _TriggerBookingState extends State<TriggerBooking> {
                                             value: 3,
                                             colors: Color.fromRGBO(
                                                 245, 253, 200, 1),
-                                            text1: 'vendor3',
+                                            text1: 'Vendor 3',
                                             textcolor1: Colors.black54,
                                             text2: "Xxxxx SAR",
                                             textcolor2: Colors.black38),
@@ -517,7 +519,7 @@ class _TriggerBookingState extends State<TriggerBooking> {
                                             value: 1,
                                             colors: Color.fromRGBO(
                                                 200, 251, 253, 1),
-                                            text1: 'vendor1',
+                                            text1: 'Vendor 3',
                                             textcolor1: Colors.black54,
                                             text2: "Xxxxx SAR",
                                             textcolor2: Colors.black38),
@@ -536,7 +538,7 @@ class _TriggerBookingState extends State<TriggerBooking> {
                                             value: 2,
                                             colors: Color.fromRGBO(
                                                 224, 253, 200, 1),
-                                            text1: 'vendor1',
+                                            text1: 'Vendor 2',
                                             textcolor1: Colors.black54,
                                             text2: "Xxxxx SAR",
                                             textcolor2: Colors.black38),
@@ -555,7 +557,7 @@ class _TriggerBookingState extends State<TriggerBooking> {
                                             value: 3,
                                             colors: Color.fromRGBO(
                                                 245, 253, 200, 1),
-                                            text1: 'vendor3',
+                                            text1: 'Vendor 3',
                                             textcolor1: Colors.black54,
                                             text2: "Xxxxx SAR",
                                             textcolor2: Colors.black38),
@@ -756,7 +758,7 @@ class _TriggerBookingState extends State<TriggerBooking> {
                                                     value: 1,
                                                     colors: Color.fromRGBO(
                                                         200, 251, 253, 1),
-                                                    text1: 'vendor1',
+                                                    text1: 'Vendor 3',
                                                     textcolor1: Colors.black54,
                                                     text2: "Xxxxx SAR",
                                                     textcolor2: Colors.black38),
@@ -774,7 +776,7 @@ class _TriggerBookingState extends State<TriggerBooking> {
                                                     value: 2,
                                                     colors: Color.fromRGBO(
                                                         224, 253, 200, 1),
-                                                    text1: 'vendor1',
+                                                    text1: 'Vendor 2',
                                                     textcolor1: Colors.black54,
                                                     text2: "Xxxxx SAR",
                                                     textcolor2: Colors.black38),
@@ -792,7 +794,7 @@ class _TriggerBookingState extends State<TriggerBooking> {
                                                     value: 3,
                                                     colors: Color.fromRGBO(
                                                         245, 253, 200, 1),
-                                                    text1: 'vendor3',
+                                                    text1: 'Vendor 3',
                                                     textcolor1: Colors.black54,
                                                     text2: "Xxxxx SAR",
                                                     textcolor2: Colors.black38),
@@ -950,7 +952,7 @@ class _TriggerBookingState extends State<TriggerBooking> {
                                                     value: 1,
                                                     colors: Color.fromRGBO(
                                                         200, 251, 253, 1),
-                                                    text1: 'vendor1',
+                                                    text1: 'Vendor 3',
                                                     textcolor1: Colors.black54,
                                                     text2: "Xxxxx SAR",
                                                     textcolor2: Colors.black38),
@@ -970,7 +972,7 @@ class _TriggerBookingState extends State<TriggerBooking> {
                                                     value: 2,
                                                     colors: Color.fromRGBO(
                                                         224, 253, 200, 1),
-                                                    text1: 'vendor1',
+                                                    text1: 'Vendor 2',
                                                     textcolor1: Colors.black54,
                                                     text2: "Xxxxx SAR",
                                                     textcolor2: Colors.black38),
@@ -990,7 +992,7 @@ class _TriggerBookingState extends State<TriggerBooking> {
                                                     value: 3,
                                                     colors: Color.fromRGBO(
                                                         245, 253, 200, 1),
-                                                    text1: 'vendor3',
+                                                    text1: 'Vendor 3',
                                                     textcolor1: Colors.black54,
                                                     text2: "Xxxxx SAR",
                                                     textcolor2: Colors.black38),
@@ -1148,7 +1150,7 @@ class _TriggerBookingState extends State<TriggerBooking> {
                                                     value: 1,
                                                     colors: Color.fromRGBO(
                                                         200, 251, 253, 1),
-                                                    text1: 'vendor1',
+                                                    text1: 'Vendor 3',
                                                     textcolor1: Colors.black54,
                                                     text2: "Xxxxx SAR",
                                                     textcolor2: Colors.black38),
@@ -1168,7 +1170,7 @@ class _TriggerBookingState extends State<TriggerBooking> {
                                                     value: 2,
                                                     colors: Color.fromRGBO(
                                                         224, 253, 200, 1),
-                                                    text1: 'vendor1',
+                                                    text1: 'Vendor 2',
                                                     textcolor1: Colors.black54,
                                                     text2: "Xxxxx SAR",
                                                     textcolor2: Colors.black38),
@@ -1188,7 +1190,7 @@ class _TriggerBookingState extends State<TriggerBooking> {
                                                     value: 3,
                                                     colors: Color.fromRGBO(
                                                         245, 253, 200, 1),
-                                                    text1: 'vendor3',
+                                                    text1: 'Vendor 3',
                                                     textcolor1: Colors.black54,
                                                     text2: "Xxxxx SAR",
                                                     textcolor2: Colors.black38),
