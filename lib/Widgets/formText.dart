@@ -104,6 +104,6 @@ class TabelText {
   static TextStyle tableText4 = TextStyle(
     color: Colors.grey,
     fontFamily: 'Helvetica',
-    fontSize: 16,
+    fontSize: 15,
   );
 }
