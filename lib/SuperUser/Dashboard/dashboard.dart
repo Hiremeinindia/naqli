@@ -292,7 +292,7 @@ class _DashboardState extends State<Dashboard> {
                                         bottomLeft: Radius.circular(12),
                                         bottomRight: Radius.circular(12)),
                                   ),
-                                  width: 378,
+                                  width: 370,
                                   child: Column(
                                     children: [
                                       Container(
@@ -607,7 +607,7 @@ class _DashboardState extends State<Dashboard> {
                                       bottomLeft: Radius.circular(12),
                                       bottomRight: Radius.circular(12)),
                                 ),
-                                width: 750,
+                                width: 730,
                                 child: Column(
                                   children: [
                                     Container(
