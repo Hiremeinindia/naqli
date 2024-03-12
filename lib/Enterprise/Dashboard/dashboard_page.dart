@@ -504,7 +504,7 @@ class _MyHomePageState extends State<enterDashboardPage> {
                           'Contracts',
                           style: TextStyle(color: Colors.black),
                         ),
-                        onTap: _handleItem3Tap),
+                        onTap: _handleItem4Tap),
                     SizedBox(
                       height: 2.h,
                     ),
@@ -514,7 +514,7 @@ class _MyHomePageState extends State<enterDashboardPage> {
                           'Payments',
                           style: TextStyle(color: Colors.black),
                         ),
-                        onTap: _handleItem4Tap),
+                        onTap: _handleItem5Tap),
                     SizedBox(
                       height: 2.h,
                     ),
