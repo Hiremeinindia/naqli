@@ -65,7 +65,7 @@ class _UsersState extends State<Users> {
                           bottomLeft: Radius.circular(0),
                           bottomRight: Radius.circular(0)),
                     ),
-                    height: 70, // Brown color
+                    height: 80, // Brown color
                     child: Padding(
                       padding: EdgeInsets.fromLTRB(3.w, 1.5.h, 1.5.w, 1.5.h),
                       child: Row(
@@ -83,24 +83,26 @@ class _UsersState extends State<Users> {
                     ),
                   ),
                   Container(
-                    padding: EdgeInsets.fromLTRB(1.w, 1.h, 1.w, 1.h),
+                    padding: EdgeInsets.fromLTRB(2.w, 1.h, 2.w, 1.h),
                     child: Column(
                       children: [
                         SizedBox(
-                          height: 30,
+                          height: 10,
                         ),
                         Align(
                           alignment: Alignment.centerRight,
                           child: SizedBox(
                             width: 127,
-                            height: 40,
+                            height: 45,
                             child: ElevatedButton.icon(
                               onPressed: () {},
                               style: ElevatedButton.styleFrom(
                                 elevation: 0,
                                 backgroundColor: Colors.white,
                                 shape: RoundedRectangleBorder(
-                                  side: BorderSide(color: Colors.black),
+                                  side: BorderSide(
+                                    color: Color.fromRGBO(98, 84, 84, 1),
+                                  ),
                                   borderRadius: BorderRadius.circular(
                                       15), // Adjust border radius as needed
                                 ),
@@ -111,7 +113,7 @@ class _UsersState extends State<Users> {
                               ),
                               label: Text('Add user',
                                   style: TextStyle(
-                                    color: Colors.black,
+                                    color: Color.fromRGBO(98, 84, 84, 1),
                                     fontFamily: 'Helvetica',
                                     fontSize: 15,
                                   )),
@@ -119,20 +121,30 @@ class _UsersState extends State<Users> {
                           ),
                         ),
                         SizedBox(
-                          height: 30,
+                          height: 10,
                         ),
                         Container(
-                          width: 1100,
+                          width: 1150,
                           decoration: BoxDecoration(
                             boxShadow: [
                               BoxShadow(
-                                color: Color.fromRGBO(112, 112, 112, 1),
+                                color: Color.fromRGBO(158, 157, 157, 1)
+                                    .withOpacity(0.5),
                                 offset: Offset(0, 0),
                                 spreadRadius: 2.0,
-                                blurRadius: 0.01, // changes position of shadow
+                                blurRadius: 2, // changes position of shadow
+                              ),
+                              BoxShadow(
+                                color: Colors.white,
+                                offset: Offset(0, -1),
+                                spreadRadius: 0,
+                                blurRadius: 0, // changes position of shadow
                               ),
                             ],
-                            border: Border.all(color: Colors.black),
+                            border: Border.all(
+                              color: Color.fromRGBO(112, 112, 112, 1)
+                                  .withOpacity(0.5),
+                            ),
                             borderRadius: BorderRadius.only(
                                 topLeft: Radius.circular(0),
                                 topRight: Radius.circular(0),
@@ -806,12 +818,13 @@ class _UsersState extends State<Users> {
 
   DataTable _booking1Table() {
     return DataTable(
+        headingRowHeight: 60,
         headingRowColor: MaterialStateColor.resolveWith(
           (states) => Color.fromRGBO(75, 61, 82, 1),
         ),
         dividerThickness: BorderSide.strokeAlignOutside,
-        columnSpacing: 15,
-        dataRowHeight: 65,
+        columnSpacing: 20,
+        dataRowHeight: 73,
         columns: _booking1Columns(),
         rows: _booking1Rows());
   }

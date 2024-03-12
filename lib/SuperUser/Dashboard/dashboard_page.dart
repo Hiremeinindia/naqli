@@ -240,9 +240,8 @@ class _MyHomePageState extends State<DashboardPage> {
                   child: Row(
                     children: [
                       Container(
-                        padding: EdgeInsets.fromLTRB(0, 0, 0, 0.1.h),
                         height: 850,
-                        width: 340,
+                        width: 360,
                         decoration: BoxDecoration(
                           border: Border.all(
                             color: Color.fromARGB(255, 216, 214, 214)
@@ -264,10 +263,10 @@ class _MyHomePageState extends State<DashboardPage> {
                             ),
                           ],
                           borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(10),
-                            bottomLeft: Radius.circular(10),
+                            topLeft: Radius.circular(13),
+                            bottomLeft: Radius.circular(13),
                             topRight: Radius.circular(0),
-                            bottomRight: Radius.circular(10),
+                            bottomRight: Radius.circular(13),
                           ),
                           color: Color.fromRGBO(236, 233, 250, 1),
                         ),
@@ -290,71 +289,68 @@ class _MyHomePageState extends State<DashboardPage> {
                                 fit: BoxFit.cover,
                               ),
                             ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.only(left: 1.5, top: 20),
-                              child: SizedBox(
-                                height: 300,
-                                child: SideMenu(
-                                  controller: sideMenu,
-                                  style: SideMenuStyle(
-                                    displayMode: SideMenuDisplayMode.auto,
-                                    selectedColor:
-                                        Color.fromRGBO(98, 105, 254, 1),
-                                    unselectedTitleTextStyle: const TextStyle(
-                                      fontFamily: 'SFProText',
-                                      fontSize: 15,
-                                      color: Color.fromRGBO(128, 118, 118, 1),
-                                    ),
-                                    selectedTitleTextStyle: const TextStyle(
-                                      fontFamily: 'SFProText',
-                                      color: Colors.white,
-                                      fontSize: 15,
-                                    ),
-                                    unselectedIconColor:
-                                        Color.fromRGBO(128, 118, 118, 1),
-                                    selectedIconColor: Colors.white,
+                            Container(
+                              height: 35.h,
+                              padding: EdgeInsets.only(left: 1.5.w, top: 50),
+                              child: SideMenu(
+                                controller: sideMenu,
+                                style: SideMenuStyle(
+                                  displayMode: SideMenuDisplayMode.auto,
+                                  selectedColor:
+                                      Color.fromRGBO(98, 105, 254, 1),
+                                  unselectedTitleTextStyle: const TextStyle(
+                                    fontFamily: 'SFProText',
+                                    fontSize: 18,
+                                    color: Color.fromRGBO(128, 118, 118, 1),
                                   ),
-                                  items: [
-                                    SideMenuItem(
-                                      title: 'Dashboard',
-                                      onTap: (page, _) {
-                                        sideMenu.changePage(page);
-                                      },
-                                      icon: Icon(Icons.login_outlined),
-                                    ),
-                                    SideMenuItem(
-                                      title: 'Trigger Booking',
-                                      onTap: (page, _) {
-                                        sideMenu.changePage(page);
-                                      },
-                                      icon: Icon(Icons.person_2_outlined),
-                                    ),
-                                    SideMenuItem(
-                                      title: 'Bookings',
-                                      onTap: (page, _) {
-                                        sideMenu.changePage(page);
-                                      },
-                                      icon: Icon(Icons.person_2_outlined),
-                                      // Set the style property to change the text size
-                                    ),
-                                    SideMenuItem(
-                                      title: 'Payments',
-                                      onTap: (page, _) {
-                                        sideMenu.changePage(page);
-                                      },
-                                      icon: const Icon(
-                                          Icons.mode_comment_outlined),
-                                    ),
-                                    SideMenuItem(
-                                      title: 'Help',
-                                      onTap: (page, _) {
-                                        sideMenu.changePage(page);
-                                      },
-                                      icon: Icon(Icons.inbox_outlined),
-                                    ),
-                                  ],
+                                  selectedTitleTextStyle: const TextStyle(
+                                    fontFamily: 'SFProText',
+                                    color: Colors.white,
+                                    fontSize: 18,
+                                  ),
+                                  unselectedIconColor:
+                                      Color.fromRGBO(128, 118, 118, 1),
+                                  selectedIconColor: Colors.white,
                                 ),
+                                items: [
+                                  SideMenuItem(
+                                    title: 'Dashboard',
+                                    onTap: (page, _) {
+                                      sideMenu.changePage(page);
+                                    },
+                                    icon: Icon(Icons.login_outlined),
+                                  ),
+                                  SideMenuItem(
+                                    title: 'Trigger Booking',
+                                    onTap: (page, _) {
+                                      sideMenu.changePage(page);
+                                    },
+                                    icon: Icon(Icons.person_2_outlined),
+                                  ),
+                                  SideMenuItem(
+                                    title: 'Bookings',
+                                    onTap: (page, _) {
+                                      sideMenu.changePage(page);
+                                    },
+                                    icon: Icon(Icons.person_2_outlined),
+                                    // Set the style property to change the text size
+                                  ),
+                                  SideMenuItem(
+                                    title: 'Payments',
+                                    onTap: (page, _) {
+                                      sideMenu.changePage(page);
+                                    },
+                                    icon:
+                                        const Icon(Icons.mode_comment_outlined),
+                                  ),
+                                  SideMenuItem(
+                                    title: 'Help',
+                                    onTap: (page, _) {
+                                      sideMenu.changePage(page);
+                                    },
+                                    icon: Icon(Icons.inbox_outlined),
+                                  ),
+                                ],
                               ),
                             ),
                           ],

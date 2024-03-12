@@ -412,6 +412,7 @@ class _MyHomePageState extends State<enterDashboardPage> {
                                   color: Color.fromRGBO(255, 255, 255, 0.00),
                                 ),
                                 child: PageView(controller: page, children: [
+                                  Users(),
                                   Dashboard(),
                                   TriggerBooking(),
                                   Bookings(),
