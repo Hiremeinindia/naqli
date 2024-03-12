@@ -24,6 +24,16 @@ class FormTextStyle {
     color: Colors.white,
     fontSize: 13,
   );
+  static TextStyle poppins10 = TextStyle(
+    color: Color.fromRGBO(152, 152, 152, 1),
+    fontFamily: 'Poppins',
+    fontSize: 15,
+  );
+  static TextStyle poppinsblack = TextStyle(
+    color: Colors.black,
+    fontFamily: 'Poppins',
+    fontSize: 15,
+  );
 }
 
 class TabelText {
@@ -36,6 +46,16 @@ class TabelText {
     color: Color.fromRGBO(75, 61, 82, 1),
     fontFamily: 'Helvetica',
     fontSize: 12,
+  );
+  static TextStyle helvetica16 = TextStyle(
+    color: const Color.fromARGB(255, 255, 255, 255),
+    fontFamily: 'Helvetica',
+    fontSize: 16,
+  );
+  static TextStyle helvetica = TextStyle(
+    color: Colors.black,
+    fontFamily: 'Helvetica',
+    fontSize: 13,
   );
   static TextStyle headerText = TextStyle(
     color: Colors.white,

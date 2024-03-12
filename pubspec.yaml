@@ -109,6 +109,12 @@ flutter:
     - family: HelveticaNeue
       fonts:
         - asset: fonts/Helvetica-Neue.otf 
+    - family: PoppinsSemiBold
+      fonts:
+        - asset: fonts/Poppins-SemiBold.ttf       
+    - family: Poppins
+      fonts:
+        - asset: fonts/Poppins.ttf       
         
   #       - asset: fonts/Schyler-Regular.ttf
   #       - asset: fonts/Schyler-Italic.ttf
