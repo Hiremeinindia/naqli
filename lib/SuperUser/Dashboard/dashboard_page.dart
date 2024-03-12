@@ -3,6 +3,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_application_1/bookingdialog.dart';
 
 import 'package:sizer/sizer.dart';
 import '../../Widgets/customButton.dart';
@@ -395,7 +396,14 @@ class _MyHomePageState extends State<DashboardPage> {
                                   height: 2.h,
                                 ),
                                 CustomButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    showDialog(
+                                      context: context,
+                                      builder: (context) {
+                                        return BookingDialog();
+                                      },
+                                    );
+                                  },
                                   text: 'Confirm Booking',
                                 ),
                               ],

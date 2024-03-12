@@ -417,9 +417,6 @@ class _MyHomePageState extends State<enterDashboardPage> {
                                   Bookings(),
                                   Contracts(),
                                   Payments(),
-                                  Container(
-                                    color: Colors.pink,
-                                  ),
                                   Users(),
                                   Container(
                                     color:
