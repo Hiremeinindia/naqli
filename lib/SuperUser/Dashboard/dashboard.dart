@@ -542,6 +542,8 @@ class _DashboardState extends State<Dashboard> {
                                 ),
                                 child: Expanded(
                                   child: Column(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
                                       Container(
                                         height: 55,
@@ -549,21 +551,11 @@ class _DashboardState extends State<Dashboard> {
                                         color: Color.fromRGBO(
                                             75, 61, 82, 1), // Brown color
                                         child: Center(
-                                          child: Text(
-                                            'New Booking',
-                                            style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 18,
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
+                                          child: Text('New Booking',
+                                              style: TabelText.headerText),
                                         ),
                                       ),
-                                      SizedBox(
-                                        height: 8.0,
-                                      ),
                                       Container(
-                                        alignment: Alignment.center,
                                         height: 70,
                                         decoration: BoxDecoration(
                                           color: Colors.white,
@@ -575,8 +567,10 @@ class _DashboardState extends State<Dashboard> {
                                               Color.fromRGBO(143, 142, 151, 1),
                                           'add.png',
                                           width: 120,
-                                          height: 170,
                                         ),
+                                      ),
+                                      SizedBox(
+                                        height: 8.0,
                                       ),
                                     ],
                                   ),
