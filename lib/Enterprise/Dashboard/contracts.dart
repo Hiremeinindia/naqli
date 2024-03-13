@@ -12,7 +12,7 @@ class Contracts extends StatefulWidget {
 class _PaymentsState extends State<Contracts> {
   final ScrollController _paymentScroll = ScrollController();
 
-  bool expandWork = false;
+  bool expandWork = true;
   DataTable _createDataTable() {
     return DataTable(
         headingRowHeight: 65,
@@ -329,137 +329,146 @@ class _PaymentsState extends State<Contracts> {
             ),
           );
         } else {
-          return SingleChildScrollView(
-            child: Container(
-              height: 682,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20.0),
-                color: Color.fromRGBO(255, 255, 255, 0.925),
-              ),
-              // padding: EdgeInsets.fromLTRB(3.w, 3.h, 3.w, 3.h),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Container(
-                    width: 1250,
-                    height: 92,
-                    decoration: BoxDecoration(
+          return Container(
+            height: 100.h,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20.0),
+              color: Color.fromRGBO(255, 255, 255, 0.925),
+            ),
+            // padding: EdgeInsets.fromLTRB(3.w, 3.h, 3.w, 3.h),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
+                  width: 1250,
+                  height: 92,
+                  decoration: BoxDecoration(
+                    color: Color.fromRGBO(75, 61, 82, 1),
+                    border: Border.all(
+                      width: 1.0,
                       color: Color.fromRGBO(75, 61, 82, 1),
-                      border: Border.all(
-                        width: 1.0,
-                        color: Color.fromRGBO(75, 61, 82, 1),
-                      ),
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(20),
-                        topRight: Radius.circular(20),
-                        bottomLeft: Radius.circular(0),
-                        bottomRight: Radius.circular(0),
-                      ),
                     ),
-                    child: Padding(
-                      padding: EdgeInsets.only(left: 120, top: 25),
-                      child: Text(
-                        "Contracts",
-                        style: TextStyle(
-                            fontFamily: "Helvetica",
-                            fontSize: 30,
-                            color: Colors.white),
-                      ),
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(20),
+                      topRight: Radius.circular(20),
+                      bottomLeft: Radius.circular(0),
+                      bottomRight: Radius.circular(0),
                     ),
                   ),
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(0),
-                        topRight: Radius.circular(0),
-                        bottomLeft: Radius.circular(20),
-                        bottomRight: Radius.circular(20),
-                      ),
+                  child: Padding(
+                    padding: EdgeInsets.only(left: 60, top: 25),
+                    child: Text(
+                      "New Contracts",
+                      style: TextStyle(
+                          fontFamily: "Helvetica",
+                          fontSize: 30,
+                          color: Colors.white),
                     ),
-                    padding: EdgeInsets.fromLTRB(3.w, 3.h, 3.w, 3.h),
-                    child: Column(
-                      children: [
-                        SizedBox(
-                          height: 20,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Container(
-                              height: 50,
-                              width: 160,
-                              padding: EdgeInsets.all(8.0),
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                  color: Colors.grey,
-                                  width: 1.0,
+                  ),
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(0),
+                      topRight: Radius.circular(0),
+                      bottomLeft: Radius.circular(20),
+                      bottomRight: Radius.circular(20),
+                    ),
+                  ),
+                  padding: EdgeInsets.fromLTRB(3.w, 3.h, 3.w, 3.h),
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(right: 25),
+                            child: GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  expandWork = !expandWork;
+                                });
+                              },
+                              child: Container(
+                                height: 50,
+                                width: 160,
+                                padding: EdgeInsets.all(8.0),
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                    color: Colors.grey,
+                                    width: 1.0,
+                                  ),
+                                  borderRadius: BorderRadius.circular(20.0),
                                 ),
-                                borderRadius: BorderRadius.circular(20.0),
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Icon(
-                                      Icons.add,
-                                      size: 19,
-                                    ),
-                                    Text("New Contract"),
-                                  ],
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Icon(
+                                        Icons.add,
+                                        size: 19,
+                                      ),
+                                      Text("New Contract"),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        Row(
-                          children: [
-                            Expanded(
-                              child: Column(
-                                children: [
-                                  Scrollbar(
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Column(
+                              children: [
+                                Scrollbar(
+                                  controller: _paymentScroll,
+                                  thumbVisibility:
+                                      true, // Set to true to always show the scrollbar
+                                  child: SingleChildScrollView(
+                                    scrollDirection: Axis.horizontal,
                                     controller: _paymentScroll,
-                                    thumbVisibility:
-                                        true, // Set to true to always show the scrollbar
-                                    child: SingleChildScrollView(
-                                      scrollDirection: Axis.horizontal,
-                                      controller: _paymentScroll,
-                                      child: Container(
-                                        height: 340,
-                                        width: 1100,
-                                        decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color: Colors.grey.withOpacity(
-                                                  0.5), // Adjust the shadow color and opacity
-                                              blurRadius:
-                                                  5.0, // Adjust the blur radius for a more visible shadow
-                                            ),
-                                          ],
-                                        ),
-                                        child: SizedBox(
-                                          height: 220,
-                                          child: ListView(
-                                            children: [_createDataTable()],
+                                    child: Container(
+                                      height: 340,
+                                      width: 1100,
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.grey.withOpacity(
+                                                0.5), // Adjust the shadow color and opacity
+                                            blurRadius:
+                                                5.0, // Adjust the blur radius for a more visible shadow
                                           ),
+                                        ],
+                                      ),
+                                      child: SizedBox(
+                                        height: 220,
+                                        child: ListView(
+                                          children: [_createDataTable()],
                                         ),
                                       ),
                                     ),
                                   ),
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
-                          ],
-                        ),
-                      ],
-                    ),
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           );
         }
