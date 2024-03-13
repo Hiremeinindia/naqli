@@ -57,6 +57,11 @@ class TabelText {
     fontFamily: 'Helvetica',
     fontSize: 13,
   );
+  static TextStyle helvetica11 = TextStyle(
+    color: Colors.black,
+    fontFamily: 'Helvetica',
+    fontSize: 12,
+  );
   static TextStyle headerText = TextStyle(
     color: Colors.white,
     fontFamily: 'SFProTextMedium',
@@ -68,14 +73,12 @@ class TabelText {
     fontSize: 14,
   );
   static TextStyle text1 = TextStyle(
-    color: Colors.black54,
+    color: Colors.black87,
     fontFamily: 'SFProTextMedium',
-    fontWeight: FontWeight.bold,
     fontSize: 12,
   );
   static TextStyle text2 = TextStyle(
-    fontFamily: 'SFProText',
-    fontWeight: FontWeight.bold,
+    fontFamily: 'SFProTextMedium',
     color: Color.fromRGBO(143, 142, 151, 1),
     fontSize: 10,
   );
@@ -105,5 +108,10 @@ class TabelText {
     color: Colors.grey,
     fontFamily: 'Helvetica',
     fontSize: 15,
+  );
+  static TextStyle usertext = TextStyle(
+    fontSize: 10,
+    fontFamily: "HelveticaNeue",
+    color: Color.fromRGBO(112, 112, 112, 1),
   );
 }

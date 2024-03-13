@@ -124,7 +124,7 @@ class _UsersState extends State<Users> {
                           height: 10,
                         ),
                         Container(
-                          width: 1150,
+                          width: 1120,
                           decoration: BoxDecoration(
                             boxShadow: [
                               BoxShadow(
