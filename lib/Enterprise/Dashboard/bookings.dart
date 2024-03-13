@@ -31,7 +31,7 @@ class _BookingsState extends State<Bookings> {
                 borderRadius: BorderRadius.circular(20.0),
                 color: Color.fromRGBO(255, 255, 255, 0.925),
               ),
-              padding: EdgeInsets.fromLTRB(3.w, 3.h, 3.w, 3.h),
+              padding: EdgeInsets.fromLTRB(3.w, 5.h, 3.w, 3.h),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -40,6 +40,15 @@ class _BookingsState extends State<Bookings> {
                       Expanded(
                         child: Container(
                           decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: Color.fromRGBO(240, 240, 240, 1)
+                                    .withOpacity(0.1),
+                                offset: Offset(0, 0),
+                                spreadRadius: 2.0,
+                                blurRadius: 0.01, // changes position of shadow
+                              ),
+                            ],
                             color: Colors.white,
                             borderRadius: BorderRadius.only(
                                 topLeft: Radius.circular(0),
@@ -88,6 +97,15 @@ class _BookingsState extends State<Bookings> {
                       Expanded(
                         child: Container(
                           decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: Color.fromRGBO(240, 240, 240, 1)
+                                    .withOpacity(0.1),
+                                offset: Offset(0, 0),
+                                spreadRadius: 2.0,
+                                blurRadius: 0.01, // changes position of shadow
+                              ),
+                            ],
                             color: Colors.white,
                             borderRadius: BorderRadius.only(
                                 topLeft: Radius.circular(0),
@@ -136,6 +154,15 @@ class _BookingsState extends State<Bookings> {
                       Container(
                         width: 200,
                         decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                              color: Color.fromRGBO(240, 240, 240, 1)
+                                  .withOpacity(0.1),
+                              offset: Offset(0, 0),
+                              spreadRadius: 2.0,
+                              blurRadius: 0.01, // changes position of shadow
+                            ),
+                          ],
                           color: Colors.white,
                           borderRadius: BorderRadius.only(
                               topLeft: Radius.circular(0),
@@ -160,8 +187,7 @@ class _BookingsState extends State<Bookings> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) =>
-                                        enterpriseMyHomePage(),
+                                    builder: (context) => superuserMyHomePage(),
                                   ),
                                 );
                               },
@@ -196,6 +222,15 @@ class _BookingsState extends State<Bookings> {
                         width: 1150,
                         height: 210,
                         decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                              color: Color.fromRGBO(240, 240, 240, 1)
+                                  .withOpacity(0.1),
+                              offset: Offset(0, 0),
+                              spreadRadius: 2.0,
+                              blurRadius: 0.01, // changes position of shadow
+                            ),
+                          ],
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(12.0),
                         ),
@@ -210,39 +245,93 @@ class _BookingsState extends State<Bookings> {
             ),
           );
         } else {
-          return Expanded(
-            child: Container(
-              color: Color.fromRGBO(255, 255, 255, 200),
-              padding: EdgeInsets.fromLTRB(3.w, 1.5.h, 3.w, 1.5.h),
+          return SingleChildScrollView(
               child: Container(
-                height: 100.h,
-                padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
-                decoration: BoxDecoration(
-                  color: Colors.deepPurple,
-                  borderRadius: BorderRadius.circular(12.0),
-                ),
-                child: SingleChildScrollView(
-                  child: Expanded(
-                    child: Column(
-                      children: [
-                        Scrollbar(
-                          controller: _book1Scroll,
-                          thumbVisibility:
-                              true, // Set to true to always show the scrollbar
-                          child: SingleChildScrollView(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20.0),
+                    color: Color.fromRGBO(255, 255, 255, 0.925),
+                  ),
+                  padding: EdgeInsets.fromLTRB(3.w, 3.h, 3.w, 3.h),
+                  child: Container(
+                    padding: EdgeInsets.fromLTRB(5.w, 1.5.h, 5.w, 1.5.h),
+                    color: Color.fromRGBO(255, 255, 255, 157),
+                    child: Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Scrollbar(
                             controller: _book1Scroll,
-                            scrollDirection: Axis.horizontal,
-                            child: Container(
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(0),
-                                    topRight: Radius.circular(0),
-                                    bottomLeft: Radius.circular(12),
-                                    bottomRight: Radius.circular(12)),
+                            thumbVisibility:
+                                true, // Set to true to always show the scrollbar
+                            child: SingleChildScrollView(
+                              controller: _book1Scroll,
+                              scrollDirection: Axis.horizontal,
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(0),
+                                      topRight: Radius.circular(0),
+                                      bottomLeft: Radius.circular(12),
+                                      bottomRight: Radius.circular(12)),
+                                ),
+                                width: 800,
+                                child: Expanded(
+                                  child: Column(
+                                    children: [
+                                      Container(
+                                        height: 55,
+                                        color: Color.fromRGBO(
+                                            75, 61, 82, 1), // Brown color
+                                        child: Padding(
+                                          padding: EdgeInsets.fromLTRB(
+                                              1.5.w, 1.5.h, 1.5.w, 1.5.h),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text('Booking 1',
+                                                  style: TabelText.headerText),
+                                              Text("Booking iD XXXXXX",
+                                                  style: TabelText.text3),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                      // Add spacing between the brown container and the white container
+
+                                      SizedBox(
+                                        height: 220,
+                                        child: ListView(
+                                          children: [_booking1Table()],
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
                               ),
-                              width: 800,
-                              child: Expanded(
+                            ),
+                          ),
+                          SizedBox(
+                            height: 4.h,
+                          ),
+                          Scrollbar(
+                            controller: _book2Scroll,
+                            thumbVisibility:
+                                true, // Set to true to always show the scrollbar
+                            child: SingleChildScrollView(
+                              controller: _book2Scroll,
+                              scrollDirection: Axis.horizontal,
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(0),
+                                      topRight: Radius.circular(0),
+                                      bottomLeft: Radius.circular(12),
+                                      bottomRight: Radius.circular(12)),
+                                ),
+                                width: 800,
                                 child: Column(
                                   children: [
                                     Container(
@@ -256,7 +345,7 @@ class _BookingsState extends State<Bookings> {
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
                                           children: [
-                                            Text('Booking 1',
+                                            Text('Booking 2',
                                                 style: TabelText.headerText),
                                             Text("Booking iD XXXXXX",
                                                 style: TabelText.text3),
@@ -265,7 +354,6 @@ class _BookingsState extends State<Bookings> {
                                       ),
                                     ),
                                     // Add spacing between the brown container and the white container
-
                                     SizedBox(
                                       height: 220,
                                       child: ListView(
@@ -277,139 +365,82 @@ class _BookingsState extends State<Bookings> {
                               ),
                             ),
                           ),
-                        ),
-                        SizedBox(
-                          height: 4.h,
-                        ),
-                        Scrollbar(
-                          controller: _book2Scroll,
-                          thumbVisibility:
-                              true, // Set to true to always show the scrollbar
-                          child: SingleChildScrollView(
-                            controller: _book2Scroll,
-                            scrollDirection: Axis.horizontal,
-                            child: Container(
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(0),
-                                    topRight: Radius.circular(0),
-                                    bottomLeft: Radius.circular(12),
-                                    bottomRight: Radius.circular(12)),
-                              ),
-                              width: 800,
-                              child: Column(
-                                children: [
-                                  Container(
-                                    height: 55,
-                                    color: Color.fromRGBO(
-                                        75, 61, 82, 1), // Brown color
-                                    child: Padding(
-                                      padding: EdgeInsets.fromLTRB(
-                                          1.5.w, 1.5.h, 1.5.w, 1.5.h),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text('Booking 2',
-                                              style: TabelText.headerText),
-                                          Text("Booking iD XXXXXX",
-                                              style: TabelText.text3),
-                                        ],
+                          SizedBox(
+                            height: 4.h,
+                          ),
+                          Container(
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(0),
+                                  topRight: Radius.circular(0),
+                                  bottomLeft: Radius.circular(12),
+                                  bottomRight: Radius.circular(12)),
+                            ),
+                            child: Column(
+                              children: [
+                                Container(
+                                  height: 55,
+
+                                  color: Color.fromRGBO(
+                                      75, 61, 82, 1), // Brown color
+                                  child: Center(
+                                    child: Text('New Booking',
+                                        style: TabelText.headerText),
+                                  ),
+                                ),
+                                GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            superuserMyHomePage(),
+                                      ),
+                                    );
+                                  },
+                                  child: Align(
+                                    alignment: Alignment.center,
+                                    child: Container(
+                                      height: 195,
+                                      child: Image.asset(
+                                        color: Color.fromRGBO(225, 225, 225, 1),
+                                        'add.png',
+                                        width: 60,
                                       ),
                                     ),
                                   ),
-                                  // Add spacing between the brown container and the white container
-                                  SizedBox(
-                                    height: 220,
-                                    child: ListView(
-                                      children: [_booking1Table()],
-                                    ),
-                                  )
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
                           ),
-                        ),
-                        SizedBox(
-                          height: 4.h,
-                        ),
-                        Container(
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(0),
-                                topRight: Radius.circular(0),
-                                bottomLeft: Radius.circular(12),
-                                bottomRight: Radius.circular(12)),
+                          SizedBox(
+                            height: 4.h,
                           ),
-                          child: Column(
-                            children: [
-                              Container(
-                                height: 55,
-
-                                color: Color.fromRGBO(
-                                    75, 61, 82, 1), // Brown color
-                                child: Center(
-                                  child: Text('New Booking',
-                                      style: TabelText.headerText),
-                                ),
-                              ),
-                              GestureDetector(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          enterpriseMyHomePage(),
-                                    ),
-                                  );
-                                },
-                                child: Align(
-                                  alignment: Alignment.center,
-                                  child: Container(
-                                    height: 195,
-                                    child: Image.asset(
-                                      color: Color.fromRGBO(225, 225, 225, 1),
-                                      'add.png',
-                                      width: 60,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        SizedBox(
-                          height: 4.h,
-                        ),
-                        Scrollbar(
-                          controller: _book3Scroll,
-                          thumbVisibility:
-                              true, // Set to true to always show the scrollbar
-                          child: SingleChildScrollView(
+                          Scrollbar(
                             controller: _book3Scroll,
-                            scrollDirection: Axis.horizontal,
-                            child: Container(
-                              width: 950,
-                              height: 230,
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(12.0),
-                              ),
-                              child: ListView(
-                                children: [_createDataTable()],
+                            thumbVisibility:
+                                true, // Set to true to always show the scrollbar
+                            child: SingleChildScrollView(
+                              controller: _book3Scroll,
+                              scrollDirection: Axis.horizontal,
+                              child: Container(
+                                width: 950,
+                                height: 230,
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(12.0),
+                                ),
+                                child: ListView(
+                                  children: [_createDataTable()],
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
-                ),
-              ),
-            ),
-          );
+                  )));
         }
       });
     });
@@ -470,17 +501,16 @@ class _BookingsState extends State<Bookings> {
               IconButton(
                   padding: EdgeInsets.zero,
                   constraints: BoxConstraints(),
-                  onPressed: null,
-                  icon: Icon(
-                    Icons.edit_document,
-                    color: Color.fromRGBO(74, 60, 81, 1),
-                  )),
+                  onPressed: () {},
+                  icon: Image.asset('editicon.png')),
+              SizedBox(
+                width: 1.w,
+              ),
               IconButton(
                   padding: EdgeInsets.zero,
-                  // constraints:
-                  //     BoxConstraints(),
-                  onPressed: null,
-                  icon: Icon(Icons.delete)),
+                  constraints: BoxConstraints(),
+                  onPressed: () {},
+                  icon: Image.asset('deleteicon.png')),
             ],
           ),
         ),
@@ -507,17 +537,16 @@ class _BookingsState extends State<Bookings> {
               IconButton(
                   padding: EdgeInsets.zero,
                   constraints: BoxConstraints(),
-                  onPressed: null,
-                  icon: Icon(
-                    Icons.edit_document,
-                    color: Color.fromRGBO(74, 60, 81, 1),
-                  )),
+                  onPressed: () {},
+                  icon: Image.asset('editicon.png')),
+              SizedBox(
+                width: 1.w,
+              ),
               IconButton(
                   padding: EdgeInsets.zero,
-                  // constraints:
-                  //     BoxConstraints(),
-                  onPressed: null,
-                  icon: Icon(Icons.delete)),
+                  constraints: BoxConstraints(),
+                  onPressed: () {},
+                  icon: Image.asset('deleteicon.png')),
             ],
           ),
         ),
@@ -544,17 +573,16 @@ class _BookingsState extends State<Bookings> {
               IconButton(
                   padding: EdgeInsets.zero,
                   constraints: BoxConstraints(),
-                  onPressed: null,
-                  icon: Icon(
-                    Icons.edit_document,
-                    color: Color.fromRGBO(74, 60, 81, 1),
-                  )),
+                  onPressed: () {},
+                  icon: Image.asset('editicon.png')),
+              SizedBox(
+                width: 1.w,
+              ),
               IconButton(
                   padding: EdgeInsets.zero,
-                  // constraints:
-                  //     BoxConstraints(),
-                  onPressed: null,
-                  icon: Icon(Icons.delete)),
+                  constraints: BoxConstraints(),
+                  onPressed: () {},
+                  icon: Image.asset('deleteicon.png')),
             ],
           ),
         ),
@@ -625,7 +653,7 @@ class _BookingsState extends State<Bookings> {
         DataCell(
           TableCell(
             verticalAlignment: TableCellVerticalAlignment.middle,
-            child: ViewButton(
+            child: EditButton(
               text: 'View',
               onPressed: () {},
               colors: Color.fromRGBO(98, 106, 254, 1),
@@ -665,7 +693,7 @@ class _BookingsState extends State<Bookings> {
         DataCell(
           TableCell(
             verticalAlignment: TableCellVerticalAlignment.middle,
-            child: ViewButton(
+            child: EditButton(
               text: 'Edit',
               onPressed: () {},
               colors: Color.fromRGBO(98, 106, 254, 1),
@@ -705,7 +733,7 @@ class _BookingsState extends State<Bookings> {
         DataCell(
           TableCell(
             verticalAlignment: TableCellVerticalAlignment.middle,
-            child: ViewButton(
+            child: EditButton(
               text: 'Pay',
               onPressed: () {},
               colors: Color.fromRGBO(98, 106, 254, 1),
