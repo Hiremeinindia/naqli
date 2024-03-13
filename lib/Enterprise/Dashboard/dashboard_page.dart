@@ -3,6 +3,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/Enterprise/Dashboard/contracts.dart';
+import 'package:flutter_application_1/Enterprise/Dashboard/newContract.dart';
 
 import 'package:sizer/sizer.dart';
 import '../../Widgets/customButton.dart';
@@ -34,6 +35,7 @@ class _MyHomePageState extends State<enterDashboardPage> {
   int? selectedRadioValue1;
   int? selectedRadioValue2;
   bool payNowButtonEnabled = false;
+  bool expandWork = false;
   String? selectedValue;
   Widget _currentContent = Dashboard(); // Initial content
 
@@ -413,7 +415,27 @@ class _MyHomePageState extends State<enterDashboardPage> {
                                   Dashboard(),
                                   TriggerBooking(),
                                   Bookings(),
-                                  Contracts(),
+                                  expandWork
+                                      ? GestureDetector(
+                                          onTap: () {
+                                            setState(() {
+                                              expandWork = !expandWork;
+                                            });
+                                          },
+                                          child: Container(
+                                            child: Contracts(),
+                                          ),
+                                        )
+                                      : GestureDetector(
+                                          onTap: () {
+                                            setState(() {
+                                              expandWork = !expandWork;
+                                            });
+                                          },
+                                          child: Container(
+                                            child: newContracts(),
+                                          ),
+                                        ),
                                   Payments(),
                                   Users(),
                                   Container(
