@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/Enterprise/Dashboard/contracts.dart';
 import 'package:flutter_application_1/Enterprise/Dashboard/dashboard_page.dart';
+import 'package:flutter_application_1/Enterprise/Dashboard/newContract.dart';
 import 'package:flutter_application_1/Partner/Dashboard/dashboard_page.dart';
 
 import 'package:flutter_application_1/Partner/homepage.dart';
@@ -41,7 +42,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: DashboardPage(),
+      home: enterDashboardPage(),
     );
   }
 }
