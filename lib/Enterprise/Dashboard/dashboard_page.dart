@@ -256,7 +256,7 @@ class _MyHomePageState extends State<enterDashboardPage> {
                       Container(
                         padding: EdgeInsets.fromLTRB(0, 0, 0, 0.1.h),
                         height: 850,
-                        width: 340,
+                        width: 360,
                         decoration: BoxDecoration(
                           border: Border.all(
                             color: Color.fromARGB(255, 216, 214, 214)
@@ -410,7 +410,6 @@ class _MyHomePageState extends State<enterDashboardPage> {
                                   color: Color.fromRGBO(255, 255, 255, 0.00),
                                 ),
                                 child: PageView(controller: page, children: [
-                                  Users(),
                                   Dashboard(),
                                   TriggerBooking(),
                                   Bookings(),

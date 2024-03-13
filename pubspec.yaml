@@ -38,6 +38,9 @@ dependencies:
   carousel_slider: ^4.2.1
   cloud_firestore: ^4.15.4
   firebase_core: ^2.25.4
+  flutter_localizations:
+    sdk: flutter
+  flutter_local_notifications: ^16.3.2
   firebase_auth: ^4.17.4
   easy_sidemenu: ^0.5.0
   fl_chart: ^0.66.2
@@ -49,6 +52,8 @@ dependencies:
   fluentui_system_icons: ^1.1.231
   font_awesome_flutter: ^10.7.0
   sidebar_bigeagle: ^0.2.2+1
+  dropdown_button2: ^2.3.9
+  shared_preferences: ^2.2.2
 
 dev_dependencies:
   flutter_test:
@@ -115,6 +120,10 @@ flutter:
     - family: Poppins
       fonts:
         - asset: fonts/Poppins.ttf       
+    - family: NotoSans
+      fonts:
+        - asset: fonts/NotoSans-Regular.ttf
+        - asset: fonts/NotoSans-Bold.ttf
         
   #       - asset: fonts/Schyler-Regular.ttf
   #       - asset: fonts/Schyler-Italic.ttf
