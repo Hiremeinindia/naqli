@@ -497,7 +497,7 @@ class _PaymentsState extends State<newContracts> {
               borderRadius: BorderRadius.circular(20.0),
               color: Color.fromRGBO(255, 255, 255, 0.925),
             ),
-            // padding: EdgeInsets.fromLTRB(3.w, 3.h, 3.w, 3.h),
+            padding: EdgeInsets.fromLTRB(3.w, 3.h, 3.w, 3.h),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -602,9 +602,9 @@ class _PaymentsState extends State<newContracts> {
                                             Radius.circular(15)),
                                       ),
                                     ),
-                                    value: selectedCity ??
-                                        cities
-                                            .first, // Set initial value to the first element
+                                    value: selectedCity,
+
+                                    // Set initial value to the first element
                                     onChanged: (String? newValue) {
                                       setState(() {
                                         selectedCity = newValue;
@@ -682,7 +682,7 @@ class _PaymentsState extends State<newContracts> {
                                                   Radius.circular(15)),
                                             ),
                                           ),
-                                          value: selectedCity ?? cities.first,
+                                          value: selectedCity,
                                           onChanged: (String? newValue) {
                                             setState(() {
                                               selectedCity = newValue;
@@ -731,7 +731,7 @@ class _PaymentsState extends State<newContracts> {
                                                   const EdgeInsets.all(8.0),
                                               child: Dash(
                                                   direction: Axis.vertical,
-                                                  length: 90,
+                                                  length: 70,
                                                   dashLength: 10,
                                                   dashColor: Color.fromRGBO(
                                                       112, 112, 112, 1)),
@@ -826,7 +826,7 @@ class _PaymentsState extends State<newContracts> {
                                             ),
                                           ],
                                         ),
-                                      )
+                                      ),
                                     ],
                                   ),
                                 ],
@@ -854,7 +854,7 @@ class _PaymentsState extends State<newContracts> {
                                                 Radius.circular(15)),
                                           ),
                                         ),
-                                        value: selectedCity ?? cities.first,
+                                        value: selectedCity,
                                         onChanged: (String? newValue) {
                                           setState(() {
                                             selectedCity = newValue;
