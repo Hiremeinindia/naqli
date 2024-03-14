@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_application_1/Enterprise/Dashboard/newContract.dart';
 import 'package:flutter_application_1/Widgets/formText.dart';
 import 'package:sizer/sizer.dart';
@@ -243,36 +245,35 @@ class _PaymentsState extends State<Contracts> {
                         children: [
                           Padding(
                             padding: const EdgeInsets.only(right: 25),
-                            child: GestureDetector(
-                              onTap: () {
-                                setState(() {
-                                  expandWork = !expandWork;
-                                });
-                              },
-                              child: Container(
-                                height: 50,
-                                width: 160,
-                                padding: EdgeInsets.all(8.0),
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                    color: Colors.grey,
-                                    width: 1.0,
-                                  ),
-                                  borderRadius: BorderRadius.circular(20.0),
+                            child: Container(
+                              height: 50,
+                              width: 160,
+                              padding: EdgeInsets.all(8.0),
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                  color: Colors.grey,
+                                  width: 1.0,
                                 ),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      Icon(
+                                borderRadius: BorderRadius.circular(20.0),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    GestureDetector(
+                                      onTap: () {
+                                        setState(() {
+                                          expandWork = !expandWork;
+                                        });
+                                      },
+                                      child: Icon(
                                         Icons.add,
                                         size: 19,
                                       ),
-                                      Text("New Contract"),
-                                    ],
-                                  ),
+                                    ),
+                                    Text("New Contract"),
+                                  ],
                                 ),
                               ),
                             ),
@@ -386,36 +387,35 @@ class _PaymentsState extends State<Contracts> {
                         children: [
                           Padding(
                             padding: const EdgeInsets.only(right: 25),
-                            child: GestureDetector(
-                              onTap: () {
-                                setState(() {
-                                  expandWork = !expandWork;
-                                });
-                              },
-                              child: Container(
-                                height: 50,
-                                width: 160,
-                                padding: EdgeInsets.all(8.0),
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                    color: Colors.grey,
-                                    width: 1.0,
-                                  ),
-                                  borderRadius: BorderRadius.circular(20.0),
+                            child: Container(
+                              height: 50,
+                              width: 160,
+                              padding: EdgeInsets.all(8.0),
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                  color: Colors.grey,
+                                  width: 1.0,
                                 ),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      Icon(
+                                borderRadius: BorderRadius.circular(20.0),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    GestureDetector(
+                                      onTap: () {
+                                        setState(() {
+                                          expandWork = !expandWork;
+                                        });
+                                      },
+                                      child: Icon(
                                         Icons.add,
                                         size: 19,
                                       ),
-                                      Text("New Contract"),
-                                    ],
-                                  ),
+                                    ),
+                                    Text("New Contract"),
+                                  ],
                                 ),
                               ),
                             ),
