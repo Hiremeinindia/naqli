@@ -22,7 +22,6 @@ class _TriggerBookingState extends State<TriggerBooking> {
   bool checkbox1 = false;
   bool checkbox2 = false;
   bool checkbox3 = false;
-  final ScrollController _scrollController = ScrollController();
   final ScrollController _Scroll = ScrollController();
   @override
   void initState() {

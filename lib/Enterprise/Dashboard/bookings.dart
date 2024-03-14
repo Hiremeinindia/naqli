@@ -187,7 +187,7 @@ class _BookingsState extends State<Bookings> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => superuserMyHomePage(),
+                                    builder: (context) => SuperuserMyHomePage(),
                                   ),
                                 );
                               },
@@ -399,7 +399,7 @@ class _BookingsState extends State<Bookings> {
                                         context,
                                         MaterialPageRoute(
                                           builder: (context) =>
-                                              superuserMyHomePage(),
+                                              SuperuserMyHomePage(),
                                         ),
                                       );
                                     },
