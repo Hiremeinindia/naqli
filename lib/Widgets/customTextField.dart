@@ -34,8 +34,8 @@ final class CustomTextfield extends StatelessWidget {
         validator: validator,
         controller: controller,
         decoration: InputDecoration(
-          contentPadding: EdgeInsets.all(5.0),
-          hintStyle: TextStyle(fontSize: 16),
+          contentPadding: EdgeInsets.only(left: 12),
+          hintStyle: TextStyle(fontSize: 12, fontFamily: 'SegoeItalic'),
           hintText: text,
           errorText: text1,
           errorStyle: TextStyle(height: 0, fontSize: 8.5),
