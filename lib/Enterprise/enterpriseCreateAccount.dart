@@ -316,6 +316,8 @@ class _enterpriseCreateAccount extends State<enterpriseCreateAccount> {
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(5)),
                                   ),
+                                  floatingLabelBehavior:
+                                      FloatingLabelBehavior.always,
                                 ),
                               ),
                             ),

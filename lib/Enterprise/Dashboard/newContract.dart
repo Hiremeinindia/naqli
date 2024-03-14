@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_application_1/Widgets/customButton.dart';
 import 'package:flutter_application_1/Widgets/formText.dart';
+import 'package:flutter_dash/flutter_dash.dart';
 import 'package:sizer/sizer.dart';
 
 class newContracts extends StatefulWidget {
@@ -74,6 +76,7 @@ class _PaymentsState extends State<newContracts> {
                     ),
                   ),
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       SizedBox(
                         height: 50,
@@ -103,12 +106,21 @@ class _PaymentsState extends State<newContracts> {
                                 children: [
                                   Text(
                                     "Mode",
+                                    style: TextStyle(
+                                        fontFamily: "SFProText-Regular",
+                                        fontSize: 17),
                                   ),
                                   Text(
                                     "From",
+                                    style: TextStyle(
+                                        fontFamily: "SFProText-Regular",
+                                        fontSize: 17),
                                   ),
                                   Text(
                                     "To",
+                                    style: TextStyle(
+                                        fontFamily: "SFProText-Regular",
+                                        fontSize: 17),
                                   ),
                                 ],
                               ),
@@ -128,19 +140,22 @@ class _PaymentsState extends State<newContracts> {
                                             Radius.circular(15)),
                                       ),
                                     ),
-                                    value: selectedCity,
+                                    value: selectedCity ??
+                                        cities
+                                            .first, // Set initial value to the first element
                                     onChanged: (String? newValue) {
                                       setState(() {
                                         selectedCity = newValue;
                                       });
                                     },
                                     items: cities.map<DropdownMenuItem<String>>(
-                                        (String value) {
-                                      return DropdownMenuItem<String>(
-                                        value: value,
-                                        child: Text(value),
-                                      );
-                                    }).toList(),
+                                      (String value) {
+                                        return DropdownMenuItem<String>(
+                                          value: value,
+                                          child: Text(value),
+                                        );
+                                      },
+                                    ).toList(),
                                   ),
                                 ),
                                 SizedBox(
@@ -150,7 +165,8 @@ class _PaymentsState extends State<newContracts> {
                                     decoration: InputDecoration(
                                       hintStyle: TextStyle(fontSize: 16),
                                       hintText: 'DD/MM/YYYY',
-                                      contentPadding: EdgeInsets.all(5.0),
+                                      contentPadding:
+                                          EdgeInsets.only(left: 30, top: 20),
                                       border: OutlineInputBorder(
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(15)),
@@ -165,7 +181,8 @@ class _PaymentsState extends State<newContracts> {
                                     decoration: InputDecoration(
                                       hintStyle: TextStyle(fontSize: 16),
                                       hintText: 'DD/MM/YYYY',
-                                      contentPadding: EdgeInsets.all(5.0),
+                                      contentPadding:
+                                          EdgeInsets.only(left: 30, top: 20),
                                       border: OutlineInputBorder(
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(15)),
@@ -176,7 +193,9 @@ class _PaymentsState extends State<newContracts> {
                               ],
                             ),
                             Padding(
-                              padding: const EdgeInsets.only(top: 50, left: 20),
+                              padding: const EdgeInsets.only(
+                                top: 50,
+                              ),
                               child: Column(
                                 children: [
                                   Row(
@@ -188,7 +207,7 @@ class _PaymentsState extends State<newContracts> {
                                         ),
                                       ),
                                       SizedBox(
-                                        width: 20,
+                                        width: 40,
                                       ),
                                       SizedBox(
                                         height: 45,
@@ -224,56 +243,133 @@ class _PaymentsState extends State<newContracts> {
                                   ),
                                   Row(
                                     children: [
-                                      Image.asset(
-                                        'Group1827.png',
-                                        width: 50,
-                                        height: 90,
-                                      ),
-                                      SizedBox(
-                                        height: 45,
-                                        width: 250,
-                                        child: TextFormField(
-                                          decoration: InputDecoration(
-                                            hintStyle: TextStyle(fontSize: 16),
-                                            hintText: 'Enter your location',
-                                            contentPadding: EdgeInsets.all(5.0),
-                                            border: OutlineInputBorder(
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(15)),
+                                      Padding(
+                                        padding: const EdgeInsets.only(
+                                            top: 30, left: 50),
+                                        child: Column(
+                                          children: [
+                                            CircleAvatar(
+                                              backgroundColor:
+                                                  Color.fromRGBO(9, 78, 37, 1),
+
+                                              // You can change the background color here
+                                              radius: 10,
+                                              child: Text(
+                                                'A',
+                                                style: TextStyle(
+                                                  fontSize: 10,
+                                                  fontWeight: FontWeight.bold,
+                                                  color: Colors
+                                                      .white, // You can change the text color here
+                                                ),
+                                              ),
                                             ),
-                                          ),
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
+                                              child: Dash(
+                                                  direction: Axis.vertical,
+                                                  length: 90,
+                                                  dashLength: 10,
+                                                  dashColor: Color.fromRGBO(
+                                                      112, 112, 112, 1)),
+                                            ),
+                                            CircleAvatar(
+                                              backgroundColor: Color.fromRGBO(
+                                                  147, 10, 26, 1),
+
+                                              // You can change the background color here
+                                              radius: 10,
+                                              child: Text(
+                                                'B',
+                                                style: TextStyle(
+                                                  fontSize: 10,
+                                                  fontWeight: FontWeight.bold,
+                                                  color: Colors
+                                                      .white, // You can change the text color here
+                                                ),
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ),
-                                    ],
-                                  ),
-                                  Row(
-                                    children: [
-                                      Image.asset(
-                                        'Group1826.png',
-                                        width: 50,
-                                        height: 90,
-                                      ),
                                       SizedBox(
-                                        height: 45,
-                                        width: 250,
-                                        child: TextFormField(
-                                          decoration: InputDecoration(
-                                            hintStyle: TextStyle(fontSize: 16),
-                                            hintText: 'Enter your location',
-                                            contentPadding: EdgeInsets.all(5.0),
-                                            border: OutlineInputBorder(
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(15)),
+                                        width: 20,
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.only(top: 28),
+                                        child: Column(
+                                          children: [
+                                            SizedBox(
+                                              height: 45,
+                                              width: 250,
+                                              child: TextFormField(
+                                                decoration: InputDecoration(
+                                                  hintStyle:
+                                                      TextStyle(fontSize: 16),
+                                                  hintText:
+                                                      'Enter your location',
+                                                  contentPadding:
+                                                      EdgeInsets.only(
+                                                          left: 50, top: 20),
+                                                  border: OutlineInputBorder(
+                                                    borderRadius:
+                                                        BorderRadius.all(
+                                                            Radius.circular(
+                                                                15)),
+                                                  ),
+                                                ),
+                                              ),
                                             ),
-                                          ),
+                                            SizedBox(
+                                              height: 50,
+                                            ),
+                                            SizedBox(
+                                              height: 45,
+                                              width: 250,
+                                              child: TextFormField(
+                                                decoration: InputDecoration(
+                                                  hintStyle:
+                                                      TextStyle(fontSize: 16),
+                                                  hintText:
+                                                      'Enter your location',
+                                                  contentPadding:
+                                                      EdgeInsets.only(
+                                                          left: 50, top: 20),
+                                                  border: OutlineInputBorder(
+                                                    borderRadius:
+                                                        BorderRadius.all(
+                                                            Radius.circular(
+                                                                15)),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ),
+                                      SizedBox(
+                                        width: 40,
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.only(top: 25),
+                                        child: Column(
+                                          children: [
+                                            SizedBox(
+                                              height: 140,
+                                              child: VerticalDivider(
+                                                color: Color.fromRGBO(
+                                                    112, 112, 112, 1),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      )
                                     ],
                                   ),
                                 ],
                               ),
                             ),
-                            SizedBox(width: 30),
                             Column(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
@@ -381,6 +477,13 @@ class _PaymentsState extends State<newContracts> {
                           ],
                         ),
                       ),
+                      SizedBox(
+                        height: 30,
+                      ),
+                      CustomButton(
+                        onPressed: () {},
+                        text: 'Send Contract',
+                      ),
                     ],
                   ),
                 ),
@@ -462,8 +565,11 @@ class _PaymentsState extends State<newContracts> {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceEvenly,
                                 children: [
-                                  Text(
-                                    "Mode",
+                                  Padding(
+                                    padding: const EdgeInsets.only(bottom: 18),
+                                    child: Text(
+                                      "Mode",
+                                    ),
                                   ),
                                   Text(
                                     "From",
@@ -510,8 +616,8 @@ class _PaymentsState extends State<newContracts> {
                                   child: TextFormField(
                                     decoration: InputDecoration(
                                       hintStyle: TextStyle(fontSize: 16),
-                                      hintText: 'DD/MM/YYYY',
-                                      contentPadding: EdgeInsets.all(5.0),
+                                      contentPadding: EdgeInsets.fromLTRB(
+                                          20.0, 10.0, 20.0, 10.0),
                                       border: OutlineInputBorder(
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(15)),
@@ -556,7 +662,8 @@ class _PaymentsState extends State<newContracts> {
                                         width: 160,
                                         child: DropdownButtonFormField(
                                           decoration: InputDecoration(
-                                            contentPadding: EdgeInsets.all(5.0),
+                                            contentPadding:
+                                                EdgeInsets.all(10.0),
                                             border: OutlineInputBorder(
                                               borderRadius: BorderRadius.all(
                                                   Radius.circular(15)),
@@ -568,6 +675,7 @@ class _PaymentsState extends State<newContracts> {
                                               selectedCity = newValue;
                                             });
                                           },
+                                          hint: Text('Advance - Percentage'),
                                           items: cities
                                               .map<DropdownMenuItem<String>>(
                                                   (String value) {
@@ -597,7 +705,8 @@ class _PaymentsState extends State<newContracts> {
                                           decoration: InputDecoration(
                                             hintStyle: TextStyle(fontSize: 16),
                                             hintText: 'Enter your location',
-                                            contentPadding: EdgeInsets.all(5.0),
+                                            contentPadding:
+                                                EdgeInsets.only(left: 50),
                                             border: OutlineInputBorder(
                                               borderRadius: BorderRadius.all(
                                                   Radius.circular(15)),
