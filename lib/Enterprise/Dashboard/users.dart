@@ -1,10 +1,8 @@
-import 'package:fluentui_system_icons/fluentui_system_icons.dart';
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_application_1/Widgets/customButton.dart';
-import 'package:flutter_application_1/Widgets/customRadio.dart';
+import 'package:flutter_application_1/Widgets/customTextField.dart';
 import 'package:flutter_application_1/Widgets/formText.dart';
-import 'package:flutter_application_1/bookingdialog.dart';
 import 'package:sizer/sizer.dart';
 
 class Users extends StatefulWidget {
@@ -15,6 +13,7 @@ class Users extends StatefulWidget {
 
 class _UsersState extends State<Users> {
   bool value = false;
+  bool addUser = false;
   bool isButtonEnabled = false;
   bool isButtonEnabled1 = false;
   bool isButtonEnabled2 = false;
@@ -24,8 +23,13 @@ class _UsersState extends State<Users> {
   bool checkbox1 = false;
   bool checkbox2 = false;
   bool checkbox3 = false;
-  final ScrollController _scrollController = ScrollController();
-  final ScrollController _Scroll = ScrollController();
+  String? access;
+  List<String> cities = [
+    'Trigger Bookings',
+    'Booking Manager',
+    'Contract',
+    'None'
+  ];
   @override
   void initState() {
     super.initState();
@@ -48,6 +52,7 @@ class _UsersState extends State<Users> {
               child: Column(
                 children: [
                   Container(
+                    padding: EdgeInsets.fromLTRB(3.w, 1.5.h, 1.5.w, 1.5.h),
                     decoration: BoxDecoration(
                       boxShadow: [
                         BoxShadow(
@@ -66,101 +71,303 @@ class _UsersState extends State<Users> {
                           bottomRight: Radius.circular(0)),
                     ),
                     height: 80, // Brown color
-                    child: Padding(
-                      padding: EdgeInsets.fromLTRB(3.w, 1.5.h, 1.5.w, 1.5.h),
-                      child: Row(
-                        children: [
-                          Text(
-                            'Users',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
-                              fontFamily: "Helvetica",
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  Container(
-                    padding: EdgeInsets.fromLTRB(2.w, 1.h, 2.w, 1.h),
-                    child: Column(
+                    child: Row(
                       children: [
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Align(
-                          alignment: Alignment.centerRight,
-                          child: SizedBox(
-                            width: 127,
-                            height: 45,
-                            child: ElevatedButton.icon(
-                              onPressed: () {},
-                              style: ElevatedButton.styleFrom(
-                                elevation: 0,
-                                backgroundColor: Colors.white,
-                                shape: RoundedRectangleBorder(
-                                  side: BorderSide(
-                                    color: Color.fromRGBO(98, 84, 84, 1),
-                                  ),
-                                  borderRadius: BorderRadius.circular(
-                                      15), // Adjust border radius as needed
-                                ),
-                              ),
-                              icon: Icon(
-                                Icons.add,
-                                size: 15,
-                              ),
-                              label: Text('Add user',
-                                  style: TextStyle(
-                                    color: Color.fromRGBO(98, 84, 84, 1),
-                                    fontFamily: 'Helvetica',
-                                    fontSize: 15,
-                                  )),
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Container(
-                          width: 1120,
-                          decoration: BoxDecoration(
-                            boxShadow: [
-                              BoxShadow(
-                                color: Color.fromRGBO(158, 157, 157, 1)
-                                    .withOpacity(0.5),
-                                offset: Offset(0, 0),
-                                spreadRadius: 2.0,
-                                blurRadius: 2, // changes position of shadow
-                              ),
-                              BoxShadow(
-                                color: Colors.white,
-                                offset: Offset(0, -1),
-                                spreadRadius: 0,
-                                blurRadius: 0, // changes position of shadow
-                              ),
-                            ],
-                            border: Border.all(
-                              color: Color.fromRGBO(112, 112, 112, 1)
-                                  .withOpacity(0.5),
-                            ),
-                            borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(0),
-                                topRight: Radius.circular(0),
-                                bottomLeft: Radius.circular(0),
-                                bottomRight: Radius.circular(0)),
-                          ),
-                          child: SizedBox(
-                            height: 350,
-                            child: ListView(
-                              children: [_booking1Table()],
-                            ),
+                        Text(
+                          addUser ? 'New User' : 'Users',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                            fontFamily: "Helvetica",
                           ),
                         ),
                       ],
                     ),
                   ),
+                  addUser
+                      ? Padding(
+                          padding: EdgeInsets.fromLTRB(7.w, 7.h, 7.w, 7.h),
+                          child: Expanded(
+                            child: Container(
+                                decoration: BoxDecoration(
+                                  boxShadow: <BoxShadow>[
+                                    BoxShadow(
+                                      color: Color.fromRGBO(199, 199, 199, 1)
+                                          .withOpacity(0.5),
+                                      blurRadius: 15,
+                                      spreadRadius: 3,
+                                    ),
+                                  ],
+                                  borderRadius: BorderRadius.circular(20.0),
+                                  color: Color.fromRGBO(255, 255, 255, 0.00),
+                                ),
+                                child: Container(
+                                  padding:
+                                      EdgeInsets.fromLTRB(8.w, 15.h, 8.w, 15.h),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(22.0),
+                                    color: Color.fromRGBO(255, 255, 255, 0.925),
+                                  ),
+                                  child: Column(
+                                    children: [
+                                      Row(
+                                        children: [
+                                          SizedBox(
+                                              width: 120, child: Text('Name')),
+                                          Expanded(
+                                              child: CustomTextfield(
+                                            text: 'Enter name',
+                                          )),
+                                          SizedBox(
+                                            width: 2.w,
+                                          ),
+                                          SizedBox(
+                                              width: 120,
+                                              child: Text('User Photo')),
+                                          Expanded(child: CustomTextfield()),
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: 25,
+                                      ),
+                                      Row(
+                                        children: [
+                                          SizedBox(
+                                              width: 120,
+                                              child: Text('Email ID')),
+                                          Expanded(
+                                              child: CustomTextfield(
+                                            text: 'Enter email address',
+                                          )),
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: 25,
+                                      ),
+                                      Row(
+                                        children: [
+                                          SizedBox(
+                                              width: 120,
+                                              child: Text('Mobile No')),
+                                          Expanded(
+                                              child: CustomTextfield(
+                                            text: 'Enter mobile no',
+                                          )),
+                                          SizedBox(
+                                            width: 5.w,
+                                          ),
+                                          SizedBox(
+                                              width: 120,
+                                              child: Text('Address')),
+                                          Expanded(
+                                              child: CustomTextfield(
+                                            text: 'Enter address',
+                                          )),
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: 25,
+                                      ),
+                                      Row(
+                                        children: [
+                                          SizedBox(
+                                              width: 120,
+                                              child: Text('Access to')),
+                                          Expanded(
+                                            child: DropdownButtonHideUnderline(
+                                              child: DropdownButton2<String>(
+                                                value:
+                                                    access, // Provide a default value if it's empty
+                                                items: <String>[
+                                                  'Trigger Bookings',
+                                                  'Booking Manager',
+                                                  'Contract',
+                                                  'None'
+                                                ].map<DropdownMenuItem<String>>(
+                                                    (String value) {
+                                                  return DropdownMenuItem<
+                                                      String>(
+                                                    value: value,
+                                                    child: Text(value,
+                                                        style: TextStyle(
+                                                            fontFamily:
+                                                                'Poppins',
+                                                            fontSize: 12)),
+                                                  );
+                                                }).toList(),
+                                                onChanged: (String? newValue) {
+                                                  setState(() {
+                                                    // Step 2: Update controller when dropdown value changes
+                                                    access = newValue!;
+                                                  });
+                                                },
+                                                buttonStyleData:
+                                                    ButtonStyleData(
+                                                  height: 45,
+                                                  width: 30.w,
+                                                  padding: EdgeInsets.only(
+                                                      left: 14, right: 14),
+                                                  decoration: BoxDecoration(
+                                                    border: Border.all(
+                                                        color: Colors
+                                                            .grey.shade500),
+                                                    borderRadius:
+                                                        BorderRadius.all(
+                                                            Radius.circular(5)),
+                                                    color: Colors.white,
+                                                  ),
+                                                ),
+                                                iconStyleData:
+                                                    const IconStyleData(
+                                                  icon: Icon(
+                                                    Icons.arrow_drop_down_sharp,
+                                                  ),
+                                                  iconSize: 25,
+                                                  iconEnabledColor:
+                                                      Colors.black,
+                                                  iconDisabledColor: null,
+                                                ),
+                                                dropdownStyleData:
+                                                    DropdownStyleData(
+                                                  elevation: 0,
+                                                  maxHeight: 200,
+                                                  padding: EdgeInsets.only(
+                                                      left: 5,
+                                                      right: 5,
+                                                      top: 5,
+                                                      bottom: 5),
+                                                  decoration: BoxDecoration(
+                                                    border: Border.all(
+                                                        color: Colors
+                                                            .grey.shade500),
+                                                    borderRadius:
+                                                        BorderRadius.only(
+                                                      topLeft:
+                                                          Radius.circular(0),
+                                                      topRight:
+                                                          Radius.circular(0),
+                                                      bottomLeft:
+                                                          Radius.circular(5),
+                                                      bottomRight:
+                                                          Radius.circular(5),
+                                                    ),
+                                                    color: Colors.white,
+                                                  ),
+                                                  scrollPadding:
+                                                      EdgeInsets.all(5),
+                                                  scrollbarTheme:
+                                                      ScrollbarThemeData(
+                                                    thickness:
+                                                        MaterialStateProperty
+                                                            .all<double>(6),
+                                                    thumbVisibility:
+                                                        MaterialStateProperty
+                                                            .all<bool>(true),
+                                                  ),
+                                                ),
+                                                menuItemStyleData:
+                                                    MenuItemStyleData(
+                                                  height: 30,
+                                                  padding: EdgeInsets.only(
+                                                      left: 14, right: 14),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          Expanded(child: SizedBox()),
+                                          Expanded(child: SizedBox()),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                )),
+                          ),
+                        )
+                      : Container(
+                          padding: EdgeInsets.fromLTRB(2.w, 1.h, 2.w, 1.h),
+                          child: Column(
+                            children: [
+                              SizedBox(
+                                height: 25,
+                              ),
+                              Align(
+                                alignment: Alignment.centerRight,
+                                child: SizedBox(
+                                  width: 127,
+                                  height: 45,
+                                  child: ElevatedButton.icon(
+                                    onPressed: () {
+                                      setState(() {
+                                        addUser = !addUser;
+                                      });
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                      elevation: 0,
+                                      backgroundColor: Colors.white,
+                                      shape: RoundedRectangleBorder(
+                                        side: BorderSide(
+                                          color: Color.fromRGBO(98, 84, 84, 1),
+                                        ),
+                                        borderRadius: BorderRadius.circular(
+                                            15), // Adjust border radius as needed
+                                      ),
+                                    ),
+                                    icon: Icon(
+                                      Icons.add,
+                                      size: 15,
+                                    ),
+                                    label: Text('Add user',
+                                        style: TextStyle(
+                                          color: Color.fromRGBO(98, 84, 84, 1),
+                                          fontFamily: 'Helvetica',
+                                          fontSize: 15,
+                                        )),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                height: 25,
+                              ),
+                              Container(
+                                width: 1120,
+                                decoration: BoxDecoration(
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Color.fromRGBO(158, 157, 157, 1)
+                                          .withOpacity(0.5),
+                                      offset: Offset(0, 0),
+                                      spreadRadius: 2.0,
+                                      blurRadius:
+                                          2, // changes position of shadow
+                                    ),
+                                    BoxShadow(
+                                      color: Colors.white,
+                                      offset: Offset(0, -1),
+                                      spreadRadius: 0,
+                                      blurRadius:
+                                          0, // changes position of shadow
+                                    ),
+                                  ],
+                                  border: Border.all(
+                                    color: Color.fromRGBO(112, 112, 112, 1)
+                                        .withOpacity(0.5),
+                                  ),
+                                  borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(0),
+                                      topRight: Radius.circular(0),
+                                      bottomLeft: Radius.circular(0),
+                                      bottomRight: Radius.circular(0)),
+                                ),
+                                child: SizedBox(
+                                  height: 350,
+                                  child: ListView(
+                                    children: [_booking1Table()],
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
+                        )
                 ],
               ),
             ),
@@ -205,104 +412,115 @@ class _UsersState extends State<Users> {
                                 child: Padding(
                                   padding: EdgeInsets.fromLTRB(
                                       3.w, 1.5.h, 1.5.w, 1.5.h),
-                                  child: Row(
+                                  child: Column(
                                     children: [
-                                      Text(
-                                        'Users',
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 20,
-                                          fontFamily: "Helvetica",
+                                      Row(
+                                        children: [
+                                          Text(
+                                            addUser ? 'Users' : 'New User',
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 20,
+                                              fontFamily: "Helvetica",
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      Container(
+                                        padding: EdgeInsets.fromLTRB(
+                                            2.w, 1.h, 2.w, 1.h),
+                                        child: Column(
+                                          children: [
+                                            SizedBox(
+                                              height: 10,
+                                            ),
+                                            Align(
+                                              alignment: Alignment.centerRight,
+                                              child: SizedBox(
+                                                width: 127,
+                                                height: 45,
+                                                child: ElevatedButton.icon(
+                                                  onPressed: () {},
+                                                  style:
+                                                      ElevatedButton.styleFrom(
+                                                    elevation: 0,
+                                                    backgroundColor:
+                                                        Colors.white,
+                                                    shape:
+                                                        RoundedRectangleBorder(
+                                                      side: BorderSide(
+                                                        color: Color.fromRGBO(
+                                                            98, 84, 84, 1),
+                                                      ),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              15), // Adjust border radius as needed
+                                                    ),
+                                                  ),
+                                                  icon: Icon(
+                                                    Icons.add,
+                                                    size: 15,
+                                                  ),
+                                                  label: Text('Add user',
+                                                      style: TextStyle(
+                                                        color: Color.fromRGBO(
+                                                            98, 84, 84, 1),
+                                                        fontFamily: 'Helvetica',
+                                                        fontSize: 15,
+                                                      )),
+                                                ),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              height: 20,
+                                            ),
+                                            Container(
+                                              width: 1120,
+                                              decoration: BoxDecoration(
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                    color: Color.fromRGBO(
+                                                            158, 157, 157, 1)
+                                                        .withOpacity(0.5),
+                                                    offset: Offset(0, 0),
+                                                    spreadRadius: 2.0,
+                                                    blurRadius:
+                                                        2, // changes position of shadow
+                                                  ),
+                                                  BoxShadow(
+                                                    color: Colors.white,
+                                                    offset: Offset(0, -1),
+                                                    spreadRadius: 0,
+                                                    blurRadius:
+                                                        0, // changes position of shadow
+                                                  ),
+                                                ],
+                                                border: Border.all(
+                                                  color: Color.fromRGBO(
+                                                          112, 112, 112, 1)
+                                                      .withOpacity(0.5),
+                                                ),
+                                                borderRadius: BorderRadius.only(
+                                                    topLeft: Radius.circular(0),
+                                                    topRight:
+                                                        Radius.circular(0),
+                                                    bottomLeft:
+                                                        Radius.circular(0),
+                                                    bottomRight:
+                                                        Radius.circular(0)),
+                                              ),
+                                              child: SizedBox(
+                                                height: 350,
+                                                child: ListView(
+                                                  children: [_booking1Table()],
+                                                ),
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ),
                                     ],
                                   ),
-                                ),
-                              ),
-                              Container(
-                                padding:
-                                    EdgeInsets.fromLTRB(2.w, 1.h, 2.w, 1.h),
-                                child: Column(
-                                  children: [
-                                    SizedBox(
-                                      height: 10,
-                                    ),
-                                    Align(
-                                      alignment: Alignment.centerRight,
-                                      child: SizedBox(
-                                        width: 127,
-                                        height: 45,
-                                        child: ElevatedButton.icon(
-                                          onPressed: () {},
-                                          style: ElevatedButton.styleFrom(
-                                            elevation: 0,
-                                            backgroundColor: Colors.white,
-                                            shape: RoundedRectangleBorder(
-                                              side: BorderSide(
-                                                color: Color.fromRGBO(
-                                                    98, 84, 84, 1),
-                                              ),
-                                              borderRadius: BorderRadius.circular(
-                                                  15), // Adjust border radius as needed
-                                            ),
-                                          ),
-                                          icon: Icon(
-                                            Icons.add,
-                                            size: 15,
-                                          ),
-                                          label: Text('Add user',
-                                              style: TextStyle(
-                                                color: Color.fromRGBO(
-                                                    98, 84, 84, 1),
-                                                fontFamily: 'Helvetica',
-                                                fontSize: 15,
-                                              )),
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: 10,
-                                    ),
-                                    Container(
-                                      width: 1120,
-                                      decoration: BoxDecoration(
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color:
-                                                Color.fromRGBO(158, 157, 157, 1)
-                                                    .withOpacity(0.5),
-                                            offset: Offset(0, 0),
-                                            spreadRadius: 2.0,
-                                            blurRadius:
-                                                2, // changes position of shadow
-                                          ),
-                                          BoxShadow(
-                                            color: Colors.white,
-                                            offset: Offset(0, -1),
-                                            spreadRadius: 0,
-                                            blurRadius:
-                                                0, // changes position of shadow
-                                          ),
-                                        ],
-                                        border: Border.all(
-                                          color:
-                                              Color.fromRGBO(112, 112, 112, 1)
-                                                  .withOpacity(0.5),
-                                        ),
-                                        borderRadius: BorderRadius.only(
-                                            topLeft: Radius.circular(0),
-                                            topRight: Radius.circular(0),
-                                            bottomLeft: Radius.circular(0),
-                                            bottomRight: Radius.circular(0)),
-                                      ),
-                                      child: SizedBox(
-                                        height: 350,
-                                        child: ListView(
-                                          children: [_booking1Table()],
-                                        ),
-                                      ),
-                                    ),
-                                  ],
                                 ),
                               ),
                             ]),
