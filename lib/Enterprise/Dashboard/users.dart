@@ -166,650 +166,148 @@ class _UsersState extends State<Users> {
             ),
           ));
         } else {
-          return SingleChildScrollView(
-            child: Expanded(
-              child: Container(
-                  color: Color.fromRGBO(255, 255, 255, 200),
-                  padding: EdgeInsets.fromLTRB(3.w, 1.5.h, 3.w, 1.5.h),
-                  child: Column(children: [
-                    Container(
-                      height: 90.h,
+          return Container(
+            height: 100.h,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20.0),
+              color: Color.fromRGBO(255, 255, 255, 0.925),
+            ),
+            child: SingleChildScrollView(
+                child: Container(
+                    padding: EdgeInsets.fromLTRB(3.w, 3.h, 3.w, 3.h),
+                    child: Container(
                       padding: EdgeInsets.fromLTRB(5.w, 1.5.h, 5.w, 1.5.h),
                       color: Color.fromRGBO(255, 255, 255, 157),
                       child: Expanded(
                         child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            Scrollbar(
-                              controller: _scrollController,
-                              thumbVisibility:
-                                  true, // Set to true to always show the scrollbar
-                              child: SingleChildScrollView(
-                                controller: _scrollController,
-                                scrollDirection: Axis.horizontal,
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.only(
-                                        topLeft: Radius.circular(0),
-                                        topRight: Radius.circular(0),
-                                        bottomLeft: Radius.circular(12),
-                                        bottomRight: Radius.circular(12)),
-                                  ),
-                                  width: 1200,
-                                  child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                decoration: BoxDecoration(
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Color.fromRGBO(240, 240, 240, 1)
+                                          .withOpacity(0.1),
+                                      offset: Offset(0, 0),
+                                      spreadRadius: 2.0,
+                                      blurRadius:
+                                          0.01, // changes position of shadow
+                                    ),
+                                  ],
+                                  color: Color.fromRGBO(75, 61, 82, 1),
+                                  borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(12),
+                                      topRight: Radius.circular(12),
+                                      bottomLeft: Radius.circular(0),
+                                      bottomRight: Radius.circular(0)),
+                                ),
+                                height: 80, // Brown color
+                                child: Padding(
+                                  padding: EdgeInsets.fromLTRB(
+                                      3.w, 1.5.h, 1.5.w, 1.5.h),
+                                  child: Row(
                                     children: [
-                                      Container(
-                                        height: 55,
-                                        color: Color.fromRGBO(
-                                            75, 61, 82, 1), // Brown color
-                                        child: Padding(
-                                          padding: EdgeInsets.fromLTRB(
-                                              1.5.w, 1.5.h, 1.5.w, 1.5.h),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Text('Trigger Booking',
-                                                  style: TabelText.headerText),
-                                              Text("Actions",
-                                                  style: TabelText.headerText),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                      // Add spacing between the brown container and the white container
-                                      Padding(
-                                        padding: EdgeInsets.fromLTRB(
-                                            1.w, 1.h, 1.w, 1.h),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Row(
-                                              children: [
-                                                Checkbox(
-                                                  value: checkbox1,
-                                                  onChanged: (bool? newValue) {
-                                                    setState(() {
-                                                      value = newValue!;
-                                                    });
-                                                  },
-                                                ),
-                                                SizedBox(
-                                                  width: 1.w,
-                                                ),
-                                                Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Text('Trip 1',
-                                                        style: TabelText.text1),
-                                                    SizedBox(
-                                                      height: 3,
-                                                    ),
-                                                    Text(
-                                                      "Booking ID Xxxxxx",
-                                                      style: TabelText.text2,
-                                                    ),
-                                                  ],
-                                                ),
-                                              ],
-                                            ),
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                CustomRadio(
-                                                    onChanged: (val) {
-                                                      // setState(
-                                                      //     () {
-                                                      //   if (selectedRadioValue ==
-                                                      //       val) {
-                                                      //     // Disable button
-                                                      //   } else {
-                                                      //     selectedRadioValue =
-                                                      //         val as int?;
-                                                      //     isButtonEnabled1 =
-                                                      //         true; // Enable button
-                                                      //   }
-                                                      // });
-                                                      setState(() {
-                                                        isButtonEnabled = true;
-                                                      });
-                                                    },
-                                                    groupValue:
-                                                        selectedRadioValue,
-                                                    value: 1,
-                                                    colors: Color.fromRGBO(
-                                                        200, 251, 253, 1),
-                                                    text1: 'Vendor 3',
-                                                    textcolor1: Colors.black54,
-                                                    text2: "Xxxxx SAR",
-                                                    textcolor2: Colors.black38),
-                                                SizedBox(
-                                                  width: 3.w,
-                                                ),
-                                                CustomRadio(
-                                                    onChanged: (val) {
-                                                      setState(() {
-                                                        isButtonEnabled = true;
-                                                      });
-                                                    },
-                                                    groupValue:
-                                                        selectedRadioValue,
-                                                    value: 2,
-                                                    colors: Color.fromRGBO(
-                                                        224, 253, 200, 1),
-                                                    text1: 'Vendor 2',
-                                                    textcolor1: Colors.black54,
-                                                    text2: "Xxxxx SAR",
-                                                    textcolor2: Colors.black38),
-                                                SizedBox(
-                                                  width: 3.w,
-                                                ),
-                                                CustomRadio(
-                                                    onChanged: (val) {
-                                                      setState(() {
-                                                        isButtonEnabled = true;
-                                                      });
-                                                    },
-                                                    groupValue:
-                                                        selectedRadioValue,
-                                                    value: 3,
-                                                    colors: Color.fromRGBO(
-                                                        245, 253, 200, 1),
-                                                    text1: 'Vendor 3',
-                                                    textcolor1: Colors.black54,
-                                                    text2: "Xxxxx SAR",
-                                                    textcolor2: Colors.black38),
-                                                SizedBox(
-                                                  width: 1.w,
-                                                ),
-                                                IconButton(
-                                                  padding: EdgeInsets.zero,
-                                                  constraints: BoxConstraints(),
-                                                  onPressed: null,
-                                                  icon: Icon(
-                                                    Icons.edit_document,
-                                                    color: Color.fromRGBO(
-                                                        74, 60, 81, 1),
-                                                  ),
-                                                ),
-                                                IconButton(
-                                                  padding: EdgeInsets.zero,
-                                                  onPressed: null,
-                                                  icon: Icon(Icons.delete),
-                                                ),
-                                                SizedBox(
-                                                  width: 1.w,
-                                                ),
-                                                SizedBox(
-                                                  height: 30,
-                                                  child: ElevatedButton(
-                                                    onPressed: isButtonEnabled
-                                                        ? () {
-                                                            showDialog(
-                                                              context: context,
-                                                              builder:
-                                                                  (context) {
-                                                                return BookingDialog();
-                                                              },
-                                                            );
-                                                          }
-                                                        : null,
-                                                    style: isButtonEnabled
-                                                        ? ElevatedButton
-                                                            .styleFrom(
-                                                            backgroundColor:
-                                                                Color.fromRGBO(
-                                                                    212,
-                                                                    213,
-                                                                    248,
-                                                                    1),
-                                                            side: BorderSide(
-                                                              color:
-                                                                  Colors.grey,
-                                                            ),
-                                                          )
-                                                        : ElevatedButton
-                                                            .styleFrom(
-                                                            backgroundColor:
-                                                                Color.fromRGBO(
-                                                                    212,
-                                                                    213,
-                                                                    248,
-                                                                    0.897),
-                                                            side: BorderSide(
-                                                              color:
-                                                                  Colors.grey,
-                                                            ),
-                                                          ),
-                                                    child: Text(
-                                                      'Pay Now',
-                                                      style: TextStyle(
-                                                        color: Colors.black54,
-                                                        fontSize: 12,
-                                                        fontFamily: "Helvetica",
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-
-                                      SizedBox(
-                                        width: 1184,
-                                        child: Divider(
-                                          color:
-                                              Color.fromRGBO(206, 203, 203, 1),
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsets.fromLTRB(
-                                            1.w, 1.h, 1.w, 1.h),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Row(
-                                              children: [
-                                                Checkbox(
-                                                  value: checkbox2,
-                                                  onChanged: (bool? newValue) {
-                                                    setState(() {
-                                                      value = newValue!;
-                                                    });
-                                                  },
-                                                ),
-                                                SizedBox(
-                                                  width: 1.w,
-                                                ),
-                                                Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Text('Equipment Hire',
-                                                        style: TabelText.text1),
-                                                    SizedBox(
-                                                      height: 3,
-                                                    ),
-                                                    Text(
-                                                      "Booking ID Xxxxxx",
-                                                      style: TabelText.text2,
-                                                    ),
-                                                  ],
-                                                ),
-                                              ],
-                                            ),
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                CustomRadio(
-                                                    onChanged: (val) {
-                                                      // setState(
-                                                      //     () {
-                                                      //   if (selectedRadioValue ==
-                                                      //       val) {
-                                                      //     // Disable button
-                                                      //   } else {
-                                                      //     selectedRadioValue =
-                                                      //         val as int?;
-                                                      //     isButtonEnabled1 =
-                                                      //         true; // Enable button
-                                                      //   }
-                                                      // });
-                                                      setState(() {
-                                                        selectedRadioValue1 =
-                                                            null; // Unselect if already selected
-                                                        isButtonEnabled1 = true;
-                                                      });
-                                                    },
-                                                    groupValue:
-                                                        selectedRadioValue1,
-                                                    value: 1,
-                                                    colors: Color.fromRGBO(
-                                                        200, 251, 253, 1),
-                                                    text1: 'Vendor 3',
-                                                    textcolor1: Colors.black54,
-                                                    text2: "Xxxxx SAR",
-                                                    textcolor2: Colors.black38),
-                                                SizedBox(
-                                                  width: 3.w,
-                                                ),
-                                                CustomRadio(
-                                                    onChanged: (val) {
-                                                      setState(() {
-                                                        selectedRadioValue1 =
-                                                            null; // Unselect if already selected
-                                                        isButtonEnabled1 = true;
-                                                      });
-                                                    },
-                                                    groupValue:
-                                                        selectedRadioValue1,
-                                                    value: 2,
-                                                    colors: Color.fromRGBO(
-                                                        224, 253, 200, 1),
-                                                    text1: 'Vendor 2',
-                                                    textcolor1: Colors.black54,
-                                                    text2: "Xxxxx SAR",
-                                                    textcolor2: Colors.black38),
-                                                SizedBox(
-                                                  width: 3.w,
-                                                ),
-                                                CustomRadio(
-                                                    onChanged: (val) {
-                                                      setState(() {
-                                                        selectedRadioValue1 =
-                                                            null; // Unselect if already selected
-                                                        isButtonEnabled1 = true;
-                                                      });
-                                                    },
-                                                    groupValue:
-                                                        selectedRadioValue1,
-                                                    value: 3,
-                                                    colors: Color.fromRGBO(
-                                                        245, 253, 200, 1),
-                                                    text1: 'Vendor 3',
-                                                    textcolor1: Colors.black54,
-                                                    text2: "Xxxxx SAR",
-                                                    textcolor2: Colors.black38),
-                                                SizedBox(
-                                                  width: 1.w,
-                                                ),
-                                                IconButton(
-                                                  padding: EdgeInsets.zero,
-                                                  constraints: BoxConstraints(),
-                                                  onPressed: null,
-                                                  icon: Icon(
-                                                    Icons.edit_document,
-                                                    color: Color.fromRGBO(
-                                                        74, 60, 81, 1),
-                                                  ),
-                                                ),
-                                                IconButton(
-                                                  padding: EdgeInsets.zero,
-                                                  onPressed: null,
-                                                  icon: Icon(Icons.delete),
-                                                ),
-                                                SizedBox(
-                                                  width: 1.w,
-                                                ),
-                                                SizedBox(
-                                                  height: 30,
-                                                  child: ElevatedButton(
-                                                    onPressed: isButtonEnabled1
-                                                        ? () {
-                                                            showDialog(
-                                                              context: context,
-                                                              builder:
-                                                                  (context) {
-                                                                return BookingDialog();
-                                                              },
-                                                            );
-                                                            print(
-                                                                'Elevated Button Pressed!');
-                                                          }
-                                                        : null,
-                                                    style: isButtonEnabled1
-                                                        ? ElevatedButton
-                                                            .styleFrom(
-                                                            backgroundColor:
-                                                                Color.fromRGBO(
-                                                                    212,
-                                                                    213,
-                                                                    248,
-                                                                    1),
-                                                            side: BorderSide(
-                                                              color:
-                                                                  Colors.grey,
-                                                            ),
-                                                          )
-                                                        : ElevatedButton
-                                                            .styleFrom(
-                                                            backgroundColor:
-                                                                Color.fromRGBO(
-                                                                    212,
-                                                                    213,
-                                                                    248,
-                                                                    0.897),
-                                                            side: BorderSide(
-                                                              color:
-                                                                  Colors.grey,
-                                                            ),
-                                                          ),
-                                                    child: Text(
-                                                      'Pay Now',
-                                                      style: TextStyle(
-                                                        color: Colors.black54,
-                                                        fontSize: 12,
-                                                        fontFamily: "Helvetica",
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-
-                                      SizedBox(
-                                        width: 1184,
-                                        child: Divider(
-                                          color:
-                                              Color.fromRGBO(206, 203, 203, 1),
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsets.fromLTRB(
-                                            1.w, 1.h, 1.w, 1.h),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Row(
-                                              children: [
-                                                Checkbox(
-                                                  value: checkbox3,
-                                                  onChanged: (bool? newValue) {
-                                                    setState(() {
-                                                      value = newValue!;
-                                                    });
-                                                  },
-                                                ),
-                                                SizedBox(
-                                                  width: 1.w,
-                                                ),
-                                                Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Text('Bus Trip',
-                                                        style: TabelText.text1),
-                                                    SizedBox(
-                                                      height: 3,
-                                                    ),
-                                                    Text(
-                                                      "Booking ID Xxxxxx",
-                                                      style: TabelText.text2,
-                                                    ),
-                                                  ],
-                                                ),
-                                              ],
-                                            ),
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                CustomRadio(
-                                                    onChanged: (val) {
-                                                      // setState(
-                                                      //     () {
-                                                      //   if (selectedRadioValue ==
-                                                      //       val) {
-                                                      //     // Disable button
-                                                      //   } else {
-                                                      //     selectedRadioValue =
-                                                      //         val as int?;
-                                                      //     isButtonEnabled1 =
-                                                      //         true; // Enable button
-                                                      //   }
-                                                      // });
-                                                      setState(() {
-                                                        selectedRadioValue2 =
-                                                            null; // Unselect if already selected
-                                                        isButtonEnabled2 = true;
-                                                      });
-                                                    },
-                                                    groupValue:
-                                                        selectedRadioValue2,
-                                                    value: 1,
-                                                    colors: Color.fromRGBO(
-                                                        200, 251, 253, 1),
-                                                    text1: 'Vendor 3',
-                                                    textcolor1: Colors.black54,
-                                                    text2: "Xxxxx SAR",
-                                                    textcolor2: Colors.black38),
-                                                SizedBox(
-                                                  width: 3.w,
-                                                ),
-                                                CustomRadio(
-                                                    onChanged: (val) {
-                                                      setState(() {
-                                                        selectedRadioValue2 =
-                                                            null; // Unselect if already selected
-                                                        isButtonEnabled2 = true;
-                                                      });
-                                                    },
-                                                    groupValue:
-                                                        selectedRadioValue2,
-                                                    value: 2,
-                                                    colors: Color.fromRGBO(
-                                                        224, 253, 200, 1),
-                                                    text1: 'Vendor 2',
-                                                    textcolor1: Colors.black54,
-                                                    text2: "Xxxxx SAR",
-                                                    textcolor2: Colors.black38),
-                                                SizedBox(
-                                                  width: 3.w,
-                                                ),
-                                                CustomRadio(
-                                                    onChanged: (val) {
-                                                      setState(() {
-                                                        selectedRadioValue2 =
-                                                            null; // Unselect if already selected
-                                                        isButtonEnabled2 = true;
-                                                      });
-                                                    },
-                                                    groupValue:
-                                                        selectedRadioValue2,
-                                                    value: 3,
-                                                    colors: Color.fromRGBO(
-                                                        245, 253, 200, 1),
-                                                    text1: 'Vendor 3',
-                                                    textcolor1: Colors.black54,
-                                                    text2: "Xxxxx SAR",
-                                                    textcolor2: Colors.black38),
-                                                SizedBox(
-                                                  width: 1.w,
-                                                ),
-                                                IconButton(
-                                                  padding: EdgeInsets.zero,
-                                                  constraints: BoxConstraints(),
-                                                  onPressed: null,
-                                                  icon: Icon(
-                                                    Icons.edit_document,
-                                                    color: Color.fromRGBO(
-                                                        74, 60, 81, 1),
-                                                  ),
-                                                ),
-                                                IconButton(
-                                                  padding: EdgeInsets.zero,
-                                                  onPressed: null,
-                                                  icon: Icon(Icons.delete),
-                                                ),
-                                                SizedBox(
-                                                  width: 1.w,
-                                                ),
-                                                SizedBox(
-                                                  height: 30,
-                                                  child: ElevatedButton(
-                                                    onPressed: isButtonEnabled2
-                                                        ? () {
-                                                            showDialog(
-                                                              context: context,
-                                                              builder:
-                                                                  (context) {
-                                                                return BookingDialog();
-                                                              },
-                                                            );
-                                                          }
-                                                        : null,
-                                                    style: isButtonEnabled2
-                                                        ? ElevatedButton
-                                                            .styleFrom(
-                                                            backgroundColor:
-                                                                Color.fromRGBO(
-                                                                    212,
-                                                                    213,
-                                                                    248,
-                                                                    1),
-                                                            side: BorderSide(
-                                                              color:
-                                                                  Colors.grey,
-                                                            ),
-                                                          )
-                                                        : ElevatedButton
-                                                            .styleFrom(
-                                                            backgroundColor:
-                                                                Color.fromRGBO(
-                                                                    212,
-                                                                    213,
-                                                                    248,
-                                                                    0.897),
-                                                            side: BorderSide(
-                                                              color:
-                                                                  Colors.grey,
-                                                            ),
-                                                          ),
-                                                    child: Text(
-                                                      'Pay Now',
-                                                      style: TextStyle(
-                                                        color: Colors.black54,
-                                                        fontSize: 12,
-                                                        fontFamily: "Helvetica",
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ],
+                                      Text(
+                                        'Users',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 20,
+                                          fontFamily: "Helvetica",
                                         ),
                                       ),
                                     ],
                                   ),
                                 ),
                               ),
-                            ),
-                          ],
-                        ),
+                              Container(
+                                padding:
+                                    EdgeInsets.fromLTRB(2.w, 1.h, 2.w, 1.h),
+                                child: Column(
+                                  children: [
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    Align(
+                                      alignment: Alignment.centerRight,
+                                      child: SizedBox(
+                                        width: 127,
+                                        height: 45,
+                                        child: ElevatedButton.icon(
+                                          onPressed: () {},
+                                          style: ElevatedButton.styleFrom(
+                                            elevation: 0,
+                                            backgroundColor: Colors.white,
+                                            shape: RoundedRectangleBorder(
+                                              side: BorderSide(
+                                                color: Color.fromRGBO(
+                                                    98, 84, 84, 1),
+                                              ),
+                                              borderRadius: BorderRadius.circular(
+                                                  15), // Adjust border radius as needed
+                                            ),
+                                          ),
+                                          icon: Icon(
+                                            Icons.add,
+                                            size: 15,
+                                          ),
+                                          label: Text('Add user',
+                                              style: TextStyle(
+                                                color: Color.fromRGBO(
+                                                    98, 84, 84, 1),
+                                                fontFamily: 'Helvetica',
+                                                fontSize: 15,
+                                              )),
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    Container(
+                                      width: 1120,
+                                      decoration: BoxDecoration(
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color:
+                                                Color.fromRGBO(158, 157, 157, 1)
+                                                    .withOpacity(0.5),
+                                            offset: Offset(0, 0),
+                                            spreadRadius: 2.0,
+                                            blurRadius:
+                                                2, // changes position of shadow
+                                          ),
+                                          BoxShadow(
+                                            color: Colors.white,
+                                            offset: Offset(0, -1),
+                                            spreadRadius: 0,
+                                            blurRadius:
+                                                0, // changes position of shadow
+                                          ),
+                                        ],
+                                        border: Border.all(
+                                          color:
+                                              Color.fromRGBO(112, 112, 112, 1)
+                                                  .withOpacity(0.5),
+                                        ),
+                                        borderRadius: BorderRadius.only(
+                                            topLeft: Radius.circular(0),
+                                            topRight: Radius.circular(0),
+                                            bottomLeft: Radius.circular(0),
+                                            bottomRight: Radius.circular(0)),
+                                      ),
+                                      child: SizedBox(
+                                        height: 350,
+                                        child: ListView(
+                                          children: [_booking1Table()],
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ]),
                       ),
-                    ),
-                    CustomButton(
-                      onPressed: () {},
-                      text: 'Confirm Booking',
-                    )
-                  ])),
-            ),
+                    ))),
           );
         }
       });

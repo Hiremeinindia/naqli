@@ -1,12 +1,17 @@
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:easy_sidemenu/easy_sidemenu.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/Enterprise/Dashboard/contracts.dart';
 import 'package:flutter_application_1/Enterprise/Dashboard/newContract.dart';
+import 'package:flutter_application_1/classes/language.dart';
 
 import 'package:sizer/sizer.dart';
 import '../../Widgets/customButton.dart';
+import '../../Widgets/formText.dart';
+import '../../classes/language_constants.dart';
+import '../../main.dart';
 import 'bookings.dart';
 import 'dashboard.dart';
 import 'payments.dart';
@@ -195,53 +200,132 @@ class _MyHomePageState extends State<enterDashboardPage> {
                           ),
                         ],
                       ),
-                      Container(
-                        padding: EdgeInsets.only(left: 20.0, top: 10),
-                        child: Row(
-                          children: [
-                            Icon(
-                              Icons.notifications,
-                              color: Color.fromRGBO(106, 102, 209, 1),
-                            ),
-                            SizedBox(
-                              height: 30,
-                              child: Padding(
-                                padding: EdgeInsets.only(left: 15, top: 5),
-                                child: Text(
-                                  "Contact Us",
-                                  style: TextStyle(
-                                    fontFamily: 'Colfax',
-                                    fontSize: 16,
+                      Row(
+                        children: [
+                          DropdownButtonHideUnderline(
+                            child: DropdownButton2<Language>(
+                              isExpanded: true,
+                              hint: Row(
+                                children: [
+                                  Text(
+                                    translation(context).english,
+                                    style: TabelText.helvetica11,
+                                    overflow: TextOverflow.ellipsis,
                                   ),
-                                ),
+                                  Expanded(child: SizedBox()),
+                                  Icon(
+                                    Icons.arrow_drop_down,
+                                    color: Colors.black,
+                                    size: 25,
+                                  )
+                                ],
                               ),
-                            ),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            SizedBox(
-                              height: 30,
-                              child: VerticalDivider(
-                                color: Colors.black,
-                              ),
-                            ),
-                            SizedBox(
-                              height: 30,
-                              width: 170,
-                              child: Padding(
+                              onChanged: (Language? language) async {
+                                if (language != null) {
+                                  Locale _locale =
+                                      await setLocale(language.languageCode);
+                                  MyApp.setLocale(context, _locale);
+                                } else {
+                                  language;
+                                }
+                              },
+                              items: Language.languageList()
+                                  .map<DropdownMenuItem<Language>>(
+                                    (e) => DropdownMenuItem<Language>(
+                                      value: e,
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceAround,
+                                        children: <Widget>[
+                                          Text(
+                                            e.flag,
+                                            style: TabelText.helvetica11,
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                          Text(
+                                            e.langname,
+                                            style: TabelText.helvetica11,
+                                            overflow: TextOverflow.ellipsis,
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  )
+                                  .toList(),
+                              buttonStyleData: ButtonStyleData(
+                                height: 30,
+                                width: 130,
                                 padding:
-                                    const EdgeInsets.only(left: 13, top: 5),
-                                child: Text(
-                                  "Hello Faizal!",
-                                  style: TextStyle(
-                                    fontFamily: 'Colfax',
-                                    fontSize: 16,
+                                    const EdgeInsets.only(left: 14, right: 14),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(8),
+                                  border: Border.all(
+                                    color: Colors.black26,
                                   ),
+                                  color: Colors.white,
                                 ),
                               ),
+                              iconStyleData: const IconStyleData(
+                                icon: Icon(
+                                  Icons.arrow_drop_down_sharp,
+                                ),
+                                iconSize: 25,
+                                iconEnabledColor: Colors.white,
+                                iconDisabledColor: null,
+                              ),
+                              dropdownStyleData: DropdownStyleData(
+                                maxHeight: 210,
+                                padding: EdgeInsets.only(
+                                    left: 10, right: 10, top: 5, bottom: 15),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(5),
+                                  border: Border.all(color: Colors.black26),
+                                  color: Colors.white,
+                                ),
+                                scrollPadding: EdgeInsets.all(5),
+                                scrollbarTheme: ScrollbarThemeData(
+                                  thickness:
+                                      MaterialStateProperty.all<double>(6),
+                                  thumbVisibility:
+                                      MaterialStateProperty.all<bool>(true),
+                                ),
+                              ),
+                              menuItemStyleData: const MenuItemStyleData(
+                                height: 25,
+                                padding: EdgeInsets.only(left: 14, right: 14),
+                              ),
                             ),
-                          ],
-                        ),
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          SizedBox(
+                            height: 40,
+                            child: VerticalDivider(
+                              color: Colors.black,
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              left: 5,
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text("Hello Faizal!",
+                                    style: TabelText.helvetica11),
+                                Text("Admin", style: TabelText.usertext),
+                                Text("Faizal industries",
+                                    style: TabelText.usertext),
+                              ],
+                            ),
+                          ),
+                          Icon(
+                            Icons.notifications,
+                            color: Color.fromRGBO(106, 102, 209, 1),
+                          ),
+                        ],
                       ),
                     ],
                   ),
