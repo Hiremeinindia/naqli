@@ -652,12 +652,14 @@ class _DashboardState extends State<Dashboard> {
             ),
           ));
         } else {
-          return SingleChildScrollView(
+          return Container(
+            height: 100.h,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20.0),
+              color: Color.fromRGBO(255, 255, 255, 0.925),
+            ),
+            child: SingleChildScrollView(
               child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20.0),
-                    color: Color.fromRGBO(255, 255, 255, 0.925),
-                  ),
                   padding: EdgeInsets.fromLTRB(3.w, 3.h, 3.w, 3.h),
                   child: Container(
                     padding: EdgeInsets.fromLTRB(5.w, 1.5.h, 5.w, 1.5.h),
@@ -1166,7 +1168,9 @@ class _DashboardState extends State<Dashboard> {
                         ],
                       ),
                     ),
-                  )));
+                  )),
+            ),
+          );
         }
       });
     });

@@ -412,7 +412,7 @@ class _MyHomePageState extends State<DashboardPage> {
                                     icon: Icon(Icons.person_2_outlined),
                                   ),
                                   SideMenuItem(
-                                    title: 'Bookings',
+                                    title: 'Booking Manager',
                                     onTap: (page, _) {
                                       sideMenu.changePage(page);
                                     },
