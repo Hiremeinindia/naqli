@@ -7,14 +7,14 @@ import 'package:flutter_application_1/SuperUser/homepage.dart';
 import 'package:flutter_application_1/SuperUser/loginPage.dart';
 import 'package:sizer/sizer.dart';
 
-class superuserCreateAccount extends StatefulWidget {
-  const superuserCreateAccount();
+class SuperuserCreateAccount extends StatefulWidget {
+  const SuperuserCreateAccount();
 
   @override
-  _superuserCreateAccountState createState() => _superuserCreateAccountState();
+  _SuperuserCreateAccountState createState() => _SuperuserCreateAccountState();
 }
 
-class _superuserCreateAccountState extends State<superuserCreateAccount> {
+class _SuperuserCreateAccountState extends State<SuperuserCreateAccount> {
   final _formKey = GlobalKey<FormState>();
 
   List<String> cities = ['City 1', 'City 2', 'City 3', 'City 4'];
@@ -776,7 +776,7 @@ class _superuserCreateAccountState extends State<superuserCreateAccount> {
                               showDialog(
                                 context: context,
                                 builder: (context) {
-                                  return superuserLoginPage();
+                                  return SuperuserLoginPage();
                                 },
                               );
                             },
@@ -1301,7 +1301,7 @@ class _superuserCreateAccountState extends State<superuserCreateAccount> {
                               showDialog(
                                 context: context,
                                 builder: (context) {
-                                  return superuserLoginPage();
+                                  return SuperuserLoginPage();
                                 },
                               );
                             },

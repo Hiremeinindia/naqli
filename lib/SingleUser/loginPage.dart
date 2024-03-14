@@ -12,10 +12,10 @@ import 'package:sizer/sizer.dart';
 import '../../main.dart';
 
 // ignore: must_be_immutable
-class singleuserLoginPage extends StatefulWidget {
-  const singleuserLoginPage();
+class SingleuserLoginPage extends StatefulWidget {
+  const SingleuserLoginPage();
   @override
-  _singleuserLoginPageState createState() => _singleuserLoginPageState();
+  _SingleuserLoginPageState createState() => _SingleuserLoginPageState();
 }
 
 class ScaleSize {
@@ -27,7 +27,7 @@ class ScaleSize {
   }
 }
 
-class _singleuserLoginPageState extends State<singleuserLoginPage> {
+class _SingleuserLoginPageState extends State<SingleuserLoginPage> {
   bool isVerified = false;
   TextEditingController otpController = TextEditingController();
 
@@ -217,7 +217,7 @@ class _singleuserLoginPageState extends State<singleuserLoginPage> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => singleuserMyHomePage(),
+                            builder: (context) => SingleuserMyHomePage(),
                           ),
                         );
                         setState(() {
@@ -391,7 +391,7 @@ class _singleuserLoginPageState extends State<singleuserLoginPage> {
                                           showDialog(
                                             context: context,
                                             builder: (context) {
-                                              return singleuserMyHomePage();
+                                              return SingleuserMyHomePage();
                                             },
                                           );
                                         },
@@ -474,7 +474,7 @@ class _singleuserLoginPageState extends State<singleuserLoginPage> {
                                         showDialog(
                                           context: context,
                                           builder: (context) {
-                                            return singleuserCreateAccount();
+                                            return SingleuserCreateAccount();
                                           },
                                         );
                                       },
@@ -511,7 +511,7 @@ class _singleuserLoginPageState extends State<singleuserLoginPage> {
                                           context,
                                           MaterialPageRoute(
                                             builder: (context) =>
-                                                singleuserMyHomePage(),
+                                                SingleuserMyHomePage(),
                                           ),
                                         );
                                       }
@@ -644,7 +644,7 @@ class _singleuserLoginPageState extends State<singleuserLoginPage> {
                                       showDialog(
                                         context: context,
                                         builder: (context) {
-                                          return singleuserMyHomePage();
+                                          return SingleuserMyHomePage();
                                         },
                                       );
                                     },
@@ -715,7 +715,7 @@ class _singleuserLoginPageState extends State<singleuserLoginPage> {
                                     showDialog(
                                       context: context,
                                       builder: (context) {
-                                        return singleuserCreateAccount();
+                                        return SingleuserCreateAccount();
                                       },
                                     );
                                   },
@@ -749,7 +749,7 @@ class _singleuserLoginPageState extends State<singleuserLoginPage> {
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) =>
-                                            singleuserMyHomePage(),
+                                            SingleuserMyHomePage(),
                                       ),
                                     );
                                   }

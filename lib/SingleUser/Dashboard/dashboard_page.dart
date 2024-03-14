@@ -9,14 +9,14 @@ import 'dashboard.dart';
 import 'payments.dart';
 import 'trigger_booking.dart';
 
-class userDashboardPage extends StatefulWidget {
-  const userDashboardPage({Key? key}) : super(key: key);
+class UserDashboardPage extends StatefulWidget {
+  const UserDashboardPage({Key? key}) : super(key: key);
 
   @override
-  State<userDashboardPage> createState() => _MyHomePageState();
+  State<UserDashboardPage> createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<userDashboardPage> {
+class _MyHomePageState extends State<UserDashboardPage> {
   PageController page = PageController();
   SideMenuController sideMenu = SideMenuController();
   bool value = false;

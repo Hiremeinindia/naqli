@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/Enterprise/enterpriseCreateAccount.dart';
+import 'package:flutter_application_1/Enterprise/EnterpriseCreateAccount.dart';
 import 'package:flutter_application_1/Enterprise/enterpriseHomePage.dart';
 import 'package:flutter_application_1/Widgets/customButton.dart';
 import 'package:flutter_application_1/SuperUser/createAccount.dart';
@@ -12,10 +12,10 @@ import 'package:sizer/sizer.dart';
 import '../../main.dart';
 
 // ignore: must_be_immutable
-class enterpriseLoginPage extends StatefulWidget {
-  const enterpriseLoginPage();
+class EnterpriseLoginPage extends StatefulWidget {
+  const EnterpriseLoginPage();
   @override
-  _enterpriseLoginPageState createState() => _enterpriseLoginPageState();
+  _EnterpriseLoginPageState createState() => _EnterpriseLoginPageState();
 }
 
 class ScaleSize {
@@ -27,7 +27,7 @@ class ScaleSize {
   }
 }
 
-class _enterpriseLoginPageState extends State<enterpriseLoginPage> {
+class _EnterpriseLoginPageState extends State<EnterpriseLoginPage> {
   bool isVerified = false;
   TextEditingController otpController = TextEditingController();
 
@@ -217,7 +217,7 @@ class _enterpriseLoginPageState extends State<enterpriseLoginPage> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => enterpriseMyHomePage(),
+                            builder: (context) => EnterpriseMyHomePage(),
                           ),
                         );
                         setState(() {
@@ -391,7 +391,7 @@ class _enterpriseLoginPageState extends State<enterpriseLoginPage> {
                                           showDialog(
                                             context: context,
                                             builder: (context) {
-                                              return enterpriseMyHomePage();
+                                              return EnterpriseMyHomePage();
                                             },
                                           );
                                         },
@@ -474,7 +474,7 @@ class _enterpriseLoginPageState extends State<enterpriseLoginPage> {
                                         showDialog(
                                           context: context,
                                           builder: (context) {
-                                            return enterpriseCreateAccount();
+                                            return EnterpriseCreateAccount();
                                           },
                                         );
                                       },
@@ -511,7 +511,7 @@ class _enterpriseLoginPageState extends State<enterpriseLoginPage> {
                                           context,
                                           MaterialPageRoute(
                                             builder: (context) =>
-                                                enterpriseMyHomePage(),
+                                                EnterpriseMyHomePage(),
                                           ),
                                         );
                                       }
@@ -644,7 +644,7 @@ class _enterpriseLoginPageState extends State<enterpriseLoginPage> {
                                       showDialog(
                                         context: context,
                                         builder: (context) {
-                                          return enterpriseMyHomePage();
+                                          return EnterpriseMyHomePage();
                                         },
                                       );
                                     },
@@ -715,7 +715,7 @@ class _enterpriseLoginPageState extends State<enterpriseLoginPage> {
                                     showDialog(
                                       context: context,
                                       builder: (context) {
-                                        return enterpriseCreateAccount();
+                                        return EnterpriseCreateAccount();
                                       },
                                     );
                                   },
@@ -749,7 +749,7 @@ class _enterpriseLoginPageState extends State<enterpriseLoginPage> {
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) =>
-                                            enterpriseMyHomePage(),
+                                            EnterpriseMyHomePage(),
                                       ),
                                     );
                                   }

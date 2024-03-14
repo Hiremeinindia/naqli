@@ -10,10 +10,10 @@ import 'package:sizer/sizer.dart';
 import '../../main.dart';
 
 // ignore: must_be_immutable
-class superuserLoginPage extends StatefulWidget {
-  const superuserLoginPage();
+class SuperuserLoginPage extends StatefulWidget {
+  const SuperuserLoginPage();
   @override
-  _superuserLoginPageState createState() => _superuserLoginPageState();
+  _SuperuserLoginPageState createState() => _SuperuserLoginPageState();
 }
 
 class ScaleSize {
@@ -25,7 +25,7 @@ class ScaleSize {
   }
 }
 
-class _superuserLoginPageState extends State<superuserLoginPage> {
+class _SuperuserLoginPageState extends State<SuperuserLoginPage> {
   bool isVerified = false;
   TextEditingController otpController = TextEditingController();
 
@@ -215,7 +215,7 @@ class _superuserLoginPageState extends State<superuserLoginPage> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => superuserMyHomePage(),
+                            builder: (context) => SuperuserMyHomePage(),
                           ),
                         );
                         setState(() {
@@ -389,7 +389,7 @@ class _superuserLoginPageState extends State<superuserLoginPage> {
                                           showDialog(
                                             context: context,
                                             builder: (context) {
-                                              return superuserMyHomePage();
+                                              return SuperuserMyHomePage();
                                             },
                                           );
                                         },
@@ -472,7 +472,7 @@ class _superuserLoginPageState extends State<superuserLoginPage> {
                                         showDialog(
                                           context: context,
                                           builder: (context) {
-                                            return superuserCreateAccount();
+                                            return SuperuserCreateAccount();
                                           },
                                         );
                                       },
@@ -509,7 +509,7 @@ class _superuserLoginPageState extends State<superuserLoginPage> {
                                           context,
                                           MaterialPageRoute(
                                             builder: (context) =>
-                                                superuserMyHomePage(),
+                                                SuperuserMyHomePage(),
                                           ),
                                         );
                                       }
@@ -642,7 +642,7 @@ class _superuserLoginPageState extends State<superuserLoginPage> {
                                       showDialog(
                                         context: context,
                                         builder: (context) {
-                                          return superuserMyHomePage();
+                                          return SuperuserMyHomePage();
                                         },
                                       );
                                     },
@@ -713,7 +713,7 @@ class _superuserLoginPageState extends State<superuserLoginPage> {
                                     showDialog(
                                       context: context,
                                       builder: (context) {
-                                        return superuserCreateAccount();
+                                        return SuperuserCreateAccount();
                                       },
                                     );
                                   },
@@ -747,7 +747,7 @@ class _superuserLoginPageState extends State<superuserLoginPage> {
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) =>
-                                            superuserMyHomePage(),
+                                            SuperuserMyHomePage(),
                                       ),
                                     );
                                   }

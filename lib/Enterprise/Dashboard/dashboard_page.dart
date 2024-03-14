@@ -1,7 +1,6 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:easy_sidemenu/easy_sidemenu.dart';
 import 'package:fl_chart/fl_chart.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/Enterprise/Dashboard/contracts.dart';
 import 'package:flutter_application_1/Enterprise/Dashboard/newContract.dart';
@@ -18,14 +17,14 @@ import 'payments.dart';
 import 'trigger_booking.dart';
 import 'users.dart';
 
-class enterDashboardPage extends StatefulWidget {
-  const enterDashboardPage({Key? key}) : super(key: key);
+class EnterDashboardPage extends StatefulWidget {
+  const EnterDashboardPage({Key? key}) : super(key: key);
 
   @override
-  State<enterDashboardPage> createState() => _MyHomePageState();
+  State<EnterDashboardPage> createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<enterDashboardPage> {
+class _MyHomePageState extends State<EnterDashboardPage> {
   PageController page = PageController();
   SideMenuController sideMenu = SideMenuController();
   bool value = false;
@@ -517,7 +516,7 @@ class _MyHomePageState extends State<enterDashboardPage> {
                                             });
                                           },
                                           child: Container(
-                                            child: newContracts(),
+                                            child: NewContracts(),
                                           ),
                                         ),
                                   Payments(),

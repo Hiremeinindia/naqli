@@ -8,16 +8,16 @@ import 'package:sizer/sizer.dart';
 
 import '../SuperUser/loginPage.dart';
 
-class singleuserMyHomePage extends StatefulWidget {
-  const singleuserMyHomePage({
+class SingleuserMyHomePage extends StatefulWidget {
+  const SingleuserMyHomePage({
     Key? key,
   }) : super(key: key);
 
   @override
-  State<singleuserMyHomePage> createState() => _singleuserMyHomePageState();
+  State<SingleuserMyHomePage> createState() => _SingleuserMyHomePageState();
 }
 
-class _singleuserMyHomePageState extends State<singleuserMyHomePage> {
+class _SingleuserMyHomePageState extends State<SingleuserMyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Sizer(builder: (context, orientation, deviceType) {
@@ -71,7 +71,7 @@ class _singleuserMyHomePageState extends State<singleuserMyHomePage> {
                                   showDialog(
                                     context: context,
                                     builder: (context) {
-                                      return singleuserLoginPage();
+                                      return SingleuserLoginPage();
                                     },
                                   );
                                 },
@@ -730,7 +730,7 @@ class _singleuserMyHomePageState extends State<singleuserMyHomePage> {
                                 showDialog(
                                   context: context,
                                   builder: (context) {
-                                    return singleuserLoginPage();
+                                    return SingleuserLoginPage();
                                   },
                                 );
                               },
