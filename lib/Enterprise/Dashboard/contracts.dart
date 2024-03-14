@@ -331,12 +331,12 @@ class _PaymentsState extends State<Contracts> {
           );
         } else {
           return Container(
-            height: 100.h,
+            height: 70.h,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20.0),
               color: Color.fromRGBO(255, 255, 255, 0.925),
             ),
-            // padding: EdgeInsets.fromLTRB(3.w, 3.h, 3.w, 3.h),
+            // padding: EdgeInsets.fromLTRB(3.w, 3.h, 3.w, 5.h),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
