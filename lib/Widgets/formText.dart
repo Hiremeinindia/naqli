@@ -52,6 +52,11 @@ class TabelText {
     fontFamily: 'Helvetica',
     fontSize: 16,
   );
+  static TextStyle helvetica16black = TextStyle(
+    color: Color.fromRGBO(183, 183, 183, 1),
+    fontFamily: 'Helvetica',
+    fontSize: 16,
+  );
   static TextStyle helvetica = TextStyle(
     color: Colors.black,
     fontFamily: 'Helvetica',
