@@ -161,7 +161,7 @@ class _BookingsState extends State<Bookings> {
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) =>
-                                        singleuserMyHomePage(),
+                                        SingleuserMyHomePage(),
                                   ),
                                 );
                               },
@@ -361,7 +361,7 @@ class _BookingsState extends State<Bookings> {
                                     context,
                                     MaterialPageRoute(
                                       builder: (context) =>
-                                          singleuserMyHomePage(),
+                                          SingleuserMyHomePage(),
                                     ),
                                   );
                                 },

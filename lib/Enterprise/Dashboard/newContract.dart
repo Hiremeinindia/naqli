@@ -6,13 +6,13 @@ import 'package:flutter_application_1/Widgets/formText.dart';
 import 'package:flutter_dash/flutter_dash.dart';
 import 'package:sizer/sizer.dart';
 
-class newContracts extends StatefulWidget {
-  newContracts();
+class NewContracts extends StatefulWidget {
+  NewContracts();
   @override
-  State<newContracts> createState() => _PaymentsState();
+  State<NewContracts> createState() => _PaymentsState();
 }
 
-class _PaymentsState extends State<newContracts> {
+class _PaymentsState extends State<NewContracts> {
   String selectedValue1 = 'Option A';
   String selectedValue2 = 'Option B';
   String selectedValue3 = 'Option C';
@@ -20,8 +20,6 @@ class _PaymentsState extends State<newContracts> {
   String? selectedType;
   String? selectedOption;
   List<String> cities = ['City 1', 'City 2', 'City 3', 'City 4'];
-
-  final ScrollController _paymentScroll = ScrollController();
 
   @override
   Widget build(BuildContext context) {

@@ -8,15 +8,15 @@ import 'package:flutter_application_1/SuperUser/homepage.dart';
 import 'package:flutter_application_1/SuperUser/loginPage.dart';
 import 'package:sizer/sizer.dart';
 
-class singleuserCreateAccount extends StatefulWidget {
-  const singleuserCreateAccount();
+class SingleuserCreateAccount extends StatefulWidget {
+  const SingleuserCreateAccount();
 
   @override
-  _singleuserCreateAccountState createState() =>
-      _singleuserCreateAccountState();
+  _SingleuserCreateAccountState createState() =>
+      _SingleuserCreateAccountState();
 }
 
-class _singleuserCreateAccountState extends State<singleuserCreateAccount> {
+class _SingleuserCreateAccountState extends State<SingleuserCreateAccount> {
   final _formKey = GlobalKey<FormState>();
 
   List<String> cities = ['City 1', 'City 2', 'City 3', 'City 4'];
@@ -141,7 +141,7 @@ class _singleuserCreateAccountState extends State<singleuserCreateAccount> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => userDashboardPage(),
+                            builder: (context) => UserDashboardPage(),
                           ),
                         );
                         setState(() {
@@ -778,7 +778,7 @@ class _singleuserCreateAccountState extends State<singleuserCreateAccount> {
                               showDialog(
                                 context: context,
                                 builder: (context) {
-                                  return singleuserLoginPage();
+                                  return SingleuserLoginPage();
                                 },
                               );
                             },
@@ -1303,7 +1303,7 @@ class _singleuserCreateAccountState extends State<singleuserCreateAccount> {
                               showDialog(
                                 context: context,
                                 builder: (context) {
-                                  return singleuserLoginPage();
+                                  return SingleuserLoginPage();
                                 },
                               );
                             },
