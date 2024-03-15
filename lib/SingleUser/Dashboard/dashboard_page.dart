@@ -15,7 +15,7 @@ import '../../main.dart';
 import 'bookings.dart';
 import 'dashboard.dart';
 import 'payments.dart';
-import 'trigger_booking.dart';
+import 'bookingHistory.dart';
 
 class SingleUserDashboardPage extends StatefulWidget {
   const SingleUserDashboardPage({Key? key}) : super(key: key);
@@ -51,28 +51,28 @@ class _MyHomePageState extends State<SingleUserDashboardPage> {
 
   void _handleItem2Tap() {
     setState(() {
-      _currentContent = TriggerBooking();
+      _currentContent = BookingHistory();
     });
     Navigator.pop(context);
   }
 
   void _handleItem3Tap() {
     setState(() {
-      _currentContent = Bookings();
+      _currentContent = SingleUserPayment();
     });
     Navigator.pop(context);
   }
 
   void _handleItem4Tap() {
     setState(() {
-      _currentContent = Payments();
+      _currentContent = SingleUserPayment();
     });
     Navigator.pop(context);
   }
 
   void _handleItem5Tap() {
     setState(() {
-      _currentContent = TriggerBooking();
+      _currentContent = BookingHistory();
     });
     Navigator.pop(context);
   }
@@ -184,132 +184,53 @@ class _MyHomePageState extends State<SingleUserDashboardPage> {
                           ),
                         ],
                       ),
-                      Row(
-                        children: [
-                          DropdownButtonHideUnderline(
-                            child: DropdownButton2<Language>(
-                              isExpanded: true,
-                              hint: Row(
-                                children: [
-                                  Text(
-                                    translation(context).english,
-                                    style: TabelText.helvetica11,
-                                    overflow: TextOverflow.ellipsis,
+                      Container(
+                        padding: EdgeInsets.only(left: 20.0, top: 10),
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.notifications,
+                              color: Color.fromRGBO(106, 102, 209, 1),
+                            ),
+                            SizedBox(
+                              height: 30,
+                              child: Padding(
+                                padding: EdgeInsets.only(left: 15, top: 5),
+                                child: Text(
+                                  "Contact Us",
+                                  style: TextStyle(
+                                    fontFamily: 'Colfax',
+                                    fontSize: 16,
                                   ),
-                                  Expanded(child: SizedBox()),
-                                  Icon(
-                                    Icons.arrow_drop_down,
-                                    color: Colors.black,
-                                    size: 25,
-                                  )
-                                ],
+                                ),
                               ),
-                              onChanged: (Language? language) async {
-                                if (language != null) {
-                                  Locale _locale =
-                                      await setLocale(language.languageCode);
-                                  MyApp.setLocale(context, _locale);
-                                } else {
-                                  language;
-                                }
-                              },
-                              items: Language.languageList()
-                                  .map<DropdownMenuItem<Language>>(
-                                    (e) => DropdownMenuItem<Language>(
-                                      value: e,
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceAround,
-                                        children: <Widget>[
-                                          Text(
-                                            e.flag,
-                                            style: TabelText.helvetica11,
-                                            overflow: TextOverflow.ellipsis,
-                                          ),
-                                          Text(
-                                            e.langname,
-                                            style: TabelText.helvetica11,
-                                            overflow: TextOverflow.ellipsis,
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                  )
-                                  .toList(),
-                              buttonStyleData: ButtonStyleData(
-                                height: 30,
-                                width: 130,
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            SizedBox(
+                              height: 30,
+                              child: VerticalDivider(
+                                color: Colors.black,
+                              ),
+                            ),
+                            SizedBox(
+                              height: 30,
+                              width: 170,
+                              child: Padding(
                                 padding:
-                                    const EdgeInsets.only(left: 14, right: 14),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(8),
-                                  border: Border.all(
-                                    color: Colors.black26,
+                                    const EdgeInsets.only(left: 13, top: 5),
+                                child: Text(
+                                  "Hello Faizal!",
+                                  style: TextStyle(
+                                    fontFamily: 'Colfax',
+                                    fontSize: 16,
                                   ),
-                                  color: Colors.white,
                                 ),
                               ),
-                              iconStyleData: const IconStyleData(
-                                icon: Icon(
-                                  Icons.arrow_drop_down_sharp,
-                                ),
-                                iconSize: 25,
-                                iconEnabledColor: Colors.white,
-                                iconDisabledColor: null,
-                              ),
-                              dropdownStyleData: DropdownStyleData(
-                                maxHeight: 210,
-                                padding: EdgeInsets.only(
-                                    left: 10, right: 10, top: 5, bottom: 15),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(5),
-                                  border: Border.all(color: Colors.black26),
-                                  color: Colors.white,
-                                ),
-                                scrollPadding: EdgeInsets.all(5),
-                                scrollbarTheme: ScrollbarThemeData(
-                                  thickness:
-                                      MaterialStateProperty.all<double>(6),
-                                  thumbVisibility:
-                                      MaterialStateProperty.all<bool>(true),
-                                ),
-                              ),
-                              menuItemStyleData: const MenuItemStyleData(
-                                height: 25,
-                                padding: EdgeInsets.only(left: 14, right: 14),
-                              ),
                             ),
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          SizedBox(
-                            height: 40,
-                            child: VerticalDivider(
-                              color: Colors.black,
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                              left: 5,
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text("Hello Faizal!",
-                                    style: TabelText.helvetica11),
-                                Text("Admin", style: TabelText.usertext),
-                                Text("Faizal industries",
-                                    style: TabelText.usertext),
-                              ],
-                            ),
-                          ),
-                          Icon(
-                            Icons.notifications,
-                            color: Color.fromRGBO(106, 102, 209, 1),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ],
                   ),
@@ -398,7 +319,7 @@ class _MyHomePageState extends State<SingleUserDashboardPage> {
                                 ),
                                 items: [
                                   SideMenuItem(
-                                    title: 'Dashboard',
+                                    title: 'Current Booking',
                                     onTap: (page, _) {
                                       setState(() {
                                         _currentContent = Dashboard();
@@ -408,20 +329,20 @@ class _MyHomePageState extends State<SingleUserDashboardPage> {
                                     icon: Icon(Icons.login_outlined),
                                   ),
                                   SideMenuItem(
-                                    title: 'Trigger Booking',
+                                    title: 'Booking History',
                                     onTap: (page, _) {
                                       setState(() {
-                                        _currentContent = TriggerBooking();
+                                        _currentContent = BookingHistory();
                                       });
                                       sideMenu.changePage(page);
                                     },
                                     icon: Icon(Icons.person_2_outlined),
                                   ),
                                   SideMenuItem(
-                                    title: 'Booking Manager',
+                                    title: 'Payments',
                                     onTap: (page, _) {
                                       setState(() {
-                                        _currentContent = Bookings();
+                                        _currentContent = SingleUserPayment();
                                       });
                                       sideMenu.changePage(page);
                                     },
@@ -429,10 +350,10 @@ class _MyHomePageState extends State<SingleUserDashboardPage> {
                                     // Set the style property to change the text size
                                   ),
                                   SideMenuItem(
-                                    title: 'Payments',
+                                    title: 'Report',
                                     onTap: (page, _) {
                                       setState(() {
-                                        _currentContent = Payments();
+                                        _currentContent = SingleUserPayment();
                                       });
                                       sideMenu.changePage(page);
                                     },
@@ -555,7 +476,7 @@ class _MyHomePageState extends State<SingleUserDashboardPage> {
                         ),
                         onTap: () {
                           setState(() {
-                            _currentContent = TriggerBooking();
+                            _currentContent = BookingHistory();
                           });
                           Navigator.pop(context);
                         }),
@@ -585,7 +506,7 @@ class _MyHomePageState extends State<SingleUserDashboardPage> {
                         ),
                         onTap: () {
                           setState(() {
-                            _currentContent = Payments();
+                            _currentContent = SingleUserPayment();
                           });
                           Navigator.pop(context);
                         }),

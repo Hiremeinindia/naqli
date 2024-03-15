@@ -1,323 +1,313 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/Widgets/formText.dart';
+import 'package:flutter/widgets.dart';
+import 'package:easy_sidemenu/easy_sidemenu.dart';
+
 import 'package:sizer/sizer.dart';
 
-class Payments extends StatefulWidget {
-  Payments();
+class SingleUserPayment extends StatefulWidget {
+  SingleUserPayment();
+
   @override
-  State<Payments> createState() => _PaymentsState();
+  _PaymentState createState() => _PaymentState();
 }
 
-class _PaymentsState extends State<Payments> {
-  final ScrollController _paymentScroll = ScrollController();
-  DataTable _createDataTable() {
-    return DataTable(
-        headingRowHeight: 65,
-        dataRowHeight: 80,
-        headingRowColor: MaterialStateColor.resolveWith(
-          (states) => Color.fromRGBO(75, 61, 82, 1),
-        ),
-        columns: _createColumns(),
-        rows: _payments());
-  }
+class _PaymentState extends State<SingleUserPayment> {
+  PageController page = PageController();
+  SideMenuController sideMenu = SideMenuController();
+  ScrollController _scrollController = ScrollController();
 
-  List<DataColumn> _createColumns() {
-    return [
-      DataColumn(
-        label: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Center(
-            child: Text('Booking ID', style: TabelText.headerText),
-          ),
-        ),
-      ),
-      DataColumn(
-        label: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child:
-              Center(child: Text('Booking Type', style: TabelText.headerText)),
-        ),
-      ),
-      DataColumn(
-        label: Center(
-          child: Padding(
-            padding: const EdgeInsets.only(left: 40),
-            child: Text('Contract', style: TabelText.headerText),
-          ),
-        ),
-      ),
-      DataColumn(
-        label: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Center(
-            child: Text('Status', style: TabelText.headerText),
-          ),
-        ),
-      ),
-      DataColumn(
-        label: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Center(
-            child: Text('Payment Made', style: TabelText.headerText),
-          ),
-        ),
-      ),
-      DataColumn(
-        label: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Center(
-            child: Text('Pending Payment', style: TabelText.headerText),
-          ),
-        ),
-      ),
-    ];
-  }
-
-  List<DataRow> _payments() {
-    return [
-      DataRow(cells: [
-        DataCell(
-          Text(
-            'NAQBOOK***',
-            style: TabelText.tableText1,
-          ),
-        ),
-        DataCell(
-          Center(child: Text('Single', style: TabelText.tableText1)),
-        ),
-        DataCell(Center(child: Text('_', style: TabelText.tableText1))),
-        DataCell(
-          Center(
-            child: Image.asset(
-              'Group353.png',
-              width: 50,
-              height: 30,
-            ),
-          ),
-        ),
-        DataCell(Center(child: Text('SAR XXXX', style: TabelText.headerText1))),
-        DataCell(
-            Center(child: Text('Completed', style: TabelText.headerText2))),
-      ]),
-      DataRow(cells: [
-        DataCell(Text(
-          'NAQBOOK***',
-          style: TabelText.tableText1,
-        )),
-        DataCell(Center(child: Text('Contract', style: TabelText.tableText1))),
-        DataCell(Center(
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(12.0),
-                child: Text('SAR 3000', style: TabelText.tableText1),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 12),
-                child: Text('Per Month-August 2024', style: TabelText.text4),
-              ),
-            ],
-          ),
-        )),
-        DataCell(
-          Center(
-            child: Image.asset(
-              'Group268.png',
-              width: 50,
-              height: 30,
-            ),
-          ),
-        ),
-        DataCell(Center(child: Text('SAR XXXX', style: TabelText.headerText1))),
-        DataCell(
-          Center(
-            child: SizedBox(
-              width: 95,
-              height: 30,
-              child: ElevatedButton(
-                onPressed: () {},
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.white,
-                  side: BorderSide(
-                    color: Color.fromRGBO(92, 85, 67, 1),
-                  ),
-                ),
-                child: Text(
-                  'Running',
-                  style: TextStyle(
-                    color: Color.fromRGBO(92, 85, 67, 1),
-                    fontSize: 12,
-                    fontFamily: "Helvetica",
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ),
-      ]),
-      DataRow(cells: [
-        DataCell(Text(
-          'NAQBOOK***',
-          style: TabelText.tableText1,
-        )),
-        DataCell(Center(child: Text('Single', style: TabelText.tableText1))),
-        DataCell(Center(child: Text('_', style: TabelText.tableText1))),
-        DataCell(
-          Center(
-            child: Image.asset(
-              'Group353.png',
-              width: 50,
-              height: 30,
-            ),
-          ),
-        ),
-        DataCell(Center(child: Text('SAR XXXX', style: TabelText.headerText1))),
-        DataCell(
-          Center(
-            child: SizedBox(
-              width: 95,
-              height: 30,
-              child: ElevatedButton(
-                onPressed: () {},
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Color.fromRGBO(110, 90, 234, 1),
-                  side: BorderSide(
-                    color: Color.fromRGBO(110, 90, 234, 1),
-                  ),
-                ),
-                child: Text(
-                  'Pay Pal',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 12,
-                    fontFamily: "Helvetica",
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ),
-      ]),
-    ];
-  }
+  bool value = false;
+  String month = '';
+  bool checkbox1 = false;
+  bool checkbox2 = false;
+  bool checkbox3 = false;
+  bool isButtonEnabled = false;
+  bool isButtonEnabled1 = false;
+  bool isButtonEnabled2 = false;
+  int? selectedRadioValue;
+  int? selectedRadioValue1;
+  int? selectedRadioValue2;
+  bool payNowButtonEnabled = false;
+  String? selectedValue;
 
   @override
+  void initState() {
+    sideMenu.addListener((p0) {
+      page.jumpToPage(p0);
+    });
+    super.initState();
+  }
+
+  void enablePayNowButton() {
+    setState(() {
+      payNowButtonEnabled = true;
+    });
+  }
+
+  void disablePayNowButton() {
+    setState(() {
+      payNowButtonEnabled = false;
+    });
+  }
+
+  bool isAnyCheckboxSelected() {
+    return checkbox1 || checkbox2 || checkbox3;
+  }
+
   Widget build(BuildContext context) {
     return Sizer(builder: (context, orientation, deviceType) {
       return LayoutBuilder(
           builder: (BuildContext ctx, BoxConstraints constraints) {
-        if (constraints.maxWidth >= 850) {
-          return SingleChildScrollView(
+        if (constraints.maxWidth >= 1380) {
+          return Padding(
+            padding: EdgeInsets.fromLTRB(3.w, 3.h, 3.w, 3.h),
             child: Container(
-              height: 100.h,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20.0),
-                color: Color.fromRGBO(255, 255, 255, 0.925),
-              ),
-              padding: EdgeInsets.fromLTRB(3.w, 3.h, 3.w, 3.h),
+              color: Color.fromRGBO(245, 243, 255, 1).withOpacity(0.5),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Container(
-                        height: 50,
-                        width: 193,
-                        padding: EdgeInsets.all(8.0),
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: Colors.grey,
-                            width: 1.0,
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(6.w, 6.h, 6.w, 6.h),
+                    child: Container(
+                      width: 1200,
+                      height: 100, // Increased height to accommodate button
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Text(
+                            'Booking ID  XXXXX',
+                            style: TextStyle(
+                                fontSize: 20.0,
+                                fontFamily: 'SFPRo Text-regular'),
                           ),
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
-                        child: DropdownButtonHideUnderline(
-                          child: DropdownButton<String>(
-                            value: 'All',
-                            onChanged: (String? newValue) {
-                              // Handle dropdown value change
-                            },
-                            items: <String>[
-                              'All',
-                              'Completed',
-                              'Incomplete Booking',
-                              'Pending Payment',
-                            ].map<DropdownMenuItem<String>>(
-                              (String value) {
-                                return DropdownMenuItem<String>(
-                                  value: value,
-                                  child: Text(
-                                    value,
+                          Text(
+                            'Booking Value : SAR xxxxxx',
+                            style: TextStyle(
+                                fontSize: 20.0,
+                                fontFamily: 'SFPRo Text-regular'),
+                          ),
+                          Text(
+                            'Paid : SAR xxxxx',
+                            style: TextStyle(
+                                fontSize: 20.0,
+                                fontFamily: 'SFPRo Text-regular'),
+                          ),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text(
+                                'Balance',
+                                style: TextStyle(
+                                    fontSize: 20.0,
+                                    fontFamily: 'SFPRo Text-regular'),
+                              ),
+                              ElevatedButton(
+                                onPressed: () {
+                                  // Add your button functionality here
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor:
+                                      Color.fromRGBO(98, 105, 254, 1),
+                                  foregroundColor: Colors.white,
+                                  minimumSize: Size(200, 35),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                ),
+                                child: Text('XXXXX SAR',
                                     style: TextStyle(
-                                        fontFamily: 'Colfax', fontSize: 16),
-                                  ),
-                                );
-                              },
-                            ).toList(),
+                                        fontSize: 20.0,
+                                        fontFamily: 'SFPRo Text-regular')),
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
+
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        border: Border.all(width: 0.5),
+                        borderRadius: BorderRadius.circular(5),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Color.fromRGBO(199, 199, 199, 1)
+                                .withOpacity(0.5),
+                            blurRadius: 1,
+                            spreadRadius: 4,
+                            offset: Offset(0, 0.5), // Bottom side shadow
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 40),
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(3.w, 3.h, 3.w, 3.h),
+                    child: Container(
+                      width: MediaQuery.of(context).size.width -
+                          40, // Set width to match screen width
+                      decoration: BoxDecoration(
+                        border: Border.all(width: 0.5),
+                        borderRadius: BorderRadius.circular(5),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Color.fromRGBO(199, 199, 199, 1)
+                                .withOpacity(0.5),
+                            blurRadius: 1,
+                            spreadRadius: 4,
+                            offset: Offset(0, 0.5), // Bottom side shadow
+                          ),
+                        ],
+                      ),
+                      child: DataTable(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(5),
+                            topRight: Radius.circular(5),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Column(
-                          children: [
-                            Scrollbar(
-                              controller: _paymentScroll,
-                              thumbVisibility:
-                                  true, // Set to true to always show the scrollbar
-                              child: SingleChildScrollView(
-                                scrollDirection: Axis.horizontal,
-                                controller: _paymentScroll,
-                                child: Container(
-                                  height: 300,
-                                  width: 1200,
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.grey.withOpacity(
-                                            0.5), // Adjust the shadow color and opacity
-                                        blurRadius:
-                                            5.0, // Adjust the blur radius for a more visible shadow
-                                      ),
-                                    ],
-                                    borderRadius: BorderRadius.circular(12.0),
+                        headingRowColor: MaterialStateColor.resolveWith(
+                            (states) => Color.fromRGBO(75, 61, 82, 1)),
+                        dataRowColor: MaterialStateColor.resolveWith(
+                            (states) => Colors.white),
+                        showBottomBorder: true,
+                        dividerThickness: 1.0,
+                        dataRowHeight: 65,
+                        columns: <DataColumn>[
+                          DataColumn(
+                              label: Expanded(
+                                  child: Text(
+                            'Mode',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 25,
+                                fontFamily: 'SFproText-Regular'),
+                            textAlign: TextAlign.center,
+                          ))),
+                          DataColumn(
+                              label: Expanded(
+                                  child: Text(
+                            'Booking Id',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 25,
+                                fontFamily: 'SFproText-Regular'),
+                            textAlign: TextAlign.center,
+                          ))),
+                          DataColumn(
+                              label: Expanded(
+                                  child: Text(
+                            'Date',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 25,
+                                fontFamily: 'SFproText-Regular'),
+                            textAlign: TextAlign.center,
+                          ))),
+                          DataColumn(
+                              label: Expanded(
+                                  child: Text(
+                            'Unit Type',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 25,
+                                fontFamily: 'SFproText-Regular'),
+                            textAlign: TextAlign.center,
+                          ))),
+                          DataColumn(
+                              label: Expanded(
+                                  child: Text(
+                            'Payment',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 25,
+                                fontFamily: 'SFproText-Regular'),
+                            textAlign: TextAlign.center,
+                          ))),
+                          DataColumn(
+                              label: Expanded(
+                                  child: Text(
+                            'Payment Status',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 25,
+                                fontFamily: 'SFproText-Regular'),
+                            textAlign: TextAlign.center,
+                          ))),
+                        ],
+                        rows: <DataRow>[
+                          DataRow(
+                            cells: <DataCell>[
+                              for (var item in [
+                                'Trip',
+                                '#456789231',
+                                '18.2.2022',
+                                'Box truck',
+                                'Xxx SAR',
+                                'Completed'
+                              ])
+                                DataCell(
+                                  Container(
+                                    height: 65, // Adjust height as needed
+                                    alignment: Alignment.center,
+                                    child: Text(item,
+                                        style: TextStyle(
+                                            fontSize: 20,
+                                            fontFamily: 'SFproText-Regular')),
                                   ),
-                                  child: SizedBox(
-                                    height: 220,
-                                    child: ListView(
-                                      children: [_createDataTable()],
+                                ),
+                            ],
+                          ),
+                          DataRow(
+                            cells: <DataCell>[
+                              for (var item in [
+                                'Bus Trip',
+                                '#456789231',
+                                '13.6.2022',
+                                'Sleeper',
+                                'Xxx SAR',
+                                'Completed'
+                              ])
+                                DataCell(
+                                  Container(
+                                    height: 65, // Adjust height as needed
+                                    alignment: Alignment.center,
+                                    child: Text(item,
+                                        style: TextStyle(
+                                            fontSize: 20,
+                                            fontFamily: 'SFproText-Regular')),
+                                  ),
+                                ),
+                            ],
+                          ),
+                          DataRow(
+                            cells: <DataCell>[
+                              for (var item in [
+                                'Equipment Hire',
+                                '#456789231',
+                                '12.5.2022',
+                                'Crane',
+                                'Xxx SAR',
+                                'Completed'
+                              ])
+                                DataCell(
+                                  Container(
+                                    height: 65, // Adjust height as needed
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                      item,
+                                      style: TextStyle(
+                                          fontSize: 20,
+                                          fontFamily: 'SFproText-Regular'),
                                     ),
                                   ),
                                 ),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 150,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(right: 110),
-                              child: SingleChildScrollView(
-                                scrollDirection: Axis.horizontal,
-                                child: Container(
-                                  height: 10, // Adjust the height as needed
-                                  // Set the desired length of the scroll bar
-                                  color: Colors
-                                      .grey, // Background color of the scrollable area
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
+                            ],
+                          ),
+                        ],
                       ),
-                    ],
+                    ),
                   ),
                 ],
               ),
@@ -325,131 +315,256 @@ class _PaymentsState extends State<Payments> {
           );
         } else {
           return Padding(
-            padding: const EdgeInsets.only(left: 5, top: 30),
-            child: Padding(
-              padding: const EdgeInsets.all(30.0),
-              child: Container(
-                height: 590,
-                decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                        color: Colors.grey,
-                        blurRadius: 0.1 // changes position of shadow
-                        ),
-                  ],
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(12.0),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(30.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
+            padding: EdgeInsets.fromLTRB(3.w, 3.h, 3.w, 3.h),
+            child: Container(
+              color: Color.fromRGBO(245, 243, 255, 1).withOpacity(0.5),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(3.w, 3.h, 3.w, 3.h),
+                    child: Container(
+                      width: 1200,
+                      height: 100, // Increased height to accommodate button
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          Container(
-                            height: 50,
-                            width: 193,
-                            padding: EdgeInsets.all(8.0),
-                            decoration: BoxDecoration(
-                              border: Border.all(
-                                color: Colors.grey,
-                                width: 1.0,
+                          Text(
+                            'Booking ID  XXXXX',
+                            style: TextStyle(
+                                fontSize: 20.0,
+                                fontFamily: 'SFPRo Text-regular'),
+                          ),
+                          Text(
+                            'Booking Value : SAR xxxxxx',
+                            style: TextStyle(
+                                fontSize: 20.0,
+                                fontFamily: 'SFPRo Text-regular'),
+                          ),
+                          Text(
+                            'Paid : SAR xxxxx',
+                            style: TextStyle(
+                                fontSize: 20.0,
+                                fontFamily: 'SFPRo Text-regular'),
+                          ),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text(
+                                'Balance',
+                                style: TextStyle(
+                                    fontSize: 20.0,
+                                    fontFamily: 'SFPRo Text-regular'),
                               ),
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
-                            child: DropdownButtonHideUnderline(
-                              child: DropdownButton<String>(
-                                value: 'All',
-                                onChanged: (String? newValue) {
-                                  // Handle dropdown value change
+                              ElevatedButton(
+                                onPressed: () {
+                                  // Add your button functionality here
                                 },
-                                items: <String>[
-                                  'All',
-                                  'Completed',
-                                  'Incomplete Booking',
-                                  'Pending Payment',
-                                ].map<DropdownMenuItem<String>>(
-                                  (String value) {
-                                    return DropdownMenuItem<String>(
-                                      value: value,
-                                      child: Text(
-                                        value,
-                                        style: TextStyle(
-                                            fontFamily: 'Colfax', fontSize: 16),
-                                      ),
-                                    );
-                                  },
-                                ).toList(),
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor:
+                                      Color.fromRGBO(98, 105, 254, 1),
+                                  foregroundColor: Colors.white,
+                                  minimumSize: Size(200, 35),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                ),
+                                child: Text('XXXXX SAR',
+                                    style: TextStyle(
+                                        fontSize: 20.0,
+                                        fontFamily: 'SFPRo Text-regular')),
                               ),
-                            ),
+                            ],
+                          )
+                        ],
+                      ),
+
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        border: Border.all(width: 0.5),
+                        borderRadius: BorderRadius.circular(5),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Color.fromRGBO(199, 199, 199, 1)
+                                .withOpacity(0.5),
+                            blurRadius: 1,
+                            spreadRadius: 4,
+                            offset: Offset(0, 0.5), // Bottom side shadow
                           ),
                         ],
                       ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: Column(
-                              children: [
-                                Scrollbar(
-                                  controller: _paymentScroll,
-                                  thumbVisibility:
-                                      true, // Set to true to always show the scrollbar
-                                  child: SingleChildScrollView(
-                                    scrollDirection: Axis.horizontal,
-                                    controller: _paymentScroll,
-                                    child: Container(
-                                      height: 300,
-                                      width: 1200,
-                                      decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: Colors.grey.withOpacity(
-                                                0.5), // Adjust the shadow color and opacity
-                                            blurRadius:
-                                                5.0, // Adjust the blur radius for a more visible shadow
-                                          ),
-                                        ],
-                                        borderRadius:
-                                            BorderRadius.circular(12.0),
-                                      ),
-                                      child: SizedBox(
-                                        height: 220,
-                                        child: ListView(
-                                          children: [_createDataTable()],
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 150,
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(right: 110),
-                                  child: SingleChildScrollView(
-                                    scrollDirection: Axis.horizontal,
-                                    child: Container(
-                                      height: 10, // Adjust the height as needed
-                                      // Set the desired length of the scroll bar
-                                      color: Colors
-                                          .grey, // Background color of the scrollable area
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
+                    ),
                   ),
-                ),
+                  SizedBox(height: 40),
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(3.w, 3.h, 3.w, 3.h),
+                    child: Container(
+                      width: MediaQuery.of(context).size.width -
+                          40, // Set width to match screen width
+                      decoration: BoxDecoration(
+                        border: Border.all(width: 0.5),
+                        borderRadius: BorderRadius.circular(5),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Color.fromRGBO(199, 199, 199, 1)
+                                .withOpacity(0.5),
+                            blurRadius: 1,
+                            spreadRadius: 4,
+                            offset: Offset(0, 0.5), // Bottom side shadow
+                          ),
+                        ],
+                      ),
+                      child: DataTable(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(5),
+                            topRight: Radius.circular(5),
+                          ),
+                        ),
+                        headingRowColor: MaterialStateColor.resolveWith(
+                            (states) => Color.fromRGBO(75, 61, 82, 1)),
+                        dataRowColor: MaterialStateColor.resolveWith(
+                            (states) => Colors.white),
+                        showBottomBorder: true,
+                        dividerThickness: 1.0,
+                        dataRowHeight: 65,
+                        columns: <DataColumn>[
+                          DataColumn(
+                              label: Expanded(
+                                  child: Text(
+                            'Mode',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 25,
+                                fontFamily: 'SFproText-Regular'),
+                            textAlign: TextAlign.center,
+                          ))),
+                          DataColumn(
+                              label: Expanded(
+                                  child: Text(
+                            'Booking Id',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 25,
+                                fontFamily: 'SFproText-Regular'),
+                            textAlign: TextAlign.center,
+                          ))),
+                          DataColumn(
+                              label: Expanded(
+                                  child: Text(
+                            'Date',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 25,
+                                fontFamily: 'SFproText-Regular'),
+                            textAlign: TextAlign.center,
+                          ))),
+                          DataColumn(
+                              label: Expanded(
+                                  child: Text(
+                            'Unit Type',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 25,
+                                fontFamily: 'SFproText-Regular'),
+                            textAlign: TextAlign.center,
+                          ))),
+                          DataColumn(
+                              label: Expanded(
+                                  child: Text(
+                            'Payment',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 25,
+                                fontFamily: 'SFproText-Regular'),
+                            textAlign: TextAlign.center,
+                          ))),
+                          DataColumn(
+                              label: Expanded(
+                                  child: Text(
+                            'Payment Status',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 25,
+                                fontFamily: 'SFproText-Regular'),
+                            textAlign: TextAlign.center,
+                          ))),
+                        ],
+                        rows: <DataRow>[
+                          DataRow(
+                            cells: <DataCell>[
+                              for (var item in [
+                                'Trip',
+                                '#456789231',
+                                '18.2.2022',
+                                'Box truck',
+                                'Xxx SAR',
+                                'Completed'
+                              ])
+                                DataCell(
+                                  Container(
+                                    height: 65, // Adjust height as needed
+                                    alignment: Alignment.center,
+                                    child: Text(item,
+                                        style: TextStyle(
+                                            fontSize: 20,
+                                            fontFamily: 'SFproText-Regular')),
+                                  ),
+                                ),
+                            ],
+                          ),
+                          DataRow(
+                            cells: <DataCell>[
+                              for (var item in [
+                                'Bus Trip',
+                                '#456789231',
+                                '13.6.2022',
+                                'Sleeper',
+                                'Xxx SAR',
+                                'Completed'
+                              ])
+                                DataCell(
+                                  Container(
+                                    height: 65, // Adjust height as needed
+                                    alignment: Alignment.center,
+                                    child: Text(item,
+                                        style: TextStyle(
+                                            fontSize: 20,
+                                            fontFamily: 'SFproText-Regular')),
+                                  ),
+                                ),
+                            ],
+                          ),
+                          DataRow(
+                            cells: <DataCell>[
+                              for (var item in [
+                                'Equipment Hire',
+                                '#456789231',
+                                '12.5.2022',
+                                'Crane',
+                                'Xxx SAR',
+                                'Completed'
+                              ])
+                                DataCell(
+                                  Container(
+                                    height: 65, // Adjust height as needed
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                      item,
+                                      style: TextStyle(
+                                          fontSize: 20,
+                                          fontFamily: 'SFproText-Regular'),
+                                    ),
+                                  ),
+                                ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
           );
