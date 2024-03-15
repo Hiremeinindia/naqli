@@ -946,7 +946,7 @@ class _PaymentsState extends State<Contracts> {
                     ),
                   ),
                   child: Padding(
-                    padding: EdgeInsets.only(left: 110, top: 25),
+                    padding: EdgeInsets.only(left: 95, top: 25),
                     child: Text(
                       addContracts ? 'New Contracts' : 'Contracts',
                       style: TextStyle(

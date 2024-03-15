@@ -141,7 +141,7 @@ class _SingleuserCreateAccountState extends State<SingleuserCreateAccount> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => UserDashboardPage(),
+                            builder: (context) => SingleUserDashboardPage(),
                           ),
                         );
                         setState(() {
