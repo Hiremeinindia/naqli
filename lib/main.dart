@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/Enterprise/Dashboard/contracts.dart';
 import 'package:flutter_application_1/Enterprise/Dashboard/dashboard_page.dart';
 import 'package:flutter_application_1/Enterprise/Dashboard/newContract.dart';
+import 'package:flutter_application_1/Enterprise/enterpriseHomePage.dart';
 import 'package:flutter_application_1/OneTimeBooking/availableUnits.dart';
 import 'package:flutter_application_1/Partner/Dashboard/dashboard_page.dart';
 
@@ -10,6 +11,8 @@ import 'package:flutter_application_1/Partner/homepage.dart';
 import 'package:flutter_application_1/Partner/joinUs.dart';
 import 'package:flutter_application_1/Partner/operator.dart';
 import 'package:flutter_application_1/SingleUser/Dashboard/dashboard_page.dart';
+import 'package:flutter_application_1/SingleUser/Dashboard/payments.dart';
+import 'package:flutter_application_1/SingleUser/homepage.dart';
 import 'package:flutter_application_1/SuperUser/Dashboard/dashboard_page.dart';
 import 'package:flutter_application_1/advancepayment.dart';
 import 'package:flutter_application_1/SuperUser/createAccount.dart';
@@ -90,7 +93,7 @@ class _MyAppState extends State<MyApp> {
       supportedLocales: AppLocalizations.supportedLocales,
       locale: _locale,
       debugShowCheckedModeBanner: false,
-      home: SingleUserDashboardPage(),
+      home: SingleUserMyHomePage(),
     );
   }
 }
