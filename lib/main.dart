@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/Enterprise/Dashboard/contracts.dart';
 import 'package:flutter_application_1/Enterprise/Dashboard/dashboard_page.dart';
 import 'package:flutter_application_1/Enterprise/Dashboard/newContract.dart';
+import 'package:flutter_application_1/OneTimeBooking/availableUnits.dart';
 import 'package:flutter_application_1/Partner/Dashboard/dashboard_page.dart';
 
 import 'package:flutter_application_1/Partner/homepage.dart';
@@ -89,7 +90,7 @@ class _MyAppState extends State<MyApp> {
       supportedLocales: AppLocalizations.supportedLocales,
       locale: _locale,
       debugShowCheckedModeBanner: false,
-      home: bookinghistory(),
+      home: AvailableUnits(),
     );
   }
 }

@@ -43,55 +43,6 @@ class _MyHomePageState extends State<EnterDashboardPage> {
   String? selectedValue;
   Widget _currentContent = Dashboard(); // Initial content
 
-  void _handleItem1Tap() {
-    setState(() {
-      _currentContent = Dashboard();
-    });
-    Navigator.pop(context);
-  }
-
-  void _handleItem2Tap() {
-    setState(() {
-      _currentContent = TriggerBooking();
-    });
-    Navigator.pop(context);
-  }
-
-  void _handleItem3Tap() {
-    setState(() {
-      _currentContent = Bookings();
-    });
-    Navigator.pop(context);
-  }
-
-  void _handleItem4Tap() {
-    setState(() {
-      _currentContent = Contracts();
-    });
-    Navigator.pop(context);
-  }
-
-  void _handleItem5Tap() {
-    setState(() {
-      _currentContent = Payments();
-    });
-    Navigator.pop(context);
-  }
-
-  void _handleItem6Tap() {
-    setState(() {
-      _currentContent = TriggerBooking();
-    });
-    Navigator.pop(context);
-  }
-
-  void _handleItem7Tap() {
-    setState(() {
-      _currentContent = TriggerBooking();
-    });
-    Navigator.pop(context);
-  }
-
   void handleRadioValueChanged(String? newValue) {
     setState(() {
       selectedValue = newValue;
@@ -416,6 +367,9 @@ class _MyHomePageState extends State<EnterDashboardPage> {
                                   SideMenuItem(
                                     title: 'Dashboard',
                                     onTap: (page, _) {
+                                      setState(() {
+                                        _currentContent = Dashboard();
+                                      });
                                       sideMenu.changePage(page);
                                     },
                                     icon: const Icon(Icons.login_outlined),
@@ -423,6 +377,9 @@ class _MyHomePageState extends State<EnterDashboardPage> {
                                   SideMenuItem(
                                     title: 'Trigger Booking',
                                     onTap: (page, _) {
+                                      setState(() {
+                                        _currentContent = TriggerBooking();
+                                      });
                                       sideMenu.changePage(page);
                                     },
                                     icon: const Icon(Icons.person_2_outlined),
@@ -430,6 +387,9 @@ class _MyHomePageState extends State<EnterDashboardPage> {
                                   SideMenuItem(
                                     title: 'Bookings Manager',
                                     onTap: (page, _) {
+                                      setState(() {
+                                        _currentContent = Bookings();
+                                      });
                                       sideMenu.changePage(page);
                                     },
                                     icon: const Icon(Icons.person_2_outlined),
@@ -438,6 +398,9 @@ class _MyHomePageState extends State<EnterDashboardPage> {
                                   SideMenuItem(
                                     title: 'Contracts',
                                     onTap: (page, _) {
+                                      setState(() {
+                                        _currentContent = Contracts();
+                                      });
                                       sideMenu.changePage(page);
                                     },
                                     icon: const Icon(Icons.person_2_outlined),
@@ -446,6 +409,9 @@ class _MyHomePageState extends State<EnterDashboardPage> {
                                   SideMenuItem(
                                     title: 'Payments',
                                     onTap: (page, _) {
+                                      setState(() {
+                                        _currentContent = Payments();
+                                      });
                                       sideMenu.changePage(page);
                                     },
                                     icon:
@@ -454,6 +420,9 @@ class _MyHomePageState extends State<EnterDashboardPage> {
                                   SideMenuItem(
                                     title: 'Users',
                                     onTap: (page, _) {
+                                      setState(() {
+                                        _currentContent = Users();
+                                      });
                                       sideMenu.changePage(page);
                                     },
                                     icon:
@@ -462,6 +431,9 @@ class _MyHomePageState extends State<EnterDashboardPage> {
                                   SideMenuItem(
                                     title: 'Help',
                                     onTap: (page, _) {
+                                      setState(() {
+                                        _currentContent = TriggerBooking();
+                                      });
                                       sideMenu.changePage(page);
                                     },
                                     icon: const Icon(Icons.inbox_outlined),
@@ -495,36 +467,7 @@ class _MyHomePageState extends State<EnterDashboardPage> {
                                   color: Color.fromRGBO(255, 255, 255, 0.00),
                                 ),
                                 child: PageView(controller: page, children: [
-                                  Dashboard(),
-                                  TriggerBooking(),
-                                  Bookings(),
-                                  expandWork
-                                      ? GestureDetector(
-                                          onTap: () {
-                                            setState(() {
-                                              expandWork = !expandWork;
-                                            });
-                                          },
-                                          child: Container(
-                                            child: Contracts(),
-                                          ),
-                                        )
-                                      : GestureDetector(
-                                          onTap: () {
-                                            setState(() {
-                                              expandWork = !expandWork;
-                                            });
-                                          },
-                                          child: Container(
-                                            child: NewContracts(),
-                                          ),
-                                        ),
-                                  Payments(),
-                                  Users(),
-                                  Container(
-                                    color:
-                                        const Color.fromARGB(255, 121, 64, 255),
-                                  ),
+                                  _currentContent,
                                 ]),
                               ),
                               SizedBox(
@@ -576,7 +519,12 @@ class _MyHomePageState extends State<EnterDashboardPage> {
                           'Dashboard',
                           style: TextStyle(color: Colors.black),
                         ),
-                        onTap: _handleItem1Tap),
+                        onTap: () {
+                          setState(() {
+                            _currentContent = Dashboard();
+                          });
+                          Navigator.pop(context);
+                        }),
                     SizedBox(
                       height: 2.h,
                     ),
@@ -586,7 +534,12 @@ class _MyHomePageState extends State<EnterDashboardPage> {
                           'Trigger Booking',
                           style: TextStyle(color: Colors.black),
                         ),
-                        onTap: _handleItem2Tap),
+                        onTap: () {
+                          setState(() {
+                            _currentContent = TriggerBooking();
+                          });
+                          Navigator.pop(context);
+                        }),
                     SizedBox(
                       height: 2.h,
                     ),
@@ -596,7 +549,12 @@ class _MyHomePageState extends State<EnterDashboardPage> {
                           'Booking Manager',
                           style: TextStyle(color: Colors.black),
                         ),
-                        onTap: _handleItem3Tap),
+                        onTap: () {
+                          setState(() {
+                            _currentContent = Bookings();
+                          });
+                          Navigator.pop(context);
+                        }),
                     SizedBox(
                       height: 2.h,
                     ),
@@ -606,7 +564,12 @@ class _MyHomePageState extends State<EnterDashboardPage> {
                           'Contracts',
                           style: TextStyle(color: Colors.black),
                         ),
-                        onTap: _handleItem4Tap),
+                        onTap: () {
+                          setState(() {
+                            _currentContent = Contracts();
+                          });
+                          Navigator.pop(context);
+                        }),
                     SizedBox(
                       height: 2.h,
                     ),
@@ -616,7 +579,27 @@ class _MyHomePageState extends State<EnterDashboardPage> {
                           'Payments',
                           style: TextStyle(color: Colors.black),
                         ),
-                        onTap: _handleItem5Tap),
+                        onTap: () {
+                          setState(() {
+                            _currentContent = Payments();
+                          });
+                          Navigator.pop(context);
+                        }),
+                    SizedBox(
+                      height: 2.h,
+                    ),
+                    ListTile(
+                        hoverColor: Colors.indigo.shade100,
+                        title: Text(
+                          'Users',
+                          style: TextStyle(color: Colors.black),
+                        ),
+                        onTap: () {
+                          setState(() {
+                            _currentContent = Users();
+                          });
+                          Navigator.pop(context);
+                        }),
                     SizedBox(
                       height: 2.h,
                     ),
@@ -626,7 +609,12 @@ class _MyHomePageState extends State<EnterDashboardPage> {
                           'Help',
                           style: TextStyle(color: Colors.black),
                         ),
-                        onTap: _handleItem6Tap),
+                        onTap: () {
+                          setState(() {
+                            _currentContent = Bookings();
+                          });
+                          Navigator.pop(context);
+                        }),
                   ]),
             ),
             appBar: PreferredSize(

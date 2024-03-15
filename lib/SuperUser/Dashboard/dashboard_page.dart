@@ -400,6 +400,9 @@ class _MyHomePageState extends State<DashboardPage> {
                                   SideMenuItem(
                                     title: 'Dashboard',
                                     onTap: (page, _) {
+                                      setState(() {
+                                        _currentContent = Dashboard();
+                                      });
                                       sideMenu.changePage(page);
                                     },
                                     icon: Icon(Icons.login_outlined),
@@ -407,6 +410,9 @@ class _MyHomePageState extends State<DashboardPage> {
                                   SideMenuItem(
                                     title: 'Trigger Booking',
                                     onTap: (page, _) {
+                                      setState(() {
+                                        _currentContent = TriggerBooking();
+                                      });
                                       sideMenu.changePage(page);
                                     },
                                     icon: Icon(Icons.person_2_outlined),
@@ -414,6 +420,9 @@ class _MyHomePageState extends State<DashboardPage> {
                                   SideMenuItem(
                                     title: 'Booking Manager',
                                     onTap: (page, _) {
+                                      setState(() {
+                                        _currentContent = Bookings();
+                                      });
                                       sideMenu.changePage(page);
                                     },
                                     icon: Icon(Icons.person_2_outlined),
@@ -422,6 +431,9 @@ class _MyHomePageState extends State<DashboardPage> {
                                   SideMenuItem(
                                     title: 'Payments',
                                     onTap: (page, _) {
+                                      setState(() {
+                                        _currentContent = Payments();
+                                      });
                                       sideMenu.changePage(page);
                                     },
                                     icon:
@@ -430,6 +442,9 @@ class _MyHomePageState extends State<DashboardPage> {
                                   SideMenuItem(
                                     title: 'Help',
                                     onTap: (page, _) {
+                                      setState(() {
+                                        _currentContent = Dashboard();
+                                      });
                                       sideMenu.changePage(page);
                                     },
                                     icon: Icon(Icons.inbox_outlined),
@@ -462,15 +477,9 @@ class _MyHomePageState extends State<DashboardPage> {
                                     borderRadius: BorderRadius.circular(20.0),
                                     color: Color.fromRGBO(255, 255, 255, 0.00),
                                   ),
-                                  child: PageView(controller: page, children: [
-                                    Dashboard(),
-                                    TriggerBooking(),
-                                    Bookings(),
-                                    Payments(),
-                                    Container(
-                                      color: Colors.deepOrangeAccent,
-                                    ),
-                                  ]),
+                                  child: PageView(
+                                      controller: page,
+                                      children: [_currentContent]),
                                 ),
                                 SizedBox(
                                   height: 2.h,
@@ -529,7 +538,12 @@ class _MyHomePageState extends State<DashboardPage> {
                           'Dashboard',
                           style: TextStyle(color: Colors.black),
                         ),
-                        onTap: _handleItem1Tap),
+                        onTap: () {
+                          setState(() {
+                            _currentContent = Dashboard();
+                          });
+                          Navigator.pop(context);
+                        }),
                     SizedBox(
                       height: 2.h,
                     ),
@@ -539,7 +553,12 @@ class _MyHomePageState extends State<DashboardPage> {
                           'Trigger Booking',
                           style: TextStyle(color: Colors.black),
                         ),
-                        onTap: _handleItem2Tap),
+                        onTap: () {
+                          setState(() {
+                            _currentContent = TriggerBooking();
+                          });
+                          Navigator.pop(context);
+                        }),
                     SizedBox(
                       height: 2.h,
                     ),
@@ -549,7 +568,12 @@ class _MyHomePageState extends State<DashboardPage> {
                           'Booking Manager',
                           style: TextStyle(color: Colors.black),
                         ),
-                        onTap: _handleItem3Tap),
+                        onTap: () {
+                          setState(() {
+                            _currentContent = Bookings();
+                          });
+                          Navigator.pop(context);
+                        }),
                     SizedBox(
                       height: 2.h,
                     ),
@@ -559,7 +583,12 @@ class _MyHomePageState extends State<DashboardPage> {
                           'Payments',
                           style: TextStyle(color: Colors.black),
                         ),
-                        onTap: _handleItem4Tap),
+                        onTap: () {
+                          setState(() {
+                            _currentContent = Payments();
+                          });
+                          Navigator.pop(context);
+                        }),
                     SizedBox(
                       height: 2.h,
                     ),
@@ -569,7 +598,12 @@ class _MyHomePageState extends State<DashboardPage> {
                           'Help',
                           style: TextStyle(color: Colors.black),
                         ),
-                        onTap: _handleItem5Tap),
+                        onTap: () {
+                          setState(() {
+                            _currentContent = Dashboard();
+                          });
+                          Navigator.pop(context);
+                        }),
                   ]),
             ),
             appBar: PreferredSize(
