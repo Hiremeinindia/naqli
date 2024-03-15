@@ -4,15 +4,17 @@ import 'package:easy_sidemenu/easy_sidemenu.dart';
 
 import 'package:sizer/sizer.dart';
 
-class bookinghistory extends StatefulWidget {
-  const bookinghistory({Key? key}) : super(key: key);
+class BookingHistory extends StatefulWidget {
+  const BookingHistory({Key? key}) : super(key: key);
   @override
-  _bookinghistoryState createState() => _bookinghistoryState();
+  _BookingHistoryState createState() => _BookingHistoryState();
 }
 
-class _bookinghistoryState extends State<bookinghistory> {
+class _BookingHistoryState extends State<BookingHistory> {
   PageController page = PageController();
   SideMenuController sideMenu = SideMenuController();
+  ScrollController _scrollController = ScrollController();
+
   bool value = false;
   String month = '';
   bool checkbox1 = false;
@@ -55,7 +57,7 @@ class _bookinghistoryState extends State<bookinghistory> {
     return Sizer(builder: (context, orientation, deviceType) {
       return LayoutBuilder(
           builder: (BuildContext ctx, BoxConstraints constraints) {
-        if (constraints.maxWidth >= 1330) {
+        if (constraints.maxWidth >= 1380) {
           return Scaffold(
             appBar: PreferredSize(
               preferredSize: Size.fromHeight(75),
@@ -622,24 +624,25 @@ class _bookinghistoryState extends State<bookinghistory> {
                     ),
                     SizedBox(height: 10),
                     Container(
-                      // width: double.infinity, // Set width to match screen width
+                      //width:300; // Set width to match screen width
                       decoration: BoxDecoration(
                         border: Border.all(width: 0.5),
                         borderRadius: BorderRadius.circular(5),
-                        // boxShadow: [
-                        //   BoxShadow(
-                        //     color: Color.fromRGBO(199, 199, 199, 1)
-                        //         .withOpacity(0.5),
-                        //     blurRadius: 10,
-                        //     spreadRadius: 4,
-                        //     offset: Offset(0, 0.5), // Bottom side shadow
-                        //   ),
-                        // ],
+                        boxShadow: [
+                          BoxShadow(
+                            color: Color.fromRGBO(199, 199, 199, 1)
+                                .withOpacity(0.5),
+                            blurRadius: 1,
+                            spreadRadius: 2,
+                            offset: Offset(0, 0.5), // Bottom side shadow
+                          ),
+                        ],
                       ),
-                      child: SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: SizedBox(
-                          width: 500,
+                      child: Scrollbar(
+                        controller: _scrollController,
+                        child: SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          controller: _scrollController,
                           child: DataTable(
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.only(
@@ -717,16 +720,14 @@ class _bookinghistoryState extends State<bookinghistory> {
                                     'Xxx SAR'
                                   ])
                                     DataCell(
-                                      Flexible(
-                                        child: Container(
-                                          height: 65, // Adjust height as needed
-                                          alignment: Alignment.center,
-                                          child: Text(item,
-                                              style: TextStyle(
-                                                  fontSize: 12,
-                                                  fontFamily:
-                                                      'SFproText-Regular')),
-                                        ),
+                                      Container(
+                                        height: 65, // Adjust height as needed
+                                        alignment: Alignment.center,
+                                        child: Text(item,
+                                            style: TextStyle(
+                                                fontSize: 12,
+                                                fontFamily:
+                                                    'SFproText-Regular')),
                                       ),
                                     ),
                                 ],
@@ -741,16 +742,14 @@ class _bookinghistoryState extends State<bookinghistory> {
                                     'Xxx SAR'
                                   ])
                                     DataCell(
-                                      Flexible(
-                                        child: Container(
-                                          height: 65, // Adjust height as needed
-                                          alignment: Alignment.center,
-                                          child: Text(item,
-                                              style: TextStyle(
-                                                  fontSize: 12,
-                                                  fontFamily:
-                                                      'SFproText-Regular')),
-                                        ),
+                                      Container(
+                                        height: 65, // Adjust height as needed
+                                        alignment: Alignment.center,
+                                        child: Text(item,
+                                            style: TextStyle(
+                                                fontSize: 12,
+                                                fontFamily:
+                                                    'SFproText-Regular')),
                                       ),
                                     ),
                                 ],
@@ -765,17 +764,14 @@ class _bookinghistoryState extends State<bookinghistory> {
                                     'Xxx SAR'
                                   ])
                                     DataCell(
-                                      Flexible(
-                                        child: Container(
-                                          height: 65, // Adjust height as needed
-                                          alignment: Alignment.center,
-                                          child: Text(
-                                            item,
-                                            style: TextStyle(
-                                                fontSize: 12,
-                                                fontFamily:
-                                                    'SFproText-Regular'),
-                                          ),
+                                      Container(
+                                        height: 65, // Adjust height as needed
+                                        alignment: Alignment.center,
+                                        child: Text(
+                                          item,
+                                          style: TextStyle(
+                                              fontSize: 12,
+                                              fontFamily: 'SFproText-Regular'),
                                         ),
                                       ),
                                     ),
