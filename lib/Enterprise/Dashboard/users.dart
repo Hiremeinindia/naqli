@@ -24,6 +24,7 @@ class _UsersState extends State<Users> {
   bool checkbox2 = false;
   bool checkbox3 = false;
   List<String> dropdownValues = ['None'];
+  final ScrollController _Scroll = ScrollController();
 
   @override
   void initState() {
@@ -340,40 +341,50 @@ class _UsersState extends State<Users> {
                               SizedBox(
                                 height: 25,
                               ),
-                              Container(
-                                width: 1120,
-                                decoration: BoxDecoration(
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Color.fromRGBO(158, 157, 157, 1)
-                                          .withOpacity(0.5),
-                                      offset: Offset(0, 0),
-                                      spreadRadius: 2.0,
-                                      blurRadius:
-                                          2, // changes position of shadow
+                              Scrollbar(
+                                controller: _Scroll,
+                                thumbVisibility:
+                                    true, // Set to true to always show the scrollbar
+                                child: SingleChildScrollView(
+                                  scrollDirection: Axis.horizontal,
+                                  controller: _Scroll,
+                                  child: Container(
+                                    width: 1120,
+                                    decoration: BoxDecoration(
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color:
+                                              Color.fromRGBO(158, 157, 157, 1)
+                                                  .withOpacity(0.5),
+                                          offset: Offset(0, 0),
+                                          spreadRadius: 2.0,
+                                          blurRadius:
+                                              2, // changes position of shadow
+                                        ),
+                                        BoxShadow(
+                                          color: Colors.white,
+                                          offset: Offset(0, -1),
+                                          spreadRadius: 0,
+                                          blurRadius:
+                                              0, // changes position of shadow
+                                        ),
+                                      ],
+                                      border: Border.all(
+                                        color: Color.fromRGBO(112, 112, 112, 1)
+                                            .withOpacity(0.5),
+                                      ),
+                                      borderRadius: BorderRadius.only(
+                                          topLeft: Radius.circular(0),
+                                          topRight: Radius.circular(0),
+                                          bottomLeft: Radius.circular(0),
+                                          bottomRight: Radius.circular(0)),
                                     ),
-                                    BoxShadow(
-                                      color: Colors.white,
-                                      offset: Offset(0, -1),
-                                      spreadRadius: 0,
-                                      blurRadius:
-                                          0, // changes position of shadow
+                                    child: SizedBox(
+                                      height: 350,
+                                      child: ListView(
+                                        children: [_booking1Table()],
+                                      ),
                                     ),
-                                  ],
-                                  border: Border.all(
-                                    color: Color.fromRGBO(112, 112, 112, 1)
-                                        .withOpacity(0.5),
-                                  ),
-                                  borderRadius: BorderRadius.only(
-                                      topLeft: Radius.circular(0),
-                                      topRight: Radius.circular(0),
-                                      bottomLeft: Radius.circular(0),
-                                      bottomRight: Radius.circular(0)),
-                                ),
-                                child: SizedBox(
-                                  height: 350,
-                                  child: ListView(
-                                    children: [_booking1Table()],
                                   ),
                                 ),
                               )
@@ -459,7 +470,7 @@ class _UsersState extends State<Users> {
                                             ),
                                             child: Container(
                                               padding: EdgeInsets.fromLTRB(
-                                                  8.w, 15.h, 8.w, 15.h),
+                                                  8.w, 8.h, 8.w, 8.h),
                                               decoration: BoxDecoration(
                                                 borderRadius:
                                                     BorderRadius.circular(22.0),
@@ -471,23 +482,15 @@ class _UsersState extends State<Users> {
                                                   Row(
                                                     children: [
                                                       SizedBox(
-                                                          width: 120,
-                                                          child: Text('Name')),
+                                                          width: 9.w,
+                                                          child: Text('Name',
+                                                              style: TabelText
+                                                                  .helvetica)),
                                                       Expanded(
                                                           child:
                                                               CustomTextfield(
                                                         text: 'Enter name',
                                                       )),
-                                                      SizedBox(
-                                                        width: 2.w,
-                                                      ),
-                                                      SizedBox(
-                                                          width: 120,
-                                                          child: Text(
-                                                              'User Photo')),
-                                                      Expanded(
-                                                          child:
-                                                              CustomTextfield()),
                                                     ],
                                                   ),
                                                   SizedBox(
@@ -496,9 +499,11 @@ class _UsersState extends State<Users> {
                                                   Row(
                                                     children: [
                                                       SizedBox(
-                                                          width: 120,
-                                                          child:
-                                                              Text('Email ID')),
+                                                          width: 9.w,
+                                                          child: Text(
+                                                              'Email ID',
+                                                              style: TabelText
+                                                                  .helvetica)),
                                                       Expanded(
                                                           child:
                                                               CustomTextfield(
@@ -513,21 +518,10 @@ class _UsersState extends State<Users> {
                                                   Row(
                                                     children: [
                                                       SizedBox(
-                                                          width: 120,
-                                                          child: Text(
-                                                              'Mobile No')),
-                                                      Expanded(
-                                                          child:
-                                                              CustomTextfield(
-                                                        text: 'Enter mobile no',
-                                                      )),
-                                                      SizedBox(
-                                                        width: 5.w,
-                                                      ),
-                                                      SizedBox(
-                                                          width: 120,
-                                                          child:
-                                                              Text('Address')),
+                                                          width: 9.w,
+                                                          child: Text('Address',
+                                                              style: TabelText
+                                                                  .helvetica)),
                                                       Expanded(
                                                           child:
                                                               CustomTextfield(
@@ -541,146 +535,76 @@ class _UsersState extends State<Users> {
                                                   Row(
                                                     children: [
                                                       SizedBox(
-                                                          width: 120,
+                                                          width: 9.w,
                                                           child: Text(
-                                                              'Access to')),
-                                                      // Expanded(
-                                                      //   child:
-                                                      //       DropdownButtonHideUnderline(
-                                                      //     child:
-                                                      //         DropdownButton2<
-                                                      //             String>(
-                                                      //       value:
-                                                      //           access, // Provide a default value if it's empty
-                                                      //       items: <String>[
-                                                      //         'Trigger Bookings',
-                                                      //         'Booking Manager',
-                                                      //         'Contract',
-                                                      //         'None'
-                                                      //       ].map<
-                                                      //           DropdownMenuItem<
-                                                      //               String>>((String
-                                                      //           value) {
-                                                      //         return DropdownMenuItem<
-                                                      //             String>(
-                                                      //           value: value,
-                                                      //           child: Text(
-                                                      //               value,
-                                                      //               style: TextStyle(
-                                                      //                   fontFamily:
-                                                      //                       'Poppins',
-                                                      //                   fontSize:
-                                                      //                       12)),
-                                                      //         );
-                                                      //       }).toList(),
-                                                      //       onChanged: (String?
-                                                      //           newValue) {
-                                                      //         setState(() {
-                                                      //           // Step 2: Update controller when dropdown value changes
-                                                      //           access =
-                                                      //               newValue!;
-                                                      //         });
-                                                      //       },
-                                                      //       buttonStyleData:
-                                                      //           ButtonStyleData(
-                                                      //         height: 45,
-                                                      //         width: 30.w,
-                                                      //         padding: EdgeInsets
-                                                      //             .only(
-                                                      //                 left: 14,
-                                                      //                 right:
-                                                      //                     14),
-                                                      //         decoration:
-                                                      //             BoxDecoration(
-                                                      //           border: Border.all(
-                                                      //               color: Colors
-                                                      //                   .grey
-                                                      //                   .shade500),
-                                                      //           borderRadius: BorderRadius
-                                                      //               .all(Radius
-                                                      //                   .circular(
-                                                      //                       5)),
-                                                      //           color: Colors
-                                                      //               .white,
-                                                      //         ),
-                                                      //       ),
-                                                      //       iconStyleData:
-                                                      //           const IconStyleData(
-                                                      //         icon: Icon(
-                                                      //           Icons
-                                                      //               .arrow_drop_down_sharp,
-                                                      //         ),
-                                                      //         iconSize: 25,
-                                                      //         iconEnabledColor:
-                                                      //             Colors.black,
-                                                      //         iconDisabledColor:
-                                                      //             null,
-                                                      //       ),
-                                                      //       dropdownStyleData:
-                                                      //           DropdownStyleData(
-                                                      //         elevation: 0,
-                                                      //         maxHeight: 200,
-                                                      //         padding: EdgeInsets
-                                                      //             .only(
-                                                      //                 left: 5,
-                                                      //                 right: 5,
-                                                      //                 top: 5,
-                                                      //                 bottom:
-                                                      //                     5),
-                                                      //         decoration:
-                                                      //             BoxDecoration(
-                                                      //           border: Border.all(
-                                                      //               color: Colors
-                                                      //                   .grey
-                                                      //                   .shade500),
-                                                      //           borderRadius:
-                                                      //               BorderRadius
-                                                      //                   .only(
-                                                      //             topLeft: Radius
-                                                      //                 .circular(
-                                                      //                     0),
-                                                      //             topRight: Radius
-                                                      //                 .circular(
-                                                      //                     0),
-                                                      //             bottomLeft: Radius
-                                                      //                 .circular(
-                                                      //                     5),
-                                                      //             bottomRight: Radius
-                                                      //                 .circular(
-                                                      //                     5),
-                                                      //           ),
-                                                      //           color: Colors
-                                                      //               .white,
-                                                      //         ),
-                                                      //         scrollPadding:
-                                                      //             EdgeInsets
-                                                      //                 .all(5),
-                                                      //         scrollbarTheme:
-                                                      //             ScrollbarThemeData(
-                                                      //           thickness:
-                                                      //               MaterialStateProperty
-                                                      //                   .all<double>(
-                                                      //                       6),
-                                                      //           thumbVisibility:
-                                                      //               MaterialStateProperty
-                                                      //                   .all<bool>(
-                                                      //                       true),
-                                                      //         ),
-                                                      //       ),
-                                                      //       menuItemStyleData:
-                                                      //           MenuItemStyleData(
-                                                      //         height: 30,
-                                                      //         padding: EdgeInsets
-                                                      //             .only(
-                                                      //                 left: 14,
-                                                      //                 right:
-                                                      //                     14),
-                                                      //       ),
-                                                      //     ),
-                                                      //   ),
-                                                      // ),
+                                                              'Mobile No',
+                                                              style: TabelText
+                                                                  .helvetica)),
                                                       Expanded(
-                                                          child: SizedBox()),
+                                                          child:
+                                                              CustomTextfield(
+                                                        text: 'Enter mobile no',
+                                                      )),
+                                                      SizedBox(
+                                                        width: 2.w,
+                                                      ),
+                                                      SizedBox(
+                                                          width: 9.w,
+                                                          child: Text(
+                                                              'User Photo',
+                                                              style: TabelText
+                                                                  .helvetica)),
+                                                      Expanded(
+                                                          child:
+                                                              CustomTextfield()),
+                                                    ],
+                                                  ),
+                                                  SizedBox(
+                                                    height: 25,
+                                                  ),
+                                                  Row(
+                                                    children: [
+                                                      SizedBox(
+                                                          width: 9.w,
+                                                          child: Text(
+                                                              'Access to',
+                                                              style: TabelText
+                                                                  .helvetica)),
+                                                      Row(
+                                                        children: [
+                                                          for (int i = 0;
+                                                              i <
+                                                                  dropdownValues
+                                                                      .length;
+                                                              i++)
+                                                            _buildDropdown(i),
+                                                        ],
+                                                      ),
+                                                      Column(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .start,
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          IconButton(
+                                                              onPressed: () {
+                                                                setState(() {
+                                                                  dropdownValues
+                                                                      .add(
+                                                                          'None'); // Add a new dropdown value
+                                                                });
+                                                              },
+                                                              icon: Icon(Icons
+                                                                  .add_circle_outline_sharp)),
+                                                          Text(
+                                                            'Add Access',
+                                                            style: TabelText
+                                                                .helvetica,
+                                                          )
+                                                        ],
+                                                      ),
                                                       Expanded(
                                                           child: SizedBox()),
                                                     ],
@@ -739,44 +663,61 @@ class _UsersState extends State<Users> {
                                           SizedBox(
                                             height: 25,
                                           ),
-                                          Container(
-                                            width: 1120,
-                                            decoration: BoxDecoration(
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  color: Color.fromRGBO(
-                                                          158, 157, 157, 1)
-                                                      .withOpacity(0.5),
-                                                  offset: Offset(0, 0),
-                                                  spreadRadius: 2.0,
-                                                  blurRadius:
-                                                      2, // changes position of shadow
+                                          Scrollbar(
+                                            controller: _Scroll,
+                                            thumbVisibility:
+                                                true, // Set to true to always show the scrollbar
+                                            child: SingleChildScrollView(
+                                              scrollDirection: Axis.horizontal,
+                                              controller: _Scroll,
+                                              child: Container(
+                                                width: 1120,
+                                                decoration: BoxDecoration(
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                      color: Color.fromRGBO(
+                                                              158, 157, 157, 1)
+                                                          .withOpacity(0.5),
+                                                      offset: Offset(0, 0),
+                                                      spreadRadius: 2.0,
+                                                      blurRadius:
+                                                          2, // changes position of shadow
+                                                    ),
+                                                    BoxShadow(
+                                                      color: Colors.white,
+                                                      offset: Offset(0, -1),
+                                                      spreadRadius: 0,
+                                                      blurRadius:
+                                                          0, // changes position of shadow
+                                                    ),
+                                                  ],
+                                                  border: Border.all(
+                                                    color: Color.fromRGBO(
+                                                            112, 112, 112, 1)
+                                                        .withOpacity(0.5),
+                                                  ),
+                                                  borderRadius:
+                                                      BorderRadius.only(
+                                                          topLeft: Radius
+                                                              .circular(0),
+                                                          topRight:
+                                                              Radius.circular(
+                                                                  0),
+                                                          bottomLeft:
+                                                              Radius.circular(
+                                                                  0),
+                                                          bottomRight:
+                                                              Radius.circular(
+                                                                  0)),
                                                 ),
-                                                BoxShadow(
-                                                  color: Colors.white,
-                                                  offset: Offset(0, -1),
-                                                  spreadRadius: 0,
-                                                  blurRadius:
-                                                      0, // changes position of shadow
+                                                child: SizedBox(
+                                                  height: 350,
+                                                  child: ListView(
+                                                    children: [
+                                                      _booking1Table()
+                                                    ],
+                                                  ),
                                                 ),
-                                              ],
-                                              border: Border.all(
-                                                color: Color.fromRGBO(
-                                                        112, 112, 112, 1)
-                                                    .withOpacity(0.5),
-                                              ),
-                                              borderRadius: BorderRadius.only(
-                                                  topLeft: Radius.circular(0),
-                                                  topRight: Radius.circular(0),
-                                                  bottomLeft:
-                                                      Radius.circular(0),
-                                                  bottomRight:
-                                                      Radius.circular(0)),
-                                            ),
-                                            child: SizedBox(
-                                              height: 350,
-                                              child: ListView(
-                                                children: [_booking1Table()],
                                               ),
                                             ),
                                           )

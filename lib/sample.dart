@@ -1,6 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:easy_sidemenu/easy_sidemenu.dart';
+import 'package:flutter/material.dart';
 
 import 'package:sizer/sizer.dart';
 
@@ -30,29 +29,6 @@ class _BookingHistoryState extends State<BookingHistory> {
   String? selectedValue;
 
   @override
-  void initState() {
-    sideMenu.addListener((p0) {
-      page.jumpToPage(p0);
-    });
-    super.initState();
-  }
-
-  void enablePayNowButton() {
-    setState(() {
-      payNowButtonEnabled = true;
-    });
-  }
-
-  void disablePayNowButton() {
-    setState(() {
-      payNowButtonEnabled = false;
-    });
-  }
-
-  bool isAnyCheckboxSelected() {
-    return checkbox1 || checkbox2 || checkbox3;
-  }
-
   Widget build(BuildContext context) {
     return Sizer(builder: (context, orientation, deviceType) {
       return LayoutBuilder(
