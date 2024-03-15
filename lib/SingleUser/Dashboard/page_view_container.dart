@@ -3,7 +3,7 @@ import 'bookings.dart';
 import 'dashboard.dart';
 import 'page_view_container.dart';
 import 'payments.dart';
-import 'trigger_booking.dart';
+import 'bookingHistory.dart';
 
 // Class for handling PageView
 class PageViewContainer extends StatefulWidget {
@@ -32,9 +32,8 @@ class _PageViewContainerState extends State<PageViewContainer> {
       controller: pageElse,
       children: [
         Dashboard(),
-        TriggerBooking(),
-        Bookings(),
-        Payments(),
+        BookingHistory(),
+        SingleUserPayment(),
         Container(
           color: Colors.pink,
         ),

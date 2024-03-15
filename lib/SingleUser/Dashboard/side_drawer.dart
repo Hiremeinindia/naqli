@@ -6,7 +6,7 @@ import 'package:sizer/sizer.dart';
 import 'bookings.dart';
 import 'dashboard.dart';
 import 'payments.dart';
-import 'trigger_booking.dart';
+import 'bookingHistory.dart';
 
 class SideDrawer extends StatefulWidget {
   SideDrawer(this.pageElse);

@@ -217,7 +217,7 @@ class _EnterpriseLoginPageState extends State<EnterpriseLoginPage> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => EnterpriseMyHomePage(),
+                            builder: (context) => EnterMyHomePage(),
                           ),
                         );
                         setState(() {
@@ -391,7 +391,7 @@ class _EnterpriseLoginPageState extends State<EnterpriseLoginPage> {
                                           showDialog(
                                             context: context,
                                             builder: (context) {
-                                              return EnterpriseMyHomePage();
+                                              return EnterMyHomePage();
                                             },
                                           );
                                         },
@@ -511,7 +511,7 @@ class _EnterpriseLoginPageState extends State<EnterpriseLoginPage> {
                                           context,
                                           MaterialPageRoute(
                                             builder: (context) =>
-                                                EnterpriseMyHomePage(),
+                                                EnterMyHomePage(),
                                           ),
                                         );
                                       }
@@ -644,7 +644,7 @@ class _EnterpriseLoginPageState extends State<EnterpriseLoginPage> {
                                       showDialog(
                                         context: context,
                                         builder: (context) {
-                                          return EnterpriseMyHomePage();
+                                          return EnterMyHomePage();
                                         },
                                       );
                                     },
@@ -748,8 +748,7 @@ class _EnterpriseLoginPageState extends State<EnterpriseLoginPage> {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) =>
-                                            EnterpriseMyHomePage(),
+                                        builder: (context) => EnterMyHomePage(),
                                       ),
                                     );
                                   }

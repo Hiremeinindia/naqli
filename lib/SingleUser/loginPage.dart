@@ -217,7 +217,7 @@ class _SingleuserLoginPageState extends State<SingleuserLoginPage> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => SingleuserMyHomePage(),
+                            builder: (context) => SingleUserMyHomePage(),
                           ),
                         );
                         setState(() {
@@ -391,7 +391,7 @@ class _SingleuserLoginPageState extends State<SingleuserLoginPage> {
                                           showDialog(
                                             context: context,
                                             builder: (context) {
-                                              return SingleuserMyHomePage();
+                                              return SingleUserMyHomePage();
                                             },
                                           );
                                         },
@@ -511,7 +511,7 @@ class _SingleuserLoginPageState extends State<SingleuserLoginPage> {
                                           context,
                                           MaterialPageRoute(
                                             builder: (context) =>
-                                                SingleuserMyHomePage(),
+                                                SingleUserMyHomePage(),
                                           ),
                                         );
                                       }
@@ -644,7 +644,7 @@ class _SingleuserLoginPageState extends State<SingleuserLoginPage> {
                                       showDialog(
                                         context: context,
                                         builder: (context) {
-                                          return SingleuserMyHomePage();
+                                          return SingleUserMyHomePage();
                                         },
                                       );
                                     },
@@ -749,7 +749,7 @@ class _SingleuserLoginPageState extends State<SingleuserLoginPage> {
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) =>
-                                            SingleuserMyHomePage(),
+                                            SingleUserMyHomePage(),
                                       ),
                                     );
                                   }
