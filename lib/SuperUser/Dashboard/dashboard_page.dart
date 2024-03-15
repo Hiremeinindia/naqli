@@ -379,7 +379,7 @@ class _MyHomePageState extends State<DashboardPage> {
                               child: SideMenu(
                                 controller: sideMenu,
                                 style: SideMenuStyle(
-                                  displayMode: SideMenuDisplayMode.auto,
+                                  // displayMode: SideMenuDisplayMode.auto,
                                   selectedColor:
                                       Color.fromRGBO(98, 105, 254, 1),
                                   unselectedTitleTextStyle: const TextStyle(
