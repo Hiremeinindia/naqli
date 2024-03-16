@@ -4,8 +4,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_application_1/Widgets/customButton.dart';
 import 'package:flutter_application_1/Widgets/formText.dart';
 import 'package:flutter_application_1/bookingSuccessful.dart';
-import 'package:flutter_application_1/SuperUser/homepage.dart';
-import 'package:flutter_application_1/SuperUser/loginPage.dart';
 import 'package:sizer/sizer.dart';
 
 class BookingDialog extends StatefulWidget {

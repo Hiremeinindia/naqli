@@ -1,11 +1,13 @@
 // ignore_for_file: dead_code
 
 import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_application_1/SingleUser/loginPage.dart';
+import 'package:flutter_application_1/Widgets/customButton.dart';
+import 'package:flutter_application_1/Widgets/customTextField.dart';
 import 'package:flutter_application_1/classes/language.dart';
 import 'package:flutter_application_1/classes/language_constants.dart';
 import 'package:sizer/sizer.dart';
@@ -25,6 +27,7 @@ class AvailableUnits extends StatefulWidget {
 class _AvailableUnitsState extends State<AvailableUnits> {
   String _selectedValue = '1';
   String categoryValue = '1';
+  String dropdownValues = 'None';
   void initState() {
     super.initState();
   }
@@ -39,7 +42,6 @@ class _AvailableUnitsState extends State<AvailableUnits> {
               appBar: PreferredSize(
                 preferredSize: Size.fromHeight(75),
                 child: Material(
-                  elevation: 3,
                   child: Padding(
                     padding: EdgeInsets.fromLTRB(5.w, 0, 2.5.w, 0),
                     child: Row(
@@ -59,7 +61,7 @@ class _AvailableUnitsState extends State<AvailableUnits> {
                                 style: TextStyle(
                                   fontSize: 20,
                                   fontFamily: "HelveticaNeue",
-                                  color: Color.fromRGBO(112, 112, 112, 1),
+                                  color: Color.fromRGBO(183, 183, 183, 1),
                                 ),
                               ),
                             ),
@@ -279,399 +281,1370 @@ class _AvailableUnitsState extends State<AvailableUnits> {
                             ],
                           ),
                           Positioned(
-                            left: 15.w,
-                            right: 15.w,
+                            left: 20.w,
+                            right: 20.w,
                             top: 80,
-                            child: Expanded(
-                              child: Container(
-                                padding:
-                                    EdgeInsets.fromLTRB(2.w, 5.h, 2.w, 5.h),
-                                decoration: const BoxDecoration(
-                                    color: Colors.white,
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.grey,
-                                        spreadRadius: 1,
-                                        blurRadius:
-                                            2, // changes position of shadow
-                                      ),
-                                    ],
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(25))),
-                                height: 740,
-                                child: Row(
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(right: 15),
+                            child: Container(
+                              padding: EdgeInsets.fromLTRB(2.w, 6.h, 2.w, 6.h),
+                              decoration: const BoxDecoration(
+                                  color: Colors.white,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey,
+                                      spreadRadius: 1,
+                                      blurRadius:
+                                          2, // changes position of shadow
+                                    ),
+                                  ],
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(25))),
+                              height: 740,
+                              child: Row(
+                                children: [
+                                  Expanded(
+                                    child: Padding(
+                                      padding:
+                                          EdgeInsets.fromLTRB(0, 0, 1.5.w, 0),
                                       child: Column(
                                         children: [
-                                          Container(
-                                            height: 100,
-                                            decoration: BoxDecoration(
-                                                border: Border.all(
-                                                  color: Colors.black,
-                                                ),
-                                                color: Colors.white,
-                                                borderRadius: BorderRadius.all(
-                                                  Radius.circular(8),
-                                                )),
-                                            child: Row(
-                                              children: [
-                                                Image.asset(
-                                                  'delivery-truck.png',
-                                                  width: 150,
-                                                  height: 150,
-                                                ),
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          top: 15,
-                                                          bottom: 15,
-                                                          right: 60),
-                                                  child: Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
+                                          Row(
+                                            children: [
+                                              Expanded(
+                                                child: Container(
+                                                  padding: EdgeInsets.fromLTRB(
+                                                      0.5.w, 0, 1.w, 0),
+                                                  height: 50,
+                                                  decoration: BoxDecoration(
+                                                    border: Border.all(
+                                                        color: Color.fromRGBO(
+                                                            183, 183, 183, 1)),
+                                                    color: Colors.white,
+                                                    borderRadius:
+                                                        BorderRadius.only(
+                                                      topLeft:
+                                                          Radius.circular(8),
+                                                      topRight:
+                                                          Radius.circular(0),
+                                                      bottomLeft:
+                                                          Radius.circular(8),
+                                                      bottomRight:
+                                                          Radius.circular(0),
+                                                    ),
+                                                  ),
+                                                  child: Row(
                                                     children: [
-                                                      Text(
-                                                        'Vehicle 1',
-                                                        style: TextStyle(
-                                                            fontFamily:
-                                                                'Colfax',
-                                                            fontSize: 17,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .bold),
+                                                      Image.asset(
+                                                        'delivery-truck.png',
+                                                        width: 50,
+                                                        height: 50,
                                                       ),
-                                                      Text(
-                                                        'Upto 500 kg / Goods for small Parcels',
-                                                        style: TextStyle(
-                                                            color: Colors.black,
-                                                            fontFamily:
-                                                                'Colfax',
-                                                            fontSize: 14),
-                                                      ),
-                                                      Text(
-                                                        'Starting from XXX',
-                                                        style: TextStyle(
-                                                          color: Colors.black,
-                                                          fontFamily: 'Colfax',
-                                                          fontSize: 14,
-                                                        ),
-                                                      ),
+                                                      Text('Tralia')
                                                     ],
                                                   ),
-                                                )
-                                              ],
-                                            ),
+                                                ),
+                                              ),
+                                              DropdownButtonHideUnderline(
+                                                child: DropdownButton2<String>(
+                                                  value:
+                                                      dropdownValues, // Use value from the list
+                                                  items: <String>[
+                                                    'Trigger Bookings',
+                                                    'Booking Manager',
+                                                    'Contract',
+                                                    'None'
+                                                  ].map<
+                                                          DropdownMenuItem<
+                                                              String>>(
+                                                      (String value) {
+                                                    return DropdownMenuItem<
+                                                        String>(
+                                                      value: value,
+                                                      child: Text(
+                                                        value,
+                                                        style: TextStyle(
+                                                            fontSize: 12,
+                                                            fontFamily:
+                                                                'SegoeItalic',
+                                                            color:
+                                                                Colors.black),
+                                                      ),
+                                                    );
+                                                  }).toList(),
+                                                  onChanged:
+                                                      (String? newValue) {
+                                                    setState(() {
+                                                      dropdownValues =
+                                                          newValue!; // Update value in the list
+                                                    });
+                                                  },
+                                                  buttonStyleData:
+                                                      ButtonStyleData(
+                                                    height: 50,
+                                                    width: 15.w,
+                                                    padding: EdgeInsets.only(
+                                                        left: 9, right: 9),
+                                                    decoration: BoxDecoration(
+                                                      border: Border(
+                                                        bottom: BorderSide(
+                                                            color:
+                                                                Color.fromRGBO(
+                                                                    183,
+                                                                    183,
+                                                                    183,
+                                                                    1)),
+                                                        right: BorderSide(
+                                                            color:
+                                                                Color.fromRGBO(
+                                                                    183,
+                                                                    183,
+                                                                    183,
+                                                                    1)),
+                                                        top: BorderSide(
+                                                            color:
+                                                                Color.fromRGBO(
+                                                                    183,
+                                                                    183,
+                                                                    183,
+                                                                    1)),
+                                                      ),
+                                                      borderRadius:
+                                                          BorderRadius.only(
+                                                        topLeft:
+                                                            Radius.circular(0),
+                                                        topRight:
+                                                            Radius.circular(8),
+                                                        bottomLeft:
+                                                            Radius.circular(0),
+                                                        bottomRight:
+                                                            Radius.circular(8),
+                                                      ),
+                                                      color: Colors.white,
+                                                    ),
+                                                  ),
+                                                  iconStyleData:
+                                                      const IconStyleData(
+                                                    icon: Icon(
+                                                      Icons
+                                                          .arrow_drop_down_sharp,
+                                                    ),
+                                                    iconSize: 25,
+                                                    iconEnabledColor:
+                                                        Colors.black,
+                                                    iconDisabledColor: null,
+                                                  ),
+                                                  dropdownStyleData:
+                                                      DropdownStyleData(
+                                                    elevation: 0,
+                                                    maxHeight: 200,
+                                                    padding: EdgeInsets.all(3),
+                                                    decoration: BoxDecoration(
+                                                      border: Border.all(
+                                                          color: Color.fromRGBO(
+                                                              112,
+                                                              112,
+                                                              112,
+                                                              1)),
+                                                      borderRadius:
+                                                          BorderRadius.only(
+                                                        topLeft:
+                                                            Radius.circular(0),
+                                                        topRight:
+                                                            Radius.circular(0),
+                                                        bottomLeft:
+                                                            Radius.circular(5),
+                                                        bottomRight:
+                                                            Radius.circular(5),
+                                                      ),
+                                                      color: Colors.white,
+                                                    ),
+                                                    scrollPadding:
+                                                        EdgeInsets.all(5),
+                                                    scrollbarTheme:
+                                                        ScrollbarThemeData(
+                                                      thickness:
+                                                          MaterialStateProperty
+                                                              .all<double>(6),
+                                                      thumbVisibility:
+                                                          MaterialStateProperty
+                                                              .all<bool>(true),
+                                                    ),
+                                                  ),
+                                                  menuItemStyleData:
+                                                      MenuItemStyleData(
+                                                    height: 30,
+                                                    padding: EdgeInsets.only(
+                                                        left: 9, right: 9),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
                                           ),
                                           SizedBox(
-                                            height: 20,
+                                            height: 10,
                                           ),
-                                          Container(
-                                            height: 100,
-                                            decoration: BoxDecoration(
-                                                border: Border.all(
-                                                  color: Colors.black,
-                                                ),
-                                                color: Colors.white,
-                                                borderRadius: BorderRadius.all(
-                                                  Radius.circular(8),
-                                                )),
-                                            child: Row(
-                                              children: [
-                                                Image.asset(
-                                                  'delivery-truck.png',
-                                                  width: 150,
-                                                  height: 150,
-                                                ),
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          top: 15,
-                                                          bottom: 15,
-                                                          right: 60),
-                                                  child: Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
+                                          Row(
+                                            children: [
+                                              Expanded(
+                                                child: Container(
+                                                  padding: EdgeInsets.fromLTRB(
+                                                      0.5.w, 0, 1.w, 0),
+                                                  height: 50,
+                                                  decoration: BoxDecoration(
+                                                    border: Border.all(
+                                                        color: Color.fromRGBO(
+                                                            183, 183, 183, 1)),
+                                                    color: Colors.white,
+                                                    borderRadius:
+                                                        BorderRadius.only(
+                                                      topLeft:
+                                                          Radius.circular(8),
+                                                      topRight:
+                                                          Radius.circular(0),
+                                                      bottomLeft:
+                                                          Radius.circular(8),
+                                                      bottomRight:
+                                                          Radius.circular(0),
+                                                    ),
+                                                  ),
+                                                  child: Row(
                                                     children: [
-                                                      Text(
-                                                        'Vehicle 2',
-                                                        style: TextStyle(
-                                                            fontFamily:
-                                                                'Colfax',
-                                                            fontSize: 17,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .bold),
+                                                      Image.asset(
+                                                        'delivery-truck.png',
+                                                        width: 50,
+                                                        height: 50,
                                                       ),
-                                                      Text(
-                                                        'Upto 500 kg / Goods for small Parcels',
-                                                        style: TextStyle(
-                                                            color: Colors.black,
-                                                            fontFamily:
-                                                                'Colfax',
-                                                            fontSize: 14),
-                                                      ),
-                                                      Text(
-                                                        'Starting from XXX',
-                                                        style: TextStyle(
-                                                          color: Colors.black,
-                                                          fontFamily: 'Colfax',
-                                                          fontSize: 14,
-                                                        ),
-                                                      ),
+                                                      Text('Tralia')
                                                     ],
                                                   ),
-                                                )
-                                              ],
-                                            ),
+                                                ),
+                                              ),
+                                              DropdownButtonHideUnderline(
+                                                child: DropdownButton2<String>(
+                                                  value:
+                                                      dropdownValues, // Use value from the list
+                                                  items: <String>[
+                                                    'Trigger Bookings',
+                                                    'Booking Manager',
+                                                    'Contract',
+                                                    'None'
+                                                  ].map<
+                                                          DropdownMenuItem<
+                                                              String>>(
+                                                      (String value) {
+                                                    return DropdownMenuItem<
+                                                        String>(
+                                                      value: value,
+                                                      child: Text(
+                                                        value,
+                                                        style: TextStyle(
+                                                            fontSize: 12,
+                                                            fontFamily:
+                                                                'SegoeItalic',
+                                                            color:
+                                                                Colors.black),
+                                                      ),
+                                                    );
+                                                  }).toList(),
+                                                  onChanged:
+                                                      (String? newValue) {
+                                                    setState(() {
+                                                      dropdownValues =
+                                                          newValue!; // Update value in the list
+                                                    });
+                                                  },
+                                                  buttonStyleData:
+                                                      ButtonStyleData(
+                                                    height: 50,
+                                                    width: 15.w,
+                                                    padding: EdgeInsets.only(
+                                                        left: 9, right: 9),
+                                                    decoration: BoxDecoration(
+                                                      border: Border(
+                                                        bottom: BorderSide(
+                                                            color:
+                                                                Color.fromRGBO(
+                                                                    183,
+                                                                    183,
+                                                                    183,
+                                                                    1)),
+                                                        right: BorderSide(
+                                                            color:
+                                                                Color.fromRGBO(
+                                                                    183,
+                                                                    183,
+                                                                    183,
+                                                                    1)),
+                                                        top: BorderSide(
+                                                            color:
+                                                                Color.fromRGBO(
+                                                                    183,
+                                                                    183,
+                                                                    183,
+                                                                    1)),
+                                                      ),
+                                                      borderRadius:
+                                                          BorderRadius.only(
+                                                        topLeft:
+                                                            Radius.circular(0),
+                                                        topRight:
+                                                            Radius.circular(8),
+                                                        bottomLeft:
+                                                            Radius.circular(0),
+                                                        bottomRight:
+                                                            Radius.circular(8),
+                                                      ),
+                                                      color: Colors.white,
+                                                    ),
+                                                  ),
+                                                  iconStyleData:
+                                                      const IconStyleData(
+                                                    icon: Icon(
+                                                      Icons
+                                                          .arrow_drop_down_sharp,
+                                                    ),
+                                                    iconSize: 25,
+                                                    iconEnabledColor:
+                                                        Colors.black,
+                                                    iconDisabledColor: null,
+                                                  ),
+                                                  dropdownStyleData:
+                                                      DropdownStyleData(
+                                                    elevation: 0,
+                                                    maxHeight: 200,
+                                                    padding: EdgeInsets.all(3),
+                                                    decoration: BoxDecoration(
+                                                      border: Border.all(
+                                                          color: Color.fromRGBO(
+                                                              112,
+                                                              112,
+                                                              112,
+                                                              1)),
+                                                      borderRadius:
+                                                          BorderRadius.only(
+                                                        topLeft:
+                                                            Radius.circular(0),
+                                                        topRight:
+                                                            Radius.circular(0),
+                                                        bottomLeft:
+                                                            Radius.circular(5),
+                                                        bottomRight:
+                                                            Radius.circular(5),
+                                                      ),
+                                                      color: Colors.white,
+                                                    ),
+                                                    scrollPadding:
+                                                        EdgeInsets.all(5),
+                                                    scrollbarTheme:
+                                                        ScrollbarThemeData(
+                                                      thickness:
+                                                          MaterialStateProperty
+                                                              .all<double>(6),
+                                                      thumbVisibility:
+                                                          MaterialStateProperty
+                                                              .all<bool>(true),
+                                                    ),
+                                                  ),
+                                                  menuItemStyleData:
+                                                      MenuItemStyleData(
+                                                    height: 30,
+                                                    padding: EdgeInsets.only(
+                                                        left: 9, right: 9),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
                                           ),
                                           SizedBox(
-                                            height: 20,
+                                            height: 10,
                                           ),
-                                          Container(
-                                            height: 100,
-                                            decoration: BoxDecoration(
-                                                border: Border.all(
-                                                  color: Colors.black,
-                                                ),
-                                                color: Colors.white,
-                                                borderRadius: BorderRadius.all(
-                                                  Radius.circular(8),
-                                                )),
-                                            child: Row(
-                                              children: [
-                                                Image.asset(
-                                                  'delivery-truck.png',
-                                                  width: 150,
-                                                  height: 150,
-                                                ),
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          top: 15,
-                                                          bottom: 15,
-                                                          right: 60),
-                                                  child: Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
+                                          Row(
+                                            children: [
+                                              Expanded(
+                                                child: Container(
+                                                  padding: EdgeInsets.fromLTRB(
+                                                      0.5.w, 0, 1.w, 0),
+                                                  height: 50,
+                                                  decoration: BoxDecoration(
+                                                    border: Border.all(
+                                                        color: Color.fromRGBO(
+                                                            183, 183, 183, 1)),
+                                                    color: Colors.white,
+                                                    borderRadius:
+                                                        BorderRadius.only(
+                                                      topLeft:
+                                                          Radius.circular(8),
+                                                      topRight:
+                                                          Radius.circular(0),
+                                                      bottomLeft:
+                                                          Radius.circular(8),
+                                                      bottomRight:
+                                                          Radius.circular(0),
+                                                    ),
+                                                  ),
+                                                  child: Row(
                                                     children: [
-                                                      Text(
-                                                        'Vehicle 3',
-                                                        style: TextStyle(
-                                                            fontFamily:
-                                                                'Colfax',
-                                                            fontSize: 17,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .bold),
+                                                      Image.asset(
+                                                        'delivery-truck.png',
+                                                        width: 50,
+                                                        height: 50,
                                                       ),
-                                                      Text(
-                                                        'Upto 500 kg / Goods for small Parcels',
-                                                        style: TextStyle(
-                                                            color: Colors.black,
-                                                            fontFamily:
-                                                                'Colfax',
-                                                            fontSize: 14),
-                                                      ),
-                                                      Text(
-                                                        'Starting from XXX',
-                                                        style: TextStyle(
-                                                          color: Colors.black,
-                                                          fontFamily: 'Colfax',
-                                                          fontSize: 14,
-                                                        ),
-                                                      ),
+                                                      Text('Tralia')
                                                     ],
                                                   ),
-                                                )
-                                              ],
-                                            ),
+                                                ),
+                                              ),
+                                              DropdownButtonHideUnderline(
+                                                child: DropdownButton2<String>(
+                                                  value:
+                                                      dropdownValues, // Use value from the list
+                                                  items: <String>[
+                                                    'Trigger Bookings',
+                                                    'Booking Manager',
+                                                    'Contract',
+                                                    'None'
+                                                  ].map<
+                                                          DropdownMenuItem<
+                                                              String>>(
+                                                      (String value) {
+                                                    return DropdownMenuItem<
+                                                        String>(
+                                                      value: value,
+                                                      child: Text(
+                                                        value,
+                                                        style: TextStyle(
+                                                            fontSize: 12,
+                                                            fontFamily:
+                                                                'SegoeItalic',
+                                                            color:
+                                                                Colors.black),
+                                                      ),
+                                                    );
+                                                  }).toList(),
+                                                  onChanged:
+                                                      (String? newValue) {
+                                                    setState(() {
+                                                      dropdownValues =
+                                                          newValue!; // Update value in the list
+                                                    });
+                                                  },
+                                                  buttonStyleData:
+                                                      ButtonStyleData(
+                                                    height: 50,
+                                                    width: 15.w,
+                                                    padding: EdgeInsets.only(
+                                                        left: 9, right: 9),
+                                                    decoration: BoxDecoration(
+                                                      border: Border(
+                                                        bottom: BorderSide(
+                                                            color:
+                                                                Color.fromRGBO(
+                                                                    183,
+                                                                    183,
+                                                                    183,
+                                                                    1)),
+                                                        right: BorderSide(
+                                                            color:
+                                                                Color.fromRGBO(
+                                                                    183,
+                                                                    183,
+                                                                    183,
+                                                                    1)),
+                                                        top: BorderSide(
+                                                            color:
+                                                                Color.fromRGBO(
+                                                                    183,
+                                                                    183,
+                                                                    183,
+                                                                    1)),
+                                                      ),
+                                                      borderRadius:
+                                                          BorderRadius.only(
+                                                        topLeft:
+                                                            Radius.circular(0),
+                                                        topRight:
+                                                            Radius.circular(8),
+                                                        bottomLeft:
+                                                            Radius.circular(0),
+                                                        bottomRight:
+                                                            Radius.circular(8),
+                                                      ),
+                                                      color: Colors.white,
+                                                    ),
+                                                  ),
+                                                  iconStyleData:
+                                                      const IconStyleData(
+                                                    icon: Icon(
+                                                      Icons
+                                                          .arrow_drop_down_sharp,
+                                                    ),
+                                                    iconSize: 25,
+                                                    iconEnabledColor:
+                                                        Colors.black,
+                                                    iconDisabledColor: null,
+                                                  ),
+                                                  dropdownStyleData:
+                                                      DropdownStyleData(
+                                                    elevation: 0,
+                                                    maxHeight: 200,
+                                                    padding: EdgeInsets.all(3),
+                                                    decoration: BoxDecoration(
+                                                      border: Border.all(
+                                                          color: Color.fromRGBO(
+                                                              112,
+                                                              112,
+                                                              112,
+                                                              1)),
+                                                      borderRadius:
+                                                          BorderRadius.only(
+                                                        topLeft:
+                                                            Radius.circular(0),
+                                                        topRight:
+                                                            Radius.circular(0),
+                                                        bottomLeft:
+                                                            Radius.circular(5),
+                                                        bottomRight:
+                                                            Radius.circular(5),
+                                                      ),
+                                                      color: Colors.white,
+                                                    ),
+                                                    scrollPadding:
+                                                        EdgeInsets.all(5),
+                                                    scrollbarTheme:
+                                                        ScrollbarThemeData(
+                                                      thickness:
+                                                          MaterialStateProperty
+                                                              .all<double>(6),
+                                                      thumbVisibility:
+                                                          MaterialStateProperty
+                                                              .all<bool>(true),
+                                                    ),
+                                                  ),
+                                                  menuItemStyleData:
+                                                      MenuItemStyleData(
+                                                    height: 30,
+                                                    padding: EdgeInsets.only(
+                                                        left: 9, right: 9),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
                                           ),
                                           SizedBox(
-                                            height: 20,
+                                            height: 10,
                                           ),
-                                          Container(
-                                            height: 100,
-                                            decoration: BoxDecoration(
-                                                border: Border.all(
-                                                  color: Colors.black,
-                                                ),
-                                                color: Colors.white,
-                                                borderRadius: BorderRadius.all(
-                                                  Radius.circular(8),
-                                                )),
-                                            child: Row(
-                                              children: [
-                                                Image.asset(
-                                                  'delivery-truck.png',
-                                                  width: 150,
-                                                  height: 150,
-                                                ),
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          top: 15,
-                                                          bottom: 15,
-                                                          right: 60),
-                                                  child: Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
+                                          Row(
+                                            children: [
+                                              Expanded(
+                                                child: Container(
+                                                  padding: EdgeInsets.fromLTRB(
+                                                      0.5.w, 0, 1.w, 0),
+                                                  height: 50,
+                                                  decoration: BoxDecoration(
+                                                    border: Border.all(
+                                                        color: Color.fromRGBO(
+                                                            183, 183, 183, 1)),
+                                                    color: Colors.white,
+                                                    borderRadius:
+                                                        BorderRadius.only(
+                                                      topLeft:
+                                                          Radius.circular(8),
+                                                      topRight:
+                                                          Radius.circular(0),
+                                                      bottomLeft:
+                                                          Radius.circular(8),
+                                                      bottomRight:
+                                                          Radius.circular(0),
+                                                    ),
+                                                  ),
+                                                  child: Row(
                                                     children: [
-                                                      Text(
-                                                        'Vehicle 4',
-                                                        style: TextStyle(
-                                                            fontFamily:
-                                                                'Colfax',
-                                                            fontSize: 17,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .bold),
+                                                      Image.asset(
+                                                        'delivery-truck.png',
+                                                        width: 50,
+                                                        height: 50,
                                                       ),
-                                                      Text(
-                                                        'Upto 500 kg / Goods for small Parcels',
-                                                        style: TextStyle(
-                                                            color: Colors.black,
-                                                            fontFamily:
-                                                                'Colfax',
-                                                            fontSize: 14),
-                                                      ),
-                                                      Text(
-                                                        'Starting from XXX',
-                                                        style: TextStyle(
-                                                          color: Colors.black,
-                                                          fontFamily: 'Colfax',
-                                                          fontSize: 14,
-                                                        ),
-                                                      ),
+                                                      Text('Tralia')
                                                     ],
                                                   ),
-                                                )
-                                              ],
-                                            ),
+                                                ),
+                                              ),
+                                              DropdownButtonHideUnderline(
+                                                child: DropdownButton2<String>(
+                                                  value:
+                                                      dropdownValues, // Use value from the list
+                                                  items: <String>[
+                                                    'Trigger Bookings',
+                                                    'Booking Manager',
+                                                    'Contract',
+                                                    'None'
+                                                  ].map<
+                                                          DropdownMenuItem<
+                                                              String>>(
+                                                      (String value) {
+                                                    return DropdownMenuItem<
+                                                        String>(
+                                                      value: value,
+                                                      child: Text(
+                                                        value,
+                                                        style: TextStyle(
+                                                            fontSize: 12,
+                                                            fontFamily:
+                                                                'SegoeItalic',
+                                                            color:
+                                                                Colors.black),
+                                                      ),
+                                                    );
+                                                  }).toList(),
+                                                  onChanged:
+                                                      (String? newValue) {
+                                                    setState(() {
+                                                      dropdownValues =
+                                                          newValue!; // Update value in the list
+                                                    });
+                                                  },
+                                                  buttonStyleData:
+                                                      ButtonStyleData(
+                                                    height: 50,
+                                                    width: 15.w,
+                                                    padding: EdgeInsets.only(
+                                                        left: 9, right: 9),
+                                                    decoration: BoxDecoration(
+                                                      border: Border(
+                                                        bottom: BorderSide(
+                                                            color:
+                                                                Color.fromRGBO(
+                                                                    183,
+                                                                    183,
+                                                                    183,
+                                                                    1)),
+                                                        right: BorderSide(
+                                                            color:
+                                                                Color.fromRGBO(
+                                                                    183,
+                                                                    183,
+                                                                    183,
+                                                                    1)),
+                                                        top: BorderSide(
+                                                            color:
+                                                                Color.fromRGBO(
+                                                                    183,
+                                                                    183,
+                                                                    183,
+                                                                    1)),
+                                                      ),
+                                                      borderRadius:
+                                                          BorderRadius.only(
+                                                        topLeft:
+                                                            Radius.circular(0),
+                                                        topRight:
+                                                            Radius.circular(8),
+                                                        bottomLeft:
+                                                            Radius.circular(0),
+                                                        bottomRight:
+                                                            Radius.circular(8),
+                                                      ),
+                                                      color: Colors.white,
+                                                    ),
+                                                  ),
+                                                  iconStyleData:
+                                                      const IconStyleData(
+                                                    icon: Icon(
+                                                      Icons
+                                                          .arrow_drop_down_sharp,
+                                                    ),
+                                                    iconSize: 25,
+                                                    iconEnabledColor:
+                                                        Colors.black,
+                                                    iconDisabledColor: null,
+                                                  ),
+                                                  dropdownStyleData:
+                                                      DropdownStyleData(
+                                                    elevation: 0,
+                                                    maxHeight: 200,
+                                                    padding: EdgeInsets.all(3),
+                                                    decoration: BoxDecoration(
+                                                      border: Border.all(
+                                                          color: Color.fromRGBO(
+                                                              112,
+                                                              112,
+                                                              112,
+                                                              1)),
+                                                      borderRadius:
+                                                          BorderRadius.only(
+                                                        topLeft:
+                                                            Radius.circular(0),
+                                                        topRight:
+                                                            Radius.circular(0),
+                                                        bottomLeft:
+                                                            Radius.circular(5),
+                                                        bottomRight:
+                                                            Radius.circular(5),
+                                                      ),
+                                                      color: Colors.white,
+                                                    ),
+                                                    scrollPadding:
+                                                        EdgeInsets.all(5),
+                                                    scrollbarTheme:
+                                                        ScrollbarThemeData(
+                                                      thickness:
+                                                          MaterialStateProperty
+                                                              .all<double>(6),
+                                                      thumbVisibility:
+                                                          MaterialStateProperty
+                                                              .all<bool>(true),
+                                                    ),
+                                                  ),
+                                                  menuItemStyleData:
+                                                      MenuItemStyleData(
+                                                    height: 30,
+                                                    padding: EdgeInsets.only(
+                                                        left: 9, right: 9),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          SizedBox(
+                                            height: 10,
+                                          ),
+                                          Row(
+                                            children: [
+                                              Expanded(
+                                                child: Container(
+                                                  padding: EdgeInsets.fromLTRB(
+                                                      0.5.w, 0, 1.w, 0),
+                                                  height: 50,
+                                                  decoration: BoxDecoration(
+                                                    border: Border.all(
+                                                        color: Color.fromRGBO(
+                                                            183, 183, 183, 1)),
+                                                    color: Colors.white,
+                                                    borderRadius:
+                                                        BorderRadius.only(
+                                                      topLeft:
+                                                          Radius.circular(8),
+                                                      topRight:
+                                                          Radius.circular(0),
+                                                      bottomLeft:
+                                                          Radius.circular(8),
+                                                      bottomRight:
+                                                          Radius.circular(0),
+                                                    ),
+                                                  ),
+                                                  child: Row(
+                                                    children: [
+                                                      Image.asset(
+                                                        'delivery-truck.png',
+                                                        width: 50,
+                                                        height: 50,
+                                                      ),
+                                                      Text('Tralia')
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                              DropdownButtonHideUnderline(
+                                                child: DropdownButton2<String>(
+                                                  value:
+                                                      dropdownValues, // Use value from the list
+                                                  items: <String>[
+                                                    'Trigger Bookings',
+                                                    'Booking Manager',
+                                                    'Contract',
+                                                    'None'
+                                                  ].map<
+                                                          DropdownMenuItem<
+                                                              String>>(
+                                                      (String value) {
+                                                    return DropdownMenuItem<
+                                                        String>(
+                                                      value: value,
+                                                      child: Text(
+                                                        value,
+                                                        style: TextStyle(
+                                                            fontSize: 12,
+                                                            fontFamily:
+                                                                'SegoeItalic',
+                                                            color:
+                                                                Colors.black),
+                                                      ),
+                                                    );
+                                                  }).toList(),
+                                                  onChanged:
+                                                      (String? newValue) {
+                                                    setState(() {
+                                                      dropdownValues =
+                                                          newValue!; // Update value in the list
+                                                    });
+                                                  },
+                                                  buttonStyleData:
+                                                      ButtonStyleData(
+                                                    height: 50,
+                                                    width: 15.w,
+                                                    padding: EdgeInsets.only(
+                                                        left: 9, right: 9),
+                                                    decoration: BoxDecoration(
+                                                      border: Border(
+                                                        bottom: BorderSide(
+                                                            color:
+                                                                Color.fromRGBO(
+                                                                    183,
+                                                                    183,
+                                                                    183,
+                                                                    1)),
+                                                        right: BorderSide(
+                                                            color:
+                                                                Color.fromRGBO(
+                                                                    183,
+                                                                    183,
+                                                                    183,
+                                                                    1)),
+                                                        top: BorderSide(
+                                                            color:
+                                                                Color.fromRGBO(
+                                                                    183,
+                                                                    183,
+                                                                    183,
+                                                                    1)),
+                                                      ),
+                                                      borderRadius:
+                                                          BorderRadius.only(
+                                                        topLeft:
+                                                            Radius.circular(0),
+                                                        topRight:
+                                                            Radius.circular(8),
+                                                        bottomLeft:
+                                                            Radius.circular(0),
+                                                        bottomRight:
+                                                            Radius.circular(8),
+                                                      ),
+                                                      color: Colors.white,
+                                                    ),
+                                                  ),
+                                                  iconStyleData:
+                                                      const IconStyleData(
+                                                    icon: Icon(
+                                                      Icons
+                                                          .arrow_drop_down_sharp,
+                                                    ),
+                                                    iconSize: 25,
+                                                    iconEnabledColor:
+                                                        Colors.black,
+                                                    iconDisabledColor: null,
+                                                  ),
+                                                  dropdownStyleData:
+                                                      DropdownStyleData(
+                                                    elevation: 0,
+                                                    maxHeight: 200,
+                                                    padding: EdgeInsets.all(3),
+                                                    decoration: BoxDecoration(
+                                                      border: Border.all(
+                                                          color: Color.fromRGBO(
+                                                              112,
+                                                              112,
+                                                              112,
+                                                              1)),
+                                                      borderRadius:
+                                                          BorderRadius.only(
+                                                        topLeft:
+                                                            Radius.circular(0),
+                                                        topRight:
+                                                            Radius.circular(0),
+                                                        bottomLeft:
+                                                            Radius.circular(5),
+                                                        bottomRight:
+                                                            Radius.circular(5),
+                                                      ),
+                                                      color: Colors.white,
+                                                    ),
+                                                    scrollPadding:
+                                                        EdgeInsets.all(5),
+                                                    scrollbarTheme:
+                                                        ScrollbarThemeData(
+                                                      thickness:
+                                                          MaterialStateProperty
+                                                              .all<double>(6),
+                                                      thumbVisibility:
+                                                          MaterialStateProperty
+                                                              .all<bool>(true),
+                                                    ),
+                                                  ),
+                                                  menuItemStyleData:
+                                                      MenuItemStyleData(
+                                                    height: 30,
+                                                    padding: EdgeInsets.only(
+                                                        left: 9, right: 9),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          SizedBox(
+                                            height: 10,
+                                          ),
+                                          Row(
+                                            children: [
+                                              Expanded(
+                                                child: Container(
+                                                  padding: EdgeInsets.fromLTRB(
+                                                      0.5.w, 0, 1.w, 0),
+                                                  height: 50,
+                                                  decoration: BoxDecoration(
+                                                    border: Border.all(
+                                                        color: Color.fromRGBO(
+                                                            183, 183, 183, 1)),
+                                                    color: Colors.white,
+                                                    borderRadius:
+                                                        BorderRadius.only(
+                                                      topLeft:
+                                                          Radius.circular(8),
+                                                      topRight:
+                                                          Radius.circular(0),
+                                                      bottomLeft:
+                                                          Radius.circular(8),
+                                                      bottomRight:
+                                                          Radius.circular(0),
+                                                    ),
+                                                  ),
+                                                  child: Row(
+                                                    children: [
+                                                      Image.asset(
+                                                        'delivery-truck.png',
+                                                        width: 50,
+                                                        height: 50,
+                                                      ),
+                                                      Text('Tralia')
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                              DropdownButtonHideUnderline(
+                                                child: DropdownButton2<String>(
+                                                  value:
+                                                      dropdownValues, // Use value from the list
+                                                  items: <String>[
+                                                    'Trigger Bookings',
+                                                    'Booking Manager',
+                                                    'Contract',
+                                                    'None'
+                                                  ].map<
+                                                          DropdownMenuItem<
+                                                              String>>(
+                                                      (String value) {
+                                                    return DropdownMenuItem<
+                                                        String>(
+                                                      value: value,
+                                                      child: Text(
+                                                        value,
+                                                        style: TextStyle(
+                                                            fontSize: 12,
+                                                            fontFamily:
+                                                                'SegoeItalic',
+                                                            color:
+                                                                Colors.black),
+                                                      ),
+                                                    );
+                                                  }).toList(),
+                                                  onChanged:
+                                                      (String? newValue) {
+                                                    setState(() {
+                                                      dropdownValues =
+                                                          newValue!; // Update value in the list
+                                                    });
+                                                  },
+                                                  buttonStyleData:
+                                                      ButtonStyleData(
+                                                    height: 50,
+                                                    width: 15.w,
+                                                    padding: EdgeInsets.only(
+                                                        left: 9, right: 9),
+                                                    decoration: BoxDecoration(
+                                                      border: Border(
+                                                        bottom: BorderSide(
+                                                            color:
+                                                                Color.fromRGBO(
+                                                                    183,
+                                                                    183,
+                                                                    183,
+                                                                    1)),
+                                                        right: BorderSide(
+                                                            color:
+                                                                Color.fromRGBO(
+                                                                    183,
+                                                                    183,
+                                                                    183,
+                                                                    1)),
+                                                        top: BorderSide(
+                                                            color:
+                                                                Color.fromRGBO(
+                                                                    183,
+                                                                    183,
+                                                                    183,
+                                                                    1)),
+                                                      ),
+                                                      borderRadius:
+                                                          BorderRadius.only(
+                                                        topLeft:
+                                                            Radius.circular(0),
+                                                        topRight:
+                                                            Radius.circular(8),
+                                                        bottomLeft:
+                                                            Radius.circular(0),
+                                                        bottomRight:
+                                                            Radius.circular(8),
+                                                      ),
+                                                      color: Colors.white,
+                                                    ),
+                                                  ),
+                                                  iconStyleData:
+                                                      const IconStyleData(
+                                                    icon: Icon(
+                                                      Icons
+                                                          .arrow_drop_down_sharp,
+                                                    ),
+                                                    iconSize: 25,
+                                                    iconEnabledColor:
+                                                        Colors.black,
+                                                    iconDisabledColor: null,
+                                                  ),
+                                                  dropdownStyleData:
+                                                      DropdownStyleData(
+                                                    elevation: 0,
+                                                    maxHeight: 200,
+                                                    padding: EdgeInsets.all(3),
+                                                    decoration: BoxDecoration(
+                                                      border: Border.all(
+                                                          color: Color.fromRGBO(
+                                                              112,
+                                                              112,
+                                                              112,
+                                                              1)),
+                                                      borderRadius:
+                                                          BorderRadius.only(
+                                                        topLeft:
+                                                            Radius.circular(0),
+                                                        topRight:
+                                                            Radius.circular(0),
+                                                        bottomLeft:
+                                                            Radius.circular(5),
+                                                        bottomRight:
+                                                            Radius.circular(5),
+                                                      ),
+                                                      color: Colors.white,
+                                                    ),
+                                                    scrollPadding:
+                                                        EdgeInsets.all(5),
+                                                    scrollbarTheme:
+                                                        ScrollbarThemeData(
+                                                      thickness:
+                                                          MaterialStateProperty
+                                                              .all<double>(6),
+                                                      thumbVisibility:
+                                                          MaterialStateProperty
+                                                              .all<bool>(true),
+                                                    ),
+                                                  ),
+                                                  menuItemStyleData:
+                                                      MenuItemStyleData(
+                                                    height: 30,
+                                                    padding: EdgeInsets.only(
+                                                        left: 9, right: 9),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          SizedBox(
+                                            height: 10,
+                                          ),
+                                          Row(
+                                            children: [
+                                              Expanded(
+                                                child: Container(
+                                                  padding: EdgeInsets.fromLTRB(
+                                                      0.5.w, 0, 1.w, 0),
+                                                  height: 50,
+                                                  decoration: BoxDecoration(
+                                                    border: Border.all(
+                                                        color: Color.fromRGBO(
+                                                            183, 183, 183, 1)),
+                                                    color: Colors.white,
+                                                    borderRadius:
+                                                        BorderRadius.only(
+                                                      topLeft:
+                                                          Radius.circular(8),
+                                                      topRight:
+                                                          Radius.circular(0),
+                                                      bottomLeft:
+                                                          Radius.circular(8),
+                                                      bottomRight:
+                                                          Radius.circular(0),
+                                                    ),
+                                                  ),
+                                                  child: Row(
+                                                    children: [
+                                                      Image.asset(
+                                                        'delivery-truck.png',
+                                                        width: 50,
+                                                        height: 50,
+                                                      ),
+                                                      Text('Tralia')
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                              DropdownButtonHideUnderline(
+                                                child: DropdownButton2<String>(
+                                                  value:
+                                                      dropdownValues, // Use value from the list
+                                                  items: <String>[
+                                                    'Trigger Bookings',
+                                                    'Booking Manager',
+                                                    'Contract',
+                                                    'None'
+                                                  ].map<
+                                                          DropdownMenuItem<
+                                                              String>>(
+                                                      (String value) {
+                                                    return DropdownMenuItem<
+                                                        String>(
+                                                      value: value,
+                                                      child: Text(
+                                                        value,
+                                                        style: TextStyle(
+                                                            fontSize: 12,
+                                                            fontFamily:
+                                                                'SegoeItalic',
+                                                            color:
+                                                                Colors.black),
+                                                      ),
+                                                    );
+                                                  }).toList(),
+                                                  onChanged:
+                                                      (String? newValue) {
+                                                    setState(() {
+                                                      dropdownValues =
+                                                          newValue!; // Update value in the list
+                                                    });
+                                                  },
+                                                  buttonStyleData:
+                                                      ButtonStyleData(
+                                                    height: 50,
+                                                    width: 15.w,
+                                                    padding: EdgeInsets.only(
+                                                        left: 9, right: 9),
+                                                    decoration: BoxDecoration(
+                                                      border: Border(
+                                                        bottom: BorderSide(
+                                                            color:
+                                                                Color.fromRGBO(
+                                                                    183,
+                                                                    183,
+                                                                    183,
+                                                                    1)),
+                                                        right: BorderSide(
+                                                            color:
+                                                                Color.fromRGBO(
+                                                                    183,
+                                                                    183,
+                                                                    183,
+                                                                    1)),
+                                                        top: BorderSide(
+                                                            color:
+                                                                Color.fromRGBO(
+                                                                    183,
+                                                                    183,
+                                                                    183,
+                                                                    1)),
+                                                      ),
+                                                      borderRadius:
+                                                          BorderRadius.only(
+                                                        topLeft:
+                                                            Radius.circular(0),
+                                                        topRight:
+                                                            Radius.circular(8),
+                                                        bottomLeft:
+                                                            Radius.circular(0),
+                                                        bottomRight:
+                                                            Radius.circular(8),
+                                                      ),
+                                                      color: Colors.white,
+                                                    ),
+                                                  ),
+                                                  iconStyleData:
+                                                      const IconStyleData(
+                                                    icon: Icon(
+                                                      Icons
+                                                          .arrow_drop_down_sharp,
+                                                    ),
+                                                    iconSize: 25,
+                                                    iconEnabledColor:
+                                                        Colors.black,
+                                                    iconDisabledColor: null,
+                                                  ),
+                                                  dropdownStyleData:
+                                                      DropdownStyleData(
+                                                    elevation: 0,
+                                                    maxHeight: 200,
+                                                    padding: EdgeInsets.all(3),
+                                                    decoration: BoxDecoration(
+                                                      border: Border.all(
+                                                          color: Color.fromRGBO(
+                                                              112,
+                                                              112,
+                                                              112,
+                                                              1)),
+                                                      borderRadius:
+                                                          BorderRadius.only(
+                                                        topLeft:
+                                                            Radius.circular(0),
+                                                        topRight:
+                                                            Radius.circular(0),
+                                                        bottomLeft:
+                                                            Radius.circular(5),
+                                                        bottomRight:
+                                                            Radius.circular(5),
+                                                      ),
+                                                      color: Colors.white,
+                                                    ),
+                                                    scrollPadding:
+                                                        EdgeInsets.all(5),
+                                                    scrollbarTheme:
+                                                        ScrollbarThemeData(
+                                                      thickness:
+                                                          MaterialStateProperty
+                                                              .all<double>(6),
+                                                      thumbVisibility:
+                                                          MaterialStateProperty
+                                                              .all<bool>(true),
+                                                    ),
+                                                  ),
+                                                  menuItemStyleData:
+                                                      MenuItemStyleData(
+                                                    height: 30,
+                                                    padding: EdgeInsets.only(
+                                                        left: 9, right: 9),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          SizedBox(
+                                            height: 10,
+                                          ),
+                                          Row(
+                                            children: [
+                                              Expanded(
+                                                  child: CustomTextfieldGrey(
+                                                text: 'Time',
+                                              ))
+                                            ],
+                                          ),
+                                          Row(
+                                            children: [],
+                                          ),
+                                          Row(
+                                            children: [],
                                           ),
                                         ],
                                       ),
                                     ),
-                                    SizedBox(
-                                      width: 20,
+                                  ),
+                                  SizedBox(
+                                    height: 660,
+                                    child: VerticalDivider(
+                                      color: Colors.black,
+                                      width: 1,
                                     ),
-                                    SizedBox(
-                                      height: 660,
-                                      child: VerticalDivider(
-                                        color: Colors.black,
-                                        width: 1,
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: 20,
-                                    ),
-                                    Column(
-                                      children: [
-                                        Expanded(
-                                          child: Container(
+                                  ),
+                                  Expanded(
+                                    child: Padding(
+                                      padding:
+                                          EdgeInsets.fromLTRB(1.5.w, 0, 0, 0),
+                                      child: Column(
+                                        children: [
+                                          Container(
+                                            padding: const EdgeInsets.all(8.0),
                                             decoration: BoxDecoration(
                                                 border: Border.all(
-                                                  color: Colors
-                                                      .black, // Specify the border width
-                                                ),
+                                                    color: Color.fromRGBO(
+                                                        183,
+                                                        183,
+                                                        183,
+                                                        1) // Specify the border width
+                                                    ),
                                                 color: Colors.white,
                                                 borderRadius: BorderRadius.all(
                                                   Radius.circular(8),
                                                 )),
-                                            height: 10,
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.all(8.0),
-                                              child: Row(
-                                                children: [
-                                                  Icon(
-                                                    Icons.circle,
-                                                    color: Colors.green,
-                                                    size: 20,
-                                                  ),
-                                                  Text(
-                                                    'Pick Up',
-                                                    style: TabelText
-                                                        .helvetica16black,
-                                                  ),
-                                                ],
-                                              ),
+                                            child: Column(
+                                              children: [
+                                                Row(
+                                                  children: [
+                                                    Icon(
+                                                      Icons.circle,
+                                                      color: Colors.green,
+                                                      size: 20,
+                                                    ),
+                                                    Text(
+                                                      'Pick Up',
+                                                      style: TabelText
+                                                          .helvetica16black,
+                                                    ),
+                                                  ],
+                                                ),
+                                                Divider(
+                                                    color: Color.fromRGBO(
+                                                        183, 183, 183, 1)),
+                                                Row(
+                                                  children: [
+                                                    Icon(
+                                                      Icons.circle,
+                                                      color: Colors.red,
+                                                      size: 20,
+                                                    ),
+                                                    Text(
+                                                      'Drop Point A',
+                                                      style: TabelText
+                                                          .helvetica16black,
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
                                             ),
                                           ),
-                                        ),
-                                        SizedBox(
-                                          height: 20,
-                                        ),
-                                        Expanded(
-                                          child: Container(
-                                            decoration: BoxDecoration(
-                                                border: Border.all(
-                                                  color: Colors
-                                                      .black, // Specify the border width
-                                                ),
-                                                color: Colors.white,
-                                                borderRadius: BorderRadius.all(
-                                                  Radius.circular(8),
-                                                )),
-                                            height: 50,
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.all(8.0),
-                                              child: Row(
-                                                children: [
-                                                  Icon(
-                                                    Icons.circle,
-                                                    color: Colors.red,
-                                                    size: 20,
-                                                  ),
-                                                  Text(
-                                                    'Drop Point A',
-                                                    style: TabelText
-                                                        .helvetica16black,
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
+                                          SizedBox(
+                                            height: 20,
                                           ),
-                                        ),
-                                        SizedBox(
-                                          height: 20,
-                                        ),
-                                        Expanded(
-                                          child: Container(
+                                          Container(
+                                            height: 200,
                                             decoration: BoxDecoration(
                                                 border: Border.all(
-                                                  color: Colors
-                                                      .black, // Specify the border width
-                                                ),
+                                                    color: Color.fromRGBO(
+                                                        183,
+                                                        183,
+                                                        183,
+                                                        1) // Specify the border width
+                                                    ),
                                                 color: Color.fromARGB(
                                                     69, 112, 106, 106),
                                                 borderRadius: BorderRadius.all(
                                                   Radius.circular(8),
                                                 )),
                                           ),
-                                        )
-                                      ],
+                                          SizedBox(
+                                            height: 20,
+                                          ),
+                                          CustomButton(
+                                            onPressed: () {},
+                                            dynamicHeight: 40,
+                                            text: 'Create Booking',
+                                          )
+                                        ],
+                                      ),
                                     ),
-                                  ],
-                                ),
+                                  ),
+                                ],
                               ),
                             ),
                           ),

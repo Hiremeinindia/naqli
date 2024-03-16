@@ -4,7 +4,6 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:flutter_application_1/Enterprise/enterpriseLoginPage.dart';
 import 'package:flutter_application_1/SuperUser/createAccount.dart';
 import 'package:flutter_application_1/classes/language.dart';
 import 'package:flutter_application_1/classes/language_constants.dart';
@@ -12,6 +11,7 @@ import 'package:flutter_application_1/main.dart';
 import 'package:sizer/sizer.dart';
 
 import 'Widgets/formText.dart';
+import 'loginPage.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({
@@ -191,12 +191,12 @@ class _MyHomePageState extends State<MyHomePage> {
                             ),
                             InkWell(
                               onTap: () {
-                                // showDialog(
-                                //   context: context,
-                                //   builder: (context) {
-                                //     return LoginPage();
-                                //   },
-                                // );
+                                showDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    return LoginPage();
+                                  },
+                                );
                               },
                               child:
                                   Text('Log in', style: TabelText.helvetica11),
@@ -779,12 +779,12 @@ class _MyHomePageState extends State<MyHomePage> {
                           children: [
                             InkWell(
                               onTap: () {
-                                // showDialog(
-                                //   context: context,
-                                //   builder: (context) {
-                                //     return LoginPage();
-                                //   },
-                                // );
+                                showDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    return LoginPage();
+                                  },
+                                );
                               },
                               child:
                                   Text('Log in', style: TabelText.helvetica11),

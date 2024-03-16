@@ -2,9 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_application_1/Enterprise/Dashboard/dashboard_page.dart';
+import 'package:flutter_application_1/loginPage.dart';
 import 'package:sizer/sizer.dart';
-
-import 'enterpriseLoginPage.dart';
 
 class EnterpriseCreateAccount extends StatefulWidget {
   const EnterpriseCreateAccount();
@@ -777,7 +776,7 @@ class _EnterpriseCreateAccount extends State<EnterpriseCreateAccount> {
                               showDialog(
                                 context: context,
                                 builder: (context) {
-                                  return EnterpriseLoginPage();
+                                  return LoginPage();
                                 },
                               );
                             },
@@ -1302,7 +1301,7 @@ class _EnterpriseCreateAccount extends State<EnterpriseCreateAccount> {
                               showDialog(
                                 context: context,
                                 builder: (context) {
-                                  return EnterpriseLoginPage();
+                                  return LoginPage();
                                 },
                               );
                             },
