@@ -4,16 +4,16 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/Widgets/customButton.dart';
 import 'package:flutter_application_1/SuperUser/createAccount.dart';
-import 'package:flutter_application_1/SuperUser/homepage.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../main.dart';
+import 'homePage.dart';
 
 // ignore: must_be_immutable
-class SuperuserLoginPage extends StatefulWidget {
-  const SuperuserLoginPage();
+class LoginPage extends StatefulWidget {
+  const LoginPage();
   @override
-  _SuperuserLoginPageState createState() => _SuperuserLoginPageState();
+  _LoginPageState createState() => _LoginPageState();
 }
 
 class ScaleSize {
@@ -25,7 +25,7 @@ class ScaleSize {
   }
 }
 
-class _SuperuserLoginPageState extends State<SuperuserLoginPage> {
+class _LoginPageState extends State<LoginPage> {
   bool isVerified = false;
   TextEditingController otpController = TextEditingController();
 
@@ -215,7 +215,7 @@ class _SuperuserLoginPageState extends State<SuperuserLoginPage> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => SuperuserMyHomePage(),
+                            builder: (context) => MyHomePage(),
                           ),
                         );
                         setState(() {
@@ -389,7 +389,7 @@ class _SuperuserLoginPageState extends State<SuperuserLoginPage> {
                                           showDialog(
                                             context: context,
                                             builder: (context) {
-                                              return SuperuserMyHomePage();
+                                              return MyHomePage();
                                             },
                                           );
                                         },
@@ -508,8 +508,7 @@ class _SuperuserLoginPageState extends State<SuperuserLoginPage> {
                                         Navigator.push(
                                           context,
                                           MaterialPageRoute(
-                                            builder: (context) =>
-                                                SuperuserMyHomePage(),
+                                            builder: (context) => MyHomePage(),
                                           ),
                                         );
                                       }
@@ -642,7 +641,7 @@ class _SuperuserLoginPageState extends State<SuperuserLoginPage> {
                                       showDialog(
                                         context: context,
                                         builder: (context) {
-                                          return SuperuserMyHomePage();
+                                          return MyHomePage();
                                         },
                                       );
                                     },
@@ -746,8 +745,7 @@ class _SuperuserLoginPageState extends State<SuperuserLoginPage> {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) =>
-                                            SuperuserMyHomePage(),
+                                        builder: (context) => MyHomePage(),
                                       ),
                                     );
                                   }

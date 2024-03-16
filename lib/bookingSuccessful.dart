@@ -1,8 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter_application_1/SuperUser/homepage.dart';
-import 'package:flutter_application_1/SuperUser/loginPage.dart';
 
 class BookingSuccessful extends StatefulWidget {
   const BookingSuccessful();
