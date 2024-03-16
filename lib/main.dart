@@ -17,6 +17,7 @@ import 'package:flutter_application_1/SuperUser/Dashboard/dashboard_page.dart';
 import 'package:flutter_application_1/advancepayment.dart';
 import 'package:flutter_application_1/SuperUser/createAccount.dart';
 import 'package:flutter_application_1/SuperUser/homepage.dart';
+import 'package:flutter_application_1/homePage.dart';
 import 'package:flutter_application_1/sample.dart';
 import 'package:flutter_application_1/sample.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -93,7 +94,7 @@ class _MyAppState extends State<MyApp> {
       supportedLocales: AppLocalizations.supportedLocales,
       locale: _locale,
       debugShowCheckedModeBanner: false,
-      home: SingleUserMyHomePage(),
+      home: SingleUserDashboardPage(),
     );
   }
 }

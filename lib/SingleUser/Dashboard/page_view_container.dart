@@ -32,7 +32,7 @@ class _PageViewContainerState extends State<PageViewContainer> {
       controller: pageElse,
       children: [
         Dashboard(),
-        BookingHistory(),
+        BookingHistroy(),
         SingleUserPayment(),
         Container(
           color: Colors.pink,
