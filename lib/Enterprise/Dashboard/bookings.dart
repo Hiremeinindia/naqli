@@ -1,10 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_application_1/Enterprise/enterpriseHomePage.dart';
-import 'package:flutter_application_1/SuperUser/homepage.dart';
 import 'package:flutter_application_1/Widgets/customButton.dart';
 import 'package:flutter_application_1/Widgets/formText.dart';
+import 'package:flutter_application_1/homePage.dart';
 import 'package:sizer/sizer.dart';
 
 class Bookings extends StatefulWidget {
@@ -187,7 +186,7 @@ class _BookingsState extends State<Bookings> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => SuperuserMyHomePage(),
+                                    builder: (context) => MyHomePage(),
                                   ),
                                 );
                               },
@@ -398,8 +397,7 @@ class _BookingsState extends State<Bookings> {
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                          builder: (context) =>
-                                              SuperuserMyHomePage(),
+                                          builder: (context) => MyHomePage(),
                                         ),
                                       );
                                     },
