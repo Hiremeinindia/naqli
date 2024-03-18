@@ -5,7 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_application_1/Widgets/customButton.dart';
-import 'package:flutter_application_1/SuperUser/createAccount.dart';
+import 'package:flutter_application_1/createAccount.dart';
 import 'package:flutter_application_1/Widgets/formText.dart';
 import 'package:sizer/sizer.dart';
 
@@ -246,172 +246,186 @@ class _LoginPageState extends State<LoginPage> {
           return Padding(
             padding: EdgeInsets.fromLTRB(15.w, 6.h, 15.w, 6.h),
             child: Dialog(
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Container(
-                      decoration: const BoxDecoration(
-                        color: Color.fromARGB(255, 128, 123, 229),
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(31),
-                          bottomLeft: Radius.circular(31),
-                        ),
-                      ),
-                      child: Align(
-                        alignment: Alignment.bottomCenter,
-                        child: Image.asset(
-                          'loginlogo.png',
-                          width: 50.w,
-                        ),
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: Container(
-                      width: 500,
-                      padding: EdgeInsets.only(
-                        left: 4.w,
-                        right: 4.w,
-                        top: 15.h,
-                        bottom: 15.h,
-                      ),
-                      decoration: const BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.only(
-                          topRight: Radius.circular(31),
-                          bottomRight: Radius.circular(31),
-                        ),
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Align(
-                            alignment: Alignment.center,
-                            child: Text(
-                              'Login',
-                              style: TextStyle(
-                                fontFamily: 'Colfax',
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
+              child: Scrollbar(
+                controller: _Scroll1,
+                thumbVisibility: true,
+                child: SingleChildScrollView(
+                  controller: _Scroll1,
+                  scrollDirection: Axis.vertical,
+                  child: Container(
+                    height: 780,
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Container(
+                            decoration: const BoxDecoration(
+                              color: Color.fromARGB(255, 128, 123, 229),
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(31),
+                                bottomLeft: Radius.circular(31),
+                              ),
+                            ),
+                            child: Align(
+                              alignment: Alignment.bottomCenter,
+                              child: Image.asset(
+                                'loginlogo.png',
+                                width: 500,
                               ),
                             ),
                           ),
-                          SizedBox(
-                            height: 50,
-                          ),
-                          Text('Email ID', style: TabelText.helvetica),
-                          SizedBox(
-                            height: 6,
-                          ),
-                          TextField(
-                            decoration: InputDecoration(
-                              contentPadding: EdgeInsets.all(5.0),
-                              border: OutlineInputBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(5)),
+                        ),
+                        Expanded(
+                          child: Container(
+                            width: 500,
+                            padding: EdgeInsets.only(
+                              left: 4.w,
+                              right: 4.w,
+                              top: 15.h,
+                              bottom: 15.h,
+                            ),
+                            decoration: const BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.only(
+                                topRight: Radius.circular(31),
+                                bottomRight: Radius.circular(31),
                               ),
                             ),
-                          ),
-                          SizedBox(
-                            height: 15,
-                          ),
-                          Text('Password', style: TabelText.helvetica),
-                          SizedBox(
-                            height: 6,
-                          ),
-                          TextField(
-                            decoration: InputDecoration(
-                              contentPadding: EdgeInsets.all(5.0),
-                              border: OutlineInputBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(5)),
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              SizedBox(
-                                height: 43,
-                                width: 140,
-                                child: ElevatedButton(
-                                  onPressed: () {
-                                    showDialog(
-                                      context: context,
-                                      builder: (context) {
-                                        return MyHomePage();
-                                      },
-                                    );
-                                  },
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor:
-                                        Color.fromRGBO(128, 123, 229, 1),
-                                    side: BorderSide(
-                                      color: Color.fromRGBO(128, 123, 229, 1),
-                                    ),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(8),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Align(
+                                  alignment: Alignment.center,
+                                  child: Text(
+                                    'Login',
+                                    style: TextStyle(
+                                      fontFamily: 'Colfax',
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
                                     ),
                                   ),
-                                  child: Text('Login',
-                                      style: FormTextStyle.buttonText),
                                 ),
-                              ),
-                              InkWell(
-                                child: Text('Forgot Password?',
-                                    style: FormTextStyle.purplehelvetica),
-                                onTap: () {},
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 30,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Text("Don't have an account?",
-                                  style: TabelText.helvetica),
-                              InkWell(
-                                child: Text('Create One!',
-                                    style: FormTextStyle.purplehelvetica),
-                                onTap: () {
-                                  showDialog(
-                                    context: context,
-                                    builder: (context) {
-                                      return SuperuserCreateAccount();
-                                    },
-                                  );
-                                },
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          InkWell(
-                            child: Text('Use without Log in',
-                                style: FormTextStyle.purplehelvetica),
-                            onTap: () async {
-                              _showOtpVerificationDialog();
-                              if (isVerified) {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => MyHomePage(),
+                                SizedBox(
+                                  height: 50,
+                                ),
+                                Text('Email ID', style: TabelText.helvetica),
+                                SizedBox(
+                                  height: 6,
+                                ),
+                                TextField(
+                                  decoration: InputDecoration(
+                                    contentPadding: EdgeInsets.all(5.0),
+                                    border: OutlineInputBorder(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(5)),
+                                    ),
                                   ),
-                                );
-                              }
-                            },
+                                ),
+                                SizedBox(
+                                  height: 15,
+                                ),
+                                Text('Password', style: TabelText.helvetica),
+                                SizedBox(
+                                  height: 6,
+                                ),
+                                TextField(
+                                  decoration: InputDecoration(
+                                    contentPadding: EdgeInsets.all(5.0),
+                                    border: OutlineInputBorder(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(5)),
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    SizedBox(
+                                      height: 43,
+                                      width: 140,
+                                      child: ElevatedButton(
+                                        onPressed: () {
+                                          showDialog(
+                                            context: context,
+                                            builder: (context) {
+                                              return MyHomePage();
+                                            },
+                                          );
+                                        },
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor:
+                                              Color.fromRGBO(128, 123, 229, 1),
+                                          side: BorderSide(
+                                            color: Color.fromRGBO(
+                                                128, 123, 229, 1),
+                                          ),
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                          ),
+                                        ),
+                                        child: Text('Login',
+                                            style: FormTextStyle.buttonText),
+                                      ),
+                                    ),
+                                    InkWell(
+                                      child: Text('Forgot Password?',
+                                          style: FormTextStyle.purplehelvetica),
+                                      onTap: () {},
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 30,
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Text("Don't have an account?",
+                                        style: TabelText.helvetica),
+                                    InkWell(
+                                      child: Text('Create One!',
+                                          style: FormTextStyle.purplehelvetica),
+                                      onTap: () {
+                                        showDialog(
+                                          context: context,
+                                          builder: (context) {
+                                            return CreateAccount();
+                                          },
+                                        );
+                                      },
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                InkWell(
+                                  child: Text('Use without Log in',
+                                      style: FormTextStyle.purplehelvetica),
+                                  onTap: () async {
+                                    _showOtpVerificationDialog();
+                                    if (isVerified) {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => MyHomePage(),
+                                        ),
+                                      );
+                                    }
+                                  },
+                                ),
+                              ],
+                            ),
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
-                ],
+                ),
               ),
             ),
           );
@@ -544,7 +558,7 @@ class _LoginPageState extends State<LoginPage> {
                                         showDialog(
                                           context: context,
                                           builder: (context) {
-                                            return SuperuserCreateAccount();
+                                            return CreateAccount();
                                           },
                                         );
                                       },

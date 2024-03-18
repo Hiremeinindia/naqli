@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/Widgets/customButton.dart';
 import 'package:flutter_application_1/Widgets/customRadio.dart';
 import 'package:flutter_application_1/Widgets/formText.dart';
-import 'package:flutter_application_1/bookingdialog.dart';
+import 'package:flutter_application_1/DialogBox/bookingdialog.dart';
 import 'package:sizer/sizer.dart';
 
 class TriggerBooking extends StatefulWidget {

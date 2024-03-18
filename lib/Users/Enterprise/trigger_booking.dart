@@ -1,9 +1,8 @@
-import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/Widgets/customButton.dart';
 import 'package:flutter_application_1/Widgets/customRadio.dart';
 import 'package:flutter_application_1/Widgets/formText.dart';
-import 'package:flutter_application_1/bookingdialog.dart';
+import 'package:flutter_application_1/DialogBox/bookingdialog.dart';
 import 'package:sizer/sizer.dart';
 
 class TriggerBooking extends StatefulWidget {
@@ -23,7 +22,6 @@ class _TriggerBookingState extends State<TriggerBooking> {
   bool checkbox1 = false;
   bool checkbox2 = false;
   bool checkbox3 = false;
-  final ScrollController _scrollController = ScrollController();
   final ScrollController _Scroll = ScrollController();
   @override
   void initState() {
