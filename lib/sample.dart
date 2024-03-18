@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 
 import 'package:sizer/sizer.dart';
 
-class BookingHistory extends StatefulWidget {
-  const BookingHistory({Key? key}) : super(key: key);
+class BookingHistory1 extends StatefulWidget {
+  const BookingHistory1({Key? key}) : super(key: key);
   @override
   _BookingHistoryState createState() => _BookingHistoryState();
 }
 
-class _BookingHistoryState extends State<BookingHistory> {
+class _BookingHistoryState extends State<BookingHistory1> {
   PageController page = PageController();
   SideMenuController sideMenu = SideMenuController();
   ScrollController _scrollController = ScrollController();
