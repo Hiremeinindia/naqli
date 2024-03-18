@@ -10,6 +10,7 @@ import 'package:flutter_application_1/Widgets/formText.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../main.dart';
+import 'DialogBox/mblNoDialog.dart';
 import 'homePage.dart';
 
 // ignore: must_be_immutable
@@ -26,216 +27,6 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController otpController = TextEditingController();
 
   TextEditingController contactNumberController = TextEditingController();
-  void _showOtpVerificationDialog() {
-    print("track4");
-
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Center(
-              child: Text(
-            "Verify Account",
-            style: TextStyle(
-                fontFamily: 'Colfax',
-                fontSize: 15,
-                color: Colors.black,
-                fontWeight: FontWeight.bold),
-          )),
-          content: Container(
-            height: 150, // Set the desired height
-            width: 1000, // Set the desired width
-            child: Container(
-              child: Column(
-                children: [
-                  Text(
-                    "Enter Mobile NO",
-                    style: TextStyle(
-                      fontFamily: 'Colfax',
-                      fontSize: 10,
-                      color: Colors.black,
-                    ),
-                  ),
-                  SizedBox(height: 10),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        height: 30,
-                        width: 200,
-                        child: TextField(
-                          controller: contactNumberController,
-                          keyboardType: TextInputType.number,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(),
-                          ),
-                        ),
-                      ),
-                      ElevatedButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                          _startPhoneAuth(contactNumberController.text);
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Color.fromRGBO(60, 55, 148, 1),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8.0),
-                          ),
-                        ),
-                        child: Text(
-                          "Get OTP",
-                          style: TextStyle(
-                            fontFamily: 'Colfax',
-                            fontSize: 10,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 10),
-                ],
-              ),
-            ),
-          ),
-          actions: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  "Didn't receive an email? ",
-                  style: TextStyle(
-                    fontFamily: 'Colfax',
-                    fontSize: 7,
-                    color: Colors.black,
-                  ),
-                ),
-                InkWell(
-                  onTap: () {
-                    // Implement the logic to resend the OTP
-                    // For now, let's close the dialog
-                    Navigator.pop(context);
-                  },
-                  child: Text(
-                    "Resend.",
-                    style: TextStyle(
-                        fontFamily: 'Colfax',
-                        fontSize: 7,
-                        color: Color.fromRGBO(60, 55, 148, 1),
-                        fontWeight: FontWeight.bold),
-                  ),
-                ),
-              ],
-            ),
-          ],
-        );
-      },
-    );
-  }
-
-  void showErrorDialog(String errorMessage) {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text("Error"),
-        content: Text(errorMessage),
-        actions: [
-          ElevatedButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            child: Text("OK"),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Future<void> _startPhoneAuth(String phoneNumber) async {
-    print("track3");
-
-    FirebaseAuth _auth = FirebaseAuth.instance;
-
-    try {
-      await _auth.verifyPhoneNumber(
-        phoneNumber: "+91${contactNumberController.text}",
-        verificationCompleted: (PhoneAuthCredential credential) async {
-          await _auth.signInWithCredential(credential).then((value) {
-            Navigator.pop(context);
-            setState(() {
-              isVerified = true;
-            });
-          });
-        },
-        verificationFailed: (FirebaseAuthException e) {
-          // Handle the verification failure
-          print('Phone authentication failed: $e');
-          showErrorDialog(
-              "Invalid phone number format. Please enter a valid 10-digit phone number.");
-        },
-        codeSent: (String verificationId, [int? forceResendingToken]) {
-          // Store the verification ID for later use (e.g., resend OTP)
-          String storedVerificationId = verificationId;
-
-          showDialog(
-            context: context,
-            barrierDismissible: false,
-            builder: (context) => AlertDialog(
-              title: Text("Enter OTP"),
-              content: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  TextField(
-                    controller: otpController,
-                  ),
-                ],
-              ),
-              actions: [
-                ElevatedButton(
-                  onPressed: () {
-                    FirebaseAuth auth = FirebaseAuth.instance;
-                    String smsCode = otpController.text;
-                    PhoneAuthCredential _credential =
-                        PhoneAuthProvider.credential(
-                      verificationId: storedVerificationId,
-                      smsCode: smsCode,
-                    );
-
-                    auth.signInWithCredential(_credential).then((result) {
-                      // Check if the verification is successful
-                      if (result.user != null) {
-                        print("otp verified successfully");
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => MyHomePage(),
-                          ),
-                        );
-                        setState(() {
-                          isVerified = true;
-                        });
-                      } else {
-                        showErrorDialog(
-                            "Invalid verification code. Please enter the correct code.");
-                      }
-                    }).catchError((e) {
-                      print("Error signing in with credential: $e");
-                    });
-                  },
-                  child: Text("Done"),
-                ),
-              ],
-            ),
-          );
-        },
-        codeAutoRetrievalTimeout: (String verificationId) {
-          // Handle code auto retrieval timeout (optional)
-        },
-      );
-    } catch (e) {
-      print('Error during phone authentication: $e');
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -349,6 +140,7 @@ class _LoginPageState extends State<LoginPage> {
                                       child: ElevatedButton(
                                         onPressed: () {
                                           showDialog(
+                                            barrierColor: Colors.transparent,
                                             context: context,
                                             builder: (context) {
                                               return MyHomePage();
@@ -391,6 +183,8 @@ class _LoginPageState extends State<LoginPage> {
                                           style: FormTextStyle.purplehelvetica),
                                       onTap: () {
                                         showDialog(
+                                          barrierColor:
+                                              Colors.grey.withOpacity(0.5),
                                           context: context,
                                           builder: (context) {
                                             return CreateAccount();
@@ -407,7 +201,16 @@ class _LoginPageState extends State<LoginPage> {
                                   child: Text('Use without Log in',
                                       style: FormTextStyle.purplehelvetica),
                                   onTap: () async {
-                                    _showOtpVerificationDialog();
+                                    // _showOtpVerificationDialog();
+
+                                    showDialog(
+                                      barrierColor:
+                                          Colors.grey.withOpacity(0.5),
+                                      context: context,
+                                      builder: (context) {
+                                        return MblNoDialog();
+                                      },
+                                    );
                                     if (isVerified) {
                                       Navigator.push(
                                         context,
@@ -515,6 +318,8 @@ class _LoginPageState extends State<LoginPage> {
                                   child: ElevatedButton(
                                     onPressed: () {
                                       showDialog(
+                                        barrierColor:
+                                            Colors.grey.withOpacity(0.5),
                                         context: context,
                                         builder: (context) {
                                           return MyHomePage();
@@ -556,6 +361,8 @@ class _LoginPageState extends State<LoginPage> {
                                           style: FormTextStyle.purplehelvetica),
                                       onTap: () {
                                         showDialog(
+                                          barrierColor:
+                                              Colors.grey.withOpacity(0.5),
                                           context: context,
                                           builder: (context) {
                                             return CreateAccount();
@@ -572,7 +379,14 @@ class _LoginPageState extends State<LoginPage> {
                                   child: Text('Use without Log in',
                                       style: FormTextStyle.purplehelvetica),
                                   onTap: () async {
-                                    _showOtpVerificationDialog();
+                                    showDialog(
+                                      barrierColor:
+                                          Colors.grey.withOpacity(0.5),
+                                      context: context,
+                                      builder: (context) {
+                                        return MblNoDialog();
+                                      },
+                                    );
                                     if (isVerified) {
                                       Navigator.push(
                                         context,
