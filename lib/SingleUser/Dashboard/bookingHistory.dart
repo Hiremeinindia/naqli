@@ -98,7 +98,6 @@ class _BookingHistroyState extends State<BookingHistroy> {
                 Container(
                   //width:300; // Set width to match screen width
                   decoration: BoxDecoration(
-                    border: Border.all(width: 0.5),
                     borderRadius: BorderRadius.circular(5),
                     boxShadow: [
                       BoxShadow(
@@ -119,6 +118,15 @@ class _BookingHistroyState extends State<BookingHistroy> {
                         width: 1100,
                         child: DataTable(
                           decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: Color.fromRGBO(199, 199, 199, 1)
+                                    .withOpacity(0.5),
+                                blurRadius: 1,
+                                spreadRadius: 2,
+                                offset: Offset(0, 0.5), // Bottom side shadow
+                              ),
+                            ],
                             borderRadius: BorderRadius.only(
                               topLeft: Radius.circular(5),
                               topRight: Radius.circular(5),
@@ -138,8 +146,8 @@ class _BookingHistroyState extends State<BookingHistroy> {
                               'Mode',
                               style: TextStyle(
                                   color: Colors.white,
-                                  fontSize: 12,
-                                  fontFamily: 'SFproText-Regular'),
+                                  fontSize: 20,
+                                  fontFamily: 'SFproText'),
                               textAlign: TextAlign.center,
                             ))),
                             DataColumn(
@@ -148,8 +156,8 @@ class _BookingHistroyState extends State<BookingHistroy> {
                               'Booking Id',
                               style: TextStyle(
                                   color: Colors.white,
-                                  fontSize: 12,
-                                  fontFamily: 'SFproText-Regular'),
+                                  fontSize: 20,
+                                  fontFamily: 'SFproText'),
                               textAlign: TextAlign.center,
                             ))),
                             DataColumn(
@@ -158,8 +166,8 @@ class _BookingHistroyState extends State<BookingHistroy> {
                               'Date',
                               style: TextStyle(
                                   color: Colors.white,
-                                  fontSize: 12,
-                                  fontFamily: 'SFproText-Regular'),
+                                  fontSize: 20,
+                                  fontFamily: 'SFproText'),
                               textAlign: TextAlign.center,
                             ))),
                             DataColumn(
@@ -168,8 +176,8 @@ class _BookingHistroyState extends State<BookingHistroy> {
                               'Unit Type',
                               style: TextStyle(
                                   color: Colors.white,
-                                  fontSize: 12,
-                                  fontFamily: 'SFproText-Regular'),
+                                  fontSize: 20,
+                                  fontFamily: 'SFproText'),
                               textAlign: TextAlign.center,
                             ))),
                             DataColumn(
@@ -178,8 +186,8 @@ class _BookingHistroyState extends State<BookingHistroy> {
                               'Payment',
                               style: TextStyle(
                                   color: Colors.white,
-                                  fontSize: 12,
-                                  fontFamily: 'SFproText-Regular'),
+                                  fontSize: 20,
+                                  fontFamily: 'SFproText'),
                               textAlign: TextAlign.center,
                             ))),
                           ],
@@ -199,8 +207,10 @@ class _BookingHistroyState extends State<BookingHistroy> {
                                       alignment: Alignment.center,
                                       child: Text(item,
                                           style: TextStyle(
-                                              fontSize: 12,
-                                              fontFamily: 'SFproText-Regular')),
+                                              fontSize: 15,
+                                              fontFamily: 'SFproText',
+                                              color:
+                                                  Color.fromRGBO(10, 5, 5, 1))),
                                     ),
                                   ),
                               ],
@@ -218,10 +228,13 @@ class _BookingHistroyState extends State<BookingHistroy> {
                                     Container(
                                       height: 65, // Adjust height as needed
                                       alignment: Alignment.center,
-                                      child: Text(item,
-                                          style: TextStyle(
-                                              fontSize: 12,
-                                              fontFamily: 'SFproText-Regular')),
+                                      child: Text(
+                                        item,
+                                        style: TextStyle(
+                                            fontSize: 15,
+                                            fontFamily: 'SFproText',
+                                            color: Color.fromRGBO(10, 5, 5, 1)),
+                                      ),
                                     ),
                                   ),
                               ],
@@ -242,8 +255,9 @@ class _BookingHistroyState extends State<BookingHistroy> {
                                       child: Text(
                                         item,
                                         style: TextStyle(
-                                            fontSize: 12,
-                                            fontFamily: 'SFproText-Regular'),
+                                            fontSize: 15,
+                                            fontFamily: 'SFproText',
+                                            color: Color.fromRGBO(10, 5, 5, 1)),
                                       ),
                                     ),
                                   ),
@@ -274,7 +288,7 @@ class _BookingHistroyState extends State<BookingHistroy> {
                 Container(
                   height: 80,
                   child: Padding(
-                    padding: const EdgeInsets.only(left: 50, top: 30),
+                    padding: const EdgeInsets.only(left: 70, top: 30),
                     child: Text('Booking History',
                         style: TextStyle(
                             fontSize: 30,
@@ -286,7 +300,6 @@ class _BookingHistroyState extends State<BookingHistroy> {
                 Container(
                   //width:300; // Set width to match screen width
                   decoration: BoxDecoration(
-                    border: Border.all(width: 0.5),
                     borderRadius: BorderRadius.circular(5),
                     boxShadow: [
                       BoxShadow(
@@ -307,6 +320,15 @@ class _BookingHistroyState extends State<BookingHistroy> {
                         width: 1100,
                         child: DataTable(
                           decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: Color.fromRGBO(199, 199, 199, 1)
+                                    .withOpacity(0.5),
+                                blurRadius: 1,
+                                spreadRadius: 2,
+                                offset: Offset(0, 0.5), // Bottom side shadow
+                              ),
+                            ],
                             borderRadius: BorderRadius.only(
                               topLeft: Radius.circular(5),
                               topRight: Radius.circular(5),
@@ -326,8 +348,8 @@ class _BookingHistroyState extends State<BookingHistroy> {
                               'Mode',
                               style: TextStyle(
                                   color: Colors.white,
-                                  fontSize: 12,
-                                  fontFamily: 'SFproText-Regular'),
+                                  fontSize: 20,
+                                  fontFamily: 'SFproText'),
                               textAlign: TextAlign.center,
                             ))),
                             DataColumn(
@@ -336,8 +358,8 @@ class _BookingHistroyState extends State<BookingHistroy> {
                               'Booking Id',
                               style: TextStyle(
                                   color: Colors.white,
-                                  fontSize: 12,
-                                  fontFamily: 'SFproText-Regular'),
+                                  fontSize: 20,
+                                  fontFamily: 'SFproText'),
                               textAlign: TextAlign.center,
                             ))),
                             DataColumn(
@@ -346,8 +368,8 @@ class _BookingHistroyState extends State<BookingHistroy> {
                               'Date',
                               style: TextStyle(
                                   color: Colors.white,
-                                  fontSize: 12,
-                                  fontFamily: 'SFproText-Regular'),
+                                  fontSize: 20,
+                                  fontFamily: 'SFproText'),
                               textAlign: TextAlign.center,
                             ))),
                             DataColumn(
@@ -356,8 +378,8 @@ class _BookingHistroyState extends State<BookingHistroy> {
                               'Unit Type',
                               style: TextStyle(
                                   color: Colors.white,
-                                  fontSize: 12,
-                                  fontFamily: 'SFproText-Regular'),
+                                  fontSize: 20,
+                                  fontFamily: 'SFproText'),
                               textAlign: TextAlign.center,
                             ))),
                             DataColumn(
@@ -366,8 +388,8 @@ class _BookingHistroyState extends State<BookingHistroy> {
                               'Payment',
                               style: TextStyle(
                                   color: Colors.white,
-                                  fontSize: 12,
-                                  fontFamily: 'SFproText-Regular'),
+                                  fontSize: 20,
+                                  fontFamily: 'SFproText'),
                               textAlign: TextAlign.center,
                             ))),
                           ],
@@ -387,8 +409,10 @@ class _BookingHistroyState extends State<BookingHistroy> {
                                       alignment: Alignment.center,
                                       child: Text(item,
                                           style: TextStyle(
-                                              fontSize: 12,
-                                              fontFamily: 'SFproText-Regular')),
+                                              fontSize: 15,
+                                              fontFamily: 'SFproText',
+                                              color:
+                                                  Color.fromRGBO(10, 5, 5, 1))),
                                     ),
                                   ),
                               ],
@@ -408,8 +432,10 @@ class _BookingHistroyState extends State<BookingHistroy> {
                                       alignment: Alignment.center,
                                       child: Text(item,
                                           style: TextStyle(
-                                              fontSize: 12,
-                                              fontFamily: 'SFproText-Regular')),
+                                              fontSize: 15,
+                                              fontFamily: 'SFproText',
+                                              color:
+                                                  Color.fromRGBO(10, 5, 5, 1))),
                                     ),
                                   ),
                               ],
@@ -430,8 +456,9 @@ class _BookingHistroyState extends State<BookingHistroy> {
                                       child: Text(
                                         item,
                                         style: TextStyle(
-                                            fontSize: 12,
-                                            fontFamily: 'SFproText-Regular'),
+                                            fontSize: 15,
+                                            fontFamily: 'SFproText',
+                                            color: Color.fromRGBO(10, 5, 5, 1)),
                                       ),
                                     ),
                                   ),
