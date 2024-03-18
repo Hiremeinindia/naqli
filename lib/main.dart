@@ -1,10 +1,10 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/OneTimeBooking/availableUnits.dart';
-import 'package:flutter_application_1/SingleUser/Dashboard/bookingHistory.dart';
-import 'package:flutter_application_1/SingleUser/Dashboard/dashboard_page.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'DialogBox/bookingSuccessful.dart';
+import 'Users/SingleUser/dashboard_page.dart';
 import 'classes/language_constants.dart';
+import 'confirmtrip.dart';
 import 'gen_l10n/app_localizations.dart';
 import 'homePage.dart';
 

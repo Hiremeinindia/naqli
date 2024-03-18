@@ -5,6 +5,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter/painting.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_application_1/Widgets/customButton.dart';
 import 'package:flutter_application_1/Widgets/customTextField.dart';
@@ -12,8 +13,7 @@ import 'package:flutter_application_1/classes/language.dart';
 import 'package:flutter_application_1/classes/language_constants.dart';
 import 'package:sizer/sizer.dart';
 
-import '../Widgets/formText.dart';
-import '../main.dart';
+import '../../Widgets/formText.dart';
 
 class AvailableUnits extends StatefulWidget {
   const AvailableUnits({
@@ -37,36 +37,41 @@ class _AvailableUnitsState extends State<AvailableUnits> {
     return Sizer(builder: (context, orientation, deviceType) {
       return LayoutBuilder(
           builder: (BuildContext ctx, BoxConstraints constraints) {
-        if (constraints.maxWidth >= 650) {
+        if (constraints.maxWidth >= 720) {
           return Scaffold(
               appBar: PreferredSize(
                 preferredSize: Size.fromHeight(75),
                 child: Material(
                   child: Padding(
-                    padding: EdgeInsets.fromLTRB(5.w, 0, 2.5.w, 0),
+                    padding: EdgeInsets.fromLTRB(17.w, 0, 17.w, 0),
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Image.asset(
-                          'Naqli-final-logo.png',
+                          'naqlilogo.png',
+                          height: 75,
+                          width: 100,
                         ),
                         Row(
                           children: [
-                            TextButton(
-                              onPressed: () {
-                                // Handle the first button press
-                              },
-                              child: Text(
-                                'User',
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  fontFamily: "HelveticaNeue",
-                                  color: Color.fromRGBO(183, 183, 183, 1),
+                            Align(
+                              alignment: Alignment.center,
+                              child: TextButton(
+                                onPressed: () {
+                                  // Handle the first button press
+                                },
+                                child: Text(
+                                  'User',
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    fontFamily: "Helvetica",
+                                    color: Color.fromRGBO(112, 112, 112, 1),
+                                  ),
                                 ),
                               ),
                             ),
                             SizedBox(
-                              height: 30,
+                              height: 20,
                               child: VerticalDivider(
                                 color: Color.fromRGBO(206, 203, 203, 1),
                               ),
@@ -78,8 +83,8 @@ class _AvailableUnitsState extends State<AvailableUnits> {
                               child: Text(
                                 'Partner',
                                 style: TextStyle(
-                                  fontSize: 16,
-                                  fontFamily: "HelveticaNeue",
+                                  fontSize: 20,
+                                  fontFamily: "Helvetica",
                                   color: Color.fromRGBO(206, 203, 203, 1),
                                 ),
                               ),
@@ -88,129 +93,19 @@ class _AvailableUnitsState extends State<AvailableUnits> {
                         ),
                         Row(
                           children: [
-                            DropdownButtonHideUnderline(
-                              child: DropdownButton2<Language>(
-                                isExpanded: true,
-                                hint: Row(
-                                  children: [
-                                    Text(
-                                      translation(context).english,
-                                      style: TabelText.helvetica11,
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                    Expanded(child: SizedBox()),
-                                    Icon(
-                                      Icons.arrow_drop_down,
-                                      color: Colors.black,
-                                      size: 25,
-                                    )
-                                  ],
-                                ),
-                                onChanged: (Language? language) async {
-                                  if (language != null) {
-                                    Locale _locale =
-                                        await setLocale(language.languageCode);
-                                    MyApp.setLocale(context, _locale);
-                                  } else {
-                                    language;
-                                  }
-                                },
-                                items: Language.languageList()
-                                    .map<DropdownMenuItem<Language>>(
-                                      (e) => DropdownMenuItem<Language>(
-                                        value: e,
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceAround,
-                                          children: <Widget>[
-                                            Text(
-                                              e.flag,
-                                              style: TabelText.helvetica11,
-                                              overflow: TextOverflow.ellipsis,
-                                            ),
-                                            Text(
-                                              e.langname,
-                                              style: TabelText.helvetica11,
-                                              overflow: TextOverflow.ellipsis,
-                                            )
-                                          ],
-                                        ),
-                                      ),
-                                    )
-                                    .toList(),
-                                buttonStyleData: ButtonStyleData(
-                                  height: 30,
-                                  width: 130,
-                                  padding: const EdgeInsets.only(
-                                      left: 14, right: 14),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(8),
-                                    border: Border.all(
-                                      color: Colors.black26,
-                                    ),
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                iconStyleData: const IconStyleData(
-                                  icon: Icon(
-                                    Icons.arrow_drop_down_sharp,
-                                  ),
-                                  iconSize: 25,
-                                  iconEnabledColor: Colors.white,
-                                  iconDisabledColor: null,
-                                ),
-                                dropdownStyleData: DropdownStyleData(
-                                  maxHeight: 210,
-                                  padding: EdgeInsets.only(
-                                      left: 10, right: 10, top: 5, bottom: 15),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(5),
-                                    border: Border.all(color: Colors.black26),
-                                    color: Colors.white,
-                                  ),
-                                  scrollPadding: EdgeInsets.all(5),
-                                  scrollbarTheme: ScrollbarThemeData(
-                                    thickness:
-                                        MaterialStateProperty.all<double>(6),
-                                    thumbVisibility:
-                                        MaterialStateProperty.all<bool>(true),
-                                  ),
-                                ),
-                                menuItemStyleData: const MenuItemStyleData(
-                                  height: 25,
-                                  padding: EdgeInsets.only(left: 14, right: 14),
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            SizedBox(
-                              height: 40,
-                              child: VerticalDivider(
-                                color: Colors.black,
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                left: 5,
-                              ),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text("Hello Faizal!",
-                                      style: TabelText.helvetica11),
-                                  Text("Admin", style: TabelText.usertext),
-                                  Text("Faizal industries",
-                                      style: TabelText.usertext),
-                                ],
-                              ),
-                            ),
                             Icon(
                               Icons.notifications,
                               color: Color.fromRGBO(106, 102, 209, 1),
                             ),
+                            Text("Contact Us ", style: TabelText.helvetica11),
+                            SizedBox(
+                              height: 20,
+                              child: VerticalDivider(
+                                color: Colors.black,
+                              ),
+                            ),
+                            Text("Hello Customer!",
+                                style: TabelText.helvetica11),
                           ],
                         ),
                       ],

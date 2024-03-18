@@ -4,7 +4,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_application_1/bookingdialog.dart';
+import 'package:flutter_application_1/DialogBox/bookingdialog.dart';
 
 import 'package:sizer/sizer.dart';
 import '../../Widgets/customButton.dart';
@@ -17,14 +17,14 @@ import 'dashboard.dart';
 import 'payments.dart';
 import 'trigger_booking.dart';
 
-class DashboardPage extends StatefulWidget {
-  const DashboardPage({Key? key}) : super(key: key);
+class SuperUserDashboardPage extends StatefulWidget {
+  const SuperUserDashboardPage({Key? key}) : super(key: key);
 
   @override
-  State<DashboardPage> createState() => _MyHomePageState();
+  State<SuperUserDashboardPage> createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<DashboardPage> {
+class _MyHomePageState extends State<SuperUserDashboardPage> {
   PageController page = PageController();
   SideMenuController sideMenu = SideMenuController();
   bool value = false;

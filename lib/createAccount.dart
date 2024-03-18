@@ -1,20 +1,18 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-
-import 'package:flutter_application_1/SuperUser/Dashboard/dashboard_page.dart';
 import 'package:sizer/sizer.dart';
+import 'Users/SuperUser/dashboard_page.dart';
+import 'loginPage.dart';
 
-import '../loginPage.dart';
-
-class SuperuserCreateAccount extends StatefulWidget {
-  const SuperuserCreateAccount();
+class CreateAccount extends StatefulWidget {
+  const CreateAccount();
 
   @override
-  _SuperuserCreateAccountState createState() => _SuperuserCreateAccountState();
+  _CreateAccountState createState() => _CreateAccountState();
 }
 
-class _SuperuserCreateAccountState extends State<SuperuserCreateAccount> {
+class _CreateAccountState extends State<CreateAccount> {
   final _formKey = GlobalKey<FormState>();
 
   List<String> cities = ['City 1', 'City 2', 'City 3', 'City 4'];
@@ -139,7 +137,7 @@ class _SuperuserCreateAccountState extends State<SuperuserCreateAccount> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => DashboardPage(),
+                            builder: (context) => SuperUserDashboardPage(),
                           ),
                         );
                         setState(() {
@@ -263,7 +261,7 @@ class _SuperuserCreateAccountState extends State<SuperuserCreateAccount> {
     return Sizer(builder: (context, orientation, deviceType) {
       return LayoutBuilder(
           builder: (BuildContext ctx, BoxConstraints constraints) {
-        if (constraints.maxWidth >= 650) {
+        if (constraints.maxWidth >= 670) {
           return Dialog(
             child: Container(
               width: 1100,
@@ -278,8 +276,8 @@ class _SuperuserCreateAccountState extends State<SuperuserCreateAccount> {
                 ),
               ),
               child: Padding(
-                padding: const EdgeInsets.only(
-                    left: 100, right: 100, top: 50, bottom: 45),
+                padding: EdgeInsets.only(
+                    left: 10.h, right: 10.h, top: 50, bottom: 45),
                 child: Form(
                   key: _formKey,
                   child: Column(
@@ -469,6 +467,7 @@ class _SuperuserCreateAccountState extends State<SuperuserCreateAccount> {
                                 SizedBox(
                                   height: 45,
                                   child: DropdownButtonFormField(
+                                    isExpanded: true,
                                     decoration: InputDecoration(
                                       contentPadding: EdgeInsets.all(5.0),
                                       border: OutlineInputBorder(
@@ -486,7 +485,8 @@ class _SuperuserCreateAccountState extends State<SuperuserCreateAccount> {
                                         (String value) {
                                       return DropdownMenuItem<String>(
                                         value: value,
-                                        child: Text(value),
+                                        child: Text(value,
+                                            style: TextStyle(fontSize: 14)),
                                       );
                                     }).toList(),
                                   ),
@@ -497,6 +497,7 @@ class _SuperuserCreateAccountState extends State<SuperuserCreateAccount> {
                                 SizedBox(
                                   height: 45,
                                   child: DropdownButtonFormField<String>(
+                                    isExpanded: true,
                                     value: selectedOption,
                                     decoration: InputDecoration(
                                       contentPadding: EdgeInsets.all(5.0),
@@ -513,15 +514,18 @@ class _SuperuserCreateAccountState extends State<SuperuserCreateAccount> {
                                     items: [
                                       DropdownMenuItem<String>(
                                         value: 'National ID',
-                                        child: Text('National ID'),
+                                        child: Text('National ID',
+                                            style: TextStyle(fontSize: 14)),
                                       ),
                                       DropdownMenuItem<String>(
                                         value: 'Iqama No.',
-                                        child: Text('Iqama No.'),
+                                        child: Text('Iqama No.',
+                                            style: TextStyle(fontSize: 14)),
                                       ),
                                       DropdownMenuItem<String>(
                                         value: 'Visit Visa / Border No',
-                                        child: Text('Visit Visa / Border No'),
+                                        child: Text('Visit Visa / Border No',
+                                            style: TextStyle(fontSize: 14)),
                                       ),
                                     ],
                                   ),
@@ -631,6 +635,7 @@ class _SuperuserCreateAccountState extends State<SuperuserCreateAccount> {
                                 SizedBox(
                                   height: 45,
                                   child: DropdownButtonFormField<String>(
+                                    isExpanded: true,
                                     value: selectedType,
                                     decoration: InputDecoration(
                                       contentPadding: EdgeInsets.all(5.0),
@@ -647,15 +652,18 @@ class _SuperuserCreateAccountState extends State<SuperuserCreateAccount> {
                                     items: [
                                       DropdownMenuItem<String>(
                                         value: 'User',
-                                        child: Text('User'),
+                                        child: Text('User',
+                                            style: TextStyle(fontSize: 14)),
                                       ),
                                       DropdownMenuItem<String>(
                                         value: 'SuperUser',
-                                        child: Text('SuperUser'),
+                                        child: Text('SuperUser',
+                                            style: TextStyle(fontSize: 14)),
                                       ),
                                       DropdownMenuItem<String>(
                                         value: 'Enterprise',
-                                        child: Text('Enterprise'),
+                                        child: Text('Enterprise',
+                                            style: TextStyle(fontSize: 14)),
                                       ),
                                     ],
                                   ),
