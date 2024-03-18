@@ -319,7 +319,7 @@ class _MyHomePageState extends State<SingleUserDashboardPage> {
                                 ),
                                 items: [
                                   SideMenuItem(
-                                    title: 'Current Booking',
+                                    title: 'Booking',
                                     onTap: (page, _) {
                                       setState(() {
                                         _currentContent = Dashboard();
@@ -456,7 +456,7 @@ class _MyHomePageState extends State<SingleUserDashboardPage> {
                     ListTile(
                         hoverColor: Colors.indigo.shade100,
                         title: Text(
-                          'Dashboard',
+                          'Booking',
                           style: TextStyle(color: Colors.black),
                         ),
                         onTap: () {
@@ -471,7 +471,7 @@ class _MyHomePageState extends State<SingleUserDashboardPage> {
                     ListTile(
                         hoverColor: Colors.indigo.shade100,
                         title: Text(
-                          'Trigger Booking',
+                          'Booking History',
                           style: TextStyle(color: Colors.black),
                         ),
                         onTap: () {
@@ -486,12 +486,12 @@ class _MyHomePageState extends State<SingleUserDashboardPage> {
                     ListTile(
                         hoverColor: Colors.indigo.shade100,
                         title: Text(
-                          'Booking Manager',
+                          'Payments',
                           style: TextStyle(color: Colors.black),
                         ),
                         onTap: () {
                           setState(() {
-                            _currentContent = Bookings();
+                            _currentContent = SingleUserPayment();
                           });
                           Navigator.pop(context);
                         }),
@@ -501,7 +501,7 @@ class _MyHomePageState extends State<SingleUserDashboardPage> {
                     ListTile(
                         hoverColor: Colors.indigo.shade100,
                         title: Text(
-                          'Payments',
+                          'Report',
                           style: TextStyle(color: Colors.black),
                         ),
                         onTap: () {
