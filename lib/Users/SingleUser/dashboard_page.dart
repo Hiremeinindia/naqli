@@ -401,7 +401,7 @@ class _MyHomePageState extends State<SingleUserDashboardPage> {
                                     title: 'Booking',
                                     onTap: (page, _) {
                                       setState(() {
-                                        _currentContent = Dashboard();
+                                        _currentContent = Bookings();
                                       });
                                       sideMenu.changePage(page);
                                     },
