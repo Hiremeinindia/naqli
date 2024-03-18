@@ -4,7 +4,7 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:flutter_application_1/SuperUser/createAccount.dart';
+import 'package:flutter_application_1/createAccount.dart';
 import 'package:flutter_application_1/classes/language.dart';
 import 'package:flutter_application_1/classes/language_constants.dart';
 import 'package:flutter_application_1/main.dart';
@@ -184,14 +184,12 @@ class _MyHomePageState extends State<MyHomePage> {
                               ),
                             ),
                             SizedBox(
-                              height: 40,
-                              child: VerticalDivider(
-                                color: Colors.black,
-                              ),
+                              width: 10,
                             ),
                             InkWell(
                               onTap: () {
                                 showDialog(
+                                  barrierColor: Colors.grey.withOpacity(0.5),
                                   context: context,
                                   builder: (context) {
                                     return LoginPage();

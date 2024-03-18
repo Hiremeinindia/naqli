@@ -2,8 +2,6 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:easy_sidemenu/easy_sidemenu.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/Enterprise/Dashboard/contracts.dart';
-import 'package:flutter_application_1/Enterprise/Dashboard/newContract.dart';
 import 'package:flutter_application_1/classes/language.dart';
 
 import 'package:sizer/sizer.dart';
@@ -12,6 +10,7 @@ import '../../Widgets/formText.dart';
 import '../../classes/language_constants.dart';
 import '../../main.dart';
 import 'bookings.dart';
+import 'contracts.dart';
 import 'dashboard.dart';
 import 'payments.dart';
 import 'trigger_booking.dart';
