@@ -20,8 +20,12 @@ class FormTextStyle {
       fontFamily: 'Poppins');
   static TextStyle buttonText = TextStyle(
     fontFamily: 'Helvetica',
-    fontWeight: FontWeight.bold,
     color: Colors.white,
+    fontSize: 13,
+  );
+  static TextStyle purplehelvetica = TextStyle(
+    fontFamily: 'Helvetica',
+    color: Color.fromRGBO(128, 123, 229, 1),
     fontSize: 13,
   );
   static TextStyle poppins10 = TextStyle(
