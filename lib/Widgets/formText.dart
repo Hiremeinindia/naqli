@@ -71,6 +71,26 @@ class TabelText {
     fontFamily: 'Helvetica',
     fontSize: 12,
   );
+  static TextStyle tableText3 = TextStyle(
+    color: Color.fromRGBO(80, 69, 74, 1),
+    fontFamily: 'Helvetica',
+    fontSize: 18,
+  );
+  static TextStyle tableText4 = TextStyle(
+    color: Colors.grey,
+    fontFamily: 'Helvetica',
+    fontSize: 15,
+  );
+  static TextStyle tableText5 = TextStyle(
+    color: Colors.black,
+    fontFamily: 'Helvetica',
+    fontSize: 15,
+  );
+  static TextStyle usertext = TextStyle(
+    fontSize: 10,
+    fontFamily: "HelveticaNeue",
+    color: Color.fromRGBO(112, 112, 112, 1),
+  );
   static TextStyle headerText = TextStyle(
     color: Colors.white,
     fontFamily: 'SFProTextMedium',
@@ -107,20 +127,5 @@ class TabelText {
     fontWeight: FontWeight.bold,
     color: Color.fromRGBO(152, 135, 135, 1),
     fontSize: 10,
-  );
-  static TextStyle tableText3 = TextStyle(
-    color: Color.fromRGBO(80, 69, 74, 1),
-    fontFamily: 'Helvetica',
-    fontSize: 18,
-  );
-  static TextStyle tableText4 = TextStyle(
-    color: Colors.grey,
-    fontFamily: 'Helvetica',
-    fontSize: 15,
-  );
-  static TextStyle usertext = TextStyle(
-    fontSize: 10,
-    fontFamily: "HelveticaNeue",
-    color: Color.fromRGBO(112, 112, 112, 1),
   );
 }

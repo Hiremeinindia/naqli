@@ -81,13 +81,17 @@ final class CustomTextfieldGrey extends StatelessWidget {
         controller: controller,
         decoration: InputDecoration(
           contentPadding: EdgeInsets.only(left: 12),
-          hintStyle: TextStyle(fontSize: 12, fontFamily: 'SegoeItalic'),
+          hintStyle: TextStyle(
+              fontSize: 13,
+              fontFamily: 'SFProText',
+              fontWeight: FontWeight.normal,
+              color: Color.fromRGBO(183, 183, 183, 1)),
           hintText: text,
           errorText: text1,
           errorStyle: TextStyle(height: 0, fontSize: 8.5),
           errorMaxLines: 2,
           border: OutlineInputBorder(
-              borderSide: BorderSide(color: Color.fromRGBO(183, 183, 183, 1)),
+              borderSide: BorderSide(color: Color.fromRGBO(218, 218, 218, 1)),
               borderRadius: BorderRadius.all(Radius.circular(5))),
         ),
       ),
