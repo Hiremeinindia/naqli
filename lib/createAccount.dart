@@ -1,9 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_application_1/Users/SingleUser/dashboard_page.dart';
+
+import 'package:flutter_application_1/loginPage.dart';
 import 'package:sizer/sizer.dart';
-import 'Users/SuperUser/dashboard_page.dart';
-import 'loginPage.dart';
 
 class CreateAccount extends StatefulWidget {
   const CreateAccount();
@@ -137,7 +138,7 @@ class _CreateAccountState extends State<CreateAccount> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => SuperUserDashboardPage(),
+                            builder: (context) => SingleUserDashboardPage(),
                           ),
                         );
                         setState(() {
@@ -261,7 +262,7 @@ class _CreateAccountState extends State<CreateAccount> {
     return Sizer(builder: (context, orientation, deviceType) {
       return LayoutBuilder(
           builder: (BuildContext ctx, BoxConstraints constraints) {
-        if (constraints.maxWidth >= 670) {
+        if (constraints.maxWidth >= 650) {
           return Dialog(
             child: Container(
               width: 1100,
@@ -276,8 +277,8 @@ class _CreateAccountState extends State<CreateAccount> {
                 ),
               ),
               child: Padding(
-                padding: EdgeInsets.only(
-                    left: 10.h, right: 10.h, top: 50, bottom: 45),
+                padding:
+                    EdgeInsets.only(left: 5.w, right: 5.w, top: 50, bottom: 45),
                 child: Form(
                   key: _formKey,
                   child: Column(
