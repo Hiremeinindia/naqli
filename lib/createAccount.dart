@@ -1,9 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_application_1/Users/SingleUser/dashboard_page.dart';
+
+import 'package:flutter_application_1/loginPage.dart';
 import 'package:sizer/sizer.dart';
-import 'Users/SuperUser/dashboard_page.dart';
-import 'loginPage.dart';
 
 class CreateAccount extends StatefulWidget {
   const CreateAccount();
@@ -137,7 +138,7 @@ class _CreateAccountState extends State<CreateAccount> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => SuperUserDashboardPage(),
+                            builder: (context) => SingleUserDashboardPage(),
                           ),
                         );
                         setState(() {
@@ -244,7 +245,7 @@ class _CreateAccountState extends State<CreateAccount> {
 
   String? validatePassword(String? value) {
     RegExp regex =
-        RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$');
+        RegExp(r'^(?=.?[A-Z])(?=.?[a-z])(?=.?[0-9])(?=.?[!@#\$&*~]).{8,}$');
     if (value!.isEmpty) {
       return 'Please enter password';
     } else {
@@ -261,7 +262,7 @@ class _CreateAccountState extends State<CreateAccount> {
     return Sizer(builder: (context, orientation, deviceType) {
       return LayoutBuilder(
           builder: (BuildContext ctx, BoxConstraints constraints) {
-        if (constraints.maxWidth >= 670) {
+        if (constraints.maxWidth >= 650) {
           return Dialog(
             child: Container(
               width: 1100,
@@ -276,8 +277,8 @@ class _CreateAccountState extends State<CreateAccount> {
                 ),
               ),
               child: Padding(
-                padding: EdgeInsets.only(
-                    left: 10.h, right: 10.h, top: 50, bottom: 45),
+                padding:
+                    EdgeInsets.only(left: 5.w, right: 5.w, top: 50, bottom: 45),
                 child: Form(
                   key: _formKey,
                   child: Column(
@@ -486,7 +487,7 @@ class _CreateAccountState extends State<CreateAccount> {
                                       return DropdownMenuItem<String>(
                                         value: value,
                                         child: Text(value,
-                                            style: TextStyle(fontSize: 14)),
+                                            style: TextStyle(fontSize: 16)),
                                       );
                                     }).toList(),
                                   ),
@@ -515,17 +516,17 @@ class _CreateAccountState extends State<CreateAccount> {
                                       DropdownMenuItem<String>(
                                         value: 'National ID',
                                         child: Text('National ID',
-                                            style: TextStyle(fontSize: 14)),
+                                            style: TextStyle(fontSize: 16)),
                                       ),
                                       DropdownMenuItem<String>(
                                         value: 'Iqama No.',
                                         child: Text('Iqama No.',
-                                            style: TextStyle(fontSize: 14)),
+                                            style: TextStyle(fontSize: 16)),
                                       ),
                                       DropdownMenuItem<String>(
                                         value: 'Visit Visa / Border No',
                                         child: Text('Visit Visa / Border No',
-                                            style: TextStyle(fontSize: 14)),
+                                            style: TextStyle(fontSize: 16)),
                                       ),
                                     ],
                                   ),
@@ -653,17 +654,17 @@ class _CreateAccountState extends State<CreateAccount> {
                                       DropdownMenuItem<String>(
                                         value: 'User',
                                         child: Text('User',
-                                            style: TextStyle(fontSize: 14)),
+                                            style: TextStyle(fontSize: 16)),
                                       ),
                                       DropdownMenuItem<String>(
                                         value: 'SuperUser',
                                         child: Text('SuperUser',
-                                            style: TextStyle(fontSize: 14)),
+                                            style: TextStyle(fontSize: 16)),
                                       ),
                                       DropdownMenuItem<String>(
                                         value: 'Enterprise',
                                         child: Text('Enterprise',
-                                            style: TextStyle(fontSize: 14)),
+                                            style: TextStyle(fontSize: 16)),
                                       ),
                                     ],
                                   ),
@@ -1087,6 +1088,7 @@ class _CreateAccountState extends State<CreateAccount> {
                             child: SizedBox(
                               height: 40,
                               child: DropdownButtonFormField(
+                                isExpanded: true,
                                 decoration: InputDecoration(
                                   contentPadding: EdgeInsets.all(5.0),
                                   border: OutlineInputBorder(
@@ -1104,7 +1106,8 @@ class _CreateAccountState extends State<CreateAccount> {
                                     (String value) {
                                   return DropdownMenuItem<String>(
                                     value: value,
-                                    child: Text(value),
+                                    child: Text(value,
+                                        style: TextStyle(fontSize: 14)),
                                   );
                                 }).toList(),
                               ),
@@ -1121,6 +1124,7 @@ class _CreateAccountState extends State<CreateAccount> {
                             child: SizedBox(
                               height: 40,
                               child: DropdownButtonFormField(
+                                isExpanded: true,
                                 value: selectedType,
                                 decoration: InputDecoration(
                                   contentPadding: EdgeInsets.all(5.0),
@@ -1138,12 +1142,12 @@ class _CreateAccountState extends State<CreateAccount> {
                                   DropdownMenuItem<String>(
                                     value: 'Individual',
                                     child: Text('Individual',
-                                        style: TextStyle(fontSize: 8.sp)),
+                                        style: TextStyle(fontSize: 14)),
                                   ),
                                   DropdownMenuItem<String>(
                                     value: 'Company',
                                     child: Text('Company',
-                                        style: TextStyle(fontSize: 8.sp)),
+                                        style: TextStyle(fontSize: 14)),
                                   ),
                                 ],
                               ),
@@ -1160,6 +1164,7 @@ class _CreateAccountState extends State<CreateAccount> {
                             child: SizedBox(
                               height: 40,
                               child: DropdownButtonFormField(
+                                isExpanded: true,
                                 value: selectedOption,
                                 decoration: InputDecoration(
                                   contentPadding: EdgeInsets.all(5.0),
@@ -1178,21 +1183,21 @@ class _CreateAccountState extends State<CreateAccount> {
                                     value: 'National ID',
                                     child: Text(
                                       'National ID',
-                                      style: TextStyle(fontSize: 8.sp),
+                                      style: TextStyle(fontSize: 14),
                                     ),
                                   ),
                                   DropdownMenuItem<String>(
                                     value: 'Iqama No.',
                                     child: Text(
                                       'Iqama No.',
-                                      style: TextStyle(fontSize: 8.sp),
+                                      style: TextStyle(fontSize: 14),
                                     ),
                                   ),
                                   DropdownMenuItem<String>(
                                     value: 'Visit Visa / Border No',
                                     child: Text(
                                       'Visit Visa / Border No',
-                                      style: TextStyle(fontSize: 5.sp),
+                                      style: TextStyle(fontSize: 14),
                                     ),
                                   ),
                                 ],

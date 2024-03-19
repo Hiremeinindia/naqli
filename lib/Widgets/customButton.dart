@@ -87,7 +87,7 @@ final class ViewButton extends StatelessWidget {
             text!,
             style: TextStyle(
               fontFamily: 'Helvetica',
-              color: Color.fromRGBO(98, 106, 254, 1),
+              color: Color.fromRGBO(98, 105, 254, 1),
               fontSize: 12,
             ),
           ),

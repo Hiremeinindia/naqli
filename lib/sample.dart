@@ -1,448 +1,804 @@
-import 'package:easy_sidemenu/easy_sidemenu.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_application_1/Users/SingleUser/dashboard_page.dart';
 
+import 'package:flutter_application_1/loginPage.dart';
 import 'package:sizer/sizer.dart';
 
-class BookingHistory1 extends StatefulWidget {
-  const BookingHistory1({Key? key}) : super(key: key);
+class SingleuserCreateAccount1 extends StatefulWidget {
+  const SingleuserCreateAccount1();
+
   @override
-  _BookingHistoryState createState() => _BookingHistoryState();
+  _SingleuserCreateAccountState createState() =>
+      _SingleuserCreateAccountState();
 }
 
-class _BookingHistoryState extends State<BookingHistory1> {
-  PageController page = PageController();
-  SideMenuController sideMenu = SideMenuController();
-  ScrollController _scrollController = ScrollController();
+class _SingleuserCreateAccountState extends State<SingleuserCreateAccount1> {
+  final _formKey = GlobalKey<FormState>();
 
-  bool value = false;
-  String month = '';
-  bool checkbox1 = false;
-  bool checkbox2 = false;
-  bool checkbox3 = false;
-  bool isButtonEnabled = false;
-  bool isButtonEnabled1 = false;
-  bool isButtonEnabled2 = false;
-  int? selectedRadioValue;
-  int? selectedRadioValue1;
-  int? selectedRadioValue2;
-  bool payNowButtonEnabled = false;
-  String? selectedValue;
+  List<String> cities = ['City 1', 'City 2', 'City 3', 'City 4'];
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+  String? selectedCity;
+  String? selectedType;
+  String? selectedOption;
+  bool isVerified = false;
+
+  TextEditingController firstNameController = TextEditingController();
+  TextEditingController lastNameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController contactNumberController = TextEditingController();
+  TextEditingController addressController = TextEditingController();
+  TextEditingController govtIdController = TextEditingController();
+  TextEditingController confirmPasswordController = TextEditingController();
+  TextEditingController alternateNumberController = TextEditingController();
+  TextEditingController address2Controller = TextEditingController();
+  TextEditingController idNumberController = TextEditingController();
+  TextEditingController cityController = TextEditingController();
+  TextEditingController accounttypeController = TextEditingController();
+  TextEditingController otpController = TextEditingController();
+  void showErrorDialog(String errorMessage) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text("Error"),
+        content: Text(errorMessage),
+        actions: [
+          ElevatedButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            child: Text("OK"),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Future<void> _saveUserDataToFirestore() async {
+    print("track2");
+    try {
+      CollectionReference usersCollection = _firestore.collection('users');
+
+      await usersCollection.add({
+        'firstName': firstNameController.text,
+        'lastName': lastNameController.text,
+        'email': emailController.text,
+        'password': passwordController.text,
+        'phoneNumber': contactNumberController.text,
+        'address': addressController.text,
+        'city': selectedCity,
+        'govtId': selectedOption,
+        'confirmPassword': confirmPasswordController.text,
+        'alternateNumber': alternateNumberController.text,
+        'address2': address2Controller.text,
+        'accountType': selectedType,
+        'idNumber': idNumberController.text,
+      });
+
+      print('User data saved to Firestore successfully!');
+    } catch (e) {
+      print('Error saving user data to Firestore: $e');
+    }
+  }
+
+  Future<void> _startPhoneAuth(String phoneNumber) async {
+    print("track3");
+
+    FirebaseAuth _auth = FirebaseAuth.instance;
+
+    try {
+      await _auth.verifyPhoneNumber(
+        phoneNumber: "+91${contactNumberController.text}",
+        verificationCompleted: (PhoneAuthCredential credential) async {
+          await _auth.signInWithCredential(credential).then((value) {
+            Navigator.pop(context);
+            setState(() {
+              isVerified = true;
+            });
+          });
+        },
+        verificationFailed: (FirebaseAuthException e) {
+          // Handle the verification failure
+          print('Phone authentication failed: $e');
+        },
+        codeSent: (String verificationId, [int? forceResendingToken]) {
+          // Store the verification ID for later use (e.g., resend OTP)
+          String storedVerificationId = verificationId;
+
+          showDialog(
+            context: context,
+            barrierDismissible: false,
+            builder: (context) => AlertDialog(
+              title: Text("Enter OTP"),
+              content: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  TextField(
+                    controller: otpController,
+                  ),
+                ],
+              ),
+              actions: [
+                ElevatedButton(
+                  onPressed: () {
+                    FirebaseAuth auth = FirebaseAuth.instance;
+                    String smsCode = otpController.text;
+                    PhoneAuthCredential _credential =
+                        PhoneAuthProvider.credential(
+                      verificationId: storedVerificationId,
+                      smsCode: smsCode,
+                    );
+
+                    auth.signInWithCredential(_credential).then((result) {
+                      // Check if the verification is successful
+                      if (result.user != null) {
+                        print("otp verified successfully");
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => SingleUserDashboardPage(),
+                          ),
+                        );
+                        setState(() {
+                          isVerified = true;
+                        });
+                      } else {
+                        showErrorDialog(
+                            "Invalid verification code. Please enter the correct code.");
+                      }
+                    }).catchError((e) {
+                      print("Error signing in with credential: $e");
+                    });
+                  },
+                  child: Text("Done"),
+                ),
+              ],
+            ),
+          );
+        },
+        codeAutoRetrievalTimeout: (String verificationId) {
+          // Handle code auto retrieval timeout (optional)
+        },
+      );
+    } catch (e) {
+      print('Error during phone authentication: $e');
+    }
+  }
+
+  void _showOtpVerificationDialog() {
+    print("track4");
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("Verification"),
+          content: Column(
+            children: [
+              Text("Enter OTP"),
+              TextField(
+                controller: otpController,
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(
+                  hintText: 'OTP',
+                ),
+              ),
+            ],
+          ),
+          actions: [
+            InkWell(
+              onTap: () {
+                Navigator.of(context).pop();
+              },
+              child: Text("Cancel"),
+            ),
+            InkWell(
+              onTap: () async {
+                // Validate OTP and proceed if valid
+                String enteredOtp = otpController.text;
+                if (enteredOtp.isNotEmpty) {
+                  // You can add OTP validation logic here
+                  // If the OTP is valid, you can perform further actions
+                  // For now, let's just close the dialog
+                  Navigator.of(context).pop();
+                } else {
+                  // Handle case where OTP is empty
+                }
+              },
+              child: Text("Verify"),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  bool isValidName(String name) {
+    final RegExp nameRegExp = RegExp(r"^[A-Za-z']+([- ][A-Za-z']+)*$");
+    return nameRegExp.hasMatch(name);
+  }
+
+  bool isValidEmail(String email) {
+    final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+    return emailRegex.hasMatch(email);
+  }
+
+  String? nameValidator(String? value) {
+    if (value == null || value.isEmpty) {
+      return '*Required';
+    } else if (!isValidName(value)) {
+      return 'Invalid format';
+    }
+    return null;
+  }
+
+  String? emailValidator(String? value) {
+    if (value == null || value.isEmpty) {
+      return '*Required';
+    } else if (!isValidEmail(value)) {
+      return 'Invalid email format';
+    }
+    return null;
+  }
+
+  String? validatePassword(String? value) {
+    RegExp regex =
+        RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$');
+    if (value!.isEmpty) {
+      return 'Please enter password';
+    } else {
+      if (!regex.hasMatch(value)) {
+        return 'Enter valid password';
+      } else {
+        return null;
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Sizer(builder: (context, orientation, deviceType) {
       return LayoutBuilder(
           builder: (BuildContext ctx, BoxConstraints constraints) {
-        if (constraints.maxWidth >= 1380) {
-          return Scaffold(
-            appBar: PreferredSize(
-              preferredSize: Size.fromHeight(75),
-              child: Material(
-                elevation: 3,
-                child: Padding(
-                  padding: EdgeInsets.fromLTRB(5.w, 0, 2.5.w, 0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        if (constraints.maxWidth >= 650) {
+          return Dialog(
+            child: Container(
+              width: 1100,
+              height: 750,
+              decoration: const BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(31),
+                  bottomLeft: Radius.circular(31),
+                  topRight: Radius.circular(31),
+                  bottomRight: Radius.circular(31),
+                ),
+              ),
+              child: Padding(
+                padding:
+                    EdgeInsets.only(left: 5.w, right: 5.w, top: 50, bottom: 45),
+                child: Form(
+                  key: _formKey,
+                  child: Column(
                     children: [
-                      Image.asset(
-                        'Naqli-final-logo.png',
-                        width: 10.w,
+                      Text(
+                        'Create your account',
+                        style: TextStyle(
+                          fontFamily: 'ColfaxBold',
+                          fontSize: 30,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 30,
                       ),
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          TextButton(
-                            onPressed: () {
-                              // Handle the first button press
-                            },
-                            child: Text(
-                              'User',
-                              style: TextStyle(
-                                fontSize: 20,
-                                fontFamily: "HelveticaNeue",
-                                color: Color.fromRGBO(112, 112, 112, 1),
+                          Text('First Name '),
+                          SizedBox(width: 75),
+                          Expanded(
+                            child: SizedBox(
+                              height: 45,
+                              width: 100,
+                              child: TextFormField(
+                                controller: firstNameController,
+                                validator: nameValidator,
+                                decoration: InputDecoration(
+                                  hintStyle: TextStyle(fontSize: 16),
+                                  hintText: 'First Name',
+                                  contentPadding: EdgeInsets.all(5.0),
+                                  border: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(5)),
+                                  ),
+                                ),
                               ),
                             ),
                           ),
-                          SizedBox(
-                            height: 30,
-                            child: VerticalDivider(
-                              color: Color.fromRGBO(206, 203, 203, 1),
-                            ),
-                          ),
-                          TextButton(
-                            onPressed: () {
-                              // Handle the third button press
-                            },
-                            child: Text(
-                              'Partner',
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontFamily: "HelveticaNeue",
-                                color: Color.fromRGBO(206, 203, 203, 1),
+                          SizedBox(width: 25),
+                          Expanded(
+                            child: SizedBox(
+                              height: 45,
+                              child: TextFormField(
+                                controller: lastNameController,
+                                validator: nameValidator,
+                                decoration: InputDecoration(
+                                  hintStyle: TextStyle(fontSize: 16),
+                                  hintText: 'Last Name',
+                                  contentPadding: EdgeInsets.all(5.0),
+                                  border: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(5)),
+                                  ),
+                                ),
                               ),
                             ),
                           ),
                         ],
                       ),
-                      Container(
-                        padding: EdgeInsets.only(left: 20.0, top: 10),
-                        child: Row(
-                          children: [
-                            Icon(
-                              Icons.notifications,
-                              color: Color.fromRGBO(106, 102, 209, 1),
-                            ),
-                            SizedBox(
-                              height: 30,
-                              child: Padding(
-                                padding: EdgeInsets.only(left: 15, top: 5),
-                                child: Text(
-                                  "Contact Us",
-                                  style: TextStyle(
-                                    fontFamily: 'Colfax',
-                                    fontSize: 16,
+                      SizedBox(height: 15),
+                      Row(
+                        children: [
+                          Text('Email Address',
+                              style: TextStyle(
+                                  fontFamily: 'Colfax', fontSize: 16)),
+                          SizedBox(width: 40),
+                          Expanded(
+                            child: SizedBox(
+                              height: 45,
+                              child: TextFormField(
+                                controller: emailController,
+                                validator: emailValidator,
+                                decoration: InputDecoration(
+                                  hintStyle: TextStyle(fontSize: 16),
+                                  hintText: 'Email address',
+                                  contentPadding: EdgeInsets.all(5.0),
+                                  border: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(5)),
                                   ),
                                 ),
                               ),
                             ),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            SizedBox(
-                              height: 30,
-                              child: VerticalDivider(
-                                color: Colors.black,
-                              ),
-                            ),
-                            SizedBox(
-                              height: 30,
-                              width: 170,
-                              child: Padding(
-                                padding:
-                                    const EdgeInsets.only(left: 13, top: 5),
-                                child: Text(
-                                  "Hello Faizal!",
-                                  style: TextStyle(
-                                    fontFamily: 'Colfax',
-                                    fontSize: 16,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            body: Expanded(
-              child: Padding(
-                padding: EdgeInsets.fromLTRB(6.w, 6.h, 6.w, 6.h),
-                child: Container(
-                  color: Color.fromRGBO(245, 243, 255, 1).withOpacity(0.5),
-                  child: Row(
-                    children: [
-                      Container(
-                        padding: EdgeInsets.fromLTRB(0, 0, 0, 0.1.h),
-                        height: 850,
-                        width: 340,
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: Color.fromARGB(255, 216, 214, 214)
-                                .withOpacity(0.5),
                           ),
-                          boxShadow: <BoxShadow>[
-                            BoxShadow(
-                              color: Color.fromARGB(255, 199, 198, 198)
-                                  .withOpacity(0.5),
-                              blurRadius: 10,
-                              spreadRadius: 4,
-                              offset: Offset(0, 0.5), // Bottom side shadow
-                            ),
-                            BoxShadow(
-                              color: Color.fromARGB(255, 255, 255, 255)
-                                  .withOpacity(0.1),
-                              blurRadius: 1,
-                              spreadRadius: 0, // Bottom side shadow
-                            ),
-                          ],
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(10),
-                            bottomLeft: Radius.circular(10),
-                            topRight: Radius.circular(0),
-                            bottomRight: Radius.circular(10),
-                          ),
-                          color: Color.fromRGBO(236, 233, 250, 1),
-                        ),
-                        child: Column(
-                          children: [
-                            Container(
-                              width: double.infinity,
-                              height: 350,
-                              decoration: BoxDecoration(
-                                color: Color.fromRGBO(255, 255, 255, 1),
-                                borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(7),
-                                  bottomLeft: Radius.circular(7),
-                                  topRight: Radius.circular(0),
-                                  bottomRight: Radius.circular(7),
-                                ),
-                              ),
-                              child: Image.asset(
-                                'Circleavatar.png',
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.only(left: 1.5, top: 20),
-                              child: SizedBox(
-                                height: 300,
-                                child: SideMenu(
-                                  controller: sideMenu,
-                                  style: SideMenuStyle(
-                                    displayMode: SideMenuDisplayMode.auto,
-                                    selectedColor:
-                                        Color.fromRGBO(98, 105, 254, 1),
-                                    unselectedTitleTextStyle: const TextStyle(
-                                      fontFamily: 'SFProText',
-                                      fontSize: 15,
-                                      color: Color.fromRGBO(128, 118, 118, 1),
-                                    ),
-                                    selectedTitleTextStyle: const TextStyle(
-                                      fontFamily: 'SFProText',
-                                      color: Colors.white,
-                                      fontSize: 15,
-                                    ),
-                                    unselectedIconColor:
-                                        Color.fromRGBO(128, 118, 118, 1),
-                                    selectedIconColor: Colors.white,
-                                  ),
-                                  items: [
-                                    SideMenuItem(
-                                      title: 'Current Booking',
-                                      onTap: (page, _) {
-                                        sideMenu.changePage(page);
-                                      },
-                                      icon: Icon(Icons.login_outlined),
-                                    ),
-                                    SideMenuItem(
-                                      title: 'Booking History',
-                                      onTap: (page, _) {
-                                        sideMenu.changePage(page);
-                                      },
-                                      icon: Icon(Icons.person_2_outlined),
-                                    ),
-                                    SideMenuItem(
-                                      title: 'Payment',
-                                      onTap: (page, _) {
-                                        sideMenu.changePage(page);
-                                      },
-                                      icon: Icon(Icons.person_2_outlined),
-                                      // Set the style property to change the text size
-                                    ),
-                                    SideMenuItem(
-                                      title: 'Report',
-                                      onTap: (page, _) {
-                                        sideMenu.changePage(page);
-                                      },
-                                      icon: const Icon(
-                                          Icons.mode_comment_outlined),
-                                    ),
-                                    SideMenuItem(
-                                      title: 'Help',
-                                      onTap: (page, _) {
-                                        sideMenu.changePage(page);
-                                      },
-                                      icon: Icon(Icons.inbox_outlined),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
+                        ],
                       ),
-                      Expanded(
-                        child: Padding(
-                          padding: EdgeInsets.fromLTRB(4.w, 4.5.h, 3.w, 2.h),
-                          child: Column(
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Row(
+                        children: [
+                          Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Container(
-                                height: 80,
-                                child: Text('Booking History',
-                                    style: TextStyle(
-                                        fontSize: 40,
-                                        fontFamily: 'Helvetica',
-                                        color:
-                                            Color.fromRGBO(162, 157, 157, 1))),
+                              Text('Password', style: TextStyle(fontSize: 16)),
+                              SizedBox(
+                                height: 40,
                               ),
-                              SizedBox(height: 10),
-                              Container(
-                                width: MediaQuery.of(context).size.width -
-                                    40, // Set width to match screen width
-                                decoration: BoxDecoration(
-                                  border: Border.all(width: 0.5),
-                                  borderRadius: BorderRadius.circular(5),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Color.fromRGBO(199, 199, 199, 1)
-                                          .withOpacity(0.5),
-                                      blurRadius: 10,
-                                      spreadRadius: 4,
-                                      offset:
-                                          Offset(0, 0.5), // Bottom side shadow
-                                    ),
-                                  ],
-                                ),
-                                child: DataTable(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.only(
-                                      topLeft: Radius.circular(5),
-                                      topRight: Radius.circular(5),
-                                    ),
-                                  ),
-                                  headingRowColor:
-                                      MaterialStateColor.resolveWith((states) =>
-                                          Color.fromRGBO(75, 61, 82, 1)),
-                                  dataRowColor: MaterialStateColor.resolveWith(
-                                      (states) => Colors.white),
-                                  showBottomBorder: true,
-                                  dividerThickness: 1.0,
-                                  dataRowHeight: 65,
-                                  columns: <DataColumn>[
-                                    DataColumn(
-                                        label: Expanded(
-                                            child: Text(
-                                      'Mode',
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 20,
-                                          fontFamily: 'SFproText-Regular'),
-                                      textAlign: TextAlign.center,
-                                    ))),
-                                    DataColumn(
-                                        label: Expanded(
-                                            child: Text(
-                                      'Booking Id',
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 20,
-                                          fontFamily: 'SFproText-Regular'),
-                                      textAlign: TextAlign.center,
-                                    ))),
-                                    DataColumn(
-                                        label: Expanded(
-                                            child: Text(
-                                      'Date',
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 20,
-                                          fontFamily: 'SFproText-Regular'),
-                                      textAlign: TextAlign.center,
-                                    ))),
-                                    DataColumn(
-                                        label: Expanded(
-                                            child: Text(
-                                      'Unit Type',
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 20,
-                                          fontFamily: 'SFproText-Regular'),
-                                      textAlign: TextAlign.center,
-                                    ))),
-                                    DataColumn(
-                                        label: Expanded(
-                                            child: Text(
-                                      'Payment',
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 20,
-                                          fontFamily: 'SFproText-Regular'),
-                                      textAlign: TextAlign.center,
-                                    ))),
-                                  ],
-                                  rows: <DataRow>[
-                                    DataRow(
-                                      cells: <DataCell>[
-                                        for (var item in [
-                                          'Trip',
-                                          '#456789231',
-                                          '18.2.2022',
-                                          'Box truck',
-                                          'Xxx SAR'
-                                        ])
-                                          DataCell(
-                                            Container(
-                                              height:
-                                                  65, // Adjust height as needed
-                                              alignment: Alignment.center,
-                                              child: Text(item,
-                                                  style: TextStyle(
-                                                      fontSize: 20,
-                                                      fontFamily:
-                                                          'SFproText-Regular')),
-                                            ),
-                                          ),
-                                      ],
-                                    ),
-                                    DataRow(
-                                      cells: <DataCell>[
-                                        for (var item in [
-                                          'Bus Trip',
-                                          '#456789231',
-                                          '13.6.2022',
-                                          'Sleeper',
-                                          'Xxx SAR'
-                                        ])
-                                          DataCell(
-                                            Container(
-                                              height:
-                                                  65, // Adjust height as needed
-                                              alignment: Alignment.center,
-                                              child: Text(item,
-                                                  style: TextStyle(
-                                                      fontSize: 20,
-                                                      fontFamily:
-                                                          'SFproText-Regular')),
-                                            ),
-                                          ),
-                                      ],
-                                    ),
-                                    DataRow(
-                                      cells: <DataCell>[
-                                        for (var item in [
-                                          'Equipment Hire',
-                                          '#456789231',
-                                          '12.5.2022',
-                                          'Crane',
-                                          'Xxx SAR'
-                                        ])
-                                          DataCell(
-                                            Container(
-                                              height:
-                                                  65, // Adjust height as needed
-                                              alignment: Alignment.center,
-                                              child: Text(
-                                                item,
-                                                style: TextStyle(
-                                                    fontSize: 20,
-                                                    fontFamily:
-                                                        'SFproText-Regular'),
-                                              ),
-                                            ),
-                                          ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
+                              Text('Contact Number',
+                                  style: TextStyle(fontSize: 16)),
+                              SizedBox(
+                                height: 40,
                               ),
+                              Text('Address 1', style: TextStyle(fontSize: 16)),
+                              SizedBox(
+                                height: 40,
+                              ),
+                              Text('City', style: TextStyle(fontSize: 16)),
+                              SizedBox(
+                                height: 40,
+                              ),
+                              Text('Govt ID', style: TextStyle(fontSize: 16)),
                             ],
                           ),
-                        ),
+                          SizedBox(
+                            width: 30,
+                          ),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                SizedBox(
+                                  height: 45,
+                                  child: TextFormField(
+                                    controller: passwordController,
+                                    validator: validatePassword,
+                                    decoration: InputDecoration(
+                                      hintStyle: TextStyle(fontSize: 16),
+                                      hintText: 'Password',
+                                      contentPadding: EdgeInsets.all(5.0),
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(5)),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 15,
+                                ),
+                                SizedBox(
+                                  height: 45,
+                                  child: TextFormField(
+                                    controller: contactNumberController,
+                                    validator: (value) {
+                                      if (value!.length != 10)
+                                        return 'Mobile Number must be of 10 digit';
+                                      else
+                                        return null;
+                                    },
+                                    decoration: InputDecoration(
+                                      hintStyle: TextStyle(fontSize: 16),
+                                      hintText: 'Phone Number',
+                                      contentPadding: EdgeInsets.all(5.0),
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(5)),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 15,
+                                ),
+                                SizedBox(
+                                  height: 45,
+                                  child: TextFormField(
+                                    controller: addressController,
+                                    validator: nameValidator,
+                                    decoration: InputDecoration(
+                                      hintStyle: TextStyle(fontSize: 16),
+                                      hintText: 'Address',
+                                      contentPadding: EdgeInsets.all(5.0),
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(5)),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 15,
+                                ),
+                                SizedBox(
+                                  height: 45,
+                                  child: DropdownButtonFormField(
+                                    isExpanded: true,
+                                    decoration: InputDecoration(
+                                      contentPadding: EdgeInsets.all(5.0),
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(5)),
+                                      ),
+                                    ),
+                                    value: selectedCity,
+                                    onChanged: (String? newValue) {
+                                      setState(() {
+                                        selectedCity = newValue;
+                                      });
+                                    },
+                                    items: cities.map<DropdownMenuItem<String>>(
+                                        (String value) {
+                                      return DropdownMenuItem<String>(
+                                        value: value,
+                                        child: Text(value,
+                                            style: TextStyle(fontSize: 14)),
+                                      );
+                                    }).toList(),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 15,
+                                ),
+                                SizedBox(
+                                  height: 45,
+                                  child: DropdownButtonFormField<String>(
+                                    isExpanded: true,
+                                    value: selectedOption,
+                                    decoration: InputDecoration(
+                                      contentPadding: EdgeInsets.all(5.0),
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(5)),
+                                      ),
+                                    ),
+                                    onChanged: (String? newValue) {
+                                      setState(() {
+                                        selectedOption = newValue;
+                                      });
+                                    },
+                                    items: [
+                                      DropdownMenuItem<String>(
+                                        value: 'National ID',
+                                        child: Text('National ID',
+                                            style: TextStyle(fontSize: 14)),
+                                      ),
+                                      DropdownMenuItem<String>(
+                                        value: 'Iqama No.',
+                                        child: Text('Iqama No.',
+                                            style: TextStyle(fontSize: 14)),
+                                      ),
+                                      DropdownMenuItem<String>(
+                                        value: 'Visit Visa / Border No',
+                                        child: Text('Visit Visa / Border No',
+                                            style: TextStyle(fontSize: 14)),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 15,
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            width: 30,
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text('Confirm Password',
+                                  style: TextStyle(fontSize: 16)),
+                              SizedBox(
+                                height: 40,
+                              ),
+                              Text('Alternate Number',
+                                  style: TextStyle(fontSize: 16)),
+                              SizedBox(
+                                height: 40,
+                              ),
+                              Text('Address 2', style: TextStyle(fontSize: 16)),
+                              SizedBox(
+                                height: 40,
+                              ),
+                              Text('Account Type',
+                                  style: TextStyle(fontSize: 16)),
+                              SizedBox(
+                                height: 40,
+                              ),
+                              Text('ID Number', style: TextStyle(fontSize: 16)),
+                            ],
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                SizedBox(
+                                  height: 45,
+                                  child: TextFormField(
+                                    validator: validatePassword,
+                                    controller: confirmPasswordController,
+                                    decoration: InputDecoration(
+                                      hintStyle: TextStyle(fontSize: 16),
+                                      hintText: 'Password',
+                                      contentPadding: EdgeInsets.all(5.0),
+                                      border: OutlineInputBorder(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(5))),
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 15,
+                                ),
+                                SizedBox(
+                                  height: 45,
+                                  child: TextFormField(
+                                    validator: (value) {
+                                      if (value!.length != 10)
+                                        return 'Mobile Number must be of 10 digit';
+                                      else
+                                        return null;
+                                    },
+                                    controller: alternateNumberController,
+                                    decoration: InputDecoration(
+                                      hintStyle: TextStyle(fontSize: 16),
+                                      hintText: 'Phone Number',
+                                      contentPadding: EdgeInsets.all(5.0),
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(5)),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 15,
+                                ),
+                                SizedBox(
+                                  height: 45,
+                                  child: TextFormField(
+                                    validator: nameValidator,
+                                    controller: address2Controller,
+                                    decoration: InputDecoration(
+                                      hintStyle: TextStyle(fontSize: 16),
+                                      hintText: 'Address',
+                                      contentPadding: EdgeInsets.all(5.0),
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(5)),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 15,
+                                ),
+                                SizedBox(
+                                  height: 45,
+                                  child: DropdownButtonFormField<String>(
+                                    isExpanded: true,
+                                    value: selectedType,
+                                    decoration: InputDecoration(
+                                      contentPadding: EdgeInsets.all(5.0),
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(5)),
+                                      ),
+                                    ),
+                                    onChanged: (String? newValue) {
+                                      setState(() {
+                                        selectedType = newValue;
+                                      });
+                                    },
+                                    items: [
+                                      DropdownMenuItem<String>(
+                                        value: 'User',
+                                        child: Text('User',
+                                            style: TextStyle(fontSize: 14)),
+                                      ),
+                                      DropdownMenuItem<String>(
+                                        value: 'SuperUser',
+                                        child: Text('SuperUser',
+                                            style: TextStyle(fontSize: 14)),
+                                      ),
+                                      DropdownMenuItem<String>(
+                                        value: 'Enterprise',
+                                        child: Text('Enterprise',
+                                            style: TextStyle(fontSize: 14)),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 15,
+                                ),
+                                SizedBox(
+                                  height: 45,
+                                  child: TextFormField(
+                                    validator: (value) {
+                                      if (value!.length != 10)
+                                        return 'Mobile Number must be of 10 digit';
+                                      else
+                                        return null;
+                                    },
+                                    controller: idNumberController,
+                                    decoration: InputDecoration(
+                                      contentPadding: EdgeInsets.all(5.0),
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(5)),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 15,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SizedBox(
+                            height: 45,
+                            child: ElevatedButton(
+                              onPressed: () async {
+                                if (_formKey.currentState!.validate()) {
+                                  print("track1");
+                                  await _startPhoneAuth(
+                                      contactNumberController.text);
+                                  // _showOtpVerificationDialog();
+                                  // Save user data and start phone authentication
+                                  await _saveUserDataToFirestore();
+                                }
+                              },
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor:
+                                    Color.fromARGB(255, 128, 123, 229),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(5),
+                                ),
+                              ),
+                              child: Text(
+                                'Create Account',
+                                style: TextStyle(
+                                  fontFamily: 'Colfax',
+                                  fontSize: 16,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 30,
+                          ),
+                          SizedBox(
+                            height: 45,
+                            child: ElevatedButton(
+                              onPressed: () async {
+                                if (_formKey.currentState!.validate()) {
+                                  print("track1");
+                                  await _startPhoneAuth(
+                                      contactNumberController.text);
+                                  // _showOtpVerificationDialog();
+                                  // Save user data and start phone authentication
+                                  await _saveUserDataToFirestore();
+                                }
+                              },
+                              style: ElevatedButton.styleFrom(
+                                fixedSize:
+                                    const Size.fromWidth(double.infinity),
+                                backgroundColor:
+                                    Color.fromARGB(112, 112, 112, 1),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(
+                                      5), // Adjust border radius as needed
+                                ),
+                              ),
+                              child: Text(
+                                'Cancel',
+                                style: TextStyle(
+                                  fontFamily: 'Colfax',
+                                  fontSize: 16,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text('Already have an account? '),
+                          InkWell(
+                            onTap: () {
+                              showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return LoginPage();
+                                },
+                              );
+                            },
+                            child: Text(
+                              'Sign In',
+                              style: TextStyle(
+                                color: Colors.blue,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
@@ -451,318 +807,530 @@ class _BookingHistoryState extends State<BookingHistory1> {
             ),
           );
         } else {
-          return Scaffold(
-            drawer: Drawer(
-              child: ListView(
-                  padding: EdgeInsets.only(
-                    top: 3.h,
-                  ),
-                  children: <Widget>[
-                    Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(12.0),
-                      ),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(
-                            30.0), // Adjust the radius as needed
-                        child: Image.asset(
-                          'Circleavatar.png',
-                          width: 550, // Adjust the height as needed
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 2.h,
-                    ),
-                    ListTile(
-                      hoverColor: Colors.indigo.shade100,
-                      title: Text(
-                        'Current Booking',
-                        style: TextStyle(color: Colors.black),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 2.h,
-                    ),
-                    ListTile(
-                      hoverColor: Colors.indigo.shade100,
-                      title: Text(
-                        'Booking History',
-                        style: TextStyle(color: Colors.black),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 2.h,
-                    ),
-                    ListTile(
-                      hoverColor: Colors.indigo.shade100,
-                      title: Text(
-                        'Payment',
-                        style: TextStyle(color: Colors.black),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 2.h,
-                    ),
-                    ListTile(
-                      hoverColor: Colors.indigo.shade100,
-                      title: Text(
-                        'Report',
-                        style: TextStyle(color: Colors.black),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 2.h,
-                    ),
-                    ListTile(
-                      hoverColor: Colors.indigo.shade100,
-                      title: Text(
-                        'Help',
-                        style: TextStyle(color: Colors.black),
-                      ),
-                    ),
-                  ]),
-            ),
-            appBar: PreferredSize(
-              preferredSize: Size.fromHeight(60),
-              child: Container(
-                height: 60,
-                child: Material(
-                  elevation: 3,
+          return Dialog(
+              child: SingleChildScrollView(
                   child: Padding(
-                    padding: EdgeInsets.fromLTRB(2.5.w, 0, 2.5.w, 0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Builder(
-                            builder: (context) => IconButton(
-                                  onPressed: () {
-                                    Scaffold.of(context).openDrawer();
-                                  },
-                                  icon: Icon(
-                                    Icons.menu_rounded,
-                                    color: Colors.indigo.shade900,
-                                  ),
-                                )),
-                        TextButton(
-                          onPressed: () {
-                            // Handle the first button press
-                          },
-                          child: Text(
-                            'User',
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontFamily: "HelveticaNeue",
-                              color: Color.fromRGBO(112, 112, 112, 1),
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 30,
-                          child: VerticalDivider(
-                            color: Color.fromRGBO(206, 203, 203, 1),
-                          ),
-                        ),
-                        TextButton(
-                          onPressed: () {
-                            // Handle the third button press
-                          },
-                          child: Text(
-                            'Partner',
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontFamily: "HelveticaNeue",
-                              color: Color.fromRGBO(206, 203, 203, 1),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+            padding: const EdgeInsets.all(4.0),
+            child: Container(
+              decoration: const BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(31),
+                  bottomLeft: Radius.circular(31),
+                  topRight: Radius.circular(31),
+                  bottomRight: Radius.circular(31),
                 ),
               ),
-            ),
-            body: Expanded(
               child: Padding(
-                padding: EdgeInsets.fromLTRB(4.w, 4.5.h, 3.w, 2.h),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      height: 80,
-                      child: Text('Booking History',
+                padding: EdgeInsets.only(
+                    left: 2.5.h, right: 2.5.h, top: 3.w, bottom: 3.w),
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    children: [
+                      SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Text(
+                          'Create your account',
                           style: TextStyle(
-                              fontSize: 30,
-                              fontFamily: 'Helvetica',
-                              color: Color.fromRGBO(162, 157, 157, 1))),
-                    ),
-                    SizedBox(height: 10),
-                    Container(
-                      //width:300; // Set width to match screen width
-                      decoration: BoxDecoration(
-                        border: Border.all(width: 0.5),
-                        borderRadius: BorderRadius.circular(5),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Color.fromRGBO(199, 199, 199, 1)
-                                .withOpacity(0.5),
-                            blurRadius: 1,
-                            spreadRadius: 2,
-                            offset: Offset(0, 0.5), // Bottom side shadow
+                            fontFamily: 'ColfaxBold',
+                            fontSize: 15,
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 25,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          SizedBox(width: 150, child: Text('First Name ')),
+                          SizedBox(width: 5),
+                          Expanded(
+                            child: SizedBox(
+                              height: 40,
+                              child: TextFormField(
+                                controller: firstNameController,
+                                validator: nameValidator,
+                                decoration: InputDecoration(
+                                  hintStyle: TextStyle(fontSize: 15),
+                                  hintText: 'First Name',
+                                  contentPadding: EdgeInsets.all(2.0),
+                                  border: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(2.0)),
+                                  ),
+                                ),
+                              ),
+                            ),
                           ),
                         ],
                       ),
-                      child: Scrollbar(
-                        controller: _scrollController,
-                        child: SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
-                          controller: _scrollController,
-                          child: DataTable(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(5),
-                                topRight: Radius.circular(5),
+                      SizedBox(height: 10),
+                      Row(
+                        children: [
+                          SizedBox(width: 150, child: Text('Last Name')),
+                          SizedBox(width: 5),
+                          Expanded(
+                            child: SizedBox(
+                              height: 40,
+                              child: TextFormField(
+                                controller: lastNameController,
+                                validator: nameValidator,
+                                decoration: InputDecoration(
+                                  hintStyle: TextStyle(fontSize: 15),
+                                  hintText: 'Last Name',
+                                  contentPadding: EdgeInsets.all(1.0),
+                                  border: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(2.0)),
+                                  ),
+                                ),
                               ),
                             ),
-                            headingRowColor: MaterialStateColor.resolveWith(
-                                (states) => Color.fromRGBO(75, 61, 82, 1)),
-                            dataRowColor: MaterialStateColor.resolveWith(
-                                (states) => Colors.white),
-                            showBottomBorder: true,
-                            dividerThickness: 1.0,
-                            dataRowHeight: 65,
-                            columns: <DataColumn>[
-                              DataColumn(
-                                  label: Expanded(
-                                      child: Text(
-                                'Mode',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 12,
-                                    fontFamily: 'SFproText-Regular'),
-                                textAlign: TextAlign.center,
-                              ))),
-                              DataColumn(
-                                  label: Expanded(
-                                      child: Text(
-                                'Booking Id',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 12,
-                                    fontFamily: 'SFproText-Regular'),
-                                textAlign: TextAlign.center,
-                              ))),
-                              DataColumn(
-                                  label: Expanded(
-                                      child: Text(
-                                'Date',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 12,
-                                    fontFamily: 'SFproText-Regular'),
-                                textAlign: TextAlign.center,
-                              ))),
-                              DataColumn(
-                                  label: Expanded(
-                                      child: Text(
-                                'Unit Type',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 12,
-                                    fontFamily: 'SFproText-Regular'),
-                                textAlign: TextAlign.center,
-                              ))),
-                              DataColumn(
-                                  label: Expanded(
-                                      child: Text(
-                                'Payment',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 12,
-                                    fontFamily: 'SFproText-Regular'),
-                                textAlign: TextAlign.center,
-                              ))),
-                            ],
-                            rows: <DataRow>[
-                              DataRow(
-                                cells: <DataCell>[
-                                  for (var item in [
-                                    'Trip',
-                                    '#456789231',
-                                    '18.2.2022',
-                                    'Box truck',
-                                    'Xxx SAR'
-                                  ])
-                                    DataCell(
-                                      Container(
-                                        height: 65, // Adjust height as needed
-                                        alignment: Alignment.center,
-                                        child: Text(item,
-                                            style: TextStyle(
-                                                fontSize: 12,
-                                                fontFamily:
-                                                    'SFproText-Regular')),
-                                      ),
-                                    ),
-                                ],
-                              ),
-                              DataRow(
-                                cells: <DataCell>[
-                                  for (var item in [
-                                    'Bus Trip',
-                                    '#456789231',
-                                    '13.6.2022',
-                                    'Sleeper',
-                                    'Xxx SAR'
-                                  ])
-                                    DataCell(
-                                      Container(
-                                        height: 65, // Adjust height as needed
-                                        alignment: Alignment.center,
-                                        child: Text(item,
-                                            style: TextStyle(
-                                                fontSize: 12,
-                                                fontFamily:
-                                                    'SFproText-Regular')),
-                                      ),
-                                    ),
-                                ],
-                              ),
-                              DataRow(
-                                cells: <DataCell>[
-                                  for (var item in [
-                                    'Equipment Hire',
-                                    '#456789231',
-                                    '12.5.2022',
-                                    'Crane',
-                                    'Xxx SAR'
-                                  ])
-                                    DataCell(
-                                      Container(
-                                        height: 65, // Adjust height as needed
-                                        alignment: Alignment.center,
-                                        child: Text(
-                                          item,
-                                          style: TextStyle(
-                                              fontSize: 12,
-                                              fontFamily: 'SFproText-Regular'),
-                                        ),
-                                      ),
-                                    ),
-                                ],
-                              ),
-                            ],
                           ),
-                        ),
+                        ],
                       ),
-                    ),
-                  ],
+                      SizedBox(height: 10),
+                      Row(
+                        children: [
+                          SizedBox(width: 150, child: Text('Email Address')),
+                          SizedBox(width: 5),
+                          Expanded(
+                            child: SizedBox(
+                              height: 40,
+                              child: TextFormField(
+                                controller: emailController,
+                                validator: emailValidator,
+                                decoration: InputDecoration(
+                                  hintStyle: TextStyle(fontSize: 15),
+                                  hintText: 'Email address',
+                                  contentPadding: EdgeInsets.all(2.0),
+                                  border: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(2)),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Row(
+                        children: [
+                          SizedBox(width: 150, child: Text('Password')),
+                          SizedBox(width: 5),
+                          Expanded(
+                            child: SizedBox(
+                              height: 40,
+                              child: TextFormField(
+                                controller: emailController,
+                                validator: emailValidator,
+                                decoration: InputDecoration(
+                                  hintStyle: TextStyle(fontSize: 15),
+                                  hintText: 'Password',
+                                  contentPadding: EdgeInsets.all(2.0),
+                                  border: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(2)),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 10),
+                      Row(
+                        children: [
+                          SizedBox(width: 150, child: Text('Confirm Password')),
+                          SizedBox(width: 5),
+                          Expanded(
+                            child: SizedBox(
+                              height: 40,
+                              child: TextFormField(
+                                controller: emailController,
+                                validator: emailValidator,
+                                decoration: InputDecoration(
+                                  hintStyle: TextStyle(fontSize: 15),
+                                  hintText: 'Password',
+                                  contentPadding: EdgeInsets.all(2.0),
+                                  border: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(2)),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 10),
+                      Row(
+                        children: [
+                          SizedBox(width: 150, child: Text('Contact Number')),
+                          SizedBox(width: 5),
+                          Expanded(
+                            child: SizedBox(
+                              height: 40,
+                              child: TextFormField(
+                                controller: contactNumberController,
+                                validator: (value) {
+                                  if (value!.length != 10)
+                                    return 'Mobile Number must be of 10 digit';
+                                  else
+                                    return null;
+                                },
+                                decoration: InputDecoration(
+                                  hintStyle: TextStyle(fontSize: 15),
+                                  hintText: 'Phone Number',
+                                  contentPadding: EdgeInsets.all(5.0),
+                                  border: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(5)),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 10),
+                      Row(
+                        children: [
+                          SizedBox(width: 150, child: Text('Alternate Number')),
+                          SizedBox(width: 5),
+                          Expanded(
+                            child: SizedBox(
+                              height: 40,
+                              child: TextFormField(
+                                validator: (value) {
+                                  if (value!.length != 10)
+                                    return 'Mobile Number must be of 10 digit';
+                                  else
+                                    return null;
+                                },
+                                controller: alternateNumberController,
+                                decoration: InputDecoration(
+                                  hintStyle: TextStyle(fontSize: 15),
+                                  hintText: 'Phone Number',
+                                  contentPadding: EdgeInsets.all(5.0),
+                                  border: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(5)),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Row(
+                        children: [
+                          SizedBox(width: 150, child: Text('Address 1')),
+                          SizedBox(width: 5),
+                          Expanded(
+                            child: SizedBox(
+                              height: 40,
+                              child: TextFormField(
+                                controller: addressController,
+                                validator: nameValidator,
+                                decoration: InputDecoration(
+                                  hintStyle: TextStyle(fontSize: 15),
+                                  hintText: 'Address',
+                                  contentPadding: EdgeInsets.all(5.0),
+                                  border: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(5)),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 10),
+                      Row(
+                        children: [
+                          SizedBox(width: 150, child: Text('Address 2')),
+                          SizedBox(width: 5),
+                          Expanded(
+                            child: SizedBox(
+                              height: 40,
+                              child: TextFormField(
+                                controller: addressController,
+                                validator: nameValidator,
+                                decoration: InputDecoration(
+                                  hintStyle: TextStyle(fontSize: 15),
+                                  hintText: 'Address',
+                                  contentPadding: EdgeInsets.all(5.0),
+                                  border: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(5)),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 10),
+                      Row(
+                        children: [
+                          SizedBox(width: 150, child: Text('Çity')),
+                          SizedBox(width: 5),
+                          Expanded(
+                            child: SizedBox(
+                              height: 40,
+                              child: DropdownButtonFormField(
+                                decoration: InputDecoration(
+                                  contentPadding: EdgeInsets.all(5.0),
+                                  border: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(5)),
+                                  ),
+                                ),
+                                value: selectedCity,
+                                onChanged: (String? newValue) {
+                                  setState(() {
+                                    selectedCity = newValue;
+                                  });
+                                },
+                                items: cities.map<DropdownMenuItem<String>>(
+                                    (String value) {
+                                  return DropdownMenuItem<String>(
+                                    value: value,
+                                    child: Text(value),
+                                  );
+                                }).toList(),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 10),
+                      Row(
+                        children: [
+                          SizedBox(width: 150, child: Text('Account Type')),
+                          SizedBox(width: 5),
+                          Expanded(
+                            child: SizedBox(
+                              height: 40,
+                              child: DropdownButtonFormField(
+                                value: selectedType,
+                                decoration: InputDecoration(
+                                  contentPadding: EdgeInsets.all(5.0),
+                                  border: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(5)),
+                                  ),
+                                ),
+                                onChanged: (String? newValue) {
+                                  setState(() {
+                                    selectedType = newValue;
+                                  });
+                                },
+                                items: [
+                                  DropdownMenuItem<String>(
+                                    value: 'Individual',
+                                    child: Text('Individual',
+                                        style: TextStyle(fontSize: 8.sp)),
+                                  ),
+                                  DropdownMenuItem<String>(
+                                    value: 'Company',
+                                    child: Text('Company',
+                                        style: TextStyle(fontSize: 8.sp)),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 10),
+                      Row(
+                        children: [
+                          SizedBox(width: 150, child: Text('Govt ID')),
+                          SizedBox(width: 5),
+                          Expanded(
+                            child: SizedBox(
+                              height: 40,
+                              child: DropdownButtonFormField(
+                                value: selectedOption,
+                                decoration: InputDecoration(
+                                  contentPadding: EdgeInsets.all(5.0),
+                                  border: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(5)),
+                                  ),
+                                ),
+                                onChanged: (String? newValue) {
+                                  setState(() {
+                                    selectedOption = newValue;
+                                  });
+                                },
+                                items: [
+                                  DropdownMenuItem<String>(
+                                    value: 'National ID',
+                                    child: Text(
+                                      'National ID',
+                                      style: TextStyle(fontSize: 8.sp),
+                                    ),
+                                  ),
+                                  DropdownMenuItem<String>(
+                                    value: 'Iqama No.',
+                                    child: Text(
+                                      'Iqama No.',
+                                      style: TextStyle(fontSize: 8.sp),
+                                    ),
+                                  ),
+                                  DropdownMenuItem<String>(
+                                    value: 'Visit Visa / Border No',
+                                    child: Text(
+                                      'Visit Visa / Border No',
+                                      style: TextStyle(fontSize: 5.sp),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 10),
+                      Row(
+                        children: [
+                          SizedBox(width: 150, child: Text('ID Number')),
+                          SizedBox(width: 5),
+                          Expanded(
+                            child: SizedBox(
+                              height: 40,
+                              child: TextFormField(
+                                controller: addressController,
+                                validator: nameValidator,
+                                decoration: InputDecoration(
+                                  hintStyle: TextStyle(fontSize: 13),
+                                  hintText: 'ID Number',
+                                  contentPadding: EdgeInsets.all(5.0),
+                                  border: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(5)),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 15),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SizedBox(
+                            height: 40,
+                            child: ElevatedButton(
+                              onPressed: () async {
+                                if (_formKey.currentState!.validate()) {
+                                  print("track1");
+                                  await _startPhoneAuth(
+                                      contactNumberController.text);
+                                  // _showOtpVerificationDialog();
+                                  // Save user data and start phone authentication
+                                  await _saveUserDataToFirestore();
+                                }
+                              },
+                              style: ElevatedButton.styleFrom(
+                                fixedSize:
+                                    const Size.fromWidth(double.infinity),
+                                backgroundColor:
+                                    Color.fromARGB(255, 128, 123, 229),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(
+                                      5), // Adjust border radius as needed
+                                ),
+                              ),
+                              child: Text(
+                                'Create Account',
+                                style: TextStyle(
+                                  fontFamily: 'Colfax',
+                                  fontSize: 16,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          ),
+                          SizedBox(width: 7),
+                          SizedBox(
+                            height: 40,
+                            child: ElevatedButton(
+                              onPressed: () async {
+                                if (_formKey.currentState!.validate()) {
+                                  print("track1");
+                                  await _startPhoneAuth(
+                                      contactNumberController.text);
+                                  // _showOtpVerificationDialog();
+                                  // Save user data and start phone authentication
+                                  await _saveUserDataToFirestore();
+                                }
+                              },
+                              style: ElevatedButton.styleFrom(
+                                fixedSize:
+                                    const Size.fromWidth(double.infinity),
+                                backgroundColor:
+                                    Color.fromARGB(112, 112, 112, 1),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(
+                                      5), // Adjust border radius as needed
+                                ),
+                              ),
+                              child: Text(
+                                'Cancel',
+                                style: TextStyle(
+                                  fontFamily: 'Colfax',
+                                  fontSize: 10,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 10),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text('Already have an account? '),
+                          InkWell(
+                            onTap: () {
+                              showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return LoginPage();
+                                },
+                              );
+                            },
+                            child: Text(
+                              'Sign In',
+                              style: TextStyle(
+                                color: Colors.blue,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
-          );
+          )));
         }
       });
     });

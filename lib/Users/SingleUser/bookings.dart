@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_application_1/Widgets/customButton.dart';
+import 'package:flutter_application_1/Widgets/customRadio.dart';
 import 'package:flutter_application_1/Widgets/formText.dart';
 import 'package:flutter_application_1/homePage.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -16,7 +17,13 @@ class Bookings extends StatefulWidget {
 class _BookingsState extends State<Bookings> {
   GoogleMapController? mapController;
   List<Marker> _markers = [];
+  bool isButtonEnabled = false;
+  bool isButtonEnabled1 = false;
+  bool isButtonEnabled2 = false;
   bool showmaps = true;
+  int? selectedRadioValue;
+  int? selectedRadioValue1;
+  int? selectedRadioValue2;
 
   final LatLng _center = const LatLng(45.521563, -122.677433);
   final ScrollController _book1Scroll = ScrollController();
@@ -49,7 +56,8 @@ class _BookingsState extends State<Bookings> {
         if (constraints.maxWidth >= 950) {
           return SingleChildScrollView(
             child: Container(
-              height: 100.h,
+              height: 673,
+              width: 1073,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20.0),
                 color: Color.fromRGBO(255, 255, 255, 0.925),
@@ -57,60 +65,252 @@ class _BookingsState extends State<Bookings> {
               padding: EdgeInsets.fromLTRB(3.w, 3.h, 3.w, 3.h),
               child: Row(
                 children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: [
-                          Image.asset(
-                            'Group1787.png',
-                            width: 140,
-                            height: 140,
+                  Padding(
+                    padding: const EdgeInsets.only(top: 20),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(left: 90),
+                          child: Row(
+                            children: [
+                              Image.asset(
+                                'Group1787.png',
+                                width: 62,
+                                height: 61,
+                              ),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              Text(
+                                "Booking Id #1345789345",
+                                style: TextStyle(
+                                    fontFamily: "Helvetica",
+                                    fontSize: 21,
+                                    color: Color.fromRGBO(16, 3, 3, 1)),
+                              ),
+                            ],
                           ),
-                          Text(
-                            "Booking Id #1345789345",
-                            style: TextStyle(
-                                fontFamily: "Helvetica",
-                                fontSize: 21,
-                                color: Color.fromRGBO(16, 3, 3, 1)),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          showmaps
-                              ? Padding(
-                                  padding: const EdgeInsets.only(left: 25),
-                                  child: Container(
-                                    height: 400,
-                                    width: 400,
-                                    decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(12)),
-                                    child: GoogleMap(
-                                        onMapCreated: (controller) {
-                                          setState(() {
-                                            mapController = controller;
-                                          });
-                                        },
-                                        markers: Set<Marker>.of(_markers),
-                                        mapType: MapType.normal,
-                                        initialCameraPosition: CameraPosition(
-                                            target:
-                                                LatLng(24.755562, 46.589584),
-                                            zoom: 13)),
+                        ),
+                        Row(
+                          children: [
+                            showmaps
+                                ? Padding(
+                                    padding: const EdgeInsets.only(left: 25),
+                                    child: Container(
+                                      height: 404,
+                                      width: 456,
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(12)),
+                                      child: GoogleMap(
+                                          onMapCreated: (controller) {
+                                            setState(() {
+                                              mapController = controller;
+                                            });
+                                          },
+                                          markers: Set<Marker>.of(_markers),
+                                          mapType: MapType.normal,
+                                          initialCameraPosition: CameraPosition(
+                                              target:
+                                                  LatLng(24.755562, 46.589584),
+                                              zoom: 13)),
+                                    ),
+                                  )
+                                : CircularProgressIndicator(
+                                    color: Colors.amber,
+                                  )
+                          ],
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 50),
+                          child: Row(
+                            children: [
+                              Column(
+                                children: [
+                                  Text(
+                                    "Pick up truck",
+                                    style: TextStyle(
+                                        fontSize: 25,
+                                        fontFamily: "Helvetica",
+                                        color: Color.fromRGBO(16, 3, 3, 1)),
                                   ),
-                                )
-                              : CircularProgressIndicator(
-                                  color: Colors.amber,
-                                )
-                        ],
-                      )
-                    ],
+                                  Text("Toyota Hilux")
+                                ],
+                              ),
+                              SizedBox(
+                                width: 40,
+                              ),
+                              Column(
+                                children: [
+                                  SizedBox(
+                                    height: 63,
+                                    child: VerticalDivider(
+                                      color: Color.fromRGBO(112, 112, 112, 1),
+                                      thickness: 2,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                width: 40,
+                              ),
+                              Column(
+                                children: [
+                                  Text(
+                                    "Load",
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        fontFamily: "Helvetica",
+                                        color: Color.fromRGBO(16, 3, 3, 1)),
+                                  ),
+                                  Text(
+                                    "Woods",
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        fontFamily: "Helvetica",
+                                        color: Color.fromRGBO(16, 3, 3, 1)),
+                                  )
+                                ],
+                              ),
+                              SizedBox(
+                                width: 60,
+                              ),
+                              Column(
+                                children: [
+                                  Text(
+                                    "Size",
+                                    style: TextStyle(
+                                        fontSize: 17,
+                                        fontFamily: "Helvetica",
+                                        color: Color.fromRGBO(16, 3, 3, 1)),
+                                  ),
+                                  Text(
+                                    " 1 to 1.5",
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        fontFamily: "Helvetica",
+                                        color: Color.fromRGBO(16, 3, 3, 1)),
+                                  )
+                                ],
+                              ),
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    width: 50,
                   ),
                   Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [],
+                    children: [
+                      SizedBox(
+                        height: 556,
+                        child: VerticalDivider(
+                          color: Color.fromRGBO(204, 195, 195, 1),
+                          thickness: 2,
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    width: 90,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 40),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        CustomRadio1(
+                            onChanged: (val) {
+                              setState(() {
+                                selectedRadioValue =
+                                    val; // Unselect if already selected
+                                isButtonEnabled = true;
+                              });
+                            },
+                            groupValue: selectedRadioValue,
+                            value: 1,
+                            text1: 'Vendor 1',
+                            colors: Colors.white,
+                            textcolor1: Colors.black54,
+                            text2: "XXXX SAR",
+                            textcolor2: Colors.black38),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        CustomRadio1(
+                            onChanged: (val) {
+                              setState(() {
+                                selectedRadioValue =
+                                    val; // Unselect if already selected
+                                isButtonEnabled = true;
+                              });
+                            },
+                            groupValue: selectedRadioValue,
+                            value: 2,
+                            text1: 'Vendor 2',
+                            colors: Colors.white,
+                            textcolor1: Colors.black54,
+                            text2: "XXXX SAR",
+                            textcolor2: Colors.black38),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        CustomRadio1(
+                            onChanged: (val) {
+                              setState(() {
+                                selectedRadioValue =
+                                    val; // Unselect if already selected
+                                isButtonEnabled = true;
+                              });
+                            },
+                            groupValue: selectedRadioValue,
+                            value: 3,
+                            text1: 'Vendor 3',
+                            colors: Colors.white,
+                            textcolor1: Colors.black54,
+                            text2: "XXXX SAR",
+                            textcolor2: Colors.black38),
+                        SizedBox(
+                          height: 40,
+                        ),
+                        Row(
+                          children: [
+                            Text(
+                              "Cancel Request",
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  fontFamily: "Helvetica",
+                                  color: Color.fromRGBO(158, 101, 169, 1),
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 170,
+                        ),
+                        Row(
+                          children: [
+                            CustomButton(
+                              onPressed: () {},
+                              text: 'Pay Advance: XXXX',
+                            ),
+                            SizedBox(
+                              width: 70,
+                            ),
+                            CustomButton(
+                              onPressed: () {},
+                              text: 'Pay: XXXX',
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
                   ),
                 ],
               ),
