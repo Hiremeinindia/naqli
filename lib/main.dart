@@ -1,5 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/Users/SingleTimeUser/availableUnits.dart';
+import 'package:flutter_application_1/Users/SingleTimeUser/bookingDetails.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'DialogBox/bookingSuccessful.dart';
 import 'classes/language_constants.dart';
@@ -74,7 +76,7 @@ class _MyAppState extends State<MyApp> {
       supportedLocales: AppLocalizations.supportedLocales,
       locale: _locale,
       debugShowCheckedModeBanner: false,
-      home: MyHomePage(),
+      home: BookingDetails(),
     );
   }
 }
