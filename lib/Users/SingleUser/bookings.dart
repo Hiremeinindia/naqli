@@ -68,10 +68,9 @@ class _BookingsState extends State<Bookings> {
                   Padding(
                     padding: const EdgeInsets.only(top: 20),
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(left: 90),
+                          padding: const EdgeInsets.only(left: 50),
                           child: Row(
                             children: [
                               Image.asset(
@@ -87,39 +86,34 @@ class _BookingsState extends State<Bookings> {
                                 style: TextStyle(
                                     fontFamily: "Helvetica",
                                     fontSize: 21,
-                                    color: Color.fromRGBO(16, 3, 3, 1)),
+                                    color: Color.fromRGBO(16, 3, 3, 1),
+                                    fontWeight: FontWeight.bold),
                               ),
                             ],
                           ),
                         ),
                         Row(
                           children: [
-                            showmaps
-                                ? Padding(
-                                    padding: const EdgeInsets.only(left: 25),
-                                    child: Container(
-                                      height: 404,
-                                      width: 456,
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(12)),
-                                      child: GoogleMap(
-                                          onMapCreated: (controller) {
-                                            setState(() {
-                                              mapController = controller;
-                                            });
-                                          },
-                                          markers: Set<Marker>.of(_markers),
-                                          mapType: MapType.normal,
-                                          initialCameraPosition: CameraPosition(
-                                              target:
-                                                  LatLng(24.755562, 46.589584),
-                                              zoom: 13)),
-                                    ),
-                                  )
-                                : CircularProgressIndicator(
-                                    color: Colors.amber,
-                                  )
+                            Padding(
+                              padding: const EdgeInsets.only(left: 25),
+                              child: Container(
+                                height: 404,
+                                width: 456,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(12)),
+                                child: GoogleMap(
+                                    onMapCreated: (controller) {
+                                      setState(() {
+                                        mapController = controller;
+                                      });
+                                    },
+                                    markers: Set<Marker>.of(_markers),
+                                    mapType: MapType.normal,
+                                    initialCameraPosition: CameraPosition(
+                                        target: LatLng(24.755562, 46.589584),
+                                        zoom: 13)),
+                              ),
+                            )
                           ],
                         ),
                         SizedBox(
@@ -212,7 +206,7 @@ class _BookingsState extends State<Bookings> {
                         height: 556,
                         child: VerticalDivider(
                           color: Color.fromRGBO(204, 195, 195, 1),
-                          thickness: 2,
+                          thickness: 1,
                         ),
                       ),
                     ],

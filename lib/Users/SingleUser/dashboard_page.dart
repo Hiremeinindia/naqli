@@ -40,11 +40,11 @@ class _MyHomePageState extends State<SingleUserDashboardPage> {
   int? selectedRadioValue2;
   bool payNowButtonEnabled = false;
   String? selectedValue;
-  Widget _currentContent = Dashboard(); // Initial content
+  Widget _currentContent = Bookings(); // Initial content
 
   void _handleItem1Tap() {
     setState(() {
-      _currentContent = Dashboard();
+      _currentContent = Bookings();
     });
     Navigator.pop(context);
   }
@@ -540,7 +540,7 @@ class _MyHomePageState extends State<SingleUserDashboardPage> {
                         ),
                         onTap: () {
                           setState(() {
-                            _currentContent = Dashboard();
+                            _currentContent = Bookings();
                           });
                           Navigator.pop(context);
                         }),
