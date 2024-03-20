@@ -20,7 +20,7 @@ class _BookingSuccessDialogState extends State<BookingSuccessDialog> {
             ),
             child: Container(
               width: MediaQuery.of(context).size.width *
-                  0.6, // Adjust width responsively
+                  0.5, // Adjust width responsively
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10.0),
                 boxShadow: [
