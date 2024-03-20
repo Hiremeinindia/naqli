@@ -6,7 +6,8 @@ import 'package:flutter_application_1/Widgets/formText.dart';
 import 'package:flutter_application_1/DialogBox/bookingSuccessful.dart';
 import 'package:sizer/sizer.dart';
 
-import '../homePage.dart';
+import '../../Users/SingleTimeUser/availableUnits.dart';
+import '../../homePage.dart';
 
 class VerifiedDialog extends StatefulWidget {
   const VerifiedDialog();
@@ -147,29 +148,41 @@ class _VerifiedDialogState extends State<VerifiedDialog> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            ImageIcon(
-                              AssetImage(
-                                'approved.png',
+                        Expanded(
+                          child: Center(
+                              child: Row(
+                            children: [
+                              ImageIcon(
+                                AssetImage(
+                                  'approved.png',
+                                ),
+                                color: Color.fromRGBO(60, 55, 148, 1),
+                                size: 30,
                               ),
-                              color: Color.fromRGBO(60, 55, 148, 1),
-                              size: 30,
-                            ),
-                            SizedBox(
-                              width: 5,
-                            ),
-                            Text(
-                              'Number Verified',
-                              style: TextStyle(
-                                fontFamily: 'Colfax',
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
+                              SizedBox(
+                                width: 5,
                               ),
-                            ),
-                          ],
+                              Text('Number Verified',
+                                  style: TabelText.helveticablack19),
+                              Row(
+                                children: [
+                                  IconButton(
+                                    icon: Icon(Icons.close),
+                                    onPressed: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              AvailableUnits(),
+                                        ),
+                                      );
+                                    },
+                                    color: Colors.black, // Setting icon color
+                                  ),
+                                ],
+                              )
+                            ],
+                          )),
                         ),
                         Text('99999 99999',
                             style: TextStyle(
