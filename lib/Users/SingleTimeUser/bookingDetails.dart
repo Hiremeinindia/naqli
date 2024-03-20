@@ -16,6 +16,7 @@ import 'package:flutter_application_1/classes/language_constants.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:sizer/sizer.dart';
 
+import '../../DialogBox/SingleTimeUser/paymentSuccessDialog.dart';
 import '../../Widgets/formText.dart';
 
 class BookingDetails extends StatefulWidget {
@@ -443,12 +444,13 @@ class _BookingDetailsState extends State<BookingDetails> {
                                       ),
                                       CustomButton(
                                         onPressed: () {
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                                  BookingDialog(),
-                                            ),
+                                          showDialog(
+                                            barrierColor:
+                                                Colors.grey.withOpacity(0.5),
+                                            context: context,
+                                            builder: (context) {
+                                              return BookingSuccessDialog();
+                                            },
                                           );
                                         },
                                         text: 'Pay Now',

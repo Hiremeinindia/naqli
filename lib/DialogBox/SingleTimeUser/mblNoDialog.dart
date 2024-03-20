@@ -1,14 +1,18 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter_application_1/DialogBox/verfiedDialog.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_application_1/DialogBox/SingleTimeUser/optDialog.dart';
+import 'package:flutter_application_1/DialogBox/SingleTimeUser/verfiedDialog.dart';
 import 'package:flutter_application_1/Users/SingleTimeUser/availableUnits.dart';
 import 'package:flutter_application_1/Widgets/customButton.dart';
 import 'package:flutter_application_1/Widgets/formText.dart';
 import 'package:flutter_application_1/DialogBox/bookingSuccessful.dart';
 import 'package:sizer/sizer.dart';
 
-import '../homePage.dart';
+import '../../createAccount.dart';
+import '../../homePage.dart';
 
 class MblNoDialog extends StatefulWidget {
   const MblNoDialog();
@@ -144,18 +148,27 @@ class _MblNoDialogState extends State<MblNoDialog> {
                         Radius.circular(31),
                       ),
                     ),
-                    padding: EdgeInsets.fromLTRB(4.w, 4.h, 4.w, 4.h),
+                    padding: EdgeInsets.fromLTRB(4.w, 2.h, 1.w, 4.h),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
-                          'Enter Mobile NO',
-                          style: TextStyle(
-                            fontFamily: 'Colfax',
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                          ),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text('Enter Mobile NO',
+                                style: TabelText.helveticablack19),
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.pop(context);
+                              },
+                              child: ImageIcon(
+                                AssetImage('cancel.png'),
+                                color: Colors.black,
+                              ),
+                            ),
+                          ],
                         ),
                         SizedBox(height: 20),
                         Row(
@@ -168,6 +181,12 @@ class _MblNoDialogState extends State<MblNoDialog> {
                                 controller: contactNumberController,
                                 keyboardType: TextInputType.number,
                                 decoration: InputDecoration(
+                                  hintText: '99999 99999',
+                                  contentPadding: EdgeInsets.only(
+                                    left: 1.w,
+                                  ),
+                                  hintStyle: TextStyle(
+                                      color: Color.fromRGBO(238, 225, 225, 1)),
                                   border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(0)),
                                 ),
@@ -181,7 +200,7 @@ class _MblNoDialogState extends State<MblNoDialog> {
                                     barrierColor: Colors.transparent,
                                     context: context,
                                     builder: (context) {
-                                      return VerifiedDialog();
+                                      return OTPDialog();
                                     },
                                   );
                                   // _startPhoneAuth(contactNumberController.text);
@@ -192,42 +211,35 @@ class _MblNoDialogState extends State<MblNoDialog> {
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(0),
                                     )),
-                                child: Text(
-                                  "Get OTP",
-                                  style: TextStyle(
-                                    fontFamily: 'Colfax',
-                                    fontSize: 10,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
-                                  ),
-                                ),
+                                child: Text("Get OTP",
+                                    style: TabelText.dialogtext1),
                               ),
                             ),
                           ],
                         ),
                         SizedBox(height: 40),
                         Padding(
-                          padding: EdgeInsets.only(left: 2.w, right: 2.w),
+                          padding: EdgeInsets.only(left: 2.w, right: 5.w),
                           child: Divider(),
                         ),
                         SizedBox(height: 10),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text("Didn't receive an email? ",
+                            Text("Don't have an account?",
                                 style: TabelText.helvetica),
                             InkWell(
+                              child: Text('Create One!',
+                                  style: FormTextStyle.purplehelvetica),
                               onTap: () {
                                 showDialog(
-                                  barrierColor: Colors.transparent,
+                                  barrierColor: Colors.grey.withOpacity(0.5),
                                   context: context,
                                   builder: (context) {
-                                    return AvailableUnits();
+                                    return CreateAccount();
                                   },
                                 );
                               },
-                              child: Text("Resend.",
-                                  style: FormTextStyle.purplehelvetica),
                             ),
                           ],
                         ),
@@ -288,7 +300,7 @@ class _MblNoDialogState extends State<MblNoDialog> {
                                 barrierColor: Colors.transparent,
                                 context: context,
                                 builder: (context) {
-                                  return VerifiedDialog();
+                                  return OTPDialog();
                                 },
                               );
                               // _startPhoneAuth(contactNumberController.text);
@@ -315,16 +327,20 @@ class _MblNoDialogState extends State<MblNoDialog> {
                           child: Divider(),
                         ),
                         SizedBox(height: 10),
-                        Text("Didn't receive an email? ",
+                        Text("Don't have an account?",
                             style: TabelText.helvetica),
                         SizedBox(height: 10),
                         InkWell(
                           onTap: () {
-                            // Implement the logic to resend the OTP
-                            // For now, let's close the dialog
-                            Navigator.pop(context);
+                            showDialog(
+                              barrierColor: Colors.grey.withOpacity(0.5),
+                              context: context,
+                              builder: (context) {
+                                return CreateAccount();
+                              },
+                            );
                           },
-                          child: Text("Resend.",
+                          child: Text('Create One!',
                               style: FormTextStyle.purplehelvetica),
                         ),
                       ],

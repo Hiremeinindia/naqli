@@ -56,8 +56,7 @@ class _BookingsState extends State<Bookings> {
         if (constraints.maxWidth >= 950) {
           return SingleChildScrollView(
             child: Container(
-              height: 673,
-              width: 1073,
+              height: 630,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20.0),
                 color: Color.fromRGBO(255, 255, 255, 0.925),
@@ -211,99 +210,90 @@ class _BookingsState extends State<Bookings> {
                       ),
                     ],
                   ),
-                  SizedBox(
-                    width: 90,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 40),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        CustomRadio1(
-                            onChanged: (val) {
-                              setState(() {
-                                selectedRadioValue =
-                                    val; // Unselect if already selected
-                                isButtonEnabled = true;
-                              });
-                            },
-                            groupValue: selectedRadioValue,
-                            value: 1,
-                            text1: 'Vendor 1',
-                            colors: Colors.white,
-                            textcolor1: Colors.black54,
-                            text2: "XXXX SAR",
-                            textcolor2: Colors.black38),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        CustomRadio1(
-                            onChanged: (val) {
-                              setState(() {
-                                selectedRadioValue =
-                                    val; // Unselect if already selected
-                                isButtonEnabled = true;
-                              });
-                            },
-                            groupValue: selectedRadioValue,
-                            value: 2,
-                            text1: 'Vendor 2',
-                            colors: Colors.white,
-                            textcolor1: Colors.black54,
-                            text2: "XXXX SAR",
-                            textcolor2: Colors.black38),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        CustomRadio1(
-                            onChanged: (val) {
-                              setState(() {
-                                selectedRadioValue =
-                                    val; // Unselect if already selected
-                                isButtonEnabled = true;
-                              });
-                            },
-                            groupValue: selectedRadioValue,
-                            value: 3,
-                            text1: 'Vendor 3',
-                            colors: Colors.white,
-                            textcolor1: Colors.black54,
-                            text2: "XXXX SAR",
-                            textcolor2: Colors.black38),
-                        SizedBox(
-                          height: 40,
-                        ),
-                        Row(
-                          children: [
-                            Text(
-                              "Cancel Request",
-                              style: TextStyle(
-                                  fontSize: 16,
-                                  fontFamily: "Helvetica",
-                                  color: Color.fromRGBO(158, 101, 169, 1),
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 170,
-                        ),
-                        Row(
-                          children: [
-                            CustomButton(
-                              onPressed: () {},
-                              text: 'Pay Advance: XXXX',
-                            ),
-                            SizedBox(
-                              width: 70,
-                            ),
-                            CustomButton(
-                              onPressed: () {},
-                              text: 'Pay: XXXX',
-                            ),
-                          ],
-                        )
-                      ],
+                  Expanded(
+                    child: Padding(
+                      padding: EdgeInsets.fromLTRB(5.w, 8.h, 5.w, 8.h),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          CustomRadio1(
+                              onChanged: (val) {
+                                setState(() {
+                                  selectedRadioValue =
+                                      val; // Unselect if already selected
+                                  isButtonEnabled = true;
+                                });
+                              },
+                              groupValue: selectedRadioValue,
+                              value: 1,
+                              text1: 'Vendor 1',
+                              colors: Colors.white,
+                              textcolor1: Colors.black54,
+                              text2: "XXXX SAR",
+                              textcolor2: Colors.black38),
+                          CustomRadio1(
+                              onChanged: (val) {
+                                setState(() {
+                                  selectedRadioValue =
+                                      val; // Unselect if already selected
+                                  isButtonEnabled = true;
+                                });
+                              },
+                              groupValue: selectedRadioValue,
+                              value: 2,
+                              text1: 'Vendor 2',
+                              colors: Colors.white,
+                              textcolor1: Colors.black54,
+                              text2: "XXXX SAR",
+                              textcolor2: Colors.black38),
+                          CustomRadio1(
+                              onChanged: (val) {
+                                setState(() {
+                                  selectedRadioValue =
+                                      val; // Unselect if already selected
+                                  isButtonEnabled = true;
+                                });
+                              },
+                              groupValue: selectedRadioValue,
+                              value: 3,
+                              text1: 'Vendor 3',
+                              colors: Colors.white,
+                              textcolor1: Colors.black54,
+                              text2: "XXXX SAR",
+                              textcolor2: Colors.black38),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Row(
+                            children: [
+                              Text(
+                                "Cancel Request",
+                                style: TextStyle(
+                                    fontSize: 16,
+                                    fontFamily: "Helvetica",
+                                    color: Color.fromRGBO(158, 101, 169, 1),
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 110,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              CustomButton(
+                                onPressed: () {},
+                                text: 'Pay Advance: XXXX',
+                              ),
+                              CustomButton(
+                                onPressed: () {},
+                                text: 'Pay: XXXX',
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
                     ),
                   ),
                 ],
