@@ -811,7 +811,7 @@ class _AvailableUnitsState extends State<AvailableUnits> {
                           ],
                         ),
                         Image.asset(
-                          'Naqli-final-logo.png',
+                          'naqlilogo.png',
                           width: 25.w,
                         ),
                         Column(

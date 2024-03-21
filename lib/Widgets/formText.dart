@@ -1,6 +1,20 @@
 // ignore: file_names
 import 'package:flutter/material.dart';
 
+class HomepageText {
+  static const TextStyle helvetica16 = TextStyle(
+    fontFamily: 'Helvetica',
+    color: Color.fromRGBO(0, 0, 0, 1),
+    fontSize: 14,
+  );
+  static const TextStyle helvetica16bold = TextStyle(
+    fontFamily: 'Helvetica',
+    color: Colors.white,
+    fontWeight: FontWeight.bold,
+    fontSize: 14,
+  );
+}
+
 class FormTextStyle {
   static const TextStyle text = TextStyle(
     fontFamily: 'Colfax',
@@ -101,7 +115,7 @@ class TabelText {
   );
   static const TextStyle usertext = TextStyle(
     fontSize: 10,
-    fontFamily: "HelveticaNeue",
+    fontFamily: "HelveticaNeueRegular",
     color: Color.fromRGBO(112, 112, 112, 1),
   );
   static const TextStyle headerText = TextStyle(
