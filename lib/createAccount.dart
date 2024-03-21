@@ -135,7 +135,12 @@ class _CreateAccountState extends State<CreateAccount> {
             context: context,
             barrierDismissible: false,
             builder: (context) => AlertDialog(
-              title: Text("Enter OTP"),
+              title: Column(
+                children: [
+                  Text("Verify"),
+                  Text("Your code was sent to your mobile no")
+                ],
+              ),
               content: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
