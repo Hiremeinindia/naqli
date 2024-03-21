@@ -10,7 +10,7 @@ import 'package:flutter_application_1/Widgets/formText.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../main.dart';
-import 'DialogBox/mblNoDialog.dart';
+import 'DialogBox/SingleTimeUser/mblNoDialog.dart';
 import 'homePage.dart';
 
 // ignore: must_be_immutable
@@ -86,14 +86,8 @@ class _LoginPageState extends State<LoginPage> {
                               children: [
                                 Align(
                                   alignment: Alignment.center,
-                                  child: Text(
-                                    'Login',
-                                    style: TextStyle(
-                                      fontFamily: 'Colfax',
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
+                                  child: Text('Login',
+                                      style: TabelText.helveticablack19),
                                 ),
                                 SizedBox(
                                   height: 50,
@@ -179,7 +173,7 @@ class _LoginPageState extends State<LoginPage> {
                                     Text("Don't have an account?",
                                         style: TabelText.helvetica),
                                     InkWell(
-                                      child: Text('Create One!',
+                                      child: Text(' Create One!',
                                           style: FormTextStyle.purplehelvetica),
                                       onTap: () {
                                         showDialog(

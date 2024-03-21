@@ -145,7 +145,7 @@ class _MyHomePageState extends State<SuperUserDashboardPage> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Image.asset(
-                        'Naqli-final-logo.png',
+                        'naqlilogo.png',
                         width: 10.w,
                       ),
                       Row(
@@ -158,7 +158,7 @@ class _MyHomePageState extends State<SuperUserDashboardPage> {
                               'User',
                               style: TextStyle(
                                 fontSize: 20,
-                                fontFamily: "HelveticaNeue",
+                                fontFamily: "HelveticaNeueRegular",
                                 color: Color.fromRGBO(112, 112, 112, 1),
                               ),
                             ),
@@ -177,7 +177,7 @@ class _MyHomePageState extends State<SuperUserDashboardPage> {
                               'Partner',
                               style: TextStyle(
                                 fontSize: 16,
-                                fontFamily: "HelveticaNeue",
+                                fontFamily: "HelveticaNeueRegular",
                                 color: Color.fromRGBO(206, 203, 203, 1),
                               ),
                             ),
@@ -635,7 +635,7 @@ class _MyHomePageState extends State<SuperUserDashboardPage> {
                             'User',
                             style: TextStyle(
                               fontSize: 20,
-                              fontFamily: "HelveticaNeue",
+                              fontFamily: "HelveticaNeueRegular",
                               color: Color.fromRGBO(112, 112, 112, 1),
                             ),
                           ),
@@ -654,7 +654,7 @@ class _MyHomePageState extends State<SuperUserDashboardPage> {
                             'Partner',
                             style: TextStyle(
                               fontSize: 16,
-                              fontFamily: "HelveticaNeue",
+                              fontFamily: "HelveticaNeueRegular",
                               color: Color.fromRGBO(206, 203, 203, 1),
                             ),
                           ),

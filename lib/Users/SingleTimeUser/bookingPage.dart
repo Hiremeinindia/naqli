@@ -7,32 +7,43 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_application_1/DialogBox/SingleTimeUser/bookingIDDialog.dart';
-import 'package:flutter_application_1/Users/SingleTimeUser/bookingDetails.dart';
+import 'package:flutter_application_1/DialogBox/SingleTimeUser/bookingConfirmDialog.dart';
+import 'package:flutter_application_1/DialogBox/bookingdialog.dart';
 import 'package:flutter_application_1/Widgets/customButton.dart';
 import 'package:flutter_application_1/Widgets/customTextField.dart';
 import 'package:flutter_application_1/Widgets/unitsContainer.dart';
 import 'package:flutter_application_1/classes/language.dart';
 import 'package:flutter_application_1/classes/language_constants.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:sizer/sizer.dart';
 
+import '../../Widgets/customRadio.dart';
 import '../../Widgets/formText.dart';
 
-class AvailableUnits extends StatefulWidget {
-  const AvailableUnits({
+class BookingPage extends StatefulWidget {
+  const BookingPage({
     Key? key,
   }) : super(key: key);
 
   @override
-  State<AvailableUnits> createState() => _AvailableUnitsState();
+  State<BookingPage> createState() => _BookingPageState();
 }
 
-class _AvailableUnitsState extends State<AvailableUnits> {
+class _BookingPageState extends State<BookingPage> {
   String _selectedValue = '1';
   String categoryValue = '1';
+  GoogleMapController? mapController;
+  List<Marker> _markers = [];
   bool value = false;
   int? groupValue = 1;
   bool checkbox1 = false;
+  bool showmaps = true;
+  bool isButtonEnabled = false;
+  bool isButtonEnabled1 = false;
+  bool isButtonEnabled2 = false;
+  int? selectedRadioValue;
+  int? selectedRadioValue1;
+  int? selectedRadioValue2;
   String trailer = 'Select Type';
   String six = 'Select Type';
   String lorry = 'Select Type';
@@ -41,8 +52,23 @@ class _AvailableUnitsState extends State<AvailableUnits> {
   String pickup = 'Select Type';
   String towtruck = 'Select Type';
   String dropdownValues = 'Load Type';
+  void _onMapCreated(GoogleMapController controller) {
+    mapController = controller;
+  }
+
+  @override
   void initState() {
     super.initState();
+
+    if (_markers.isNotEmpty) {
+      _markers.add(const Marker(
+        markerId: MarkerId("Mylocation"),
+        position: LatLng(59.948680, 11.010630),
+      ));
+      setState(() {
+        showmaps = true;
+      });
+    }
   }
 
   @override
@@ -52,729 +78,364 @@ class _AvailableUnitsState extends State<AvailableUnits> {
           builder: (BuildContext ctx, BoxConstraints constraints) {
         if (constraints.maxWidth >= 720) {
           return Scaffold(
-              appBar: PreferredSize(
-                preferredSize: Size.fromHeight(75),
-                child: Material(
-                  child: Padding(
-                    padding: EdgeInsets.fromLTRB(17.w, 0, 17.w, 0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Image.asset(
-                          'naqlilogo.png',
-                          height: 75,
-                          width: 100,
-                        ),
-                        Row(
-                          children: [
-                            Align(
-                              alignment: Alignment.center,
-                              child: TextButton(
-                                onPressed: () {
-                                  // Handle the first button press
-                                },
-                                child: Text(
-                                  'User',
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                    fontFamily: "Helvetica",
-                                    color: Color.fromRGBO(112, 112, 112, 1),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 20,
-                              child: VerticalDivider(
-                                color: Color.fromRGBO(206, 203, 203, 1),
-                              ),
-                            ),
-                            TextButton(
+            appBar: PreferredSize(
+              preferredSize: Size.fromHeight(75),
+              child: Material(
+                elevation: 3,
+                child: Padding(
+                  padding: EdgeInsets.fromLTRB(17.w, 0, 17.w, 0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Image.asset(
+                        'naqlilogo.png',
+                        height: 75,
+                        width: 100,
+                      ),
+                      Row(
+                        children: [
+                          Align(
+                            alignment: Alignment.center,
+                            child: TextButton(
                               onPressed: () {
-                                // Handle the third button press
+                                // Handle the first button press
                               },
                               child: Text(
-                                'Partner',
+                                'User',
                                 style: TextStyle(
                                   fontSize: 20,
                                   fontFamily: "Helvetica",
-                                  color: Color.fromRGBO(206, 203, 203, 1),
+                                  color: Color.fromRGBO(112, 112, 112, 1),
                                 ),
                               ),
                             ),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            Icon(
-                              Icons.notifications,
-                              color: Color.fromRGBO(106, 102, 209, 1),
-                            ),
-                            Text("Contact Us ", style: TabelText.helvetica11),
-                            SizedBox(
-                              height: 20,
-                              child: VerticalDivider(
-                                color: Colors.black,
-                              ),
-                            ),
-                            Text("Hello Customer!",
-                                style: TabelText.helvetica11),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              body: SingleChildScrollView(
-                child: Center(
-                  child: Stack(
-                    children: [
-                      Container(
-                        height: 850,
-                        child: Align(
-                          alignment: Alignment.topLeft,
-                          child: CarouselSlider(
-                            options: CarouselOptions(
-                              height: 500,
-                            ),
-                            items: [
-                              Container(
-                                margin: EdgeInsets.all(6.0),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(8.0),
-                                  image: DecorationImage(
-                                    image: AssetImage('truckslide.jpg'),
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                              ),
-                              Container(
-                                margin: EdgeInsets.all(6.0),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(8.0),
-                                  image: DecorationImage(
-                                    image: AssetImage('truckslide.jpg'),
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                              ),
-                            ],
                           ),
-                        ),
+                          SizedBox(
+                            height: 20,
+                            child: VerticalDivider(
+                              color: Color.fromRGBO(206, 203, 203, 1),
+                            ),
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              // Handle the third button press
+                            },
+                            child: Text(
+                              'Partner',
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontFamily: "Helvetica",
+                                color: Color.fromRGBO(206, 203, 203, 1),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
-                      Positioned(
-                        left: 18.w,
-                        top: 80,
-                        child: Container(
-                          width: 60.w,
-                          padding: EdgeInsets.fromLTRB(2.w, 6.h, 2.w, 3.h),
-                          decoration: const BoxDecoration(
-                              color: Colors.white,
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey,
-                                  spreadRadius: 1,
-                                  blurRadius: 2, // changes position of shadow
-                                ),
-                              ],
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(25))),
-                          height: 740,
-                          child: Row(
-                            children: [
-                              Expanded(
-                                child: Padding(
-                                  padding: EdgeInsets.fromLTRB(0, 0, 1.5.w, 0),
-                                  child: Container(
-                                    width: 28.w,
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        UnitsContainer(
-                                          text: 'Tralia',
-                                          items: <String>[
-                                            'Select Type',
-                                            'Short Sides',
-                                            'Contract',
-                                            'None'
-                                          ],
-                                          value: trailer,
-                                          onChanged: (String? newValue) {
-                                            setState(() {
-                                              trailer =
-                                                  newValue!; // Update value in the list
-                                            });
-                                          },
-                                        ),
-                                        UnitsContainer(
-                                          text: 'Six',
-                                          items: <String>[
-                                            'Select Type',
-                                            'Short Sides',
-                                            'Contract',
-                                            'None'
-                                          ],
-                                          value: six,
-                                          onChanged: (String? newValue) {
-                                            setState(() {
-                                              six =
-                                                  newValue!; // Update value in the list
-                                            });
-                                          },
-                                        ),
-                                        UnitsContainer(
-                                          text: 'Lorry 7 Metres',
-                                          items: <String>[
-                                            'Select Type',
-                                            'Short Sides',
-                                            'Contract',
-                                            'None'
-                                          ],
-                                          value: lorry7,
-                                          onChanged: (String? newValue) {
-                                            setState(() {
-                                              lorry =
-                                                  newValue!; // Update value in the list
-                                            });
-                                          },
-                                        ),
-                                        UnitsContainer(
-                                          text: 'Lorry',
-                                          items: <String>[
-                                            'Select Type',
-                                            'Short Sides',
-                                            'Contract',
-                                            'None'
-                                          ],
-                                          value: lorry,
-                                          onChanged: (String? newValue) {
-                                            setState(() {
-                                              lorry =
-                                                  newValue!; // Update value in the list
-                                            });
-                                          },
-                                        ),
-                                        UnitsContainer(
-                                          text: 'Diana',
-                                          items: <String>[
-                                            'Select Type',
-                                            'Short Sides',
-                                            'Contract',
-                                            'None'
-                                          ],
-                                          value: diana,
-                                          onChanged: (String? newValue) {
-                                            setState(() {
-                                              diana =
-                                                  newValue!; // Update value in the list
-                                            });
-                                          },
-                                        ),
-                                        UnitsContainer(
-                                          text: 'Pick Up',
-                                          items: <String>[
-                                            'Select Type',
-                                            'Short Sides',
-                                            'Contract',
-                                            'None'
-                                          ],
-                                          value: pickup,
-                                          onChanged: (String? newValue) {
-                                            setState(() {
-                                              pickup =
-                                                  newValue!; // Update value in the list
-                                            });
-                                          },
-                                        ),
-                                        UnitsContainer(
-                                          text: 'Tow Truck',
-                                          items: <String>[
-                                            'Select Type',
-                                            'Short Sides',
-                                            'Contract',
-                                            'None'
-                                          ],
-                                          value: towtruck,
-                                          onChanged: (String? newValue) {
-                                            setState(() {
-                                              towtruck =
-                                                  newValue!; // Update value in the list
-                                            });
-                                          },
-                                        ),
-                                        SizedBox(
-                                          height: 10,
-                                        ),
-                                        Row(
-                                          children: [
-                                            Expanded(
-                                              child: Column(
-                                                children: [
-                                                  Row(
-                                                    children: [
-                                                      Flexible(
-                                                        child:
-                                                            CustomTextfieldGrey(
-                                                          text: 'Time',
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  SizedBox(
-                                                    height: 15,
-                                                  ),
-                                                  Row(
-                                                    children: [
-                                                      Flexible(
-                                                        child:
-                                                            CustomTextfieldGrey(
-                                                          text:
-                                                              'Value of the Product',
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  )
-                                                ],
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              width: 15,
-                                            ),
-                                            Expanded(
-                                              child: Column(
-                                                children: [
-                                                  Container(
-                                                    padding:
-                                                        EdgeInsets.fromLTRB(
-                                                            0.5.w, 0, 1.w, 0),
-                                                    height: 50,
-                                                    decoration: BoxDecoration(
-                                                      border: Border.all(
-                                                          color: Color.fromRGBO(
-                                                              183,
-                                                              183,
-                                                              183,
-                                                              1)),
-                                                      color: Colors.white,
-                                                      borderRadius:
-                                                          BorderRadius.only(
-                                                        topLeft:
-                                                            Radius.circular(8),
-                                                        topRight:
-                                                            Radius.circular(8),
-                                                        bottomLeft:
-                                                            Radius.circular(8),
-                                                        bottomRight:
-                                                            Radius.circular(8),
-                                                      ),
-                                                    ),
-                                                    child: Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        Icon(
-                                                            Icons
-                                                                .calendar_today,
-                                                            color:
-                                                                Color.fromRGBO(
-                                                                    183,
-                                                                    183,
-                                                                    183,
-                                                                    1)),
-                                                        SizedBox(
-                                                          width: 10,
-                                                        ),
-                                                        VerticalDivider(
-                                                          width: 0.2,
-                                                          color: Color.fromRGBO(
-                                                              183, 183, 183, 1),
-                                                        )
-                                                      ],
-                                                    ),
-                                                  ),
-                                                  SizedBox(
-                                                    height: 15,
-                                                  ),
-                                                  DropdownButtonHideUnderline(
-                                                    child:
-                                                        DropdownButton2<String>(
-                                                      value:
-                                                          dropdownValues, // Use value from the list
-                                                      items: <String>[
-                                                        'Trigger Bookings',
-                                                        'Booking Manager',
-                                                        'Contract',
-                                                        'Load Type',
-                                                        'None'
-                                                      ].map<
-                                                              DropdownMenuItem<
-                                                                  String>>(
-                                                          (String value) {
-                                                        return DropdownMenuItem<
-                                                            String>(
-                                                          value: value,
-                                                          child: Text(
-                                                            value,
-                                                            style: TextStyle(
-                                                                fontSize: 12,
-                                                                fontFamily:
-                                                                    'SegoeItalic',
-                                                                color: Colors
-                                                                    .black),
-                                                          ),
-                                                        );
-                                                      }).toList(),
-                                                      onChanged:
-                                                          (String? newValue) {
-                                                        setState(() {
-                                                          dropdownValues =
-                                                              newValue!; // Update value in the list
-                                                        });
-                                                      },
-                                                      buttonStyleData:
-                                                          ButtonStyleData(
-                                                        height: 50,
-                                                        width: 15.w,
-                                                        padding:
-                                                            EdgeInsets.only(
-                                                                left: 9,
-                                                                right: 9),
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          border: Border.all(
-                                                              color: Color
-                                                                  .fromRGBO(
-                                                                      183,
-                                                                      183,
-                                                                      183,
-                                                                      1)),
-                                                          borderRadius:
-                                                              BorderRadius.only(
-                                                            topLeft:
-                                                                Radius.circular(
-                                                                    8),
-                                                            topRight:
-                                                                Radius.circular(
-                                                                    8),
-                                                            bottomLeft:
-                                                                Radius.circular(
-                                                                    8),
-                                                            bottomRight:
-                                                                Radius.circular(
-                                                                    8),
-                                                          ),
-                                                          color: Colors.white,
-                                                        ),
-                                                      ),
-                                                      iconStyleData:
-                                                          const IconStyleData(
-                                                        icon: Icon(
-                                                          Icons
-                                                              .arrow_drop_down_sharp,
-                                                        ),
-                                                        iconSize: 25,
-                                                        iconEnabledColor:
-                                                            Colors.black,
-                                                        iconDisabledColor: null,
-                                                      ),
-                                                      dropdownStyleData:
-                                                          DropdownStyleData(
-                                                        elevation: 0,
-                                                        maxHeight: 200,
-                                                        padding:
-                                                            EdgeInsets.all(3),
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          border: Border.all(
-                                                              color: Color
-                                                                  .fromRGBO(
-                                                                      112,
-                                                                      112,
-                                                                      112,
-                                                                      1)),
-                                                          borderRadius:
-                                                              BorderRadius.only(
-                                                            topLeft:
-                                                                Radius.circular(
-                                                                    5),
-                                                            topRight:
-                                                                Radius.circular(
-                                                                    5),
-                                                            bottomLeft:
-                                                                Radius.circular(
-                                                                    5),
-                                                            bottomRight:
-                                                                Radius.circular(
-                                                                    5),
-                                                          ),
-                                                          color: Colors.white,
-                                                        ),
-                                                        scrollPadding:
-                                                            EdgeInsets.all(5),
-                                                        scrollbarTheme:
-                                                            ScrollbarThemeData(
-                                                          thickness:
-                                                              MaterialStateProperty
-                                                                  .all<double>(
-                                                                      6),
-                                                          thumbVisibility:
-                                                              MaterialStateProperty
-                                                                  .all<bool>(
-                                                                      true),
-                                                        ),
-                                                      ),
-                                                      menuItemStyleData:
-                                                          MenuItemStyleData(
-                                                        height: 30,
-                                                        padding:
-                                                            EdgeInsets.only(
-                                                                left: 9,
-                                                                right: 9),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            )
-                                          ],
-                                        ),
-                                        SizedBox(
-                                          height: 10,
-                                        ),
-                                        Row(
-                                          children: [
-                                            Checkbox(
-                                              value: checkbox1,
-                                              onChanged: (bool? newValue) {
-                                                setState(() {
-                                                  value = newValue!;
-                                                });
-                                              },
-                                            ),
-                                            Text('Need Additional Labour',
-                                                style: TabelText.text1),
-                                            Transform.scale(
-                                              scale: 0.7,
-                                              child: Radio<int?>(
-                                                  splashRadius: 5,
-                                                  fillColor:
-                                                      MaterialStateProperty
-                                                          .resolveWith(
-                                                              (states) {
-                                                    if (states.contains(
-                                                        MaterialState
-                                                            .selected)) {
-                                                      return Color.fromRGBO(
-                                                          183, 183, 183, 1);
-                                                    }
-                                                    return Color.fromRGBO(
-                                                        208, 205, 205, 1);
-                                                  }),
-                                                  hoverColor: Color.fromRGBO(
-                                                          183, 183, 183, 1)
-                                                      .withOpacity(.8),
-                                                  value: 1,
-                                                  groupValue: groupValue,
-                                                  onChanged: (int? value) {
-                                                    setState(() {
-                                                      groupValue = value;
-                                                    });
-                                                  }),
-                                            ),
-                                            Text('1', style: TabelText.text1),
-                                            Transform.scale(
-                                              scale: 0.7,
-                                              child: Radio<int?>(
-                                                  splashRadius: 5,
-                                                  fillColor:
-                                                      MaterialStateProperty
-                                                          .resolveWith(
-                                                              (states) {
-                                                    if (states.contains(
-                                                        MaterialState
-                                                            .selected)) {
-                                                      return Color.fromRGBO(
-                                                          183, 183, 183, 1);
-                                                    }
-                                                    return Color.fromRGBO(
-                                                        208, 205, 205, 1);
-                                                  }),
-                                                  hoverColor: Color.fromRGBO(
-                                                          183, 183, 183, 1)
-                                                      .withOpacity(.8),
-                                                  value: 2,
-                                                  groupValue: groupValue,
-                                                  onChanged: (int? value) {
-                                                    setState(() {
-                                                      groupValue = value;
-                                                    });
-                                                  }),
-                                            ),
-                                            Text('2', style: TabelText.text1),
-                                            Transform.scale(
-                                              scale: 0.7,
-                                              child: Radio<int?>(
-                                                  splashRadius: 5,
-                                                  fillColor:
-                                                      MaterialStateProperty
-                                                          .resolveWith(
-                                                              (states) {
-                                                    if (states.contains(
-                                                        MaterialState
-                                                            .selected)) {
-                                                      return Color.fromRGBO(
-                                                          183, 183, 183, 1);
-                                                    }
-                                                    return Color.fromRGBO(
-                                                        208, 205, 205, 1);
-                                                  }),
-                                                  hoverColor: Color.fromRGBO(
-                                                          183, 183, 183, 1)
-                                                      .withOpacity(.8),
-                                                  value: 3,
-                                                  groupValue: groupValue,
-                                                  onChanged: (int? value) {
-                                                    setState(() {
-                                                      groupValue = value;
-                                                    });
-                                                  }),
-                                            ),
-                                            Text('3', style: TabelText.text1),
-                                          ],
-                                        ),
-                                        SizedBox(
-                                          height: 10,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              VerticalDivider(
-                                color: Color.fromRGBO(183, 183, 183, 1),
-                                width: 1,
-                              ),
-                              Expanded(
-                                child: Padding(
-                                  padding: EdgeInsets.fromLTRB(1.5.w, 0, 0, 0),
-                                  child: Column(
-                                    children: [
-                                      Container(
-                                        padding: const EdgeInsets.all(8.0),
-                                        decoration: BoxDecoration(
-                                            border: Border.all(
-                                                color: Color.fromRGBO(
-                                                    183,
-                                                    183,
-                                                    183,
-                                                    1) // Specify the border width
-                                                ),
-                                            color: Colors.white,
-                                            borderRadius: BorderRadius.all(
-                                              Radius.circular(8),
-                                            )),
-                                        child: Column(
-                                          children: [
-                                            Row(
-                                              children: [
-                                                Icon(
-                                                  Icons.circle,
-                                                  color: Colors.green,
-                                                  size: 20,
-                                                ),
-                                                SizedBox(
-                                                  width: 10,
-                                                ),
-                                                Text(
-                                                  'Pick Up',
-                                                  style: TabelText
-                                                      .helvetica16black,
-                                                ),
-                                              ],
-                                            ),
-                                            Divider(
-                                                color: Color.fromRGBO(
-                                                    183, 183, 183, 1)),
-                                            Row(
-                                              children: [
-                                                Icon(
-                                                  Icons.circle,
-                                                  color: Colors.red,
-                                                  size: 20,
-                                                ),
-                                                SizedBox(
-                                                  width: 10,
-                                                ),
-                                                Text(
-                                                  'Drop Point A',
-                                                  style: TabelText
-                                                      .helvetica16black,
-                                                ),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: 20,
-                                      ),
-                                      Expanded(
-                                        child: Container(
-                                          height: 200,
-                                          decoration: BoxDecoration(
-                                              border: Border.all(
-                                                  color: Color.fromRGBO(
-                                                      183,
-                                                      183,
-                                                      183,
-                                                      1) // Specify the border width
-                                                  ),
-                                              color: Color.fromARGB(
-                                                  69, 112, 106, 106),
-                                              borderRadius: BorderRadius.all(
-                                                Radius.circular(8),
-                                              )),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: 20,
-                                      ),
-                                      SizedBox(
-                                        width: double.infinity,
-                                        height: 47,
-                                        child: CustomButton(
-                                          onPressed: () {
-                                            showDialog(
-                                              barrierColor:
-                                                  Color.fromRGBO(59, 57, 57, 1)
-                                                      .withOpacity(0.5),
-                                              context: context,
-                                              builder: (context) {
-                                                return BookingIDDialog();
-                                              },
-                                            );
-                                          },
-                                          text: 'Create Booking',
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: 20,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ],
+                      Row(
+                        children: [
+                          Icon(
+                            Icons.notifications,
+                            color: Color.fromRGBO(106, 102, 209, 1),
                           ),
-                        ),
+                          Text("Contact Us ", style: TabelText.helvetica11),
+                          SizedBox(
+                            height: 20,
+                            child: VerticalDivider(
+                              color: Colors.black,
+                            ),
+                          ),
+                          Text("Hello Customer!", style: TabelText.helvetica11),
+                        ],
                       ),
                     ],
                   ),
                 ),
-              ));
+              ),
+            ),
+            body: Padding(
+              padding: EdgeInsets.fromLTRB(4.w, 4.h, 4.w, 4.h),
+              child: Expanded(
+                child: Container(
+                  padding: EdgeInsets.fromLTRB(4.w, 8.h, 3.w, 8.h),
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color:
+                          Color.fromARGB(255, 216, 214, 214).withOpacity(0.2),
+                    ),
+                    boxShadow: <BoxShadow>[
+                      BoxShadow(
+                        color:
+                            Color.fromARGB(255, 199, 198, 198).withOpacity(0.5),
+                        blurRadius: 5,
+                        spreadRadius: 5,
+                        offset: Offset(0, 0.5), // Bottom side shadow
+                      ),
+                      BoxShadow(
+                        color:
+                            Color.fromARGB(255, 255, 255, 255).withOpacity(0.2),
+                        blurRadius: 1,
+                        spreadRadius: 0, // Bottom side shadow
+                      ),
+                    ],
+                    borderRadius: BorderRadius.circular(5),
+                    color: Color.fromRGBO(245, 243, 255, 1).withOpacity(0.8),
+                  ),
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: Container(
+                      width: 1000,
+                      height: 700,
+                      padding: EdgeInsets.fromLTRB(1.w, 2.h, 1.w, 2.h),
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: Color.fromARGB(255, 216, 214, 214)
+                              .withOpacity(0.2),
+                        ),
+                        boxShadow: <BoxShadow>[
+                          BoxShadow(
+                            color: Color.fromARGB(255, 199, 198, 198)
+                                .withOpacity(0.3),
+                            blurRadius: 10,
+                            spreadRadius: 10,
+                            offset: Offset(0, 0.5), // Bottom side shadow
+                          ),
+                          BoxShadow(
+                            color: Color.fromARGB(255, 255, 255, 255)
+                                .withOpacity(0.2),
+                            blurRadius: 1,
+                            spreadRadius: 0, // Bottom side shadow
+                          ),
+                        ],
+                        borderRadius: BorderRadius.circular(25),
+                        color: Colors.white,
+                      ),
+                      child: SingleChildScrollView(
+                        child: Container(
+                          height: 605,
+                          padding: EdgeInsets.fromLTRB(1.w, 1.h, 1.w, 1.h),
+                          child: Row(
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.fromLTRB(0, 0, 1.w, 0),
+                                child: Expanded(
+                                  child: Column(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Image.asset(
+                                            'Group1787.png',
+                                            width: 62,
+                                            height: 61,
+                                          ),
+                                          SizedBox(
+                                            width: 10,
+                                          ),
+                                          Text(
+                                            "Booking Id #1345789345",
+                                            style: TabelText.helveticablack16,
+                                          ),
+                                        ],
+                                      ),
+                                      Container(
+                                        height: 404,
+                                        width: 456,
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(12)),
+                                        child: GoogleMap(
+                                            onMapCreated: (controller) {
+                                              setState(() {
+                                                mapController = controller;
+                                              });
+                                            },
+                                            markers: Set<Marker>.of(_markers),
+                                            mapType: MapType.normal,
+                                            initialCameraPosition:
+                                                CameraPosition(
+                                                    target: LatLng(
+                                                        24.755562, 46.589584),
+                                                    zoom: 13)),
+                                      ),
+                                      Container(
+                                        width: 20.w,
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Column(
+                                              children: [
+                                                Text(
+                                                  "Pick up truck",
+                                                  style: TextStyle(
+                                                      fontSize: 20,
+                                                      fontFamily: "Helvetica",
+                                                      color: Color.fromRGBO(
+                                                          16, 3, 3, 1)),
+                                                ),
+                                                Text(
+                                                  "Toyota Hilux",
+                                                  style: TabelText.tableText5,
+                                                )
+                                              ],
+                                            ),
+                                            SizedBox(
+                                              height: 63,
+                                              child: VerticalDivider(
+                                                color: Color.fromRGBO(
+                                                    204, 195, 195, 1),
+                                                thickness: 2,
+                                              ),
+                                            ),
+                                            Column(
+                                              children: [
+                                                Text(
+                                                  "Load",
+                                                  style: TabelText.tableText5,
+                                                ),
+                                                Text(
+                                                  "Woods",
+                                                  style: TabelText.tableText5,
+                                                )
+                                              ],
+                                            ),
+                                            Column(
+                                              children: [
+                                                Text(
+                                                  "Size",
+                                                  style: TabelText.tableText5,
+                                                ),
+                                                Text(
+                                                  " 1 to 1.5",
+                                                  style: TabelText.tableText5,
+                                                )
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              VerticalDivider(
+                                color: Color.fromRGBO(204, 195, 195, 1),
+                                thickness: 2,
+                              ),
+                              Expanded(
+                                child: Padding(
+                                  padding:
+                                      EdgeInsets.fromLTRB(2.w, 2.h, 1.w, 2.h),
+                                  child: Column(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      CustomRadio1(
+                                          onChanged: (val) {
+                                            setState(() {
+                                              selectedRadioValue =
+                                                  val; // Unselect if already selected
+                                              isButtonEnabled = true;
+                                            });
+                                          },
+                                          groupValue: selectedRadioValue,
+                                          value: 1,
+                                          text1: 'Vendor 1',
+                                          colors: Colors.white,
+                                          textcolor1: Colors.black54,
+                                          text2: "XXXX SAR",
+                                          textcolor2: Colors.black38),
+                                      SizedBox(
+                                        height: 20,
+                                      ),
+                                      CustomRadio1(
+                                          onChanged: (val) {
+                                            setState(() {
+                                              selectedRadioValue =
+                                                  val; // Unselect if already selected
+                                              isButtonEnabled = true;
+                                            });
+                                          },
+                                          groupValue: selectedRadioValue,
+                                          value: 2,
+                                          text1: 'Vendor 2',
+                                          colors: Colors.white,
+                                          textcolor1: Colors.black54,
+                                          text2: "XXXX SAR",
+                                          textcolor2: Colors.black38),
+                                      SizedBox(
+                                        height: 20,
+                                      ),
+                                      CustomRadio1(
+                                          onChanged: (val) {
+                                            setState(() {
+                                              selectedRadioValue =
+                                                  val; // Unselect if already selected
+                                              isButtonEnabled = true;
+                                            });
+                                          },
+                                          groupValue: selectedRadioValue,
+                                          value: 3,
+                                          text1: 'Vendor 3',
+                                          colors: Colors.white,
+                                          textcolor1: Colors.black54,
+                                          text2: "XXXX SAR",
+                                          textcolor2: Colors.black38),
+                                      SizedBox(
+                                        height: 40,
+                                      ),
+                                      Row(
+                                        children: [
+                                          Text("Cancel Request",
+                                              style: TextStyle(
+                                                  color: Color.fromRGBO(
+                                                      145, 79, 157, 1),
+                                                  fontFamily: 'Helvetica',
+                                                  fontSize: 13,
+                                                  fontWeight: FontWeight.bold)),
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: 170,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          CustomButton(
+                                            onPressed: () {},
+                                            text: 'Pay Advance: XXXX',
+                                          ),
+                                          CustomButton(
+                                            onPressed: () {
+                                              showDialog(
+                                                barrierColor: Colors.grey
+                                                    .withOpacity(0.5),
+                                                context: context,
+                                                builder: (context) {
+                                                  return BookingConfirmDialog();
+                                                },
+                                              );
+                                            },
+                                            text: 'Pay: XXXX',
+                                          ),
+                                        ],
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          );
         } else {
           return Scaffold(
               appBar: PreferredSize(
