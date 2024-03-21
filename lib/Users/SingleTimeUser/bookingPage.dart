@@ -472,7 +472,7 @@ class _BookingPageState extends State<BookingPage> {
                           ],
                         ),
                         Image.asset(
-                          'Naqli-final-logo.png',
+                          'naqlilogo.png',
                           width: 25.w,
                         ),
                         Column(
