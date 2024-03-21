@@ -23,6 +23,9 @@ class _CreateAccountState extends State<CreateAccount> {
   String? selectedType;
   String? selectedOption;
   bool isVerified = false;
+  String firstName = '';
+  String lastName = '';
+  String phoneNumber = '';
 
   TextEditingController firstNameController = TextEditingController();
   TextEditingController lastNameController = TextEditingController();
@@ -38,6 +41,27 @@ class _CreateAccountState extends State<CreateAccount> {
   TextEditingController cityController = TextEditingController();
   TextEditingController accounttypeController = TextEditingController();
   TextEditingController otpController = TextEditingController();
+  @override
+  void initState() {
+    super.initState();
+    fetchUserData();
+  }
+
+  Future<void> fetchUserData() async {
+    try {
+      DocumentSnapshot userDoc =
+          await _firestore.collection('users').doc('user_id').get();
+
+      setState(() {
+        firstName = userDoc['firstName'];
+        lastName = userDoc['lastName'];
+        phoneNumber = userDoc['phoneNumber'];
+      });
+    } catch (e) {
+      print('Error fetching user data: $e');
+    }
+  }
+
   void showErrorDialog(String errorMessage) {
     showDialog(
       context: context,
@@ -134,13 +158,65 @@ class _CreateAccountState extends State<CreateAccount> {
                     auth.signInWithCredential(_credential).then((result) {
                       // Check if the verification is successful
                       if (result.user != null) {
-                        print("otp verified successfully");
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => SingleUserDashboardPage(),
-                          ),
-                        );
+                        print("OTP verified successfully");
+                        // Fetch user details from Firebase
+                        User? user = FirebaseAuth.instance.currentUser;
+                        String? phoneNumber = user?.phoneNumber;
+
+                        // Check if any document exists in 'users' collection
+                        FirebaseFirestore.instance
+                            .collection('users')
+                            .get()
+                            .then((QuerySnapshot querySnapshot) {
+                          if (querySnapshot.docs.isNotEmpty) {
+                            // At least one document exists, you can fetch and display data here
+                            // For simplicity, let's assume you want to display the first document's data
+                            QueryDocumentSnapshot firstDocument =
+                                querySnapshot.docs.first;
+                            Map<String, dynamic> userData = firstDocument.data()
+                                as Map<String, dynamic>; // Explicit cast
+
+                            // Check if 'firstName' field exists in the document
+                            if (userData.containsKey('firstName')) {
+                              String? firstName = userData['firstName'];
+                              // Display user details in a dialog box
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return AlertDialog(
+                                    title: Text("User Details"),
+                                    content: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text("Name: $firstName"),
+                                        Text("Phone Number: $phoneNumber"),
+                                      ],
+                                    ),
+                                    actions: [
+                                      TextButton(
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                        },
+                                        child: Text("Close"),
+                                      ),
+                                    ],
+                                  );
+                                },
+                              );
+                            } else {
+                              print(
+                                  'No firstName field found in Firestore document.');
+                            }
+                          } else {
+                            // No documents found in 'users' collection
+                            print('No user data found in Firestore.');
+                          }
+                        }).catchError((e) {
+                          print("Error fetching user data: $e");
+                        });
+
                         setState(() {
                           isVerified = true;
                         });
@@ -407,7 +483,7 @@ class _CreateAccountState extends State<CreateAccount> {
                                   height: 45,
                                   child: TextFormField(
                                     controller: passwordController,
-                                    validator: validatePassword,
+                                    // validator: validatePassword,
                                     decoration: InputDecoration(
                                       hintStyle: TextStyle(fontSize: 16),
                                       hintText: 'Password',
@@ -575,7 +651,7 @@ class _CreateAccountState extends State<CreateAccount> {
                                 SizedBox(
                                   height: 45,
                                   child: TextFormField(
-                                    validator: validatePassword,
+                                    // validator: validatePassword,
                                     controller: confirmPasswordController,
                                     decoration: InputDecoration(
                                       hintStyle: TextStyle(fontSize: 16),
