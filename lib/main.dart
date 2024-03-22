@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/Users/Enterprise/dashboard_page.dart';
+import 'package:flutter_application_1/Partner/Dashboard/bookings.dart';
 import 'package:flutter_application_1/Users/SingleTimeUser/availableUnits.dart';
 import 'package:flutter_application_1/Users/SingleTimeUser/bookingDetails.dart';
 import 'package:flutter_application_1/Users/SingleTimeUser/bookingPage.dart';
@@ -82,7 +83,7 @@ class _MyAppState extends State<MyApp> {
       supportedLocales: AppLocalizations.supportedLocales,
       locale: _locale,
       debugShowCheckedModeBanner: false,
-      home: MyHomePage(),
+      home: CreateAccount(),
     );
   }
 }
