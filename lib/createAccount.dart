@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_application_1/Controllers/allUsersFormController.dart';
 import 'package:flutter_application_1/Users/Enterprise/dashboard_page.dart';
 import 'package:flutter_application_1/DialogBox/SingleTimeUser/mblNoDialog.dart';
 import 'package:flutter_application_1/DialogBox/SingleTimeUser/optDialog.dart';
@@ -37,28 +38,15 @@ class _CreateAccountState extends State<CreateAccount> {
   String lastName = '';
   String phoneNumber = '';
   String enterpriseSelect = 'User';
+  final FirebaseAuth _auth = FirebaseAuth.instance;
   final ScrollController _Scroll1 = ScrollController();
   final ScrollController _Scroll2 = ScrollController();
-  TextEditingController firstNameController = TextEditingController();
-  TextEditingController lastNameController = TextEditingController();
-  TextEditingController legalNameController = TextEditingController();
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-  TextEditingController contactNumberController = TextEditingController();
-  TextEditingController addressController = TextEditingController();
-  TextEditingController govtIdController = TextEditingController();
-  TextEditingController confirmPasswordController = TextEditingController();
-  TextEditingController alternateNumberController = TextEditingController();
-  TextEditingController address2Controller = TextEditingController();
-  TextEditingController idNumberController = TextEditingController();
-  TextEditingController cityController = TextEditingController();
-  TextEditingController companyidNumberController = TextEditingController();
-  TextEditingController accounttypeController = TextEditingController();
+  AllUsersFormController controller = AllUsersFormController();
   TextEditingController otpController = TextEditingController();
   @override
   void initState() {
     super.initState();
-    fetchUserData();
+    // fetchUserData();
   }
 
   Future<void> fetchUserData() async {
@@ -100,19 +88,21 @@ class _CreateAccountState extends State<CreateAccount> {
       CollectionReference usersCollection = _firestore.collection('users');
 
       await usersCollection.add({
-        'firstName': firstNameController.text,
-        'lastName': lastNameController.text,
-        'email': emailController.text,
-        'password': passwordController.text,
-        'phoneNumber': contactNumberController.text,
-        'address': addressController.text,
-        'city': selectedCity,
-        'govtId': selectedOption,
-        'confirmPassword': confirmPasswordController.text,
-        'alternateNumber': alternateNumberController.text,
-        'address2': address2Controller.text,
-        'accountType': selectedType,
-        'idNumber': idNumberController.text,
+        'firstName': controller.firstName.text,
+        'lastName': controller.lastName.text,
+        'legalName': controller.legalName.text,
+        'email': controller.email.text,
+        'password': controller.password.text,
+        'contactNumber': controller.contactNumber.text,
+        'address': controller.address.text,
+        'govtId': controller.govtId.text,
+        'confirmPassword': controller.confirmPassword.text,
+        'alternateNumber': controller.alternateNumber.text,
+        'address2': controller.address2.text,
+        'idNumber': controller.idNumber.text,
+        'city': controller.city.text,
+        'companyidNumber': controller.companyidNumber.text,
+        'accounttype': controller.accounttype.text,
       });
 
       print('User data saved to Firestore successfully!');
@@ -153,7 +143,7 @@ class _CreateAccountState extends State<CreateAccount> {
                 height: 30,
                 width: 200,
                 child: TextField(
-                  controller: contactNumberController,
+                  controller: controller.contactNumber,
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(
@@ -166,7 +156,7 @@ class _CreateAccountState extends State<CreateAccount> {
                 height: 30,
                 child: ElevatedButton(
                   onPressed: () async {
-                    await _startPhoneAuth(contactNumberController.text);
+                    await _startPhoneAuth(controller.contactNumber.text);
                     showDialog(
                       barrierColor: Colors.transparent,
                       context: context,
@@ -224,7 +214,7 @@ class _CreateAccountState extends State<CreateAccount> {
 
     try {
       await _auth.verifyPhoneNumber(
-        phoneNumber: "+91${contactNumberController.text}",
+        phoneNumber: "+91${controller.contactNumber.text}",
         verificationCompleted: (PhoneAuthCredential credential) async {
           await _auth.signInWithCredential(credential).then((value) {
             Navigator.pop(context);
@@ -373,15 +363,15 @@ class _CreateAccountState extends State<CreateAccount> {
                                       children: [
                                         Expanded(
                                             child: CustomTextfield(
-                                          validator: nameValidator,
-                                          controller: firstNameController,
+                                          // validator: nameValidator,
+                                          controller: controller.firstName,
                                           text: 'First Name',
                                         )),
                                         SizedBox(width: 25),
                                         Expanded(
                                             child: CustomTextfield(
-                                          validator: nameValidator,
-                                          controller: lastNameController,
+                                          // validator: nameValidator,
+                                          controller: controller.lastName,
                                           text: 'Last Name',
                                         )),
                                       ],
@@ -390,7 +380,7 @@ class _CreateAccountState extends State<CreateAccount> {
                                       height: 15,
                                     ),
                                     CustomTextfield(
-                                      controller: emailController,
+                                      controller: controller.email,
                                       validator: emailValidator,
                                       text: 'Email address',
                                     ),
@@ -439,7 +429,7 @@ class _CreateAccountState extends State<CreateAccount> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     CustomTextfield(
-                                      controller: passwordController,
+                                      controller: controller.password,
                                       validator: validatePassword,
                                       text: 'Password',
                                     ),
@@ -447,21 +437,21 @@ class _CreateAccountState extends State<CreateAccount> {
                                       height: 15,
                                     ),
                                     CustomTextfield(
-                                      controller: contactNumberController,
-                                      validator: (value) {
-                                        if (value!.length != 10)
-                                          return 'Mobile Number must be of 10 digit';
-                                        else
-                                          return null;
-                                      },
+                                      controller: controller.contactNumber,
+                                      // validator: (value) {
+                                      //   if (value!.length != 10)
+                                      //     return 'Mobile Number must be of 10 digit';
+                                      //   else
+                                      //     return null;
+                                      // },
                                       text: 'Phone Number',
                                     ),
                                     SizedBox(
                                       height: 15,
                                     ),
                                     CustomTextfield(
-                                      controller: addressController,
-                                      validator: nameValidator,
+                                      controller: controller.address,
+                                      // validator: nameValidator,
                                       text: 'Address',
                                     ),
                                     SizedBox(
@@ -500,9 +490,9 @@ class _CreateAccountState extends State<CreateAccount> {
                                     ),
                                     enterpriseSelect == 'Enterprise'
                                         ? CustomTextfield(
-                                            validator: nameValidator,
+                                            // validator: nameValidator,
                                             controller:
-                                                companyidNumberController,
+                                                controller.companyidNumber,
                                             text: 'Id number',
                                           )
                                         : SizedBox(
@@ -596,7 +586,7 @@ class _CreateAccountState extends State<CreateAccount> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     CustomTextfield(
-                                      controller: confirmPasswordController,
+                                      controller: controller.confirmPassword,
                                       validator: validatePassword,
                                       text: 'Confirm Password',
                                     ),
@@ -604,21 +594,21 @@ class _CreateAccountState extends State<CreateAccount> {
                                       height: 15,
                                     ),
                                     CustomTextfield(
-                                      validator: (value) {
-                                        if (value!.length != 10)
-                                          return 'Mobile Number must be of 10 digit';
-                                        else
-                                          return null;
-                                      },
-                                      controller: alternateNumberController,
+                                      // validator: (value) {
+                                      //   if (value!.length != 10)
+                                      //     return 'Mobile Number must be of 10 digit';
+                                      //   else
+                                      //     return null;
+                                      // },
+                                      controller: controller.alternateNumber,
                                       text: 'Phone Number',
                                     ),
                                     SizedBox(
                                       height: 15,
                                     ),
                                     CustomTextfield(
-                                      validator: nameValidator,
-                                      controller: address2Controller,
+                                      // validator: nameValidator,
+                                      controller: controller.address2,
                                       text: 'Address',
                                     ),
                                     SizedBox(
@@ -705,18 +695,18 @@ class _CreateAccountState extends State<CreateAccount> {
                                     ),
                                     enterpriseSelect == 'Enterprise'
                                         ? CustomTextfield(
-                                            validator: nameValidator,
-                                            controller: legalNameController,
+                                            // validator: nameValidator,
+                                            controller: controller.legalName,
                                             text: 'Leagl name',
                                           )
                                         : CustomTextfield(
-                                            validator: (value) {
-                                              if (value!.length != 10)
-                                                return 'Mobile Number must be of 10 digit';
-                                              else
-                                                return null;
-                                            },
-                                            controller: idNumberController,
+                                            // validator: (value) {
+                                            //   if (value!.length != 10)
+                                            //     return 'Mobile Number must be of 10 digit';
+                                            //   else
+                                            //     return null;
+                                            // },
+                                            controller: controller.idNumber,
                                             text: 'ID Number',
                                           ),
                                     SizedBox(
@@ -737,7 +727,7 @@ class _CreateAccountState extends State<CreateAccount> {
                                     if (_formKey.currentState!.validate()) {
                                       print("track1");
                                       await _startPhoneAuth(
-                                          contactNumberController.text);
+                                          controller.contactNumber.text);
                                       // _showOtpVerificationDialog();
                                       // Save user data and start phone authentication
                                       await _saveUserDataToFirestore();
@@ -770,7 +760,7 @@ class _CreateAccountState extends State<CreateAccount> {
                                     if (_formKey.currentState!.validate()) {
                                       print("track1");
                                       await _startPhoneAuth(
-                                          contactNumberController.text);
+                                          controller.contactNumber.text);
                                       // _showOtpVerificationDialog();
                                       // Save user data and start phone authentication
                                       await _saveUserDataToFirestore();
@@ -804,32 +794,52 @@ class _CreateAccountState extends State<CreateAccount> {
                               Text('Already have an account? ',
                                   style: HomepageText.helvetica16black),
                               InkWell(
-                                onTap: () {
-                                  if (selectedType == 'User') {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) =>
-                                            SingleUserDashboardPage(),
-                                      ),
+                                onTap: () async {
+                                  try {
+                                    UserCredential userCredential = await _auth
+                                        .createUserWithEmailAndPassword(
+                                      email: controller.email.text,
+                                      password: controller.password.text,
                                     );
-                                  } else if (selectedType == 'Super User') {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) =>
-                                            SuperUserDashboardPage(),
-                                      ),
-                                    );
-                                  } else if (selectedType == 'Enterprise') {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) =>
-                                            EnterDashboardPage(),
-                                      ),
-                                    );
+                                    // User creation successful
+                                    print(
+                                        "User created: ${userCredential.user!.email}");
+                                    await _createAccount(
+                                        userCredential.user!.uid,
+                                        selectedType.toString());
+                                    print('value passed$selectedType');
+
+                                    // Navigate to different pages based on selectedType
+                                    if (selectedType == 'Enterprise') {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                EnterDashboardPage()),
+                                      );
+                                    } else if (selectedType == 'Super User') {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                SuperUserDashboardPage()),
+                                      );
+                                    } else if (selectedType == 'User') {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                SingleUserDashboardPage()),
+                                      );
+                                    } else {
+                                      // Handle invalid selectedType
+                                      print(
+                                          'Invalid selected type: $selectedType');
+                                    }
+                                  } catch (e) {
+                                    print("Error creating user: $e");
                                   }
+                                  // Call _register function when onTap is triggered
                                 },
                                 child: Text(
                                   'Sign In',
@@ -913,7 +923,7 @@ class _CreateAccountState extends State<CreateAccount> {
                             child: SizedBox(
                               height: 40,
                               child: TextFormField(
-                                controller: firstNameController,
+                                controller: controller.firstName,
                                 validator: nameValidator,
                                 decoration: InputDecoration(
                                   hintStyle: TextStyle(fontSize: 15),
@@ -941,7 +951,7 @@ class _CreateAccountState extends State<CreateAccount> {
                             child: SizedBox(
                               height: 40,
                               child: TextFormField(
-                                controller: lastNameController,
+                                controller: controller.lastName,
                                 validator: nameValidator,
                                 decoration: InputDecoration(
                                   hintStyle: TextStyle(fontSize: 15),
@@ -969,7 +979,7 @@ class _CreateAccountState extends State<CreateAccount> {
                             child: SizedBox(
                               height: 40,
                               child: TextFormField(
-                                controller: emailController,
+                                controller: controller.email,
                                 validator: emailValidator,
                                 decoration: InputDecoration(
                                   hintStyle: TextStyle(fontSize: 15),
@@ -999,7 +1009,7 @@ class _CreateAccountState extends State<CreateAccount> {
                             child: SizedBox(
                               height: 40,
                               child: TextFormField(
-                                controller: emailController,
+                                controller: controller.email,
                                 validator: emailValidator,
                                 decoration: InputDecoration(
                                   hintStyle: TextStyle(fontSize: 15),
@@ -1027,7 +1037,7 @@ class _CreateAccountState extends State<CreateAccount> {
                             child: SizedBox(
                               height: 40,
                               child: TextFormField(
-                                controller: emailController,
+                                controller: controller.email,
                                 validator: emailValidator,
                                 decoration: InputDecoration(
                                   hintStyle: TextStyle(fontSize: 15),
@@ -1055,7 +1065,7 @@ class _CreateAccountState extends State<CreateAccount> {
                             child: SizedBox(
                               height: 40,
                               child: TextFormField(
-                                controller: contactNumberController,
+                                controller: controller.contactNumber,
                                 validator: (value) {
                                   if (value!.length != 10)
                                     return 'Mobile Number must be of 10 digit';
@@ -1094,7 +1104,7 @@ class _CreateAccountState extends State<CreateAccount> {
                                   else
                                     return null;
                                 },
-                                controller: alternateNumberController,
+                                controller: controller.alternateNumber,
                                 decoration: InputDecoration(
                                   hintStyle: TextStyle(fontSize: 15),
                                   hintText: 'Phone Number',
@@ -1123,7 +1133,7 @@ class _CreateAccountState extends State<CreateAccount> {
                             child: SizedBox(
                               height: 40,
                               child: TextFormField(
-                                controller: addressController,
+                                controller: controller.address,
                                 validator: nameValidator,
                                 decoration: InputDecoration(
                                   hintStyle: TextStyle(fontSize: 15),
@@ -1151,7 +1161,7 @@ class _CreateAccountState extends State<CreateAccount> {
                             child: SizedBox(
                               height: 40,
                               child: TextFormField(
-                                controller: addressController,
+                                controller: controller.address,
                                 validator: nameValidator,
                                 decoration: InputDecoration(
                                   hintStyle: TextStyle(fontSize: 15),
@@ -1315,7 +1325,7 @@ class _CreateAccountState extends State<CreateAccount> {
                             child: SizedBox(
                               height: 40,
                               child: TextFormField(
-                                controller: addressController,
+                                controller: controller.address,
                                 validator: nameValidator,
                                 decoration: InputDecoration(
                                   hintStyle: TextStyle(fontSize: 13),
@@ -1411,13 +1421,50 @@ class _CreateAccountState extends State<CreateAccount> {
                           Text('Already have an account? ',
                               style: HomepageText.helvetica16black),
                           InkWell(
-                            onTap: () {
-                              showDialog(
-                                context: context,
-                                builder: (context) {
-                                  return LoginPage();
-                                },
-                              );
+                            onTap: () async {
+                              try {
+                                UserCredential userCredential =
+                                    await _auth.createUserWithEmailAndPassword(
+                                  email: controller.email.text,
+                                  password: controller.password.text,
+                                );
+                                // User creation successful
+                                print(
+                                    "User created: ${userCredential.user!.email}");
+                                await _createAccount(userCredential.user!.uid,
+                                    selectedType.toString());
+                                print('value passed$selectedType');
+
+                                // Navigate to different pages based on selectedType
+                                if (selectedType == 'Enterprise') {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            EnterDashboardPage()),
+                                  );
+                                } else if (selectedType == 'Super User') {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            SuperUserDashboardPage()),
+                                  );
+                                } else if (selectedType == 'User') {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            SingleUserDashboardPage()),
+                                  );
+                                } else {
+                                  // Handle invalid selectedType
+                                  print('Invalid selected type: $selectedType');
+                                }
+                              } catch (e) {
+                                print("Error creating user: $e");
+                              }
+                              // Call _register function when onTap is triggered
                             },
                             child: Text('Sign In',
                                 style: LoginpageText.purplehelvetica),
@@ -1433,5 +1480,46 @@ class _CreateAccountState extends State<CreateAccount> {
         }
       });
     });
+  }
+
+  Future<void> _createAccount(String uid, String selectedType) async {
+    try {
+      String userCollection;
+      Map<String, dynamic> userData = {
+        'firstName': controller.firstName.text,
+        'lastName': controller.lastName.text,
+        'email': controller.email.text,
+        'password': controller.password.text,
+        'contactNumber': controller.contactNumber.text,
+        'address': controller.address.text,
+        'alternateNumber': controller.alternateNumber.text,
+        'address2': controller.address2.text,
+        'city': controller.city.text,
+        'accounttype': controller.accounttype.text,
+      };
+
+      if (selectedType == 'Enterprise') {
+        userCollection = 'enterprisedummy';
+        userData['legalName'] = controller.legalName.text;
+        userData['companyidNumber'] = controller.companyidNumber.text;
+      } else if (selectedType == 'User') {
+        userCollection = 'userdummy';
+        userData['govtId'] = controller.govtId.text;
+        userData['idNumber'] = controller.idNumber.text;
+      } else if (selectedType == 'Super User') {
+        userCollection = 'superuserdummy';
+        userData['govtId'] = controller.govtId.text;
+        userData['idNumber'] = controller.idNumber.text;
+      } else {
+        throw Exception('Invalid selected type');
+      }
+
+      await FirebaseFirestore.instance
+          .collection(userCollection)
+          .doc(uid)
+          .set(userData);
+    } catch (e) {
+      print('Error creating account: $e');
+    }
   }
 }
