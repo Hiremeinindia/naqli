@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_application_1/Controllers/allUsersFormController.dart';
 import 'package:flutter_application_1/DialogBox/SingleTimeUser/optDialog.dart';
 import 'package:flutter_application_1/DialogBox/SingleTimeUser/verfiedDialog.dart';
 import 'package:flutter_application_1/Users/SingleTimeUser/availableUnits.dart';
@@ -23,6 +24,7 @@ class MblNoDialog extends StatefulWidget {
 
 class _MblNoDialogState extends State<MblNoDialog> {
   bool isVerified = false;
+  AllUsersFormController controller = AllUsersFormController();
   TextEditingController otpController = TextEditingController();
   void showErrorDialog(String errorMessage) {
     showDialog(
@@ -42,8 +44,22 @@ class _MblNoDialogState extends State<MblNoDialog> {
     );
   }
 
+  bool isValidPhoneNumber(String phoneNumber) {
+    // Regular expression pattern to match a 10-digit phone number
+    RegExp regex = RegExp(r'^[0-9]{10}$');
+
+    // Check if the phone number matches the pattern
+    if (regex.hasMatch(phoneNumber)) {
+      // Phone number format is valid
+      return true;
+    } else {
+      // Phone number format is invalid
+      return false;
+    }
+  }
+
   Future<void> _startPhoneAuth(String phoneNumber) async {
-    print("track3");
+    print("mobtrack3");
 
     FirebaseAuth _auth = FirebaseAuth.instance;
 
@@ -67,56 +83,37 @@ class _MblNoDialogState extends State<MblNoDialog> {
         codeSent: (String verificationId, [int? forceResendingToken]) {
           // Store the verification ID for later use (e.g., resend OTP)
           String storedVerificationId = verificationId;
+          ElevatedButton(
+            onPressed: () {
+              FirebaseAuth auth = FirebaseAuth.instance;
+              String smsCode = otpController.text;
+              PhoneAuthCredential _credential = PhoneAuthProvider.credential(
+                verificationId: storedVerificationId,
+                smsCode: smsCode,
+              );
 
-          showDialog(
-            context: context,
-            barrierDismissible: false,
-            builder: (context) => AlertDialog(
-              title: Text("Enter OTP"),
-              content: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  TextField(
-                    controller: otpController,
-                  ),
-                ],
-              ),
-              actions: [
-                ElevatedButton(
-                  onPressed: () {
-                    FirebaseAuth auth = FirebaseAuth.instance;
-                    String smsCode = otpController.text;
-                    PhoneAuthCredential _credential =
-                        PhoneAuthProvider.credential(
-                      verificationId: storedVerificationId,
-                      smsCode: smsCode,
-                    );
-
-                    auth.signInWithCredential(_credential).then((result) {
-                      // Check if the verification is successful
-                      if (result.user != null) {
-                        print("otp verified successfully");
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => MyHomePage(),
-                          ),
-                        );
-                        setState(() {
-                          isVerified = true;
-                        });
-                      } else {
-                        showErrorDialog(
-                            "Invalid verification code. Please enter the correct code.");
-                      }
-                    }).catchError((e) {
-                      print("Error signing in with credential: $e");
-                    });
-                  },
-                  child: Text("Done"),
-                ),
-              ],
-            ),
+              auth.signInWithCredential(_credential).then((result) {
+                // Check if the verification is successful
+                if (result.user != null) {
+                  print("otp verified successfully");
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => MyHomePage(),
+                    ),
+                  );
+                  setState(() {
+                    isVerified = true;
+                  });
+                } else {
+                  showErrorDialog(
+                      "Invalid verification code. Please enter the correct code.");
+                }
+              }).catchError((e) {
+                print("Error signing in with credential: $e");
+              });
+            },
+            child: Text("Done"),
           );
         },
         codeAutoRetrievalTimeout: (String verificationId) {
@@ -196,6 +193,14 @@ class _MblNoDialogState extends State<MblNoDialog> {
                               height: 30,
                               child: ElevatedButton(
                                 onPressed: () async {
+                                  if (isValidPhoneNumber(
+                                      contactNumberController.text)) {
+                                    await _startPhoneAuth(
+                                        contactNumberController.text);
+                                  } else {
+                                    showErrorDialog(
+                                        "Invalid phone number format. Please enter a valid 10-digit phone number.");
+                                  }
                                   await _startPhoneAuth(
                                       contactNumberController.text);
                                   showDialog(

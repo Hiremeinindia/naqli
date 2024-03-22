@@ -131,7 +131,7 @@ class _VerifiedDialogState extends State<VerifiedDialog> {
           builder: (BuildContext ctx, BoxConstraints constraints) {
         if (constraints.maxWidth >= 1180) {
           return Padding(
-            padding: EdgeInsets.fromLTRB(15.w, 6.h, 15.w, 6.h),
+            padding: EdgeInsets.fromLTRB(16.w, 6.h, 16.w, 6.h),
             child: Dialog(
               child: SingleChildScrollView(
                 child: Expanded(
