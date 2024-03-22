@@ -430,7 +430,7 @@ class _CreateAccountState extends State<CreateAccount> {
                                   children: [
                                     CustomTextfield(
                                       controller: controller.password,
-                                      validator: validatePassword,
+                                      // validator: validatePassword,
                                       text: 'Password',
                                     ),
                                     SizedBox(
@@ -587,7 +587,7 @@ class _CreateAccountState extends State<CreateAccount> {
                                   children: [
                                     CustomTextfield(
                                       controller: controller.confirmPassword,
-                                      validator: validatePassword,
+                                      // validator: validatePassword,
                                       text: 'Confirm Password',
                                     ),
                                     SizedBox(
@@ -726,8 +726,15 @@ class _CreateAccountState extends State<CreateAccount> {
                                   onPressed: () async {
                                     if (_formKey.currentState!.validate()) {
                                       print("track1");
-                                      await _startPhoneAuth(
-                                          controller.contactNumber.text);
+                                      showDialog(
+                                        barrierColor:
+                                            Colors.grey.withOpacity(0.5),
+                                        context: context,
+                                        builder: (context) {
+                                          return MblNoDialog();
+                                        },
+                                      );
+
                                       // _showOtpVerificationDialog();
                                       // Save user data and start phone authentication
                                       await _saveUserDataToFirestore();
@@ -795,6 +802,13 @@ class _CreateAccountState extends State<CreateAccount> {
                                   style: HomepageText.helvetica16black),
                               InkWell(
                                 onTap: () async {
+                                  showDialog(
+                                    barrierColor: Colors.grey.withOpacity(0.5),
+                                    context: context,
+                                    builder: (context) {
+                                      return MblNoDialog();
+                                    },
+                                  );
                                   try {
                                     UserCredential userCredential = await _auth
                                         .createUserWithEmailAndPassword(
