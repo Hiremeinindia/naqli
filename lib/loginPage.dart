@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_application_1/Widgets/customButton.dart';
 import 'package:flutter_application_1/createAccount.dart';
@@ -258,174 +259,184 @@ class _LoginPageState extends State<LoginPage> {
           );
         } else {
           return Padding(
-            padding: EdgeInsets.fromLTRB(2.w, 6.h, 2.w, 6.h),
-            child: Dialog(
-              child: Expanded(
-                child: Container(
-                  padding: EdgeInsets.fromLTRB(5.w, 15.h, 5.w, 15.h),
-                  decoration: const BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(31),
+            padding: EdgeInsets.only(
+              left: 18.w,
+              right: 18.w,
+              top: 8.h,
+              bottom: 8.h,
+            ),
+            child: Scrollbar(
+              controller: _Scroll1,
+              thumbVisibility: true,
+              child: SingleChildScrollView(
+                controller: _Scroll1,
+                scrollDirection: Axis.vertical,
+                child: Card(
+                  elevation: 5,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(31))),
+                  child: Container(
+                    padding: EdgeInsets.only(
+                      left: 4.w,
+                      right: 4.w,
+                      top: 5.h,
+                      bottom: 5.h,
                     ),
-                  ),
-                  child: Scrollbar(
-                    controller: _Scroll1,
-                    thumbVisibility: true,
-                    child: SingleChildScrollView(
-                      controller: _Scroll1,
-                      scrollDirection: Axis.horizontal,
-                      child: Scrollbar(
-                        controller: _Scroll2,
-                        thumbVisibility: true,
-                        child: SingleChildScrollView(
-                          controller: _Scroll2,
-                          scrollDirection: Axis.vertical,
-                          child: Container(
-                            width: 500,
-                            height: 420,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Text(
-                                  'Login',
-                                  style: TextStyle(
-                                    fontFamily: 'Colfax',
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 50,
-                                ),
-                                Align(
-                                    alignment: Alignment.centerLeft,
-                                    child: Text('Email ID',
-                                        style: TabelText.helvetica)),
-                                SizedBox(
-                                  height: 6,
-                                ),
-                                TextField(
-                                  decoration: InputDecoration(
-                                    contentPadding: EdgeInsets.all(5.0),
-                                    border: OutlineInputBorder(
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(5)),
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 15,
-                                ),
-                                Align(
-                                    alignment: Alignment.centerLeft,
-                                    child: Text('Password',
-                                        style: TabelText.helvetica)),
-                                SizedBox(
-                                  height: 6,
-                                ),
-                                TextField(
-                                  decoration: InputDecoration(
-                                    contentPadding: EdgeInsets.all(5.0),
-                                    border: OutlineInputBorder(
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(5)),
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 20,
-                                ),
-                                SizedBox(
-                                  height: 43,
-                                  width: 140,
-                                  child: ElevatedButton(
-                                    onPressed: () {
-                                      showDialog(
-                                        barrierColor:
-                                            Colors.grey.withOpacity(0.5),
-                                        context: context,
-                                        builder: (context) {
-                                          return MyHomePage();
-                                        },
-                                      );
-                                    },
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor:
-                                          Color.fromRGBO(128, 123, 229, 1),
-                                      side: BorderSide(
-                                        color: Color.fromRGBO(128, 123, 229, 1),
-                                      ),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                    ),
-                                    child: Text('Login',
-                                        style: FormTextStyle.buttonText),
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 15,
-                                ),
-                                InkWell(
-                                  child: Text('Forgot Password?',
-                                      style: FormTextStyle.purplehelvetica),
-                                  onTap: () {},
-                                ),
-                                SizedBox(
-                                  height: 15,
-                                ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text("Don't have an account?",
-                                        style: TabelText.helvetica),
-                                    InkWell(
-                                      child: Text('Create One!',
-                                          style: FormTextStyle.purplehelvetica),
-                                      onTap: () {
-                                        showDialog(
-                                          barrierColor:
-                                              Colors.grey.withOpacity(0.5),
-                                          context: context,
-                                          builder: (context) {
-                                            return CreateAccount();
-                                          },
-                                        );
-                                      },
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 20,
-                                ),
-                                InkWell(
-                                  child: Text('Use without Log in',
-                                      style: FormTextStyle.purplehelvetica),
-                                  onTap: () async {
-                                    showDialog(
-                                      barrierColor:
-                                          Colors.grey.withOpacity(0.5),
-                                      context: context,
-                                      builder: (context) {
-                                        return MblNoDialog();
-                                      },
-                                    );
-                                    if (isVerified) {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => MyHomePage(),
-                                        ),
-                                      );
-                                    }
-                                  },
-                                ),
-                              ],
+                    decoration: const BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(31),
+                      ),
+                    ),
+                    height: 770,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Expanded(
+                                child: SizedBox(
+                              height: 0.1,
+                            )),
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.pop(context);
+                              },
+                              child: ImageIcon(
+                                AssetImage('cancel.png'),
+                                color: Color.fromRGBO(112, 112, 112, 1),
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 100,
+                        ),
+                        Text('Login',
+                            style: TextStyle(
+                                color: Color.fromRGBO(0, 0, 0, 1),
+                                fontFamily: 'Helvetica',
+                                fontWeight: FontWeight.bold,
+                                fontSize: 26,
+                                letterSpacing: 2)),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text('Email ID',
+                                style: HomepageText.helvetica16black)),
+                        TextField(
+                          decoration: InputDecoration(
+                            contentPadding: EdgeInsets.all(5.0),
+                            border: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(5)),
                             ),
                           ),
                         ),
-                      ),
+                        Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text('Password',
+                                style: HomepageText.helvetica16black)),
+                        TextField(
+                          decoration: InputDecoration(
+                            contentPadding: EdgeInsets.all(5.0),
+                            border: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(5)),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        SizedBox(
+                          height: 50,
+                          child: ElevatedButton(
+                            onPressed: () {},
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor:
+                                  Color.fromARGB(255, 128, 123, 229),
+                              shape: RoundedRectangleBorder(
+                                side: BorderSide(
+                                    color:
+                                        const Color.fromRGBO(112, 112, 112, 1)
+                                            .withOpacity(0.3)),
+                                borderRadius: BorderRadius.circular(
+                                    10), // Adjust border radius as needed
+                              ),
+                            ),
+                            child: Padding(
+                              padding: EdgeInsets.fromLTRB(1.w, 4, 1.w, 4),
+                              child: Text(
+                                'Login',
+                                style: TextStyle(
+                                  fontFamily: 'Helvetica',
+                                  color: Colors.white,
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 3,
+                        ),
+                        InkWell(
+                          child: Text('Forgot Password?',
+                              style: LoginpageText.purplehelvetica),
+                          onTap: () {},
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text("Don't have an account?",
+                                style: HomepageText.helvetica16black),
+                            InkWell(
+                              child: Text(' Create One!',
+                                  style: LoginpageText.purplehelvetica),
+                              onTap: () {
+                                showDialog(
+                                  barrierColor: Colors.transparent,
+                                  context: context,
+                                  builder: (context) {
+                                    return CreateAccount();
+                                  },
+                                );
+                              },
+                            ),
+                          ],
+                        ),
+                        InkWell(
+                          child: Text('Use without Log in',
+                              style: LoginpageText.purplehelvetica),
+                          onTap: () async {
+                            // _showOtpVerificationDialog();
+
+                            showDialog(
+                              barrierColor: Colors.grey.withOpacity(0.5),
+                              context: context,
+                              builder: (context) {
+                                return MblNoDialog();
+                              },
+                            );
+                            if (isVerified) {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => MyHomePage(),
+                                ),
+                              );
+                            }
+                          },
+                        ),
+                        SizedBox(
+                          height: 60,
+                        ),
+                      ],
                     ),
                   ),
                 ),
