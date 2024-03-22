@@ -195,7 +195,9 @@ class _MblNoDialogState extends State<MblNoDialog> {
                             SizedBox(
                               height: 30,
                               child: ElevatedButton(
-                                onPressed: () {
+                                onPressed: () async {
+                                  await _startPhoneAuth(
+                                      contactNumberController.text);
                                   showDialog(
                                     barrierColor: Colors.transparent,
                                     context: context,
