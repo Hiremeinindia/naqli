@@ -802,6 +802,13 @@ class _CreateAccountState extends State<CreateAccount> {
                                   style: HomepageText.helvetica16black),
                               InkWell(
                                 onTap: () async {
+                                  showDialog(
+                                    barrierColor: Colors.grey.withOpacity(0.5),
+                                    context: context,
+                                    builder: (context) {
+                                      return MblNoDialog();
+                                    },
+                                  );
                                   try {
                                     UserCredential userCredential = await _auth
                                         .createUserWithEmailAndPassword(
