@@ -1,7 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_application_1/DialogBox/SingleTimeUser/mblNoDialog.dart';
+import 'package:flutter_application_1/DialogBox/SingleTimeUser/optDialog.dart';
 import 'package:flutter_application_1/Users/SingleUser/dashboard_page.dart';
+import 'package:flutter_application_1/Widgets/formText.dart';
 
 import 'package:flutter_application_1/loginPage.dart';
 import 'package:sizer/sizer.dart';
@@ -107,9 +110,105 @@ class _CreateAccountState extends State<CreateAccount> {
     }
   }
 
-  Future<void> _startPhoneAuth(String phoneNumber) async {
+  Future<void> _showDialog() async {
     print("track3");
+    Padding(
+      padding: EdgeInsets.fromLTRB(15.w, 6.h, 15.w, 6.h),
+      child: Dialog(
+        child: Container(
+          width: 350,
+          height: 350,
+          decoration: const BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.all(
+              Radius.circular(31),
+            ),
+          ),
+          padding: EdgeInsets.fromLTRB(1.5.w, 4.h, 1.5.w, 4.h),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'Enter Mobile NO',
+                style: TextStyle(
+                  fontFamily: 'Colfax',
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              SizedBox(height: 20),
+              SizedBox(
+                height: 30,
+                width: 200,
+                child: TextField(
+                  controller: contactNumberController,
+                  keyboardType: TextInputType.number,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(0)),
+                  ),
+                ),
+              ),
+              SizedBox(height: 10),
+              SizedBox(
+                height: 30,
+                child: ElevatedButton(
+                  onPressed: () async {
+                    await _startPhoneAuth(contactNumberController.text);
+                    showDialog(
+                      barrierColor: Colors.transparent,
+                      context: context,
+                      builder: (context) {
+                        return OTPDialog();
+                      },
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: Color.fromRGBO(60, 55, 148, 1),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(0),
+                      )),
+                  child: Text(
+                    "Get OTP",
+                    style: TextStyle(
+                      fontFamily: 'Colfax',
+                      fontSize: 10,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 40),
+              Padding(
+                padding: EdgeInsets.only(left: 2.w, right: 2.w),
+                child: Divider(),
+              ),
+              SizedBox(height: 10),
+              Text("Don't have an account?", style: TabelText.helvetica),
+              SizedBox(height: 10),
+              InkWell(
+                onTap: () {
+                  showDialog(
+                    barrierColor: Colors.grey.withOpacity(0.5),
+                    context: context,
+                    builder: (context) {
+                      return CreateAccount();
+                    },
+                  );
+                },
+                child:
+                    Text('Create One!', style: FormTextStyle.purplehelvetica),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
 
+  Future<void> _startPhoneAuth(String phoneNumber) async {
     FirebaseAuth _auth = FirebaseAuth.instance;
 
     try {
@@ -130,114 +229,6 @@ class _CreateAccountState extends State<CreateAccount> {
         codeSent: (String verificationId, [int? forceResendingToken]) {
           // Store the verification ID for later use (e.g., resend OTP)
           String storedVerificationId = verificationId;
-
-          showDialog(
-            context: context,
-            barrierDismissible: false,
-            builder: (context) => AlertDialog(
-              title: Column(
-                children: [
-                  Text("Verify"),
-                  Text("Your code was sent to your mobile no")
-                ],
-              ),
-              content: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  TextField(
-                    controller: otpController,
-                  ),
-                ],
-              ),
-              actions: [
-                ElevatedButton(
-                  onPressed: () {
-                    FirebaseAuth auth = FirebaseAuth.instance;
-                    String smsCode = otpController.text;
-                    PhoneAuthCredential _credential =
-                        PhoneAuthProvider.credential(
-                      verificationId: storedVerificationId,
-                      smsCode: smsCode,
-                    );
-
-                    auth.signInWithCredential(_credential).then((result) {
-                      // Check if the verification is successful
-                      if (result.user != null) {
-                        print("OTP verified successfully");
-                        // Fetch user details from Firebase
-                        User? user = FirebaseAuth.instance.currentUser;
-                        String? phoneNumber = user?.phoneNumber;
-
-                        // Check if any document exists in 'users' collection
-                        FirebaseFirestore.instance
-                            .collection('users')
-                            .get()
-                            .then((QuerySnapshot querySnapshot) {
-                          if (querySnapshot.docs.isNotEmpty) {
-                            // At least one document exists, you can fetch and display data here
-                            // For simplicity, let's assume you want to display the first document's data
-                            QueryDocumentSnapshot firstDocument =
-                                querySnapshot.docs.first;
-                            Map<String, dynamic> userData = firstDocument.data()
-                                as Map<String, dynamic>; // Explicit cast
-
-                            // Check if 'firstName' field exists in the document
-                            if (userData.containsKey('firstName')) {
-                              String? firstName = userData['firstName'];
-                              // Display user details in a dialog box
-                              showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return AlertDialog(
-                                    title: Text("User Details"),
-                                    content: Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text("Name: $firstName"),
-                                        Text("Phone Number: $phoneNumber"),
-                                      ],
-                                    ),
-                                    actions: [
-                                      TextButton(
-                                        onPressed: () {
-                                          Navigator.pop(context);
-                                        },
-                                        child: Text("Close"),
-                                      ),
-                                    ],
-                                  );
-                                },
-                              );
-                            } else {
-                              print(
-                                  'No firstName field found in Firestore document.');
-                            }
-                          } else {
-                            // No documents found in 'users' collection
-                            print('No user data found in Firestore.');
-                          }
-                        }).catchError((e) {
-                          print("Error fetching user data: $e");
-                        });
-
-                        setState(() {
-                          isVerified = true;
-                        });
-                      } else {
-                        showErrorDialog(
-                            "Invalid verification code. Please enter the correct code.");
-                      }
-                    }).catchError((e) {
-                      print("Error signing in with credential: $e");
-                    });
-                  },
-                  child: Text("Done"),
-                ),
-              ],
-            ),
-          );
         },
         codeAutoRetrievalTimeout: (String verificationId) {
           // Handle code auto retrieval timeout (optional)
@@ -246,54 +237,6 @@ class _CreateAccountState extends State<CreateAccount> {
     } catch (e) {
       print('Error during phone authentication: $e');
     }
-  }
-
-  void _showOtpVerificationDialog() {
-    print("track4");
-
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text("Verification"),
-          content: Column(
-            children: [
-              Text("Enter OTP"),
-              TextField(
-                controller: otpController,
-                keyboardType: TextInputType.number,
-                decoration: InputDecoration(
-                  hintText: 'OTP',
-                ),
-              ),
-            ],
-          ),
-          actions: [
-            InkWell(
-              onTap: () {
-                Navigator.of(context).pop();
-              },
-              child: Text("Cancel"),
-            ),
-            InkWell(
-              onTap: () async {
-                // Validate OTP and proceed if valid
-                String enteredOtp = otpController.text;
-                if (enteredOtp.isNotEmpty) {
-                  // You can add OTP validation logic here
-                  // If the OTP is valid, you can perform further actions
-                  // For now, let's just close the dialog
-                  Navigator.of(context).pop();
-                } else {
-                  // Handle case where OTP is empty
-                }
-              },
-              child: Text("Verify"),
-            ),
-          ],
-        );
-      },
-    );
   }
 
   bool isValidName(String name) {
@@ -792,8 +735,14 @@ class _CreateAccountState extends State<CreateAccount> {
                               onPressed: () async {
                                 if (_formKey.currentState!.validate()) {
                                   print("track1");
-                                  await _startPhoneAuth(
-                                      contactNumberController.text);
+                                  showDialog(
+                                    barrierColor: Colors.grey.withOpacity(0.5),
+                                    context: context,
+                                    builder: (context) {
+                                      return MblNoDialog();
+                                    },
+                                  );
+
                                   // _showOtpVerificationDialog();
                                   // Save user data and start phone authentication
                                   await _saveUserDataToFirestore();
@@ -825,8 +774,8 @@ class _CreateAccountState extends State<CreateAccount> {
                               onPressed: () async {
                                 if (_formKey.currentState!.validate()) {
                                   print("track1");
-                                  await _startPhoneAuth(
-                                      contactNumberController.text);
+                                  // await _startPhoneAuth(
+                                  //     contactNumberController.text);
                                   // _showOtpVerificationDialog();
                                   // Save user data and start phone authentication
                                   await _saveUserDataToFirestore();
@@ -863,12 +812,13 @@ class _CreateAccountState extends State<CreateAccount> {
                           Text('Already have an account? '),
                           InkWell(
                             onTap: () {
-                              showDialog(
-                                context: context,
-                                builder: (context) {
-                                  return LoginPage();
-                                },
-                              );
+                              _showDialog();
+                              // showDialog(
+                              //   context: context,
+                              //   builder: (context) {
+                              //     return LoginPage();
+                              //   },
+                              // );
                             },
                             child: Text(
                               'Sign In',
@@ -1322,8 +1272,8 @@ class _CreateAccountState extends State<CreateAccount> {
                               onPressed: () async {
                                 if (_formKey.currentState!.validate()) {
                                   print("track1");
-                                  await _startPhoneAuth(
-                                      contactNumberController.text);
+                                  // await _startPhoneAuth(
+                                  //     contactNumberController.text);
                                   // _showOtpVerificationDialog();
                                   // Save user data and start phone authentication
                                   await _saveUserDataToFirestore();
@@ -1356,8 +1306,8 @@ class _CreateAccountState extends State<CreateAccount> {
                               onPressed: () async {
                                 if (_formKey.currentState!.validate()) {
                                   print("track1");
-                                  await _startPhoneAuth(
-                                      contactNumberController.text);
+                                  // await _startPhoneAuth(
+                                  //     contactNumberController.text);
                                   // _showOtpVerificationDialog();
                                   // Save user data and start phone authentication
                                   await _saveUserDataToFirestore();
