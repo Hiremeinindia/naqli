@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_application_1/Controllers/allUsersFormController.dart';
 import 'package:flutter_application_1/DialogBox/SingleTimeUser/verfiedDialog.dart';
 import 'package:flutter_application_1/Users/SingleTimeUser/availableUnits.dart';
 import 'package:flutter_application_1/Widgets/customButton.dart';
@@ -20,6 +21,7 @@ class OTPDialog extends StatefulWidget {
 
 class _OTPDialogState extends State<OTPDialog> {
   bool isVerified = false;
+  AllUsersFormController controller = AllUsersFormController();
   TextEditingController otpController = TextEditingController();
   void showErrorDialog(String errorMessage) {
     showDialog(
@@ -39,8 +41,13 @@ class _OTPDialogState extends State<OTPDialog> {
     );
   }
 
+  bool isValidPhoneNumber(String phoneNumber) {
+    RegExp regex = RegExp(r'^[0-9]{10}$');
+    return regex.hasMatch(phoneNumber);
+  }
+
   Future<void> _startPhoneAuth(String phoneNumber) async {
-    print("track3");
+    print("verifytrack3");
 
     FirebaseAuth _auth = FirebaseAuth.instance;
 
@@ -133,7 +140,7 @@ class _OTPDialogState extends State<OTPDialog> {
           builder: (BuildContext ctx, BoxConstraints constraints) {
         if (constraints.maxWidth >= 1180) {
           return Padding(
-            padding: EdgeInsets.fromLTRB(15.w, 6.h, 15.w, 6.h),
+            padding: EdgeInsets.fromLTRB(16.w, 6.h, 16.w, 6.h),
             child: Dialog(
               child: SingleChildScrollView(
                 child: Expanded(
@@ -267,14 +274,24 @@ class _OTPDialogState extends State<OTPDialog> {
                         SizedBox(
                           height: 40,
                           child: ElevatedButton(
-                            onPressed: () {
-                              showDialog(
-                                barrierColor: Colors.transparent,
-                                context: context,
-                                builder: (context) {
-                                  return VerifiedDialog();
-                                },
-                              );
+                            onPressed: () async {
+                              if (isValidPhoneNumber(
+                                  contactNumberController.text)) {
+                                await _startPhoneAuth(
+                                    contactNumberController.text);
+                              } else {
+                                showErrorDialog(
+                                    "Invalid phone number format. Please enter a valid 10-digit phone number.");
+                              }
+                              await _startPhoneAuth(
+                                  contactNumberController.text);
+                              // showDialog(
+                              //   barrierColor: Colors.transparent,
+                              //   context: context,
+                              //   builder: (context) {
+                              //     return VerifiedDialog();
+                              //   },
+                              // );
                               // _startPhoneAuth(contactNumberController.text);
                             },
                             style: ElevatedButton.styleFrom(
