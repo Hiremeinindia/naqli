@@ -4,6 +4,7 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_application_1/createAccount.dart';
 import 'package:flutter_application_1/classes/language.dart';
 import 'package:flutter_application_1/classes/language_constants.dart';
@@ -222,28 +223,17 @@ class _MyHomePageState extends State<MyHomePage> {
                             children: [
                               CarouselSlider(
                                 options: CarouselOptions(
+                                  autoPlay: true,
+                                  viewportFraction: 1.0,
+                                  autoPlayAnimationDuration:
+                                      Durations.extralong4,
                                   height: 500,
                                 ),
                                 items: [
-                                  Container(
-                                    margin: EdgeInsets.all(6.0),
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(8.0),
-                                      image: DecorationImage(
-                                        image: AssetImage('truckslide.jpg'),
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.all(6.0),
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(8.0),
-                                      image: DecorationImage(
-                                        image: AssetImage('truckslide.jpg'),
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
+                                  Image(
+                                    width: double.infinity,
+                                    fit: BoxFit.cover,
+                                    image: AssetImage('truckslide.jpg'),
                                   ),
                                 ],
                               ),
