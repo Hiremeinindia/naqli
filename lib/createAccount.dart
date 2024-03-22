@@ -9,6 +9,7 @@ import 'package:flutter_application_1/DialogBox/SingleTimeUser/mblNoDialog.dart'
 import 'package:flutter_application_1/DialogBox/SingleTimeUser/optDialog.dart';
 import 'package:flutter_application_1/Users/SingleUser/dashboard_page.dart';
 import 'package:flutter_application_1/Users/SuperUser/dashboard_page.dart';
+import 'package:flutter_application_1/Widgets/customDropdown.dart';
 import 'package:flutter_application_1/Widgets/customTextField.dart';
 import 'package:flutter_application_1/Widgets/formText.dart';
 
@@ -457,33 +458,19 @@ class _CreateAccountState extends State<CreateAccount> {
                                     SizedBox(
                                       height: 15,
                                     ),
-                                    SizedBox(
-                                      height: 45,
-                                      child: DropdownButtonFormField(
-                                        isExpanded: true,
-                                        decoration: InputDecoration(
-                                          contentPadding: EdgeInsets.all(5.0),
-                                          border: OutlineInputBorder(
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(5)),
-                                          ),
-                                        ),
-                                        value: selectedCity,
-                                        onChanged: (String? newValue) {
-                                          setState(() {
-                                            selectedCity = newValue;
-                                          });
-                                        },
-                                        items: cities
-                                            .map<DropdownMenuItem<String>>(
-                                                (String value) {
-                                          return DropdownMenuItem<String>(
-                                            value: value,
-                                            child: Text(value,
-                                                style: TextStyle(fontSize: 16)),
-                                          );
-                                        }).toList(),
-                                      ),
+                                    CustomDropDown(
+                                      value: selectedCity,
+                                      items: [
+                                        'City 1',
+                                        'City 2',
+                                        'City 3',
+                                        'City 4'
+                                      ],
+                                      onChanged: (String? newValue) {
+                                        setState(() {
+                                          selectedCity = newValue;
+                                        });
+                                      },
                                     ),
                                     SizedBox(
                                       height: 15,
@@ -495,50 +482,56 @@ class _CreateAccountState extends State<CreateAccount> {
                                                 controller.companyidNumber,
                                             text: 'Id number',
                                           )
-                                        : SizedBox(
-                                            height: 45,
-                                            child:
-                                                DropdownButtonFormField<String>(
-                                              isExpanded: true,
-                                              value: selectedOption,
-                                              decoration: InputDecoration(
-                                                contentPadding:
-                                                    EdgeInsets.all(5.0),
-                                                border: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                          Radius.circular(5)),
-                                                ),
-                                              ),
-                                              onChanged: (String? newValue) {
-                                                setState(() {
-                                                  selectedOption = newValue;
-                                                });
-                                              },
-                                              items: [
-                                                DropdownMenuItem<String>(
-                                                  value: 'National ID',
-                                                  child: Text('National ID',
-                                                      style: TextStyle(
-                                                          fontSize: 16)),
-                                                ),
-                                                DropdownMenuItem<String>(
-                                                  value: 'Iqama No.',
-                                                  child: Text('Iqama No.',
-                                                      style: TextStyle(
-                                                          fontSize: 16)),
-                                                ),
-                                                DropdownMenuItem<String>(
-                                                  value:
-                                                      'Visit Visa / Border No',
-                                                  child: Text(
-                                                      'Visit Visa / Border No',
-                                                      style: TextStyle(
-                                                          fontSize: 16)),
-                                                ),
-                                              ],
-                                            ),
+                                        : CustomDropDown(
+                                            value: selectedOption,
+                                            items: [
+                                              'National ID',
+                                              'Iqama No.',
+                                              'Visit Visa / Border No',
+                                            ],
+                                            onChanged: (String? newValue) {
+                                              setState(() {
+                                                selectedOption = newValue;
+                                              });
+                                            },
                                           ),
+                                    // SizedBox(
+                                    //   height: 45,
+                                    //   child: DropdownButtonFormField<String>(
+                                    //     isExpanded: true,
+                                    //     value: selectedOption,
+                                    //     decoration: InputDecoration(
+                                    //       contentPadding: EdgeInsets.all(5.0),
+                                    //       border: OutlineInputBorder(
+                                    //         borderRadius: BorderRadius.all(
+                                    //             Radius.circular(5)),
+                                    //       ),
+                                    //     ),
+                                    //     onChanged: (String? newValue) {
+                                    //       setState(() {
+                                    //         selectedOption = newValue;
+                                    //       });
+                                    //     },
+                                    //     items: [
+                                    //       DropdownMenuItem<String>(
+                                    //         value: 'National ID',
+                                    //         child: Text('National ID',
+                                    //             style: TextStyle(fontSize: 16)),
+                                    //       ),
+                                    //       DropdownMenuItem<String>(
+                                    //         value: 'Iqama No.',
+                                    //         child: Text('Iqama No.',
+                                    //             style: TextStyle(fontSize: 16)),
+                                    //       ),
+                                    //       DropdownMenuItem<String>(
+                                    //         value: 'Visit Visa / Border No',
+                                    //         child: Text(
+                                    //             'Visit Visa / Border No',
+                                    //             style: TextStyle(fontSize: 16)),
+                                    //       ),
+                                    //     ],
+                                    //   ),
+                                    // ),
                                     SizedBox(
                                       height: 15,
                                     ),
@@ -614,81 +607,19 @@ class _CreateAccountState extends State<CreateAccount> {
                                     SizedBox(
                                       height: 15,
                                     ),
-                                    DropdownButtonHideUnderline(
-                                      child: DropdownButton2<String>(
-                                        value: selectedType,
-                                        items: <String>[
-                                          'User',
-                                          'Super User',
-                                          'Enterprise',
-                                        ].map<DropdownMenuItem<String>>(
-                                            (String value) {
-                                          return DropdownMenuItem<String>(
-                                            value: value,
-                                            child: Text(value,
-                                                style: HomepageText
-                                                    .helvetica16black),
-                                          );
-                                        }).toList(),
-                                        onChanged: (String? newValue) {
-                                          setState(() {
-                                            selectedType = newValue;
-                                            enterpriseSelect = selectedType!;
-                                          });
-                                        },
-                                        buttonStyleData: ButtonStyleData(
-                                          height: 45,
-                                          width: 15.w,
-                                          padding: EdgeInsets.only(
-                                              left: 9, right: 9),
-                                          decoration: BoxDecoration(
-                                            border: Border.all(
-                                                color: Color.fromRGBO(
-                                                    112, 112, 112, 1)),
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(5)),
-                                            color: Colors.white,
-                                          ),
-                                        ),
-                                        iconStyleData: const IconStyleData(
-                                          icon: Icon(
-                                            Icons.arrow_drop_down_sharp,
-                                          ),
-                                          iconSize: 25,
-                                          iconEnabledColor: Colors.black,
-                                          iconDisabledColor: null,
-                                        ),
-                                        dropdownStyleData: DropdownStyleData(
-                                          elevation: 0,
-                                          maxHeight: 200,
-                                          padding: EdgeInsets.all(3),
-                                          decoration: BoxDecoration(
-                                            border: Border.all(
-                                                color: Color.fromRGBO(
-                                                    112, 112, 112, 1)),
-                                            borderRadius: BorderRadius.only(
-                                              topLeft: Radius.circular(0),
-                                              topRight: Radius.circular(0),
-                                              bottomLeft: Radius.circular(5),
-                                              bottomRight: Radius.circular(5),
-                                            ),
-                                            color: Colors.white,
-                                          ),
-                                          scrollPadding: EdgeInsets.all(5),
-                                          scrollbarTheme: ScrollbarThemeData(
-                                            thickness: MaterialStateProperty
-                                                .all<double>(6),
-                                            thumbVisibility:
-                                                MaterialStateProperty.all<bool>(
-                                                    true),
-                                          ),
-                                        ),
-                                        menuItemStyleData: MenuItemStyleData(
-                                          height: 30,
-                                          padding: EdgeInsets.only(
-                                              left: 9, right: 9),
-                                        ),
-                                      ),
+                                    CustomDropDown(
+                                      value: selectedType,
+                                      items: <String>[
+                                        'User',
+                                        'Super User',
+                                        'Enterprise',
+                                      ],
+                                      onChanged: (String? newValue) {
+                                        setState(() {
+                                          selectedType = newValue;
+                                          enterpriseSelect = selectedType!;
+                                        });
+                                      },
                                     ),
                                     SizedBox(
                                       height: 15,
@@ -1125,32 +1056,19 @@ class _CreateAccountState extends State<CreateAccount> {
                                       style: HomepageText.helvetica16black)),
                               SizedBox(width: 5),
                               Expanded(
-                                child: SizedBox(
-                                  height: 45,
-                                  child: DropdownButtonFormField(
-                                    isExpanded: true,
-                                    decoration: InputDecoration(
-                                      contentPadding: EdgeInsets.all(5.0),
-                                      border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(5)),
-                                      ),
-                                    ),
-                                    value: selectedCity,
-                                    onChanged: (String? newValue) {
-                                      setState(() {
-                                        selectedCity = newValue;
-                                      });
-                                    },
-                                    items: cities.map<DropdownMenuItem<String>>(
-                                        (String value) {
-                                      return DropdownMenuItem<String>(
-                                        value: value,
-                                        child: Text(value,
-                                            style: TextStyle(fontSize: 16)),
-                                      );
-                                    }).toList(),
-                                  ),
+                                child: CustomDropDown(
+                                  value: selectedCity,
+                                  items: [
+                                    'City 1',
+                                    'City 2',
+                                    'City 3',
+                                    'City 4'
+                                  ],
+                                  onChanged: (String? newValue) {
+                                    setState(() {
+                                      selectedCity = newValue;
+                                    });
+                                  },
                                 ),
                               ),
                             ],
@@ -1166,82 +1084,19 @@ class _CreateAccountState extends State<CreateAccount> {
                                       style: HomepageText.helvetica16black)),
                               SizedBox(width: 5),
                               Expanded(
-                                child: DropdownButtonHideUnderline(
-                                  child: DropdownButton2<String>(
-                                    value: selectedType,
-                                    items: <String>[
-                                      'User',
-                                      'Super User',
-                                      'Enterprise',
-                                    ].map<DropdownMenuItem<String>>(
-                                        (String value) {
-                                      return DropdownMenuItem<String>(
-                                        value: value,
-                                        child: Text(value,
-                                            style:
-                                                HomepageText.helvetica16black),
-                                      );
-                                    }).toList(),
-                                    onChanged: (String? newValue) {
-                                      setState(() {
-                                        selectedType = newValue;
-                                        enterpriseSelect = selectedType!;
-                                      });
-                                    },
-                                    buttonStyleData: ButtonStyleData(
-                                      height: 45,
-                                      width: 15.w,
-                                      padding:
-                                          EdgeInsets.only(left: 9, right: 9),
-                                      decoration: BoxDecoration(
-                                        border: Border.all(
-                                            color: Color.fromRGBO(
-                                                112, 112, 112, 1)),
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(5)),
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                    iconStyleData: const IconStyleData(
-                                      icon: Icon(
-                                        Icons.arrow_drop_down_sharp,
-                                      ),
-                                      iconSize: 25,
-                                      iconEnabledColor: Colors.black,
-                                      iconDisabledColor: null,
-                                    ),
-                                    dropdownStyleData: DropdownStyleData(
-                                      elevation: 0,
-                                      maxHeight: 200,
-                                      padding: EdgeInsets.all(3),
-                                      decoration: BoxDecoration(
-                                        border: Border.all(
-                                            color: Color.fromRGBO(
-                                                112, 112, 112, 1)),
-                                        borderRadius: BorderRadius.only(
-                                          topLeft: Radius.circular(0),
-                                          topRight: Radius.circular(0),
-                                          bottomLeft: Radius.circular(5),
-                                          bottomRight: Radius.circular(5),
-                                        ),
-                                        color: Colors.white,
-                                      ),
-                                      scrollPadding: EdgeInsets.all(5),
-                                      scrollbarTheme: ScrollbarThemeData(
-                                        thickness:
-                                            MaterialStateProperty.all<double>(
-                                                6),
-                                        thumbVisibility:
-                                            MaterialStateProperty.all<bool>(
-                                                true),
-                                      ),
-                                    ),
-                                    menuItemStyleData: MenuItemStyleData(
-                                      height: 30,
-                                      padding:
-                                          EdgeInsets.only(left: 9, right: 9),
-                                    ),
-                                  ),
+                                child: CustomDropDown(
+                                  value: selectedType,
+                                  items: <String>[
+                                    'User',
+                                    'Super User',
+                                    'Enterprise',
+                                  ],
+                                  onChanged: (String? newValue) {
+                                    setState(() {
+                                      selectedType = newValue;
+                                      enterpriseSelect = selectedType!;
+                                    });
+                                  },
                                 ),
                               ),
                             ],
@@ -1267,45 +1122,18 @@ class _CreateAccountState extends State<CreateAccount> {
                                         controller: controller.companyidNumber,
                                         text: 'Id number',
                                       )
-                                    : SizedBox(
-                                        height: 45,
-                                        child: DropdownButtonFormField<String>(
-                                          isExpanded: true,
-                                          value: selectedOption,
-                                          decoration: InputDecoration(
-                                            contentPadding: EdgeInsets.all(5.0),
-                                            border: OutlineInputBorder(
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(5)),
-                                            ),
-                                          ),
-                                          onChanged: (String? newValue) {
-                                            setState(() {
-                                              selectedOption = newValue;
-                                            });
-                                          },
-                                          items: [
-                                            DropdownMenuItem<String>(
-                                              value: 'National ID',
-                                              child: Text('National ID',
-                                                  style:
-                                                      TextStyle(fontSize: 16)),
-                                            ),
-                                            DropdownMenuItem<String>(
-                                              value: 'Iqama No.',
-                                              child: Text('Iqama No.',
-                                                  style:
-                                                      TextStyle(fontSize: 16)),
-                                            ),
-                                            DropdownMenuItem<String>(
-                                              value: 'Visit Visa / Border No',
-                                              child: Text(
-                                                  'Visit Visa / Border No',
-                                                  style:
-                                                      TextStyle(fontSize: 16)),
-                                            ),
-                                          ],
-                                        ),
+                                    : CustomDropDown(
+                                        value: selectedOption,
+                                        items: [
+                                          'National ID',
+                                          'Iqama No.',
+                                          'Visit Visa / Border No',
+                                        ],
+                                        onChanged: (String? newValue) {
+                                          setState(() {
+                                            selectedOption = newValue;
+                                          });
+                                        },
                                       ),
                               ),
                             ],
