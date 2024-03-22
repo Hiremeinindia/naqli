@@ -40,7 +40,7 @@ final class CustomButton extends StatelessWidget {
             style: TextStyle(
               fontFamily: 'Helvetica',
               color: Colors.white,
-              fontSize: 15,
+              fontSize: 14,
             ),
           ),
         ),

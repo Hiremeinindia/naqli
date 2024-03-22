@@ -193,7 +193,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                   barrierColor: Colors.grey.withOpacity(0.5),
                                   context: context,
                                   builder: (context) {
-                                    return LoginPage();
+                                    return CreateAccount();
                                   },
                                 );
                               },
@@ -324,7 +324,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                                         child: Text(
                                                           value,
                                                           style: HomepageText
-                                                              .helvetica16,
+                                                              .helvetica16black,
                                                         ),
                                                       );
                                                     },
@@ -383,7 +383,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                                       SizedBox(height: 2),
                                                       Text('Vehicle',
                                                           style: HomepageText
-                                                              .helvetica16),
+                                                              .helvetica16black),
                                                     ],
                                                   ),
                                                 ),
@@ -426,7 +426,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                                       Text(
                                                         'Bus',
                                                         style: HomepageText
-                                                            .helvetica16,
+                                                            .helvetica16black,
                                                       ),
                                                     ],
                                                   ),
@@ -470,7 +470,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                                       Text(
                                                         'Equipment-2',
                                                         style: HomepageText
-                                                            .helvetica16,
+                                                            .helvetica16black,
                                                       ),
                                                     ],
                                                   ),
@@ -514,7 +514,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                                       Text(
                                                         'Special',
                                                         style: HomepageText
-                                                            .helvetica16,
+                                                            .helvetica16black,
                                                       ),
                                                     ],
                                                   ),
@@ -558,7 +558,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                                       Text(
                                                         'Others',
                                                         style: HomepageText
-                                                            .helvetica16,
+                                                            .helvetica16black,
                                                       ),
                                                     ],
                                                   ),
@@ -894,7 +894,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                                   child: Text(
                                                     value,
                                                     style: HomepageText
-                                                        .helvetica16,
+                                                        .helvetica16black,
                                                   ),
                                                 );
                                               },

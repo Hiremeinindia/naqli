@@ -2,15 +2,34 @@
 import 'package:flutter/material.dart';
 
 class HomepageText {
-  static const TextStyle helvetica16 = TextStyle(
+  static const TextStyle helvetica16black = TextStyle(
     fontFamily: 'Helvetica',
     color: Color.fromRGBO(0, 0, 0, 1),
-    fontSize: 14,
+    fontSize: 15,
   );
   static const TextStyle helvetica16bold = TextStyle(
     fontFamily: 'Helvetica',
     color: Colors.white,
     fontWeight: FontWeight.bold,
+    fontSize: 14,
+  );
+}
+
+class LoginpageText {
+  static const TextStyle helvetica20bold = TextStyle(
+    color: Color.fromRGBO(0, 0, 0, 1),
+    fontFamily: 'Helvetica',
+    fontWeight: FontWeight.w800,
+    fontSize: 26,
+  );
+  static const TextStyle purplehelvetica = TextStyle(
+    fontFamily: 'Helvetica',
+    color: Color.fromRGBO(128, 123, 229, 1),
+    fontSize: 14,
+  );
+  static const TextStyle helvetica16white = TextStyle(
+    fontFamily: 'Helvetica',
+    color: Colors.white,
     fontSize: 14,
   );
 }
