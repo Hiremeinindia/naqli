@@ -314,7 +314,7 @@ class _CreateAccountState extends State<CreateAccount> {
                               Expanded(child: SizedBox()),
                               Text(
                                 'Create your account',
-                                style: LoginpageText.helvetica20bold,
+                                style: LoginpageText.helvetica30bold,
                               ),
                               Expanded(child: SizedBox()),
                               GestureDetector(
@@ -857,7 +857,7 @@ class _CreateAccountState extends State<CreateAccount> {
                               Expanded(child: SizedBox()),
                               Text(
                                 'Create your account',
-                                style: LoginpageText.helvetica20bold,
+                                style: LoginpageText.helvetica30bold,
                               ),
                               Expanded(child: SizedBox()),
                               GestureDetector(

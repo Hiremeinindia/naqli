@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_application_1/DialogBox/SingleTimeUser/optDialog.dart';
 import 'package:flutter_application_1/Users/Enterprise/dashboard_page.dart';
 import 'package:flutter_application_1/Users/SingleUser/dashboard_page.dart';
 import 'package:flutter_application_1/Users/SuperUser/dashboard_page.dart';
@@ -311,7 +312,15 @@ class _LoginPageState extends State<LoginPage> {
                                     InkWell(
                                       child: Text('Forgot Password?',
                                           style: LoginpageText.purplehelvetica),
-                                      onTap: () {},
+                                      onTap: () {
+                                        showDialog(
+                                          barrierColor: Colors.transparent,
+                                          context: context,
+                                          builder: (context) {
+                                            return OTPDialog();
+                                          },
+                                        );
+                                      },
                                     ),
                                   ],
                                 ),
