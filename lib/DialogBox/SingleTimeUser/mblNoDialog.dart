@@ -1,15 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_application_1/Controllers/allUsersFormController.dart';
 import 'package:flutter_application_1/DialogBox/SingleTimeUser/optDialog.dart';
-import 'package:flutter_application_1/DialogBox/SingleTimeUser/verfiedDialog.dart';
-import 'package:flutter_application_1/Users/SingleTimeUser/availableUnits.dart';
-import 'package:flutter_application_1/Widgets/customButton.dart';
 import 'package:flutter_application_1/Widgets/formText.dart';
-import 'package:flutter_application_1/DialogBox/bookingSuccessful.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../createAccount.dart';

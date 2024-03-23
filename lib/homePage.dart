@@ -5,7 +5,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_application_1/createAccount.dart';
 import 'package:flutter_application_1/classes/language.dart';
 import 'package:flutter_application_1/classes/language_constants.dart';
 import 'package:flutter_application_1/main.dart';
@@ -40,15 +39,18 @@ class _MyHomePageState extends State<MyHomePage> {
         if (constraints.maxWidth >= 680) {
           return Scaffold(
               appBar: PreferredSize(
-                preferredSize: Size.fromHeight(75),
+                preferredSize: Size.fromHeight(90),
                 child: Material(
                   child: Padding(
                     padding: EdgeInsets.fromLTRB(13.w, 0, 15.w, 0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Image.asset(
-                          'naqlilogo.png',
+                        Padding(
+                          padding: EdgeInsets.only(top: 12, bottom: 6),
+                          child: Image.asset(
+                            'naqlilogo.png',
+                          ),
                         ),
                         Row(
                           children: [

@@ -25,14 +25,14 @@ class AllUsersController {
         'password': controller.password.text,
         'contactNumber': controller.contactNumber.text,
         'address': controller.address.text,
-        'govtId': controller.govtId.text,
+        'govtId': controller.selectedGovtId.text,
         'confirmPassword': controller.confirmPassword.text,
         'alternateNumber': controller.alternateNumber.text,
         'address2': controller.address2.text,
         'idNumber': controller.idNumber.text,
-        'city': controller.city.text,
+        'city': controller.selectedCity.text,
         'companyidNumber': controller.companyidNumber.text,
-        'accounttype': controller.accounttype.text,
+        'accounttype': controller.selectedAccounttype.text,
       }, SetOptions(merge: true));
 
       print('AllUsers added successfully');

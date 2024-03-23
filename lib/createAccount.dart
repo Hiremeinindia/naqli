@@ -1,4 +1,3 @@
-import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -12,11 +11,7 @@ import 'package:flutter_application_1/Users/SuperUser/dashboard_page.dart';
 import 'package:flutter_application_1/Widgets/customDropdown.dart';
 import 'package:flutter_application_1/Widgets/customTextField.dart';
 import 'package:flutter_application_1/Widgets/formText.dart';
-
-import 'package:flutter_application_1/loginPage.dart';
 import 'package:sizer/sizer.dart';
-
-import 'Widgets/formText.dart';
 
 class CreateAccount extends StatefulWidget {
   const CreateAccount();
@@ -31,9 +26,6 @@ class _CreateAccountState extends State<CreateAccount> {
   List<String> cities = ['City 1', 'City 2', 'City 3', 'City 4'];
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-  String? selectedCity;
-  String? selectedType;
-  String? selectedOption;
   bool isVerified = false;
   String firstName = '';
   String lastName = '';
@@ -41,7 +33,6 @@ class _CreateAccountState extends State<CreateAccount> {
   String enterpriseSelect = 'User';
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final ScrollController _Scroll1 = ScrollController();
-  final ScrollController _Scroll2 = ScrollController();
   AllUsersFormController controller = AllUsersFormController();
   TextEditingController otpController = TextEditingController();
   @override
@@ -96,14 +87,14 @@ class _CreateAccountState extends State<CreateAccount> {
         'password': controller.password.text,
         'contactNumber': controller.contactNumber.text,
         'address': controller.address.text,
-        'govtId': controller.govtId.text,
+        'govtId': controller.selectedGovtId.text,
         'confirmPassword': controller.confirmPassword.text,
         'alternateNumber': controller.alternateNumber.text,
         'address2': controller.address2.text,
         'idNumber': controller.idNumber.text,
-        'city': controller.city.text,
+        'city': controller.selectedCity.text,
         'companyidNumber': controller.companyidNumber.text,
-        'accounttype': controller.accounttype.text,
+        'accounttype': controller.selectedAccounttype.text,
       });
 
       print('User data saved to Firestore successfully!');
@@ -459,7 +450,10 @@ class _CreateAccountState extends State<CreateAccount> {
                                       height: 15,
                                     ),
                                     CustomDropDown(
-                                      value: selectedCity,
+                                      value: controller
+                                              .selectedCity.text.isNotEmpty
+                                          ? controller.selectedCity.text
+                                          : 'City 1',
                                       items: [
                                         'City 1',
                                         'City 2',
@@ -468,7 +462,8 @@ class _CreateAccountState extends State<CreateAccount> {
                                       ],
                                       onChanged: (String? newValue) {
                                         setState(() {
-                                          selectedCity = newValue;
+                                          controller.selectedCity.text =
+                                              newValue!;
                                         });
                                       },
                                     ),
@@ -483,7 +478,10 @@ class _CreateAccountState extends State<CreateAccount> {
                                             text: 'Id number',
                                           )
                                         : CustomDropDown(
-                                            value: selectedOption,
+                                            value: controller.selectedGovtId
+                                                    .text.isNotEmpty
+                                                ? controller.selectedGovtId.text
+                                                : 'National ID',
                                             items: [
                                               'National ID',
                                               'Iqama No.',
@@ -491,7 +489,8 @@ class _CreateAccountState extends State<CreateAccount> {
                                             ],
                                             onChanged: (String? newValue) {
                                               setState(() {
-                                                selectedOption = newValue;
+                                                controller.selectedGovtId.text =
+                                                    newValue!;
                                               });
                                             },
                                           ),
@@ -608,7 +607,10 @@ class _CreateAccountState extends State<CreateAccount> {
                                       height: 15,
                                     ),
                                     CustomDropDown(
-                                      value: selectedType,
+                                      value: controller.selectedAccounttype.text
+                                              .isNotEmpty
+                                          ? controller.selectedAccounttype.text
+                                          : 'User',
                                       items: <String>[
                                         'User',
                                         'Super User',
@@ -616,8 +618,10 @@ class _CreateAccountState extends State<CreateAccount> {
                                       ],
                                       onChanged: (String? newValue) {
                                         setState(() {
-                                          selectedType = newValue;
-                                          enterpriseSelect = selectedType!;
+                                          controller.selectedAccounttype.text =
+                                              newValue!;
+                                          enterpriseSelect = controller
+                                              .selectedAccounttype.text;
                                         });
                                       },
                                     ),
@@ -733,13 +737,6 @@ class _CreateAccountState extends State<CreateAccount> {
                                   style: HomepageText.helvetica16black),
                               InkWell(
                                 onTap: () async {
-                                  showDialog(
-                                    barrierColor: Colors.grey.withOpacity(0.5),
-                                    context: context,
-                                    builder: (context) {
-                                      return MblNoDialog();
-                                    },
-                                  );
                                   try {
                                     UserCredential userCredential = await _auth
                                         .createUserWithEmailAndPassword(
@@ -747,39 +744,48 @@ class _CreateAccountState extends State<CreateAccount> {
                                       password: controller.password.text,
                                     );
                                     // User creation successful
+                                    String accountType =
+                                        controller.selectedAccounttype.text;
                                     print(
                                         "User created: ${userCredential.user!.email}");
+                                    print(
+                                        'Account Type before create Account : $accountType');
                                     await _createAccount(
-                                        userCredential.user!.uid,
-                                        selectedType.toString());
-                                    print('value passed$selectedType');
+                                        userCredential.user!.uid, accountType);
+                                    print('value passed$accountType');
 
                                     // Navigate to different pages based on selectedType
-                                    if (selectedType == 'Enterprise') {
+                                    if (accountType == 'Enterprise') {
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) =>
-                                                EnterDashboardPage()),
+                                                EnterDashboardPage(
+                                                    user:
+                                                        userCredential.user!)),
                                       );
-                                    } else if (selectedType == 'Super User') {
+                                    } else if (accountType == 'Super User') {
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) =>
-                                                SuperUserDashboardPage()),
+                                                SuperUserDashboardPage(
+                                                    user:
+                                                        userCredential.user!)),
                                       );
-                                    } else if (selectedType == 'User') {
+                                    } else if (accountType == 'User') {
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) =>
-                                                SingleUserDashboardPage()),
+                                                SingleUserDashboardPage(
+                                                    user:
+                                                        userCredential.user!)),
                                       );
                                     } else {
                                       // Handle invalid selectedType
                                       print(
-                                          'Invalid selected type: $selectedType');
+                                          'Invalid selected type: $accountType');
                                     }
                                   } catch (e) {
                                     print("Error creating user: $e");
@@ -1057,7 +1063,9 @@ class _CreateAccountState extends State<CreateAccount> {
                               SizedBox(width: 5),
                               Expanded(
                                 child: CustomDropDown(
-                                  value: selectedCity,
+                                  value: controller.selectedCity.text.isNotEmpty
+                                      ? controller.selectedCity.text
+                                      : 'City 1',
                                   items: [
                                     'City 1',
                                     'City 2',
@@ -1066,7 +1074,7 @@ class _CreateAccountState extends State<CreateAccount> {
                                   ],
                                   onChanged: (String? newValue) {
                                     setState(() {
-                                      selectedCity = newValue;
+                                      controller.selectedCity.text = newValue!;
                                     });
                                   },
                                 ),
@@ -1085,7 +1093,10 @@ class _CreateAccountState extends State<CreateAccount> {
                               SizedBox(width: 5),
                               Expanded(
                                 child: CustomDropDown(
-                                  value: selectedType,
+                                  value: controller
+                                          .selectedAccounttype.text.isNotEmpty
+                                      ? controller.selectedAccounttype.text
+                                      : 'User',
                                   items: <String>[
                                     'User',
                                     'Super User',
@@ -1093,8 +1104,10 @@ class _CreateAccountState extends State<CreateAccount> {
                                   ],
                                   onChanged: (String? newValue) {
                                     setState(() {
-                                      selectedType = newValue;
-                                      enterpriseSelect = selectedType!;
+                                      controller.selectedAccounttype.text =
+                                          newValue!;
+                                      enterpriseSelect =
+                                          controller.selectedAccounttype.text;
                                     });
                                   },
                                 ),
@@ -1123,7 +1136,10 @@ class _CreateAccountState extends State<CreateAccount> {
                                         text: 'Id number',
                                       )
                                     : CustomDropDown(
-                                        value: selectedOption,
+                                        value: controller
+                                                .selectedGovtId.text.isNotEmpty
+                                            ? controller.selectedGovtId.text
+                                            : 'National ID',
                                         items: [
                                           'National ID',
                                           'Iqama No.',
@@ -1131,7 +1147,8 @@ class _CreateAccountState extends State<CreateAccount> {
                                         ],
                                         onChanged: (String? newValue) {
                                           setState(() {
-                                            selectedOption = newValue;
+                                            controller.selectedGovtId.text =
+                                                newValue!;
                                           });
                                         },
                                       ),
@@ -1263,39 +1280,48 @@ class _CreateAccountState extends State<CreateAccount> {
                                       password: controller.password.text,
                                     );
                                     // User creation successful
+                                    String accountType =
+                                        controller.selectedAccounttype.text;
                                     print(
                                         "User created: ${userCredential.user!.email}");
+                                    print(
+                                        'Account Type before create Account : $accountType');
                                     await _createAccount(
-                                        userCredential.user!.uid,
-                                        selectedType.toString());
-                                    print('value passed$selectedType');
+                                        userCredential.user!.uid, accountType);
+                                    print('value passed$accountType');
 
                                     // Navigate to different pages based on selectedType
-                                    if (selectedType == 'Enterprise') {
+                                    if (accountType == 'Enterprise') {
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) =>
-                                                EnterDashboardPage()),
+                                                EnterDashboardPage(
+                                                    user:
+                                                        userCredential.user!)),
                                       );
-                                    } else if (selectedType == 'Super User') {
+                                    } else if (accountType == 'Super User') {
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) =>
-                                                SuperUserDashboardPage()),
+                                                SuperUserDashboardPage(
+                                                    user:
+                                                        userCredential.user!)),
                                       );
-                                    } else if (selectedType == 'User') {
+                                    } else if (accountType == 'User') {
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) =>
-                                                SingleUserDashboardPage()),
+                                                SingleUserDashboardPage(
+                                                    user:
+                                                        userCredential.user!)),
                                       );
                                     } else {
                                       // Handle invalid selectedType
                                       print(
-                                          'Invalid selected type: $selectedType');
+                                          'Invalid selected type: $accountType');
                                     }
                                   } catch (e) {
                                     print("Error creating user: $e");
@@ -1358,8 +1384,8 @@ class _CreateAccountState extends State<CreateAccount> {
         'address': controller.address.text,
         'alternateNumber': controller.alternateNumber.text,
         'address2': controller.address2.text,
-        'city': controller.city.text,
-        'accounttype': controller.accounttype.text,
+        'city': controller.selectedCity.text,
+        'accounttype': controller.selectedAccounttype.text,
       };
 
       if (selectedType == 'Enterprise') {
@@ -1368,11 +1394,11 @@ class _CreateAccountState extends State<CreateAccount> {
         userData['companyidNumber'] = controller.companyidNumber.text;
       } else if (selectedType == 'User') {
         userCollection = 'userdummy';
-        userData['govtId'] = controller.govtId.text;
+        userData['govtId'] = controller.selectedGovtId.text;
         userData['idNumber'] = controller.idNumber.text;
       } else if (selectedType == 'Super User') {
         userCollection = 'superuserdummy';
-        userData['govtId'] = controller.govtId.text;
+        userData['govtId'] = controller.selectedGovtId.text;
         userData['idNumber'] = controller.idNumber.text;
       } else {
         throw Exception('Invalid selected type');
@@ -1383,7 +1409,7 @@ class _CreateAccountState extends State<CreateAccount> {
           .doc(uid)
           .set(userData);
     } catch (e) {
-      print('Error creating account: $e');
+      print("Data doesn't store : $e");
     }
   }
 }
