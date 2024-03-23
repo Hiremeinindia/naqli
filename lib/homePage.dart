@@ -9,6 +9,7 @@ import 'package:flutter_application_1/createAccount.dart';
 import 'package:flutter_application_1/classes/language.dart';
 import 'package:flutter_application_1/classes/language_constants.dart';
 import 'package:flutter_application_1/main.dart';
+import 'package:open_street_map_search_and_pick/open_street_map_search_and_pick.dart';
 import 'package:sizer/sizer.dart';
 
 import 'Widgets/formText.dart';
@@ -293,34 +294,43 @@ class _MyHomePageState extends State<MyHomePage> {
                                                 color: Colors.black,
                                               ),
                                               SizedBox(width: 5),
+                                              SizedBox(
+                                                height: 200,
+                                                width: 200,
+                                                child: OpenStreetMapSearchAndPick(
+                                                    buttonColor: Colors.blue,
+                                                    buttonText:
+                                                        'Set Current Location',
+                                                    onPicked: (pickedData) {}),
+                                              )
                                               // Replace the below DropdownButton with your actual dropdown widget
-                                              DropdownButtonHideUnderline(
-                                                child: DropdownButton<String>(
-                                                  value: 'Location',
-                                                  onChanged:
-                                                      (String? newValue) {
-                                                    // Handle dropdown value change
-                                                  },
-                                                  items: <String>[
-                                                    'Location',
-                                                    'Location1',
-                                                    'Location2'
-                                                  ].map<
-                                                      DropdownMenuItem<String>>(
-                                                    (String value) {
-                                                      return DropdownMenuItem<
-                                                          String>(
-                                                        value: value,
-                                                        child: Text(
-                                                          value,
-                                                          style: HomepageText
-                                                              .helvetica16black,
-                                                        ),
-                                                      );
-                                                    },
-                                                  ).toList(),
-                                                ),
-                                              ),
+                                              // DropdownButtonHideUnderline(
+                                              //   child: DropdownButton<String>(
+                                              //     value: 'Location',
+                                              //     onChanged:
+                                              //         (String? newValue) {
+                                              //       // Handle dropdown value change
+                                              //     },
+                                              //     items: <String>[
+                                              //       'Location',
+                                              //       'Location1',
+                                              //       'Location2'
+                                              //     ].map<
+                                              //         DropdownMenuItem<String>>(
+                                              //       (String value) {
+                                              //         return DropdownMenuItem<
+                                              //             String>(
+                                              //           value: value,
+                                              //           child: Text(
+                                              //             value,
+                                              //             style: HomepageText
+                                              //                 .helvetica16black,
+                                              //           ),
+                                              //         );
+                                              //       },
+                                              //     ).toList(),
+                                              //   ),
+                                              // ),
                                             ],
                                           ),
                                         ),

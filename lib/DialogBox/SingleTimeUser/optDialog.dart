@@ -13,7 +13,8 @@ import '../../createAccount.dart';
 import '../../homePage.dart';
 
 class OTPDialog extends StatefulWidget {
-  const OTPDialog();
+  final String? verificationId;
+  OTPDialog({required this.verificationId});
 
   @override
   _OTPDialogState createState() => _OTPDialogState();
@@ -23,6 +24,13 @@ class _OTPDialogState extends State<OTPDialog> {
   bool isVerified = false;
   AllUsersFormController controller = AllUsersFormController();
   TextEditingController otpController = TextEditingController();
+  TextEditingController contactNumberController = TextEditingController();
+  TextEditingController otp1 = TextEditingController();
+  TextEditingController otp2 = TextEditingController();
+  TextEditingController otp3 = TextEditingController();
+  TextEditingController otp4 = TextEditingController();
+  TextEditingController otp5 = TextEditingController();
+  TextEditingController otp6 = TextEditingController();
   void showErrorDialog(String errorMessage) {
     showDialog(
       context: context,
@@ -46,93 +54,41 @@ class _OTPDialogState extends State<OTPDialog> {
     return regex.hasMatch(phoneNumber);
   }
 
-  Future<void> _startPhoneAuth(String phoneNumber) async {
-    print("verifytrack3");
-
-    FirebaseAuth _auth = FirebaseAuth.instance;
-
+  Future<void> verifyOTP(
+      BuildContext context,
+      String verificationId,
+      String otp1,
+      String otp2,
+      String otp3,
+      String otp4,
+      String otp5,
+      String otp6) async {
     try {
-      await _auth.verifyPhoneNumber(
-        phoneNumber: "+91${contactNumberController.text}",
-        verificationCompleted: (PhoneAuthCredential credential) async {
-          await _auth.signInWithCredential(credential).then((value) {
-            Navigator.pop(context);
-            setState(() {
-              isVerified = true;
-            });
-          });
-        },
-        verificationFailed: (FirebaseAuthException e) {
-          // Handle the verification failure
-          print('Phone authentication failed: $e');
-          showErrorDialog(
-              "Invalid phone number format. Please enter a valid 10-digit phone number.");
-        },
-        codeSent: (String verificationId, [int? forceResendingToken]) {
-          // Store the verification ID for later use (e.g., resend OTP)
-          String storedVerificationId = verificationId;
-
-          showDialog(
-            context: context,
-            barrierDismissible: false,
-            builder: (context) => AlertDialog(
-              title: Text("Enter OTP"),
-              content: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  TextField(
-                    controller: otpController,
-                  ),
-                ],
-              ),
-              actions: [
-                ElevatedButton(
-                  onPressed: () {
-                    FirebaseAuth auth = FirebaseAuth.instance;
-                    String smsCode = otpController.text;
-                    PhoneAuthCredential _credential =
-                        PhoneAuthProvider.credential(
-                      verificationId: storedVerificationId,
-                      smsCode: smsCode,
-                    );
-
-                    auth.signInWithCredential(_credential).then((result) {
-                      // Check if the verification is successful
-                      if (result.user != null) {
-                        print("otp verified successfully");
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => MyHomePage(),
-                          ),
-                        );
-                        setState(() {
-                          isVerified = true;
-                        });
-                      } else {
-                        showErrorDialog(
-                            "Invalid verification code. Please enter the correct code.");
-                      }
-                    }).catchError((e) {
-                      print("Error signing in with credential: $e");
-                    });
-                  },
-                  child: Text("Done"),
-                ),
-              ],
-            ),
-          );
-        },
-        codeAutoRetrievalTimeout: (String verificationId) {
-          // Handle code auto retrieval timeout (optional)
-        },
+      FirebaseAuth auth = FirebaseAuth.instance;
+      String smsCode = otpController.text;
+      PhoneAuthCredential credential = PhoneAuthProvider.credential(
+        verificationId: verificationId,
+        smsCode: smsCode,
       );
+
+      final result = await auth.signInWithCredential(credential);
+      if (result.user != null) {
+        print("OTP verified successfully");
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => MyHomePage()),
+        );
+      } else {
+        showErrorDialog(
+          "Invalid verification code. Please enter the correct code.",
+        );
+      }
     } catch (e) {
-      print('Error during phone authentication: $e');
+      print("Error signing in with credential: $e");
+      showErrorDialog("Error verifying OTP. Please try again.");
     }
   }
 
-  TextEditingController contactNumberController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Sizer(builder: (context, orientation, deviceType) {
@@ -192,6 +148,7 @@ class _OTPDialogState extends State<OTPDialog> {
                               height: 45,
                               width: 45,
                               child: TextField(
+                                controller: otp1,
                                 keyboardType: TextInputType.number,
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(
@@ -206,6 +163,7 @@ class _OTPDialogState extends State<OTPDialog> {
                               height: 45,
                               width: 45,
                               child: TextField(
+                                controller: otp2,
                                 keyboardType: TextInputType.number,
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(
@@ -220,6 +178,7 @@ class _OTPDialogState extends State<OTPDialog> {
                               height: 45,
                               width: 45,
                               child: TextField(
+                                controller: otp3,
                                 keyboardType: TextInputType.number,
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(
@@ -234,6 +193,7 @@ class _OTPDialogState extends State<OTPDialog> {
                               height: 45,
                               width: 45,
                               child: TextField(
+                                controller: otp4,
                                 keyboardType: TextInputType.number,
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(
@@ -248,6 +208,7 @@ class _OTPDialogState extends State<OTPDialog> {
                               height: 45,
                               width: 45,
                               child: TextField(
+                                controller: otp5,
                                 keyboardType: TextInputType.number,
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(
@@ -262,6 +223,7 @@ class _OTPDialogState extends State<OTPDialog> {
                               height: 45,
                               width: 45,
                               child: TextField(
+                                controller: otp6,
                                 keyboardType: TextInputType.number,
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(
@@ -275,30 +237,24 @@ class _OTPDialogState extends State<OTPDialog> {
                           height: 40,
                           child: ElevatedButton(
                             onPressed: () async {
-                              if (isValidPhoneNumber(
-                                  contactNumberController.text)) {
-                                await _startPhoneAuth(
-                                    contactNumberController.text);
-                              } else {
-                                showErrorDialog(
-                                    "Invalid phone number format. Please enter a valid 10-digit phone number.");
-                              }
-                              await _startPhoneAuth(
-                                  contactNumberController.text);
-                              // showDialog(
-                              //   barrierColor: Colors.transparent,
-                              //   context: context,
-                              //   builder: (context) {
-                              //     return VerifiedDialog();
-                              //   },
-                              // );
-                              // _startPhoneAuth(contactNumberController.text);
+                              await verifyOTP(
+                                context,
+                                otp1.text,
+                                otp2.text,
+                                otp3.text,
+                                otp4.text,
+                                otp5.text,
+                                otp6.text,
+                                widget.verificationId ??
+                                    '', // Accessing the verificationId passed to OTPDialog
+                              );
                             },
                             style: ElevatedButton.styleFrom(
-                                backgroundColor: Color.fromRGBO(60, 55, 148, 1),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                )),
+                              backgroundColor: Color.fromRGBO(60, 55, 148, 1),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                            ),
                             child: Text("Verify", style: TabelText.dialogtext1),
                           ),
                         ),
@@ -386,7 +342,6 @@ class _OTPDialogState extends State<OTPDialog> {
                                   return VerifiedDialog();
                                 },
                               );
-                              // _startPhoneAuth(contactNumberController.text);
                             },
                             style: ElevatedButton.styleFrom(
                                 backgroundColor: Color.fromRGBO(60, 55, 148, 1),
