@@ -546,8 +546,7 @@ class _CreateAccountState extends State<CreateAccount> {
                                             Colors.grey.withOpacity(0.5),
                                         context: context,
                                         builder: (context) {
-                                          return MblNoDialog(email, password,
-                                              selectedAccounttype);
+                                          return MblNoDialog();
                                         },
                                       );
 
