@@ -1,5 +1,6 @@
 import 'dart:html';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -10,11 +11,17 @@ import 'package:flutter_application_1/DialogBox/SingleTimeUser/verfiedDialog.dar
 import 'package:flutter_application_1/Widgets/formText.dart';
 import 'package:sizer/sizer.dart';
 
+import '../../Users/Enterprise/dashboard_page.dart';
+import '../../Users/SingleUser/dashboard_page.dart';
+import '../../Users/SuperUser/dashboard_page.dart';
 import '../../createAccount.dart';
 import '../../homePage.dart';
 
 class MblNoDialog extends StatefulWidget {
-  const MblNoDialog();
+  String email;
+  String password;
+  String selectedAccounttype;
+  MblNoDialog(this.email, this.password, this.selectedAccounttype);
 
   @override
   _MblNoDialogState createState() => _MblNoDialogState();
@@ -47,6 +54,47 @@ class _MblNoDialogState extends State<MblNoDialog> {
         ],
       ),
     );
+  }
+
+  Future<void> _createAccount(String uid, String selectedType) async {
+    try {
+      String userCollection;
+      Map<String, dynamic> userData = {
+        'firstName': controller.firstName.text,
+        'lastName': controller.lastName.text,
+        'email': controller.email.text,
+        'password': controller.password.text,
+        'contactNumber': controller.contactNumber.text,
+        'address': controller.address.text,
+        'alternateNumber': controller.alternateNumber.text,
+        'address2': controller.address2.text,
+        'city': controller.selectedCity.text,
+        'accounttype': controller.selectedAccounttype.text,
+      };
+
+      if (selectedType == 'Enterprise') {
+        userCollection = 'enterprisedummy';
+        userData['legalName'] = controller.legalName.text;
+        userData['companyidNumber'] = controller.companyidNumber.text;
+      } else if (selectedType == 'User') {
+        userCollection = 'userdummy';
+        userData['govtId'] = controller.selectedGovtId.text;
+        userData['idNumber'] = controller.idNumber.text;
+      } else if (selectedType == 'Super User') {
+        userCollection = 'superuserdummy';
+        userData['govtId'] = controller.selectedGovtId.text;
+        userData['idNumber'] = controller.idNumber.text;
+      } else {
+        throw Exception('Invalid selected type');
+      }
+
+      await FirebaseFirestore.instance
+          .collection(userCollection)
+          .doc(uid)
+          .set(userData);
+    } catch (e) {
+      print("Data doesn't store : $e");
+    }
   }
 
   bool isValidPhoneNumber(String phoneNumber) {
@@ -268,9 +316,9 @@ class _MblNoDialogState extends State<MblNoDialog> {
                                 showErrorDialog(
                                     "Invalid verification code. Please enter the correct code.");
                               }
-                            }).catchError((e) {
+                            } catch (e) {
                               print("Error signing in with credential: $e");
-                            });
+                            }
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Color.fromRGBO(60, 55, 148, 1),

@@ -535,13 +535,19 @@ class _CreateAccountState extends State<CreateAccount> {
                                 child: ElevatedButton(
                                   onPressed: () async {
                                     if (_formKey.currentState!.validate()) {
+                                      String email = controller.email.text;
+                                      String password =
+                                          controller.password.text;
+                                      String selectedAccounttype =
+                                          controller.selectedAccounttype.text;
                                       print("track1");
                                       showDialog(
                                         barrierColor:
                                             Colors.grey.withOpacity(0.5),
                                         context: context,
                                         builder: (context) {
-                                          return MblNoDialog();
+                                          return MblNoDialog(email, password,
+                                              selectedAccounttype);
                                         },
                                       );
 
@@ -573,71 +579,7 @@ class _CreateAccountState extends State<CreateAccount> {
                               SizedBox(
                                 height: 45,
                                 child: ElevatedButton(
-                                  onPressed: () async {
-                                    try {
-                                      UserCredential userCredential =
-                                          await _auth
-                                              .createUserWithEmailAndPassword(
-                                        email: controller.email.text,
-                                        password: controller.password.text,
-                                      );
-                                      // User creation successful
-                                      String accountType =
-                                          controller.selectedAccounttype.text;
-                                      print(
-                                          "User created: ${userCredential.user!.email}");
-                                      print(
-                                          'Account Type before create Account : $accountType');
-                                      await _createAccount(
-                                          userCredential.user!.uid,
-                                          accountType);
-                                      print('value passed$accountType');
-
-                                      // Navigate to different pages based on selectedType
-                                      if (accountType == 'Enterprise') {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  EnterDashboardPage(
-                                                      user: userCredential
-                                                          .user!)),
-                                        );
-                                      } else if (accountType == 'Super User') {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  SuperUserDashboardPage(
-                                                      user: userCredential
-                                                          .user!)),
-                                        );
-                                      } else if (accountType == 'User') {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  SingleUserDashboardPage(
-                                                      user: userCredential
-                                                          .user!)),
-                                        );
-                                      } else {
-                                        // Handle invalid selectedType
-                                        print(
-                                            'Invalid selected type: $accountType');
-                                      }
-                                    } catch (e) {
-                                      print("Error creating user: $e");
-                                    }
-                                    if (_formKey.currentState!.validate()) {
-                                      print("track1");
-                                      // await _startPhoneAuth(
-                                      //     contactNumberController.text);
-                                      // _showOtpVerificationDialog();
-                                      // Save user data and start phone authentication
-                                      await _saveUserDataToFirestore();
-                                    }
-                                  },
+                                  onPressed: () {},
                                   style: ElevatedButton.styleFrom(
                                     fixedSize:
                                         const Size.fromWidth(double.infinity),
@@ -1079,62 +1021,63 @@ class _CreateAccountState extends State<CreateAccount> {
                                 height: 45,
                                 child: ElevatedButton(
                                   onPressed: () async {
-                                    try {
-                                      UserCredential userCredential =
-                                          await _auth
-                                              .createUserWithEmailAndPassword(
-                                        email: controller.email.text,
-                                        password: controller.password.text,
-                                      );
-                                      // User creation successful
-                                      String accountType =
-                                          controller.selectedAccounttype.text;
-                                      print(
-                                          "User created: ${userCredential.user!.email}");
-                                      print(
-                                          'Account Type before create Account : $accountType');
-                                      await _createAccount(
-                                          userCredential.user!.uid,
-                                          accountType);
-                                      print('value passed$accountType');
-
-                                      // Navigate to different pages based on selectedType
-                                      if (accountType == 'Enterprise') {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  EnterDashboardPage(
-                                                      user: userCredential
-                                                          .user!)),
-                                        );
-                                      } else if (accountType == 'Super User') {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  SuperUserDashboardPage(
-                                                      user: userCredential
-                                                          .user!)),
-                                        );
-                                      } else if (accountType == 'User') {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  SingleUserDashboardPage(
-                                                      user: userCredential
-                                                          .user!)),
-                                        );
-                                      } else {
-                                        // Handle invalid selectedType
-                                        print(
-                                            'Invalid selected type: $accountType');
-                                      }
-                                    } catch (e) {
-                                      print("Error creating user: $e");
-                                    }
                                     if (_formKey.currentState!.validate()) {
+                                      try {
+                                        UserCredential userCredential =
+                                            await _auth
+                                                .createUserWithEmailAndPassword(
+                                          email: controller.email.text,
+                                          password: controller.password.text,
+                                        );
+                                        // User creation successful
+                                        String accountType =
+                                            controller.selectedAccounttype.text;
+                                        print(
+                                            "User created: ${userCredential.user!.email}");
+                                        print(
+                                            'Account Type before create Account : $accountType');
+                                        await _createAccount(
+                                            userCredential.user!.uid,
+                                            accountType);
+                                        print('value passed$accountType');
+
+                                        // Navigate to different pages based on selectedType
+                                        if (accountType == 'Enterprise') {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    EnterDashboardPage(
+                                                        user: userCredential
+                                                            .user!)),
+                                          );
+                                        } else if (accountType ==
+                                            'Super User') {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    SuperUserDashboardPage(
+                                                        user: userCredential
+                                                            .user!)),
+                                          );
+                                        } else if (accountType == 'User') {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    SingleUserDashboardPage(
+                                                        user: userCredential
+                                                            .user!)),
+                                          );
+                                        } else {
+                                          // Handle invalid selectedType
+                                          print(
+                                              'Invalid selected type: $accountType');
+                                        }
+                                      } catch (e) {
+                                        print("Error creating user: $e");
+                                      }
                                       print("track1");
                                       // await _startPhoneAuth(
                                       //     contactNumberController.text);
