@@ -1,18 +1,21 @@
-import 'dart:math';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_application_1/Widgets/customButton.dart';
+import 'package:flutter_application_1/DialogBox/SingleTimeUser/optDialog.dart';
+import 'package:flutter_application_1/Users/Enterprise/dashboard_page.dart';
+import 'package:flutter_application_1/Users/SingleUser/dashboard_page.dart';
+import 'package:flutter_application_1/Users/SuperUser/dashboard_page.dart';
 import 'package:flutter_application_1/createAccount.dart';
 import 'package:flutter_application_1/Widgets/formText.dart';
 import 'package:sizer/sizer.dart';
 
-import '../../main.dart';
+import 'Controllers/allUsersFormController.dart';
 import 'DialogBox/SingleTimeUser/mblNoDialog.dart';
+import 'Widgets/customTextField.dart';
 import 'homePage.dart';
 
 // ignore: must_be_immutable
@@ -23,12 +26,75 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
   bool isVerified = false;
   final ScrollController _Scroll1 = ScrollController();
   final ScrollController _Scroll2 = ScrollController();
   TextEditingController otpController = TextEditingController();
-
+  AllUsersFormController controller = AllUsersFormController();
   TextEditingController contactNumberController = TextEditingController();
+
+  bool isValidEmail(String email) {
+    final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+    return emailRegex.hasMatch(email);
+  }
+
+  String? emailValidator(String? value) {
+    if (value == null || value.isEmpty) {
+      return '*Required';
+    } else if (!isValidEmail(value)) {
+      return 'Invalid email format';
+    }
+    return null;
+  }
+
+  Future<String> getUserRole(String uid) async {
+    try {
+      String enterpriseCollection = 'enterprisedummy';
+      String superuserCollection = 'superuserdummy';
+      String userCollection = 'userdummy';
+
+      // Check if the user is an admin
+      DocumentSnapshot<Map<String, dynamic>> enterpriseSnapshot =
+          await FirebaseFirestore.instance
+              .collection(enterpriseCollection)
+              .doc(uid)
+              .get();
+
+      if (enterpriseSnapshot.exists) {
+        print('Login as admin');
+        return 'Enterprise';
+      }
+
+      // Check if the user is a regular user
+      DocumentSnapshot<Map<String, dynamic>> userSnapshot =
+          await FirebaseFirestore.instance
+              .collection(userCollection)
+              .doc(uid)
+              .get();
+
+      if (userSnapshot.exists) {
+        print('Login as user');
+        return 'User';
+      }
+
+      // Check if the user is a superuser
+      DocumentSnapshot<Map<String, dynamic>> superuserSnapshot =
+          await FirebaseFirestore.instance
+              .collection(superuserCollection)
+              .doc(uid)
+              .get();
+
+      if (superuserSnapshot.exists) {
+        print('Login as superuser');
+        return 'Superuser';
+      }
+    } catch (e) {
+      print('Error determining user role: $e');
+    }
+
+    return 'Unknown';
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -132,25 +198,17 @@ class _LoginPageState extends State<LoginPage> {
                                 ),
                                 Text('Email ID',
                                     style: HomepageText.helvetica16black),
-                                TextField(
-                                  decoration: InputDecoration(
-                                    contentPadding: EdgeInsets.all(5.0),
-                                    border: OutlineInputBorder(
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(5)),
-                                    ),
-                                  ),
+                                CustomTextfield(
+                                  controller: controller.email,
+                                  validator: emailValidator,
+                                  text: 'Email address',
                                 ),
                                 Text('Password',
                                     style: HomepageText.helvetica16black),
-                                TextField(
-                                  decoration: InputDecoration(
-                                    contentPadding: EdgeInsets.all(5.0),
-                                    border: OutlineInputBorder(
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(5)),
-                                    ),
-                                  ),
+                                CustomTextfield(
+                                  controller: controller.password,
+                                  // validator: validatePassword,
+                                  text: 'Password',
                                 ),
                                 SizedBox(
                                   height: 3,
@@ -162,7 +220,69 @@ class _LoginPageState extends State<LoginPage> {
                                     SizedBox(
                                       height: 50,
                                       child: ElevatedButton(
-                                        onPressed: () {},
+                                        onPressed: () async {
+                                          try {
+                                            print(
+                                                'email ${controller.email.text}');
+                                            // Sign in with email and password
+                                            UserCredential userCredential =
+                                                await _auth
+                                                    .signInWithEmailAndPassword(
+                                              email: controller.email.text,
+                                              password:
+                                                  controller.password.text,
+                                            );
+                                            print(
+                                                'email ${controller.email.text}');
+                                            // Check the user's role after successful sign-in
+                                            String userRole = await getUserRole(
+                                                userCredential.user!.uid);
+
+                                            // Navigate to the appropriate dashboard based on the user's role
+                                            if (userRole == 'User') {
+                                              Navigator.pushReplacement(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      SingleUserDashboardPage(
+                                                          user: userCredential
+                                                              .user!),
+                                                ),
+                                              );
+                                            } else if (userRole ==
+                                                'Super User') {
+                                              Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        SuperUserDashboardPage(
+                                                            user: userCredential
+                                                                .user!),
+                                                  ));
+                                            } else if (userRole ==
+                                                'Enterprise') {
+                                              Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        EnterDashboardPage(
+                                                            user: userCredential
+                                                                .user!),
+                                                  ));
+                                            } else {
+                                              print('Unknown user role');
+                                            }
+                                          } on FirebaseAuthException catch (e) {
+                                            // Handle authentication exceptions
+                                            if (e.code == 'user-not-found') {
+                                              print(
+                                                  'No user found for that email.');
+                                            } else if (e.code ==
+                                                'wrong-password') {
+                                              print('Wrong password provided.');
+                                            }
+                                          }
+                                        },
                                         style: ElevatedButton.styleFrom(
                                           backgroundColor: Color.fromARGB(
                                               255, 128, 123, 229),
@@ -192,7 +312,17 @@ class _LoginPageState extends State<LoginPage> {
                                     InkWell(
                                       child: Text('Forgot Password?',
                                           style: LoginpageText.purplehelvetica),
-                                      onTap: () {},
+                                      onTap: () {
+                                        showDialog(
+                                          barrierColor: Colors.transparent,
+                                          context: context,
+                                          builder: (context) {
+                                            return OTPDialog(
+                                              verificationId: '',
+                                            );
+                                          },
+                                        );
+                                      },
                                     ),
                                   ],
                                 ),
@@ -328,27 +458,19 @@ class _LoginPageState extends State<LoginPage> {
                             alignment: Alignment.centerLeft,
                             child: Text('Email ID',
                                 style: HomepageText.helvetica16black)),
-                        TextField(
-                          decoration: InputDecoration(
-                            contentPadding: EdgeInsets.all(5.0),
-                            border: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(5)),
-                            ),
-                          ),
+                        CustomTextfield(
+                          controller: controller.email,
+                          validator: emailValidator,
+                          text: 'Email address',
                         ),
                         Align(
                             alignment: Alignment.centerLeft,
                             child: Text('Password',
                                 style: HomepageText.helvetica16black)),
-                        TextField(
-                          decoration: InputDecoration(
-                            contentPadding: EdgeInsets.all(5.0),
-                            border: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(5)),
-                            ),
-                          ),
+                        CustomTextfield(
+                          controller: controller.password,
+                          // validator: validatePassword,
+                          text: 'Password',
                         ),
                         SizedBox(
                           height: 10,
@@ -356,7 +478,58 @@ class _LoginPageState extends State<LoginPage> {
                         SizedBox(
                           height: 50,
                           child: ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () async {
+                              try {
+                                print('email ${controller.email.text}');
+                                // Sign in with email and password
+                                UserCredential userCredential =
+                                    await _auth.signInWithEmailAndPassword(
+                                  email: controller.email.text,
+                                  password: controller.password.text,
+                                );
+                                print('email ${controller.email.text}');
+                                // Check the user's role after successful sign-in
+                                String userRole =
+                                    await getUserRole(userCredential.user!.uid);
+
+                                // Navigate to the appropriate dashboard based on the user's role
+                                if (userRole == 'User') {
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          SingleUserDashboardPage(
+                                              user: userCredential.user!),
+                                    ),
+                                  );
+                                } else if (userRole == 'Super User') {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            SuperUserDashboardPage(
+                                                user: userCredential.user!),
+                                      ));
+                                } else if (userRole == 'Enterprise') {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            EnterDashboardPage(
+                                                user: userCredential.user!),
+                                      ));
+                                } else {
+                                  print('Unknown user role');
+                                }
+                              } on FirebaseAuthException catch (e) {
+                                // Handle authentication exceptions
+                                if (e.code == 'user-not-found') {
+                                  print('No user found for that email.');
+                                } else if (e.code == 'wrong-password') {
+                                  print('Wrong password provided.');
+                                }
+                              }
+                            },
                             style: ElevatedButton.styleFrom(
                               backgroundColor:
                                   Color.fromARGB(255, 128, 123, 229),

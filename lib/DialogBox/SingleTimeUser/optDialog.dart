@@ -1,12 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_application_1/Controllers/allUsersFormController.dart';
 import 'package:flutter_application_1/DialogBox/SingleTimeUser/verfiedDialog.dart';
-import 'package:flutter_application_1/Users/SingleTimeUser/availableUnits.dart';
-import 'package:flutter_application_1/Widgets/customButton.dart';
 import 'package:flutter_application_1/Widgets/formText.dart';
-import 'package:flutter_application_1/DialogBox/bookingSuccessful.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../createAccount.dart';
@@ -96,10 +92,13 @@ class _OTPDialogState extends State<OTPDialog> {
           builder: (BuildContext ctx, BoxConstraints constraints) {
         if (constraints.maxWidth >= 1180) {
           return Padding(
-            padding: EdgeInsets.fromLTRB(16.w, 6.h, 16.w, 6.h),
-            child: Dialog(
-              child: SingleChildScrollView(
-                child: Expanded(
+            padding: EdgeInsets.fromLTRB(18.w, 27.h, 18.w, 27.h),
+            child: SingleChildScrollView(
+              child: Expanded(
+                child: Card(
+                  elevation: 5,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(31))),
                   child: Container(
                     height: 360,
                     decoration: const BoxDecoration(
@@ -108,7 +107,7 @@ class _OTPDialogState extends State<OTPDialog> {
                         Radius.circular(31),
                       ),
                     ),
-                    padding: EdgeInsets.fromLTRB(4.w, 4.h, 4.w, 4.h),
+                    padding: EdgeInsets.fromLTRB(4.w, 4.h, 2.w, 4.h),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -119,7 +118,7 @@ class _OTPDialogState extends State<OTPDialog> {
                             Expanded(
                               child: Center(
                                 child: Text('Verify',
-                                    style: TabelText.helveticablack19),
+                                    style: LoginpageText.helvetica30bold),
                               ),
                             ),
                             GestureDetector(
@@ -133,14 +132,8 @@ class _OTPDialogState extends State<OTPDialog> {
                             ),
                           ],
                         ),
-                        Text(
-                          'Your code was sent to your mobile no',
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontFamily: 'Helvetica',
-                            fontSize: 22,
-                          ),
-                        ),
+                        Text('Your code was sent to your mobile no',
+                            style: DialogText.helvetica25black),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -234,7 +227,7 @@ class _OTPDialogState extends State<OTPDialog> {
                           ],
                         ),
                         SizedBox(
-                          height: 40,
+                          height: 48,
                           child: ElevatedButton(
                             onPressed: () async {
                               await verifyOTP(
@@ -250,26 +243,34 @@ class _OTPDialogState extends State<OTPDialog> {
                               );
                             },
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: Color.fromRGBO(60, 55, 148, 1),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
+                                backgroundColor: Color.fromRGBO(60, 55, 148, 1),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(11),
+                                )),
+                            child: Padding(
+                              padding: EdgeInsets.only(
+                                left: 1.w,
+                                right: 1.w,
                               ),
+                              child:
+                                  Text("Verify", style: DialogText.helvetica20),
                             ),
-                            child: Text("Verify", style: TabelText.dialogtext1),
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsets.only(left: 2.w, right: 2.w),
-                          child: Divider(),
+                          padding: EdgeInsets.only(left: 2.w, right: 5.w),
+                          child: Divider(
+                            color: Color.fromRGBO(112, 112, 112, 1),
+                          ),
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text("Didn't receive OTP ?",
-                                style: TabelText.helvetica),
+                                style: HomepageText.helvetica16black),
                             InkWell(
-                              child: Text('Resend',
-                                  style: FormTextStyle.purplehelvetica),
+                              child: Text(' Resend',
+                                  style: DialogText.purplehelveticabold),
                               onTap: () {
                                 showDialog(
                                   barrierColor: Colors.grey.withOpacity(0.5),

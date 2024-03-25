@@ -12,14 +12,14 @@ class AllUsersFormController {
   final password = TextEditingController();
   final contactNumber = TextEditingController();
   final address = TextEditingController();
-  final govtId = TextEditingController();
+  final selectedGovtId = TextEditingController();
   final confirmPassword = TextEditingController();
   final alternateNumber = TextEditingController();
   final address2 = TextEditingController();
   final idNumber = TextEditingController();
-  final city = TextEditingController();
+  final selectedCity = TextEditingController();
   final companyidNumber = TextEditingController();
-  final accounttype = TextEditingController();
+  final selectedAccounttype = TextEditingController();
   final otp = TextEditingController();
 
   // String get newDocId => FirebaseFirestore.instance.collection('AllUserss').doc().id;
@@ -41,13 +41,13 @@ class AllUsersFormController {
         password: password.text,
         contactNumber: contactNumber.text,
         address: address.text,
-        govtId: govtId.text,
+        govtId: selectedGovtId.text,
         confirmPassword: confirmPassword.text,
         alternateNumber: alternateNumber.text,
         address2: address2.text,
         idNumber: idNumber.text,
-        city: city.text,
+        city: selectedCity.text,
         companyidNumber: companyidNumber.text,
-        accounttype: accounttype.text,
+        accounttype: selectedAccounttype.text,
       );
 }

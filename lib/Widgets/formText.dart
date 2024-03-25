@@ -4,7 +4,7 @@ class HomepageText {
   static const TextStyle helvetica16black = TextStyle(
     fontFamily: 'Helvetica',
     color: Color.fromRGBO(0, 0, 0, 1),
-    fontSize: 15,
+    fontSize: 14,
   );
   static const TextStyle helvetica16bold = TextStyle(
     fontFamily: 'Helvetica',
@@ -15,7 +15,7 @@ class HomepageText {
 }
 
 class LoginpageText {
-  static const TextStyle helvetica20bold = TextStyle(
+  static const TextStyle helvetica30bold = TextStyle(
     color: Color.fromRGBO(0, 0, 0, 1),
     fontFamily: 'Helvetica',
     fontWeight: FontWeight.w800,
@@ -29,6 +29,30 @@ class LoginpageText {
   static const TextStyle helvetica16white = TextStyle(
     fontFamily: 'Helvetica',
     color: Colors.white,
+    fontSize: 14,
+  );
+}
+
+class DialogText {
+  static const TextStyle helvetica16sandal = TextStyle(
+    fontFamily: 'Helvetica',
+    color: Color.fromRGBO(238, 225, 225, 1),
+    fontSize: 14,
+  );
+  static const TextStyle helvetica25black = TextStyle(
+    fontFamily: 'Helvetica',
+    color: Color.fromRGBO(0, 0, 0, 1),
+    fontSize: 21,
+  );
+  static const TextStyle helvetica20 = TextStyle(
+    fontFamily: 'Helvetica',
+    color: Colors.white,
+    fontSize: 18,
+  );
+  static const TextStyle purplehelveticabold = TextStyle(
+    fontFamily: 'Helvetica',
+    fontWeight: FontWeight.bold,
+    color: Color.fromRGBO(128, 123, 229, 1),
     fontSize: 14,
   );
 }

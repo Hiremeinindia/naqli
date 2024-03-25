@@ -3,15 +3,10 @@ import 'dart:html';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_application_1/Controllers/allUsersFormController.dart';
 import 'package:flutter_application_1/DialogBox/SingleTimeUser/optDialog.dart';
-import 'package:flutter_application_1/DialogBox/SingleTimeUser/verfiedDialog.dart';
-import 'package:flutter_application_1/Users/SingleTimeUser/availableUnits.dart';
-import 'package:flutter_application_1/Widgets/customButton.dart';
 import 'package:flutter_application_1/Widgets/formText.dart';
-import 'package:flutter_application_1/DialogBox/bookingSuccessful.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../createAccount.dart';
@@ -161,10 +156,13 @@ class _MblNoDialogState extends State<MblNoDialog> {
           builder: (BuildContext ctx, BoxConstraints constraints) {
         if (constraints.maxWidth >= 1180) {
           return Padding(
-            padding: EdgeInsets.fromLTRB(16.w, 6.h, 16.w, 6.h),
-            child: Dialog(
-              child: SingleChildScrollView(
-                child: Expanded(
+            padding: EdgeInsets.fromLTRB(18.w, 33.h, 18.w, 33.h),
+            child: SingleChildScrollView(
+              child: Expanded(
+                child: Card(
+                  elevation: 5,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(31))),
                   child: Container(
                     height: 280,
                     decoration: const BoxDecoration(
@@ -173,17 +171,20 @@ class _MblNoDialogState extends State<MblNoDialog> {
                         Radius.circular(31),
                       ),
                     ),
-                    padding: EdgeInsets.fromLTRB(4.w, 2.h, 1.w, 4.h),
+                    padding: EdgeInsets.fromLTRB(4.w, 4.h, 2.w, 4.h),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text('Enter Mobile NO',
-                                style: TabelText.helveticablack19),
+                            Expanded(
+                              child: Center(
+                                child: Text('Enter Mobile No',
+                                    style: LoginpageText.helvetica30bold),
+                              ),
+                            ),
                             GestureDetector(
                               onTap: () {
                                 Navigator.pop(context);
@@ -210,8 +211,7 @@ class _MblNoDialogState extends State<MblNoDialog> {
                                   contentPadding: EdgeInsets.only(
                                     left: 1.w,
                                   ),
-                                  hintStyle: TextStyle(
-                                      color: Color.fromRGBO(238, 225, 225, 1)),
+                                  hintStyle: DialogText.helvetica16sandal,
                                   border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(0)),
                                 ),
@@ -239,7 +239,7 @@ class _MblNoDialogState extends State<MblNoDialog> {
                                       borderRadius: BorderRadius.circular(0),
                                     )),
                                 child: Text("Get OTP",
-                                    style: TabelText.dialogtext1),
+                                    style: LoginpageText.helvetica16white),
                               ),
                             ),
                           ],
@@ -247,17 +247,19 @@ class _MblNoDialogState extends State<MblNoDialog> {
                         SizedBox(height: 40),
                         Padding(
                           padding: EdgeInsets.only(left: 2.w, right: 5.w),
-                          child: Divider(),
+                          child: Divider(
+                            color: Color.fromRGBO(112, 112, 112, 1),
+                          ),
                         ),
                         SizedBox(height: 10),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text("Don't have an account?",
-                                style: TabelText.helvetica),
+                                style: HomepageText.helvetica16black),
                             InkWell(
                               child: Text('Create One!',
-                                  style: FormTextStyle.purplehelvetica),
+                                  style: LoginpageText.purplehelvetica),
                               onTap: () {
                                 showDialog(
                                   barrierColor: Colors.grey.withOpacity(0.5),
@@ -280,11 +282,14 @@ class _MblNoDialogState extends State<MblNoDialog> {
         } else {
           return Padding(
             padding: EdgeInsets.fromLTRB(2.w, 6.h, 2.w, 6.h),
-            child: Dialog(
-              child: SingleChildScrollView(
-                child: Expanded(
+            child: SingleChildScrollView(
+              child: Expanded(
+                child: Card(
+                  elevation: 5,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(31))),
                   child: Container(
-                    width: 350,
+                    width: 400,
                     height: 350,
                     decoration: const BoxDecoration(
                       color: Colors.white,
@@ -297,13 +302,25 @@ class _MblNoDialogState extends State<MblNoDialog> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
-                          'Enter Mobile NO',
-                          style: TextStyle(
-                            fontFamily: 'Colfax',
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                          ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Expanded(
+                              child: Center(
+                                child: Text('Enter Mobile No',
+                                    style: LoginpageText.helvetica30bold),
+                              ),
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.pop(context);
+                              },
+                              child: ImageIcon(
+                                AssetImage('cancel.png'),
+                                color: Colors.black,
+                              ),
+                            ),
+                          ],
                         ),
                         SizedBox(height: 20),
                         SizedBox(
@@ -313,6 +330,11 @@ class _MblNoDialogState extends State<MblNoDialog> {
                             controller: contactNumberController,
                             keyboardType: TextInputType.number,
                             decoration: InputDecoration(
+                              hintText: '99999 99999',
+                              contentPadding: EdgeInsets.only(
+                                left: 1.w,
+                              ),
+                              hintStyle: DialogText.helvetica16sandal,
                               border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(0)),
                             ),
@@ -337,15 +359,8 @@ class _MblNoDialogState extends State<MblNoDialog> {
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(0),
                                 )),
-                            child: Text(
-                              "Get OTP",
-                              style: TextStyle(
-                                fontFamily: 'Colfax',
-                                fontSize: 10,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                              ),
-                            ),
+                            child: Text("Get OTP",
+                                style: LoginpageText.helvetica16white),
                           ),
                         ),
                         SizedBox(height: 40),
@@ -355,7 +370,7 @@ class _MblNoDialogState extends State<MblNoDialog> {
                         ),
                         SizedBox(height: 10),
                         Text("Don't have an account?",
-                            style: TabelText.helvetica),
+                            style: HomepageText.helvetica16black),
                         SizedBox(height: 10),
                         InkWell(
                           onTap: () {
@@ -368,7 +383,7 @@ class _MblNoDialogState extends State<MblNoDialog> {
                             );
                           },
                           child: Text('Create One!',
-                              style: FormTextStyle.purplehelvetica),
+                              style: LoginpageText.purplehelvetica),
                         ),
                       ],
                     ),

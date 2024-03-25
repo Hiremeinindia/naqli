@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/Users/SingleTimeUser/bookingPage.dart';
-import 'package:flutter_application_1/Widgets/formText.dart';
 import 'package:sizer/sizer.dart';
 
 class BookingIDDialog extends StatefulWidget {
