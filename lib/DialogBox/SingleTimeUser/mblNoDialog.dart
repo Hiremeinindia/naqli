@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_application_1/Controllers/allUsersFormController.dart';
 import 'package:flutter_application_1/DialogBox/SingleTimeUser/optDialog.dart';
+import 'package:flutter_application_1/DialogBox/SingleTimeUser/verfiedDialog.dart';
 import 'package:flutter_application_1/Widgets/formText.dart';
 import 'package:sizer/sizer.dart';
 
@@ -256,11 +257,12 @@ class _MblNoDialogState extends State<MblNoDialog> {
                                 .then((result) {
                               if (result.user != null) {
                                 print("OTP verified successfully");
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => MyHomePage(),
-                                  ),
+                                showDialog(
+                                  barrierColor: Colors.grey.withOpacity(0.5),
+                                  context: context,
+                                  builder: (context) {
+                                    return VerifiedDialog();
+                                  },
                                 );
                               } else {
                                 showErrorDialog(
@@ -291,14 +293,9 @@ class _MblNoDialogState extends State<MblNoDialog> {
                           InkWell(
                             child: Text('Resend',
                                 style: FormTextStyle.purplehelvetica),
-                            onTap: () {
-                              showDialog(
-                                barrierColor: Colors.grey.withOpacity(0.5),
-                                context: context,
-                                builder: (context) {
-                                  return CreateAccount();
-                                },
-                              );
+                            onTap: () async {
+                              await _startPhoneAuth(
+                                  contactNumberController.text);
                             },
                           ),
                         ],
