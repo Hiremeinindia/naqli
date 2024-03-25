@@ -92,14 +92,17 @@ class _MblNoDialogState extends State<MblNoDialog> {
           storedVerificationId = verificationId;
 
           // Show the dialog to enter OTP
+
           showDialog(
             context: context,
             barrierDismissible: false,
             builder: (context) {
-              return Padding(
-                padding: EdgeInsets.fromLTRB(4.w, 10.h, 4.w, 10.h),
-                child: Container(
-                  height: 360,
+              return AlertDialog(
+                titlePadding: EdgeInsets.zero,
+                contentPadding: EdgeInsets.zero,
+                content: Container(
+                  height: 310,
+                  width: 1215,
                   decoration: const BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.all(
@@ -142,7 +145,93 @@ class _MblNoDialogState extends State<MblNoDialog> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          // Your OTP input fields
+                          SizedBox(
+                            height: 45,
+                            width: 45,
+                            child: TextField(
+                              controller: otp1,
+                              keyboardType: TextInputType.number,
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(0)),
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 0.5.w,
+                          ),
+                          SizedBox(
+                            height: 45,
+                            width: 45,
+                            child: TextField(
+                              controller: otp2,
+                              keyboardType: TextInputType.number,
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(0)),
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 0.5.w,
+                          ),
+                          SizedBox(
+                            height: 45,
+                            width: 45,
+                            child: TextField(
+                              controller: otp3,
+                              keyboardType: TextInputType.number,
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(0)),
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 0.5.w,
+                          ),
+                          SizedBox(
+                            height: 45,
+                            width: 45,
+                            child: TextField(
+                              controller: otp4,
+                              keyboardType: TextInputType.number,
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(0)),
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 0.5.w,
+                          ),
+                          SizedBox(
+                            height: 45,
+                            width: 45,
+                            child: TextField(
+                              controller: otp5,
+                              keyboardType: TextInputType.number,
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(0)),
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 0.5.w,
+                          ),
+                          SizedBox(
+                            height: 45,
+                            width: 45,
+                            child: TextField(
+                              controller: otp6,
+                              keyboardType: TextInputType.number,
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(0)),
+                              ),
+                            ),
+                          ),
                         ],
                       ),
                       SizedBox(height: 20), // Adjust spacing as needed
