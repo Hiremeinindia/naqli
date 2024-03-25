@@ -317,7 +317,9 @@ class _LoginPageState extends State<LoginPage> {
                                           barrierColor: Colors.transparent,
                                           context: context,
                                           builder: (context) {
-                                            return OTPDialog();
+                                            return OTPDialog(
+                                              verificationId: '',
+                                            );
                                           },
                                         );
                                       },
