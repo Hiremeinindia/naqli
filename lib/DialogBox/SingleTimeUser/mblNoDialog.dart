@@ -21,6 +21,12 @@ class MblNoDialog extends StatefulWidget {
 
 class _MblNoDialogState extends State<MblNoDialog> {
   bool isVerified = false;
+  TextEditingController otp1 = TextEditingController();
+  TextEditingController otp2 = TextEditingController();
+  TextEditingController otp3 = TextEditingController();
+  TextEditingController otp4 = TextEditingController();
+  TextEditingController otp5 = TextEditingController();
+  TextEditingController otp6 = TextEditingController();
   AllUsersFormController controller = AllUsersFormController();
   TextEditingController otpController = TextEditingController();
   TextEditingController contactNumberController = TextEditingController();
@@ -89,52 +95,130 @@ class _MblNoDialogState extends State<MblNoDialog> {
           showDialog(
             context: context,
             barrierDismissible: false,
-            builder: (context) => AlertDialog(
-              title: Text("Enter OTP"),
-              content: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  TextField(
-                    controller: otpController,
+            builder: (context) {
+              return Padding(
+                padding: EdgeInsets.fromLTRB(4.w, 10.h, 4.w, 10.h),
+                child: Container(
+                  height: 360,
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(31),
+                    ),
                   ),
-                ],
-              ),
-              actions: [
-                ElevatedButton(
-                  onPressed: () {
-                    FirebaseAuth auth = FirebaseAuth.instance;
-                    String smsCode = otpController.text;
-                    PhoneAuthCredential _credential =
-                        PhoneAuthProvider.credential(
-                      verificationId: storedVerificationId!,
-                      smsCode: smsCode,
-                    );
-
-                    auth.signInWithCredential(_credential).then((result) {
-                      // Check if the verification is successful
-                      if (result.user != null) {
-                        print("otp verified successfully");
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => MyHomePage(),
+                  padding: EdgeInsets.fromLTRB(4.w, 4.h, 4.w, 4.h),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Expanded(
+                            child: Center(
+                              child: Text('Verify',
+                                  style: TabelText.helveticablack19),
+                            ),
                           ),
-                        );
-                        setState(() {
-                          isVerified = true;
-                        });
-                      } else {
-                        showErrorDialog(
-                            "Invalid verification code. Please enter the correct code.");
-                      }
-                    }).catchError((e) {
-                      print("Error signing in with credential: $e");
-                    });
-                  },
-                  child: Text("Done"),
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.pop(context);
+                            },
+                            child: ImageIcon(
+                              AssetImage('cancel.png'),
+                              color: Colors.black,
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 20), // Adjust spacing as needed
+                      Text(
+                        'Your code was sent to your mobile no',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontFamily: 'Helvetica',
+                          fontSize: 22,
+                        ),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          // Your OTP input fields
+                        ],
+                      ),
+                      SizedBox(height: 20), // Adjust spacing as needed
+                      SizedBox(
+                        height: 40,
+                        child: ElevatedButton(
+                          onPressed: () async {
+                            String smsCode = otp1.text +
+                                otp2.text +
+                                otp3.text +
+                                otp4.text +
+                                otp5.text +
+                                otp6.text; // Concatenate all OTP fields
+                            PhoneAuthCredential _credential =
+                                PhoneAuthProvider.credential(
+                              verificationId: storedVerificationId!,
+                              smsCode: smsCode,
+                            );
+
+                            FirebaseAuth.instance
+                                .signInWithCredential(_credential)
+                                .then((result) {
+                              if (result.user != null) {
+                                print("OTP verified successfully");
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => MyHomePage(),
+                                  ),
+                                );
+                              } else {
+                                showErrorDialog(
+                                    "Invalid verification code. Please enter the correct code.");
+                              }
+                            }).catchError((e) {
+                              print("Error signing in with credential: $e");
+                            });
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Color.fromRGBO(60, 55, 148, 1),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                          ),
+                          child: Text("Verify", style: TabelText.dialogtext1),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(left: 2.w, right: 2.w),
+                        child: Divider(),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text("Didn't receive OTP ?",
+                              style: TabelText.helvetica),
+                          InkWell(
+                            child: Text('Resend',
+                                style: FormTextStyle.purplehelvetica),
+                            onTap: () {
+                              showDialog(
+                                barrierColor: Colors.grey.withOpacity(0.5),
+                                context: context,
+                                builder: (context) {
+                                  return CreateAccount();
+                                },
+                              );
+                            },
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
-              ],
-            ),
+              );
+            },
           );
         },
         codeAutoRetrievalTimeout: (String verificationId) {
@@ -223,14 +307,6 @@ class _MblNoDialogState extends State<MblNoDialog> {
                                 onPressed: () async {
                                   await _startPhoneAuth(
                                       contactNumberController.text);
-                                  showDialog(
-                                    barrierColor: Colors.transparent,
-                                    context: context,
-                                    builder: (context) {
-                                      return OTPDialog(
-                                          verificationId: storedVerificationId);
-                                    },
-                                  );
                                 },
                                 style: ElevatedButton.styleFrom(
                                     backgroundColor:
