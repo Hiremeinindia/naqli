@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'Users/SingleTimeUser/availableUnits.dart';
 import 'classes/language_constants.dart';
 import 'gen_l10n/app_localizations.dart';
 import 'homePage.dart';
@@ -72,7 +73,7 @@ class _MyAppState extends State<MyApp> {
       supportedLocales: AppLocalizations.supportedLocales,
       locale: _locale,
       debugShowCheckedModeBanner: false,
-      home: MyHomePage(),
+      home: AvailableUnits(),
     );
   }
 }

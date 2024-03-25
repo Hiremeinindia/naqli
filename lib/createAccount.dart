@@ -325,12 +325,13 @@ class _CreateAccountState extends State<CreateAccount> {
                                       value: controller
                                               .selectedCity.text.isNotEmpty
                                           ? controller.selectedCity.text
-                                          : 'City 1',
+                                          : 'Select',
                                       items: [
                                         'City 1',
                                         'City 2',
                                         'City 3',
-                                        'City 4'
+                                        'City 4',
+                                        'Select'
                                       ],
                                       onChanged: (String? newValue) {
                                         setState(() {
@@ -353,11 +354,12 @@ class _CreateAccountState extends State<CreateAccount> {
                                             value: controller.selectedGovtId
                                                     .text.isNotEmpty
                                                 ? controller.selectedGovtId.text
-                                                : 'National ID',
+                                                : 'Select',
                                             items: [
                                               'National ID',
                                               'Iqama No.',
                                               'Visit Visa / Border No',
+                                              'Select',
                                             ],
                                             onChanged: (String? newValue) {
                                               setState(() {
@@ -482,11 +484,12 @@ class _CreateAccountState extends State<CreateAccount> {
                                       value: controller.selectedAccounttype.text
                                               .isNotEmpty
                                           ? controller.selectedAccounttype.text
-                                          : 'User',
+                                          : 'Select',
                                       items: <String>[
                                         'User',
                                         'Super User',
                                         'Enterprise',
+                                        'Select',
                                       ],
                                       onChanged: (String? newValue) {
                                         setState(() {
@@ -937,12 +940,13 @@ class _CreateAccountState extends State<CreateAccount> {
                                 child: CustomDropDown(
                                   value: controller.selectedCity.text.isNotEmpty
                                       ? controller.selectedCity.text
-                                      : 'City 1',
+                                      : 'Select',
                                   items: [
                                     'City 1',
                                     'City 2',
                                     'City 3',
-                                    'City 4'
+                                    'City 4',
+                                    'Select',
                                   ],
                                   onChanged: (String? newValue) {
                                     setState(() {
@@ -968,11 +972,12 @@ class _CreateAccountState extends State<CreateAccount> {
                                   value: controller
                                           .selectedAccounttype.text.isNotEmpty
                                       ? controller.selectedAccounttype.text
-                                      : 'User',
+                                      : 'Select',
                                   items: <String>[
                                     'User',
                                     'Super User',
                                     'Enterprise',
+                                    'Select',
                                   ],
                                   onChanged: (String? newValue) {
                                     setState(() {
@@ -1011,11 +1016,12 @@ class _CreateAccountState extends State<CreateAccount> {
                                         value: controller
                                                 .selectedGovtId.text.isNotEmpty
                                             ? controller.selectedGovtId.text
-                                            : 'National ID',
+                                            : 'Select',
                                         items: [
                                           'National ID',
                                           'Iqama No.',
                                           'Visit Visa / Border No',
+                                          'Select',
                                         ],
                                         onChanged: (String? newValue) {
                                           setState(() {

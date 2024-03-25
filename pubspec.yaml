@@ -61,6 +61,7 @@ dependencies:
   google_maps_widget: ^1.0.5+1
   flutter_osm_plugin: ^0.42.0
   open_street_map_search_and_pick: ^0.1.1
+  map_location_picker: ^1.2.8+3
 
 dev_dependencies:
   flutter_test:
@@ -100,27 +101,24 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
+    - family: Helvetica
+      fonts:
+        - asset: fonts/Helvetica.ttf      
+    - family: HelveticaNeueRegular
+      fonts:
+        - asset: fonts/Helvetica-Neue-Regular.otf  
+    - family: Arsenal
+      fonts:
+        - asset: fonts/Arsenal.otf      
+    - family: Tajawal
+      fonts:
+        - asset: fonts/Tajawal.ttf      
     - family: Colfax
       fonts:
         - asset: fonts/Colfax-Regular.otf
     - family: ColfaxBold
       fonts:
         - asset: fonts/Colfax-Bold.otf
-    - family: Segoe
-      fonts:
-        - asset: fonts/Segoe_UI_Italic.ttf
-    - family: SFProText
-      fonts:
-        - asset: fonts/SFProText-Regular.ttf
-    - family: SFProTextMedium
-      fonts:
-        - asset: fonts/SFProText-Medium.ttf        
-    - family: Helvetica
-      fonts:
-        - asset: fonts/Helvetica.ttf      
-    - family: HelveticaNeueRegularRegular
-      fonts:
-        - asset: fonts/Helvetica-Neue-Regular.otf 
     - family: PoppinsSemiBold
       fonts:
         - asset: fonts/Poppins-SemiBold.ttf       

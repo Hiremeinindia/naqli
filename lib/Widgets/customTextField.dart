@@ -1,6 +1,7 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/Widgets/formText.dart';
 
 @immutable
 final class CustomTextfield extends StatelessWidget {
@@ -82,18 +83,16 @@ final class CustomTextfieldGrey extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 45,
+      height: 50,
       child: TextFormField(
+        textAlignVertical: TextAlignVertical.center,
+        textAlign: TextAlign.center,
         style: TextStyle(height: 1),
         validator: validator,
         controller: controller,
         decoration: InputDecoration(
           contentPadding: EdgeInsets.only(left: 12),
-          hintStyle: TextStyle(
-              fontSize: 13,
-              fontFamily: 'SFProText',
-              fontWeight: FontWeight.normal,
-              color: Color.fromRGBO(183, 183, 183, 1)),
+          hintStyle: AvailableText.helvetica,
           hintText: text,
           errorText: text1,
           errorStyle: TextStyle(height: 0, fontSize: 8.5),
