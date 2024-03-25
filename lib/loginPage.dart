@@ -355,13 +355,17 @@ class _LoginPageState extends State<LoginPage> {
                                       style: LoginpageText.purplehelvetica),
                                   onTap: () async {
                                     // _showOtpVerificationDialog();
-
+                                    String email = controller.email.text;
+                                    String password = controller.password.text;
+                                    String selectedAccounttype =
+                                        controller.selectedAccounttype.text;
                                     showDialog(
                                       barrierColor:
                                           Colors.grey.withOpacity(0.5),
                                       context: context,
                                       builder: (context) {
-                                        return VerifiedDialog();
+                                        return VerifiedDialog(email, password,
+                                            selectedAccounttype);
                                       },
                                     );
                                     if (isVerified) {
@@ -589,12 +593,16 @@ class _LoginPageState extends State<LoginPage> {
                               style: LoginpageText.purplehelvetica),
                           onTap: () async {
                             // _showOtpVerificationDialog();
-
+                            String email = controller.email.text;
+                            String password = controller.password.text;
+                            String selectedAccounttype =
+                                controller.selectedAccounttype.text;
                             showDialog(
                               barrierColor: Colors.grey.withOpacity(0.5),
                               context: context,
                               builder: (context) {
-                                return VerifiedDialog();
+                                return VerifiedDialog(
+                                    email, password, selectedAccounttype);
                               },
                             );
                             if (isVerified) {
