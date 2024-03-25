@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_application_1/Controllers/allUsersFormController.dart';
 import 'package:flutter_application_1/DialogBox/SingleTimeUser/optDialog.dart';
+import 'package:flutter_application_1/DialogBox/SingleTimeUser/verfiedDialog.dart';
 import 'package:flutter_application_1/Widgets/formText.dart';
 import 'package:sizer/sizer.dart';
 
@@ -299,53 +300,18 @@ class _MblNoDialogState extends State<MblNoDialog> {
                               smsCode: smsCode,
                             );
 
-                            try {
-                              UserCredential userCredential = await FirebaseAuth
-                                  .instance
-                                  .signInWithCredential(_credential);
-
-                              if (userCredential.user != null) {
-                                String email = widget.email;
-                                String accountType = widget.selectedAccounttype;
-                                print(
-                                    "User created: ${userCredential.user!.email}");
-                                print(
-                                    'Account Type before create Account : $accountType');
-                                await _createAccount(
-                                    userCredential.user!.uid, accountType);
-                                print('value passed$accountType');
-
-                                // Navigate to different pages based on selectedType
-                                if (accountType == 'Enterprise') {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => EnterDashboardPage(
-                                          user: userCredential.user!),
-                                    ),
-                                  );
-                                } else if (accountType == 'Super User') {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          SuperUserDashboardPage(
-                                              user: userCredential.user!),
-                                    ),
-                                  );
-                                } else if (accountType == 'User') {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          SingleUserDashboardPage(
-                                              user: userCredential.user!),
-                                    ),
-                                  );
-                                } else {
-                                  // Handle invalid selectedType
-                                  print('Invalid selected type: $accountType');
-                                }
+                            FirebaseAuth.instance
+                                .signInWithCredential(_credential)
+                                .then((result) {
+                              if (result.user != null) {
+                                print("OTP verified successfully");
+                                showDialog(
+                                  barrierColor: Colors.grey.withOpacity(0.5),
+                                  context: context,
+                                  builder: (context) {
+                                    return VerifiedDialog();
+                                  },
+                                );
                               } else {
                                 showErrorDialog(
                                     "Invalid verification code. Please enter the correct code.");
@@ -375,14 +341,9 @@ class _MblNoDialogState extends State<MblNoDialog> {
                           InkWell(
                             child: Text('Resend',
                                 style: FormTextStyle.purplehelvetica),
-                            onTap: () {
-                              showDialog(
-                                barrierColor: Colors.grey.withOpacity(0.5),
-                                context: context,
-                                builder: (context) {
-                                  return CreateAccount();
-                                },
-                              );
+                            onTap: () async {
+                              await _startPhoneAuth(
+                                  contactNumberController.text);
                             },
                           ),
                         ],
