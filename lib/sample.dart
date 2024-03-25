@@ -1,20 +1,13 @@
 import 'dart:ui';
-
 import 'package:easy_sidemenu/easy_sidemenu.dart';
-import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_application_1/Widgets/colorContainer.dart';
 import 'package:flutter_application_1/Widgets/formText.dart';
-import 'package:flutter_application_1/pieChart/app_colors.dart';
-import 'package:flutter_application_1/pieChart/indicator.dart';
 import 'package:flutter_application_1/Widgets/customButton.dart';
-import 'package:flutter_application_1/echarts_data.dart';
-import 'package:graphic/graphic.dart';
 import 'package:sizer/sizer.dart';
-import 'dart:ui';
 
 class SingleUserPayment1 extends StatefulWidget {
   SingleUserPayment1();

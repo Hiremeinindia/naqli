@@ -1,5 +1,6 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:easy_sidemenu/easy_sidemenu.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +19,8 @@ import 'payments.dart';
 import 'trigger_booking.dart';
 
 class SuperUserDashboardPage extends StatefulWidget {
-  const SuperUserDashboardPage({Key? key}) : super(key: key);
+  final User user;
+  SuperUserDashboardPage({required this.user});
 
   @override
   State<SuperUserDashboardPage> createState() => _MyHomePageState();
