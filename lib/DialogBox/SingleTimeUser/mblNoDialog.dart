@@ -11,6 +11,9 @@ import 'package:flutter_application_1/DialogBox/SingleTimeUser/verfiedDialog.dar
 import 'package:flutter_application_1/Widgets/formText.dart';
 import 'package:sizer/sizer.dart';
 
+import '../../Users/Enterprise/dashboard_page.dart';
+import '../../Users/SingleUser/dashboard_page.dart';
+import '../../Users/SuperUser/dashboard_page.dart';
 import '../../createAccount.dart';
 import '../../homePage.dart';
 
@@ -79,47 +82,6 @@ class _MblNoDialogState extends State<MblNoDialog> {
         ],
       ),
     );
-  }
-
-  Future<void> _createAccount(String uid, String selectedType) async {
-    try {
-      String userCollection;
-      Map<String, dynamic> userData = {
-        'firstName': widget.firstName,
-        'lastName': widget.lastName,
-        'email': widget.email,
-        'password': widget.password,
-        'contactNumber': widget.contactNumber,
-        'address': widget.address,
-        'alternateNumber': widget.alternateNumber,
-        'address2': widget.address2,
-        'city': widget.selectedCity,
-        'accounttype': widget.selectedAccounttype,
-      };
-
-      if (selectedType == 'Enterprise') {
-        userCollection = 'enterprisedummy';
-        userData['legalName'] = widget.legalName;
-        userData['companyidNumber'] = widget.companyidNumber;
-      } else if (selectedType == 'User') {
-        userCollection = 'userdummy';
-        userData['govtId'] = widget.selectedGovtId;
-        userData['idNumber'] = widget.idNumber;
-      } else if (selectedType == 'Super User') {
-        userCollection = 'superuserdummy';
-        userData['govtId'] = widget.selectedGovtId;
-        userData['idNumber'] = widget.idNumber;
-      } else {
-        throw Exception('Invalid selected type');
-      }
-
-      await FirebaseFirestore.instance
-          .collection(userCollection)
-          .doc(uid)
-          .set(userData);
-    } catch (e) {
-      print("Data doesn't store : $e");
-    }
   }
 
   bool isValidPhoneNumber(String phoneNumber) {
@@ -316,7 +278,7 @@ class _MblNoDialogState extends State<MblNoDialog> {
                             String email = controller.email.text;
                             String password = controller.password.text;
                             String selectedAccounttype =
-                                controller.selectedAccounttype.text;
+                                widget.selectedAccounttype;
                             String smsCode = otp1.text +
                                 otp2.text +
                                 otp3.text +
@@ -392,7 +354,53 @@ class _MblNoDialogState extends State<MblNoDialog> {
                                                           style: TabelText
                                                               .helveticablack19),
                                                       GestureDetector(
-                                                        onTap: () {
+                                                        onTap: () async {
+                                                          String accountType =
+                                                              widget
+                                                                  .selectedAccounttype; // Navigate to different pages based on selectedType
+                                                          UserCredential
+                                                              userCredential =
+                                                              await _auth
+                                                                  .signInWithEmailAndPassword(
+                                                            email: widget.email,
+                                                            password:
+                                                                widget.password,
+                                                          );
+                                                          if (accountType ==
+                                                              'Enterprise') {
+                                                            Navigator.push(
+                                                              context,
+                                                              MaterialPageRoute(
+                                                                  builder: (context) =>
+                                                                      EnterDashboardPage(
+                                                                          user:
+                                                                              userCredential.user!)),
+                                                            );
+                                                          } else if (accountType ==
+                                                              'Super User') {
+                                                            Navigator.push(
+                                                              context,
+                                                              MaterialPageRoute(
+                                                                  builder: (context) =>
+                                                                      SuperUserDashboardPage(
+                                                                          user:
+                                                                              userCredential.user!)),
+                                                            );
+                                                          } else if (accountType ==
+                                                              'User') {
+                                                            Navigator.push(
+                                                              context,
+                                                              MaterialPageRoute(
+                                                                  builder: (context) =>
+                                                                      SingleUserDashboardPage(
+                                                                          user:
+                                                                              userCredential.user!)),
+                                                            );
+                                                          } else {
+                                                            // Handle invalid selectedType
+                                                            print(
+                                                                'Invalid selected type: $accountType');
+                                                          }
                                                           Navigator.pop(
                                                               context);
                                                         },

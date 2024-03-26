@@ -81,8 +81,8 @@ class _VerifiedDialogState extends State<VerifiedDialog> {
     try {
       UserCredential userCredential =
           await _auth.createUserWithEmailAndPassword(
-        email: widget.email!,
-        password: widget.password!,
+        email: widget.email,
+        password: widget.password,
       );
       String userCollection;
       Map<String, dynamic> userData = {
