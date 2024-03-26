@@ -540,14 +540,53 @@ class _CreateAccountState extends State<CreateAccount> {
                                           controller.password.text;
                                       String selectedAccounttype =
                                           controller.selectedAccounttype.text;
+
+                                      String firstName =
+                                          controller.firstName.text;
+                                      String lastName =
+                                          controller.lastName.text;
+                                      String legalName =
+                                          controller.legalName.text;
+                                      String contactNumber =
+                                          controller.contactNumber.text;
+                                      String address = controller.address.text;
+                                      String govtId =
+                                          controller.selectedGovtId.text;
+                                      String confirmPassword =
+                                          controller.confirmPassword.text;
+                                      String alternateNumber =
+                                          controller.alternateNumber.text;
+                                      String address2 =
+                                          controller.address2.text;
+                                      String idNumber =
+                                          controller.idNumber.text;
+                                      String city =
+                                          controller.selectedCity.text;
+                                      String companyidNumber =
+                                          controller.companyidNumber.text;
+
                                       print("track1");
                                       showDialog(
                                         barrierColor:
                                             Colors.grey.withOpacity(0.5),
                                         context: context,
                                         builder: (context) {
-                                          return MblNoDialog(email, password,
-                                              selectedAccounttype);
+                                          return MblNoDialog(
+                                              email,
+                                              password,
+                                              selectedAccounttype,
+                                              firstName,
+                                              legalName,
+                                              lastName,
+                                              confirmPassword,
+                                              contactNumber,
+                                              address2,
+                                              address,
+                                              govtId,
+                                              alternateNumber,
+                                              idNumber,
+                                              city,
+                                              companyidNumber);
                                         },
                                       );
 

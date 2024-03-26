@@ -238,7 +238,7 @@ class _LoginPageState extends State<LoginPage> {
                                             // Check the user's role after successful sign-in
                                             String userRole = await getUserRole(
                                                 userCredential.user!.uid);
-
+                                            print('User Role = $userRole');
                                             // Navigate to the appropriate dashboard based on the user's role
                                             if (userRole == 'User') {
                                               Navigator.pushReplacement(

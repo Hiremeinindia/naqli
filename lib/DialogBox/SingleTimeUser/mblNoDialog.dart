@@ -20,7 +20,35 @@ class MblNoDialog extends StatefulWidget {
   String email;
   String password;
   String selectedAccounttype;
-  MblNoDialog(this.email, this.password, this.selectedAccounttype);
+  String firstName;
+  String lastName;
+  String legalName;
+  String contactNumber;
+  String address;
+  String selectedGovtId;
+  String confirmPassword;
+  String alternateNumber;
+  String address2;
+  String idNumber;
+  String selectedCity;
+  String companyidNumber;
+
+  MblNoDialog(
+      this.email,
+      this.password,
+      this.selectedAccounttype,
+      this.firstName,
+      this.lastName,
+      this.legalName,
+      this.address,
+      this.address2,
+      this.alternateNumber,
+      this.companyidNumber,
+      this.confirmPassword,
+      this.contactNumber,
+      this.idNumber,
+      this.selectedCity,
+      this.selectedGovtId);
 
   @override
   _MblNoDialogState createState() => _MblNoDialogState();
@@ -59,30 +87,30 @@ class _MblNoDialogState extends State<MblNoDialog> {
     try {
       String userCollection;
       Map<String, dynamic> userData = {
-        'firstName': controller.firstName.text,
-        'lastName': controller.lastName.text,
-        'email': controller.email.text,
-        'password': controller.password.text,
-        'contactNumber': controller.contactNumber.text,
-        'address': controller.address.text,
-        'alternateNumber': controller.alternateNumber.text,
-        'address2': controller.address2.text,
-        'city': controller.selectedCity.text,
-        'accounttype': controller.selectedAccounttype.text,
+        'firstName': widget.firstName,
+        'lastName': widget.lastName,
+        'email': widget.email,
+        'password': widget.password,
+        'contactNumber': widget.contactNumber,
+        'address': widget.address,
+        'alternateNumber': widget.alternateNumber,
+        'address2': widget.address2,
+        'city': widget.selectedCity,
+        'accounttype': widget.selectedAccounttype,
       };
 
       if (selectedType == 'Enterprise') {
         userCollection = 'enterprisedummy';
-        userData['legalName'] = controller.legalName.text;
-        userData['companyidNumber'] = controller.companyidNumber.text;
+        userData['legalName'] = widget.legalName;
+        userData['companyidNumber'] = widget.companyidNumber;
       } else if (selectedType == 'User') {
         userCollection = 'userdummy';
-        userData['govtId'] = controller.selectedGovtId.text;
-        userData['idNumber'] = controller.idNumber.text;
+        userData['govtId'] = widget.selectedGovtId;
+        userData['idNumber'] = widget.idNumber;
       } else if (selectedType == 'Super User') {
         userCollection = 'superuserdummy';
-        userData['govtId'] = controller.selectedGovtId.text;
-        userData['idNumber'] = controller.idNumber.text;
+        userData['govtId'] = widget.selectedGovtId;
+        userData['idNumber'] = widget.idNumber;
       } else {
         throw Exception('Invalid selected type');
       }
