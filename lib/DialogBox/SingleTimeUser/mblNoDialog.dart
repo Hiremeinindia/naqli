@@ -1,4 +1,5 @@
 import 'dart:html';
+import 'dart:ui';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -298,6 +299,7 @@ class _MblNoDialogState extends State<MblNoDialog> {
                                 print("OTP verified successfully");
 
                                 // Fetch user details from Firebase
+                                // Fetch user details from Firebase
                                 User? user = FirebaseAuth.instance.currentUser;
                                 String? phoneNumber = user?.phoneNumber;
 
@@ -316,137 +318,100 @@ class _MblNoDialogState extends State<MblNoDialog> {
                                             dynamic>; // Explicit cast
 
                                     // Check if 'firstName' field exists in the document
-
-                                    String? firstName = userData['firstName'];
-                                    String? lastName = userData['lastName'];
-                                    // Display user details in a dialog box
-                                    showDialog(
-                                      context: context,
-                                      builder: (BuildContext context) {
-                                        return Dialog(
-                                          child: Container(
-                                            height: 340,
-                                            width: 1225,
-                                            decoration: const BoxDecoration(
-                                              color: Colors.white,
-                                              borderRadius: BorderRadius.all(
-                                                Radius.circular(31),
+                                    if (userData.containsKey('firstName')) {
+                                      String? firstName = userData['firstName'];
+                                      String? lastName = userData['lastName'];
+                                      // Display user details in a dialog box
+                                      showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          return Dialog(
+                                            child: Container(
+                                              height: 340,
+                                              width: 1225,
+                                              decoration: const BoxDecoration(
+                                                color: Colors.white,
+                                                borderRadius: BorderRadius.all(
+                                                  Radius.circular(31),
+                                                ),
+                                              ),
+                                              child: Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      ImageIcon(
+                                                        AssetImage(
+                                                          'approved.png',
+                                                        ),
+                                                        color: Color.fromRGBO(
+                                                            60, 55, 148, 1),
+                                                        size: 30,
+                                                      ),
+                                                      SizedBox(
+                                                        width: 5,
+                                                      ),
+                                                      Text('Account Verified',
+                                                          style: TabelText
+                                                              .helveticablack19),
+                                                      GestureDetector(
+                                                        onTap: () {
+                                                          Navigator.pop(
+                                                              context);
+                                                        },
+                                                        child: Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .end,
+                                                          children: [
+                                                            ImageIcon(
+                                                              AssetImage(
+                                                                  'cancel.png'),
+                                                              color:
+                                                                  Colors.black,
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  SizedBox(
+                                                    height: 20,
+                                                  ),
+                                                  Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      Text(
+                                                        "$firstName $lastName",
+                                                        style: DialogText
+                                                            .helvetica41,
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  SizedBox(
+                                                    height: 10,
+                                                  ),
+                                                  Text(
+                                                    "$phoneNumber",
+                                                    style:
+                                                        DialogText.helvetica42,
+                                                  ),
+                                                ],
                                               ),
                                             ),
-                                            child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  children: [
-                                                    ImageIcon(
-                                                      AssetImage(
-                                                        'approved.png',
-                                                      ),
-                                                      color: Color.fromRGBO(
-                                                          60, 55, 148, 1),
-                                                      size: 30,
-                                                    ),
-                                                    SizedBox(
-                                                      width: 5,
-                                                    ),
-                                                    Text('Account Verified',
-                                                        style: TabelText
-                                                            .helveticablack19),
-                                                    GestureDetector(
-                                                      onTap: () async {
-                                                        String accountType = widget
-                                                            .selectedAccounttype; // Navigate to different pages based on selectedType
-                                                        UserCredential
-                                                            userCredential =
-                                                            await _auth
-                                                                .signInWithEmailAndPassword(
-                                                          email: widget.email,
-                                                          password:
-                                                              widget.password,
-                                                        );
-                                                        if (accountType ==
-                                                            'Enterprise') {
-                                                          Navigator.push(
-                                                            context,
-                                                            MaterialPageRoute(
-                                                                builder: (context) =>
-                                                                    EnterDashboardPage(
-                                                                        user: userCredential
-                                                                            .user!)),
-                                                          );
-                                                        } else if (accountType ==
-                                                            'Super User') {
-                                                          Navigator.push(
-                                                            context,
-                                                            MaterialPageRoute(
-                                                                builder: (context) =>
-                                                                    SuperUserDashboardPage(
-                                                                        user: userCredential
-                                                                            .user!)),
-                                                          );
-                                                        } else if (accountType ==
-                                                            'User') {
-                                                          Navigator.push(
-                                                            context,
-                                                            MaterialPageRoute(
-                                                                builder: (context) =>
-                                                                    SingleUserDashboardPage(
-                                                                        user: userCredential
-                                                                            .user!)),
-                                                          );
-                                                        } else {
-                                                          // Handle invalid selectedType
-                                                          print(
-                                                              'Invalid selected type: $accountType');
-                                                        }
-                                                        Navigator.pop(context);
-                                                      },
-                                                      child: ImageIcon(
-                                                        AssetImage(
-                                                            'cancel.png'),
-                                                        color: Colors.black,
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                                SizedBox(
-                                                  height: 50,
-                                                ),
-                                                Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  children: [
-                                                    Text(
-                                                      "$firstName",
-                                                      style: TextStyle(
-                                                          fontSize: 30,
-                                                          color: Color.fromRGBO(
-                                                              81, 40, 137, 1),
-                                                          fontFamily:
-                                                              "Helvetica"),
-                                                    ),
-                                                  ],
-                                                ),
-                                                SizedBox(
-                                                  height: 10,
-                                                ),
-                                                Text(
-                                                  "$phoneNumber",
-                                                  style: TextStyle(
-                                                      fontSize: 30,
-                                                      color: Color.fromRGBO(
-                                                          78, 68, 68, 1),
-                                                      fontFamily: "Helvetica"),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        );
-                                      },
-                                    );
+                                          );
+                                        },
+                                      );
+                                    } else {
+                                      print(
+                                          'No firstName field found in Firestore document.');
+                                    }
                                   } else {
                                     // No documents found in 'users' collection
                                     print('No user data found in Firestore.');
