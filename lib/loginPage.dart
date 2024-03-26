@@ -5,8 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_application_1/DialogBox/SingleTimeUser/optDialog.dart';
-import 'package:flutter_application_1/DialogBox/SingleTimeUser/verfiedDialog.dart';
 import 'package:flutter_application_1/Users/Enterprise/dashboard_page.dart';
 import 'package:flutter_application_1/Users/SingleUser/dashboard_page.dart';
 import 'package:flutter_application_1/Users/SuperUser/dashboard_page.dart';
@@ -16,6 +14,7 @@ import 'package:sizer/sizer.dart';
 
 import 'Controllers/allUsersFormController.dart';
 import 'DialogBox/SingleTimeUser/mblNoDialog.dart';
+import 'DialogBox/SingleTimeUser/verfiedDialog.dart';
 import 'Widgets/customTextField.dart';
 import 'homePage.dart';
 
@@ -219,111 +218,103 @@ class _LoginPageState extends State<LoginPage> {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     SizedBox(
-                                      height: 50,
-                                      child: ElevatedButton(
-                                        onPressed: () async {
-                                          try {
-                                            print(
-                                                'email ${controller.email.text}');
-                                            // Sign in with email and password
-                                            UserCredential userCredential =
-                                                await _auth
-                                                    .signInWithEmailAndPassword(
-                                              email: controller.email.text,
-                                              password:
-                                                  controller.password.text,
-                                            );
-                                            print(
-                                                'email ${controller.email.text}');
-                                            // Check the user's role after successful sign-in
-                                            String userRole = await getUserRole(
-                                                userCredential.user!.uid);
-
-                                            // Navigate to the appropriate dashboard based on the user's role
-                                            if (userRole == 'User') {
-                                              Navigator.pushReplacement(
-                                                context,
-                                                MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      SingleUserDashboardPage(
-                                                          user: userCredential
-                                                              .user!),
-                                                ),
+                                        height: 50,
+                                        child: ElevatedButton(
+                                          onPressed: () async {
+                                            try {
+                                              // Sign in with email and password
+                                              UserCredential userCredential =
+                                                  await _auth
+                                                      .signInWithEmailAndPassword(
+                                                email: controller.email.text,
+                                                password:
+                                                    controller.password.text,
                                               );
-                                            } else if (userRole ==
-                                                'Super User') {
-                                              Navigator.push(
+
+                                              // Check the user's role after successful sign-in
+                                              String userRole =
+                                                  await getUserRole(
+                                                      userCredential.user!.uid);
+
+                                              print('User Role = $userRole');
+                                              // Navigate to the appropriate dashboard based on the user's role
+                                              if (userRole == 'User') {
+                                                Navigator.pushReplacement(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        SingleUserDashboardPage(
+                                                            user: userCredential
+                                                                .user!),
+                                                  ),
+                                                );
+                                              } else if (userRole ==
+                                                  'Super User') {
+                                                Navigator.push(
                                                   context,
                                                   MaterialPageRoute(
                                                     builder: (context) =>
                                                         SuperUserDashboardPage(
                                                             user: userCredential
                                                                 .user!),
-                                                  ));
-                                            } else if (userRole ==
-                                                'Enterprise') {
-                                              Navigator.push(
+                                                  ),
+                                                );
+                                              } else if (userRole ==
+                                                  'Enterprise') {
+                                                Navigator.push(
                                                   context,
                                                   MaterialPageRoute(
                                                     builder: (context) =>
                                                         EnterDashboardPage(
                                                             user: userCredential
                                                                 .user!),
-                                                  ));
-                                            } else {
-                                              print('Unknown user role');
+                                                  ),
+                                                );
+                                              } else {
+                                                print('Unknown user role');
+                                              }
+                                            } on FirebaseAuthException catch (e) {
+                                              // Handle authentication exceptions
+                                              if (e.code == 'user-not-found') {
+                                                print(
+                                                    'No user found for that email.');
+                                              } else if (e.code ==
+                                                  'wrong-password') {
+                                                print(
+                                                    'Wrong password provided.');
+                                              }
                                             }
-                                          } on FirebaseAuthException catch (e) {
-                                            // Handle authentication exceptions
-                                            if (e.code == 'user-not-found') {
-                                              print(
-                                                  'No user found for that email.');
-                                            } else if (e.code ==
-                                                'wrong-password') {
-                                              print('Wrong password provided.');
-                                            }
-                                          }
-                                        },
-                                        style: ElevatedButton.styleFrom(
-                                          backgroundColor: Color.fromARGB(
-                                              255, 128, 123, 229),
-                                          shape: RoundedRectangleBorder(
-                                            side: BorderSide(
+                                          },
+                                          style: ElevatedButton.styleFrom(
+                                            backgroundColor: Color.fromARGB(
+                                                255, 128, 123, 229),
+                                            shape: RoundedRectangleBorder(
+                                              side: BorderSide(
                                                 color: const Color.fromRGBO(
                                                         112, 112, 112, 1)
-                                                    .withOpacity(0.3)),
-                                            borderRadius: BorderRadius.circular(
-                                                10), // Adjust border radius as needed
-                                          ),
-                                        ),
-                                        child: Padding(
-                                          padding: EdgeInsets.fromLTRB(
-                                              1.w, 4, 1.w, 4),
-                                          child: Text(
-                                            'Login',
-                                            style: TextStyle(
-                                              fontFamily: 'Helvetica',
-                                              color: Colors.white,
-                                              fontSize: 14,
+                                                    .withOpacity(0.3),
+                                              ),
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
                                             ),
                                           ),
-                                        ),
-                                      ),
-                                    ),
+                                          child: Padding(
+                                            padding: EdgeInsets.fromLTRB(
+                                                1.w, 4, 1.w, 4),
+                                            child: Text(
+                                              'Login',
+                                              style: TextStyle(
+                                                fontFamily: 'Helvetica',
+                                                color: Colors.white,
+                                                fontSize: 14,
+                                              ),
+                                            ),
+                                          ),
+                                        )),
                                     InkWell(
                                       child: Text('Forgot Password?',
                                           style: LoginpageText.purplehelvetica),
-                                      onTap: () {
-                                        showDialog(
-                                          barrierColor: Colors.transparent,
-                                          context: context,
-                                          builder: (context) {
-                                            return OTPDialog(
-                                              verificationId: '',
-                                            );
-                                          },
-                                        );
-                                      },
+                                      onTap: () {},
                                     ),
                                   ],
                                 ),
@@ -492,7 +483,7 @@ class _LoginPageState extends State<LoginPage> {
                                   email: controller.email.text,
                                   password: controller.password.text,
                                 );
-                                print('email ${controller.email.text}');
+                                print('email---- ${controller.email.text}');
                                 // Check the user's role after successful sign-in
                                 String userRole =
                                     await getUserRole(userCredential.user!.uid);

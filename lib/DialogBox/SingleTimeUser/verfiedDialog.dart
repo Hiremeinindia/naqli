@@ -37,6 +37,7 @@ class _VerifiedDialogState extends State<VerifiedDialog> {
   TextEditingController otp4 = TextEditingController();
   TextEditingController otp5 = TextEditingController();
   TextEditingController otp6 = TextEditingController();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
   @override
   void initState() {
     super.initState();
@@ -78,6 +79,11 @@ class _VerifiedDialogState extends State<VerifiedDialog> {
 
   Future<void> _createAccount(String uid, String selectedType) async {
     try {
+      UserCredential userCredential =
+          await _auth.createUserWithEmailAndPassword(
+        email: widget.email,
+        password: widget.password,
+      );
       String userCollection;
       Map<String, dynamic> userData = {
         'firstName': controller.firstName.text,
