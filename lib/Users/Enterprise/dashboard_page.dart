@@ -42,7 +42,7 @@ class _MyHomePageState extends State<EnterDashboardPage> {
   bool payNowButtonEnabled = false;
   bool expandWork = false;
   String? selectedValue;
-  Widget _currentContent = Dashboard(); // Initial content
+  Widget _currentContent = enterDashboard(); // Initial content
 
   void handleRadioValueChanged(String? newValue) {
     setState(() {
@@ -369,7 +369,7 @@ class _MyHomePageState extends State<EnterDashboardPage> {
                                     title: 'Dashboard',
                                     onTap: (page, _) {
                                       setState(() {
-                                        _currentContent = Dashboard();
+                                        _currentContent = enterDashboard();
                                       });
                                       sideMenu.changePage(page);
                                     },
@@ -522,7 +522,7 @@ class _MyHomePageState extends State<EnterDashboardPage> {
                         ),
                         onTap: () {
                           setState(() {
-                            _currentContent = Dashboard();
+                            _currentContent = enterDashboard();
                           });
                           Navigator.pop(context);
                         }),
