@@ -1,5 +1,6 @@
 import 'dart:html';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -261,14 +262,101 @@ class _MblNoDialogState extends State<MblNoDialog> {
                                 .then((result) {
                               if (result.user != null) {
                                 print("OTP verified successfully");
-                                showDialog(
-                                  barrierColor: Colors.grey.withOpacity(0.5),
-                                  context: context,
-                                  builder: (context) {
-                                    return VerifiedDialog(
-                                        email, password, selectedAccounttype);
-                                  },
-                                );
+
+                                // Fetch user details from Firebase
+                                User? user = FirebaseAuth.instance.currentUser;
+                                String? phoneNumber = user?.phoneNumber;
+
+                                // Check if any document exists in 'users' collection
+                                FirebaseFirestore.instance
+                                    .collection('users')
+                                    .get()
+                                    .then((QuerySnapshot querySnapshot) {
+                                  if (querySnapshot.docs.isNotEmpty) {
+                                    // At least one document exists, you can fetch and display data here
+                                    // For simplicity, let's assume you want to display the first document's data
+                                    QueryDocumentSnapshot firstDocument =
+                                        querySnapshot.docs.first;
+                                    Map<String, dynamic> userData =
+                                        firstDocument.data() as Map<String,
+                                            dynamic>; // Explicit cast
+
+                                    // Check if 'firstName' field exists in the document
+                                    if (userData.containsKey('firstName')) {
+                                      String? firstName = userData['firstName'];
+                                      String? lastName = userData['lastName'];
+                                      // Display user details in a dialog box
+                                      showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          return Dialog(
+                                            child: Container(
+                                              height: 340,
+                                              width: 1225,
+                                              decoration: const BoxDecoration(
+                                                color: Colors.white,
+                                                borderRadius: BorderRadius.all(
+                                                  Radius.circular(31),
+                                                ),
+                                              ),
+                                              child: Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Row(
+                                                    children: [
+                                                      ImageIcon(
+                                                        AssetImage(
+                                                          'approved.png',
+                                                        ),
+                                                        color: Color.fromRGBO(
+                                                            60, 55, 148, 1),
+                                                        size: 30,
+                                                      ),
+                                                      SizedBox(
+                                                        width: 5,
+                                                      ),
+                                                      Text('Account Verified',
+                                                          style: TabelText
+                                                              .helveticablack19),
+                                                      GestureDetector(
+                                                        onTap: () {
+                                                          Navigator.pop(
+                                                              context);
+                                                        },
+                                                        child: ImageIcon(
+                                                          AssetImage(
+                                                              'cancel.png'),
+                                                          color: Colors.black,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  Row(
+                                                    children: [
+                                                      Text("Name: $firstName"),
+                                                      Text("Name: $lastName"),
+                                                    ],
+                                                  ),
+                                                  Text(
+                                                      "Phone Number: $phoneNumber"),
+                                                ],
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                      );
+                                    } else {
+                                      print(
+                                          'No firstName field found in Firestore document.');
+                                    }
+                                  } else {
+                                    // No documents found in 'users' collection
+                                    print('No user data found in Firestore.');
+                                  }
+                                }).catchError((e) {
+                                  print("Error fetching user data: $e");
+                                });
                               } else {
                                 showErrorDialog(
                                     "Invalid verification code. Please enter the correct code.");

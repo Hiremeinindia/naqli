@@ -32,30 +32,11 @@ class _CreateAccountState extends State<CreateAccount> {
   String lastName = '';
   String phoneNumber = '';
   String enterpriseSelect = 'User';
+
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final ScrollController _Scroll1 = ScrollController();
   AllUsersFormController controller = AllUsersFormController();
   TextEditingController otpController = TextEditingController();
-  @override
-  void initState() {
-    super.initState();
-    // fetchUserData();
-  }
-
-  Future<void> fetchUserData() async {
-    try {
-      DocumentSnapshot userDoc =
-          await _firestore.collection('users').doc('user_id').get();
-
-      setState(() {
-        firstName = userDoc['firstName'];
-        lastName = userDoc['lastName'];
-        phoneNumber = userDoc['phoneNumber'];
-      });
-    } catch (e) {
-      print('Error fetching user data: $e');
-    }
-  }
 
   void showErrorDialog(String errorMessage) {
     showDialog(
