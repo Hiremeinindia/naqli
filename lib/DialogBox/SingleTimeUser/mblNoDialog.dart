@@ -15,7 +15,10 @@ import '../../createAccount.dart';
 import '../../homePage.dart';
 
 class MblNoDialog extends StatefulWidget {
-  const MblNoDialog();
+  String email;
+  String password;
+
+  MblNoDialog(this.email, this.password);
 
   @override
   _MblNoDialogState createState() => _MblNoDialogState();
@@ -282,8 +285,8 @@ class _MblNoDialogState extends State<MblNoDialog> {
                                             dynamic>; // Explicit cast
 
                                     // Check if 'firstName' field exists in the document
-                                    if (userData.containsKey('firstName')) {
-                                      String? firstName = userData['firstName'];
+                                   
+                                      String? firstName = ${widget.first};
                                       String? lastName = userData['lastName'];
                                       // Display user details in a dialog box
                                       showDialog(
@@ -304,6 +307,9 @@ class _MblNoDialogState extends State<MblNoDialog> {
                                                     MainAxisAlignment.center,
                                                 children: [
                                                   Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
                                                     children: [
                                                       ImageIcon(
                                                         AssetImage(
@@ -332,24 +338,48 @@ class _MblNoDialogState extends State<MblNoDialog> {
                                                       ),
                                                     ],
                                                   ),
+                                                  SizedBox(
+                                                    height: 50,
+                                                  ),
                                                   Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
                                                     children: [
-                                                      Text("Name: $firstName"),
-                                                      Text("Name: $lastName"),
+                                                      Text(
+                                                        "$firstName $lastName",
+                                                        style: TextStyle(
+                                                            fontSize: 30,
+                                                            color:
+                                                                Color.fromRGBO(
+                                                                    81,
+                                                                    40,
+                                                                    137,
+                                                                    1),
+                                                            fontFamily:
+                                                                "Helvetica"),
+                                                      ),
                                                     ],
                                                   ),
+                                                  SizedBox(
+                                                    height: 10,
+                                                  ),
                                                   Text(
-                                                      "Phone Number: $phoneNumber"),
+                                                    "$phoneNumber",
+                                                    style: TextStyle(
+                                                        fontSize: 30,
+                                                        color: Color.fromRGBO(
+                                                            78, 68, 68, 1),
+                                                        fontFamily:
+                                                            "Helvetica"),
+                                                  ),
                                                 ],
                                               ),
                                             ),
                                           );
                                         },
                                       );
-                                    } else {
-                                      print(
-                                          'No firstName field found in Firestore document.');
-                                    }
+                                  
                                   } else {
                                     // No documents found in 'users' collection
                                     print('No user data found in Firestore.');

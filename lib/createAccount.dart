@@ -521,13 +521,19 @@ class _CreateAccountState extends State<CreateAccount> {
                                           controller.password.text;
                                       String selectedAccounttype =
                                           controller.selectedAccounttype.text;
+                                      String firstName =
+                                          controller.firstName.text;
+                                      String lastName =
+                                          controller.lastName.text;
+                                      String contactNumber =
+                                          controller.contactNumber.text;
                                       print("track1");
                                       showDialog(
                                         barrierColor:
                                             Colors.grey.withOpacity(0.5),
                                         context: context,
                                         builder: (context) {
-                                          return MblNoDialog();
+                                          return MblNoDialog(email, password);
                                         },
                                       );
 
