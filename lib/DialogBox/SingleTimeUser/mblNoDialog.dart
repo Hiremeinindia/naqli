@@ -298,6 +298,7 @@ class _MblNoDialogState extends State<MblNoDialog> {
                                 print("OTP verified successfully");
 
                                 // Fetch user details from Firebase
+                                // Fetch user details from Firebase
                                 User? user = FirebaseAuth.instance.currentUser;
                                 String? phoneNumber = user?.phoneNumber;
 
@@ -353,11 +354,11 @@ class _MblNoDialogState extends State<MblNoDialog> {
                                                       Text('Account Verified',
                                                           style: TabelText
                                                               .helveticablack19),
+                                                      SizedBox(
+                                                        width: 200,
+                                                      ),
                                                       GestureDetector(
                                                         onTap: () async {
-                                                          String accountType =
-                                                              widget
-                                                                  .selectedAccounttype; // Navigate to different pages based on selectedType
                                                           UserCredential
                                                               userCredential =
                                                               await _auth
@@ -366,7 +367,8 @@ class _MblNoDialogState extends State<MblNoDialog> {
                                                             password:
                                                                 widget.password,
                                                           );
-                                                          if (accountType ==
+                                                          if (widget
+                                                                  .selectedAccounttype ==
                                                               'Enterprise') {
                                                             Navigator.push(
                                                               context,
@@ -376,7 +378,8 @@ class _MblNoDialogState extends State<MblNoDialog> {
                                                                           user:
                                                                               userCredential.user!)),
                                                             );
-                                                          } else if (accountType ==
+                                                          } else if (widget
+                                                                  .selectedAccounttype ==
                                                               'Super User') {
                                                             Navigator.push(
                                                               context,
@@ -386,7 +389,8 @@ class _MblNoDialogState extends State<MblNoDialog> {
                                                                           user:
                                                                               userCredential.user!)),
                                                             );
-                                                          } else if (accountType ==
+                                                          } else if (widget
+                                                                  .selectedAccounttype ==
                                                               'User') {
                                                             Navigator.push(
                                                               context,
@@ -399,10 +403,8 @@ class _MblNoDialogState extends State<MblNoDialog> {
                                                           } else {
                                                             // Handle invalid selectedType
                                                             print(
-                                                                'Invalid selected type: $accountType');
+                                                                'Invalid selected type: ${widget.selectedAccounttype}');
                                                           }
-                                                          Navigator.pop(
-                                                              context);
                                                         },
                                                         child: ImageIcon(
                                                           AssetImage(
@@ -412,11 +414,17 @@ class _MblNoDialogState extends State<MblNoDialog> {
                                                       ),
                                                     ],
                                                   ),
+                                                  SizedBox(
+                                                    height: 20,
+                                                  ),
                                                   Row(
                                                     children: [
                                                       Text("Name: $firstName"),
                                                       Text("Name: $lastName"),
                                                     ],
+                                                  ),
+                                                  SizedBox(
+                                                    height: 10,
                                                   ),
                                                   Text(
                                                       "Phone Number: $phoneNumber"),
