@@ -25,6 +25,10 @@ class VerifiedDialog extends StatefulWidget {
 class _VerifiedDialogState extends State<VerifiedDialog> {
   bool isVerified = false;
   String? storedVerificationId;
+  String firstName = '';
+  String lastName = '';
+  String phoneNumber = '';
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   TextEditingController otpController = TextEditingController();
   AllUsersFormController controller = AllUsersFormController();
   TextEditingController otp1 = TextEditingController();
@@ -34,6 +38,27 @@ class _VerifiedDialogState extends State<VerifiedDialog> {
   TextEditingController otp5 = TextEditingController();
   TextEditingController otp6 = TextEditingController();
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  @override
+  void initState() {
+    super.initState();
+    fetchUserData();
+  }
+
+  Future<void> fetchUserData() async {
+    try {
+      DocumentSnapshot userDoc =
+          await _firestore.collection('users').doc('user_id').get();
+
+      setState(() {
+        firstName = userDoc['firstName'];
+        lastName = userDoc['lastName'];
+        phoneNumber = userDoc['phoneNumber'];
+      });
+    } catch (e) {
+      print('Error fetching user data: $e');
+    }
+  }
+
   void showErrorDialog(String errorMessage) {
     showDialog(
       context: context,
@@ -223,7 +248,7 @@ class _VerifiedDialogState extends State<VerifiedDialog> {
                               SizedBox(
                                 width: 5,
                               ),
-                              Text('Number Verified',
+                              Text('Account Verified',
                                   style: TabelText.helveticablack19),
                               Row(
                                 children: [
