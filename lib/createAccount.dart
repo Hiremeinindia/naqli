@@ -56,35 +56,6 @@ class _CreateAccountState extends State<CreateAccount> {
     );
   }
 
-  Future<void> _saveUserDataToFirestore() async {
-    print("track2");
-    try {
-      CollectionReference usersCollection = _firestore.collection('users');
-
-      await usersCollection.add({
-        'firstName': controller.firstName.text,
-        'lastName': controller.lastName.text,
-        'legalName': controller.legalName.text,
-        'email': controller.email.text,
-        'password': controller.password.text,
-        'contactNumber': controller.contactNumber.text,
-        'address': controller.address.text,
-        'govtId': controller.selectedGovtId.text,
-        'confirmPassword': controller.confirmPassword.text,
-        'alternateNumber': controller.alternateNumber.text,
-        'address2': controller.address2.text,
-        'idNumber': controller.idNumber.text,
-        'city': controller.selectedCity.text,
-        'companyidNumber': controller.companyidNumber.text,
-        'accounttype': controller.selectedAccounttype.text,
-      });
-
-      print('User data saved to Firestore successfully!');
-    } catch (e) {
-      print('Error saving user data to Firestore: $e');
-    }
-  }
-
   bool isValidName(String name) {
     final RegExp nameRegExp = RegExp(r"^[A-Za-z']+([- ][A-Za-z']+)*$");
     return nameRegExp.hasMatch(name);
@@ -521,25 +492,71 @@ class _CreateAccountState extends State<CreateAccount> {
                                           controller.password.text;
                                       String selectedAccounttype =
                                           controller.selectedAccounttype.text;
+
                                       String firstName =
                                           controller.firstName.text;
                                       String lastName =
                                           controller.lastName.text;
+                                      String legalName =
+                                          controller.legalName.text;
                                       String contactNumber =
                                           controller.contactNumber.text;
+                                      String address = controller.address.text;
+                                      String govtId =
+                                          controller.selectedGovtId.text;
+                                      String confirmPassword =
+                                          controller.confirmPassword.text;
+                                      String alternateNumber =
+                                          controller.alternateNumber.text;
+                                      String address2 =
+                                          controller.address2.text;
+                                      String idNumber =
+                                          controller.idNumber.text;
+                                      String city =
+                                          controller.selectedCity.text;
+                                      String companyidNumber =
+                                          controller.companyidNumber.text;
+                                      UserCredential userCredential =
+                                          await _auth
+                                              .createUserWithEmailAndPassword(
+                                        email: controller.email.text,
+                                        password: controller.password.text,
+                                      );
+                                      // User creation successful
+                                      String accountType =
+                                          controller.selectedAccounttype.text;
+                                      print(
+                                          "User created: ${userCredential.user!.email}");
+                                      print(
+                                          'Account Type before create Account : $accountType');
+                                      await _createAccount(
+                                          userCredential.user!.uid,
+                                          accountType);
+                                      print('value passed$accountType');
                                       print("track1");
                                       showDialog(
                                         barrierColor:
                                             Colors.grey.withOpacity(0.5),
                                         context: context,
                                         builder: (context) {
-                                          return MblNoDialog(email, password);
+                                          return MblNoDialog(
+                                              email,
+                                              password,
+                                              selectedAccounttype,
+                                              firstName,
+                                              legalName,
+                                              lastName,
+                                              confirmPassword,
+                                              contactNumber,
+                                              address2,
+                                              address,
+                                              govtId,
+                                              alternateNumber,
+                                              idNumber,
+                                              city,
+                                              companyidNumber);
                                         },
                                       );
-
-                                      // _showOtpVerificationDialog();
-                                      // Save user data and start phone authentication
-                                      await _saveUserDataToFirestore();
                                     }
                                   },
                                   style: ElevatedButton.styleFrom(
@@ -1026,50 +1043,10 @@ class _CreateAccountState extends State<CreateAccount> {
                                             userCredential.user!.uid,
                                             accountType);
                                         print('value passed$accountType');
-
-                                        // Navigate to different pages based on selectedType
-                                        if (accountType == 'Enterprise') {
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    EnterDashboardPage(
-                                                        user: userCredential
-                                                            .user!)),
-                                          );
-                                        } else if (accountType ==
-                                            'Super User') {
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    SuperUserDashboardPage(
-                                                        user: userCredential
-                                                            .user!)),
-                                          );
-                                        } else if (accountType == 'User') {
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    SingleUserDashboardPage(
-                                                        user: userCredential
-                                                            .user!)),
-                                          );
-                                        } else {
-                                          // Handle invalid selectedType
-                                          print(
-                                              'Invalid selected type: $accountType');
-                                        }
                                       } catch (e) {
                                         print("Error creating user: $e");
                                       }
                                       print("track1");
-                                      // await _startPhoneAuth(
-                                      //     contactNumberController.text);
-                                      // _showOtpVerificationDialog();
-                                      // Save user data and start phone authentication
-                                      await _saveUserDataToFirestore();
                                     }
                                   },
                                   style: ElevatedButton.styleFrom(
@@ -1095,16 +1072,7 @@ class _CreateAccountState extends State<CreateAccount> {
                               SizedBox(
                                 height: 45,
                                 child: ElevatedButton(
-                                  onPressed: () async {
-                                    if (_formKey.currentState!.validate()) {
-                                      print("track1");
-                                      // await _startPhoneAuth(
-                                      //     contactNumberController.text);
-                                      // _showOtpVerificationDialog();
-                                      // Save user data and start phone authentication
-                                      await _saveUserDataToFirestore();
-                                    }
-                                  },
+                                  onPressed: () {},
                                   style: ElevatedButton.styleFrom(
                                     fixedSize:
                                         const Size.fromWidth(double.infinity),
