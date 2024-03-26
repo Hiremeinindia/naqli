@@ -336,11 +336,16 @@ class _OTPDialogState extends State<OTPDialog> {
                           height: 30,
                           child: ElevatedButton(
                             onPressed: () {
+                              String email = controller.email.text;
+                              String password = controller.password.text;
+                              String selectedAccounttype =
+                                  controller.selectedAccounttype.text;
                               showDialog(
                                 barrierColor: Colors.transparent,
                                 context: context,
                                 builder: (context) {
-                                  return VerifiedDialog();
+                                  return VerifiedDialog(
+                                      email, password, selectedAccounttype);
                                 },
                               );
                             },
