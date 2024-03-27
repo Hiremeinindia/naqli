@@ -8,6 +8,7 @@ import 'package:flutter_application_1/DialogBox/SingleTimeUser/mblNoDialog.dart'
 import 'package:flutter_application_1/DialogBox/SingleTimeUser/optDialog.dart';
 import 'package:flutter_application_1/Users/SingleUser/dashboard_page.dart';
 import 'package:flutter_application_1/Users/SuperUser/dashboard_page.dart';
+import 'package:flutter_application_1/Widgets/customButton.dart';
 import 'package:flutter_application_1/Widgets/customDropdown.dart';
 import 'package:flutter_application_1/Widgets/customTextField.dart';
 import 'package:flutter_application_1/Widgets/formText.dart';
@@ -482,99 +483,75 @@ class _CreateAccountState extends State<CreateAccount> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              SizedBox(
-                                height: 45,
-                                child: ElevatedButton(
-                                  onPressed: () async {
-                                    if (_formKey.currentState!.validate()) {
-                                      String email = controller.email.text;
-                                      String password =
-                                          controller.password.text;
-                                      String selectedAccounttype =
-                                          controller.selectedAccounttype.text;
+                              GradientButton(
+                                onPressed: () async {
+                                  if (_formKey.currentState!.validate()) {
+                                    String email = controller.email.text;
+                                    String password = controller.password.text;
+                                    String selectedAccounttype =
+                                        controller.selectedAccounttype.text;
 
-                                      String firstName =
-                                          controller.firstName.text;
-                                      String lastName =
-                                          controller.lastName.text;
-                                      String legalName =
-                                          controller.legalName.text;
-                                      String contactNumber =
-                                          controller.contactNumber.text;
-                                      String address = controller.address.text;
-                                      String govtId =
-                                          controller.selectedGovtId.text;
-                                      String confirmPassword =
-                                          controller.confirmPassword.text;
-                                      String alternateNumber =
-                                          controller.alternateNumber.text;
-                                      String address2 =
-                                          controller.address2.text;
-                                      String idNumber =
-                                          controller.idNumber.text;
-                                      String city =
-                                          controller.selectedCity.text;
-                                      String companyidNumber =
-                                          controller.companyidNumber.text;
-                                      UserCredential userCredential =
-                                          await _auth
-                                              .createUserWithEmailAndPassword(
-                                        email: controller.email.text,
-                                        password: controller.password.text,
-                                      );
-                                      // User creation successful
-                                      String accountType =
-                                          controller.selectedAccounttype.text;
-                                      print(
-                                          "User created: ${userCredential.user!.email}");
-                                      print(
-                                          'Account Type before create Account : $accountType');
-                                      await _createAccount(
-                                          userCredential.user!.uid,
-                                          accountType);
-                                      print('value passed$accountType');
-                                      print("track1");
-                                      showDialog(
-                                        barrierColor:
-                                            Colors.grey.withOpacity(0.5),
-                                        context: context,
-                                        builder: (context) {
-                                          return MblNoDialog(
-                                              email,
-                                              password,
-                                              selectedAccounttype,
-                                              firstName,
-                                              legalName,
-                                              lastName,
-                                              confirmPassword,
-                                              contactNumber,
-                                              address2,
-                                              address,
-                                              govtId,
-                                              alternateNumber,
-                                              idNumber,
-                                              city,
-                                              companyidNumber);
-                                        },
-                                      );
-                                    }
-                                  },
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor:
-                                        Color.fromARGB(255, 128, 123, 229),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(5),
-                                    ),
-                                  ),
-                                  child: Text(
-                                    'Create Account',
-                                    style: TextStyle(
-                                      fontFamily: 'Colfax',
-                                      fontSize: 16,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ),
+                                    String firstName =
+                                        controller.firstName.text;
+                                    String lastName = controller.lastName.text;
+                                    String legalName =
+                                        controller.legalName.text;
+                                    String contactNumber =
+                                        controller.contactNumber.text;
+                                    String address = controller.address.text;
+                                    String govtId =
+                                        controller.selectedGovtId.text;
+                                    String confirmPassword =
+                                        controller.confirmPassword.text;
+                                    String alternateNumber =
+                                        controller.alternateNumber.text;
+                                    String address2 = controller.address2.text;
+                                    String idNumber = controller.idNumber.text;
+                                    String city = controller.selectedCity.text;
+                                    String companyidNumber =
+                                        controller.companyidNumber.text;
+                                    UserCredential userCredential = await _auth
+                                        .createUserWithEmailAndPassword(
+                                      email: controller.email.text,
+                                      password: controller.password.text,
+                                    );
+                                    // User creation successful
+                                    String accountType =
+                                        controller.selectedAccounttype.text;
+                                    print(
+                                        "User created: ${userCredential.user!.email}");
+                                    print(
+                                        'Account Type before create Account : $accountType');
+                                    await _createAccount(
+                                        userCredential.user!.uid, accountType);
+                                    print('value passed$accountType');
+                                    print("track1");
+                                    showDialog(
+                                      barrierColor:
+                                          Colors.grey.withOpacity(0.5),
+                                      context: context,
+                                      builder: (context) {
+                                        return MblNoDialog(
+                                            email,
+                                            password,
+                                            selectedAccounttype,
+                                            firstName,
+                                            legalName,
+                                            lastName,
+                                            confirmPassword,
+                                            contactNumber,
+                                            address2,
+                                            address,
+                                            govtId,
+                                            alternateNumber,
+                                            idNumber,
+                                            city,
+                                            companyidNumber);
+                                      },
+                                    );
+                                  }
+                                },
+                                text: 'Create Account',
                               ),
                               SizedBox(
                                 width: 30,
@@ -587,19 +564,17 @@ class _CreateAccountState extends State<CreateAccount> {
                                     fixedSize:
                                         const Size.fromWidth(double.infinity),
                                     backgroundColor:
-                                        Color.fromARGB(112, 112, 112, 1),
+                                        Color.fromRGBO(112, 112, 112, 1),
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(
-                                          5), // Adjust border radius as needed
+                                          7), // Adjust border radius as needed
                                     ),
                                   ),
-                                  child: Text(
-                                    'Cancel',
-                                    style: TextStyle(
-                                      fontFamily: 'Colfax',
-                                      fontSize: 16,
-                                      color: Colors.white,
-                                    ),
+                                  child: Padding(
+                                    padding:
+                                        EdgeInsets.fromLTRB(3.w, 0, 3.w, 0),
+                                    child: Text('Cancel',
+                                        style: LoginpageText.helvetica16white),
                                   ),
                                 ),
                               ),
