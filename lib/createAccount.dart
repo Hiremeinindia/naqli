@@ -86,8 +86,9 @@ class _CreateAccountState extends State<CreateAccount> {
   }
 
   String? validatePassword(String? value) {
-    RegExp regex =
-        RegExp(r'^(?=.?[A-Z])(?=.?[a-z])(?=.?[0-9])(?=.?[!@#\$&*~]).{8,}$');
+    RegExp regex = RegExp(
+      r'^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#\$&*~]).{8,}$',
+    );
     if (value!.isEmpty) {
       return 'Please enter password';
     } else {
@@ -180,14 +181,14 @@ class _CreateAccountState extends State<CreateAccount> {
                                       children: [
                                         Expanded(
                                             child: CustomTextfield(
-                                          // validator: nameValidator,
+                                          validator: nameValidator,
                                           controller: controller.firstName,
                                           text: 'First Name',
                                         )),
                                         SizedBox(width: 25),
                                         Expanded(
                                             child: CustomTextfield(
-                                          // validator: nameValidator,
+                                          validator: nameValidator,
                                           controller: controller.lastName,
                                           text: 'Last Name',
                                         )),
@@ -247,7 +248,7 @@ class _CreateAccountState extends State<CreateAccount> {
                                   children: [
                                     CustomTextfield(
                                       controller: controller.password,
-                                      // validator: validatePassword,
+                                      validator: validatePassword,
                                       text: 'Password',
                                     ),
                                     SizedBox(
@@ -255,12 +256,12 @@ class _CreateAccountState extends State<CreateAccount> {
                                     ),
                                     CustomTextfield(
                                       controller: controller.contactNumber,
-                                      // validator: (value) {
-                                      //   if (value!.length != 10)
-                                      //     return 'Mobile Number must be of 10 digit';
-                                      //   else
-                                      //     return null;
-                                      // },
+                                      validator: (value) {
+                                        if (value!.length != 10)
+                                          return 'Mobile Number must be of 10 digit';
+                                        else
+                                          return null;
+                                      },
                                       text: 'Phone Number',
                                     ),
                                     SizedBox(
@@ -268,7 +269,7 @@ class _CreateAccountState extends State<CreateAccount> {
                                     ),
                                     CustomTextfield(
                                       controller: controller.address,
-                                      // validator: nameValidator,
+                                      validator: nameValidator,
                                       text: 'Address',
                                     ),
                                     SizedBox(
@@ -298,7 +299,7 @@ class _CreateAccountState extends State<CreateAccount> {
                                     ),
                                     enterpriseSelect == 'Enterprise'
                                         ? CustomTextfield(
-                                            // validator: nameValidator,
+                                            validator: nameValidator,
                                             controller:
                                                 controller.companyidNumber,
                                             text: 'Id number',
@@ -321,43 +322,6 @@ class _CreateAccountState extends State<CreateAccount> {
                                               });
                                             },
                                           ),
-                                    // SizedBox(
-                                    //   height: 45,
-                                    //   child: DropdownButtonFormField<String>(
-                                    //     isExpanded: true,
-                                    //     value: selectedOption,
-                                    //     decoration: InputDecoration(
-                                    //       contentPadding: EdgeInsets.all(5.0),
-                                    //       border: OutlineInputBorder(
-                                    //         borderRadius: BorderRadius.all(
-                                    //             Radius.circular(5)),
-                                    //       ),
-                                    //     ),
-                                    //     onChanged: (String? newValue) {
-                                    //       setState(() {
-                                    //         selectedOption = newValue;
-                                    //       });
-                                    //     },
-                                    //     items: [
-                                    //       DropdownMenuItem<String>(
-                                    //         value: 'National ID',
-                                    //         child: Text('National ID',
-                                    //             style: TextStyle(fontSize: 16)),
-                                    //       ),
-                                    //       DropdownMenuItem<String>(
-                                    //         value: 'Iqama No.',
-                                    //         child: Text('Iqama No.',
-                                    //             style: TextStyle(fontSize: 16)),
-                                    //       ),
-                                    //       DropdownMenuItem<String>(
-                                    //         value: 'Visit Visa / Border No',
-                                    //         child: Text(
-                                    //             'Visit Visa / Border No',
-                                    //             style: TextStyle(fontSize: 16)),
-                                    //       ),
-                                    //     ],
-                                    //   ),
-                                    // ),
                                     SizedBox(
                                       height: 15,
                                     ),
@@ -406,19 +370,19 @@ class _CreateAccountState extends State<CreateAccount> {
                                   children: [
                                     CustomTextfield(
                                       controller: controller.confirmPassword,
-                                      // validator: validatePassword,
+                                      validator: validatePassword,
                                       text: 'Confirm Password',
                                     ),
                                     SizedBox(
                                       height: 15,
                                     ),
                                     CustomTextfield(
-                                      // validator: (value) {
-                                      //   if (value!.length != 10)
-                                      //     return 'Mobile Number must be of 10 digit';
-                                      //   else
-                                      //     return null;
-                                      // },
+                                      validator: (value) {
+                                        if (value!.length != 10)
+                                          return 'Mobile Number must be of 10 digit';
+                                        else
+                                          return null;
+                                      },
                                       controller: controller.alternateNumber,
                                       text: 'Phone Number',
                                     ),
@@ -426,7 +390,7 @@ class _CreateAccountState extends State<CreateAccount> {
                                       height: 15,
                                     ),
                                     CustomTextfield(
-                                      // validator: nameValidator,
+                                      validator: nameValidator,
                                       controller: controller.address2,
                                       text: 'Address',
                                     ),
@@ -458,17 +422,17 @@ class _CreateAccountState extends State<CreateAccount> {
                                     ),
                                     enterpriseSelect == 'Enterprise'
                                         ? CustomTextfield(
-                                            // validator: nameValidator,
+                                            validator: nameValidator,
                                             controller: controller.legalName,
                                             text: 'Leagl name',
                                           )
                                         : CustomTextfield(
-                                            // validator: (value) {
-                                            //   if (value!.length != 10)
-                                            //     return 'Mobile Number must be of 10 digit';
-                                            //   else
-                                            //     return null;
-                                            // },
+                                            validator: (value) {
+                                              if (value!.length != 10)
+                                                return 'Mobile Number must be of 10 digit';
+                                              else
+                                                return null;
+                                            },
                                             controller: controller.idNumber,
                                             text: 'ID Number',
                                           ),
@@ -774,12 +738,12 @@ class _CreateAccountState extends State<CreateAccount> {
                               SizedBox(width: 5),
                               Expanded(
                                 child: CustomTextfield(
-                                  // validator: (value) {
-                                  //   if (value!.length != 10)
-                                  //     return 'Mobile Number must be of 10 digit';
-                                  //   else
-                                  //     return null;
-                                  // },
+                                  validator: (value) {
+                                    if (value!.length != 10)
+                                      return 'Mobile Number must be of 10 digit';
+                                    else
+                                      return null;
+                                  },
                                   controller: controller.contactNumber,
                                   text: 'Phone Number',
                                 ),
@@ -798,12 +762,12 @@ class _CreateAccountState extends State<CreateAccount> {
                               SizedBox(width: 5),
                               Expanded(
                                 child: CustomTextfield(
-                                  // validator: (value) {
-                                  //   if (value!.length != 10)
-                                  //     return 'Mobile Number must be of 10 digit';
-                                  //   else
-                                  //     return null;
-                                  // },
+                                  validator: (value) {
+                                    if (value!.length != 10)
+                                      return 'Mobile Number must be of 10 digit';
+                                    else
+                                      return null;
+                                  },
                                   controller: controller.alternateNumber,
                                   text: 'Phone Number',
                                 ),
@@ -822,7 +786,7 @@ class _CreateAccountState extends State<CreateAccount> {
                               SizedBox(width: 5),
                               Expanded(
                                 child: CustomTextfield(
-                                  // validator: nameValidator,
+                                  validator: nameValidator,
                                   controller: controller.address,
                                   text: 'Address',
                                 ),
@@ -841,7 +805,7 @@ class _CreateAccountState extends State<CreateAccount> {
                               SizedBox(width: 5),
                               Expanded(
                                 child: CustomTextfield(
-                                  // validator: nameValidator,
+                                  validator: nameValidator,
                                   controller: controller.address2,
                                   text: 'Address',
                                 ),
@@ -972,17 +936,17 @@ class _CreateAccountState extends State<CreateAccount> {
                               Expanded(
                                 child: enterpriseSelect == 'Enterprise'
                                     ? CustomTextfield(
-                                        // validator: nameValidator,
+                                        validator: nameValidator,
                                         controller: controller.legalName,
                                         text: 'Leagl name',
                                       )
                                     : CustomTextfield(
-                                        // validator: (value) {
-                                        //   if (value!.length != 10)
-                                        //     return 'Mobile Number must be of 10 digit';
-                                        //   else
-                                        //     return null;
-                                        // },
+                                        validator: (value) {
+                                          if (value!.length != 10)
+                                            return 'Mobile Number must be of 10 digit';
+                                          else
+                                            return null;
+                                        },
                                         controller: controller.idNumber,
                                         text: 'ID Number',
                                       ),
