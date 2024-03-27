@@ -668,7 +668,7 @@ class _MblNoDialogState extends State<MblNoDialog> {
           );
         } else {
           return Padding(
-            padding: EdgeInsets.fromLTRB(2.w, 6.h, 2.w, 6.h),
+            padding: EdgeInsets.fromLTRB(18.w, 33.h, 18.w, 33.h),
             child: SingleChildScrollView(
               child: Expanded(
                 child: Card(
@@ -676,15 +676,14 @@ class _MblNoDialogState extends State<MblNoDialog> {
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(31))),
                   child: Container(
-                    width: 400,
-                    height: 350,
+                    height: 280,
                     decoration: const BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.all(
                         Radius.circular(31),
                       ),
                     ),
-                    padding: EdgeInsets.fromLTRB(1.5.w, 4.h, 1.5.w, 4.h),
+                    padding: EdgeInsets.fromLTRB(4.w, 4.h, 2.w, 4.h),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -710,67 +709,72 @@ class _MblNoDialogState extends State<MblNoDialog> {
                           ],
                         ),
                         SizedBox(height: 20),
-                        SizedBox(
-                          height: 30,
-                          width: 200,
-                          child: TextField(
-                            controller: contactNumberController,
-                            keyboardType: TextInputType.number,
-                            decoration: InputDecoration(
-                              hintText: '99999 99999',
-                              contentPadding: EdgeInsets.only(
-                                left: 1.w,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SizedBox(
+                              height: 30,
+                              width: 200,
+                              child: TextField(
+                                controller: contactNumberController,
+                                keyboardType: TextInputType.number,
+                                decoration: InputDecoration(
+                                  hintText: '99999 99999',
+                                  contentPadding: EdgeInsets.only(
+                                    left: 1.w,
+                                  ),
+                                  hintStyle: DialogText.helvetica16sandal,
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(0)),
+                                ),
                               ),
-                              hintStyle: DialogText.helvetica16sandal,
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(0)),
                             ),
-                          ),
-                        ),
-                        SizedBox(height: 10),
-                        SizedBox(
-                          height: 30,
-                          child: ElevatedButton(
-                            onPressed: () {
-                              showDialog(
-                                barrierColor: Colors.transparent,
-                                context: context,
-                                builder: (context) {
-                                  return OTPDialog(
-                                      verificationId: storedVerificationId);
+                            SizedBox(
+                              height: 30,
+                              child: ElevatedButton(
+                                onPressed: () async {
+                                  await _startPhoneAuth(
+                                      contactNumberController.text);
                                 },
-                              );
-                            },
-                            style: ElevatedButton.styleFrom(
-                                backgroundColor: Color.fromRGBO(60, 55, 148, 1),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(0),
-                                )),
-                            child: Text("Get OTP",
-                                style: LoginpageText.helvetica16white),
-                          ),
+                                style: ElevatedButton.styleFrom(
+                                    backgroundColor:
+                                        Color.fromRGBO(60, 55, 148, 1),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(0),
+                                    )),
+                                child: Text("Get OTP",
+                                    style: LoginpageText.helvetica16white),
+                              ),
+                            ),
+                          ],
                         ),
                         SizedBox(height: 40),
                         Padding(
-                          padding: EdgeInsets.only(left: 2.w, right: 2.w),
-                          child: Divider(),
+                          padding: EdgeInsets.only(left: 2.w, right: 5.w),
+                          child: Divider(
+                            color: Color.fromRGBO(112, 112, 112, 1),
+                          ),
                         ),
                         SizedBox(height: 10),
-                        Text("Don't have an account?",
-                            style: HomepageText.helvetica16black),
-                        SizedBox(height: 10),
-                        InkWell(
-                          onTap: () {
-                            showDialog(
-                              barrierColor: Colors.grey.withOpacity(0.5),
-                              context: context,
-                              builder: (context) {
-                                return CreateAccount();
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text("Don't have an account?",
+                                style: HomepageText.helvetica16black),
+                            InkWell(
+                              child: Text('Create One!',
+                                  style: LoginpageText.purplehelvetica),
+                              onTap: () {
+                                showDialog(
+                                  barrierColor: Colors.grey.withOpacity(0.5),
+                                  context: context,
+                                  builder: (context) {
+                                    return CreateAccount();
+                                  },
+                                );
                               },
-                            );
-                          },
-                          child: Text('Create One!',
-                              style: LoginpageText.purplehelvetica),
+                            ),
+                          ],
                         ),
                       ],
                     ),
