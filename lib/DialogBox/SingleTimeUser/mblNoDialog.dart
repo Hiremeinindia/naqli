@@ -300,6 +300,7 @@ class _MblNoDialogState extends State<MblNoDialog> {
 
                                 // Fetch user details from Firebase
                                 // Fetch user details from Firebase
+                                // Fetch user details from Firebase
                                 User? user = FirebaseAuth.instance.currentUser;
                                 String? phoneNumber = user?.phoneNumber;
 
@@ -358,10 +359,58 @@ class _MblNoDialogState extends State<MblNoDialog> {
                                                       Text('Account Verified',
                                                           style: TabelText
                                                               .helveticablack19),
+                                                      SizedBox(
+                                                        width: 200,
+                                                      ),
                                                       GestureDetector(
-                                                        onTap: () {
-                                                          Navigator.pop(
-                                                              context);
+                                                        onTap: () async {
+                                                          //dfgsfdg
+                                                          UserCredential
+                                                              userCredential =
+                                                              await _auth
+                                                                  .signInWithEmailAndPassword(
+                                                            email: widget.email,
+                                                            password:
+                                                                widget.password,
+                                                          );
+                                                          if (widget
+                                                                  .selectedAccounttype ==
+                                                              'Enterprise') {
+                                                            Navigator.push(
+                                                              context,
+                                                              MaterialPageRoute(
+                                                                  builder: (context) =>
+                                                                      EnterDashboardPage(
+                                                                          user:
+                                                                              userCredential.user!)),
+                                                            );
+                                                          } else if (widget
+                                                                  .selectedAccounttype ==
+                                                              'Super User') {
+                                                            Navigator.push(
+                                                              context,
+                                                              MaterialPageRoute(
+                                                                  builder: (context) =>
+                                                                      SuperUserDashboardPage(
+                                                                          user:
+                                                                              userCredential.user!)),
+                                                            );
+                                                          } else if (widget
+                                                                  .selectedAccounttype ==
+                                                              'User') {
+                                                            Navigator.push(
+                                                              context,
+                                                              MaterialPageRoute(
+                                                                  builder: (context) =>
+                                                                      SingleUserDashboardPage(
+                                                                          user:
+                                                                              userCredential.user!)),
+                                                            );
+                                                          } else {
+                                                            // Handle invalid selectedType
+                                                            print(
+                                                                'Invalid selected type: ${widget.selectedAccounttype}');
+                                                          }
                                                         },
                                                         child: Row(
                                                           mainAxisAlignment:
@@ -392,10 +441,10 @@ class _MblNoDialogState extends State<MblNoDialog> {
                                                         style: DialogText
                                                             .helvetica41,
                                                       ),
+                                                      SizedBox(
+                                                        height: 10,
+                                                      ),
                                                     ],
-                                                  ),
-                                                  SizedBox(
-                                                    height: 10,
                                                   ),
                                                   Text(
                                                     "$phoneNumber",
