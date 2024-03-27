@@ -817,14 +817,9 @@ class ForgotPasswordPage extends StatelessWidget {
                       InkWell(
                         child: Text(' Resend',
                             style: DialogText.purplehelveticabold),
-                        onTap: () {
-                          showDialog(
-                            barrierColor: Colors.grey.withOpacity(0.5),
-                            context: context,
-                            builder: (context) {
-                              return CreateAccount();
-                            },
-                          );
+                        onTap: () async {
+                          await FirebaseAuth.instance.sendPasswordResetEmail(
+                              email: _emailController.text);
                         },
                       ),
                     ],
