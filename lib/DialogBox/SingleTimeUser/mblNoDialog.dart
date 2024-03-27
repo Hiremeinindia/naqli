@@ -343,24 +343,35 @@ class _MblNoDialogState extends State<MblNoDialog> {
                                                   Row(
                                                     mainAxisAlignment:
                                                         MainAxisAlignment
-                                                            .center,
+                                                            .spaceBetween,
                                                     children: [
-                                                      ImageIcon(
-                                                        AssetImage(
-                                                          'approved.png',
+                                                      Expanded(
+                                                        child: Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .center,
+                                                          children: [
+                                                            ImageIcon(
+                                                              AssetImage(
+                                                                'approved.png',
+                                                              ),
+                                                              color: Color
+                                                                  .fromRGBO(
+                                                                      60,
+                                                                      55,
+                                                                      148,
+                                                                      1),
+                                                              size: 30,
+                                                            ),
+                                                            SizedBox(
+                                                              width: 5,
+                                                            ),
+                                                            Text(
+                                                                'Account Verified',
+                                                                style: TabelText
+                                                                    .helveticablack19),
+                                                          ],
                                                         ),
-                                                        color: Color.fromRGBO(
-                                                            60, 55, 148, 1),
-                                                        size: 30,
-                                                      ),
-                                                      SizedBox(
-                                                        width: 5,
-                                                      ),
-                                                      Text('Account Verified',
-                                                          style: TabelText
-                                                              .helveticablack19),
-                                                      SizedBox(
-                                                        width: 200,
                                                       ),
                                                       GestureDetector(
                                                         onTap: () async {
@@ -415,13 +426,15 @@ class _MblNoDialogState extends State<MblNoDialog> {
                                                         child: Row(
                                                           mainAxisAlignment:
                                                               MainAxisAlignment
-                                                                  .end,
+                                                                  .spaceBetween,
                                                           children: [
-                                                            ImageIcon(
-                                                              AssetImage(
-                                                                  'cancel.png'),
-                                                              color:
-                                                                  Colors.black,
+                                                            Center(
+                                                              child: ImageIcon(
+                                                                AssetImage(
+                                                                    'cancel.png'),
+                                                                color: Colors
+                                                                    .black,
+                                                              ),
                                                             ),
                                                           ],
                                                         ),
@@ -450,6 +463,14 @@ class _MblNoDialogState extends State<MblNoDialog> {
                                                     "$phoneNumber",
                                                     style:
                                                         DialogText.helvetica42,
+                                                  ),
+                                                  Padding(
+                                                    padding: EdgeInsets.only(
+                                                        left: 2.w, right: 5.w),
+                                                    child: Divider(
+                                                      color: Color.fromRGBO(
+                                                          112, 112, 112, 1),
+                                                    ),
                                                   ),
                                                 ],
                                               ),
