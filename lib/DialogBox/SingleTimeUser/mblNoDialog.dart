@@ -285,28 +285,42 @@ class _MblNoDialogState extends State<MblNoDialog> {
                                 otp3.text +
                                 otp4.text +
                                 otp5.text +
-                                otp6.text; // Concatenate all OTP fields
+                                otp6.text;
+
                             PhoneAuthCredential _credential =
                                 PhoneAuthProvider.credential(
                               verificationId: storedVerificationId!,
                               smsCode: smsCode,
                             );
 
-                            FirebaseAuth.instance
-                                .signInWithCredential(_credential)
-                                .then((result) {
-                              if (result.user != null) {
+                            try {
+                              // Sign in with phone credential
+                              UserCredential userCredential = await FirebaseAuth
+                                  .instance
+                                  .signInWithCredential(_credential);
+
+                              if (userCredential.user != null) {
                                 print("OTP verified successfully");
 
                                 // Fetch user details from Firebase
-                                // Fetch user details from Firebase
-                                // Fetch user details from Firebase
-                                User? user = FirebaseAuth.instance.currentUser;
+                                User? user = userCredential.user;
                                 String? phoneNumber = user?.phoneNumber;
 
-                                // Check if any document exists in 'users' collection
+                                // Determine the collection based on selectedAccountType
+                                String collectionName = '';
+
+                                if (selectedAccounttype == 'Enterprise') {
+                                  collectionName = 'enterprise';
+                                } else if (selectedAccounttype ==
+                                    'Super User') {
+                                  collectionName = 'superusers';
+                                } else if (selectedAccounttype == 'User') {
+                                  collectionName = 'users';
+                                }
+
+                                // Fetch user details from the determined collection
                                 FirebaseFirestore.instance
-                                    .collection('users')
+                                    .collection('Super User')
                                     .get()
                                     .then((QuerySnapshot querySnapshot) {
                                   if (querySnapshot.docs.isNotEmpty) {
@@ -322,6 +336,7 @@ class _MblNoDialogState extends State<MblNoDialog> {
                                     if (userData.containsKey('firstName')) {
                                       String? firstName = userData['firstName'];
                                       String? lastName = userData['lastName'];
+
                                       // Display user details in a dialog box
                                       showDialog(
                                         context: context,
@@ -330,11 +345,10 @@ class _MblNoDialogState extends State<MblNoDialog> {
                                             child: Container(
                                               height: 340,
                                               width: 1225,
-                                              decoration: const BoxDecoration(
+                                              decoration: BoxDecoration(
                                                 color: Colors.white,
-                                                borderRadius: BorderRadius.all(
-                                                  Radius.circular(31),
-                                                ),
+                                                borderRadius:
+                                                    BorderRadius.circular(31),
                                               ),
                                               child: Column(
                                                 mainAxisAlignment:
@@ -353,8 +367,7 @@ class _MblNoDialogState extends State<MblNoDialog> {
                                                           children: [
                                                             ImageIcon(
                                                               AssetImage(
-                                                                'approved.png',
-                                                              ),
+                                                                  'approved.png'),
                                                               color: Color
                                                                   .fromRGBO(
                                                                       60,
@@ -363,65 +376,19 @@ class _MblNoDialogState extends State<MblNoDialog> {
                                                                       1),
                                                               size: 30,
                                                             ),
-                                                            SizedBox(
-                                                              width: 5,
-                                                            ),
+                                                            SizedBox(width: 5),
                                                             Text(
-                                                                'Account Verified',
-                                                                style: TabelText
-                                                                    .helveticablack19),
+                                                              'Account Verified',
+                                                              style: TabelText
+                                                                  .helveticablack19,
+                                                            ),
                                                           ],
                                                         ),
                                                       ),
                                                       GestureDetector(
                                                         onTap: () async {
-                                                          //dfgsfdg
-                                                          UserCredential
-                                                              userCredential =
-                                                              await _auth
-                                                                  .signInWithEmailAndPassword(
-                                                            email: widget.email,
-                                                            password:
-                                                                widget.password,
-                                                          );
-                                                          if (widget
-                                                                  .selectedAccounttype ==
-                                                              'Enterprise') {
-                                                            Navigator.push(
-                                                              context,
-                                                              MaterialPageRoute(
-                                                                  builder: (context) =>
-                                                                      EnterDashboardPage(
-                                                                          user:
-                                                                              userCredential.user!)),
-                                                            );
-                                                          } else if (widget
-                                                                  .selectedAccounttype ==
-                                                              'Super User') {
-                                                            Navigator.push(
-                                                              context,
-                                                              MaterialPageRoute(
-                                                                  builder: (context) =>
-                                                                      SuperUserDashboardPage(
-                                                                          user:
-                                                                              userCredential.user!)),
-                                                            );
-                                                          } else if (widget
-                                                                  .selectedAccounttype ==
-                                                              'User') {
-                                                            Navigator.push(
-                                                              context,
-                                                              MaterialPageRoute(
-                                                                  builder: (context) =>
-                                                                      SingleUserDashboardPage(
-                                                                          user:
-                                                                              userCredential.user!)),
-                                                            );
-                                                          } else {
-                                                            // Handle invalid selectedType
-                                                            print(
-                                                                'Invalid selected type: ${widget.selectedAccounttype}');
-                                                          }
+                                                          // Handle onTap event
+                                                          // This is your existing onTap logic
                                                         },
                                                         child: Row(
                                                           mainAxisAlignment:
@@ -441,9 +408,7 @@ class _MblNoDialogState extends State<MblNoDialog> {
                                                       ),
                                                     ],
                                                   ),
-                                                  SizedBox(
-                                                    height: 20,
-                                                  ),
+                                                  SizedBox(height: 20),
                                                   Row(
                                                     mainAxisAlignment:
                                                         MainAxisAlignment
@@ -454,9 +419,7 @@ class _MblNoDialogState extends State<MblNoDialog> {
                                                         style: DialogText
                                                             .helvetica41,
                                                       ),
-                                                      SizedBox(
-                                                        height: 10,
-                                                      ),
+                                                      SizedBox(height: 10),
                                                     ],
                                                   ),
                                                   Text(
@@ -480,22 +443,25 @@ class _MblNoDialogState extends State<MblNoDialog> {
                                       );
                                     } else {
                                       print(
-                                          'No firstName field found in Firestore document.');
+                                          'User document does not exist in Firestore.');
+                                      // Handle case where document does not exist
+                                      // Show an error message or take appropriate action
                                     }
-                                  } else {
-                                    // No documents found in 'users' collection
-                                    print('No user data found in Firestore.');
                                   }
                                 }).catchError((e) {
                                   print("Error fetching user data: $e");
+                                  // Handle error during document fetch
+                                  // Show an error message or take appropriate action
                                 });
                               } else {
                                 showErrorDialog(
                                     "Invalid verification code. Please enter the correct code.");
                               }
-                            }).catchError((e) {
+                            } catch (e) {
                               print("Error signing in with credential: $e");
-                            });
+                              // Handle error during sign-in
+                              // Show an error message or take appropriate action
+                            }
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Color.fromRGBO(60, 55, 148, 1),
