@@ -1,4 +1,5 @@
 import 'dart:html';
+import 'dart:ui';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -299,6 +300,7 @@ class _MblNoDialogState extends State<MblNoDialog> {
 
                                 // Fetch user details from Firebase
                                 // Fetch user details from Firebase
+                                // Fetch user details from Firebase
                                 User? user = FirebaseAuth.instance.currentUser;
                                 String? phoneNumber = user?.phoneNumber;
 
@@ -339,6 +341,9 @@ class _MblNoDialogState extends State<MblNoDialog> {
                                                     MainAxisAlignment.center,
                                                 children: [
                                                   Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
                                                     children: [
                                                       ImageIcon(
                                                         AssetImage(
@@ -407,10 +412,18 @@ class _MblNoDialogState extends State<MblNoDialog> {
                                                                 'Invalid selected type: ${widget.selectedAccounttype}');
                                                           }
                                                         },
-                                                        child: ImageIcon(
-                                                          AssetImage(
-                                                              'cancel.png'),
-                                                          color: Colors.black,
+                                                        child: Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .end,
+                                                          children: [
+                                                            ImageIcon(
+                                                              AssetImage(
+                                                                  'cancel.png'),
+                                                              color:
+                                                                  Colors.black,
+                                                            ),
+                                                          ],
                                                         ),
                                                       ),
                                                     ],
@@ -419,16 +432,25 @@ class _MblNoDialogState extends State<MblNoDialog> {
                                                     height: 20,
                                                   ),
                                                   Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
                                                     children: [
-                                                      Text("Name: $firstName"),
-                                                      Text("Name: $lastName"),
+                                                      Text(
+                                                        "$firstName $lastName",
+                                                        style: DialogText
+                                                            .helvetica41,
+                                                      ),
+                                                      SizedBox(
+                                                        height: 10,
+                                                      ),
                                                     ],
                                                   ),
-                                                  SizedBox(
-                                                    height: 10,
-                                                  ),
                                                   Text(
-                                                      "Phone Number: $phoneNumber"),
+                                                    "$phoneNumber",
+                                                    style:
+                                                        DialogText.helvetica42,
+                                                  ),
                                                 ],
                                               ),
                                             ),
