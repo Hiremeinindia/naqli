@@ -34,7 +34,7 @@ class MblNoDialog extends StatefulWidget {
   String idNumber;
   String selectedCity;
   String companyidNumber;
-  User adminUid;
+  String adminUid;
 
   MblNoDialog(
       this.email,
@@ -69,6 +69,68 @@ class _MblNoDialogState extends State<MblNoDialog> {
   AllUsersFormController controller = AllUsersFormController();
   TextEditingController otpController = TextEditingController();
   TextEditingController contactNumberController = TextEditingController();
+  String _firstName = '';
+  @override
+  late Stream<Map<String, dynamic>?> userStream;
+  String _lastName = '';
+  @override
+  void initState() {
+    super.initState();
+    fetchData().then((stream) {
+      // Assign the obtained stream to your userStream variable
+      userStream = stream;
+    });
+  }
+
+  Future<Stream<Map<String, dynamic>?>> fetchData() async {
+    try {
+      String selectedAccounttype = widget.selectedAccounttype;
+      String smsCode =
+          otp1.text + otp2.text + otp3.text + otp4.text + otp5.text + otp6.text;
+      String adminUid = widget.adminUid;
+      PhoneAuthCredential _credential = PhoneAuthProvider.credential(
+        verificationId: storedVerificationId!,
+        smsCode: smsCode,
+      );
+      UserCredential userCredential =
+          await FirebaseAuth.instance.signInWithCredential(_credential);
+      // Fetch user details from Firebase
+      User? user = userCredential.user;
+      String? phoneNumber = user?.phoneNumber;
+
+      // Determine the collection based on selectedAccountType
+      String collectionName = '';
+
+      if (selectedAccounttype == 'Enterprise') {
+        collectionName = 'enterprisedummy';
+      } else if (selectedAccounttype == 'Super User') {
+        collectionName = 'superuserdummy';
+      } else if (selectedAccounttype == 'User') {
+        collectionName = 'userdummy';
+      }
+      return FirebaseFirestore.instance
+          .collection(collectionName)
+          .doc(adminUid)
+          .snapshots()
+          .map((DocumentSnapshot<Map<String, dynamic>> documentSnapshot) {
+        if (documentSnapshot.exists) {
+          Map<String, dynamic> data = documentSnapshot.data()!;
+          String firstName = data['firstName'];
+          String lastName = data['lastName'];
+          _firstName = firstName;
+          _lastName = lastName;
+          return data;
+        } else {
+          print('Document does not exist');
+          return null;
+        }
+      });
+    } catch (e) {
+      print('Error fetching data: $e');
+      return Stream.value(null);
+    }
+  }
+
   void showErrorDialog(String errorMessage) {
     showDialog(
       context: context,
@@ -104,7 +166,7 @@ class _MblNoDialogState extends State<MblNoDialog> {
   String?
       storedVerificationId; // Declare a variable to store the verification ID
 
-  Future<void> _startPhoneAuth(String phoneNumber) async {
+  Future<void> _startPhoneAuth(String phoneNumber, String adminUid) async {
     print("mobtrack3");
 
     FirebaseAuth _auth = FirebaseAuth.instance;
@@ -278,8 +340,6 @@ class _MblNoDialogState extends State<MblNoDialog> {
                         height: 40,
                         child: ElevatedButton(
                           onPressed: () async {
-                            String email = controller.email.text;
-                            String password = controller.password.text;
                             String selectedAccounttype =
                                 widget.selectedAccounttype;
                             String smsCode = otp1.text +
@@ -303,7 +363,7 @@ class _MblNoDialogState extends State<MblNoDialog> {
 
                               if (userCredential.user != null) {
                                 print("OTP verified successfully");
-
+                                String adminUid = widget.adminUid;
                                 // Fetch user details from Firebase
                                 User? user = userCredential.user;
                                 String? phoneNumber = user?.phoneNumber;
@@ -333,168 +393,165 @@ class _MblNoDialogState extends State<MblNoDialog> {
                                             as Map<String, dynamic>;
 
                                     // Check if 'firstName' field exists in the document
-                                    if (userData.containsKey('firstName')) {
-                                      String? firstName = userData['firstName'];
-                                      String? lastName = userData['lastName'];
-
-                                      // Display user details in a dialog box
-                                      showDialog(
-                                        context: context,
-                                        builder: (BuildContext context) {
-                                          return Dialog(
-                                            child: Container(
-                                              height: 340,
-                                              width: 1225,
-                                              decoration: BoxDecoration(
-                                                color: Colors.white,
-                                                borderRadius:
-                                                    BorderRadius.circular(31),
-                                              ),
-                                              child: Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
-                                                    children: [
-                                                      Expanded(
-                                                        child: Row(
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .center,
-                                                          children: [
-                                                            ImageIcon(
-                                                              AssetImage(
-                                                                  'approved.png'),
-                                                              color: Color
-                                                                  .fromRGBO(
-                                                                      60,
-                                                                      55,
-                                                                      148,
-                                                                      1),
-                                                              size: 30,
-                                                            ),
-                                                            SizedBox(width: 5),
-                                                            Text(
-                                                              'Account Verified',
-                                                              style: TabelText
-                                                                  .helveticablack19,
-                                                            ),
-                                                          ],
-                                                        ),
+                                    showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return Dialog(
+                                          child: Container(
+                                            height: 340,
+                                            width: 1225,
+                                            decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              borderRadius:
+                                                  BorderRadius.circular(31),
+                                            ),
+                                            child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    Expanded(
+                                                      child: Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .center,
+                                                        children: [
+                                                          ImageIcon(
+                                                            AssetImage(
+                                                                'approved.png'),
+                                                            color:
+                                                                Color.fromRGBO(
+                                                                    60,
+                                                                    55,
+                                                                    148,
+                                                                    1),
+                                                            size: 30,
+                                                          ),
+                                                          SizedBox(width: 5),
+                                                          Text(
+                                                            'Account Verified',
+                                                            style: TabelText
+                                                                .helveticablack19,
+                                                          ),
+                                                        ],
                                                       ),
-                                                      GestureDetector(
-                                                        onTap: () async {
-                                                          //dfgsfdg
-                                                          UserCredential
-                                                              userCredential =
-                                                              await _auth
-                                                                  .signInWithEmailAndPassword(
-                                                            email: widget.email,
-                                                            password:
-                                                                widget.password,
+                                                    ),
+                                                    GestureDetector(
+                                                      onTap: () async {
+                                                        //dfgsfdg
+                                                        UserCredential
+                                                            userCredential =
+                                                            await _auth
+                                                                .signInWithEmailAndPassword(
+                                                          email: widget.email,
+                                                          password:
+                                                              widget.password,
+                                                        );
+                                                        String userId =
+                                                            userCredential
+                                                                .user!.uid;
+                                                        if (widget
+                                                                .selectedAccounttype ==
+                                                            'Enterprise') {
+                                                          Navigator.push(
+                                                            context,
+                                                            MaterialPageRoute(
+                                                                builder: (context) =>
+                                                                    EnterDashboardPage(
+                                                                        adminUid:
+                                                                            userId)),
                                                           );
-                                                          String userId =
-                                                              userCredential
-                                                                  .user!.uid;
-                                                          if (widget
-                                                                  .selectedAccounttype ==
-                                                              'Enterprise') {
-                                                            Navigator.push(
-                                                              context,
-                                                              MaterialPageRoute(
-                                                                  builder: (context) =>
-                                                                      EnterDashboardPage(
-                                                                          adminUid:
-                                                                              userId)),
-                                                            );
-                                                          } else if (widget
-                                                                  .selectedAccounttype ==
-                                                              'Super User') {
-                                                            Navigator.push(
-                                                              context,
-                                                              MaterialPageRoute(
-                                                                  builder: (context) =>
-                                                                      SuperUserDashboardPage(
-                                                                          user:
-                                                                              userCredential.user!)),
-                                                            );
-                                                          } else if (widget
-                                                                  .selectedAccounttype ==
-                                                              'User') {
-                                                            Navigator.push(
-                                                              context,
-                                                              MaterialPageRoute(
-                                                                  builder: (context) =>
-                                                                      SingleUserDashboardPage(
-                                                                          user:
-                                                                              userCredential.user!)),
-                                                            );
-                                                          } else {
-                                                            // Handle invalid selectedType
-                                                            print(
-                                                                'Invalid selected type: ${widget.selectedAccounttype}');
-                                                          }
-                                                        },
-                                                        child: Row(
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .spaceBetween,
-                                                          children: [
-                                                            Center(
-                                                              child: ImageIcon(
-                                                                AssetImage(
-                                                                    'cancel.png'),
-                                                                color: Colors
-                                                                    .black,
-                                                              ),
+                                                        } else if (widget
+                                                                .selectedAccounttype ==
+                                                            'Super User') {
+                                                          Navigator.push(
+                                                            context,
+                                                            MaterialPageRoute(
+                                                                builder: (context) =>
+                                                                    SuperUserDashboardPage(
+                                                                        user: userCredential
+                                                                            .user!)),
+                                                          );
+                                                        } else if (widget
+                                                                .selectedAccounttype ==
+                                                            'User') {
+                                                          Navigator.push(
+                                                            context,
+                                                            MaterialPageRoute(
+                                                                builder: (context) =>
+                                                                    SingleUserDashboardPage(
+                                                                        user: userCredential
+                                                                            .user!)),
+                                                          );
+                                                        } else {
+                                                          // Handle invalid selectedType
+                                                          print(
+                                                              'Invalid selected type: ${widget.selectedAccounttype}');
+                                                        }
+                                                      },
+                                                      child: Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceBetween,
+                                                        children: [
+                                                          Center(
+                                                            child: ImageIcon(
+                                                              AssetImage(
+                                                                  'cancel.png'),
+                                                              color:
+                                                                  Colors.black,
                                                             ),
-                                                          ],
-                                                        ),
+                                                          ),
+                                                        ],
                                                       ),
-                                                    ],
-                                                  ),
-                                                  SizedBox(height: 20),
-                                                  Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
-                                                    children: [
-                                                      Text(
-                                                        "$firstName $lastName",
+                                                    ),
+                                                  ],
+                                                ),
+                                                SizedBox(height: 20),
+                                                StreamBuilder<
+                                                    Map<String, dynamic>?>(
+                                                  stream: userStream,
+                                                  builder: (context, snapshot) {
+                                                    if (snapshot.hasData &&
+                                                        snapshot.data != null) {
+                                                      // Display the user's name
+                                                      return Text(
+                                                        "$_firstName $_lastName",
                                                         style: DialogText
                                                             .helvetica41,
-                                                      ),
-                                                      SizedBox(height: 10),
-                                                    ],
+                                                      );
+                                                    } else {
+                                                      // Loading or error state
+                                                      return Center(
+                                                        child:
+                                                            CircularProgressIndicator(),
+                                                      );
+                                                    }
+                                                  },
+                                                ),
+                                                SizedBox(height: 10),
+                                                Text(
+                                                  "$phoneNumber",
+                                                  style: DialogText.helvetica42,
+                                                ),
+                                                Padding(
+                                                  padding: EdgeInsets.only(
+                                                      left: 2.w, right: 5.w),
+                                                  child: Divider(
+                                                    color: Color.fromRGBO(
+                                                        112, 112, 112, 1),
                                                   ),
-                                                  Text(
-                                                    "$phoneNumber",
-                                                    style:
-                                                        DialogText.helvetica42,
-                                                  ),
-                                                  Padding(
-                                                    padding: EdgeInsets.only(
-                                                        left: 2.w, right: 5.w),
-                                                    child: Divider(
-                                                      color: Color.fromRGBO(
-                                                          112, 112, 112, 1),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
+                                                ),
+                                              ],
                                             ),
-                                          );
-                                        },
-                                      );
-                                    } else {
-                                      print(
-                                          'User document does not exist in Firestore.');
-                                      // Handle case where document does not exist
-                                      // Show an error message or take appropriate action
-                                    }
+                                          ),
+                                        );
+                                      },
+                                    );
                                   }
                                 }).catchError((e) {
                                   print("Error fetching user data: $e");
@@ -534,7 +591,7 @@ class _MblNoDialogState extends State<MblNoDialog> {
                                 style: FormTextStyle.purplehelvetica),
                             onTap: () async {
                               await _startPhoneAuth(
-                                  contactNumberController.text);
+                                  contactNumberController.text, adminUid);
                             },
                           ),
                         ],
@@ -630,8 +687,9 @@ class _MblNoDialogState extends State<MblNoDialog> {
                               height: 30,
                               child: ElevatedButton(
                                 onPressed: () async {
+                                  String adminUid = widget.adminUid;
                                   await _startPhoneAuth(
-                                      contactNumberController.text);
+                                      contactNumberController.text, adminUid);
                                 },
                                 style: ElevatedButton.styleFrom(
                                     backgroundColor:
@@ -747,8 +805,9 @@ class _MblNoDialogState extends State<MblNoDialog> {
                               height: 30,
                               child: ElevatedButton(
                                 onPressed: () async {
+                                  String adminUid = widget.adminUid;
                                   await _startPhoneAuth(
-                                      contactNumberController.text);
+                                      contactNumberController.text, adminUid);
                                 },
                                 style: ElevatedButton.styleFrom(
                                     backgroundColor:
