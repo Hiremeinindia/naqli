@@ -34,6 +34,7 @@ class MblNoDialog extends StatefulWidget {
   String idNumber;
   String selectedCity;
   String companyidNumber;
+  User adminUid;
 
   MblNoDialog(
       this.email,
@@ -50,7 +51,8 @@ class MblNoDialog extends StatefulWidget {
       this.contactNumber,
       this.idNumber,
       this.selectedCity,
-      this.selectedGovtId);
+      this.selectedGovtId,
+      this.adminUid);
 
   @override
   _MblNoDialogState createState() => _MblNoDialogState();
@@ -384,6 +386,9 @@ class _MblNoDialogState extends State<MblNoDialog> {
                                                             password:
                                                                 widget.password,
                                                           );
+                                                          String userId =
+                                                              userCredential
+                                                                  .user!.uid;
                                                           if (widget
                                                                   .selectedAccounttype ==
                                                               'Enterprise') {
@@ -392,8 +397,8 @@ class _MblNoDialogState extends State<MblNoDialog> {
                                                               MaterialPageRoute(
                                                                   builder: (context) =>
                                                                       EnterDashboardPage(
-                                                                          user:
-                                                                              userCredential.user!)),
+                                                                          adminUid:
+                                                                              userId)),
                                                             );
                                                           } else if (widget
                                                                   .selectedAccounttype ==

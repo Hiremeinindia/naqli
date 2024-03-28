@@ -230,11 +230,11 @@ class _LoginPageState extends State<LoginPage> {
                                                 password:
                                                     controller.password.text,
                                               );
-
+                                              String userId =
+                                                  userCredential.user!.uid;
                                               // Check the user's role after successful sign-in
                                               String userRole =
-                                                  await getUserRole(
-                                                      userCredential.user!.uid);
+                                                  await getUserRole(userId);
 
                                               print('User Role = $userRole');
                                               // Navigate to the appropriate dashboard based on the user's role
@@ -266,8 +266,7 @@ class _LoginPageState extends State<LoginPage> {
                                                   MaterialPageRoute(
                                                     builder: (context) =>
                                                         EnterDashboardPage(
-                                                            user: userCredential
-                                                                .user!),
+                                                            adminUid: userId),
                                                   ),
                                                 );
                                               } else {
@@ -493,8 +492,8 @@ class _LoginPageState extends State<LoginPage> {
                                 );
                                 print('email---- ${controller.email.text}');
                                 // Check the user's role after successful sign-in
-                                String userRole =
-                                    await getUserRole(userCredential.user!.uid);
+                                String userId = userCredential.user!.uid;
+                                String userRole = await getUserRole(userId);
 
                                 // Navigate to the appropriate dashboard based on the user's role
                                 if (userRole == 'User') {
@@ -520,7 +519,7 @@ class _LoginPageState extends State<LoginPage> {
                                       MaterialPageRoute(
                                         builder: (context) =>
                                             EnterDashboardPage(
-                                                user: userCredential.user!),
+                                                adminUid: userId),
                                       ));
                                 } else {
                                   print('Unknown user role');
