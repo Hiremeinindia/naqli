@@ -485,7 +485,7 @@ class _CreateAccountState extends State<CreateAccount> {
                                       password: controller.password.text,
                                     );
                                     // User creation successful
-                                    User? adminUid = userCredential.user;
+                                    String adminUid = userCredential.user!.uid;
                                     String accountType =
                                         controller.selectedAccounttype.text;
                                     print(
