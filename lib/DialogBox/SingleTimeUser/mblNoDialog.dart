@@ -324,13 +324,11 @@ class _MblNoDialogState extends State<MblNoDialog> {
                                     .get()
                                     .then((QuerySnapshot querySnapshot) {
                                   if (querySnapshot.docs.isNotEmpty) {
-                                    // At least one document exists, you can fetch and display data here
-                                    // For simplicity, let's assume you want to display the first document's data
-                                    QueryDocumentSnapshot lastDocument =
+                                    QueryDocumentSnapshot recentDocument =
                                         querySnapshot.docs.first;
                                     Map<String, dynamic> userData =
-                                        lastDocument.data() as Map<String,
-                                            dynamic>; // Explicit cast
+                                        recentDocument.data()
+                                            as Map<String, dynamic>;
 
                                     // Check if 'firstName' field exists in the document
                                     if (userData.containsKey('firstName')) {
