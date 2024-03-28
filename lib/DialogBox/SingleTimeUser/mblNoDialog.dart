@@ -310,26 +310,26 @@ class _MblNoDialogState extends State<MblNoDialog> {
                                 String collectionName = '';
 
                                 if (selectedAccounttype == 'Enterprise') {
-                                  collectionName = 'enterprise';
+                                  collectionName = 'enterprisedummy';
                                 } else if (selectedAccounttype ==
                                     'Super User') {
-                                  collectionName = 'superusers';
+                                  collectionName = 'superuserdummy';
                                 } else if (selectedAccounttype == 'User') {
-                                  collectionName = 'users';
+                                  collectionName = 'userdummy';
                                 }
 
                                 // Fetch user details from the determined collection
                                 FirebaseFirestore.instance
-                                    .collection('Super User')
+                                    .collection(collectionName)
                                     .get()
                                     .then((QuerySnapshot querySnapshot) {
                                   if (querySnapshot.docs.isNotEmpty) {
                                     // At least one document exists, you can fetch and display data here
                                     // For simplicity, let's assume you want to display the first document's data
-                                    QueryDocumentSnapshot firstDocument =
+                                    QueryDocumentSnapshot lastDocument =
                                         querySnapshot.docs.first;
                                     Map<String, dynamic> userData =
-                                        firstDocument.data() as Map<String,
+                                        lastDocument.data() as Map<String,
                                             dynamic>; // Explicit cast
 
                                     // Check if 'firstName' field exists in the document
