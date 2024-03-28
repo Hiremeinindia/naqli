@@ -299,7 +299,12 @@ class _CreateAccountState extends State<CreateAccount> {
                                     ),
                                     enterpriseSelect == 'Enterprise'
                                         ? CustomTextfield(
-                                            validator: nameValidator,
+                                            validator: (value) {
+                                              if (value!.length != 10)
+                                                return 'Mobile Number must be of 10 digit';
+                                              else
+                                                return null;
+                                            },
                                             controller:
                                                 controller.companyidNumber,
                                             text: 'Id number',
