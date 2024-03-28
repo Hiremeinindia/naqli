@@ -34,6 +34,7 @@ class MblNoDialog extends StatefulWidget {
   String idNumber;
   String selectedCity;
   String companyidNumber;
+  User adminUid;
 
   MblNoDialog(
       this.email,
@@ -50,7 +51,8 @@ class MblNoDialog extends StatefulWidget {
       this.contactNumber,
       this.idNumber,
       this.selectedCity,
-      this.selectedGovtId);
+      this.selectedGovtId,
+      this.adminUid);
 
   @override
   _MblNoDialogState createState() => _MblNoDialogState();
@@ -387,8 +389,56 @@ class _MblNoDialogState extends State<MblNoDialog> {
                                                       ),
                                                       GestureDetector(
                                                         onTap: () async {
-                                                          // Handle onTap event
-                                                          // This is your existing onTap logic
+                                                          //dfgsfdg
+                                                          UserCredential
+                                                              userCredential =
+                                                              await _auth
+                                                                  .signInWithEmailAndPassword(
+                                                            email: widget.email,
+                                                            password:
+                                                                widget.password,
+                                                          );
+                                                          String userId =
+                                                              userCredential
+                                                                  .user!.uid;
+                                                          if (widget
+                                                                  .selectedAccounttype ==
+                                                              'Enterprise') {
+                                                            Navigator.push(
+                                                              context,
+                                                              MaterialPageRoute(
+                                                                  builder: (context) =>
+                                                                      EnterDashboardPage(
+                                                                          adminUid:
+                                                                              userId)),
+                                                            );
+                                                          } else if (widget
+                                                                  .selectedAccounttype ==
+                                                              'Super User') {
+                                                            Navigator.push(
+                                                              context,
+                                                              MaterialPageRoute(
+                                                                  builder: (context) =>
+                                                                      SuperUserDashboardPage(
+                                                                          user:
+                                                                              userCredential.user!)),
+                                                            );
+                                                          } else if (widget
+                                                                  .selectedAccounttype ==
+                                                              'User') {
+                                                            Navigator.push(
+                                                              context,
+                                                              MaterialPageRoute(
+                                                                  builder: (context) =>
+                                                                      SingleUserDashboardPage(
+                                                                          user:
+                                                                              userCredential.user!)),
+                                                            );
+                                                          } else {
+                                                            // Handle invalid selectedType
+                                                            print(
+                                                                'Invalid selected type: ${widget.selectedAccounttype}');
+                                                          }
                                                         },
                                                         child: Row(
                                                           mainAxisAlignment:

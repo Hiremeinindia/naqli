@@ -485,6 +485,7 @@ class _CreateAccountState extends State<CreateAccount> {
                                       password: controller.password.text,
                                     );
                                     // User creation successful
+                                    User? adminUid = userCredential.user;
                                     String accountType =
                                         controller.selectedAccounttype.text;
                                     print(
@@ -501,21 +502,23 @@ class _CreateAccountState extends State<CreateAccount> {
                                       context: context,
                                       builder: (context) {
                                         return MblNoDialog(
-                                            email,
-                                            password,
-                                            selectedAccounttype,
-                                            firstName,
-                                            legalName,
-                                            lastName,
-                                            confirmPassword,
-                                            contactNumber,
-                                            address2,
-                                            address,
-                                            govtId,
-                                            alternateNumber,
-                                            idNumber,
-                                            city,
-                                            companyidNumber);
+                                          email,
+                                          password,
+                                          selectedAccounttype,
+                                          firstName,
+                                          legalName,
+                                          lastName,
+                                          confirmPassword,
+                                          contactNumber,
+                                          address2,
+                                          address,
+                                          govtId,
+                                          alternateNumber,
+                                          idNumber,
+                                          city,
+                                          companyidNumber,
+                                          adminUid!,
+                                        );
                                       },
                                     );
                                   }
