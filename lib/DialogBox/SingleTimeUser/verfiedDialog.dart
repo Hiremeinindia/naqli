@@ -8,7 +8,7 @@ import 'package:flutter_application_1/Users/SuperUser/dashboard_page.dart';
 import 'package:flutter_application_1/Widgets/formText.dart';
 import 'package:sizer/sizer.dart';
 
-import '../../Users/SingleTimeUser/availableUnits.dart';
+import '../../availableUnits.dart';
 import '../../homePage.dart';
 
 class VerifiedDialog extends StatefulWidget {

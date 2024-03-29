@@ -101,6 +101,11 @@ class AvailableText {
     color: Colors.black87,
     fontSize: 16,
   );
+  static const TextStyle helvetica30white = TextStyle(
+      fontFamily: 'Helvetica',
+      color: Colors.white,
+      fontSize: 28,
+      fontWeight: FontWeight.bold);
 }
 
 class FormTextStyle {

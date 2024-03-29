@@ -4,7 +4,7 @@ import 'package:flutter_application_1/Partner/Dashboard/dashboard.dart';
 import 'package:flutter_application_1/createAccount.dart';
 import 'package:flutter_application_1/sample.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'Users/SingleTimeUser/availableUnits.dart';
+import 'availableUnits.dart';
 import 'classes/language_constants.dart';
 import 'gen_l10n/app_localizations.dart';
 import 'homePage.dart';
@@ -76,7 +76,7 @@ class _MyAppState extends State<MyApp> {
       supportedLocales: AppLocalizations.supportedLocales,
       locale: _locale,
       debugShowCheckedModeBanner: false,
-      home: MyHomePage(),
+      home: AvailableUnits(),
     );
   }
 }
