@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:html';
 import 'dart:ui';
 
@@ -37,22 +38,23 @@ class MblNoDialog extends StatefulWidget {
   String adminUid;
 
   MblNoDialog(
-      this.email,
-      this.password,
-      this.selectedAccounttype,
-      this.firstName,
-      this.lastName,
-      this.legalName,
-      this.address,
-      this.address2,
-      this.alternateNumber,
-      this.companyidNumber,
-      this.confirmPassword,
-      this.contactNumber,
-      this.idNumber,
-      this.selectedCity,
-      this.selectedGovtId,
-      this.adminUid);
+    this.email,
+    this.password,
+    this.selectedAccounttype,
+    this.firstName,
+    this.lastName,
+    this.legalName,
+    this.address,
+    this.address2,
+    this.alternateNumber,
+    this.companyidNumber,
+    this.confirmPassword,
+    this.contactNumber,
+    this.idNumber,
+    this.selectedCity,
+    this.selectedGovtId,
+    this.adminUid,
+  );
 
   @override
   _MblNoDialogState createState() => _MblNoDialogState();
@@ -73,16 +75,51 @@ class _MblNoDialogState extends State<MblNoDialog> {
   @override
   late Stream<Map<String, dynamic>?> userStream;
   String _lastName = '';
+  late StreamController<Map<String, dynamic>> _userStreamController;
+
   @override
   void initState() {
     super.initState();
-    fetchData().then((stream) {
-      // Assign the obtained stream to your userStream variable
-      userStream = stream;
-    });
+    userStream = fetchData().map((data) => data);
   }
 
-  Future<Stream<Map<String, dynamic>?>> fetchData() async {
+  Stream<Map<String, dynamic>?> fetchData() {
+    try {
+      String collectionName = '';
+
+      if (widget.selectedAccounttype == 'Enterprise') {
+        collectionName = 'enterprisedummy';
+      } else if (widget.selectedAccounttype == 'Super User') {
+        collectionName = 'superuserdummy';
+      } else if (widget.selectedAccounttype == 'User') {
+        collectionName = 'userdummy';
+      }
+
+      String adminUid = widget.adminUid;
+      return FirebaseFirestore.instance
+          .collection(collectionName)
+          .doc(adminUid)
+          .snapshots()
+          .map((DocumentSnapshot<Map<String, dynamic>> documentSnapshot) {
+        if (documentSnapshot.exists) {
+          Map<String, dynamic> data = documentSnapshot.data()!;
+          String firstName = data['firstName'];
+          String lastName = data['lastName'];
+          _firstName = firstName;
+          _lastName = lastName;
+          return data;
+        } else {
+          print('Document does not exist');
+          return null;
+        }
+      });
+    } catch (e) {
+      print('Error fetching data: $e');
+      return Stream.value(null);
+    }
+  }
+
+  void fetchData1() async {
     try {
       String selectedAccounttype = widget.selectedAccounttype;
       String smsCode =
@@ -108,27 +145,28 @@ class _MblNoDialogState extends State<MblNoDialog> {
       } else if (selectedAccounttype == 'User') {
         collectionName = 'userdummy';
       }
-      return FirebaseFirestore.instance
+
+      FirebaseFirestore.instance
           .collection(collectionName)
           .doc(adminUid)
           .snapshots()
-          .map((DocumentSnapshot<Map<String, dynamic>> documentSnapshot) {
+          .listen((DocumentSnapshot<Map<String, dynamic>> documentSnapshot) {
         if (documentSnapshot.exists) {
           Map<String, dynamic> data = documentSnapshot.data()!;
-          String firstName = data['firstName'];
-          String lastName = data['lastName'];
-          _firstName = firstName;
-          _lastName = lastName;
-          return data;
+          _userStreamController.add(data);
         } else {
           print('Document does not exist');
-          return null;
         }
       });
     } catch (e) {
       print('Error fetching data: $e');
-      return Stream.value(null);
     }
+  }
+
+  @override
+  void dispose() {
+    _userStreamController.close();
+    super.dispose();
   }
 
   void showErrorDialog(String errorMessage) {
@@ -518,11 +556,14 @@ class _MblNoDialogState extends State<MblNoDialog> {
                                                   builder: (context, snapshot) {
                                                     if (snapshot.hasData &&
                                                         snapshot.data != null) {
-                                                      // Display the user's name
-                                                      return Text(
-                                                        "$_firstName $_lastName",
-                                                        style: DialogText
-                                                            .helvetica41,
+                                                      return Column(
+                                                        children: [
+                                                          Text(
+                                                            "$_firstName $_lastName",
+                                                            style: DialogText
+                                                                .helvetica41,
+                                                          ),
+                                                        ],
                                                       );
                                                     } else {
                                                       // Loading or error state
