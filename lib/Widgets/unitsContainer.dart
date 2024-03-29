@@ -1,6 +1,7 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_application_1/Widgets/formText.dart';
@@ -26,44 +27,34 @@ final class UnitsContainer extends StatelessWidget {
     return Row(
       children: [
         Expanded(
-          child: Container(
-            padding: EdgeInsets.fromLTRB(1.w, 0, 1.w, 0),
-            height: 50,
-            decoration: BoxDecoration(
-              border: Border.all(color: Color.fromRGBO(183, 183, 183, 1)),
-              color: Colors.white,
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(8),
-                topRight: Radius.circular(0),
-                bottomLeft: Radius.circular(8),
-                bottomRight: Radius.circular(0),
-              ),
-            ),
-            child: Row(
-              children: [
-                Image.asset(
-                  'delivery-truck.png',
-                  width: 50,
-                  height: 50,
-                ),
-                SizedBox(
-                  width: 1.5.w,
-                ),
-                SizedBox(
-                    width: 6.w,
-                    child: Text(text!, style: AvailableText.helvetica17black)),
-              ],
-            ),
-          ),
-        ),
-        Expanded(
           child: DropdownButtonHideUnderline(
             child: DropdownButton2<String>(
               value: value, // Use value from the list
               items: items!.map<DropdownMenuItem<String>>((String value) {
                 return DropdownMenuItem<String>(
                   value: value,
-                  child: Text(value, style: AvailableText.helvetica),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Image.asset(
+                        'delivery-truck.png',
+                        width: 50,
+                        height: 50,
+                      ),
+                      SizedBox(
+                        width: 2.w,
+                      ),
+                      SizedBox(
+                          width: 6.w,
+                          child: Text(text!,
+                              style: AvailableText.helvetica17black)),
+                      SizedBox(width: 2.w),
+                      SizedBox(
+                          height: double.infinity, child: VerticalDivider()),
+                      SizedBox(width: 2.w),
+                      Text(value, style: AvailableText.helvetica),
+                    ],
+                  ),
                 );
               }).toList(),
               onChanged: onChanged,
@@ -71,16 +62,9 @@ final class UnitsContainer extends StatelessWidget {
                 height: 50,
                 padding: EdgeInsets.only(left: 9, right: 9),
                 decoration: BoxDecoration(
-                  border: Border(
-                    bottom: BorderSide(color: Color.fromRGBO(183, 183, 183, 1)),
-                    right: BorderSide(color: Color.fromRGBO(183, 183, 183, 1)),
-                    top: BorderSide(color: Color.fromRGBO(183, 183, 183, 1)),
-                  ),
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(0),
-                    topRight: Radius.circular(8),
-                    bottomLeft: Radius.circular(0),
-                    bottomRight: Radius.circular(8),
+                  border: Border.all(color: Color.fromRGBO(183, 183, 183, 1)),
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(8),
                   ),
                   color: Colors.white,
                 ),
