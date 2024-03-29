@@ -5,6 +5,7 @@ import 'package:flutter_application_1/Widgets/customButton.dart';
 import 'package:flutter_application_1/Widgets/customRadio.dart';
 import 'package:flutter_application_1/Widgets/formText.dart';
 import 'package:flutter_application_1/homePage.dart';
+import 'package:flutter_application_1/test.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:sizer/sizer.dart';
 
@@ -266,13 +267,25 @@ class _BookingsState extends State<Bookings> {
                           ),
                           Row(
                             children: [
-                              Text(
-                                "Cancel Request",
-                                style: TextStyle(
+                              InkWell(
+                                onTap: () {
+                                  showDialog(
+                                    barrierColor: Colors.grey.withOpacity(0.5),
+                                    context: context,
+                                    builder: (context) {
+                                      return BookingConfirmationDialog();
+                                    },
+                                  );
+                                },
+                                child: Text(
+                                  "Cancel Request",
+                                  style: TextStyle(
                                     fontSize: 16,
                                     fontFamily: "Helvetica",
                                     color: Color.fromRGBO(158, 101, 169, 1),
-                                    fontWeight: FontWeight.bold),
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
                               ),
                             ],
                           ),

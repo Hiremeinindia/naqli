@@ -108,3 +108,102 @@ final class UnitsContainer extends StatelessWidget {
     );
   }
 }
+
+class UnitsContainer1 extends StatefulWidget {
+  final String? text;
+  String? value;
+  List<String>? items;
+  void Function(String?)? onChanged;
+
+  UnitsContainer1({
+    Key? key,
+    this.text,
+    this.value,
+    this.items,
+    this.onChanged,
+  }) : super(key: key);
+
+  @override
+  _UnitsContainer1State createState() => _UnitsContainer1State();
+}
+
+class _UnitsContainer1State extends State<UnitsContainer1> {
+  bool _isExpanded = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        GestureDetector(
+          onTap: () {
+            setState(() {
+              _isExpanded = !_isExpanded;
+            });
+          },
+          child: Container(
+            decoration: BoxDecoration(
+              border: Border.all(color: Color.fromRGBO(183, 183, 183, 1)),
+              borderRadius: BorderRadius.all(
+                Radius.circular(8),
+              ),
+              color: Colors.white,
+            ),
+            padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+            child: Row(
+              children: [
+                Image.asset(
+                  'delivery-truck.png',
+                  width: 50,
+                  height: 50,
+                ),
+                SizedBox(width: 8),
+                Text(
+                  widget.text!,
+                  style: TextStyle(fontSize: 17, color: Colors.black),
+                ),
+                Spacer(),
+                Icon(
+                  _isExpanded ? Icons.arrow_drop_up : Icons.arrow_drop_down,
+                  size: 25,
+                  color: Colors.black,
+                ),
+              ],
+            ),
+          ),
+        ),
+        if (_isExpanded)
+          Container(
+            margin: EdgeInsets.only(top: 8),
+            decoration: BoxDecoration(
+              border: Border.all(color: Color.fromRGBO(112, 112, 112, 1)),
+              borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(5),
+                bottomRight: Radius.circular(5),
+              ),
+              color: Colors.white,
+            ),
+            padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: widget.items!.map((String value) {
+                return GestureDetector(
+                  onTap: () {
+                    widget.onChanged?.call(value);
+                    setState(() {
+                      widget.value = value;
+                      _isExpanded = false;
+                    });
+                  },
+                  child: Text(
+                    value,
+                    style: TextStyle(fontSize: 17),
+                  ),
+                );
+              }).toList(),
+            ),
+          ),
+      ],
+    );
+  }
+}
