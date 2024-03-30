@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_application_1/DialogBox/bookingConfirmation.dart';
 import 'package:flutter_application_1/Users/Enterprise/contracts.dart';
 import 'package:flutter_application_1/Users/Enterprise/newContract.dart';
 import 'package:flutter_application_1/Users/SuperUser/editcontract.dart';
@@ -424,7 +425,10 @@ class _BookingsState extends State<Bookings> {
                           Color.fromRGBO(59, 57, 57, 1).withOpacity(0.5),
                       context: context,
                       builder: (context) {
-                        return EditContract();
+                        return Padding(
+                          padding: const EdgeInsets.only(left: 380, top: 40),
+                          child: EditContract(),
+                        );
                       },
                     );
                   },
@@ -435,7 +439,19 @@ class _BookingsState extends State<Bookings> {
               IconButton(
                   padding: EdgeInsets.zero,
                   constraints: BoxConstraints(),
-                  onPressed: () {},
+                  onPressed: () {
+                    showDialog(
+                      barrierColor:
+                          Color.fromRGBO(59, 57, 57, 1).withOpacity(0.5),
+                      context: context,
+                      builder: (context) {
+                        return Padding(
+                          padding: const EdgeInsets.only(left: 350),
+                          child: BookingConfirmationDialog(),
+                        );
+                      },
+                    );
+                  },
                   icon: Image.asset('deleteicon.png')),
             ],
           ),
@@ -471,7 +487,19 @@ class _BookingsState extends State<Bookings> {
               IconButton(
                   padding: EdgeInsets.zero,
                   constraints: BoxConstraints(),
-                  onPressed: () {},
+                  onPressed: () {
+                    showDialog(
+                      barrierColor:
+                          Color.fromRGBO(59, 57, 57, 1).withOpacity(0.5),
+                      context: context,
+                      builder: (context) {
+                        return Padding(
+                          padding: const EdgeInsets.only(left: 350),
+                          child: BookingConfirmationDialog(),
+                        );
+                      },
+                    );
+                  },
                   icon: Image.asset('deleteicon.png')),
             ],
           ),
@@ -507,7 +535,19 @@ class _BookingsState extends State<Bookings> {
               IconButton(
                   padding: EdgeInsets.zero,
                   constraints: BoxConstraints(),
-                  onPressed: () {},
+                  onPressed: () {
+                    showDialog(
+                      barrierColor:
+                          Color.fromRGBO(59, 57, 57, 1).withOpacity(0.5),
+                      context: context,
+                      builder: (context) {
+                        return Padding(
+                          padding: const EdgeInsets.only(left: 350),
+                          child: BookingConfirmationDialog(),
+                        );
+                      },
+                    );
+                  },
                   icon: Image.asset('deleteicon.png')),
             ],
           ),

@@ -37,11 +37,11 @@ class _BookingConfirmationDialogState extends State<BookingConfirmationDialog> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        'Are You Sure ?',
+                        'Are you sure ?',
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 20,
-                          fontFamily: 'Poppins',
+                          fontFamily: 'PoppinsSemiBold',
                           fontWeight: FontWeight.bold,
                         ),
                       ),
