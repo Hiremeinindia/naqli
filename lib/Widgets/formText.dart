@@ -52,7 +52,7 @@ class DialogText {
   static const TextStyle purplehelveticabold = TextStyle(
     fontFamily: 'Helvetica',
     fontWeight: FontWeight.bold,
-    color: Color.fromRGBO(128, 123, 229, 1),
+    color: Color.fromRGBO(158, 101, 169, 1),
     fontSize: 14,
   );
   static const TextStyle helvetica21 = TextStyle(
@@ -146,6 +146,22 @@ class BookingText {
     color: Colors.black,
     fontWeight: FontWeight.bold,
     fontSize: 19,
+  );
+  static const TextStyle helveticablack = TextStyle(
+    fontFamily: 'Helvetica',
+    color: Color.fromRGBO(0, 0, 0, 1),
+    fontSize: 15,
+  );
+  static const TextStyle helveticawhite = TextStyle(
+    fontFamily: 'Helvetica',
+    color: Colors.white,
+    fontSize: 15,
+  );
+  static const TextStyle helveticawhitebold = TextStyle(
+    fontFamily: 'Helvetica',
+    fontWeight: FontWeight.bold,
+    color: Colors.white,
+    fontSize: 15,
   );
 }
 
