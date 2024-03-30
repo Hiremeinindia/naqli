@@ -273,7 +273,11 @@ class _BookingsState extends State<Bookings> {
                                     barrierColor: Colors.grey.withOpacity(0.5),
                                     context: context,
                                     builder: (context) {
-                                      return BookingConfirmationDialog();
+                                      return Padding(
+                                        padding:
+                                            const EdgeInsets.only(left: 335),
+                                        child: BookingConfirmationDialog(),
+                                      );
                                     },
                                   );
                                 },
