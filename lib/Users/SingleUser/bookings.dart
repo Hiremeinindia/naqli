@@ -57,7 +57,7 @@ class _BookingsState extends State<Bookings> {
         if (constraints.maxWidth >= 950) {
           return SingleChildScrollView(
             child: Container(
-              height: 630,
+              height: 680,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20.0),
                 color: Color.fromRGBO(255, 255, 255, 0.925),
@@ -81,14 +81,8 @@ class _BookingsState extends State<Bookings> {
                               SizedBox(
                                 width: 10,
                               ),
-                              Text(
-                                "Booking Id #1345789345",
-                                style: TextStyle(
-                                    fontFamily: "Helvetica",
-                                    fontSize: 21,
-                                    color: Color.fromRGBO(16, 3, 3, 1),
-                                    fontWeight: FontWeight.bold),
-                              ),
+                              Text("Booking Id #1345789345",
+                                  style: BookingText.helvetica21),
                             ],
                           ),
                         ),

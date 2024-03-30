@@ -78,7 +78,7 @@ class _MyAppState extends State<MyApp> {
       supportedLocales: AppLocalizations.supportedLocales,
       locale: _locale,
       debugShowCheckedModeBanner: false,
-      home: SuperUserDashboardPage1(),
+      home: Sample(),
     );
   }
 }

@@ -62,6 +62,7 @@ dependencies:
   flutter_osm_plugin: ^0.42.0
   open_street_map_search_and_pick: ^0.1.1
   map_location_picker: ^1.2.8+3
+  dropdown_model_list: ^2.0.2
 
 dev_dependencies:
   flutter_test:
@@ -113,6 +114,12 @@ flutter:
     - family: Tajawal
       fonts:
         - asset: fonts/Tajawal.ttf      
+    - family: TajawalMedium
+      fonts:
+        - asset: fonts/Tajawal-Medium.ttf      
+    - family: Acre
+      fonts:
+        - asset: fonts/Acre.otf      
     - family: Colfax
       fonts:
         - asset: fonts/Colfax-Regular.otf
