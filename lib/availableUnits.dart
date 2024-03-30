@@ -1,6 +1,7 @@
 // ignore_for_file: dead_code
 
 import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:dropdown_model_list/dropdown_model_list.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -43,6 +44,21 @@ class _AvailableUnitsState extends State<AvailableUnits> {
   String pickup = 'Select Type';
   String towtruck = 'Select Type';
   String dropdownValues = 'Load Type';
+  DropListModel dropListModel = DropListModel([
+    OptionItem(id: "1", title: "Jatin Sharma"),
+    OptionItem(id: "2", title: "Puneet Chand"),
+    OptionItem(id: "3", title: "Vikas Bhardwaj"),
+    OptionItem(id: "4", title: "Rakesh Kumar"),
+    OptionItem(id: "5", title: "Alok Dubey"),
+    OptionItem(id: "6", title: "Kiran Yadav"),
+    OptionItem(id: "7", title: "Pradeep Kumar"),
+    OptionItem(id: "8", title: "Amit Kumar"),
+    OptionItem(id: "9", title: "Sweta Sharma"),
+    OptionItem(id: "10", title: "Ankit Bhist"),
+  ]);
+  OptionItem optionItemSelected = OptionItem(title: "Select User");
+
+  TextEditingController controller = TextEditingController();
   void initState() {
     super.initState();
   }
@@ -205,21 +221,40 @@ class _AvailableUnitsState extends State<AvailableUnits> {
                                                   MainAxisAlignment
                                                       .spaceBetween,
                                               children: [
-                                                UnitsContainer(
-                                                  text: 'Tralia',
-                                                  items: <String>[
-                                                    'Select Type',
-                                                    'Short Sides',
-                                                    'Contract',
-                                                    'None'
-                                                  ],
-                                                  value: trailer,
-                                                  onChanged:
-                                                      (String? newValue) {
-                                                    setState(() {
-                                                      trailer =
-                                                          newValue!; // Update value in the list
-                                                    });
+                                                // UnitsContainer(
+                                                //   text: 'Tralia',
+                                                //   items: <String>[
+                                                //     'Select Type',
+                                                //     'Short Sides',
+                                                //     'Contract',
+                                                //     'None'
+                                                //   ],
+                                                //   value: trailer,
+                                                //   onChanged:
+                                                //       (String? newValue) {
+                                                //     setState(() {
+                                                //       trailer =
+                                                //           newValue!; // Update value in the list
+                                                //     });
+                                                //   },
+                                                // ),
+                                                SelectDropList(
+                                                  itemSelected:
+                                                      optionItemSelected,
+                                                  dropListModel: dropListModel,
+                                                  showIcon:
+                                                      true, // Show Icon in DropDown Title
+                                                  showArrowIcon:
+                                                      true, // Show Arrow Icon in DropDown
+                                                  showBorder: true,
+                                                  paddingTop: 0,
+                                                  icon: const Icon(Icons.person,
+                                                      color: Colors.black),
+                                                  onOptionSelected:
+                                                      (optionItem) {
+                                                    optionItemSelected =
+                                                        optionItem;
+                                                    setState(() {});
                                                   },
                                                 ),
                                                 UnitsContainer(
