@@ -6,6 +6,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_application_1/DialogBox/bookingdialog.dart';
+import 'package:flutter_application_1/Users/SuperUser/bookings.dart';
+import 'package:flutter_application_1/Users/SuperUser/dashboard.dart';
+import 'package:flutter_application_1/Users/SuperUser/payments.dart';
+import 'package:flutter_application_1/Users/SuperUser/trigger_booking.dart';
 
 import 'package:sizer/sizer.dart';
 import '../../Widgets/customButton.dart';
@@ -13,19 +17,15 @@ import '../../Widgets/formText.dart';
 import '../../classes/language.dart';
 import '../../classes/language_constants.dart';
 import '../../main.dart';
-import 'Users/SuperUser/bookings.dart';
-import 'Users/SuperUser/dashboard.dart';
-import 'Users/SuperUser/payments.dart';
-import 'Users/SuperUser/trigger_booking.dart';
 
-class Sample extends StatefulWidget {
-  Sample();
+class SuperUserDashboardPage1 extends StatefulWidget {
+  SuperUserDashboardPage1();
 
   @override
-  State<Sample> createState() => _MyHomePageState();
+  State<SuperUserDashboardPage1> createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<Sample> {
+class _MyHomePageState extends State<SuperUserDashboardPage1> {
   PageController page = PageController();
   SideMenuController sideMenu = SideMenuController();
   bool value = false;

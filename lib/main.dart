@@ -1,8 +1,10 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/EquipmentUnits.dart';
 import 'package:flutter_application_1/Partner/Dashboard/dashboard.dart';
 import 'package:flutter_application_1/createAccount.dart';
 import 'package:flutter_application_1/sample.dart';
+import 'package:flutter_application_1/test.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'availableUnits.dart';
 import 'classes/language_constants.dart';
@@ -76,7 +78,7 @@ class _MyAppState extends State<MyApp> {
       supportedLocales: AppLocalizations.supportedLocales,
       locale: _locale,
       debugShowCheckedModeBanner: false,
-      home: Sample(),
+      home: BookingConfirmationDialog(),
     );
   }
 }
