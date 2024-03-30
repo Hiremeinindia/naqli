@@ -108,6 +108,14 @@ class AvailableText {
       fontWeight: FontWeight.bold);
 }
 
+class DashboardText {
+  static const TextStyle helvetica10 = TextStyle(
+    color: Colors.black87,
+    fontFamily: 'SFProText',
+    fontSize: 9,
+  );
+}
+
 class FormTextStyle {
   static const TextStyle text = TextStyle(
     fontFamily: 'Colfax',

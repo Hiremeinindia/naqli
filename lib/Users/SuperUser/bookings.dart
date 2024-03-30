@@ -6,6 +6,8 @@ import 'package:flutter_application_1/Widgets/formText.dart';
 import 'package:flutter_application_1/homePage.dart';
 import 'package:sizer/sizer.dart';
 
+import '../../Widgets/colorContainer.dart';
+
 class Bookings extends StatefulWidget {
   Bookings();
   @override
@@ -37,24 +39,7 @@ class _BookingsState extends State<Bookings> {
                   Row(
                     children: [
                       Expanded(
-                        child: Container(
-                          decoration: BoxDecoration(
-                            boxShadow: [
-                              BoxShadow(
-                                color: Color.fromRGBO(240, 240, 240, 1)
-                                    .withOpacity(0.1),
-                                offset: Offset(0, 0),
-                                spreadRadius: 2.0,
-                                blurRadius: 0.01, // changes position of shadow
-                              ),
-                            ],
-                            color: Colors.white,
-                            borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(0),
-                                topRight: Radius.circular(0),
-                                bottomLeft: Radius.circular(12),
-                                bottomRight: Radius.circular(12)),
-                          ),
+                        child: ElevationContainer(
                           child: Expanded(
                             child: Column(
                               children: [
@@ -94,24 +79,7 @@ class _BookingsState extends State<Bookings> {
                         width: 4.5.w,
                       ),
                       Expanded(
-                        child: Container(
-                          decoration: BoxDecoration(
-                            boxShadow: [
-                              BoxShadow(
-                                color: Color.fromRGBO(240, 240, 240, 1)
-                                    .withOpacity(0.1),
-                                offset: Offset(0, 0),
-                                spreadRadius: 2.0,
-                                blurRadius: 0.01, // changes position of shadow
-                              ),
-                            ],
-                            color: Colors.white,
-                            borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(0),
-                                topRight: Radius.circular(0),
-                                bottomLeft: Radius.circular(12),
-                                bottomRight: Radius.circular(12)),
-                          ),
+                        child: ElevationContainer(
                           child: Expanded(
                             child: Column(
                               children: [
@@ -150,25 +118,8 @@ class _BookingsState extends State<Bookings> {
                       SizedBox(
                         width: 4.5.w,
                       ),
-                      Container(
+                      ElevationContainer(
                         width: 200,
-                        decoration: BoxDecoration(
-                          boxShadow: [
-                            BoxShadow(
-                              color: Color.fromRGBO(240, 240, 240, 1)
-                                  .withOpacity(0.1),
-                              offset: Offset(0, 0),
-                              spreadRadius: 2.0,
-                              blurRadius: 0.01, // changes position of shadow
-                            ),
-                          ],
-                          color: Colors.white,
-                          borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(0),
-                              topRight: Radius.circular(0),
-                              bottomLeft: Radius.circular(12),
-                              bottomRight: Radius.circular(12)),
-                        ),
                         child: Column(
                           children: [
                             Container(
@@ -217,22 +168,9 @@ class _BookingsState extends State<Bookings> {
                     child: SingleChildScrollView(
                       controller: _book3Scroll,
                       scrollDirection: Axis.horizontal,
-                      child: Container(
+                      child: ElevationContainer(
                         width: 1150,
                         height: 210,
-                        decoration: BoxDecoration(
-                          boxShadow: [
-                            BoxShadow(
-                              color: Color.fromRGBO(240, 240, 240, 1)
-                                  .withOpacity(0.1),
-                              offset: Offset(0, 0),
-                              spreadRadius: 2.0,
-                              blurRadius: 0.01, // changes position of shadow
-                            ),
-                          ],
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(12.0),
-                        ),
                         child: ListView(
                           children: [_createDataTable()],
                         ),
@@ -267,15 +205,7 @@ class _BookingsState extends State<Bookings> {
                               child: SingleChildScrollView(
                                 controller: _book1Scroll,
                                 scrollDirection: Axis.horizontal,
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.only(
-                                        topLeft: Radius.circular(0),
-                                        topRight: Radius.circular(0),
-                                        bottomLeft: Radius.circular(12),
-                                        bottomRight: Radius.circular(12)),
-                                  ),
+                                child: ElevationContainer(
                                   width: 800,
                                   child: Expanded(
                                     child: Column(
@@ -325,15 +255,7 @@ class _BookingsState extends State<Bookings> {
                               child: SingleChildScrollView(
                                 controller: _book2Scroll,
                                 scrollDirection: Axis.horizontal,
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.only(
-                                        topLeft: Radius.circular(0),
-                                        topRight: Radius.circular(0),
-                                        bottomLeft: Radius.circular(12),
-                                        bottomRight: Radius.circular(12)),
-                                  ),
+                                child: ElevationContainer(
                                   width: 800,
                                   child: Column(
                                     children: [
@@ -371,15 +293,7 @@ class _BookingsState extends State<Bookings> {
                             SizedBox(
                               height: 4.h,
                             ),
-                            Container(
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(0),
-                                    topRight: Radius.circular(0),
-                                    bottomLeft: Radius.circular(12),
-                                    bottomRight: Radius.circular(12)),
-                              ),
+                            ElevationContainer(
                               child: Column(
                                 children: [
                                   Container(
@@ -427,13 +341,9 @@ class _BookingsState extends State<Bookings> {
                               child: SingleChildScrollView(
                                 controller: _book3Scroll,
                                 scrollDirection: Axis.horizontal,
-                                child: Container(
+                                child: ElevationContainer(
                                   width: 950,
                                   height: 230,
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(12.0),
-                                  ),
                                   child: ListView(
                                     children: [_createDataTable()],
                                   ),
