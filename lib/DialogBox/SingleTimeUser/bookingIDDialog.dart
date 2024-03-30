@@ -21,6 +21,7 @@ class _BookingIDDialogState extends State<BookingIDDialog> {
               borderRadius: BorderRadius.circular(10.0),
             ),
             child: Container(
+              height: 280,
               width: MediaQuery.of(context).size.width *
                   0.5, // Adjust width responsively
               decoration: BoxDecoration(
@@ -33,7 +34,6 @@ class _BookingIDDialogState extends State<BookingIDDialog> {
                 ],
               ),
               child: Column(
-                mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Container(
@@ -75,7 +75,7 @@ class _BookingIDDialogState extends State<BookingIDDialog> {
                   ),
                   Center(
                     child: Container(
-                      height: 250,
+                      height: 230,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.only(
                             bottomLeft: Radius.circular(10.0),

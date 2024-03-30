@@ -114,6 +114,12 @@ flutter:
     - family: Tajawal
       fonts:
         - asset: fonts/Tajawal.ttf      
+    - family: TajawalMedium
+      fonts:
+        - asset: fonts/Tajawal-Medium.ttf      
+    - family: Acre
+      fonts:
+        - asset: fonts/Acre.otf      
     - family: Colfax
       fonts:
         - asset: fonts/Colfax-Regular.otf

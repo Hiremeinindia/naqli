@@ -114,6 +114,39 @@ class DashboardText {
     fontFamily: 'SFProText',
     fontSize: 9,
   );
+  static const TextStyle sfpro19 = TextStyle(
+    fontFamily: 'Tajawal',
+    color: Color.fromRGBO(143, 142, 151, 1),
+    fontSize: 19,
+    letterSpacing: 0.5,
+  );
+
+  static const TextStyle sfpro12 = TextStyle(
+    fontFamily: 'TajawalMedium',
+    color: Color.fromRGBO(143, 142, 151, 1),
+    fontSize: 12,
+  );
+  static const TextStyle sfpro12black = TextStyle(
+    fontFamily: 'Tajawal',
+    color: Colors.black,
+    fontSize: 12,
+  );
+
+  static const TextStyle acre = TextStyle(
+    fontFamily: 'Acre',
+    color: Color.fromRGBO(25, 25, 27, 1),
+    letterSpacing: 1,
+    fontSize: 21,
+  );
+}
+
+class BookingText {
+  static const TextStyle helvetica21 = TextStyle(
+    fontFamily: 'Helvetica',
+    color: Colors.black,
+    fontWeight: FontWeight.bold,
+    fontSize: 19,
+  );
 }
 
 class FormTextStyle {
