@@ -6,6 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_application_1/DialogBox/bookingdialog.dart';
+import 'package:flutter_application_1/Users/SingleTimeUser/bookingDetails.dart';
 
 import 'package:sizer/sizer.dart';
 import '../../Widgets/customButton.dart';
@@ -18,15 +19,14 @@ import 'package:flutter_application_1/Users/SingleUser/bookings.dart';
 import 'package:flutter_application_1/Users/SingleUser/dashboard.dart';
 import 'package:flutter_application_1/Users/SingleUser/payments.dart';
 
-class SingleUserDashboardPage extends StatefulWidget {
-  final User user;
-  const SingleUserDashboardPage({required this.user});
+class SingleTimeUserDashboardPage extends StatefulWidget {
+  const SingleTimeUserDashboardPage();
 
   @override
-  State<SingleUserDashboardPage> createState() => _MyHomePageState();
+  State<SingleTimeUserDashboardPage> createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<SingleUserDashboardPage> {
+class _MyHomePageState extends State<SingleTimeUserDashboardPage> {
   PageController page = PageController();
   SideMenuController sideMenu = SideMenuController();
   bool value = false;
@@ -42,48 +42,13 @@ class _MyHomePageState extends State<SingleUserDashboardPage> {
   int? selectedRadioValue2;
   bool payNowButtonEnabled = false;
   String? selectedValue;
-  Widget _currentContent = Bookings(); // Initial content
+  Widget _currentContent = BookingDetails(); // Initial content
 
   void _handleItem1Tap() {
     setState(() {
-      _currentContent = Bookings();
+      _currentContent = BookingDetails();
     });
     Navigator.pop(context);
-  }
-
-  void _handleItem2Tap() {
-    setState(() {
-      _currentContent = BookingHistroy();
-    });
-    Navigator.pop(context);
-  }
-
-  void _handleItem3Tap() {
-    setState(() {
-      _currentContent = SingleUserPayment();
-    });
-    Navigator.pop(context);
-  }
-
-  void _handleItem4Tap() {
-    setState(() {
-      _currentContent = SingleUserPayment();
-    });
-    Navigator.pop(context);
-  }
-
-  void _handleItem5Tap() {
-    setState(() {
-      _currentContent = BookingHistroy();
-    });
-    Navigator.pop(context);
-  }
-
-  void handleRadioValueChanged(String? newValue) {
-    setState(() {
-      selectedValue = newValue;
-    });
-    print('Selected value: $selectedValue');
   }
 
   @override
@@ -321,9 +286,10 @@ class _MyHomePageState extends State<SingleUserDashboardPage> {
               ),
             ),
             body: Padding(
-              padding: EdgeInsets.fromLTRB(6.w, 4.h, 6.w, 4.h),
+              padding: EdgeInsets.fromLTRB(4.w, 4.h, 4.w, 4.h),
               child: Expanded(
                 child: Container(
+                  padding: EdgeInsets.fromLTRB(4.w, 5.h, 3.w, 5.h),
                   decoration: BoxDecoration(
                     border: Border.all(
                       color: Color.fromRGBO(112, 112, 112, 1).withOpacity(0.1),
@@ -346,203 +312,36 @@ class _MyHomePageState extends State<SingleUserDashboardPage> {
                     borderRadius: BorderRadius.circular(3),
                     color: Color.fromRGBO(247, 246, 255, 1).withOpacity(1),
                   ),
-                  child: Row(
-                    children: [
-                      Container(
-                        height: 850,
-                        width: 360,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(13),
+                  child: Align(
+                      alignment: Alignment.center,
+                      child: Container(
+                          width: 1000,
+                          height: 850,
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: Color.fromARGB(255, 216, 214, 214)
+                                  .withOpacity(0.2),
+                            ),
+                            boxShadow: <BoxShadow>[
+                              BoxShadow(
+                                color: Color.fromARGB(255, 199, 198, 198)
+                                    .withOpacity(0.3),
+                                blurRadius: 10,
+                                spreadRadius: 10,
+                                offset: Offset(0, 0.5), // Bottom side shadow
+                              ),
+                              BoxShadow(
+                                color: Color.fromARGB(255, 255, 255, 255)
+                                    .withOpacity(0.2),
+                                blurRadius: 1,
+                                spreadRadius: 0, // Bottom side shadow
+                              ),
+                            ],
+                            borderRadius: BorderRadius.circular(25),
+                            color: Colors.white,
                           ),
-                          color: Color.fromRGBO(236, 233, 250, 1),
-                        ),
-                        child: Column(
-                          children: [
-                            Container(
-                              height: 330,
-                              decoration: BoxDecoration(
-                                image: DecorationImage(
-                                  fit: BoxFit.fill,
-                                  image: AssetImage(
-                                    'Circleavatar.png',
-                                  ),
-                                ),
-                                // color: Color.fromRGBO(255, 255, 255, 1),
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(7),
-                                ),
-                              ),
-                              child: Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  SizedBox(
-                                    height: 20,
-                                  ),
-                                  Text('Faizal Khan',
-                                      style: DashboardText.acre),
-                                  Text('Location',
-                                      style: DashboardText.sfpro19),
-                                  SizedBox(
-                                    height: 10,
-                                  ),
-                                  CircleAvatar(
-                                    backgroundColor:
-                                        Color.fromRGBO(127, 106, 255, 1),
-                                    maxRadius: 76,
-                                    minRadius: 72,
-                                    child: CircleAvatar(
-                                        backgroundColor: Colors.white,
-                                        maxRadius: 70,
-                                        minRadius: 67,
-                                        child: CircleAvatar(
-                                          backgroundImage:
-                                              AssetImage('uploadimage.png'),
-                                          maxRadius: 65,
-                                          minRadius: 65,
-                                        )),
-                                  ),
-                                  SizedBox(
-                                    height: 10,
-                                  ),
-                                  Text('ID No : xxxxxxxxxx',
-                                      style: DashboardText.sfpro12),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      IconButton(
-                                          onPressed: () {},
-                                          icon: Image.asset(
-                                            'editicon.png',
-                                            width: 16,
-                                            height: 16,
-                                          )),
-                                      Text('Edit Profile',
-                                          style: DashboardText.sfpro12black),
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    height: 10,
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Container(
-                              height: 35.h,
-                              padding: EdgeInsets.only(left: 1.5.w, top: 50),
-                              child: SideMenu(
-                                controller: sideMenu,
-                                style: SideMenuStyle(
-                                  // displayMode: SideMenuDisplayMode.auto,
-                                  selectedColor:
-                                      Color.fromRGBO(98, 105, 254, 1),
-                                  unselectedTitleTextStyle: const TextStyle(
-                                    fontFamily: 'SFProText',
-                                    fontSize: 18,
-                                    color: Color.fromRGBO(128, 118, 118, 1),
-                                  ),
-                                  selectedTitleTextStyle: const TextStyle(
-                                    fontFamily: 'SFProText',
-                                    color: Colors.white,
-                                    fontSize: 18,
-                                  ),
-                                  unselectedIconColor:
-                                      Color.fromRGBO(128, 118, 118, 1),
-                                  selectedIconColor: Colors.white,
-                                ),
-                                items: [
-                                  SideMenuItem(
-                                    title: 'Booking',
-                                    onTap: (page, _) {
-                                      setState(() {
-                                        _currentContent = Bookings();
-                                      });
-                                      sideMenu.changePage(page);
-                                    },
-                                    icon: Icon(Icons.login_outlined),
-                                  ),
-                                  SideMenuItem(
-                                    title: 'Booking History',
-                                    onTap: (page, _) {
-                                      setState(() {
-                                        _currentContent = BookingHistroy();
-                                      });
-                                      sideMenu.changePage(page);
-                                    },
-                                    icon: Icon(Icons.person_2_outlined),
-                                  ),
-                                  SideMenuItem(
-                                    title: 'Payments',
-                                    onTap: (page, _) {
-                                      setState(() {
-                                        _currentContent = SingleUserPayment();
-                                      });
-                                      sideMenu.changePage(page);
-                                    },
-                                    icon: Icon(Icons.person_2_outlined),
-                                    // Set the style property to change the text size
-                                  ),
-                                  SideMenuItem(
-                                    title: 'Report',
-                                    onTap: (page, _) {
-                                      setState(() {
-                                        _currentContent = SingleUserPayment();
-                                      });
-                                      sideMenu.changePage(page);
-                                    },
-                                    icon:
-                                        const Icon(Icons.mode_comment_outlined),
-                                  ),
-                                  SideMenuItem(
-                                    title: 'Help',
-                                    onTap: (page, _) {
-                                      setState(() {
-                                        _currentContent = Dashboard();
-                                      });
-                                      sideMenu.changePage(page);
-                                    },
-                                    icon: Icon(Icons.inbox_outlined),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Expanded(
-                        child: SingleChildScrollView(
-                          child: Padding(
-                            padding: EdgeInsets.fromLTRB(4.w, 2.h, 4.w, 2.h),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Container(
-                                  height: 680,
-                                  decoration: BoxDecoration(
-                                    boxShadow: <BoxShadow>[
-                                      BoxShadow(
-                                        color: Color.fromRGBO(199, 199, 199, 1)
-                                            .withOpacity(0.5),
-                                        blurRadius: 15,
-                                        spreadRadius: 3,
-                                      )
-                                    ],
-                                    borderRadius: BorderRadius.circular(20.0),
-                                    color: Color.fromRGBO(255, 255, 255, 0.00),
-                                  ),
-                                  child: PageView(
-                                      controller: page,
-                                      children: [_currentContent]),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+                          child: PageView(
+                              controller: page, children: [_currentContent]))),
                 ),
               ),
             ),

@@ -13,10 +13,10 @@ import '../../Widgets/formText.dart';
 import '../../classes/language.dart';
 import '../../classes/language_constants.dart';
 import '../../main.dart';
-import 'bookings.dart';
-import 'dashboard.dart';
-import 'payments.dart';
-import 'trigger_booking.dart';
+import 'package:flutter_application_1/Users/SuperUser/bookings.dart';
+import 'package:flutter_application_1/Users/SuperUser/dashboard.dart';
+import 'package:flutter_application_1/Users/SuperUser/payments.dart';
+import 'package:flutter_application_1/Users/SuperUser/trigger_booking.dart';
 
 class SuperUserDashboardPage extends StatefulWidget {
   final User user;
@@ -318,61 +318,112 @@ class _MyHomePageState extends State<SuperUserDashboardPage> {
                 ),
               ),
             ),
-            body: Expanded(
-              child: Padding(
-                padding: EdgeInsets.fromLTRB(6.w, 6.h, 6.w, 6.h),
+            body: Padding(
+              padding: EdgeInsets.fromLTRB(6.w, 4.h, 6.w, 4.h),
+              child: Expanded(
                 child: Container(
-                  color: Color.fromRGBO(245, 243, 255, 1).withOpacity(0.5),
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Color.fromRGBO(112, 112, 112, 1).withOpacity(0.1),
+                    ),
+                    boxShadow: <BoxShadow>[
+                      BoxShadow(
+                        color:
+                            Color.fromARGB(255, 199, 198, 198).withOpacity(0.3),
+                        blurRadius: 5,
+                        spreadRadius: 5,
+                        offset: Offset(0, 0), // Bottom side shadow
+                      ),
+                      BoxShadow(
+                        color:
+                            Color.fromARGB(255, 255, 255, 255).withOpacity(0.2),
+                        blurRadius: 1,
+                        spreadRadius: 0, // Bottom side shadow
+                      ),
+                    ],
+                    borderRadius: BorderRadius.circular(3),
+                    color: Color.fromRGBO(247, 246, 255, 1).withOpacity(1),
+                  ),
                   child: Row(
                     children: [
                       Container(
                         height: 850,
                         width: 360,
                         decoration: BoxDecoration(
-                          border: Border.all(
-                            color: Color.fromARGB(255, 216, 214, 214)
-                                .withOpacity(0.5),
-                          ),
-                          boxShadow: <BoxShadow>[
-                            BoxShadow(
-                              color: Color.fromARGB(255, 199, 198, 198)
-                                  .withOpacity(0.5),
-                              blurRadius: 10,
-                              spreadRadius: 4,
-                              offset: Offset(0, 0.5), // Bottom side shadow
-                            ),
-                            BoxShadow(
-                              color: Color.fromARGB(255, 255, 255, 255)
-                                  .withOpacity(0.1),
-                              blurRadius: 1,
-                              spreadRadius: 0, // Bottom side shadow
-                            ),
-                          ],
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(13),
-                            bottomLeft: Radius.circular(13),
-                            topRight: Radius.circular(0),
-                            bottomRight: Radius.circular(13),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(13),
                           ),
                           color: Color.fromRGBO(236, 233, 250, 1),
                         ),
                         child: Column(
                           children: [
                             Container(
-                              height: 370,
+                              height: 330,
                               decoration: BoxDecoration(
-                                color: Color.fromRGBO(255, 255, 255, 1),
-                                borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(7),
-                                  bottomLeft: Radius.circular(7),
-                                  topRight: Radius.circular(0),
-                                  bottomRight: Radius.circular(7),
+                                image: DecorationImage(
+                                  fit: BoxFit.fill,
+                                  image: AssetImage(
+                                    'Circleavatar.png',
+                                  ),
+                                ),
+                                // color: Color.fromRGBO(255, 255, 255, 1),
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(7),
                                 ),
                               ),
-                              child: Image.asset(
-                                'Circleavatar.png',
-                                width: 550, // Adjust the height as needed
-                                fit: BoxFit.cover,
+                              child: Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  SizedBox(
+                                    height: 20,
+                                  ),
+                                  Text('Faizal Khan',
+                                      style: DashboardText.acre),
+                                  Text('Location',
+                                      style: DashboardText.sfpro19),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  CircleAvatar(
+                                    backgroundColor:
+                                        Color.fromRGBO(127, 106, 255, 1),
+                                    maxRadius: 76,
+                                    minRadius: 72,
+                                    child: CircleAvatar(
+                                        backgroundColor: Colors.white,
+                                        maxRadius: 70,
+                                        minRadius: 67,
+                                        child: CircleAvatar(
+                                          backgroundImage:
+                                              AssetImage('uploadimage.png'),
+                                          maxRadius: 65,
+                                          minRadius: 65,
+                                        )),
+                                  ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  Text('ID No : xxxxxxxxxx',
+                                      style: DashboardText.sfpro12),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      IconButton(
+                                          onPressed: () {},
+                                          icon: Image.asset(
+                                            'editicon.png',
+                                            width: 16,
+                                            height: 16,
+                                          )),
+                                      Text('Edit Profile',
+                                          style: DashboardText.sfpro12black),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                ],
                               ),
                             ),
                             Container(

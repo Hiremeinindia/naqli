@@ -666,25 +666,7 @@ class _TriggerBookingState extends State<TriggerBooking> {
                             child: SingleChildScrollView(
                               controller: _Scroll,
                               scrollDirection: Axis.horizontal,
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Color.fromRGBO(240, 240, 240, 1)
-                                          .withOpacity(0.1),
-                                      offset: Offset(0, 0),
-                                      spreadRadius: 2.0,
-                                      blurRadius:
-                                          0.01, // changes position of shadow
-                                    ),
-                                  ],
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.only(
-                                      topLeft: Radius.circular(0),
-                                      topRight: Radius.circular(0),
-                                      bottomLeft: Radius.circular(12),
-                                      bottomRight: Radius.circular(12)),
-                                ),
+                              child: ElevationContainer(
                                 width: 1100,
                                 child: Column(
                                   children: [

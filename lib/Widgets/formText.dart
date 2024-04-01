@@ -81,6 +81,21 @@ class DialogText {
     color: Color.fromRGBO(78, 68, 68, 1),
     fontSize: 30,
   );
+  static const TextStyle poppins20 = TextStyle(
+      fontSize: 18,
+      color: Colors.white,
+      fontWeight: FontWeight.bold,
+      fontFamily: 'PoppinsSemiBold');
+  static const TextStyle poppins22 = TextStyle(
+      fontSize: 20,
+      color: Colors.black,
+      fontFamily: 'Poppins',
+      fontWeight: FontWeight.bold);
+  static const TextStyle poppins16 = TextStyle(
+      fontSize: 14,
+      color: Colors.black,
+      fontFamily: 'Poppins',
+      fontWeight: FontWeight.bold);
 }
 
 class AvailableText {
@@ -168,6 +183,24 @@ class BookingText {
     color: Colors.white,
     fontSize: 15,
   );
+}
+
+class BookingHistoryText {
+  static TextStyle helvetica40 = TextStyle(
+    fontFamily: 'Helvetica',
+    color: Colors.white,
+    fontSize: 38,
+  );
+  static const TextStyle sfpro20black = TextStyle(
+      fontSize: 17,
+      letterSpacing: 1,
+      fontFamily: 'SFproText',
+      color: Color.fromRGBO(10, 5, 5, 1));
+  static const TextStyle sfpro20white = TextStyle(
+      fontSize: 17,
+      letterSpacing: 1,
+      fontFamily: 'SFproText',
+      color: Colors.white);
 }
 
 class FormTextStyle {

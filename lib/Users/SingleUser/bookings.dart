@@ -9,6 +9,8 @@ import 'package:flutter_application_1/test.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:sizer/sizer.dart';
 
+import '../../DialogBox/SingleTimeUser/bookingConfirmDialog.dart';
+
 class Bookings extends StatefulWidget {
   Bookings();
   @override
@@ -65,86 +67,87 @@ class _BookingsState extends State<Bookings> {
               padding: EdgeInsets.fromLTRB(6.w, 10.h, 4.w, 10.h),
               child: Row(
                 children: [
-                  Container(
-                    width: 600,
-                    padding: EdgeInsets.only(right: 3.w),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            Image.asset(
-                              'Group1787.png',
-                              width: 62,
-                              height: 61,
-                            ),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            Text("Booking Id #1345789345",
-                                style: BookingText.helvetica21),
-                          ],
-                        ),
-                        Container(
-                          height: 380,
-                          width: 700,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(12)),
-                          child: GoogleMap(
-                              onMapCreated: (controller) {
-                                setState(() {
-                                  mapController = controller;
-                                });
-                              },
-                              markers: Set<Marker>.of(_markers),
-                              mapType: MapType.normal,
-                              initialCameraPosition: CameraPosition(
-                                  target: LatLng(24.755562, 46.589584),
-                                  zoom: 13)),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(
-                              right: 4.w, left: 4.w, top: 1.w, bottom: 2.w),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  Expanded(
+                    child: Container(
+                      padding: EdgeInsets.only(right: 3.w),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
                             children: [
-                              Column(
-                                children: [
-                                  Text("Pick up truck",
-                                      style: DialogText.helvetica25black),
-                                  Text("Toyota Hilux",
-                                      style: BookingText.helveticablack)
-                                ],
+                              Image.asset(
+                                'Group1787.png',
+                                width: 62,
+                                height: 61,
                               ),
                               SizedBox(
-                                height: 63,
-                                child: VerticalDivider(
-                                  color: Color.fromRGBO(112, 112, 112, 1),
-                                  thickness: 2,
-                                ),
+                                width: 10,
                               ),
-                              Column(
-                                children: [
-                                  Text("Load",
-                                      style: BookingText.helveticablack),
-                                  Text("Woods",
-                                      style: HomepageText.helvetica16black)
-                                ],
-                              ),
-                              SizedBox(
-                                child: Column(
+                              Text("Booking Id #1345789345",
+                                  style: BookingText.helvetica21),
+                            ],
+                          ),
+                          Container(
+                            height: 380,
+                            width: 700,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(12)),
+                            child: GoogleMap(
+                                onMapCreated: (controller) {
+                                  setState(() {
+                                    mapController = controller;
+                                  });
+                                },
+                                markers: Set<Marker>.of(_markers),
+                                mapType: MapType.normal,
+                                initialCameraPosition: CameraPosition(
+                                    target: LatLng(24.755562, 46.589584),
+                                    zoom: 13)),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(
+                                right: 4.w, left: 4.w, top: 1.w, bottom: 2.w),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Column(
                                   children: [
-                                    Text("Size",
+                                    Text("Pick up truck",
+                                        style: DialogText.helvetica25black),
+                                    Text("Toyota Hilux",
+                                        style: BookingText.helveticablack)
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 63,
+                                  child: VerticalDivider(
+                                    color: Color.fromRGBO(112, 112, 112, 1),
+                                    thickness: 2,
+                                  ),
+                                ),
+                                Column(
+                                  children: [
+                                    Text("Load",
                                         style: BookingText.helveticablack),
-                                    Text(" 1 to 1.5",
+                                    Text("Woods",
                                         style: HomepageText.helvetica16black)
                                   ],
                                 ),
-                              ),
-                            ],
-                          ),
-                        )
-                      ],
+                                SizedBox(
+                                  child: Column(
+                                    children: [
+                                      Text("Size",
+                                          style: BookingText.helveticablack),
+                                      Text(" 1 to 1.5",
+                                          style: HomepageText.helvetica16black)
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                   ),
                   VerticalDivider(
@@ -241,7 +244,21 @@ class _BookingsState extends State<Bookings> {
                               ),
                               Expanded(
                                 child: CustomButton2(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    showDialog(
+                                      barrierColor:
+                                          Color.fromRGBO(59, 57, 57, 1)
+                                              .withOpacity(0.5),
+                                      context: context,
+                                      builder: (context) {
+                                        return Padding(
+                                          padding: const EdgeInsets.only(
+                                              left: 380, top: 40),
+                                          child: BookingConfirmDialog(),
+                                        );
+                                      },
+                                    );
+                                  },
                                   text1: 'Pay: ',
                                   text2: 'XXXX',
                                 ),
@@ -257,10 +274,199 @@ class _BookingsState extends State<Bookings> {
             ),
           );
         } else {
-          return Expanded(
-            child: Container(
-              color: Color.fromRGBO(255, 255, 255, 200),
-              padding: EdgeInsets.fromLTRB(3.w, 1.5.h, 3.w, 1.5.h),
+          return Container(
+            height: 680,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20.0),
+              color: Color.fromRGBO(255, 255, 255, 0.925),
+            ),
+            padding: EdgeInsets.fromLTRB(6.w, 10.h, 6.w, 10.h),
+            child: Expanded(
+              child: SingleChildScrollView(
+                child: Container(
+                  height: 900,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: [
+                          Image.asset(
+                            'Group1787.png',
+                            width: 62,
+                            height: 61,
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Text("Booking Id #1345789345",
+                              style: BookingText.helvetica21),
+                        ],
+                      ),
+                      Container(
+                        height: 380,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(12)),
+                        child: GoogleMap(
+                            onMapCreated: (controller) {
+                              setState(() {
+                                mapController = controller;
+                              });
+                            },
+                            markers: Set<Marker>.of(_markers),
+                            mapType: MapType.normal,
+                            initialCameraPosition: CameraPosition(
+                                target: LatLng(24.755562, 46.589584),
+                                zoom: 13)),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Column(
+                            children: [
+                              Text("Pick up truck",
+                                  style: DialogText.helvetica25black),
+                              Text("Toyota Hilux",
+                                  style: BookingText.helveticablack)
+                            ],
+                          ),
+                          SizedBox(
+                            height: 63,
+                            child: VerticalDivider(
+                              color: Color.fromRGBO(112, 112, 112, 1),
+                              thickness: 2,
+                            ),
+                          ),
+                          Column(
+                            children: [
+                              Text("Load", style: BookingText.helveticablack),
+                              Text("Woods",
+                                  style: HomepageText.helvetica16black)
+                            ],
+                          ),
+                          SizedBox(
+                            child: Column(
+                              children: [
+                                Text("Size", style: BookingText.helveticablack),
+                                Text(" 1 to 1.5",
+                                    style: HomepageText.helvetica16black)
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      CustomRadio1(
+                        onChanged: (val) {
+                          setState(() {
+                            selectedRadioValue =
+                                val; // Unselect if already selected
+                            isButtonEnabled = true;
+                          });
+                        },
+                        groupValue: selectedRadioValue,
+                        value: 1,
+                        text1: 'Vendor 1',
+                        colors: Colors.white,
+                        text2: "XXXX SAR",
+                      ),
+                      CustomRadio1(
+                        onChanged: (val) {
+                          setState(() {
+                            selectedRadioValue =
+                                val; // Unselect if already selected
+                            isButtonEnabled = true;
+                          });
+                        },
+                        groupValue: selectedRadioValue,
+                        value: 2,
+                        text1: 'Vendor 2',
+                        colors: Colors.white,
+                        text2: "XXXX SAR",
+                      ),
+                      CustomRadio1(
+                        onChanged: (val) {
+                          setState(() {
+                            selectedRadioValue =
+                                val; // Unselect if already selected
+                            isButtonEnabled = true;
+                          });
+                        },
+                        groupValue: selectedRadioValue,
+                        value: 3,
+                        text1: 'Vendor 3',
+                        colors: Colors.white,
+                        text2: "XXXX SAR",
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Row(
+                        children: [
+                          InkWell(
+                            onTap: () {
+                              showDialog(
+                                barrierColor: Colors.grey.withOpacity(0.5),
+                                context: context,
+                                builder: (context) {
+                                  return Padding(
+                                    padding: const EdgeInsets.only(left: 335),
+                                    child: BookingConfirmationDialog(),
+                                  );
+                                },
+                              );
+                            },
+                            child: Text("Cancel Request",
+                                style: DialogText.purplehelveticabold),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Expanded(
+                            child: CustomButton2(
+                              onPressed: () {},
+                              text1: 'Pay Advance: ',
+                              text2: 'XXXX',
+                            ),
+                          ),
+                          SizedBox(
+                            width: 1.w,
+                          ),
+                          Expanded(
+                            child: CustomButton2(
+                              onPressed: () {
+                                showDialog(
+                                  barrierColor: Color.fromRGBO(59, 57, 57, 1)
+                                      .withOpacity(0.5),
+                                  context: context,
+                                  builder: (context) {
+                                    return Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: 380, top: 40),
+                                      child: BookingConfirmDialog(),
+                                    );
+                                  },
+                                );
+                              },
+                              text1: 'Pay: ',
+                              text2: 'XXXX',
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
             ),
           );
         }

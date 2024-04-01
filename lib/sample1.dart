@@ -2,31 +2,30 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:easy_sidemenu/easy_sidemenu.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fl_chart/fl_chart.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter_application_1/DialogBox/bookingdialog.dart';
+import 'package:flutter_application_1/Users/Enterprise/bookings.dart';
+import 'package:flutter_application_1/Users/Enterprise/contracts.dart';
+import 'package:flutter_application_1/Users/Enterprise/dashboard.dart';
+import 'package:flutter_application_1/Users/Enterprise/payments.dart';
+import 'package:flutter_application_1/Users/Enterprise/trigger_booking.dart';
+import 'package:flutter_application_1/Users/Enterprise/users.dart';
+import 'package:flutter_application_1/classes/language.dart';
 
 import 'package:sizer/sizer.dart';
 import '../../Widgets/customButton.dart';
 import '../../Widgets/formText.dart';
-import '../../classes/language.dart';
 import '../../classes/language_constants.dart';
 import '../../main.dart';
-import 'package:flutter_application_1/Users/SingleUser/bookingHistory.dart';
-import 'package:flutter_application_1/Users/SingleUser/bookings.dart';
-import 'package:flutter_application_1/Users/SingleUser/dashboard.dart';
-import 'package:flutter_application_1/Users/SingleUser/payments.dart';
 
-class SingleUserDashboardPage extends StatefulWidget {
-  final User user;
-  const SingleUserDashboardPage({required this.user});
+class Sample1 extends StatefulWidget {
+  String? adminUid;
+  Sample1({this.adminUid});
 
   @override
-  State<SingleUserDashboardPage> createState() => _MyHomePageState();
+  State<Sample1> createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<SingleUserDashboardPage> {
+class _MyHomePageState extends State<Sample1> {
   PageController page = PageController();
   SideMenuController sideMenu = SideMenuController();
   bool value = false;
@@ -41,43 +40,9 @@ class _MyHomePageState extends State<SingleUserDashboardPage> {
   int? selectedRadioValue1;
   int? selectedRadioValue2;
   bool payNowButtonEnabled = false;
+  bool expandWork = false;
   String? selectedValue;
-  Widget _currentContent = Bookings(); // Initial content
-
-  void _handleItem1Tap() {
-    setState(() {
-      _currentContent = Bookings();
-    });
-    Navigator.pop(context);
-  }
-
-  void _handleItem2Tap() {
-    setState(() {
-      _currentContent = BookingHistroy();
-    });
-    Navigator.pop(context);
-  }
-
-  void _handleItem3Tap() {
-    setState(() {
-      _currentContent = SingleUserPayment();
-    });
-    Navigator.pop(context);
-  }
-
-  void _handleItem4Tap() {
-    setState(() {
-      _currentContent = SingleUserPayment();
-    });
-    Navigator.pop(context);
-  }
-
-  void _handleItem5Tap() {
-    setState(() {
-      _currentContent = BookingHistroy();
-    });
-    Navigator.pop(context);
-  }
+  Widget _currentContent = enterDashboard(); // Initial content
 
   void handleRadioValueChanged(String? newValue) {
     setState(() {
@@ -138,19 +103,17 @@ class _MyHomePageState extends State<SingleUserDashboardPage> {
         if (constraints.maxWidth >= 850) {
           return Scaffold(
             appBar: PreferredSize(
-              preferredSize: Size.fromHeight(90),
+              preferredSize: Size.fromHeight(75),
               child: Material(
                 elevation: 3,
                 child: Padding(
-                  padding: EdgeInsets.fromLTRB(13.w, 0, 15.w, 0),
+                  padding: EdgeInsets.fromLTRB(5.w, 0, 2.5.w, 0),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Padding(
-                        padding: EdgeInsets.only(top: 12, bottom: 6),
-                        child: Image.asset(
-                          'naqlilogo.png',
-                        ),
+                      Image.asset(
+                        'naqlilogo.png',
+                        width: 10.w,
                       ),
                       Row(
                         children: [
@@ -180,7 +143,7 @@ class _MyHomePageState extends State<SingleUserDashboardPage> {
                             child: Text(
                               'Partner',
                               style: TextStyle(
-                                fontSize: 20,
+                                fontSize: 16,
                                 fontFamily: "HelveticaNeueRegular",
                                 color: Color.fromRGBO(206, 203, 203, 1),
                               ),
@@ -429,12 +392,12 @@ class _MyHomePageState extends State<SingleUserDashboardPage> {
                               ),
                             ),
                             Container(
-                              height: 35.h,
-                              padding: EdgeInsets.only(left: 1.5.w, top: 50),
+                              height: 37.h,
+                              padding: EdgeInsets.only(left: 1.5.w, top: 20),
                               child: SideMenu(
                                 controller: sideMenu,
                                 style: SideMenuStyle(
-                                  // displayMode: SideMenuDisplayMode.auto,
+                                  displayMode: SideMenuDisplayMode.auto,
                                   selectedColor:
                                       Color.fromRGBO(98, 105, 254, 1),
                                   unselectedTitleTextStyle: const TextStyle(
@@ -443,51 +406,75 @@ class _MyHomePageState extends State<SingleUserDashboardPage> {
                                     color: Color.fromRGBO(128, 118, 118, 1),
                                   ),
                                   selectedTitleTextStyle: const TextStyle(
-                                    fontFamily: 'SFProText',
-                                    color: Colors.white,
-                                    fontSize: 18,
-                                  ),
+                                      fontFamily: 'SFProText',
+                                      color: Colors.white,
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w600),
                                   unselectedIconColor:
                                       Color.fromRGBO(128, 118, 118, 1),
                                   selectedIconColor: Colors.white,
                                 ),
                                 items: [
                                   SideMenuItem(
-                                    title: 'Booking',
+                                    title: 'Dashboard',
+                                    onTap: (page, _) {
+                                      setState(() {
+                                        _currentContent = enterDashboard();
+                                      });
+                                      sideMenu.changePage(page);
+                                    },
+                                    icon: const Icon(Icons.login_outlined),
+                                  ),
+                                  SideMenuItem(
+                                    title: 'Trigger Booking',
+                                    onTap: (page, _) {
+                                      setState(() {
+                                        _currentContent = TriggerBooking();
+                                      });
+                                      sideMenu.changePage(page);
+                                    },
+                                    icon: const Icon(Icons.person_2_outlined),
+                                  ),
+                                  SideMenuItem(
+                                    title: 'Bookings Manager',
                                     onTap: (page, _) {
                                       setState(() {
                                         _currentContent = Bookings();
                                       });
                                       sideMenu.changePage(page);
                                     },
-                                    icon: Icon(Icons.login_outlined),
+                                    icon: const Icon(Icons.person_2_outlined),
+                                    // Set the style property to change the text size
                                   ),
                                   SideMenuItem(
-                                    title: 'Booking History',
+                                    title: 'Contracts',
                                     onTap: (page, _) {
                                       setState(() {
-                                        _currentContent = BookingHistroy();
+                                        _currentContent = Contracts();
                                       });
                                       sideMenu.changePage(page);
                                     },
-                                    icon: Icon(Icons.person_2_outlined),
+                                    icon: const Icon(Icons.person_2_outlined),
+                                    // Set the style property to change the text size
                                   ),
                                   SideMenuItem(
                                     title: 'Payments',
                                     onTap: (page, _) {
                                       setState(() {
-                                        _currentContent = SingleUserPayment();
+                                        _currentContent = Payments();
                                       });
                                       sideMenu.changePage(page);
                                     },
-                                    icon: Icon(Icons.person_2_outlined),
-                                    // Set the style property to change the text size
+                                    icon:
+                                        const Icon(Icons.mode_comment_outlined),
                                   ),
                                   SideMenuItem(
-                                    title: 'Report',
+                                    title: 'Users',
                                     onTap: (page, _) {
                                       setState(() {
-                                        _currentContent = SingleUserPayment();
+                                        _currentContent = Users(
+                                          adminUid: widget.adminUid,
+                                        );
                                       });
                                       sideMenu.changePage(page);
                                     },
@@ -498,11 +485,11 @@ class _MyHomePageState extends State<SingleUserDashboardPage> {
                                     title: 'Help',
                                     onTap: (page, _) {
                                       setState(() {
-                                        _currentContent = Dashboard();
+                                        _currentContent = TriggerBooking();
                                       });
                                       sideMenu.changePage(page);
                                     },
-                                    icon: Icon(Icons.inbox_outlined),
+                                    icon: const Icon(Icons.inbox_outlined),
                                   ),
                                 ],
                               ),
@@ -511,36 +498,42 @@ class _MyHomePageState extends State<SingleUserDashboardPage> {
                         ),
                       ),
                       Expanded(
-                        child: SingleChildScrollView(
-                          child: Padding(
-                            padding: EdgeInsets.fromLTRB(4.w, 2.h, 4.w, 2.h),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Container(
-                                  height: 680,
-                                  decoration: BoxDecoration(
-                                    boxShadow: <BoxShadow>[
-                                      BoxShadow(
-                                        color: Color.fromRGBO(199, 199, 199, 1)
-                                            .withOpacity(0.5),
-                                        blurRadius: 15,
-                                        spreadRadius: 3,
-                                      )
-                                    ],
-                                    borderRadius: BorderRadius.circular(20.0),
-                                    color: Color.fromRGBO(255, 255, 255, 0.00),
-                                  ),
-                                  child: PageView(
-                                      controller: page,
-                                      children: [_currentContent]),
+                          child: SingleChildScrollView(
+                        child: Padding(
+                          padding: EdgeInsets.fromLTRB(4.w, 4.5.h, 3.w, 2.h),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Container(
+                                height: 630,
+                                decoration: BoxDecoration(
+                                  boxShadow: <BoxShadow>[
+                                    BoxShadow(
+                                      color: Color.fromRGBO(199, 199, 199, 1)
+                                          .withOpacity(0.5),
+                                      blurRadius: 15,
+                                      spreadRadius: 3,
+                                    )
+                                  ],
+                                  borderRadius: BorderRadius.circular(20.0),
+                                  color: Color.fromRGBO(255, 255, 255, 0.00),
                                 ),
-                              ],
-                            ),
+                                child: PageView(controller: page, children: [
+                                  _currentContent,
+                                ]),
+                              ),
+                              SizedBox(
+                                height: 2.h,
+                              ),
+                              CustomButton(
+                                onPressed: () {},
+                                text: 'Confirm Booking',
+                              ),
+                            ],
                           ),
                         ),
-                      ),
+                      )),
                     ],
                   ),
                 ),
@@ -576,7 +569,37 @@ class _MyHomePageState extends State<SingleUserDashboardPage> {
                     ListTile(
                         hoverColor: Colors.indigo.shade100,
                         title: Text(
-                          'Booking',
+                          'Dashboard',
+                          style: TextStyle(color: Colors.black),
+                        ),
+                        onTap: () {
+                          setState(() {
+                            _currentContent = enterDashboard();
+                          });
+                          Navigator.pop(context);
+                        }),
+                    SizedBox(
+                      height: 2.h,
+                    ),
+                    ListTile(
+                        hoverColor: Colors.indigo.shade100,
+                        title: Text(
+                          'Trigger Booking',
+                          style: TextStyle(color: Colors.black),
+                        ),
+                        onTap: () {
+                          setState(() {
+                            _currentContent = TriggerBooking();
+                          });
+                          Navigator.pop(context);
+                        }),
+                    SizedBox(
+                      height: 2.h,
+                    ),
+                    ListTile(
+                        hoverColor: Colors.indigo.shade100,
+                        title: Text(
+                          'Booking Manager',
                           style: TextStyle(color: Colors.black),
                         ),
                         onTap: () {
@@ -591,12 +614,12 @@ class _MyHomePageState extends State<SingleUserDashboardPage> {
                     ListTile(
                         hoverColor: Colors.indigo.shade100,
                         title: Text(
-                          'Booking History',
+                          'Contracts',
                           style: TextStyle(color: Colors.black),
                         ),
                         onTap: () {
                           setState(() {
-                            _currentContent = BookingHistroy();
+                            _currentContent = Contracts();
                           });
                           Navigator.pop(context);
                         }),
@@ -611,7 +634,7 @@ class _MyHomePageState extends State<SingleUserDashboardPage> {
                         ),
                         onTap: () {
                           setState(() {
-                            _currentContent = SingleUserPayment();
+                            _currentContent = Payments();
                           });
                           Navigator.pop(context);
                         }),
@@ -621,12 +644,12 @@ class _MyHomePageState extends State<SingleUserDashboardPage> {
                     ListTile(
                         hoverColor: Colors.indigo.shade100,
                         title: Text(
-                          'Report',
+                          'Users',
                           style: TextStyle(color: Colors.black),
                         ),
                         onTap: () {
                           setState(() {
-                            _currentContent = SingleUserPayment();
+                            _currentContent = Users(adminUid: widget.adminUid);
                           });
                           Navigator.pop(context);
                         }),
@@ -641,7 +664,7 @@ class _MyHomePageState extends State<SingleUserDashboardPage> {
                         ),
                         onTap: () {
                           setState(() {
-                            _currentContent = Dashboard();
+                            _currentContent = Bookings();
                           });
                           Navigator.pop(context);
                         }),
@@ -668,36 +691,93 @@ class _MyHomePageState extends State<SingleUserDashboardPage> {
                                     color: Colors.indigo.shade900,
                                   ),
                                 )),
-                        TextButton(
-                          onPressed: () {
-                            // Handle the first button press
-                          },
-                          child: Text(
-                            'User',
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontFamily: "HelveticaNeueRegular",
-                              color: Color.fromRGBO(112, 112, 112, 1),
+                        Image.asset(
+                          'naqlilogo.png',
+                          width: 10.w,
+                        ),
+                        Padding(
+                          padding: EdgeInsets.fromLTRB(2.0.w, 0, 0, 0),
+                          child: TextButton(
+                            onPressed: () {
+                              // Handle the first button press
+                            },
+                            child: Text(
+                              'User',
+                              style: TextStyle(
+                                fontSize: 12,
+                                fontFamily: "HelveticaNeueRegular",
+                                color: Color.fromRGBO(206, 203, 203, 1),
+                              ),
                             ),
                           ),
                         ),
                         SizedBox(
-                          height: 30,
+                          width: 2,
+                          height: 20, // Adjust this value to reduce space
                           child: VerticalDivider(
                             color: Color.fromRGBO(206, 203, 203, 1),
                           ),
                         ),
-                        TextButton(
-                          onPressed: () {
-                            // Handle the third button press
-                          },
-                          child: Text(
-                            'Partner',
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontFamily: "HelveticaNeueRegular",
-                              color: Color.fromRGBO(206, 203, 203, 1),
+                        Padding(
+                          padding: EdgeInsets.fromLTRB(1.0.w, 0, 0, 0),
+                          child: TextButton(
+                            onPressed: () {
+                              // Handle the third button press
+                            },
+                            child: Text(
+                              'Partner',
+                              style: TextStyle(
+                                fontSize: 12,
+                                fontFamily: "HelveticaNeueRegular",
+                                fontWeight: FontWeight.bold,
+                                color: Color.fromRGBO(112, 112, 112, 1),
+                              ),
                             ),
+                          ),
+                        ),
+                        Container(
+                          padding: EdgeInsets.only(left: 5.0, top: 10),
+                          child: Row(
+                            children: [
+                              Icon(
+                                Icons.notifications,
+                                color: Color.fromRGBO(106, 102, 209, 1),
+                              ),
+                              SizedBox(
+                                height: 30,
+                                child: Padding(
+                                  padding: EdgeInsets.only(left: 3, top: 5),
+                                  child: Text(
+                                    "Contact Us",
+                                    style: TextStyle(
+                                      fontFamily: 'Colfax',
+                                      fontSize: 12,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                height: 20,
+                                child: VerticalDivider(
+                                  color: Color.fromRGBO(206, 203, 203, 1),
+                                ),
+                              ),
+                              SizedBox(
+                                height: 30,
+                                child: Padding(
+                                  padding: const EdgeInsets.only(
+                                    top: 5,
+                                  ),
+                                  child: Text(
+                                    "Hello Faizal!",
+                                    style: TextStyle(
+                                      fontFamily: 'Colfax',
+                                      fontSize: 12,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ],
@@ -706,13 +786,12 @@ class _MyHomePageState extends State<SingleUserDashboardPage> {
                 ),
               ),
             ),
-            body: Expanded(
-                child: Padding(
-              padding: EdgeInsets.fromLTRB(6.w, 6.h, 6.w, 6.h),
+            body: Padding(
+              padding: EdgeInsets.fromLTRB(6.w, 3.h, 6.w, 3.h),
               child: Container(
-                  color: Color.fromRGBO(245, 243, 255, 1).withOpacity(0.5),
+                  color: Color.fromRGBO(240, 237, 250, 1),
                   child: Expanded(child: _currentContent)),
-            )),
+            ),
           );
         }
       });
