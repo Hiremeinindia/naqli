@@ -6,6 +6,11 @@ class HomepageText {
     color: Color.fromRGBO(0, 0, 0, 1),
     fontSize: 14,
   );
+  static const TextStyle helvetica16black1 = TextStyle(
+    fontFamily: 'Helvetica',
+    color: Color.fromRGBO(0, 0, 0, 1),
+    fontSize: 12,
+  );
   static const TextStyle helvetica16bold = TextStyle(
     fontFamily: 'Helvetica',
     color: Colors.white,

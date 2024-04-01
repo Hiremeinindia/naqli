@@ -45,7 +45,7 @@ final class CustomButton extends StatelessWidget {
   }
 }
 
-final class CustomButton1 extends StatelessWidget {
+final class CustomButton2 extends StatelessWidget {
   final String? text1;
   final String? text2;
   Widget? child;
@@ -53,7 +53,7 @@ final class CustomButton1 extends StatelessWidget {
 
   final List<Color>? colors;
   final double? dynamicHeight;
-  CustomButton1({
+  CustomButton2({
     super.key,
     this.text1,
     this.text2,
