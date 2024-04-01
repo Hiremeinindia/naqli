@@ -230,7 +230,7 @@ class _BookingsState extends State<Bookings> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Expanded(
-                                child: CustomButton1(
+                                child: CustomButton2(
                                   onPressed: () {},
                                   text1: 'Pay Advance: ',
                                   text2: 'XXXX',
@@ -240,7 +240,7 @@ class _BookingsState extends State<Bookings> {
                                 width: 1.w,
                               ),
                               Expanded(
-                                child: CustomButton1(
+                                child: CustomButton2(
                                   onPressed: () {},
                                   text1: 'Pay: ',
                                   text2: 'XXXX',
