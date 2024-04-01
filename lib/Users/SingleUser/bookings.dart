@@ -62,128 +62,84 @@ class _BookingsState extends State<Bookings> {
                 borderRadius: BorderRadius.circular(20.0),
                 color: Color.fromRGBO(255, 255, 255, 0.925),
               ),
-              padding: EdgeInsets.fromLTRB(3.w, 3.h, 3.w, 3.h),
+              padding: EdgeInsets.fromLTRB(6.w, 10.h, 4.w, 10.h),
               child: Row(
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.only(top: 20),
+                  Container(
+                    width: 600,
+                    padding: EdgeInsets.only(right: 3.w),
                     child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.only(left: 30),
-                          child: Row(
-                            children: [
-                              Image.asset(
-                                'Group1787.png',
-                                width: 62,
-                                height: 61,
-                              ),
-                              SizedBox(
-                                width: 10,
-                              ),
-                              Text("Booking Id #1345789345",
-                                  style: BookingText.helvetica21),
-                            ],
-                          ),
-                        ),
                         Row(
                           children: [
-                            Padding(
-                              padding: const EdgeInsets.only(left: 25),
-                              child: Container(
-                                height: 404,
-                                width: 456,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(12)),
-                                child: GoogleMap(
-                                    onMapCreated: (controller) {
-                                      setState(() {
-                                        mapController = controller;
-                                      });
-                                    },
-                                    markers: Set<Marker>.of(_markers),
-                                    mapType: MapType.normal,
-                                    initialCameraPosition: CameraPosition(
-                                        target: LatLng(24.755562, 46.589584),
-                                        zoom: 13)),
-                              ),
-                            )
+                            Image.asset(
+                              'Group1787.png',
+                              width: 62,
+                              height: 61,
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Text("Booking Id #1345789345",
+                                style: BookingText.helvetica21),
                           ],
                         ),
-                        SizedBox(
-                          height: 10,
+                        Container(
+                          height: 380,
+                          width: 700,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(12)),
+                          child: GoogleMap(
+                              onMapCreated: (controller) {
+                                setState(() {
+                                  mapController = controller;
+                                });
+                              },
+                              markers: Set<Marker>.of(_markers),
+                              mapType: MapType.normal,
+                              initialCameraPosition: CameraPosition(
+                                  target: LatLng(24.755562, 46.589584),
+                                  zoom: 13)),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(left: 50),
+                          padding: EdgeInsets.only(
+                              right: 4.w, left: 4.w, top: 1.w, bottom: 2.w),
                           child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Column(
                                 children: [
-                                  Text(
-                                    "Pick up truck",
-                                    style: TextStyle(
-                                        fontSize: 25,
-                                        fontFamily: "Helvetica",
-                                        color: Color.fromRGBO(16, 3, 3, 1)),
-                                  ),
-                                  Text("Toyota Hilux")
+                                  Text("Pick up truck",
+                                      style: DialogText.helvetica25black),
+                                  Text("Toyota Hilux",
+                                      style: BookingText.helveticablack)
                                 ],
                               ),
                               SizedBox(
-                                width: 40,
+                                height: 63,
+                                child: VerticalDivider(
+                                  color: Color.fromRGBO(112, 112, 112, 1),
+                                  thickness: 2,
+                                ),
                               ),
                               Column(
                                 children: [
-                                  SizedBox(
-                                    height: 63,
-                                    child: VerticalDivider(
-                                      color: Color.fromRGBO(112, 112, 112, 1),
-                                      thickness: 2,
-                                    ),
-                                  ),
+                                  Text("Load",
+                                      style: BookingText.helveticablack),
+                                  Text("Woods",
+                                      style: HomepageText.helvetica16black)
                                 ],
                               ),
                               SizedBox(
-                                width: 40,
-                              ),
-                              Column(
-                                children: [
-                                  Text(
-                                    "Load",
-                                    style: TextStyle(
-                                        fontSize: 16,
-                                        fontFamily: "Helvetica",
-                                        color: Color.fromRGBO(16, 3, 3, 1)),
-                                  ),
-                                  Text(
-                                    "Woods",
-                                    style: TextStyle(
-                                        fontSize: 16,
-                                        fontFamily: "Helvetica",
-                                        color: Color.fromRGBO(16, 3, 3, 1)),
-                                  )
-                                ],
-                              ),
-                              SizedBox(
-                                width: 60,
-                              ),
-                              Column(
-                                children: [
-                                  Text(
-                                    "Size",
-                                    style: TextStyle(
-                                        fontSize: 17,
-                                        fontFamily: "Helvetica",
-                                        color: Color.fromRGBO(16, 3, 3, 1)),
-                                  ),
-                                  Text(
-                                    " 1 to 1.5",
-                                    style: TextStyle(
-                                        fontSize: 16,
-                                        fontFamily: "Helvetica",
-                                        color: Color.fromRGBO(16, 3, 3, 1)),
-                                  )
-                                ],
+                                child: Column(
+                                  children: [
+                                    Text("Size",
+                                        style: BookingText.helveticablack),
+                                    Text(" 1 to 1.5",
+                                        style: HomepageText.helvetica16black)
+                                  ],
+                                ),
                               ),
                             ],
                           ),
@@ -191,71 +147,58 @@ class _BookingsState extends State<Bookings> {
                       ],
                     ),
                   ),
-                  SizedBox(
-                    width: 50,
-                  ),
-                  Column(
-                    children: [
-                      SizedBox(
-                        height: 556,
-                        child: VerticalDivider(
-                          color: Color.fromRGBO(204, 195, 195, 1),
-                          thickness: 1,
-                        ),
-                      ),
-                    ],
+                  VerticalDivider(
+                    color: Color.fromRGBO(204, 195, 195, 1),
+                    thickness: 1,
                   ),
                   Expanded(
                     child: Padding(
-                      padding: EdgeInsets.fromLTRB(5.w, 8.h, 5.w, 8.h),
+                      padding: EdgeInsets.fromLTRB(3.w, 8.h, 0, 8.h),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           CustomRadio1(
-                              onChanged: (val) {
-                                setState(() {
-                                  selectedRadioValue =
-                                      val; // Unselect if already selected
-                                  isButtonEnabled = true;
-                                });
-                              },
-                              groupValue: selectedRadioValue,
-                              value: 1,
-                              text1: 'Vendor 1',
-                              colors: Colors.white,
-                              textcolor1: Colors.black54,
-                              text2: "XXXX SAR",
-                              textcolor2: Colors.black38),
+                            onChanged: (val) {
+                              setState(() {
+                                selectedRadioValue =
+                                    val; // Unselect if already selected
+                                isButtonEnabled = true;
+                              });
+                            },
+                            groupValue: selectedRadioValue,
+                            value: 1,
+                            text1: 'Vendor 1',
+                            colors: Colors.white,
+                            text2: "XXXX SAR",
+                          ),
                           CustomRadio1(
-                              onChanged: (val) {
-                                setState(() {
-                                  selectedRadioValue =
-                                      val; // Unselect if already selected
-                                  isButtonEnabled = true;
-                                });
-                              },
-                              groupValue: selectedRadioValue,
-                              value: 2,
-                              text1: 'Vendor 2',
-                              colors: Colors.white,
-                              textcolor1: Colors.black54,
-                              text2: "XXXX SAR",
-                              textcolor2: Colors.black38),
+                            onChanged: (val) {
+                              setState(() {
+                                selectedRadioValue =
+                                    val; // Unselect if already selected
+                                isButtonEnabled = true;
+                              });
+                            },
+                            groupValue: selectedRadioValue,
+                            value: 2,
+                            text1: 'Vendor 2',
+                            colors: Colors.white,
+                            text2: "XXXX SAR",
+                          ),
                           CustomRadio1(
-                              onChanged: (val) {
-                                setState(() {
-                                  selectedRadioValue =
-                                      val; // Unselect if already selected
-                                  isButtonEnabled = true;
-                                });
-                              },
-                              groupValue: selectedRadioValue,
-                              value: 3,
-                              text1: 'Vendor 3',
-                              colors: Colors.white,
-                              textcolor1: Colors.black54,
-                              text2: "XXXX SAR",
-                              textcolor2: Colors.black38),
+                            onChanged: (val) {
+                              setState(() {
+                                selectedRadioValue =
+                                    val; // Unselect if already selected
+                                isButtonEnabled = true;
+                              });
+                            },
+                            groupValue: selectedRadioValue,
+                            value: 3,
+                            text1: 'Vendor 3',
+                            colors: Colors.white,
+                            text2: "XXXX SAR",
+                          ),
                           SizedBox(
                             height: 20,
                           ),
@@ -275,31 +218,33 @@ class _BookingsState extends State<Bookings> {
                                     },
                                   );
                                 },
-                                child: Text(
-                                  "Cancel Request",
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    fontFamily: "Helvetica",
-                                    color: Color.fromRGBO(158, 101, 169, 1),
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
+                                child: Text("Cancel Request",
+                                    style: DialogText.purplehelveticabold),
                               ),
                             ],
                           ),
                           SizedBox(
-                            height: 110,
+                            height: 90,
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              CustomButton(
-                                onPressed: () {},
-                                text: 'Pay Advance: XXXX',
+                              Expanded(
+                                child: CustomButton2(
+                                  onPressed: () {},
+                                  text1: 'Pay Advance: ',
+                                  text2: 'XXXX',
+                                ),
                               ),
-                              CustomButton(
-                                onPressed: () {},
-                                text: 'Pay: XXXX',
+                              SizedBox(
+                                width: 1.w,
+                              ),
+                              Expanded(
+                                child: CustomButton2(
+                                  onPressed: () {},
+                                  text1: 'Pay: ',
+                                  text2: 'XXXX',
+                                ),
                               ),
                             ],
                           )
