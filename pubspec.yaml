@@ -63,6 +63,7 @@ dependencies:
   open_street_map_search_and_pick: ^0.1.1
   map_location_picker: ^1.2.8+3
   dropdown_model_list: ^2.0.2
+  modular_customizable_dropdown: ^2.0.3
 
 dev_dependencies:
   flutter_test:
@@ -120,18 +121,18 @@ flutter:
     - family: Acre
       fonts:
         - asset: fonts/Acre.otf      
-    - family: Colfax
-      fonts:
-        - asset: fonts/Colfax-Regular.otf
-    - family: ColfaxBold
-      fonts:
-        - asset: fonts/Colfax-Bold.otf
     - family: PoppinsSemiBold
       fonts:
         - asset: fonts/Poppins-SemiBold.ttf       
     - family: Poppins
       fonts:
         - asset: fonts/Poppins.ttf       
+    - family: Colfax
+      fonts:
+        - asset: fonts/Colfax-Regular.otf
+    - family: ColfaxBold
+      fonts:
+        - asset: fonts/Colfax-Bold.otf
     - family: NotoSans
       fonts:
         - asset: fonts/NotoSans-Regular.ttf

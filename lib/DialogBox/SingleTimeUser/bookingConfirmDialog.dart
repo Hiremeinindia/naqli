@@ -50,7 +50,7 @@ class _BookingConfirmDialogState extends State<BookingConfirmDialog> {
                           child: Center(
                             child: Text(
                               'Booking Confirmation',
-                              style: TabelText.dialogtext1,
+                              style: DialogText.poppins20,
                             ),
                           ),
                         ),
@@ -84,13 +84,13 @@ class _BookingConfirmDialogState extends State<BookingConfirmDialog> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Text(
-                            'BOOKIN ID NAQXXXXXXXX Confirmed',
-                            style: TabelText.dialogtext2,
+                            'BOOKING ID NAQXXXXXXXX Confirmed',
+                            style: DialogText.poppins22,
                             textAlign: TextAlign.center,
                           ),
                           Text(
-                            'With Advance payment Of SAR XXXXXX',
-                            style: TabelText.dialogtext3,
+                            'With Advance Payment of SAR XXXXXX',
+                            style: DialogText.poppins16,
                             textAlign: TextAlign.center,
                           ),
                         ],
