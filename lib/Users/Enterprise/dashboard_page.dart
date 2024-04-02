@@ -3,7 +3,7 @@ import 'package:easy_sidemenu/easy_sidemenu.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/Users/Enterprise/bookings.dart';
+import 'package:flutter_application_1/Users/Enterprise/booking_manager.dart';
 import 'package:flutter_application_1/Users/Enterprise/contracts.dart';
 import 'package:flutter_application_1/Users/Enterprise/dashboard.dart';
 import 'package:flutter_application_1/Users/Enterprise/payments.dart';

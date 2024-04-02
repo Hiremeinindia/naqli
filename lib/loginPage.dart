@@ -50,9 +50,9 @@ class _LoginPageState extends State<LoginPage> {
 
   Future<String> getUserRole(String uid) async {
     try {
-      String enterpriseCollection = 'enterprisedummy';
-      String superuserCollection = 'superuserdummy';
-      String userCollection = 'userdummy';
+      String enterpriseCollection = 'enterpriseuser';
+      String superuserCollection = 'superuser';
+      String userCollection = 'user';
 
       // Check if the user is an admin
       DocumentSnapshot<Map<String, dynamic>> enterpriseSnapshot =
@@ -244,8 +244,7 @@ class _LoginPageState extends State<LoginPage> {
                                                   MaterialPageRoute(
                                                     builder: (context) =>
                                                         SingleUserDashboardPage(
-                                                            user: userCredential
-                                                                .user!),
+                                                            user: userId),
                                                   ),
                                                 );
                                               } else if (userRole ==
@@ -255,8 +254,7 @@ class _LoginPageState extends State<LoginPage> {
                                                   MaterialPageRoute(
                                                     builder: (context) =>
                                                         SuperUserDashboardPage(
-                                                            user: userCredential
-                                                                .user!),
+                                                            user: userId),
                                                   ),
                                                 );
                                               } else if (userRole ==
@@ -353,27 +351,47 @@ class _LoginPageState extends State<LoginPage> {
                                       style: LoginpageText.purplehelvetica),
                                   onTap: () async {
                                     // _showOtpVerificationDialog();
-                                    String email = controller.email.text;
-                                    String password = controller.password.text;
-                                    String selectedAccounttype =
-                                        controller.selectedAccounttype.text;
+                                    String? email = '';
+                                    String password = '';
+                                    String selectedAccounttype = '';
+
+                                    String firstName = '';
+                                    String lastName = '';
+                                    String legalName = '';
+                                    String adminUid = '';
+                                    String contactNumber = '';
+                                    String address = '';
+                                    String selectedGovtId = '';
+                                    String confirmPassword = '';
+                                    String alternateNumber = '';
+                                    String address2 = '';
+                                    String idNumber = '';
+                                    String selectedCity = '';
+                                    String companyidNumber = '';
                                     showDialog(
                                       barrierColor:
                                           Colors.grey.withOpacity(0.5),
                                       context: context,
                                       builder: (context) {
-                                        return VerifiedDialog(email, password,
-                                            selectedAccounttype);
+                                        return MblNoDialog(
+                                            email,
+                                            password,
+                                            selectedAccounttype,
+                                            firstName,
+                                            lastName,
+                                            legalName,
+                                            address,
+                                            address2,
+                                            alternateNumber,
+                                            companyidNumber,
+                                            confirmPassword,
+                                            contactNumber,
+                                            idNumber,
+                                            selectedCity,
+                                            selectedGovtId,
+                                            adminUid);
                                       },
                                     );
-                                    if (isVerified) {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => MyHomePage(),
-                                        ),
-                                      );
-                                    }
                                   },
                                 ),
                                 SizedBox(
@@ -502,7 +520,7 @@ class _LoginPageState extends State<LoginPage> {
                                     MaterialPageRoute(
                                       builder: (context) =>
                                           SingleUserDashboardPage(
-                                              user: userCredential.user!),
+                                              user: userId!),
                                     ),
                                   );
                                 } else if (userRole == 'Super User') {
@@ -511,7 +529,7 @@ class _LoginPageState extends State<LoginPage> {
                                       MaterialPageRoute(
                                         builder: (context) =>
                                             SuperUserDashboardPage(
-                                                user: userCredential.user!),
+                                                user: userId),
                                       ));
                                 } else if (userRole == 'Enterprise') {
                                   Navigator.push(

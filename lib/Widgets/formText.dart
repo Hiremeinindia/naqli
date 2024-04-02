@@ -96,6 +96,11 @@ class DialogText {
       color: Colors.black,
       fontFamily: 'Poppins',
       fontWeight: FontWeight.bold);
+  static const TextStyle dialogtext1 = TextStyle(
+    fontSize: 18,
+    color: Colors.white,
+    fontFamily: 'Helvetica',
+  );
 }
 
 class AvailableText {
@@ -201,6 +206,36 @@ class BookingHistoryText {
       letterSpacing: 1,
       fontFamily: 'SFproText',
       color: Colors.white);
+}
+
+class BookingManagerText {
+  static const TextStyle sfpro20white = TextStyle(
+    color: Colors.white,
+    fontFamily: 'SFProText',
+    letterSpacing: 1,
+    fontSize: 18,
+  );
+  static TextStyle sfpro20black = TextStyle(
+    color: Color.fromRGBO(80, 69, 74, 1).withOpacity(0.9),
+    fontFamily: 'SFProText',
+    letterSpacing: 1,
+    fontSize: 18,
+  );
+}
+
+class TriggerBookingText {
+  static const TextStyle sfpro16 = TextStyle(
+    color: Colors.black87,
+    fontFamily: 'SFProText',
+    letterSpacing: 1,
+    fontSize: 15,
+  );
+  static const TextStyle sfpro14 = TextStyle(
+    color: Color.fromRGBO(143, 142, 151, 1),
+    letterSpacing: 1.5,
+    fontFamily: 'SFProText',
+    fontSize: 13,
+  );
 }
 
 class FormTextStyle {

@@ -28,6 +28,7 @@ class CustomRadio extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 37,
+      padding: EdgeInsets.fromLTRB(0.1.w, 1.h, 0, 1.h),
       decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
@@ -41,49 +42,44 @@ class CustomRadio extends StatelessWidget {
           borderRadius: BorderRadius.circular(19.0),
           border: Border.all(
               color: Color.fromRGBO(216, 216, 216, 1).withOpacity(0.5))),
-      child: Padding(
-        padding: EdgeInsets.fromLTRB(0.1.w, 1.h, 1.w, 1.h),
-        child: Center(
-          child: Row(
-            children: [
-              Transform.scale(
-                scale: 0.7,
-                child: Radio<int?>(
-                  splashRadius: 5,
-                  fillColor: MaterialStateProperty.resolveWith((states) {
-                    if (states.contains(MaterialState.selected)) {
-                      return Color.fromRGBO(98, 105, 254, 1);
-                    }
-                    return Color.fromRGBO(208, 205, 205, 1);
-                  }),
-                  hoverColor: Color.fromRGBO(98, 105, 254, 1).withOpacity(.8),
-                  value: value,
-                  groupValue: groupValue,
-                  onChanged: onChanged,
-                ),
-              ),
-              Text(text1!,
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'SFProText',
-                    fontSize: 9,
-                    color: Colors.black54,
-                  )),
-              SizedBox(
-                width: 10,
-              ),
-              Text(
-                text2!,
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontFamily: 'SFProText',
-                  fontSize: 8,
-                  color: Color.fromRGBO(143, 142, 151, 1),
-                ),
-              ),
-            ],
+      child: Row(
+        children: [
+          Transform.scale(
+            scale: 0.7,
+            child: Radio<int?>(
+              splashRadius: 5,
+              fillColor: MaterialStateProperty.resolveWith((states) {
+                if (states.contains(MaterialState.selected)) {
+                  return Color.fromRGBO(98, 105, 254, 1);
+                }
+                return Color.fromRGBO(208, 205, 205, 1);
+              }),
+              hoverColor: Color.fromRGBO(98, 105, 254, 1).withOpacity(.8),
+              value: value,
+              groupValue: groupValue,
+              onChanged: onChanged,
+            ),
           ),
-        ),
+          Text(text1!,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontFamily: 'SFProText',
+                fontSize: 9,
+                color: Color.fromRGBO(128, 118, 118, 1),
+              )),
+          SizedBox(
+            width: 10,
+          ),
+          Text(
+            text2!,
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontFamily: 'SFProText',
+              fontSize: 8,
+              color: Color.fromRGBO(148, 142, 183, 1),
+            ),
+          ),
+        ],
       ),
     );
   }

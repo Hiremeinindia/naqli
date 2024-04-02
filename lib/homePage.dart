@@ -5,6 +5,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_application_1/availableBus.dart';
+import 'package:flutter_application_1/availableEquipment.dart';
+import 'package:flutter_application_1/availableSpecial.dart';
+import 'package:flutter_application_1/availableVehicle.dart';
 import 'package:flutter_application_1/classes/language.dart';
 import 'package:flutter_application_1/classes/language_constants.dart';
 import 'package:flutter_application_1/createAccount.dart';
@@ -369,43 +373,111 @@ class _MyHomePageState extends State<MyHomePage>
                                               mainAxisAlignment:
                                                   MainAxisAlignment.spaceEvenly,
                                               children: [
-                                                Card(
-                                                  elevation: 5.5,
-                                                  shadowColor: Color.fromRGBO(
-                                                          216, 216, 216, 1)
-                                                      .withOpacity(0.6),
-                                                  child: Container(
-                                                    width: 200,
-                                                    height: 200,
-                                                    decoration: BoxDecoration(
-                                                      color: Color.fromRGBO(
-                                                          247, 246, 255, 1),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              8.0),
+                                                GestureDetector(
+                                                  onTap: () {
+                                                    Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              AvailableVehicle()),
+                                                    );
+                                                  },
+                                                  child: Card(
+                                                    elevation: 5.5,
+                                                    shadowColor: Color.fromRGBO(
+                                                            216, 216, 216, 1)
+                                                        .withOpacity(0.6),
+                                                    child: Container(
+                                                      width: 200,
+                                                      height: 200,
+                                                      decoration: BoxDecoration(
+                                                        color: Color.fromRGBO(
+                                                            247, 246, 255, 1),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(8.0),
+                                                      ),
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child: Column(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .end,
+                                                          children: [
+                                                            Image.asset(
+                                                              'Group68.png',
+                                                              width: 150,
+                                                              height: 139,
+                                                            ),
+                                                            Divider(
+                                                              color:
+                                                                  Colors.black,
+                                                            ),
+                                                            SizedBox(height: 2),
+                                                            Text('Vehicle',
+                                                                style: HomepageText
+                                                                    .helvetica16black),
+                                                          ],
+                                                        ),
+                                                      ),
                                                     ),
-                                                    child: Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              8.0),
-                                                      child: Column(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .end,
-                                                        children: [
-                                                          Image.asset(
-                                                            'Group68.png',
-                                                            width: 150,
-                                                            height: 139,
-                                                          ),
-                                                          Divider(
-                                                            color: Colors.black,
-                                                          ),
-                                                          SizedBox(height: 2),
-                                                          Text('Vehicle',
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  width: 15,
+                                                ),
+                                                GestureDetector(
+                                                  onTap: () {
+                                                    Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              AvailableBus()),
+                                                    );
+                                                  },
+                                                  child: Card(
+                                                    elevation: 5.5,
+                                                    shadowColor: Color.fromRGBO(
+                                                            216, 216, 216, 1)
+                                                        .withOpacity(0.6),
+                                                    child: Container(
+                                                      width: 200,
+                                                      height: 200,
+                                                      decoration: BoxDecoration(
+                                                        color: Color.fromRGBO(
+                                                            247, 246, 255, 1),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(8.0),
+                                                      ),
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child: Column(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .end,
+                                                          children: [
+                                                            Image.asset(
+                                                              'bus.png',
+                                                              width: 150,
+                                                              height: 139,
+                                                            ),
+                                                            Divider(
+                                                              color:
+                                                                  Colors.black,
+                                                            ),
+                                                            SizedBox(height: 2),
+                                                            Text(
+                                                              'Bus',
                                                               style: HomepageText
-                                                                  .helvetica16black),
-                                                        ],
+                                                                  .helvetica16black,
+                                                            ),
+                                                          ],
+                                                        ),
                                                       ),
                                                     ),
                                                   ),
@@ -413,45 +485,56 @@ class _MyHomePageState extends State<MyHomePage>
                                                 SizedBox(
                                                   width: 15,
                                                 ),
-                                                Card(
-                                                  elevation: 5.5,
-                                                  shadowColor: Color.fromRGBO(
-                                                          216, 216, 216, 1)
-                                                      .withOpacity(0.6),
-                                                  child: Container(
-                                                    width: 200,
-                                                    height: 200,
-                                                    decoration: BoxDecoration(
-                                                      color: Color.fromRGBO(
-                                                          247, 246, 255, 1),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              8.0),
-                                                    ),
-                                                    child: Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              8.0),
-                                                      child: Column(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .end,
-                                                        children: [
-                                                          Image.asset(
-                                                            'bus.png',
-                                                            width: 150,
-                                                            height: 139,
-                                                          ),
-                                                          Divider(
-                                                            color: Colors.black,
-                                                          ),
-                                                          SizedBox(height: 2),
-                                                          Text(
-                                                            'Bus',
-                                                            style: HomepageText
-                                                                .helvetica16black,
-                                                          ),
-                                                        ],
+                                                GestureDetector(
+                                                  onTap: () {
+                                                    Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              AvailableEquipment()),
+                                                    );
+                                                  },
+                                                  child: Card(
+                                                    elevation: 5.5,
+                                                    shadowColor: Color.fromRGBO(
+                                                            216, 216, 216, 1)
+                                                        .withOpacity(0.6),
+                                                    child: Container(
+                                                      width: 200,
+                                                      height: 200,
+                                                      decoration: BoxDecoration(
+                                                        color: Color.fromRGBO(
+                                                            247, 246, 255, 1),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(8.0),
+                                                      ),
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child: Column(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .end,
+                                                          children: [
+                                                            Image.asset(
+                                                              'Group1496.png',
+                                                              width: 150,
+                                                              height: 139,
+                                                            ),
+                                                            Divider(
+                                                              color:
+                                                                  Colors.black,
+                                                            ),
+                                                            SizedBox(height: 2),
+                                                            Text(
+                                                              'Equipment-2',
+                                                              style: HomepageText
+                                                                  .helvetica16black,
+                                                            ),
+                                                          ],
+                                                        ),
                                                       ),
                                                     ),
                                                   ),
@@ -459,45 +542,56 @@ class _MyHomePageState extends State<MyHomePage>
                                                 SizedBox(
                                                   width: 15,
                                                 ),
-                                                Card(
-                                                  elevation: 5.5,
-                                                  shadowColor: Color.fromRGBO(
-                                                          216, 216, 216, 1)
-                                                      .withOpacity(0.6),
-                                                  child: Container(
-                                                    width: 200,
-                                                    height: 200,
-                                                    decoration: BoxDecoration(
-                                                      color: Color.fromRGBO(
-                                                          247, 246, 255, 1),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              8.0),
-                                                    ),
-                                                    child: Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              8.0),
-                                                      child: Column(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .end,
-                                                        children: [
-                                                          Image.asset(
-                                                            'Group1496.png',
-                                                            width: 150,
-                                                            height: 139,
-                                                          ),
-                                                          Divider(
-                                                            color: Colors.black,
-                                                          ),
-                                                          SizedBox(height: 2),
-                                                          Text(
-                                                            'Equipment-2',
-                                                            style: HomepageText
-                                                                .helvetica16black,
-                                                          ),
-                                                        ],
+                                                GestureDetector(
+                                                  onTap: () {
+                                                    Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              AvailableSpecial()),
+                                                    );
+                                                  },
+                                                  child: Card(
+                                                    elevation: 5.5,
+                                                    shadowColor: Color.fromRGBO(
+                                                            216, 216, 216, 1)
+                                                        .withOpacity(0.6),
+                                                    child: Container(
+                                                      width: 200,
+                                                      height: 200,
+                                                      decoration: BoxDecoration(
+                                                        color: Color.fromRGBO(
+                                                            247, 246, 255, 1),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(8.0),
+                                                      ),
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child: Column(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .end,
+                                                          children: [
+                                                            Image.asset(
+                                                              'Group1660.png',
+                                                              width: 150,
+                                                              height: 139,
+                                                            ),
+                                                            Divider(
+                                                              color:
+                                                                  Colors.black,
+                                                            ),
+                                                            SizedBox(height: 2),
+                                                            Text(
+                                                              'Special',
+                                                              style: HomepageText
+                                                                  .helvetica16black,
+                                                            ),
+                                                          ],
+                                                        ),
                                                       ),
                                                     ),
                                                   ),
@@ -505,91 +599,56 @@ class _MyHomePageState extends State<MyHomePage>
                                                 SizedBox(
                                                   width: 15,
                                                 ),
-                                                Card(
-                                                  elevation: 5.5,
-                                                  shadowColor: Color.fromRGBO(
-                                                          216, 216, 216, 1)
-                                                      .withOpacity(0.6),
-                                                  child: Container(
-                                                    width: 200,
-                                                    height: 200,
-                                                    decoration: BoxDecoration(
-                                                      color: Color.fromRGBO(
-                                                          247, 246, 255, 1),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              8.0),
-                                                    ),
-                                                    child: Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              8.0),
-                                                      child: Column(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .end,
-                                                        children: [
-                                                          Image.asset(
-                                                            'Group1660.png',
-                                                            width: 150,
-                                                            height: 139,
-                                                          ),
-                                                          Divider(
-                                                            color: Colors.black,
-                                                          ),
-                                                          SizedBox(height: 2),
-                                                          Text(
-                                                            'Special',
-                                                            style: HomepageText
-                                                                .helvetica16black,
-                                                          ),
-                                                        ],
+                                                GestureDetector(
+                                                  onTap: () {
+                                                    Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              AvailableSpecial()),
+                                                    );
+                                                  },
+                                                  child: Card(
+                                                    elevation: 5.5,
+                                                    shadowColor: Color.fromRGBO(
+                                                            216, 216, 216, 1)
+                                                        .withOpacity(0.6),
+                                                    child: Container(
+                                                      width: 200,
+                                                      height: 200,
+                                                      decoration: BoxDecoration(
+                                                        color: Color.fromRGBO(
+                                                            247, 246, 255, 1),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(8.0),
                                                       ),
-                                                    ),
-                                                  ),
-                                                ),
-                                                SizedBox(
-                                                  width: 15,
-                                                ),
-                                                Card(
-                                                  elevation: 5.5,
-                                                  shadowColor: Color.fromRGBO(
-                                                          216, 216, 216, 1)
-                                                      .withOpacity(0.6),
-                                                  child: Container(
-                                                    width: 200,
-                                                    height: 200,
-                                                    decoration: BoxDecoration(
-                                                      color: Color.fromRGBO(
-                                                          247, 246, 255, 1),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              8.0),
-                                                    ),
-                                                    child: Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              8.0),
-                                                      child: Column(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .end,
-                                                        children: [
-                                                          Image.asset(
-                                                            'Group1716.png',
-                                                            width: 150,
-                                                            height: 139,
-                                                          ),
-                                                          Divider(
-                                                            color: Colors.black,
-                                                          ),
-                                                          SizedBox(height: 2),
-                                                          Text(
-                                                            'Others',
-                                                            style: HomepageText
-                                                                .helvetica16black,
-                                                          ),
-                                                        ],
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child: Column(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .end,
+                                                          children: [
+                                                            Image.asset(
+                                                              'Group1716.png',
+                                                              width: 150,
+                                                              height: 139,
+                                                            ),
+                                                            Divider(
+                                                              color:
+                                                                  Colors.black,
+                                                            ),
+                                                            SizedBox(height: 2),
+                                                            Text(
+                                                              'Others',
+                                                              style: HomepageText
+                                                                  .helvetica16black,
+                                                            ),
+                                                          ],
+                                                        ),
                                                       ),
                                                     ),
                                                   ),
@@ -957,40 +1016,50 @@ class _MyHomePageState extends State<MyHomePage>
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceEvenly,
                                       children: [
-                                        Card(
-                                          elevation: 5.5,
-                                          shadowColor:
-                                              Color.fromRGBO(216, 216, 216, 1)
-                                                  .withOpacity(0.6),
-                                          child: Container(
-                                            width: 200,
-                                            height: 200,
-                                            decoration: BoxDecoration(
-                                              color: Color.fromRGBO(
-                                                  247, 246, 255, 1),
-                                              borderRadius:
-                                                  BorderRadius.circular(8.0),
-                                            ),
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.all(8.0),
-                                              child: Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.end,
-                                                children: [
-                                                  Image.asset(
-                                                    'Group68.png',
-                                                    width: 150,
-                                                    height: 139,
-                                                  ),
-                                                  Divider(
-                                                    color: Colors.black,
-                                                  ),
-                                                  SizedBox(height: 2),
-                                                  Text('Vehicle',
-                                                      style: HomepageText
-                                                          .helvetica16black),
-                                                ],
+                                        GestureDetector(
+                                          onTap: () {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      AvailableVehicle()),
+                                            );
+                                          },
+                                          child: Card(
+                                            elevation: 5.5,
+                                            shadowColor:
+                                                Color.fromRGBO(216, 216, 216, 1)
+                                                    .withOpacity(0.6),
+                                            child: Container(
+                                              width: 200,
+                                              height: 200,
+                                              decoration: BoxDecoration(
+                                                color: Color.fromRGBO(
+                                                    247, 246, 255, 1),
+                                                borderRadius:
+                                                    BorderRadius.circular(8.0),
+                                              ),
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(8.0),
+                                                child: Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.end,
+                                                  children: [
+                                                    Image.asset(
+                                                      'Group68.png',
+                                                      width: 150,
+                                                      height: 139,
+                                                    ),
+                                                    Divider(
+                                                      color: Colors.black,
+                                                    ),
+                                                    SizedBox(height: 2),
+                                                    Text('Vehicle',
+                                                        style: HomepageText
+                                                            .helvetica16black),
+                                                  ],
+                                                ),
                                               ),
                                             ),
                                           ),
@@ -998,40 +1067,50 @@ class _MyHomePageState extends State<MyHomePage>
                                         SizedBox(
                                           height: 15,
                                         ),
-                                        Card(
-                                          elevation: 5.5,
-                                          shadowColor:
-                                              Color.fromRGBO(216, 216, 216, 1)
-                                                  .withOpacity(0.6),
-                                          child: Container(
-                                            width: 200,
-                                            height: 200,
-                                            decoration: BoxDecoration(
-                                              color: Color.fromRGBO(
-                                                  247, 246, 255, 1),
-                                              borderRadius:
-                                                  BorderRadius.circular(8.0),
-                                            ),
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.all(8.0),
-                                              child: Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.end,
-                                                children: [
-                                                  Image.asset(
-                                                    'bus.png',
-                                                    width: 150,
-                                                    height: 139,
-                                                  ),
-                                                  Divider(
-                                                    color: Colors.black,
-                                                  ),
-                                                  SizedBox(height: 2),
-                                                  Text('Bus',
-                                                      style: HomepageText
-                                                          .helvetica16black),
-                                                ],
+                                        GestureDetector(
+                                          onTap: () {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      AvailableBus()),
+                                            );
+                                          },
+                                          child: Card(
+                                            elevation: 5.5,
+                                            shadowColor:
+                                                Color.fromRGBO(216, 216, 216, 1)
+                                                    .withOpacity(0.6),
+                                            child: Container(
+                                              width: 200,
+                                              height: 200,
+                                              decoration: BoxDecoration(
+                                                color: Color.fromRGBO(
+                                                    247, 246, 255, 1),
+                                                borderRadius:
+                                                    BorderRadius.circular(8.0),
+                                              ),
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(8.0),
+                                                child: Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.end,
+                                                  children: [
+                                                    Image.asset(
+                                                      'bus.png',
+                                                      width: 150,
+                                                      height: 139,
+                                                    ),
+                                                    Divider(
+                                                      color: Colors.black,
+                                                    ),
+                                                    SizedBox(height: 2),
+                                                    Text('Bus',
+                                                        style: HomepageText
+                                                            .helvetica16black),
+                                                  ],
+                                                ),
                                               ),
                                             ),
                                           ),
@@ -1039,40 +1118,50 @@ class _MyHomePageState extends State<MyHomePage>
                                         SizedBox(
                                           height: 15,
                                         ),
-                                        Card(
-                                          elevation: 5.5,
-                                          shadowColor:
-                                              Color.fromRGBO(216, 216, 216, 1)
-                                                  .withOpacity(0.6),
-                                          child: Container(
-                                            width: 200,
-                                            height: 200,
-                                            decoration: BoxDecoration(
-                                              color: Color.fromRGBO(
-                                                  247, 246, 255, 1),
-                                              borderRadius:
-                                                  BorderRadius.circular(8.0),
-                                            ),
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.all(8.0),
-                                              child: Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.end,
-                                                children: [
-                                                  Image.asset(
-                                                    'Group1496.png',
-                                                    width: 150,
-                                                    height: 139,
-                                                  ),
-                                                  Divider(
-                                                    color: Colors.black,
-                                                  ),
-                                                  SizedBox(height: 2),
-                                                  Text('Equipment-2',
-                                                      style: HomepageText
-                                                          .helvetica16black),
-                                                ],
+                                        GestureDetector(
+                                          onTap: () {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      AvailableEquipment()),
+                                            );
+                                          },
+                                          child: Card(
+                                            elevation: 5.5,
+                                            shadowColor:
+                                                Color.fromRGBO(216, 216, 216, 1)
+                                                    .withOpacity(0.6),
+                                            child: Container(
+                                              width: 200,
+                                              height: 200,
+                                              decoration: BoxDecoration(
+                                                color: Color.fromRGBO(
+                                                    247, 246, 255, 1),
+                                                borderRadius:
+                                                    BorderRadius.circular(8.0),
+                                              ),
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(8.0),
+                                                child: Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.end,
+                                                  children: [
+                                                    Image.asset(
+                                                      'Group1496.png',
+                                                      width: 150,
+                                                      height: 139,
+                                                    ),
+                                                    Divider(
+                                                      color: Colors.black,
+                                                    ),
+                                                    SizedBox(height: 2),
+                                                    Text('Equipment-2',
+                                                        style: HomepageText
+                                                            .helvetica16black),
+                                                  ],
+                                                ),
                                               ),
                                             ),
                                           ),
@@ -1080,40 +1169,50 @@ class _MyHomePageState extends State<MyHomePage>
                                         SizedBox(
                                           height: 15,
                                         ),
-                                        Card(
-                                          elevation: 5.5,
-                                          shadowColor:
-                                              Color.fromRGBO(216, 216, 216, 1)
-                                                  .withOpacity(0.6),
-                                          child: Container(
-                                            width: 200,
-                                            height: 200,
-                                            decoration: BoxDecoration(
-                                              color: Color.fromRGBO(
-                                                  247, 246, 255, 1),
-                                              borderRadius:
-                                                  BorderRadius.circular(8.0),
-                                            ),
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.all(8.0),
-                                              child: Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.end,
-                                                children: [
-                                                  Image.asset(
-                                                    'Group1660.png',
-                                                    width: 150,
-                                                    height: 139,
-                                                  ),
-                                                  Divider(
-                                                    color: Colors.black,
-                                                  ),
-                                                  SizedBox(height: 2),
-                                                  Text('Special',
-                                                      style: HomepageText
-                                                          .helvetica16black),
-                                                ],
+                                        GestureDetector(
+                                          onTap: () {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      AvailableSpecial()),
+                                            );
+                                          },
+                                          child: Card(
+                                            elevation: 5.5,
+                                            shadowColor:
+                                                Color.fromRGBO(216, 216, 216, 1)
+                                                    .withOpacity(0.6),
+                                            child: Container(
+                                              width: 200,
+                                              height: 200,
+                                              decoration: BoxDecoration(
+                                                color: Color.fromRGBO(
+                                                    247, 246, 255, 1),
+                                                borderRadius:
+                                                    BorderRadius.circular(8.0),
+                                              ),
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(8.0),
+                                                child: Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.end,
+                                                  children: [
+                                                    Image.asset(
+                                                      'Group1660.png',
+                                                      width: 150,
+                                                      height: 139,
+                                                    ),
+                                                    Divider(
+                                                      color: Colors.black,
+                                                    ),
+                                                    SizedBox(height: 2),
+                                                    Text('Special',
+                                                        style: HomepageText
+                                                            .helvetica16black),
+                                                  ],
+                                                ),
                                               ),
                                             ),
                                           ),
@@ -1121,40 +1220,50 @@ class _MyHomePageState extends State<MyHomePage>
                                         SizedBox(
                                           height: 15,
                                         ),
-                                        Card(
-                                          elevation: 5.5,
-                                          shadowColor:
-                                              Color.fromRGBO(216, 216, 216, 1)
-                                                  .withOpacity(0.6),
-                                          child: Container(
-                                            width: 200,
-                                            height: 200,
-                                            decoration: BoxDecoration(
-                                              color: Color.fromRGBO(
-                                                  247, 246, 255, 1),
-                                              borderRadius:
-                                                  BorderRadius.circular(8.0),
-                                            ),
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.all(8.0),
-                                              child: Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.end,
-                                                children: [
-                                                  Image.asset(
-                                                    'Group1716.png',
-                                                    width: 150,
-                                                    height: 139,
-                                                  ),
-                                                  Divider(
-                                                    color: Colors.black,
-                                                  ),
-                                                  SizedBox(height: 2),
-                                                  Text('Others',
-                                                      style: HomepageText
-                                                          .helvetica16black),
-                                                ],
+                                        GestureDetector(
+                                          onTap: () {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      AvailableSpecial()),
+                                            );
+                                          },
+                                          child: Card(
+                                            elevation: 5.5,
+                                            shadowColor:
+                                                Color.fromRGBO(216, 216, 216, 1)
+                                                    .withOpacity(0.6),
+                                            child: Container(
+                                              width: 200,
+                                              height: 200,
+                                              decoration: BoxDecoration(
+                                                color: Color.fromRGBO(
+                                                    247, 246, 255, 1),
+                                                borderRadius:
+                                                    BorderRadius.circular(8.0),
+                                              ),
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(8.0),
+                                                child: Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.end,
+                                                  children: [
+                                                    Image.asset(
+                                                      'Group1716.png',
+                                                      width: 150,
+                                                      height: 139,
+                                                    ),
+                                                    Divider(
+                                                      color: Colors.black,
+                                                    ),
+                                                    SizedBox(height: 2),
+                                                    Text('Others',
+                                                        style: HomepageText
+                                                            .helvetica16black),
+                                                  ],
+                                                ),
                                               ),
                                             ),
                                           ),

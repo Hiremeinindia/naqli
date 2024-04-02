@@ -252,8 +252,8 @@ class _BookingsState extends State<Bookings> {
                                       context: context,
                                       builder: (context) {
                                         return Padding(
-                                          padding: const EdgeInsets.only(
-                                              left: 380, top: 40),
+                                          padding: EdgeInsets.fromLTRB(
+                                              15.w, 0, 15.w, 0),
                                           child: BookingConfirmDialog(),
                                         );
                                       },
