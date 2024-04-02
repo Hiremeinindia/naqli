@@ -13,13 +13,13 @@ import '../../Widgets/formText.dart';
 import '../../classes/language.dart';
 import '../../classes/language_constants.dart';
 import '../../main.dart';
-import 'package:flutter_application_1/Users/SuperUser/bookings.dart';
+import 'package:flutter_application_1/Users/SuperUser/booking_manager.dart';
 import 'package:flutter_application_1/Users/SuperUser/dashboard.dart';
 import 'package:flutter_application_1/Users/SuperUser/payments.dart';
 import 'package:flutter_application_1/Users/SuperUser/trigger_booking.dart';
 
 class SuperUserDashboardPage extends StatefulWidget {
-  final User user;
+  final String user;
   SuperUserDashboardPage({required this.user});
 
   @override

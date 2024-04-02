@@ -12,9 +12,7 @@ import '../../DialogBox/SingleTimeUser/paymentSuccessDialog.dart';
 import '../../Widgets/formText.dart';
 
 class BookingDetails extends StatefulWidget {
-  const BookingDetails({
-    Key? key,
-  }) : super(key: key);
+  BookingDetails();
 
   @override
   State<BookingDetails> createState() => _BookingDetailsState();
@@ -284,7 +282,10 @@ class _BookingDetailsState extends State<BookingDetails> {
                                 barrierColor: Colors.grey.withOpacity(0.5),
                                 context: context,
                                 builder: (context) {
-                                  return BookingSuccessDialog();
+                                  return Padding(
+                                      padding:
+                                          EdgeInsets.fromLTRB(15.w, 0, 15.w, 0),
+                                      child: BookingSuccessDialog());
                                 },
                               );
                             },

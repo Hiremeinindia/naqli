@@ -147,23 +147,7 @@ class _DashboardState extends State<Dashboard> {
                       child: Expanded(
                         child: Column(
                           children: [
-                            Container(
-                              decoration: BoxDecoration(
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Color.fromRGBO(112, 112, 112, 1)
-                                          .withOpacity(0.1),
-                                      offset: Offset(0, 0),
-                                      blurRadius:
-                                          2, // changes position of shadow
-                                    ),
-                                  ],
-                                  color: Colors.white,
-                                  border: Border.all(
-                                      color: Color.fromRGBO(112, 112, 112, 1)
-                                          .withOpacity(0.1)),
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(10))),
+                            ElevationContainer(
                               height: 250,
                               child: Stack(
                                 children: [
@@ -263,8 +247,6 @@ class _DashboardState extends State<Dashboard> {
                                 controller: _bookScroll,
                                 scrollDirection: Axis.horizontal,
                                 child: ElevationContainer(
-                                  bottomleft: 20,
-                                  bottomright: 20,
                                   width: 370,
                                   child: Column(
                                     children: [
@@ -315,25 +297,7 @@ class _DashboardState extends State<Dashboard> {
                           Row(
                             children: [
                               Expanded(
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color:
-                                              Color.fromRGBO(112, 112, 112, 1)
-                                                  .withOpacity(0.1),
-                                          offset: Offset(0, 0),
-                                          blurRadius:
-                                              2, // changes position of shadow
-                                        ),
-                                      ],
-                                      color: Colors.white,
-                                      border: Border.all(
-                                          color:
-                                              Color.fromRGBO(112, 112, 112, 1)
-                                                  .withOpacity(0.1)),
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(10))),
+                                child: ElevationContainer(
                                   height: 250,
                                   child: Chart(
                                     data: lineMarkerData,

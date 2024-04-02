@@ -188,7 +188,7 @@ class _SingleUserPaymentState extends State<SingleUserPayment> {
 
                               decoration: BoxDecoration(
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(20)),
+                                    BorderRadius.all(Radius.circular(8)),
                                 border: Border.all(
                                   color: Color.fromRGBO(112, 112, 112, 1)
                                       .withOpacity(0.3),
@@ -459,7 +459,7 @@ class _SingleUserPaymentState extends State<SingleUserPayment> {
 
                               decoration: BoxDecoration(
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(20)),
+                                    BorderRadius.all(Radius.circular(8)),
                                 border: Border.all(
                                   color: Color.fromRGBO(112, 112, 112, 1)
                                       .withOpacity(0.3),

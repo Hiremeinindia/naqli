@@ -1,27 +1,19 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_application_1/Users/SingleTimeUser/bookingDetails.dart';
+import 'package:flutter_application_1/Widgets/formText.dart';
+import 'package:flutter_application_1/classes/language.dart';
+import 'package:flutter_application_1/classes/language_constants.dart';
+import 'package:flutter_application_1/main.dart';
+import 'package:sizer/sizer.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:easy_sidemenu/easy_sidemenu.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_application_1/DialogBox/bookingdialog.dart';
-import 'package:flutter_application_1/Users/SingleTimeUser/bookingDetails.dart';
-
-import 'package:sizer/sizer.dart';
-import '../../Widgets/customButton.dart';
-import '../../Widgets/formText.dart';
-import '../../classes/language.dart';
-import '../../classes/language_constants.dart';
-import '../../main.dart';
-import 'package:flutter_application_1/Users/SingleUser/bookingHistory.dart';
-import 'package:flutter_application_1/Users/SingleUser/bookings.dart';
-import 'package:flutter_application_1/Users/SingleUser/dashboard.dart';
-import 'package:flutter_application_1/Users/SingleUser/payments.dart';
 
 class SingleTimeUserDashboardPage extends StatefulWidget {
-  const SingleTimeUserDashboardPage();
-
+  String? adminUid;
+  SingleTimeUserDashboardPage({this.adminUid});
   @override
   State<SingleTimeUserDashboardPage> createState() => _MyHomePageState();
 }
@@ -372,78 +364,78 @@ class _MyHomePageState extends State<SingleTimeUserDashboardPage> {
                     SizedBox(
                       height: 2.h,
                     ),
-                    ListTile(
-                        hoverColor: Colors.indigo.shade100,
-                        title: Text(
-                          'Booking',
-                          style: TextStyle(color: Colors.black),
-                        ),
-                        onTap: () {
-                          setState(() {
-                            _currentContent = Bookings();
-                          });
-                          Navigator.pop(context);
-                        }),
-                    SizedBox(
-                      height: 2.h,
-                    ),
-                    ListTile(
-                        hoverColor: Colors.indigo.shade100,
-                        title: Text(
-                          'Booking History',
-                          style: TextStyle(color: Colors.black),
-                        ),
-                        onTap: () {
-                          setState(() {
-                            _currentContent = BookingHistroy();
-                          });
-                          Navigator.pop(context);
-                        }),
-                    SizedBox(
-                      height: 2.h,
-                    ),
-                    ListTile(
-                        hoverColor: Colors.indigo.shade100,
-                        title: Text(
-                          'Payments',
-                          style: TextStyle(color: Colors.black),
-                        ),
-                        onTap: () {
-                          setState(() {
-                            _currentContent = SingleUserPayment();
-                          });
-                          Navigator.pop(context);
-                        }),
-                    SizedBox(
-                      height: 2.h,
-                    ),
-                    ListTile(
-                        hoverColor: Colors.indigo.shade100,
-                        title: Text(
-                          'Report',
-                          style: TextStyle(color: Colors.black),
-                        ),
-                        onTap: () {
-                          setState(() {
-                            _currentContent = SingleUserPayment();
-                          });
-                          Navigator.pop(context);
-                        }),
-                    SizedBox(
-                      height: 2.h,
-                    ),
-                    ListTile(
-                        hoverColor: Colors.indigo.shade100,
-                        title: Text(
-                          'Help',
-                          style: TextStyle(color: Colors.black),
-                        ),
-                        onTap: () {
-                          setState(() {
-                            _currentContent = Dashboard();
-                          });
-                          Navigator.pop(context);
-                        }),
+                    // ListTile(
+                    //     hoverColor: Colors.indigo.shade100,
+                    //     title: Text(
+                    //       'Booking',
+                    //       style: TextStyle(color: Colors.black),
+                    //     ),
+                    //     onTap: () {
+                    //       setState(() {
+                    //         _currentContent = Bookings();
+                    //       });
+                    //       Navigator.pop(context);
+                    //     }),
+                    // SizedBox(
+                    //   height: 2.h,
+                    // ),
+                    // ListTile(
+                    //     hoverColor: Colors.indigo.shade100,
+                    //     title: Text(
+                    //       'Booking History',
+                    //       style: TextStyle(color: Colors.black),
+                    //     ),
+                    //     onTap: () {
+                    //       setState(() {
+                    //         _currentContent = BookingHistroy();
+                    //       });
+                    //       Navigator.pop(context);
+                    //     }),
+                    // SizedBox(
+                    //   height: 2.h,
+                    // ),
+                    // ListTile(
+                    //     hoverColor: Colors.indigo.shade100,
+                    //     title: Text(
+                    //       'Payments',
+                    //       style: TextStyle(color: Colors.black),
+                    //     ),
+                    //     onTap: () {
+                    //       setState(() {
+                    //         _currentContent = SingleUserPayment();
+                    //       });
+                    //       Navigator.pop(context);
+                    //     }),
+                    // SizedBox(
+                    //   height: 2.h,
+                    // ),
+                    // ListTile(
+                    //     hoverColor: Colors.indigo.shade100,
+                    //     title: Text(
+                    //       'Report',
+                    //       style: TextStyle(color: Colors.black),
+                    //     ),
+                    //     onTap: () {
+                    //       setState(() {
+                    //         _currentContent = SingleUserPayment();
+                    //       });
+                    //       Navigator.pop(context);
+                    //     }),
+                    // SizedBox(
+                    //   height: 2.h,
+                    // ),
+                    // ListTile(
+                    //     hoverColor: Colors.indigo.shade100,
+                    //     title: Text(
+                    //       'Help',
+                    //       style: TextStyle(color: Colors.black),
+                    //     ),
+                    //     onTap: () {
+                    //       setState(() {
+                    //         _currentContent = Dashboard();
+                    //       });
+                    //       Navigator.pop(context);
+                    //     }),
                   ]),
             ),
             appBar: PreferredSize(
@@ -505,13 +497,67 @@ class _MyHomePageState extends State<SingleTimeUserDashboardPage> {
                 ),
               ),
             ),
-            body: Expanded(
-                child: Padding(
-              padding: EdgeInsets.fromLTRB(6.w, 6.h, 6.w, 6.h),
-              child: Container(
-                  color: Color.fromRGBO(245, 243, 255, 1).withOpacity(0.5),
-                  child: Expanded(child: _currentContent)),
-            )),
+            body: Padding(
+              padding: EdgeInsets.fromLTRB(4.w, 4.h, 4.w, 4.h),
+              child: Expanded(
+                child: Container(
+                  padding: EdgeInsets.fromLTRB(4.w, 5.h, 3.w, 5.h),
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Color.fromRGBO(112, 112, 112, 1).withOpacity(0.1),
+                    ),
+                    boxShadow: <BoxShadow>[
+                      BoxShadow(
+                        color:
+                            Color.fromARGB(255, 199, 198, 198).withOpacity(0.3),
+                        blurRadius: 5,
+                        spreadRadius: 5,
+                        offset: Offset(0, 0), // Bottom side shadow
+                      ),
+                      BoxShadow(
+                        color:
+                            Color.fromARGB(255, 255, 255, 255).withOpacity(0.2),
+                        blurRadius: 1,
+                        spreadRadius: 0, // Bottom side shadow
+                      ),
+                    ],
+                    borderRadius: BorderRadius.circular(3),
+                    color: Color.fromRGBO(247, 246, 255, 1).withOpacity(1),
+                  ),
+                  child: Align(
+                      alignment: Alignment.center,
+                      child: Expanded(
+                        child: Container(
+                            height: 850,
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: Color.fromARGB(255, 216, 214, 214)
+                                    .withOpacity(0.2),
+                              ),
+                              boxShadow: <BoxShadow>[
+                                BoxShadow(
+                                  color: Color.fromARGB(255, 199, 198, 198)
+                                      .withOpacity(0.3),
+                                  blurRadius: 10,
+                                  spreadRadius: 10,
+                                  offset: Offset(0, 0.5), // Bottom side shadow
+                                ),
+                                BoxShadow(
+                                  color: Color.fromARGB(255, 255, 255, 255)
+                                      .withOpacity(0.2),
+                                  blurRadius: 1,
+                                  spreadRadius: 0, // Bottom side shadow
+                                ),
+                              ],
+                              borderRadius: BorderRadius.circular(25),
+                              color: Colors.white,
+                            ),
+                            child: PageView(
+                                controller: page, children: [_currentContent])),
+                      )),
+                ),
+              ),
+            ),
           );
         }
       });

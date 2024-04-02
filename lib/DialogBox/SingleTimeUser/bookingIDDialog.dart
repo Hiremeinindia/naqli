@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/Users/SingleTimeUser/bookingPage.dart';
+import 'package:flutter_application_1/Users/Enterprise/booking_manager.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../Widgets/formText.dart';
@@ -64,7 +64,7 @@ class _BookingIDDialogState extends State<BookingIDDialog> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => BookingPage(),
+                                builder: (context) => Bookings(),
                               ),
                             );
                           },
