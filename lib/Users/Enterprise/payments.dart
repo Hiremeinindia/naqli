@@ -212,97 +212,113 @@ class _PaymentsState extends State<Payments> {
           return SingleChildScrollView(
             child: Container(
               height: 100.h,
+              width: 300.w,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20.0),
                 color: Color.fromRGBO(255, 255, 255, 0.925),
               ),
-              padding: EdgeInsets.fromLTRB(3.w, 3.h, 3.w, 3.h),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      Container(
-                        height: 50,
-                        width: 193,
-                        padding: EdgeInsets.all(8.0),
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: Colors.grey,
-                            width: 1.0,
+                      Expanded(
+                        child: Container(
+                          height: 90,
+                          decoration: BoxDecoration(
+                            color: Color.fromRGBO(75, 61, 82, 1),
+                            border: Border.all(
+                              width: 1.0,
+                              color: Color.fromRGBO(75, 61, 82, 1),
+                            ),
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(20.0),
+                              topRight: Radius.circular(20.0),
+                            ),
                           ),
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
-                        child: DropdownButtonHideUnderline(
-                          child: DropdownButton<String>(
-                            value: 'All',
-                            onChanged: (String? newValue) {
-                              // Handle dropdown value change
-                            },
-                            items: <String>[
-                              'All',
-                              'Completed',
-                              'Incomplete Booking',
-                              'Pending Payment',
-                            ].map<DropdownMenuItem<String>>(
-                              (String value) {
-                                return DropdownMenuItem<String>(
-                                  value: value,
-                                  child: Text(
-                                    value,
-                                    style: TextStyle(
-                                        fontFamily: 'Colfax', fontSize: 16),
-                                  ),
-                                );
-                              },
-                            ).toList(),
+                          child: Padding(
+                            padding: EdgeInsets.only(left: 80, top: 20),
+                            child: Text('Payments',
+                                style: BookingHistoryText.helvetica40),
                           ),
                         ),
                       ),
                     ],
                   ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  ElevationContainer(
-                    child: Scrollbar(
-                      controller: _paymentScroll,
-                      thumbVisibility:
-                          true, // Set to true to always show the scrollbar
-                      child: SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        controller: _paymentScroll,
-                        child: Container(
-                          height: 300,
-                          width: 1100,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(8)),
-                            border: Border.all(
-                              color: Color.fromRGBO(112, 112, 112, 1)
-                                  .withOpacity(0.3),
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(4.w, 8.h, 4.w, 2.h),
+                    child: Column(
+                      children: [
+                        Align(
+                          alignment: Alignment.centerRight,
+                          child: Container(
+                            height: 50,
+                            width: 193,
+                            padding: EdgeInsets.all(8.0),
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: Colors.grey,
+                                width: 1.0,
+                              ),
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                            child: DropdownButtonHideUnderline(
+                              child: DropdownButton<String>(
+                                value: 'All',
+                                onChanged: (String? newValue) {
+                                  // Handle dropdown value change
+                                },
+                                items: <String>[
+                                  'All',
+                                  'Completed',
+                                  'Incomplete Booking',
+                                  'Pending Payment',
+                                ].map<DropdownMenuItem<String>>(
+                                  (String value) {
+                                    return DropdownMenuItem<String>(
+                                      value: value,
+                                      child: Text(
+                                        value,
+                                        style: TextStyle(
+                                            fontFamily: 'Colfax', fontSize: 16),
+                                      ),
+                                    );
+                                  },
+                                ).toList(),
+                              ),
                             ),
                           ),
-                          child: ListView(
-                            children: [_createDataTable()],
+                        ),
+                        SizedBox(
+                          height: 25,
+                        ),
+                        ElevationContainer(
+                          child: Scrollbar(
+                            controller: _paymentScroll,
+                            thumbVisibility:
+                                true, // Set to true to always show the scrollbar
+                            child: SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              controller: _paymentScroll,
+                              child: Container(
+                                height: 300,
+                                width: 1080,
+                                decoration: BoxDecoration(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(8)),
+                                  border: Border.all(
+                                    color: Color.fromRGBO(112, 112, 112, 1)
+                                        .withOpacity(0.3),
+                                  ),
+                                ),
+                                child: ListView(
+                                  children: [_createDataTable()],
+                                ),
+                              ),
+                            ),
                           ),
                         ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 150,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 110),
-                    child: SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: Container(
-                        height: 10, // Adjust the height as needed
-                        // Set the desired length of the scroll bar
-                        color: Colors
-                            .grey, // Background color of the scrollable area
-                      ),
+                      ],
                     ),
                   ),
                 ],
@@ -311,112 +327,117 @@ class _PaymentsState extends State<Payments> {
           );
         } else {
           return Container(
-            height: 100.h,
+            height: 86.h,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20.0),
               color: Color.fromRGBO(255, 255, 255, 0.925),
             ),
-            child: SingleChildScrollView(
-                child: Container(
-                    padding: EdgeInsets.fromLTRB(3.w, 3.h, 3.w, 3.h),
-                    child: Container(
-                      padding: EdgeInsets.fromLTRB(2.w, 1.5.h, 2.w, 1.5.h),
-                      color: Color.fromRGBO(255, 255, 255, 157),
-                      child: Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                Container(
-                                  height: 50,
-                                  width: 193,
-                                  padding: EdgeInsets.all(8.0),
-                                  decoration: BoxDecoration(
-                                    border: Border.all(
-                                      color: Colors.grey,
-                                      width: 1.0,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8.0),
-                                  ),
-                                  child: DropdownButtonHideUnderline(
-                                    child: DropdownButton<String>(
-                                      value: 'All',
-                                      onChanged: (String? newValue) {
-                                        // Handle dropdown value change
-                                      },
-                                      items: <String>[
-                                        'All',
-                                        'Completed',
-                                        'Incomplete Booking',
-                                        'Pending Payment',
-                                      ].map<DropdownMenuItem<String>>(
-                                        (String value) {
-                                          return DropdownMenuItem<String>(
-                                            value: value,
-                                            child: Text(
-                                              value,
-                                              style: TextStyle(
-                                                  fontFamily: 'Colfax',
-                                                  fontSize: 16),
-                                            ),
-                                          );
-                                        },
-                                      ).toList(),
-                                    ),
-                                  ),
-                                ),
-                              ],
+            // padding: EdgeInsets.fromLTRB(3.w, 3.h, 3.w, 3.h),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
+                  width: 1250,
+                  height: 92,
+                  decoration: BoxDecoration(
+                    color: Color.fromRGBO(75, 61, 82, 1),
+                    border: Border.all(
+                      width: 1.0,
+                      color: Color.fromRGBO(75, 61, 82, 1),
+                    ),
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(20),
+                      topRight: Radius.circular(20),
+                      bottomLeft: Radius.circular(0),
+                      bottomRight: Radius.circular(0),
+                    ),
+                  ),
+                  child: Padding(
+                    padding: EdgeInsets.only(left: 80, top: 20),
+                    child:
+                        Text('Payments', style: BookingHistoryText.helvetica40),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.fromLTRB(4.w, 8.h, 4.w, 4.h),
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Container(
+                            height: 50,
+                            width: 193,
+                            padding: EdgeInsets.all(8.0),
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: Colors.grey,
+                                width: 1.0,
+                              ),
+                              borderRadius: BorderRadius.circular(8.0),
                             ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            ElevationContainer(
-                              child: Scrollbar(
-                                controller: _paymentScroll,
-                                thumbVisibility:
-                                    true, // Set to true to always show the scrollbar
-                                child: SingleChildScrollView(
-                                  scrollDirection: Axis.horizontal,
-                                  controller: _paymentScroll,
-                                  child: Container(
-                                    height: 300,
-                                    width: 1200,
-                                    decoration: BoxDecoration(
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(8)),
-                                      border: Border.all(
-                                        color: Color.fromRGBO(112, 112, 112, 1)
-                                            .withOpacity(0.3),
+                            child: DropdownButtonHideUnderline(
+                              child: DropdownButton<String>(
+                                value: 'All',
+                                onChanged: (String? newValue) {
+                                  // Handle dropdown value change
+                                },
+                                items: <String>[
+                                  'All',
+                                  'Completed',
+                                  'Incomplete Booking',
+                                  'Pending Payment',
+                                ].map<DropdownMenuItem<String>>(
+                                  (String value) {
+                                    return DropdownMenuItem<String>(
+                                      value: value,
+                                      child: Text(
+                                        value,
+                                        style: TextStyle(
+                                            fontFamily: 'Colfax', fontSize: 16),
                                       ),
-                                    ),
-                                    child: ListView(
-                                      children: [_createDataTable()],
-                                    ),
-                                  ),
-                                ),
+                                    );
+                                  },
+                                ).toList(),
                               ),
                             ),
-                            SizedBox(
-                              height: 150,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(right: 110),
-                              child: SingleChildScrollView(
-                                scrollDirection: Axis.horizontal,
-                                child: Container(
-                                  height: 10, // Adjust the height as needed
-                                  // Set the desired length of the scroll bar
-                                  color: Colors
-                                      .grey, // Background color of the scrollable area
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 25,
+                      ),
+                      ElevationContainer(
+                        child: Scrollbar(
+                          controller: _paymentScroll,
+                          thumbVisibility:
+                              true, // Set to true to always show the scrollbar
+                          child: SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            controller: _paymentScroll,
+                            child: Container(
+                              height: 300,
+                              width: 1080,
+                              decoration: BoxDecoration(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(8)),
+                                border: Border.all(
+                                  color: Color.fromRGBO(112, 112, 112, 1)
+                                      .withOpacity(0.3),
                                 ),
                               ),
+                              child: ListView(
+                                children: [_createDataTable()],
+                              ),
                             ),
-                          ],
+                          ),
                         ),
                       ),
-                    ))),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           );
         }
       });

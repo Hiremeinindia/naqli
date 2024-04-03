@@ -64,7 +64,7 @@ class _BookingIDDialogState extends State<BookingIDDialog> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => Bookings(),
+                                builder: (context) => BookingManager(),
                               ),
                             );
                           },

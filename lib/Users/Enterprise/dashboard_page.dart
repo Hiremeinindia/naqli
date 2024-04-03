@@ -436,10 +436,10 @@ class _MyHomePageState extends State<EnterDashboardPage> {
                                     icon: const Icon(Icons.person_2_outlined),
                                   ),
                                   SideMenuItem(
-                                    title: 'Bookings Manager',
+                                    title: 'BookingManager',
                                     onTap: (page, _) {
                                       setState(() {
-                                        _currentContent = Bookings();
+                                        _currentContent = BookingManager();
                                       });
                                       sideMenu.changePage(page);
                                     },
@@ -604,7 +604,7 @@ class _MyHomePageState extends State<EnterDashboardPage> {
                         ),
                         onTap: () {
                           setState(() {
-                            _currentContent = Bookings();
+                            _currentContent = BookingManager();
                           });
                           Navigator.pop(context);
                         }),
@@ -664,7 +664,7 @@ class _MyHomePageState extends State<EnterDashboardPage> {
                         ),
                         onTap: () {
                           setState(() {
-                            _currentContent = Bookings();
+                            _currentContent = BookingManager();
                           });
                           Navigator.pop(context);
                         }),
