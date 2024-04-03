@@ -923,14 +923,8 @@ class _PaymentsState extends State<Contracts> {
                   ),
                   child: Padding(
                     padding: EdgeInsets.only(left: 95, top: 25),
-                    child: Text(
-                      addContracts ? 'New Contracts' : 'Contracts',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 30,
-                        fontFamily: "Helvetica",
-                      ),
-                    ),
+                    child: Text(addContracts ? 'New Contracts' : 'Contracts',
+                        style: BookingHistoryText.helvetica40),
                   ),
                 ),
                 addContracts
@@ -1523,9 +1517,9 @@ class _PaymentsState extends State<Contracts> {
                                   height: 20,
                                 ),
                                 Align(
-                                  alignment: Alignment.topCenter,
+                                  alignment: Alignment.centerRight,
                                   child: SizedBox(
-                                    width: 137,
+                                    width: 180,
                                     height: 45,
                                     child: ElevatedButton.icon(
                                       onPressed: () {
@@ -1554,13 +1548,13 @@ class _PaymentsState extends State<Contracts> {
                                             color:
                                                 Color.fromRGBO(98, 84, 84, 1),
                                             fontFamily: 'Helvetica',
-                                            fontSize: 11,
+                                            fontSize: 15,
                                           )),
                                     ),
                                   ),
                                 ),
                                 SizedBox(
-                                  height: 20,
+                                  height: 25,
                                 ),
                                 Row(
                                   children: [
