@@ -57,7 +57,7 @@ class DialogText {
   static const TextStyle purplehelveticabold = TextStyle(
     fontFamily: 'Helvetica',
     fontWeight: FontWeight.bold,
-    color: Color.fromRGBO(128, 123, 229, 1),
+    color: Color.fromRGBO(158, 101, 169, 1),
     fontSize: 14,
   );
   static const TextStyle helvetica21 = TextStyle(
@@ -80,6 +80,26 @@ class DialogText {
     fontFamily: 'Helvetica',
     color: Color.fromRGBO(78, 68, 68, 1),
     fontSize: 30,
+  );
+  static const TextStyle poppins20 = TextStyle(
+      fontSize: 18,
+      color: Colors.white,
+      fontWeight: FontWeight.bold,
+      fontFamily: 'PoppinsSemiBold');
+  static const TextStyle poppins22 = TextStyle(
+      fontSize: 20,
+      color: Colors.black,
+      fontFamily: 'Poppins',
+      fontWeight: FontWeight.bold);
+  static const TextStyle poppins16 = TextStyle(
+      fontSize: 14,
+      color: Colors.black,
+      fontFamily: 'Poppins',
+      fontWeight: FontWeight.bold);
+  static const TextStyle dialogtext1 = TextStyle(
+    fontSize: 18,
+    color: Colors.white,
+    fontFamily: 'Helvetica',
   );
 }
 
@@ -151,6 +171,85 @@ class BookingText {
     color: Colors.black,
     fontWeight: FontWeight.bold,
     fontSize: 19,
+  );
+  static const TextStyle helveticablack = TextStyle(
+    fontFamily: 'Helvetica',
+    color: Color.fromRGBO(0, 0, 0, 1),
+    fontSize: 15,
+  );
+  static const TextStyle helveticawhite = TextStyle(
+    fontFamily: 'Helvetica',
+    color: Colors.white,
+    fontSize: 15,
+  );
+  static const TextStyle helveticawhitebold = TextStyle(
+    fontFamily: 'Helvetica',
+    fontWeight: FontWeight.bold,
+    color: Colors.white,
+    fontSize: 15,
+  );
+}
+
+class BookingHistoryText {
+  static TextStyle helvetica40 = TextStyle(
+    fontFamily: 'Helvetica',
+    color: Colors.white,
+    fontSize: 38,
+  );
+  static const TextStyle sfpro20black = TextStyle(
+      fontSize: 17,
+      letterSpacing: 1,
+      fontFamily: 'SFproText',
+      color: Color.fromRGBO(10, 5, 5, 1));
+  static const TextStyle sfpro20white = TextStyle(
+      fontSize: 17,
+      letterSpacing: 1,
+      fontFamily: 'SFproText',
+      color: Colors.white);
+}
+
+class BookingManagerText {
+  static const TextStyle sfpro20white = TextStyle(
+    color: Colors.white,
+    fontFamily: 'SFProText',
+    letterSpacing: 1,
+    fontSize: 18,
+  );
+  static TextStyle sfpro20black = TextStyle(
+    color: Color.fromRGBO(80, 69, 74, 1).withOpacity(0.9),
+    fontFamily: 'SFProText',
+    letterSpacing: 1,
+    fontSize: 18,
+  );
+}
+
+class TriggerBookingText {
+  static const TextStyle sfpro16 = TextStyle(
+    color: Colors.black87,
+    fontFamily: 'SFProText',
+    letterSpacing: 1,
+    fontSize: 15,
+  );
+  static const TextStyle sfpro14 = TextStyle(
+    color: Color.fromRGBO(143, 142, 151, 1),
+    letterSpacing: 1.5,
+    fontFamily: 'SFProText',
+    fontSize: 13,
+  );
+}
+
+class AppBarText {
+  static const TextStyle helvetica = TextStyle(
+    color: Colors.black,
+    fontFamily: 'Helvetica',
+    height: 0.8,
+    fontSize: 16,
+  );
+  static const TextStyle usertext = TextStyle(
+    fontSize: 10,
+    height: 1,
+    fontFamily: "HelveticaNeueRegular",
+    color: Color.fromRGBO(112, 112, 112, 1),
   );
 }
 
