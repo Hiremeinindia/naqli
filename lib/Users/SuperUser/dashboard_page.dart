@@ -60,7 +60,7 @@ class _MyHomePageState extends State<SuperUserDashboardPage> {
 
   void _handleItem3Tap() {
     setState(() {
-      _currentContent = BookingManager();
+      _currentContent = Bookings();
     });
     Navigator.pop(context);
   }
@@ -474,7 +474,7 @@ class _MyHomePageState extends State<SuperUserDashboardPage> {
                                     title: 'Booking Manager',
                                     onTap: (page, _) {
                                       setState(() {
-                                        _currentContent = BookingManager();
+                                        _currentContent = Bookings();
                                       });
                                       sideMenu.changePage(page);
                                     },
@@ -623,7 +623,7 @@ class _MyHomePageState extends State<SuperUserDashboardPage> {
                         ),
                         onTap: () {
                           setState(() {
-                            _currentContent = BookingManager();
+                            _currentContent = Bookings();
                           });
                           Navigator.pop(context);
                         }),

@@ -21,7 +21,7 @@ final class ColorContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 35,
+      height: 30,
       decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(

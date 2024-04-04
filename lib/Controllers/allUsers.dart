@@ -16,7 +16,7 @@ class AllUsers {
   String? idNumber;
   String? companyidNumber;
   String? legalName;
-  final String? imgPic;
+
   DocumentReference? reference;
   String? selectedOption;
 
@@ -37,7 +37,6 @@ class AllUsers {
     this.companyidNumber,
     this.legalName,
     this.selectedOption,
-    this.imgPic,
     this.reference,
   });
 
@@ -58,7 +57,6 @@ class AllUsers {
         "companyidNumber": companyidNumber,
         "legalName": legalName,
         "reference": reference,
-        "imgpic": imgPic,
       };
 
   static AllUsers fromSnapshot(DocumentSnapshot snapshot) {
