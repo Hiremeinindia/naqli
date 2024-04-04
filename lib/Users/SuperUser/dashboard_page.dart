@@ -19,7 +19,7 @@ import 'package:flutter_application_1/Users/SuperUser/payments.dart';
 import 'package:flutter_application_1/Users/SuperUser/trigger_booking.dart';
 
 class SuperUserDashboardPage extends StatefulWidget {
-  final String user;
+  final String? user;
   SuperUserDashboardPage({required this.user});
 
   @override
@@ -152,8 +152,8 @@ class _MyHomePageState extends State<SuperUserDashboardPage> {
                       ),
                       Row(
                         children: [
-                          TextButton(
-                            onPressed: () {
+                          InkWell(
+                            onTap: () {
                               // Handle the first button press
                             },
                             child: Text(
@@ -165,20 +165,24 @@ class _MyHomePageState extends State<SuperUserDashboardPage> {
                               ),
                             ),
                           ),
-                          SizedBox(
-                            height: 30,
-                            child: VerticalDivider(
-                              color: Color.fromRGBO(206, 203, 203, 1),
+                          Padding(
+                            padding: EdgeInsets.fromLTRB(0.5.w, 0, 0.5.w, 0),
+                            child: SizedBox(
+                              height: 20,
+                              child: VerticalDivider(
+                                thickness: 2,
+                                color: Color.fromRGBO(206, 203, 203, 1),
+                              ),
                             ),
                           ),
-                          TextButton(
-                            onPressed: () {
+                          InkWell(
+                            onTap: () {
                               // Handle the third button press
                             },
                             child: Text(
                               'Partner',
                               style: TextStyle(
-                                fontSize: 16,
+                                fontSize: 20,
                                 fontFamily: "HelveticaNeueRegular",
                                 color: Color.fromRGBO(206, 203, 203, 1),
                               ),
@@ -286,31 +290,55 @@ class _MyHomePageState extends State<SuperUserDashboardPage> {
                             width: 10,
                           ),
                           SizedBox(
-                            height: 40,
+                            height: 35,
                             child: VerticalDivider(
                               color: Colors.black,
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsets.only(
-                              left: 5,
-                            ),
+                            padding: const EdgeInsets.only(left: 2, right: 10),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text("Hello Faizal!",
-                                    style: TabelText.helvetica11),
+                                    style: TabelText.helvetica),
                                 Text("Admin", style: TabelText.usertext),
                                 Text("Faizal industries",
                                     style: TabelText.usertext),
                               ],
                             ),
                           ),
-                          Icon(
-                            Icons.notifications,
-                            color: Color.fromRGBO(106, 102, 209, 1),
-                          ),
+                          Stack(children: [
+                            Container(
+                              height: 5.h,
+                              width: 50,
+                              child: InkWell(
+                                onTap: () {},
+                                child: ImageIcon(
+                                  AssetImage('Group.png'),
+                                  color: Color.fromRGBO(106, 102, 209, 1),
+                                ),
+                              ),
+                            ),
+                            Positioned(
+                              top: 4,
+                              left: 25,
+                              child: CircleAvatar(
+                                  backgroundColor:
+                                      const Color.fromARGB(255, 243, 7, 7),
+                                  maxRadius: 8,
+                                  minRadius: 8,
+                                  child: Align(
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                      '3',
+                                      style: TextStyle(
+                                          fontSize: 11, color: Colors.white),
+                                    ),
+                                  )),
+                            ),
+                          ]),
                         ],
                       ),
                     ],
