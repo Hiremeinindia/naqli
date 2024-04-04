@@ -382,7 +382,7 @@ class _EditContractState extends State<EditContract> {
                                         Padding(
                                           padding: EdgeInsets.only(
                                               top:
-                                                  50), // Adjust spacing as needed
+                                                  40), // Adjust spacing as needed
                                           child: Row(
                                             children: [
                                               Text(

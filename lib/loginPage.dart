@@ -6,6 +6,7 @@ import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_application_1/Users/Enterprise/dashboard_page.dart';
+
 import 'package:flutter_application_1/Users/SingleUser/dashboard_page.dart';
 import 'package:flutter_application_1/Users/SuperUser/dashboard_page.dart';
 import 'package:flutter_application_1/createAccount.dart';
@@ -27,6 +28,7 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  final _formKey = GlobalKey<FormState>();
   bool isVerified = false;
   final ScrollController _Scroll1 = ScrollController();
   final ScrollController _Scroll2 = ScrollController();
@@ -39,6 +41,20 @@ class _LoginPageState extends State<LoginPage> {
     return emailRegex.hasMatch(email);
   }
 
+  String? nameValidator(String? value) {
+    if (value == null || value.isEmpty) {
+      return '*Required';
+    } else if (!isValidName(value)) {
+      return 'Invalid format';
+    }
+    return null;
+  }
+
+  bool isValidName(String name) {
+    final RegExp nameRegExp = RegExp(r"^[A-Za-z']+([- ][A-Za-z']+)*$");
+    return nameRegExp.hasMatch(name);
+  }
+
   String? emailValidator(String? value) {
     if (value == null || value.isEmpty) {
       return '*Required';
@@ -46,6 +62,21 @@ class _LoginPageState extends State<LoginPage> {
       return 'Invalid email format';
     }
     return null;
+  }
+
+  String? validatePassword(String? value) {
+    RegExp regex = RegExp(
+      r'^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#\$&*~]).{8,}$',
+    );
+    if (value!.isEmpty) {
+      return 'Please enter password';
+    } else {
+      if (!regex.hasMatch(value)) {
+        return 'Enter valid password';
+      } else {
+        return null;
+      }
+    }
   }
 
   Future<String> getUserRole(String uid) async {
@@ -157,128 +188,155 @@ class _LoginPageState extends State<LoginPage> {
                                 bottomRight: Radius.circular(31),
                               ),
                             ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Expanded(
-                                        child: SizedBox(
-                                      height: 0.1,
-                                    )),
-                                    GestureDetector(
-                                      onTap: () {
-                                        Navigator.pop(context);
-                                      },
-                                      child: ImageIcon(
-                                        AssetImage('cancel.png'),
-                                        color: Color.fromRGBO(112, 112, 112, 1),
+                            child: Form(
+                              key: _formKey,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Expanded(
+                                          child: SizedBox(
+                                        height: 0.1,
+                                      )),
+                                      GestureDetector(
+                                        onTap: () {
+                                          Navigator.pop(context);
+                                        },
+                                        child: ImageIcon(
+                                          AssetImage('cancel.png'),
+                                          color:
+                                              Color.fromRGBO(112, 112, 112, 1),
+                                        ),
                                       ),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 100,
-                                ),
-                                Align(
-                                  alignment: Alignment.center,
-                                  child: Text('Login',
-                                      style: TextStyle(
-                                          color: Color.fromRGBO(0, 0, 0, 1),
-                                          fontFamily: 'Helvetica',
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 26,
-                                          letterSpacing: 2)),
-                                ),
-                                SizedBox(
-                                  height: 20,
-                                ),
-                                Text('Email ID',
-                                    style: HomepageText.helvetica16black),
-                                CustomTextfield(
-                                  controller: controller.email,
-                                  validator: emailValidator,
-                                  text: 'Email address',
-                                ),
-                                Text('Password',
-                                    style: HomepageText.helvetica16black),
-                                CustomTextfield(
-                                  controller: controller.password,
-                                  // validator: validatePassword,
-                                  text: 'Password',
-                                ),
-                                SizedBox(
-                                  height: 3,
-                                ),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    SizedBox(
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 100,
+                                  ),
+                                  Align(
+                                    alignment: Alignment.center,
+                                    child: Text('Login',
+                                        style: TextStyle(
+                                            color: Color.fromRGBO(0, 0, 0, 1),
+                                            fontFamily: 'Helvetica',
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 26,
+                                            letterSpacing: 2)),
+                                  ),
+                                  SizedBox(
+                                    height: 20,
+                                  ),
+                                  Text('Email ID',
+                                      style: HomepageText.helvetica16black),
+                                  CustomTextfield(
+                                    controller: controller.email,
+                                    validator: (value) {
+                                      if (value == null || value.isEmpty) {
+                                        return 'Please enter your email ID';
+                                      }
+                                      // You can add additional email format validation here if needed
+                                      return null;
+                                    },
+                                    text: 'Email address',
+                                  ),
+                                  Text('Password',
+                                      style: HomepageText.helvetica16black),
+                                  CustomTextfield(
+                                    controller: controller.password,
+                                    validator: (value) {
+                                      if (value == null || value.isEmpty) {
+                                        return 'Please enter your password';
+                                      }
+                                      // You can add additional password validation here if needed
+                                      return null;
+                                    },
+                                    text: 'Password',
+                                  ),
+                                  SizedBox(
+                                    height: 3,
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      SizedBox(
                                         height: 50,
                                         child: ElevatedButton(
                                           onPressed: () async {
-                                            try {
-                                              // Sign in with email and password
-                                              UserCredential userCredential =
-                                                  await _auth
-                                                      .signInWithEmailAndPassword(
-                                                email: controller.email.text,
-                                                password:
-                                                    controller.password.text,
-                                              );
-                                              String userId =
-                                                  userCredential.user!.uid;
-                                              // Check the user's role after successful sign-in
-                                              String userRole =
-                                                  await getUserRole(userId);
+                                            if (_formKey.currentState!
+                                                .validate()) {
+                                              try {
+                                                // Sign in with email and password
+                                                UserCredential userCredential =
+                                                    await _auth
+                                                        .signInWithEmailAndPassword(
+                                                  email: controller.email.text
+                                                      .trim(), // Trim to remove whitespace
+                                                  password:
+                                                      controller.password.text,
+                                                );
+                                                String userId =
+                                                    userCredential.user!.uid;
+                                                // Check the user's role after successful sign-in
+                                                String userRole =
+                                                    await getUserRole(userId);
 
-                                              print('User Role = $userRole');
-                                              // Navigate to the appropriate dashboard based on the user's role
-                                              if (userRole == 'User') {
-                                                Navigator.pushReplacement(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        SingleUserDashboardPage(
-                                                            user: userId),
-                                                  ),
-                                                );
-                                              } else if (userRole ==
-                                                  'Super User') {
-                                                Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        SuperUserDashboardPage(
-                                                            user: userId),
-                                                  ),
-                                                );
-                                              } else if (userRole ==
-                                                  'Enterprise') {
-                                                Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        EnterDashboardPage(
-                                                            adminUid: userId),
-                                                  ),
-                                                );
-                                              } else {
-                                                print('Unknown user role');
-                                              }
-                                            } on FirebaseAuthException catch (e) {
-                                              // Handle authentication exceptions
-                                              if (e.code == 'user-not-found') {
+                                                print('User Role = $userRole');
+                                                // Navigate to the appropriate dashboard based on the user's role
+                                                if (userRole == 'User') {
+                                                  Navigator.pushReplacement(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          SingleUserDashboardPage(
+                                                              user: userId),
+                                                    ),
+                                                  );
+                                                } else if (userRole ==
+                                                    'Super User') {
+                                                  Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          SuperUserDashboardPage(
+                                                              user: userId),
+                                                    ),
+                                                  );
+                                                } else if (userRole ==
+                                                    'Enterprise') {
+                                                  Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          EnterDashboardPage(
+                                                              adminUid: userId),
+                                                    ),
+                                                  );
+                                                } else {
+                                                  print('Unknown user role');
+                                                }
+                                              } on FirebaseAuthException catch (e) {
+                                                // Handle authentication exceptions
+                                                if (e.code ==
+                                                    'user-not-found') {
+                                                  print(
+                                                      'No user found for that email.');
+                                                } else if (e.code ==
+                                                    'wrong-password') {
+                                                  print(
+                                                      'Wrong password provided.');
+                                                } else {
+                                                  print(
+                                                      'Error: ${e.message}'); // Print other errors
+                                                }
+                                              } catch (e) {
                                                 print(
-                                                    'No user found for that email.');
-                                              } else if (e.code ==
-                                                  'wrong-password') {
-                                                print(
-                                                    'Wrong password provided.');
+                                                    'Error: $e'); // Catch any unexpected errors
                                               }
                                             }
                                           },
@@ -297,7 +355,10 @@ class _LoginPageState extends State<LoginPage> {
                                           ),
                                           child: Padding(
                                             padding: EdgeInsets.fromLTRB(
-                                                1.w, 4, 1.w, 4),
+                                                10,
+                                                4,
+                                                10,
+                                                4), // Adjust padding as needed
                                             child: Text(
                                               'Login',
                                               style: TextStyle(
@@ -307,97 +368,82 @@ class _LoginPageState extends State<LoginPage> {
                                               ),
                                             ),
                                           ),
-                                        )),
-                                    InkWell(
-                                      child: Text('Forgot Password?',
-                                          style: LoginpageText.purplehelvetica),
-                                      onTap: () {
-                                        showDialog(
-                                          barrierColor: Colors.transparent,
-                                          context: context,
-                                          builder: (context) {
-                                            return ForgotPasswordPage();
-                                          },
+                                        ),
+                                      ),
+                                      InkWell(
+                                        child: Text('Forgot Password?',
+                                            style:
+                                                LoginpageText.purplehelvetica),
+                                        onTap: () {
+                                          showDialog(
+                                            barrierColor: Colors.transparent,
+                                            context: context,
+                                            builder: (context) {
+                                              return ForgotPasswordPage();
+                                            },
+                                          );
+                                        },
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Text("Don't have an account?",
+                                          style: HomepageText.helvetica16black),
+                                      InkWell(
+                                        child: Text(' Create One!',
+                                            style:
+                                                LoginpageText.purplehelvetica),
+                                        onTap: () {
+                                          showDialog(
+                                            barrierColor: Colors.transparent,
+                                            context: context,
+                                            builder: (context) {
+                                              return CreateAccount();
+                                            },
+                                          );
+                                        },
+                                      ),
+                                    ],
+                                  ),
+                                  InkWell(
+                                    child: Text('Use without Log in',
+                                        style: LoginpageText.purplehelvetica),
+                                    onTap: () async {
+                                      // _showOtpVerificationDialog();
+                                      String email = controller.email.text;
+                                      String password =
+                                          controller.password.text;
+                                      String selectedAccounttype =
+                                          controller.selectedAccounttype.text;
+                                      showDialog(
+                                        barrierColor:
+                                            Colors.grey.withOpacity(0.5),
+                                        context: context,
+                                        builder: (context) {
+                                          return VerifiedDialog(email, password,
+                                              selectedAccounttype);
+                                        },
+                                      );
+                                      if (isVerified) {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => MyHomePage(),
+                                          ),
                                         );
-                                      },
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Text("Don't have an account?",
-                                        style: HomepageText.helvetica16black),
-                                    InkWell(
-                                      child: Text(' Create One!',
-                                          style: LoginpageText.purplehelvetica),
-                                      onTap: () {
-                                        showDialog(
-                                          barrierColor: Colors.transparent,
-                                          context: context,
-                                          builder: (context) {
-                                            return CreateAccount();
-                                          },
-                                        );
-                                      },
-                                    ),
-                                  ],
-                                ),
-                                InkWell(
-                                  child: Text('Use without Log in',
-                                      style: LoginpageText.purplehelvetica),
-                                  onTap: () async {
-                                    // _showOtpVerificationDialog();
-                                    String? email = '';
-                                    String password = '';
-                                    String selectedAccounttype = '';
-
-                                    String firstName = '';
-                                    String lastName = '';
-                                    String legalName = '';
-                                    String adminUid = '';
-                                    String contactNumber = '';
-                                    String address = '';
-                                    String selectedGovtId = '';
-                                    String confirmPassword = '';
-                                    String alternateNumber = '';
-                                    String address2 = '';
-                                    String idNumber = '';
-                                    String selectedCity = '';
-                                    String companyidNumber = '';
-                                    showDialog(
-                                      barrierColor:
-                                          Colors.grey.withOpacity(0.5),
-                                      context: context,
-                                      builder: (context) {
-                                        return MblNoDialog(
-                                            email,
-                                            password,
-                                            selectedAccounttype,
-                                            firstName,
-                                            lastName,
-                                            legalName,
-                                            address,
-                                            address2,
-                                            alternateNumber,
-                                            companyidNumber,
-                                            confirmPassword,
-                                            contactNumber,
-                                            idNumber,
-                                            selectedCity,
-                                            selectedGovtId,
-                                            adminUid);
-                                      },
-                                    );
-                                  },
-                                ),
-                                SizedBox(
-                                  height: 60,
-                                ),
-                              ],
+                                      }
+                                    },
+                                  ),
+                                  SizedBox(
+                                    height: 60,
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ),
@@ -481,7 +527,13 @@ class _LoginPageState extends State<LoginPage> {
                                 style: HomepageText.helvetica16black)),
                         CustomTextfield(
                           controller: controller.email,
-                          validator: emailValidator,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter your email ID';
+                            }
+                            // You can add additional email format validation here if needed
+                            return null;
+                          },
                           text: 'Email address',
                         ),
                         Align(
@@ -490,7 +542,13 @@ class _LoginPageState extends State<LoginPage> {
                                 style: HomepageText.helvetica16black)),
                         CustomTextfield(
                           controller: controller.password,
-                          // validator: validatePassword,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter your password';
+                            }
+                            // You can add additional password validation here if needed
+                            return null;
+                          },
                           text: 'Password',
                         ),
                         SizedBox(
@@ -657,92 +715,98 @@ class _LoginPageState extends State<LoginPage> {
 
 class ForgotPasswordPage extends StatelessWidget {
   final TextEditingController _emailController = TextEditingController();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   Future<void> _resetPassword(BuildContext context) async {
-    try {
-      await FirebaseAuth.instance
-          .sendPasswordResetEmail(email: _emailController.text);
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return Dialog(
-            child: Container(
-              padding: EdgeInsets.fromLTRB(4.w, 5.h, 3.w, 10.h),
-              height: 340,
-              width: 1225,
-              decoration: const BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.all(
-                  Radius.circular(31),
-                ),
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
+    if (_formKey.currentState != null && _formKey.currentState!.validate()) {
+      try {
+        if (_emailController.text.isNotEmpty) {
+          await FirebaseAuth.instance
+              .sendPasswordResetEmail(email: _emailController.text);
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return Dialog(
+                child: Container(
+                  padding: EdgeInsets.fromLTRB(4.w, 5.h, 3.w, 10.h),
+                  height: 340,
+                  width: 1225,
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(31),
+                    ),
+                  ),
+                  child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      SizedBox(),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.pop(context);
-                        },
-                        child: ImageIcon(
-                          AssetImage('cancel.png'),
-                          color: Colors.black,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          SizedBox(),
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.pop(context);
+                            },
+                            child: ImageIcon(
+                              AssetImage('cancel.png'),
+                              color: Colors.black,
+                            ),
+                          ),
+                        ],
+                      ),
+                      Text('Password Reset link has been sent to your email.',
+                          style: TabelText.helveticablack19),
+                      SizedBox(
+                        height: 48,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => MyHomePage()),
+                            );
+                          },
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: Color.fromRGBO(60, 55, 148, 1),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(11),
+                              )),
+                          child: Padding(
+                            padding: EdgeInsets.only(
+                              left: 1.w,
+                              right: 1.w,
+                            ),
+                            child: Text("OK", style: DialogText.helvetica20),
+                          ),
                         ),
                       ),
                     ],
                   ),
-                  Text('Password Reset link has been sent to your email.',
-                      style: TabelText.helveticablack19),
-                  SizedBox(
-                    height: 48,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => MyHomePage()),
-                        );
-                      },
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor: Color.fromRGBO(60, 55, 148, 1),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(11),
-                          )),
-                      child: Padding(
-                        padding: EdgeInsets.only(
-                          left: 1.w,
-                          right: 1.w,
-                        ),
-                        child: Text("OK", style: DialogText.helvetica20),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
+                ),
+              );
+            },
           );
-        },
-      );
-    } catch (e) {
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text('Error'),
-            content: Text(e.toString()),
-            actions: <Widget>[
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: Text('OK'),
-              ),
-            ],
-          );
-        },
-      );
+        }
+      } catch (e) {
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text('Error'),
+              content: Text(e.toString()),
+              actions: <Widget>[
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: Text('OK'),
+                ),
+              ],
+            );
+          },
+        );
+      }
     }
   }
 
@@ -765,83 +829,98 @@ class ForgotPasswordPage extends StatelessWidget {
                 ),
               ),
               padding: EdgeInsets.fromLTRB(4.w, 4.h, 2.w, 4.h),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Expanded(
-                        child: Center(
-                          child: Text('Reset Password',
-                              style: LoginpageText.helvetica30bold),
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                          child: Center(
+                            child: Text('Reset Password',
+                                style: LoginpageText.helvetica30bold),
+                          ),
                         ),
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.pop(context);
-                        },
-                        child: ImageIcon(
-                          AssetImage('cancel.png'),
-                          color: Colors.black,
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
+                          child: ImageIcon(
+                            AssetImage('cancel.png'),
+                            color: Colors.black,
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                  Text('Enter your email to reset Password',
-                      style: DialogText.helvetica25black),
-                  SizedBox(
-                    height: 45,
-                    width: 400,
-                    child: TextField(
-                      controller: _emailController,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(0)),
-                      ),
+                      ],
                     ),
-                  ),
-                  SizedBox(
-                    height: 48,
-                    child: ElevatedButton(
-                      onPressed: () => _resetPassword(context),
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor: Color.fromRGBO(60, 55, 148, 1),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(11),
-                          )),
-                      child: Padding(
-                        padding: EdgeInsets.only(
-                          left: 1.w,
-                          right: 1.w,
+                    Text('Enter your email to reset Password',
+                        style: DialogText.helvetica25black),
+                    SizedBox(
+                      height: 45,
+                      width: 400,
+                      child: TextFormField(
+                        controller: _emailController,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(0)),
                         ),
-                        child: Text('Send', style: DialogText.helvetica20),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(left: 2.w, right: 5.w),
-                    child: Divider(
-                      color: Color.fromRGBO(112, 112, 112, 1),
-                    ),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text("Didn't receive OTP ?",
-                          style: HomepageText.helvetica16black),
-                      InkWell(
-                        child: Text(' Resend',
-                            style: DialogText.purplehelveticabold),
-                        onTap: () async {
-                          await FirebaseAuth.instance.sendPasswordResetEmail(
-                              email: _emailController.text);
+                        validator: (value) {
+                          if (value != null && value.isEmpty) {
+                            return 'Please enter your email';
+                          }
+                          return null;
                         },
                       ),
-                    ],
-                  ),
-                ],
+                    ),
+                    SizedBox(
+                      height: 48,
+                      child: ElevatedButton(
+                        onPressed: () => _resetPassword(context),
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: Color.fromRGBO(60, 55, 148, 1),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(11),
+                            )),
+                        child: Padding(
+                          padding: EdgeInsets.only(
+                            left: 1.w,
+                            right: 1.w,
+                          ),
+                          child: Text('Send', style: DialogText.helvetica20),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(left: 2.w, right: 5.w),
+                      child: Divider(
+                        color: Color.fromRGBO(112, 112, 112, 1),
+                      ),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text("Didn't receive OTP ?",
+                            style: HomepageText.helvetica16black),
+                        InkWell(
+                          child: Text(' Resend',
+                              style: DialogText.purplehelveticabold),
+                          onTap: () async {
+                            if (_formKey.currentState != null &&
+                                _formKey.currentState!.validate()) {
+                              if (_emailController.text.isNotEmpty) {
+                                await FirebaseAuth.instance
+                                    .sendPasswordResetEmail(
+                                        email: _emailController.text);
+                              }
+                            }
+                          },
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
