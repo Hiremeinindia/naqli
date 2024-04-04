@@ -90,7 +90,7 @@ packages:
     source: hosted
     version: "6.1.12"
   cloud_firestore_web:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: cloud_firestore_web
       sha256: b6f05eb405517ddda1be982ed0c707d0977a45e2fcfa2086d1125ce0916ad823
@@ -258,7 +258,7 @@ packages:
     source: hosted
     version: "7.2.1"
   firebase_auth_web:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: firebase_auth_web
       sha256: a9c9faea77db8b7215f642d7a9a715347f1c46093f025813226596e3a25879b0

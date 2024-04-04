@@ -2,9 +2,7 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:easy_sidemenu/easy_sidemenu.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fl_chart/fl_chart.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_application_1/Users/Enterprise/booking_manager.dart';
 import 'package:flutter_application_1/Users/Enterprise/contracts.dart';
 import 'package:flutter_application_1/Users/Enterprise/dashboard.dart';
@@ -119,8 +117,8 @@ class _MyHomePageState extends State<EnterDashboardPage> {
                       ),
                       Row(
                         children: [
-                          InkWell(
-                            onTap: () {
+                          TextButton(
+                            onPressed: () {
                               // Handle the first button press
                             },
                             child: Text(
@@ -132,24 +130,20 @@ class _MyHomePageState extends State<EnterDashboardPage> {
                               ),
                             ),
                           ),
-                          Padding(
-                            padding: EdgeInsets.fromLTRB(0.5.w, 0, 0.5.w, 0),
-                            child: SizedBox(
-                              height: 20,
-                              child: VerticalDivider(
-                                thickness: 2,
-                                color: Color.fromRGBO(206, 203, 203, 1),
-                              ),
+                          SizedBox(
+                            height: 30,
+                            child: VerticalDivider(
+                              color: Color.fromRGBO(206, 203, 203, 1),
                             ),
                           ),
-                          InkWell(
-                            onTap: () {
+                          TextButton(
+                            onPressed: () {
                               // Handle the third button press
                             },
                             child: Text(
                               'Partner',
                               style: TextStyle(
-                                fontSize: 20,
+                                fontSize: 16,
                                 fontFamily: "HelveticaNeueRegular",
                                 color: Color.fromRGBO(206, 203, 203, 1),
                               ),
@@ -161,22 +155,21 @@ class _MyHomePageState extends State<EnterDashboardPage> {
                         children: [
                           DropdownButtonHideUnderline(
                             child: DropdownButton2<Language>(
-                              hint: Padding(
-                                padding: EdgeInsets.only(left: 10),
-                                child: Row(
-                                  children: [
-                                    Text(
-                                      translation(context).english,
-                                      style: TabelText.helvetica11,
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                    Icon(
-                                      Icons.arrow_drop_down,
-                                      color: Colors.black,
-                                      size: 25,
-                                    )
-                                  ],
-                                ),
+                              isExpanded: true,
+                              hint: Row(
+                                children: [
+                                  Text(
+                                    translation(context).english,
+                                    style: TabelText.helvetica11,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                  Expanded(child: SizedBox()),
+                                  Icon(
+                                    Icons.arrow_drop_down,
+                                    color: Colors.black,
+                                    size: 25,
+                                  )
+                                ],
                               ),
                               onChanged: (Language? language) async {
                                 if (language != null) {
@@ -191,33 +184,30 @@ class _MyHomePageState extends State<EnterDashboardPage> {
                                   .map<DropdownMenuItem<Language>>(
                                     (e) => DropdownMenuItem<Language>(
                                       value: e,
-                                      child: Text(
-                                        e.langname,
-                                        style: TabelText.helvetica11,
-                                        overflow: TextOverflow.ellipsis,
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceAround,
+                                        children: <Widget>[
+                                          Text(
+                                            e.flag,
+                                            style: TabelText.helvetica11,
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                          Text(
+                                            e.langname,
+                                            style: TabelText.helvetica11,
+                                            overflow: TextOverflow.ellipsis,
+                                          )
+                                        ],
                                       ),
-                                      //  Row(
-                                      //   mainAxisAlignment:
-                                      //       MainAxisAlignment.spaceAround,
-                                      //   children: <Widget>[
-                                      //     Text(
-                                      //       e.flag,
-                                      //       style: TabelText.helvetica11,
-                                      //       overflow: TextOverflow.ellipsis,
-                                      //     ),
-                                      //     Text(
-                                      //       e.langname,
-                                      //       style: TabelText.helvetica11,
-                                      //       overflow: TextOverflow.ellipsis,
-                                      //     )
-                                      //   ],
-                                      // ),
                                     ),
                                   )
                                   .toList(),
                               buttonStyleData: ButtonStyleData(
-                                height: 25,
-                                width: 103,
+                                height: 30,
+                                width: 130,
+                                padding:
+                                    const EdgeInsets.only(left: 14, right: 14),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(8),
                                   border: Border.all(
@@ -236,6 +226,8 @@ class _MyHomePageState extends State<EnterDashboardPage> {
                               ),
                               dropdownStyleData: DropdownStyleData(
                                 maxHeight: 210,
+                                padding: EdgeInsets.only(
+                                    left: 10, right: 10, top: 5, bottom: 15),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(5),
                                   border: Border.all(color: Colors.black26),
@@ -251,6 +243,7 @@ class _MyHomePageState extends State<EnterDashboardPage> {
                               ),
                               menuItemStyleData: const MenuItemStyleData(
                                 height: 25,
+                                padding: EdgeInsets.only(left: 14, right: 14),
                               ),
                             ),
                           ),
@@ -258,55 +251,31 @@ class _MyHomePageState extends State<EnterDashboardPage> {
                             width: 10,
                           ),
                           SizedBox(
-                            height: 35,
+                            height: 40,
                             child: VerticalDivider(
                               color: Colors.black,
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsets.only(left: 2, right: 10),
+                            padding: const EdgeInsets.only(
+                              left: 5,
+                            ),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text("Hello Faizal!",
-                                    style: AppBarText.helvetica),
-                                Text("Admin", style: AppBarText.usertext),
+                                    style: TabelText.helvetica11),
+                                Text("Admin", style: TabelText.usertext),
                                 Text("Faizal industries",
-                                    style: AppBarText.usertext),
+                                    style: TabelText.usertext),
                               ],
                             ),
                           ),
-                          Stack(children: [
-                            Container(
-                              height: 50,
-                              width: 50,
-                              child: InkWell(
-                                onTap: () {},
-                                child: ImageIcon(
-                                  AssetImage('Group.png'),
-                                  color: Color.fromRGBO(106, 102, 209, 1),
-                                ),
-                              ),
-                            ),
-                            Positioned(
-                              top: 7,
-                              left: 23,
-                              child: CircleAvatar(
-                                  backgroundColor:
-                                      const Color.fromARGB(255, 243, 7, 7),
-                                  maxRadius: 8,
-                                  minRadius: 7,
-                                  child: Align(
-                                    alignment: Alignment.center,
-                                    child: Text(
-                                      '3',
-                                      style: TextStyle(
-                                          fontSize: 11, color: Colors.white),
-                                    ),
-                                  )),
-                            ),
-                          ]),
+                          Icon(
+                            Icons.notifications,
+                            color: Color.fromRGBO(106, 102, 209, 1),
+                          ),
                         ],
                       ),
                     ],
