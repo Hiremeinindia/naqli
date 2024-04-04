@@ -313,7 +313,8 @@ class _VerifiedDialogState extends State<VerifiedDialog> {
                                               MaterialPageRoute(
                                                 builder: (context) =>
                                                     SingleUserDashboardPage(
-                                                        user: userId),
+                                                        user: userCredential
+                                                            .user!),
                                               ),
                                             );
                                           } else {

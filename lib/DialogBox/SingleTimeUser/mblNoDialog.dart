@@ -20,22 +20,22 @@ import '../../createAccount.dart';
 import '../../homePage.dart';
 
 class MblNoDialog extends StatefulWidget {
-  String? email;
-  String? password;
-  String? selectedAccounttype;
-  String? firstName;
-  String? lastName;
-  String? legalName;
-  String? contactNumber;
-  String? address;
-  String? selectedGovtId;
-  String? confirmPassword;
-  String? alternateNumber;
-  String? address2;
-  String? idNumber;
-  String? selectedCity;
-  String? companyidNumber;
-  String? adminUid;
+  String email;
+  String password;
+  String selectedAccounttype;
+  String firstName;
+  String lastName;
+  String legalName;
+  String contactNumber;
+  String address;
+  String selectedGovtId;
+  String confirmPassword;
+  String alternateNumber;
+  String address2;
+  String idNumber;
+  String selectedCity;
+  String companyidNumber;
+  String adminUid;
 
   MblNoDialog(
     this.email,
@@ -90,12 +90,12 @@ class _MblNoDialogState extends State<MblNoDialog> {
       if (widget.selectedAccounttype == 'Enterprise') {
         collectionName = 'enterpriseuser';
       } else if (widget.selectedAccounttype == 'Super User') {
-        collectionName = 'superuserdummy';
+        collectionName = 'superuser';
       } else if (widget.selectedAccounttype == 'User') {
-        collectionName = 'userdummy';
+        collectionName = 'user';
       }
 
-      String adminUid = widget.adminUid!;
+      String adminUid = widget.adminUid;
       return FirebaseFirestore.instance
           .collection(collectionName)
           .doc(adminUid)
@@ -121,10 +121,10 @@ class _MblNoDialogState extends State<MblNoDialog> {
 
   void fetchData1() async {
     try {
-      String selectedAccounttype = widget.selectedAccounttype!;
+      String selectedAccounttype = widget.selectedAccounttype;
       String smsCode =
           otp1.text + otp2.text + otp3.text + otp4.text + otp5.text + otp6.text;
-      String adminUid = widget.adminUid!;
+      String adminUid = widget.adminUid;
       PhoneAuthCredential _credential = PhoneAuthProvider.credential(
         verificationId: storedVerificationId!,
         smsCode: smsCode,
@@ -379,7 +379,7 @@ class _MblNoDialogState extends State<MblNoDialog> {
                         child: ElevatedButton(
                           onPressed: () async {
                             String selectedAccounttype =
-                                widget.selectedAccounttype!;
+                                widget.selectedAccounttype;
                             String smsCode = otp1.text +
                                 otp2.text +
                                 otp3.text +
@@ -401,7 +401,7 @@ class _MblNoDialogState extends State<MblNoDialog> {
 
                               if (userCredential.user != null) {
                                 print("OTP verified successfully");
-                                String adminUid = widget.adminUid!;
+                                String adminUid = widget.adminUid;
                                 // Fetch user details from Firebase
                                 User? user = userCredential.user;
                                 String? phoneNumber = user?.phoneNumber;
@@ -410,12 +410,12 @@ class _MblNoDialogState extends State<MblNoDialog> {
                                 String collectionName = '';
 
                                 if (selectedAccounttype == 'Enterprise') {
-                                  collectionName = 'enterpriseuser';
+                                  collectionName = 'enterprise';
                                 } else if (selectedAccounttype ==
                                     'Super User') {
-                                  collectionName = 'superuser';
+                                  collectionName = 'superuserdummy';
                                 } else if (selectedAccounttype == 'User') {
-                                  collectionName = 'user';
+                                  collectionName = 'userdummy';
                                 }
 
                                 // Fetch user details from the determined collection
@@ -485,9 +485,9 @@ class _MblNoDialogState extends State<MblNoDialog> {
                                                             userCredential =
                                                             await _auth
                                                                 .signInWithEmailAndPassword(
-                                                          email: widget.email!,
+                                                          email: widget.email,
                                                           password:
-                                                              widget.password!,
+                                                              widget.password,
                                                         );
                                                         String userId =
                                                             userCredential
@@ -522,8 +522,8 @@ class _MblNoDialogState extends State<MblNoDialog> {
                                                             MaterialPageRoute(
                                                                 builder: (context) =>
                                                                     SingleUserDashboardPage(
-                                                                        user:
-                                                                            userId)),
+                                                                        user: userCredential
+                                                                            .user!)),
                                                           );
                                                         } else {
                                                           // Handle invalid selectedType
@@ -728,7 +728,7 @@ class _MblNoDialogState extends State<MblNoDialog> {
                               height: 30,
                               child: ElevatedButton(
                                 onPressed: () async {
-                                  String adminUid = widget.adminUid!;
+                                  String adminUid = widget.adminUid;
                                   await _startPhoneAuth(
                                       contactNumberController.text, adminUid);
                                 },
@@ -846,7 +846,7 @@ class _MblNoDialogState extends State<MblNoDialog> {
                               height: 30,
                               child: ElevatedButton(
                                 onPressed: () async {
-                                  String adminUid = widget.adminUid!;
+                                  String adminUid = widget.adminUid;
                                   await _startPhoneAuth(
                                       contactNumberController.text, adminUid);
                                 },

@@ -238,6 +238,21 @@ class TriggerBookingText {
   );
 }
 
+class AppBarText {
+  static const TextStyle helvetica = TextStyle(
+    color: Colors.black,
+    fontFamily: 'Helvetica',
+    height: 0.8,
+    fontSize: 16,
+  );
+  static const TextStyle usertext = TextStyle(
+    fontSize: 10,
+    height: 1,
+    fontFamily: "HelveticaNeueRegular",
+    color: Color.fromRGBO(112, 112, 112, 1),
+  );
+}
+
 class FormTextStyle {
   static const TextStyle text = TextStyle(
     fontFamily: 'Colfax',

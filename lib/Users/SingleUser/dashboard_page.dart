@@ -19,7 +19,7 @@ import 'package:flutter_application_1/Users/SingleUser/dashboard.dart';
 import 'package:flutter_application_1/Users/SingleUser/payments.dart';
 
 class SingleUserDashboardPage extends StatefulWidget {
-  final String? user;
+  final User user;
   const SingleUserDashboardPage({required this.user});
 
   @override
