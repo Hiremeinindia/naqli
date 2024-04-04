@@ -51,7 +51,7 @@ class _TriggerBookingState extends State<TriggerBooking> {
                     child: Column(
                       children: [
                         Container(
-                          height: 65, width: 1090,
+                          height: 65, width: 90.w,
                           color: Color.fromRGBO(75, 61, 82, 1), // Brown color
                           child: Padding(
                             padding:
@@ -76,7 +76,7 @@ class _TriggerBookingState extends State<TriggerBooking> {
                             child: Expanded(
                               child: Container(
                                 height: 230,
-                                width: 1090,
+                                width: 90.w,
                                 decoration: BoxDecoration(
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(8)),
@@ -120,7 +120,7 @@ class _TriggerBookingState extends State<TriggerBooking> {
                             child: Column(
                               children: [
                                 Container(
-                                  height: 65, width: 1090,
+                                  height: 65, width: 90.w,
                                   color: Color.fromRGBO(
                                       75, 61, 82, 1), // Brown color
                                   child: Padding(
@@ -148,7 +148,7 @@ class _TriggerBookingState extends State<TriggerBooking> {
                                     child: Expanded(
                                       child: Container(
                                         height: 230,
-                                        width: 1090,
+                                        width: 90.w,
                                         decoration: BoxDecoration(
                                           borderRadius: BorderRadius.all(
                                               Radius.circular(8)),
@@ -196,6 +196,7 @@ class _TriggerBookingState extends State<TriggerBooking> {
       DataColumn(
         label: SizedBox(),
       ),
+      DataColumn(label: SizedBox(), numeric: true),
       DataColumn(
         label: SizedBox(),
       ),
@@ -224,32 +225,27 @@ class _TriggerBookingState extends State<TriggerBooking> {
     return [
       DataRow(cells: [
         DataCell(
-          Row(
+          Checkbox(
+            splashRadius: 1,
+            shape: RoundedRectangleBorder(side: BorderSide()),
+            value: checkbox1,
+            onChanged: (bool? newValue) {
+              setState(() {
+                value = newValue!;
+              });
+            },
+          ),
+        ),
+        DataCell(
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Checkbox(
-                splashRadius: 1,
-                shape: RoundedRectangleBorder(side: BorderSide()),
-                value: checkbox1,
-                onChanged: (bool? newValue) {
-                  setState(() {
-                    value = newValue!;
-                  });
-                },
-              ),
+              Text('Trip 1', style: TriggerBookingText.sfpro16),
               SizedBox(
-                width: 15,
+                height: 3,
               ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text('Trip 1', style: TriggerBookingText.sfpro16),
-                  SizedBox(
-                    height: 3,
-                  ),
-                  Text("Booking ID Xxxxxx", style: TriggerBookingText.sfpro14),
-                ],
-              ),
+              Text("Booking ID Xxxxxx", style: TriggerBookingText.sfpro14),
             ],
           ),
         ),
@@ -314,7 +310,6 @@ class _TriggerBookingState extends State<TriggerBooking> {
               textcolor2: Colors.black38),
         ),
         DataCell(Row(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             IconButton(
                 padding: EdgeInsets.zero,
@@ -332,48 +327,45 @@ class _TriggerBookingState extends State<TriggerBooking> {
           ],
         )),
         DataCell(
-          Align(
-            alignment: Alignment.center,
-            child: SizedBox(
-              height: 30,
-              child: ElevatedButton(
-                onPressed: isButtonEnabled
-                    ? () {
-                        showDialog(
-                          context: context,
-                          builder: (context) {
-                            return BookingDialog();
-                          },
-                        );
-                      }
-                    : null,
-                style: isButtonEnabled
-                    ? ElevatedButton.styleFrom(
-                        elevation: 2,
-                        padding: EdgeInsets.only(
-                            left: 2.w, right: 2.w, top: 2.5.h, bottom: 2.5.h),
-                        backgroundColor: Color.fromRGBO(212, 213, 248, 1),
-                        side: BorderSide(
-                          color: Color.fromARGB(255, 196, 196, 196)
-                              .withOpacity(0.1),
-                        ),
-                      )
-                    : ElevatedButton.styleFrom(
-                        elevation: 2,
-                        padding: EdgeInsets.only(
-                            left: 2.w, right: 2.w, top: 2.5.h, bottom: 2.5.h),
-                        backgroundColor: Color.fromRGBO(212, 213, 248, 1),
-                        side: BorderSide(
-                          color: Colors.grey.withOpacity(0.2),
-                        ),
+          SizedBox(
+            height: 30,
+            child: ElevatedButton(
+              onPressed: isButtonEnabled
+                  ? () {
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          return BookingDialog();
+                        },
+                      );
+                    }
+                  : null,
+              style: isButtonEnabled
+                  ? ElevatedButton.styleFrom(
+                      elevation: 2,
+                      padding: EdgeInsets.only(
+                          left: 2.w, right: 2.w, top: 2.5.h, bottom: 2.5.h),
+                      backgroundColor: Color.fromRGBO(212, 213, 248, 1),
+                      side: BorderSide(
+                        color:
+                            Color.fromARGB(255, 196, 196, 196).withOpacity(0.1),
                       ),
-                child: Text(
-                  'Pay Now',
-                  style: TextStyle(
-                    color: Colors.black54,
-                    fontSize: 12,
-                    fontFamily: "Helvetica",
-                  ),
+                    )
+                  : ElevatedButton.styleFrom(
+                      elevation: 2,
+                      padding: EdgeInsets.only(
+                          left: 2.w, right: 2.w, top: 2.5.h, bottom: 2.5.h),
+                      backgroundColor: Color.fromRGBO(212, 213, 248, 1),
+                      side: BorderSide(
+                        color: Colors.grey.withOpacity(0.2),
+                      ),
+                    ),
+              child: Text(
+                'Pay Now',
+                style: TextStyle(
+                  color: Colors.black54,
+                  fontSize: 12,
+                  fontFamily: "Helvetica",
                 ),
               ),
             ),
@@ -382,32 +374,26 @@ class _TriggerBookingState extends State<TriggerBooking> {
       ]),
       DataRow(cells: [
         DataCell(
-          Row(
+          Checkbox(
+            splashRadius: 1,
+            shape: RoundedRectangleBorder(side: BorderSide()),
+            value: checkbox2,
+            onChanged: (bool? newValue) {
+              setState(() {
+                value = newValue!;
+              });
+            },
+          ),
+        ),
+        DataCell(
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Checkbox(
-                splashRadius: 1,
-                shape: RoundedRectangleBorder(side: BorderSide()),
-                value: checkbox2,
-                onChanged: (bool? newValue) {
-                  setState(() {
-                    value = newValue!;
-                  });
-                },
-              ),
+              Text('Equipment Hire', style: TriggerBookingText.sfpro16),
               SizedBox(
-                width: 15,
+                height: 3,
               ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text('Equipment Hire', style: TriggerBookingText.sfpro16),
-                  SizedBox(
-                    height: 3,
-                  ),
-                  Text("Booking ID Xxxxxx", style: TriggerBookingText.sfpro14),
-                ],
-              ),
+              Text("Booking ID Xxxxxx", style: TriggerBookingText.sfpro14),
             ],
           ),
         ),
@@ -473,7 +459,6 @@ class _TriggerBookingState extends State<TriggerBooking> {
         ),
         DataCell(
           Row(
-            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               IconButton(
                   padding: EdgeInsets.zero,
@@ -492,49 +477,46 @@ class _TriggerBookingState extends State<TriggerBooking> {
           ),
         ),
         DataCell(
-          Align(
-            alignment: Alignment.center,
-            child: SizedBox(
-              height: 30,
-              child: ElevatedButton(
-                onPressed: isButtonEnabled1
-                    ? () {
-                        showDialog(
-                          context: context,
-                          builder: (context) {
-                            return BookingDialog();
-                          },
-                        );
-                        print('Elevated Button Pressed!');
-                      }
-                    : null,
-                style: isButtonEnabled1
-                    ? ElevatedButton.styleFrom(
-                        padding: EdgeInsets.only(
-                            left: 2.w, right: 2.w, top: 2.5.h, bottom: 2.5.h),
-                        elevation: 2,
-                        backgroundColor: Color.fromRGBO(212, 213, 248, 1),
-                        side: BorderSide(
-                          color: Color.fromARGB(255, 196, 196, 196)
-                              .withOpacity(0.1),
-                        ),
-                      )
-                    : ElevatedButton.styleFrom(
-                        padding: EdgeInsets.only(
-                            left: 2.w, right: 2.w, top: 2.5.h, bottom: 2.5.h),
-                        elevation: 2,
-                        backgroundColor: Color.fromRGBO(212, 213, 248, 1),
-                        side: BorderSide(
-                          color: Colors.grey.withOpacity(0.2),
-                        ),
+          SizedBox(
+            height: 30,
+            child: ElevatedButton(
+              onPressed: isButtonEnabled1
+                  ? () {
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          return BookingDialog();
+                        },
+                      );
+                      print('Elevated Button Pressed!');
+                    }
+                  : null,
+              style: isButtonEnabled1
+                  ? ElevatedButton.styleFrom(
+                      padding: EdgeInsets.only(
+                          left: 2.w, right: 2.w, top: 2.5.h, bottom: 2.5.h),
+                      elevation: 2,
+                      backgroundColor: Color.fromRGBO(212, 213, 248, 1),
+                      side: BorderSide(
+                        color:
+                            Color.fromARGB(255, 196, 196, 196).withOpacity(0.1),
                       ),
-                child: Text(
-                  'Pay Now',
-                  style: TextStyle(
-                    color: Colors.black54,
-                    fontSize: 12,
-                    fontFamily: "Helvetica",
-                  ),
+                    )
+                  : ElevatedButton.styleFrom(
+                      padding: EdgeInsets.only(
+                          left: 2.w, right: 2.w, top: 2.5.h, bottom: 2.5.h),
+                      elevation: 2,
+                      backgroundColor: Color.fromRGBO(212, 213, 248, 1),
+                      side: BorderSide(
+                        color: Colors.grey.withOpacity(0.2),
+                      ),
+                    ),
+              child: Text(
+                'Pay Now',
+                style: TextStyle(
+                  color: Colors.black54,
+                  fontSize: 12,
+                  fontFamily: "Helvetica",
                 ),
               ),
             ),
@@ -543,32 +525,26 @@ class _TriggerBookingState extends State<TriggerBooking> {
       ]),
       DataRow(cells: [
         DataCell(
-          Row(
+          Checkbox(
+            splashRadius: 1,
+            shape: RoundedRectangleBorder(side: BorderSide()),
+            value: checkbox3,
+            onChanged: (bool? newValue) {
+              setState(() {
+                value = newValue!;
+              });
+            },
+          ),
+        ),
+        DataCell(
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Checkbox(
-                splashRadius: 1,
-                shape: RoundedRectangleBorder(side: BorderSide()),
-                value: checkbox3,
-                onChanged: (bool? newValue) {
-                  setState(() {
-                    value = newValue!;
-                  });
-                },
-              ),
+              Text('Bus Trip', style: TriggerBookingText.sfpro16),
               SizedBox(
-                width: 15,
+                height: 3,
               ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text('Bus Trip', style: TriggerBookingText.sfpro16),
-                  SizedBox(
-                    height: 3,
-                  ),
-                  Text("Booking ID Xxxxxx", style: TriggerBookingText.sfpro14),
-                ],
-              ),
+              Text("Booking ID Xxxxxx", style: TriggerBookingText.sfpro14),
             ],
           ),
         ),
@@ -634,7 +610,6 @@ class _TriggerBookingState extends State<TriggerBooking> {
         ),
         DataCell(
           Row(
-            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               IconButton(
                   padding: EdgeInsets.zero,
@@ -653,48 +628,45 @@ class _TriggerBookingState extends State<TriggerBooking> {
           ),
         ),
         DataCell(
-          Align(
-            alignment: Alignment.center,
-            child: SizedBox(
-              height: 30,
-              child: ElevatedButton(
-                onPressed: isButtonEnabled2
-                    ? () {
-                        showDialog(
-                          context: context,
-                          builder: (context) {
-                            return BookingDialog();
-                          },
-                        );
-                      }
-                    : null,
-                style: isButtonEnabled2
-                    ? ElevatedButton.styleFrom(
-                        padding: EdgeInsets.only(
-                            left: 2.w, right: 2.w, top: 2.5.h, bottom: 2.5.h),
-                        elevation: 2,
-                        backgroundColor: Color.fromRGBO(212, 213, 248, 1),
-                        side: BorderSide(
-                          color: Color.fromARGB(255, 196, 196, 196)
-                              .withOpacity(0.1),
-                        ),
-                      )
-                    : ElevatedButton.styleFrom(
-                        padding: EdgeInsets.only(
-                            left: 2.w, right: 2.w, top: 2.5.h, bottom: 2.5.h),
-                        elevation: 2,
-                        backgroundColor: Color.fromRGBO(212, 213, 248, 1),
-                        side: BorderSide(
-                          color: Colors.grey.withOpacity(0.2),
-                        ),
+          SizedBox(
+            height: 30,
+            child: ElevatedButton(
+              onPressed: isButtonEnabled2
+                  ? () {
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          return BookingDialog();
+                        },
+                      );
+                    }
+                  : null,
+              style: isButtonEnabled2
+                  ? ElevatedButton.styleFrom(
+                      padding: EdgeInsets.only(
+                          left: 2.w, right: 2.w, top: 2.5.h, bottom: 2.5.h),
+                      elevation: 2,
+                      backgroundColor: Color.fromRGBO(212, 213, 248, 1),
+                      side: BorderSide(
+                        color:
+                            Color.fromARGB(255, 196, 196, 196).withOpacity(0.1),
                       ),
-                child: Text(
-                  'Pay Now',
-                  style: TextStyle(
-                    color: Colors.black54,
-                    fontSize: 12,
-                    fontFamily: "Helvetica",
-                  ),
+                    )
+                  : ElevatedButton.styleFrom(
+                      padding: EdgeInsets.only(
+                          left: 2.w, right: 2.w, top: 2.5.h, bottom: 2.5.h),
+                      elevation: 2,
+                      backgroundColor: Color.fromRGBO(212, 213, 248, 1),
+                      side: BorderSide(
+                        color: Colors.grey.withOpacity(0.2),
+                      ),
+                    ),
+              child: Text(
+                'Pay Now',
+                style: TextStyle(
+                  color: Colors.black54,
+                  fontSize: 12,
+                  fontFamily: "Helvetica",
                 ),
               ),
             ),

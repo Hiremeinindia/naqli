@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:file_picker/file_picker.dart';
+
 import 'allUsers.dart';
 
 class AllUsersFormController {
@@ -21,8 +21,6 @@ class AllUsersFormController {
   final companyidNumber = TextEditingController();
   final selectedAccounttype = TextEditingController();
   final otp = TextEditingController();
-  final imgpic = TextEditingController();
-  FilePickerResult? imagePic;
 
   // String get newDocId => FirebaseFirestore.instance.collection('AllUserss').doc().id;
 
@@ -51,6 +49,5 @@ class AllUsersFormController {
         city: selectedCity.text,
         companyidNumber: companyidNumber.text,
         accounttype: selectedAccounttype.text,
-        imgPic: imgpic.text,
       );
 }

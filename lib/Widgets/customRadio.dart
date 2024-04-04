@@ -27,9 +27,8 @@ class CustomRadio extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 40,
-      width: 150,
-      padding: EdgeInsets.fromLTRB(0.1.w, 1.h, 1.w, 1.h),
+      height: 37,
+      padding: EdgeInsets.fromLTRB(0.1.w, 1.h, 0, 1.h),
       decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
@@ -44,10 +43,9 @@ class CustomRadio extends StatelessWidget {
           border: Border.all(
               color: Color.fromRGBO(216, 216, 216, 1).withOpacity(0.5))),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Transform.scale(
-            scale: 0.9,
+            scale: 0.7,
             child: Radio<int?>(
               splashRadius: 5,
               fillColor: MaterialStateProperty.resolveWith((states) {
@@ -69,6 +67,9 @@ class CustomRadio extends StatelessWidget {
                 fontSize: 9,
                 color: Color.fromRGBO(128, 118, 118, 1),
               )),
+          SizedBox(
+            width: 10,
+          ),
           Text(
             text2!,
             style: TextStyle(
