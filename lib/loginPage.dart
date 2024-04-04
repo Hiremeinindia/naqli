@@ -81,9 +81,9 @@ class _LoginPageState extends State<LoginPage> {
 
   Future<String> getUserRole(String uid) async {
     try {
-      String enterpriseCollection = 'enterprisedummy';
-      String superuserCollection = 'superuserdummy';
-      String userCollection = 'userdummy';
+      String enterpriseCollection = 'enterpriseuser';
+      String superuserCollection = 'superuser';
+      String userCollection = 'user';
 
       // Check if the user is an admin
       DocumentSnapshot<Map<String, dynamic>> enterpriseSnapshot =
@@ -286,61 +286,49 @@ class _LoginPageState extends State<LoginPage> {
                                                 String userRole =
                                                     await getUserRole(userId);
 
-                                                print('User Role = $userRole');
-                                                // Navigate to the appropriate dashboard based on the user's role
-                                                if (userRole == 'User') {
-                                                  Navigator.pushReplacement(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          SingleUserDashboardPage(
-                                                              user:
-                                                                  userCredential
-                                                                      .user!),
-                                                    ),
-                                                  );
-                                                } else if (userRole ==
-                                                    'Super User') {
-                                                  Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          SuperUserDashboardPage(
-                                                              user:
-                                                                  userCredential
-                                                                      .user!),
-                                                    ),
-                                                  );
-                                                } else if (userRole ==
-                                                    'Enterprise') {
-                                                  Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          EnterDashboardPage(
-                                                              adminUid: userId),
-                                                    ),
-                                                  );
-                                                } else {
-                                                  print('Unknown user role');
-                                                }
-                                              } on FirebaseAuthException catch (e) {
-                                                // Handle authentication exceptions
-                                                if (e.code ==
-                                                    'user-not-found') {
-                                                  print(
-                                                      'No user found for that email.');
-                                                } else if (e.code ==
-                                                    'wrong-password') {
-                                                  print(
-                                                      'Wrong password provided.');
-                                                } else {
-                                                  print(
-                                                      'Error: ${e.message}'); // Print other errors
-                                                }
-                                              } catch (e) {
+                                              print('User Role = $userRole');
+                                              // Navigate to the appropriate dashboard based on the user's role
+                                              if (userRole == 'User') {
+                                                Navigator.pushReplacement(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        SingleUserDashboardPage(
+                                                            user: userId),
+                                                  ),
+                                                );
+                                              } else if (userRole ==
+                                                  'Super User') {
+                                                Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        SuperUserDashboardPage(
+                                                            user: userId),
+                                                  ),
+                                                );
+                                              } else if (userRole ==
+                                                  'Enterprise') {
+                                                Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        EnterDashboardPage(
+                                                            adminUid: userId),
+                                                  ),
+                                                );
+                                              } else {
+                                                print('Unknown user role');
+                                              }
+                                            } on FirebaseAuthException catch (e) {
+                                              // Handle authentication exceptions
+                                              if (e.code == 'user-not-found') {
                                                 print(
-                                                    'Error: $e'); // Catch any unexpected errors
+                                                    'No user found for that email.');
+                                              } else if (e.code ==
+                                                  'wrong-password') {
+                                                print(
+                                                    'Wrong password provided.');
                                               }
                                             }
                                           },
@@ -372,82 +360,97 @@ class _LoginPageState extends State<LoginPage> {
                                               ),
                                             ),
                                           ),
-                                        ),
-                                      ),
-                                      InkWell(
-                                        child: Text('Forgot Password?',
-                                            style:
-                                                LoginpageText.purplehelvetica),
-                                        onTap: () {
-                                          showDialog(
-                                            barrierColor: Colors.transparent,
-                                            context: context,
-                                            builder: (context) {
-                                              return ForgotPasswordPage();
-                                            },
-                                          );
-                                        },
-                                      ),
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    height: 10,
-                                  ),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      Text("Don't have an account?",
-                                          style: HomepageText.helvetica16black),
-                                      InkWell(
-                                        child: Text(' Create One!',
-                                            style:
-                                                LoginpageText.purplehelvetica),
-                                        onTap: () {
-                                          showDialog(
-                                            barrierColor: Colors.transparent,
-                                            context: context,
-                                            builder: (context) {
-                                              return CreateAccount();
-                                            },
-                                          );
-                                        },
-                                      ),
-                                    ],
-                                  ),
-                                  InkWell(
-                                    child: Text('Use without Log in',
-                                        style: LoginpageText.purplehelvetica),
-                                    onTap: () async {
-                                      // _showOtpVerificationDialog();
-                                      String email = controller.email.text;
-                                      String password =
-                                          controller.password.text;
-                                      String selectedAccounttype =
-                                          controller.selectedAccounttype.text;
-                                      showDialog(
-                                        barrierColor:
-                                            Colors.grey.withOpacity(0.5),
-                                        context: context,
-                                        builder: (context) {
-                                          return VerifiedDialog(email, password,
-                                              selectedAccounttype);
-                                        },
-                                      );
-                                      if (isVerified) {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) => MyHomePage(),
-                                          ),
+                                        )),
+                                    InkWell(
+                                      child: Text('Forgot Password?',
+                                          style: LoginpageText.purplehelvetica),
+                                      onTap: () {
+                                        showDialog(
+                                          barrierColor: Colors.transparent,
+                                          context: context,
+                                          builder: (context) {
+                                            return ForgotPasswordPage();
+                                          },
                                         );
-                                      }
-                                    },
-                                  ),
-                                  SizedBox(
-                                    height: 60,
-                                  ),
-                                ],
-                              ),
+                                      },
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Text("Don't have an account?",
+                                        style: HomepageText.helvetica16black),
+                                    InkWell(
+                                      child: Text(' Create One!',
+                                          style: LoginpageText.purplehelvetica),
+                                      onTap: () {
+                                        showDialog(
+                                          barrierColor: Colors.transparent,
+                                          context: context,
+                                          builder: (context) {
+                                            return CreateAccount();
+                                          },
+                                        );
+                                      },
+                                    ),
+                                  ],
+                                ),
+                                InkWell(
+                                  child: Text('Use without Log in',
+                                      style: LoginpageText.purplehelvetica),
+                                  onTap: () async {
+                                    // _showOtpVerificationDialog();
+                                    String? email = '';
+                                    String password = '';
+                                    String selectedAccounttype = '';
+
+                                    String firstName = '';
+                                    String lastName = '';
+                                    String legalName = '';
+                                    String adminUid = '';
+                                    String contactNumber = '';
+                                    String address = '';
+                                    String selectedGovtId = '';
+                                    String confirmPassword = '';
+                                    String alternateNumber = '';
+                                    String address2 = '';
+                                    String idNumber = '';
+                                    String selectedCity = '';
+                                    String companyidNumber = '';
+                                    showDialog(
+                                      barrierColor:
+                                          Colors.grey.withOpacity(0.5),
+                                      context: context,
+                                      builder: (context) {
+                                        return MblNoDialog(
+                                            email,
+                                            password,
+                                            selectedAccounttype,
+                                            firstName,
+                                            lastName,
+                                            legalName,
+                                            address,
+                                            address2,
+                                            alternateNumber,
+                                            companyidNumber,
+                                            confirmPassword,
+                                            contactNumber,
+                                            idNumber,
+                                            selectedCity,
+                                            selectedGovtId,
+                                            adminUid);
+                                      },
+                                    );
+                                  },
+                                ),
+                                SizedBox(
+                                  height: 60,
+                                ),
+                              ],
                             ),
                           ),
                         ),
@@ -582,7 +585,7 @@ class _LoginPageState extends State<LoginPage> {
                                     MaterialPageRoute(
                                       builder: (context) =>
                                           SingleUserDashboardPage(
-                                              user: userCredential.user!),
+                                              user: userId!),
                                     ),
                                   );
                                 } else if (userRole == 'Super User') {
@@ -591,7 +594,7 @@ class _LoginPageState extends State<LoginPage> {
                                       MaterialPageRoute(
                                         builder: (context) =>
                                             SuperUserDashboardPage(
-                                                user: userCredential.user!),
+                                                user: userId),
                                       ));
                                 } else if (userRole == 'Enterprise') {
                                   Navigator.push(

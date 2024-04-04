@@ -9,13 +9,13 @@ import 'package:sizer/sizer.dart';
 
 import '../../Widgets/colorContainer.dart';
 
-class BookingManager extends StatefulWidget {
-  BookingManager();
+class Bookings extends StatefulWidget {
+  Bookings();
   @override
-  State<BookingManager> createState() => _BookingManagerState();
+  State<Bookings> createState() => _BookingsState();
 }
 
-class _BookingManagerState extends State<BookingManager> {
+class _BookingsState extends State<Bookings> {
   final ScrollController _book1Scroll = ScrollController();
   final ScrollController _book2Scroll = ScrollController();
   final ScrollController _book3Scroll = ScrollController();
@@ -233,7 +233,7 @@ class _BookingManagerState extends State<BookingManager> {
                                   Scrollbar(
                                     controller: _book1Scroll,
                                     thumbVisibility:
-                                        false, // Set to true to always show the scrollbar
+                                        true, // Set to true to always show the scrollbar
                                     child: SingleChildScrollView(
                                       controller: _book1Scroll,
                                       scrollDirection: Axis.horizontal,

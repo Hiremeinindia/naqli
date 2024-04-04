@@ -28,7 +28,7 @@ class AllUsersFormController {
 
   DocumentReference get reference {
     _reference ??=
-        FirebaseFirestore.instance.collection('enterprisedummy').doc();
+        FirebaseFirestore.instance.collection('enterpriseuser').doc();
     return _reference!;
   }
 

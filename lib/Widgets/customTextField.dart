@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/Widgets/formText.dart';
+import 'package:sizer/sizer.dart';
 
 @immutable
 final class CustomTextfield extends StatelessWidget {
@@ -37,7 +38,7 @@ final class CustomTextfield extends StatelessWidget {
         validator: validator,
         controller: controller,
         decoration: InputDecoration(
-          contentPadding: EdgeInsets.only(left: 12),
+          contentPadding: EdgeInsets.only(left: 0.9.w),
           hintStyle: TextStyle(
               fontStyle: FontStyle.normal,
               fontSize: 13,
