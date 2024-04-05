@@ -18,8 +18,8 @@ import '../../classes/language_constants.dart';
 import '../../main.dart';
 
 class Sample1 extends StatefulWidget {
-  String? adminUid;
-  Sample1({this.adminUid});
+  String? user;
+  Sample1({this.user});
 
   @override
   State<Sample1> createState() => _MyHomePageState();
@@ -473,7 +473,7 @@ class _MyHomePageState extends State<Sample1> {
                                     onTap: (page, _) {
                                       setState(() {
                                         _currentContent = Users(
-                                          adminUid: widget.adminUid,
+                                          user: widget.user,
                                         );
                                       });
                                       sideMenu.changePage(page);
@@ -649,7 +649,7 @@ class _MyHomePageState extends State<Sample1> {
                         ),
                         onTap: () {
                           setState(() {
-                            _currentContent = Users(adminUid: widget.adminUid);
+                            _currentContent = Users(user: widget.user);
                           });
                           Navigator.pop(context);
                         }),

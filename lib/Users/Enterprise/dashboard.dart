@@ -1,12 +1,15 @@
 import 'dart:ui';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_application_1/Controllers/allUsersFormController.dart';
 import 'package:flutter_application_1/Widgets/colorContainer.dart';
 import 'package:flutter_application_1/Widgets/formText.dart';
+import 'package:flutter_application_1/homePageEnterprise.dart';
 import 'package:flutter_application_1/pieChart/app_colors.dart';
 import 'package:flutter_application_1/pieChart/indicator.dart';
 import 'package:flutter_application_1/Widgets/customButton.dart';
@@ -24,6 +27,8 @@ class enterDashboard extends StatefulWidget {
 class _DashboardState extends State<enterDashboard> {
   final ScrollController _bookScroll = ScrollController();
   final ScrollController _pendingbookScroll = ScrollController();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  AllUsersFormController controller = AllUsersFormController();
   String month = '';
   int touchedIndex = -1;
   List<PieChartSectionData> showingSections() {
@@ -485,18 +490,40 @@ class _DashboardState extends State<enterDashboard> {
                                               style: TabelText.headerText),
                                         ),
                                       ),
-                                      Container(
-                                        height: 70,
-                                        decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          borderRadius:
-                                              BorderRadius.circular(12.0),
-                                        ),
-                                        child: Image.asset(
-                                          color:
-                                              Color.fromRGBO(143, 142, 151, 1),
-                                          'add.png',
-                                          width: 120,
+                                      InkWell(
+                                        onTap: () async {
+                                          UserCredential userCredential =
+                                              await _auth
+                                                  .signInWithEmailAndPassword(
+                                            email: controller.email.text,
+                                            password: controller.password.text,
+                                          );
+                                          String userId =
+                                              userCredential.user!.uid;
+                                          // Navigate to the specific class here
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  MyHomePageEnter(
+                                                user: userId,
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                        child: Container(
+                                          height: 70,
+                                          decoration: BoxDecoration(
+                                            color: Colors.white,
+                                            borderRadius:
+                                                BorderRadius.circular(12.0),
+                                          ),
+                                          child: Image.asset(
+                                            'assets/add.png', // Make sure to provide the correct path to your image asset
+                                            color: Color.fromRGBO(
+                                                143, 142, 151, 1),
+                                            width: 120,
+                                          ),
                                         ),
                                       ),
                                       SizedBox(
