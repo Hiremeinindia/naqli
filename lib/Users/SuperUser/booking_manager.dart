@@ -4,7 +4,8 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_application_1/DialogBox/bookingConfirmation.dart';
 import 'package:flutter_application_1/Users/Enterprise/contracts.dart';
 import 'package:flutter_application_1/Users/Enterprise/newContract.dart';
-import 'package:flutter_application_1/Users/SuperUser/editcontract.dart';
+import 'package:flutter_application_1/Users/SuperUser/edit_contract.dart';
+
 import 'package:flutter_application_1/Widgets/customButton.dart';
 import 'package:flutter_application_1/Widgets/formText.dart';
 import 'package:flutter_application_1/homePage.dart';
