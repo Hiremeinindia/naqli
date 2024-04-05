@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+
 import 'package:flutter/cupertino.dart';
 
 import 'allUsers.dart';
@@ -30,7 +31,7 @@ class AllUsersFormController {
 
   DocumentReference get reference {
     _reference ??=
-        FirebaseFirestore.instance.collection('enterpriseuser').doc();
+        FirebaseFirestore.instance.collection('enterprisedummy').doc();
     return _reference!;
   }
 

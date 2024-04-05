@@ -248,7 +248,7 @@ class _LoginPageState extends State<LoginPage> {
                                                   ),
                                                 );
                                               } else if (userRole ==
-                                                  'Super User') {
+                                                  'Superuser') {
                                                 Navigator.push(
                                                   context,
                                                   MaterialPageRoute(
@@ -264,7 +264,7 @@ class _LoginPageState extends State<LoginPage> {
                                                   MaterialPageRoute(
                                                     builder: (context) =>
                                                         EnterDashboardPage(
-                                                            adminUid: userId),
+                                                            user: userId),
                                                   ),
                                                 );
                                               } else {
@@ -536,8 +536,7 @@ class _LoginPageState extends State<LoginPage> {
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) =>
-                                            EnterDashboardPage(
-                                                adminUid: userId),
+                                            EnterDashboardPage(user: userId),
                                       ));
                                 } else {
                                   print('Unknown user role');

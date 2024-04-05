@@ -10,6 +10,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_application_1/Controllers/allUsersFormController.dart';
 import 'package:flutter_application_1/DialogBox/SingleTimeUser/optDialog.dart';
 import 'package:flutter_application_1/DialogBox/SingleTimeUser/verfiedDialog.dart';
+import 'package:flutter_application_1/Widgets/customTextField.dart';
 import 'package:flutter_application_1/Widgets/formText.dart';
 import 'package:sizer/sizer.dart';
 
@@ -62,6 +63,7 @@ class MblNoDialog extends StatefulWidget {
 
 class _MblNoDialogState extends State<MblNoDialog> {
   bool isVerified = false;
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   TextEditingController otp1 = TextEditingController();
   TextEditingController otp2 = TextEditingController();
   TextEditingController otp3 = TextEditingController();
@@ -500,7 +502,7 @@ class _MblNoDialogState extends State<MblNoDialog> {
                                                             MaterialPageRoute(
                                                                 builder: (context) =>
                                                                     EnterDashboardPage(
-                                                                        adminUid:
+                                                                        user:
                                                                             userId)),
                                                           );
                                                         } else if (widget
@@ -679,100 +681,112 @@ class _MblNoDialogState extends State<MblNoDialog> {
                       ),
                     ),
                     padding: EdgeInsets.fromLTRB(4.w, 4.h, 2.w, 4.h),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Expanded(
-                              child: Center(
-                                child: Text('Enter Mobile No',
-                                    style: LoginpageText.helvetica30bold),
-                              ),
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.pop(context);
-                              },
-                              child: ImageIcon(
-                                AssetImage('cancel.png'),
-                                color: Colors.black,
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: 20),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            SizedBox(
-                              height: 30,
-                              width: 200,
-                              child: TextField(
-                                controller: contactNumberController,
-                                keyboardType: TextInputType.number,
-                                decoration: InputDecoration(
-                                  hintText: '99999 99999',
-                                  contentPadding: EdgeInsets.only(
-                                    left: 1.w,
-                                  ),
-                                  hintStyle: DialogText.helvetica16sandal,
-                                  border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(0)),
+                    child: Form(
+                      key: _formKey,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Expanded(
+                                child: Center(
+                                  child: Text('Enter Mobile No',
+                                      style: LoginpageText.helvetica30bold),
                                 ),
                               ),
-                            ),
-                            SizedBox(
-                              height: 30,
-                              child: ElevatedButton(
-                                onPressed: () async {
-                                  String adminUid = widget.adminUid!;
-                                  await _startPhoneAuth(
-                                      contactNumberController.text, adminUid);
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.pop(context);
                                 },
-                                style: ElevatedButton.styleFrom(
-                                    backgroundColor:
-                                        Color.fromRGBO(60, 55, 148, 1),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(0),
-                                    )),
-                                child: Text("Get OTP",
-                                    style: LoginpageText.helvetica16white),
+                                child: ImageIcon(
+                                  AssetImage('cancel.png'),
+                                  color: Colors.black,
+                                ),
                               ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: 40),
-                        Padding(
-                          padding: EdgeInsets.only(left: 2.w, right: 5.w),
-                          child: Divider(
-                            color: Color.fromRGBO(112, 112, 112, 1),
+                            ],
                           ),
-                        ),
-                        SizedBox(height: 10),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text("Don't have an account?",
-                                style: HomepageText.helvetica16black),
-                            InkWell(
-                              child: Text('Create One!',
-                                  style: LoginpageText.purplehelvetica),
-                              onTap: () {
-                                showDialog(
-                                  barrierColor: Colors.grey.withOpacity(0.5),
-                                  context: context,
-                                  builder: (context) {
-                                    return CreateAccount();
+                          SizedBox(height: 20),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SizedBox(
+                                height: 30,
+                                width: 200,
+                                child: CustomTextfield1(
+                                  controller: contactNumberController,
+
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'Please enter your mobile number';
+                                    }
+                                    return null;
                                   },
-                                );
-                              },
+                                  // decoration: InputDecoration(
+                                  //   hintText: '99999 99999',
+                                  //   contentPadding: EdgeInsets.only(
+                                  //     left: 1.w,
+                                  //   ),
+                                  //   hintStyle: DialogText.helvetica16sandal,
+                                  //   border: OutlineInputBorder(
+                                  //       borderRadius: BorderRadius.circular(0)),
+                                  // ),
+                                ),
+                              ),
+                              SizedBox(
+                                height: 30,
+                                child: ElevatedButton(
+                                  onPressed: () async {
+                                    if (_formKey.currentState!.validate()) {
+                                      String adminUid = widget.adminUid!;
+                                      await _startPhoneAuth(
+                                          contactNumberController.text,
+                                          adminUid);
+                                    }
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                      backgroundColor:
+                                          Color.fromRGBO(60, 55, 148, 1),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(0),
+                                      )),
+                                  child: Text("Get OTP",
+                                      style: LoginpageText.helvetica16white),
+                                ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(height: 40),
+                          Padding(
+                            padding: EdgeInsets.only(left: 2.w, right: 5.w),
+                            child: Divider(
+                              color: Color.fromRGBO(112, 112, 112, 1),
                             ),
-                          ],
-                        ),
-                      ],
+                          ),
+                          SizedBox(height: 10),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text("Don't have an account?",
+                                  style: HomepageText.helvetica16black),
+                              InkWell(
+                                child: Text('Create One!',
+                                    style: LoginpageText.purplehelvetica),
+                                onTap: () {
+                                  showDialog(
+                                    barrierColor: Colors.grey.withOpacity(0.5),
+                                    context: context,
+                                    builder: (context) {
+                                      return CreateAccount();
+                                    },
+                                  );
+                                },
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -825,41 +839,51 @@ class _MblNoDialogState extends State<MblNoDialog> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            SizedBox(
-                              height: 30,
-                              width: 200,
-                              child: TextField(
-                                controller: contactNumberController,
-                                keyboardType: TextInputType.number,
-                                decoration: InputDecoration(
-                                  hintText: '99999 99999',
-                                  contentPadding: EdgeInsets.only(
-                                    left: 1.w,
+                            Container(
+                              height: 80, // Adjust height as needed
+                              width: double.infinity, // Take full width
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                                children: [
+                                  TextField(
+                                    controller: contactNumberController,
+                                    keyboardType: TextInputType.number,
+                                    decoration: InputDecoration(
+                                      hintText: '99999 99999',
+                                      contentPadding:
+                                          EdgeInsets.only(left: 1.w),
+                                      hintStyle: DialogText.helvetica16sandal,
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(0),
+                                      ),
+                                    ),
                                   ),
-                                  hintStyle: DialogText.helvetica16sandal,
-                                  border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(0)),
-                                ),
+                                  SizedBox(
+                                    height: 30,
+                                    child: ElevatedButton(
+                                      onPressed: () async {
+                                        String adminUid = widget.adminUid!;
+                                        await _startPhoneAuth(
+                                            contactNumberController.text,
+                                            adminUid);
+                                      },
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor:
+                                            Color.fromRGBO(60, 55, 148, 1),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(0),
+                                        ),
+                                      ),
+                                      child: Text(
+                                        "Get OTP",
+                                        style: LoginpageText.helvetica16white,
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
-                            ),
-                            SizedBox(
-                              height: 30,
-                              child: ElevatedButton(
-                                onPressed: () async {
-                                  String adminUid = widget.adminUid!;
-                                  await _startPhoneAuth(
-                                      contactNumberController.text, adminUid);
-                                },
-                                style: ElevatedButton.styleFrom(
-                                    backgroundColor:
-                                        Color.fromRGBO(60, 55, 148, 1),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(0),
-                                    )),
-                                child: Text("Get OTP",
-                                    style: LoginpageText.helvetica16white),
-                              ),
-                            ),
+                            )
                           ],
                         ),
                         SizedBox(height: 40),
