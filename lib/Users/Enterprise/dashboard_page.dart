@@ -520,7 +520,7 @@ class _MyHomePageState extends State<EnterDashboardPage> {
                                     onTap: (page, _) {
                                       setState(() {
                                         _currentContent = Users(
-                                          adminUid: widget.user!,
+                                          user: widget.user!,
                                         );
                                       });
                                       sideMenu.changePage(page);
@@ -696,7 +696,7 @@ class _MyHomePageState extends State<EnterDashboardPage> {
                         ),
                         onTap: () {
                           setState(() {
-                            _currentContent = Users(adminUid: widget.user!);
+                            _currentContent = Users(user: widget.user!);
                           });
                           Navigator.pop(context);
                         }),
@@ -766,20 +766,41 @@ class _MyHomePageState extends State<EnterDashboardPage> {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsets.fromLTRB(1.0.w, 0, 0, 0),
-                          child: TextButton(
-                            onPressed: () {
-                              // Handle the third button press
+                          padding: const EdgeInsets.only(
+                            left: 5,
+                          ),
+                          child: FutureBuilder<Map<String, dynamic>?>(
+                            future: fetchData(widget
+                                .user!), // Pass the userId to fetchData method
+                            builder: (context, snapshot) {
+                              if (snapshot.connectionState ==
+                                  ConnectionState.waiting) {
+                                return CircularProgressIndicator(); // Show a loading indicator while data is being fetched
+                              } else if (snapshot.hasError) {
+                                return Text('Error: ${snapshot.error}');
+                              } else if (snapshot.hasData) {
+                                // Extract first name and last name from snapshot data
+                                String firstName =
+                                    snapshot.data?['firstName'] ?? '';
+                                String lastName =
+                                    snapshot.data?['lastName'] ?? '';
+
+                                return Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text("Hello $firstName $lastName!",
+                                        style: TabelText.helvetica11),
+                                    Text("Admin", style: TabelText.usertext),
+                                    Text("Faizal industries",
+                                        style: TabelText.usertext),
+                                  ],
+                                );
+                              } else {
+                                return Text(
+                                    'No data available'); // Handle case when snapshot has no data
+                              }
                             },
-                            child: Text(
-                              'Partner',
-                              style: TextStyle(
-                                fontSize: 12,
-                                fontFamily: "HelveticaNeueRegular",
-                                fontWeight: FontWeight.bold,
-                                color: Color.fromRGBO(112, 112, 112, 1),
-                              ),
-                            ),
                           ),
                         ),
                         Container(

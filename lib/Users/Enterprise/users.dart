@@ -14,8 +14,8 @@ import '../../Controllers/allUsersFormController.dart';
 import '../../Widgets/customButton.dart';
 
 class Users extends StatefulWidget {
-  String? adminUid;
-  Users({this.adminUid});
+  String? user;
+  Users({this.user});
   @override
   State<Users> createState() => _UsersState();
 }
@@ -316,8 +316,7 @@ class _UsersState extends State<Users> {
                                         CustomButton(
                                           onPressed: () async {
                                             try {
-                                              String? adminUid =
-                                                  widget.adminUid;
+                                              String? adminUid = widget.user;
                                               final FirebaseAuth _auth =
                                                   FirebaseAuth.instance;
                                               UserCredential userCredential =
@@ -673,7 +672,7 @@ class _UsersState extends State<Users> {
                                                   onPressed: () async {
                                                     try {
                                                       String? adminUid =
-                                                          widget.adminUid;
+                                                          widget.user;
                                                       final FirebaseAuth _auth =
                                                           FirebaseAuth.instance;
                                                       UserCredential
