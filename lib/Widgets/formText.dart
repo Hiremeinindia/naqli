@@ -103,6 +103,77 @@ class DialogText {
   );
 }
 
+class BookingText {
+  static const TextStyle helvetica21 = TextStyle(
+    fontFamily: 'Helvetica',
+    color: Colors.black,
+    fontWeight: FontWeight.bold,
+    letterSpacing: 1,
+    fontSize: 19,
+  );
+  static const TextStyle helveticablack = TextStyle(
+    fontFamily: 'Helvetica',
+    color: Color.fromRGBO(0, 0, 0, 1),
+    fontSize: 15,
+  );
+  static const TextStyle helveticawhite = TextStyle(
+    fontFamily: 'Helvetica',
+    color: Colors.white,
+    fontSize: 15,
+  );
+  static const TextStyle helveticawhitebold = TextStyle(
+    fontFamily: 'Helvetica',
+    fontWeight: FontWeight.bold,
+    color: Colors.white,
+    fontSize: 15,
+  );
+  static const TextStyle helvetica16bold = TextStyle(
+      fontFamily: 'Helvetica',
+      color: Color.fromRGBO(121, 121, 124, 1),
+      letterSpacing: 1,
+      fontSize: 14,
+      fontWeight: FontWeight.bold);
+}
+
+class PaymentText {
+  static const TextStyle helviticaNeue = TextStyle(
+    fontSize: 10,
+    fontFamily: "HelveticaNeueRegular",
+    color: Color.fromRGBO(112, 112, 112, 1),
+  );
+  static const TextStyle SFproText = TextStyle(
+      fontSize: 18,
+      fontFamily: 'SFProText',
+      color: Color.fromRGBO(149, 143, 143, 1));
+  static const TextStyle SFproTextwhite = TextStyle(
+      fontSize: 18,
+      fontFamily: 'SFProText',
+      letterSpacing: 1,
+      color: Colors.white);
+  static const TextStyle SFproText18 = TextStyle(
+      fontSize: 18,
+      fontFamily: 'SFProText',
+      color: Color.fromRGBO(149, 143, 143, 1));
+}
+
+class BookingHistoryText {
+  static TextStyle helvetica40 = TextStyle(
+    fontFamily: 'Helvetica',
+    color: Colors.white,
+    fontSize: 38,
+  );
+  static const TextStyle sfpro20black = TextStyle(
+      fontSize: 17,
+      letterSpacing: 1,
+      fontFamily: 'SFproText',
+      color: Color.fromRGBO(10, 5, 5, 1));
+  static const TextStyle sfpro20white = TextStyle(
+      fontSize: 17,
+      letterSpacing: 1,
+      fontFamily: 'SFproText',
+      color: Colors.white);
+}
+
 class AvailableText {
   static const TextStyle helvetica17black = TextStyle(
       fontFamily: 'Helvetica',
@@ -163,49 +234,6 @@ class DashboardText {
     letterSpacing: 1,
     fontSize: 21,
   );
-}
-
-class BookingText {
-  static const TextStyle helvetica21 = TextStyle(
-    fontFamily: 'Helvetica',
-    color: Colors.black,
-    fontWeight: FontWeight.bold,
-    fontSize: 19,
-  );
-  static const TextStyle helveticablack = TextStyle(
-    fontFamily: 'Helvetica',
-    color: Color.fromRGBO(0, 0, 0, 1),
-    fontSize: 15,
-  );
-  static const TextStyle helveticawhite = TextStyle(
-    fontFamily: 'Helvetica',
-    color: Colors.white,
-    fontSize: 15,
-  );
-  static const TextStyle helveticawhitebold = TextStyle(
-    fontFamily: 'Helvetica',
-    fontWeight: FontWeight.bold,
-    color: Colors.white,
-    fontSize: 15,
-  );
-}
-
-class BookingHistoryText {
-  static TextStyle helvetica40 = TextStyle(
-    fontFamily: 'Helvetica',
-    color: Colors.white,
-    fontSize: 38,
-  );
-  static const TextStyle sfpro20black = TextStyle(
-      fontSize: 17,
-      letterSpacing: 1,
-      fontFamily: 'SFproText',
-      color: Color.fromRGBO(10, 5, 5, 1));
-  static const TextStyle sfpro20white = TextStyle(
-      fontSize: 17,
-      letterSpacing: 1,
-      fontFamily: 'SFproText',
-      color: Colors.white);
 }
 
 class BookingManagerText {

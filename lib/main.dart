@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/Partner/Dashboard/dashboard_page.dart';
 import 'package:flutter_application_1/Users/SingleTimeUser/dashboard_page.dart';
 import 'package:flutter_application_1/Users/SingleUser/dashboard_page.dart';
 import 'package:flutter_application_1/Users/SuperUser/dashboard_page.dart';

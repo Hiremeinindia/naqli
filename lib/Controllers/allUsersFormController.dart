@@ -19,6 +19,8 @@ class AllUsersFormController {
   final address2 = TextEditingController();
   final idNumber = TextEditingController();
   final selectedCity = TextEditingController();
+  final fromDate = TextEditingController();
+  final toDate = TextEditingController();
   final companyidNumber = TextEditingController();
   final selectedAccounttype = TextEditingController();
   final otp = TextEditingController();

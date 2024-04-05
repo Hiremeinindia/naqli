@@ -245,49 +245,41 @@ class _DashboardState extends State<enterDashboard> {
                             SizedBox(
                               height: 5.h,
                             ),
-                            Scrollbar(
-                              controller: _bookScroll,
-                              thumbVisibility:
-                                  true, // Set to true to always show the scrollbar
-                              child: SingleChildScrollView(
-                                controller: _bookScroll,
-                                scrollDirection: Axis.horizontal,
-                                child: ElevationContainer(
-                                  width: 370,
-                                  child: Column(
-                                    children: [
-                                      Container(
-                                        width: 378,
-                                        height: 55,
-                                        color: Color.fromRGBO(
-                                            75, 61, 82, 1), // Brown color
-                                        child: Padding(
-                                          padding: EdgeInsets.fromLTRB(
-                                              1.5.w, 1.5.h, 1.5.w, 1.5.h),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Text('Bookings',
-                                                  style: TabelText.headerText),
-                                              Text("View All",
-                                                  style: TabelText.text3),
-                                            ],
-                                          ),
-                                        ),
+                            ElevationContainer(
+                              child: Column(
+                                children: [
+                                  Container(
+                                    width: 370,
+                                    height: 55,
+                                    color: Color.fromRGBO(
+                                        75, 61, 82, 1), // Brown color
+                                    child: Padding(
+                                      padding: EdgeInsets.fromLTRB(
+                                          1.5.w, 1.5.h, 1.5.w, 1.5.h),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text('Booking',
+                                              style: TabelText.headerText),
+                                          Text("View All",
+                                              style: DialogText.helvetica20),
+                                        ],
                                       ),
-                                      // Add spacing between the brown container and the white container
-
-                                      SizedBox(
-                                        width: 380,
-                                        height: 200,
-                                        child: ListView(
-                                          children: [_booking1Table()],
-                                        ),
-                                      )
-                                    ],
+                                    ),
                                   ),
-                                ),
+                                  Scrollbar(
+                                    controller: _bookScroll,
+                                    thumbVisibility:
+                                        false, // Set to true to always show the scrollbar
+                                    child: SingleChildScrollView(
+                                      controller: _bookScroll,
+                                      scrollDirection: Axis.horizontal,
+                                      child: SizedBox(
+                                          width: 357, child: _booking1Table()),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
                           ],
@@ -538,49 +530,41 @@ class _DashboardState extends State<enterDashboard> {
                           SizedBox(
                             height: 5.h,
                           ),
-                          Scrollbar(
-                            controller: _pendingbookScroll,
-                            thumbVisibility:
-                                true, // Set to true to always show the scrollbar
-                            child: SingleChildScrollView(
-                              controller: _pendingbookScroll,
-                              scrollDirection: Axis.horizontal,
-                              child: ElevationContainer(
-                                bottomleft: 20,
-                                bottomright: 20,
-                                width: 715,
-                                child: Column(
-                                  children: [
-                                    Container(
-                                      height: 55,
-                                      color: Color.fromRGBO(
-                                          75, 61, 82, 1), // Brown color
-                                      child: Padding(
-                                        padding: EdgeInsets.fromLTRB(
-                                            1.5.w, 1.5.h, 1.5.w, 1.5.h),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Text('Booking Approval',
-                                                style: TabelText.headerText),
-                                            Text("View All",
-                                                style: TabelText.text3),
-                                          ],
-                                        ),
-                                      ),
+                          ElevationContainer(
+                            child: Column(
+                              children: [
+                                Container(
+                                  width: 715,
+                                  height: 55,
+                                  color: Color.fromRGBO(
+                                      75, 61, 82, 1), // Brown color
+                                  child: Padding(
+                                    padding: EdgeInsets.fromLTRB(
+                                        1.5.w, 1.5.h, 1.5.w, 1.5.h),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text('Booking Approval',
+                                            style: TabelText.headerText),
+                                        Text("View All",
+                                            style: DialogText.helvetica20),
+                                      ],
                                     ),
-                                    // Add spacing between the brown container and the white container
-
-                                    SizedBox(
-                                      height: 200,
-                                      child: ListView(
-                                        children: [_pendingbookTable()],
-                                      ),
-                                    )
-                                  ],
+                                  ),
                                 ),
-                              ),
+                                Scrollbar(
+                                  controller: _pendingbookScroll,
+                                  thumbVisibility:
+                                      false, // Set to true to always show the scrollbar
+                                  child: SingleChildScrollView(
+                                    controller: _pendingbookScroll,
+                                    scrollDirection: Axis.horizontal,
+                                    child: SizedBox(
+                                        width: 715, child: _pendingbookTable()),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                         ],
@@ -755,131 +739,111 @@ class _DashboardState extends State<enterDashboard> {
                             SizedBox(
                               height: 5.h,
                             ),
-                            Scrollbar(
-                              controller: _bookScroll,
-                              thumbVisibility:
-                                  true, // Set to true to always show the scrollbar
-                              child: SingleChildScrollView(
-                                controller: _bookScroll,
-                                scrollDirection: Axis.horizontal,
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Color.fromRGBO(240, 240, 240, 1)
-                                            .withOpacity(0.1),
-                                        offset: Offset(0, 0),
-                                        spreadRadius: 2.0,
-                                        blurRadius:
-                                            0.01, // changes position of shadow
+                            ElevationContainer(
+                              child: Column(
+                                children: [
+                                  Container(
+                                    height: 55, width: 90.w,
+                                    color: Color.fromRGBO(
+                                        75, 61, 82, 1), // Brown color
+                                    child: Padding(
+                                      padding: EdgeInsets.fromLTRB(
+                                          1.5.w, 1.5.h, 1.5.w, 1.5.h),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text('Bookings',
+                                              style: TabelText.headerText),
+                                          Text("View All",
+                                              style: TabelText.text3),
+                                        ],
                                       ),
-                                    ],
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.only(
-                                        topLeft: Radius.circular(0),
-                                        topRight: Radius.circular(0),
-                                        bottomLeft: Radius.circular(12),
-                                        bottomRight: Radius.circular(12)),
+                                    ),
                                   ),
-                                  width: 370,
-                                  child: Column(
-                                    children: [
-                                      Container(
-                                        width: 378,
-                                        height: 55,
-                                        color: Color.fromRGBO(
-                                            75, 61, 82, 1), // Brown color
-                                        child: Padding(
-                                          padding: EdgeInsets.fromLTRB(
-                                              1.5.w, 1.5.h, 1.5.w, 1.5.h),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Text('Bookings',
-                                                  style: TabelText.headerText),
-                                              Text("View All",
-                                                  style: TabelText.text3),
-                                            ],
+                                  Scrollbar(
+                                    controller: _bookScroll,
+                                    thumbVisibility:
+                                        true, // Set to true to always show the scrollbar
+                                    child: SingleChildScrollView(
+                                      controller: _bookScroll,
+                                      scrollDirection: Axis.horizontal,
+                                      child: Expanded(
+                                        child: Container(
+                                          width: 90.w,
+                                          height: 200,
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(8)),
+                                            border: Border.all(
+                                              color: Color.fromRGBO(
+                                                      112, 112, 112, 1)
+                                                  .withOpacity(0.3),
+                                            ),
+                                          ),
+                                          child: ListView(
+                                            children: [_booking1Table()],
                                           ),
                                         ),
                                       ),
-                                      // Add spacing between the brown container and the white container
-
-                                      SizedBox(
-                                        width: 380,
-                                        height: 200,
-                                        child: ListView(
-                                          children: [_booking1Table()],
-                                        ),
-                                      )
-                                    ],
+                                    ),
                                   ),
-                                ),
+                                ],
                               ),
                             ),
                             SizedBox(
                               height: 5.h,
                             ),
-                            Scrollbar(
-                              controller: _pendingbookScroll,
-                              thumbVisibility:
-                                  true, // Set to true to always show the scrollbar
-                              child: SingleChildScrollView(
-                                controller: _pendingbookScroll,
-                                scrollDirection: Axis.horizontal,
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Color.fromRGBO(240, 240, 240, 1)
-                                            .withOpacity(0.1),
-                                        offset: Offset(0, 0),
-                                        spreadRadius: 2.0,
-                                        blurRadius:
-                                            0.01, // changes position of shadow
+                            ElevationContainer(
+                              child: Column(
+                                children: [
+                                  Container(
+                                    height: 55, width: 90.w,
+                                    color: Color.fromRGBO(
+                                        75, 61, 82, 1), // Brown color
+                                    child: Padding(
+                                      padding: EdgeInsets.fromLTRB(
+                                          1.5.w, 1.5.h, 1.5.w, 1.5.h),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text('Booking Approval',
+                                              style: TabelText.headerText),
+                                          Text("View All",
+                                              style: TabelText.text3),
+                                        ],
                                       ),
-                                    ],
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.only(
-                                        topLeft: Radius.circular(0),
-                                        topRight: Radius.circular(0),
-                                        bottomLeft: Radius.circular(12),
-                                        bottomRight: Radius.circular(12)),
+                                    ),
                                   ),
-                                  width: 730,
-                                  child: Column(
-                                    children: [
-                                      Container(
-                                        height: 55,
-                                        color: Color.fromRGBO(
-                                            75, 61, 82, 1), // Brown color
-                                        child: Padding(
-                                          padding: EdgeInsets.fromLTRB(
-                                              1.5.w, 1.5.h, 1.5.w, 1.5.h),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Text('Booking Approval',
-                                                  style: TabelText.headerText),
-                                              Text("View All",
-                                                  style: TabelText.text3),
-                                            ],
+                                  Scrollbar(
+                                    controller: _pendingbookScroll,
+                                    thumbVisibility:
+                                        false, // Set to true to always show the scrollbar
+                                    child: SingleChildScrollView(
+                                      controller: _pendingbookScroll,
+                                      scrollDirection: Axis.horizontal,
+                                      child: Expanded(
+                                        child: Container(
+                                          height: 200,
+                                          width: 90.w,
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(8)),
+                                            border: Border.all(
+                                              color: Color.fromRGBO(
+                                                      112, 112, 112, 1)
+                                                  .withOpacity(0.3),
+                                            ),
+                                          ),
+                                          child: ListView(
+                                            children: [_pendingbookTable()],
                                           ),
                                         ),
                                       ),
-                                      // Add spacing between the brown container and the white container
-
-                                      SizedBox(
-                                        height: 200,
-                                        child: ListView(
-                                          children: [_pendingbookTable()],
-                                        ),
-                                      )
-                                    ],
+                                    ),
                                   ),
-                                ),
+                                ],
                               ),
                             ),
                             SizedBox(
@@ -1091,21 +1055,25 @@ class _DashboardState extends State<enterDashboard> {
   DataTable _pendingbookTable() {
     return DataTable(
         border: TableBorder(
-            verticalInside:
-                BorderSide(width: 1, color: Color.fromRGBO(118, 112, 112, 1)),
+            borderRadius: BorderRadius.all(Radius.circular(8)),
+            verticalInside: BorderSide(
+                width: 1,
+                color: Color.fromRGBO(112, 112, 112, 1).withOpacity(0.2)),
             right: BorderSide(
-                width: 0.5, color: Color.fromRGBO(118, 112, 112, 1))),
-        decoration: const BoxDecoration(
+                width: 0.5,
+                color: Color.fromRGBO(112, 112, 112, 1).withOpacity(0.2))),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(8)),
           gradient: LinearGradient(colors: [
             Colors.white,
             Color.fromRGBO(245, 243, 255, 1),
-            Color.fromRGBO(245, 243, 255, 1),
+            Colors.white,
             Color.fromRGBO(245, 243, 255, 1),
           ], stops: [
-            0.4,
-            0.4,
-            0.4,
-            0.4
+            0.033.w,
+            0.033.w,
+            0.033.w,
+            0.033.w,
           ], begin: Alignment.centerLeft, end: Alignment.centerRight),
         ),
         columnSpacing: 0,
@@ -1121,17 +1089,17 @@ class _DashboardState extends State<enterDashboard> {
       DataColumn(label: SizedBox(), numeric: false),
       DataColumn(
           label: SizedBox(
-            width: 140,
+            width: 110,
           ),
           numeric: true),
       DataColumn(
           label: SizedBox(
-            width: 140,
+            width: 110,
           ),
           numeric: true),
       DataColumn(
           label: SizedBox(
-            width: 130,
+            width: 110,
           ),
           numeric: true),
     ];
@@ -1150,154 +1118,178 @@ class _DashboardState extends State<enterDashboard> {
     return [
       DataRow(cells: [
         DataCell(
-          TableCell(
-            verticalAlignment: TableCellVerticalAlignment.middle,
-            child: Row(
-              children: [
-                SizedBox(
-                  width: 35,
-                  height: 35,
-                  child: CircleAvatar(
-                    backgroundColor: Color.fromRGBO(230, 228, 238, 1),
-                  ),
+          Row(
+            children: [
+              SizedBox(
+                width: 35,
+                height: 35,
+                child: CircleAvatar(
+                  backgroundColor: Color.fromRGBO(230, 228, 238, 1),
                 ),
-                SizedBox(
-                  width: 1.w,
-                ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('Truck', style: TabelText.text1),
-                    SizedBox(height: 3),
-                    Text("Booking ID XXXXXX", style: TabelText.text2),
-                  ],
-                ),
-              ],
+              ),
+              SizedBox(
+                width: 1.w,
+              ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('Truck', style: TabelText.text1),
+                  SizedBox(height: 3),
+                  Text("Booking ID XXXXXX", style: TabelText.text2),
+                ],
+              ),
+            ],
+          ),
+        ),
+        DataCell(
+          Container(
+            padding: EdgeInsets.only(left: 10, right: 10),
+            color: Color.fromRGBO(245, 243, 255, 1),
+            child: ColorContainer(
+              text1: 'Vendor 3',
+              text2: 'Xxxxx SAR',
+              colors: Color.fromRGBO(200, 251, 253, 1),
             ),
           ),
         ),
         DataCell(
-          ColorContainer(
-            text1: 'Vendor 3',
-            text2: 'Xxxxx SAR',
-            colors: Color.fromRGBO(200, 251, 253, 1),
+          Container(
+            padding: EdgeInsets.only(left: 10, right: 10),
+            color: Color.fromRGBO(245, 243, 255, 1),
+            child: ColorContainer(
+              text1: 'Vendor 2',
+              text2: 'Xxxxx SAR',
+              colors: Color.fromRGBO(224, 253, 200, 1),
+            ),
           ),
         ),
         DataCell(
-          ColorContainer(
-            text1: 'Vendor 2',
-            text2: 'Xxxxx SAR',
-            colors: Color.fromRGBO(224, 253, 200, 1),
-          ),
-        ),
-        DataCell(
-          ColorContainer(
-            text1: 'Vendor 3',
-            text2: 'Xxxxx SAR',
-            colors: Color.fromRGBO(245, 253, 200, 1),
+          Container(
+            padding: EdgeInsets.only(left: 10),
+            child: ColorContainer(
+              text1: 'Vendor 3',
+              text2: 'Xxxxx SAR',
+              colors: Color.fromRGBO(245, 253, 200, 1),
+            ),
           ),
         ),
       ]),
       DataRow(cells: [
         DataCell(
-          TableCell(
-            verticalAlignment: TableCellVerticalAlignment.middle,
-            child: Row(
-              children: [
-                SizedBox(
-                  width: 35,
-                  height: 35,
-                  child: CircleAvatar(
-                    backgroundColor: Color.fromRGBO(230, 228, 238, 1),
-                  ),
+          Row(
+            children: [
+              SizedBox(
+                width: 35,
+                height: 35,
+                child: CircleAvatar(
+                  backgroundColor: Color.fromRGBO(230, 228, 238, 1),
                 ),
-                SizedBox(
-                  width: 1.w,
-                ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('Equipment Hire', style: TabelText.text1),
-                    SizedBox(height: 3),
-                    Text("Booking ID XXXXXX", style: TabelText.text2),
-                  ],
-                ),
-              ],
+              ),
+              SizedBox(
+                width: 1.w,
+              ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('Equipment Hire', style: TabelText.text1),
+                  SizedBox(height: 3),
+                  Text("Booking ID XXXXXX", style: TabelText.text2),
+                ],
+              ),
+            ],
+          ),
+        ),
+        DataCell(
+          Container(
+            padding: EdgeInsets.only(left: 10, right: 10),
+            color: Color.fromRGBO(245, 243, 255, 1),
+            child: ColorContainer(
+              text1: 'Vendor 3',
+              text2: 'Xxxxx SAR',
+              colors: Color.fromRGBO(200, 251, 253, 1),
             ),
           ),
         ),
         DataCell(
-          ColorContainer(
-            text1: 'Vendor 3',
-            text2: 'Xxxxx SAR',
-            colors: Color.fromRGBO(200, 251, 253, 1),
+          Container(
+            padding: EdgeInsets.only(left: 10, right: 10),
+            color: Color.fromRGBO(245, 243, 255, 1),
+            child: ColorContainer(
+              text1: 'Vendor 2',
+              text2: 'Xxxxx SAR',
+              colors: Color.fromRGBO(224, 253, 200, 1),
+            ),
           ),
         ),
         DataCell(
-          ColorContainer(
-            text1: 'Vendor 2',
-            text2: 'Xxxxx SAR',
-            colors: Color.fromRGBO(224, 253, 200, 1),
-          ),
-        ),
-        DataCell(
-          ColorContainer(
-            text1: 'Vendor 3',
-            text2: 'Xxxxx SAR',
-            colors: Color.fromRGBO(245, 253, 200, 1),
+          Container(
+            padding: EdgeInsets.only(left: 10),
+            child: ColorContainer(
+              text1: 'Vendor 3',
+              text2: 'Xxxxx SAR',
+              colors: Color.fromRGBO(245, 253, 200, 1),
+            ),
           ),
         ),
       ]),
       DataRow(cells: [
         DataCell(
-          TableCell(
-            verticalAlignment: TableCellVerticalAlignment.middle,
-            child: Row(
-              children: [
-                SizedBox(
-                  width: 35,
-                  height: 35,
-                  child: CircleAvatar(
-                    backgroundColor: Color.fromRGBO(230, 228, 238, 1),
-                  ),
+          Row(
+            children: [
+              SizedBox(
+                width: 35,
+                height: 35,
+                child: CircleAvatar(
+                  backgroundColor: Color.fromRGBO(230, 228, 238, 1),
                 ),
-                SizedBox(
-                  width: 1.w,
-                ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('Bus Trip', style: TabelText.text1),
-                    SizedBox(height: 3),
-                    Text("Booking ID XXXXXX", style: TabelText.text2),
-                  ],
-                ),
-              ],
+              ),
+              SizedBox(
+                width: 1.w,
+              ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('Bus Trip', style: TabelText.text1),
+                  SizedBox(height: 3),
+                  Text("Booking ID XXXXXX", style: TabelText.text2),
+                ],
+              ),
+            ],
+          ),
+        ),
+        DataCell(
+          Container(
+            padding: EdgeInsets.only(left: 10, right: 10),
+            color: Color.fromRGBO(245, 243, 255, 1),
+            child: ColorContainer(
+              text1: 'Vendor 3',
+              text2: 'Xxxxx SAR',
+              colors: Color.fromRGBO(200, 251, 253, 1),
             ),
           ),
         ),
         DataCell(
-          ColorContainer(
-            text1: 'Vendor 3',
-            text2: 'Xxxxx SAR',
-            colors: Color.fromRGBO(200, 251, 253, 1),
+          Container(
+            padding: EdgeInsets.only(left: 10, right: 10),
+            color: Color.fromRGBO(245, 243, 255, 1),
+            child: ColorContainer(
+              text1: 'Vendor 2',
+              text2: 'Xxxxx SAR',
+              colors: Color.fromRGBO(224, 253, 200, 1),
+            ),
           ),
         ),
         DataCell(
-          ColorContainer(
-            text1: 'Vendor 2',
-            text2: 'Xxxxx SAR',
-            colors: Color.fromRGBO(224, 253, 200, 1),
-          ),
-        ),
-        DataCell(
-          ColorContainer(
-            text1: 'Vendor 3',
-            text2: 'Xxxxx SAR',
-            colors: Color.fromRGBO(245, 253, 200, 1),
+          Container(
+            padding: EdgeInsets.only(left: 10),
+            child: ColorContainer(
+              text1: 'Vendor 3',
+              text2: 'Xxxxx SAR',
+              colors: Color.fromRGBO(245, 253, 200, 1),
+            ),
           ),
         ),
       ]),

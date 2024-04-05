@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_application_1/Partner/Dashboard/dashboard.dart';
+import 'package:flutter_application_1/Partner/joinUs.dart';
 
 import 'package:flutter_application_1/Partner/operator.dart';
 
@@ -259,7 +260,7 @@ class _MyHomePageState extends State<HomePagePartner> {
                                           ),
                                           onPressed: () {
                                             showDialog(
-                                              barrierDismissible: false,
+                                              barrierDismissible: true,
                                               context: context,
                                               builder: (context) {
                                                 return (Operator());
@@ -314,7 +315,13 @@ class _MyHomePageState extends State<HomePagePartner> {
                                             size: 71,
                                           ),
                                           onPressed: () {
-                                            // Add your onPressed functionality here
+                                            showDialog(
+                                              barrierDismissible: true,
+                                              context: context,
+                                              builder: (context) {
+                                                return (Partner());
+                                              },
+                                            );
                                             print(
                                                 'Log in Arrow button pressed');
                                           },
