@@ -53,6 +53,42 @@ class _MyHomePageState extends State<MyHomePage>
     super.dispose();
   }
 
+  // Stream<Map<String, dynamic>?> fetchData() {
+  //   try {
+  //     String collectionName = '';
+
+  //     // if (widget.selectedAccounttype == 'Enterprise') {
+  //     //   collectionName = 'enterpriseuser';
+  //     // } else if (widget.selectedAccounttype == 'Super User') {
+  //     //   collectionName = 'superuserdummy';
+  //     // } else if (widget.selectedAccounttype == 'User') {
+  //     //   collectionName = 'userdummy';
+  //     // }
+
+  //     String adminUid = widget.adminUid!;
+  //     return FirebaseFirestore.instance
+  //         .collection(collectionName)
+  //         .doc(adminUid)
+  //         .snapshots()
+  //         .map((DocumentSnapshot<Map<String, dynamic>> documentSnapshot) {
+  //       if (documentSnapshot.exists) {
+  //         Map<String, dynamic> data = documentSnapshot.data()!;
+  //         String firstName = data['firstName'];
+  //         String lastName = data['lastName'];
+  //         _firstName = firstName;
+  //         _lastName = lastName;
+  //         return data;
+  //       } else {
+  //         print('Document does not exist');
+  //         return null;
+  //       }
+  //     });
+  //   } catch (e) {
+  //     print('Error fetching data: $e');
+  //     return Stream.value(null);
+  //   }
+  // }
+
   @override
   Widget build(BuildContext context) {
     return Sizer(builder: (context, orientation, deviceType) {

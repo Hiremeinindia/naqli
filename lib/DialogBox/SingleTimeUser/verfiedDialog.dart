@@ -294,7 +294,7 @@ class _VerifiedDialogState extends State<VerifiedDialog> {
                                               MaterialPageRoute(
                                                 builder: (context) =>
                                                     EnterDashboardPage(
-                                                        adminUid: userId),
+                                                        user: userId),
                                               ),
                                             );
                                           } else if (accountType ==
