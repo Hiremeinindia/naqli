@@ -153,7 +153,7 @@ final class CustomButton3 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 40,
+      height: 52,
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
@@ -163,7 +163,7 @@ final class CustomButton3 extends StatelessWidget {
             side: BorderSide(
                 color: const Color.fromRGBO(112, 112, 112, 1).withOpacity(0.3)),
             borderRadius:
-                BorderRadius.circular(20), // Adjust border radius as needed
+                BorderRadius.circular(28), // Adjust border radius as needed
           ),
         ),
         child: Padding(
