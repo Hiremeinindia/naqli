@@ -23,9 +23,10 @@ import 'Widgets/formText.dart';
 import 'loginPage.dart';
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({
-    Key? key,
-  }) : super(key: key);
+  final String user;
+  MyHomePage({
+    required this.user,
+  });
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -385,7 +386,10 @@ class _MyHomePageState extends State<MyHomePage>
                                                       context,
                                                       MaterialPageRoute(
                                                           builder: (context) =>
-                                                              AvailableVehicle()),
+                                                              AvailableVehicle(
+                                                                user:
+                                                                    widget.user,
+                                                              )),
                                                     );
                                                   },
                                                   child: Card(
@@ -1081,7 +1085,9 @@ class _MyHomePageState extends State<MyHomePage>
                                               context,
                                               MaterialPageRoute(
                                                   builder: (context) =>
-                                                      AvailableVehicle()),
+                                                      AvailableVehicle(
+                                                        user: widget.user,
+                                                      )),
                                             );
                                           },
                                           child: Card(

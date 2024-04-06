@@ -632,7 +632,9 @@ class _LoginPageState extends State<LoginPage> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => MyHomePage(),
+                                  builder: (context) => MyHomePage(
+                                    user: '',
+                                  ),
                                 ),
                               );
                             }
@@ -701,7 +703,10 @@ class ForgotPasswordPage extends StatelessWidget {
                       onPressed: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => MyHomePage()),
+                          MaterialPageRoute(
+                              builder: (context) => MyHomePage(
+                                    user: '',
+                                  )),
                         );
                       },
                       style: ElevatedButton.styleFrom(

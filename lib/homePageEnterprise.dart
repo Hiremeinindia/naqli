@@ -438,7 +438,9 @@ class _MyHomePageEnterState extends State<MyHomePageEnter>
                                                       context,
                                                       MaterialPageRoute(
                                                           builder: (context) =>
-                                                              AvailableVehicle()),
+                                                              AvailableVehicle(
+                                                                user: '',
+                                                              )),
                                                     );
                                                   },
                                                   child: Card(
@@ -795,7 +797,7 @@ class _MyHomePageEnterState extends State<MyHomePageEnter>
                                                                           left:
                                                                               50),
                                                                       child:
-                                                                          EnterDashboardPage(
+                                                                          AvailableVehicle(
                                                                         user: widget
                                                                             .user,
                                                                       ),
@@ -1144,7 +1146,9 @@ class _MyHomePageEnterState extends State<MyHomePageEnter>
                                               context,
                                               MaterialPageRoute(
                                                   builder: (context) =>
-                                                      AvailableVehicle()),
+                                                      AvailableVehicle(
+                                                        user: '',
+                                                      )),
                                             );
                                           },
                                           child: Card(
