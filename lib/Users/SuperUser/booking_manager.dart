@@ -9,12 +9,14 @@ import 'package:flutter_application_1/Users/SuperUser/edit_contract.dart';
 import 'package:flutter_application_1/Widgets/customButton.dart';
 import 'package:flutter_application_1/Widgets/formText.dart';
 import 'package:flutter_application_1/homePage.dart';
+import 'package:flutter_application_1/homePageSuperUser.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../Widgets/colorContainer.dart';
 
 class Bookings extends StatefulWidget {
-  Bookings();
+  final String user;
+  Bookings({required this.user});
   @override
   State<Bookings> createState() => _BookingsState();
 }
@@ -142,7 +144,9 @@ class _BookingsState extends State<Bookings> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => MyHomePage(),
+                                    builder: (context) => MyHomePagesuper(
+                                      user: widget.user,
+                                    ),
                                   ),
                                 );
                               },

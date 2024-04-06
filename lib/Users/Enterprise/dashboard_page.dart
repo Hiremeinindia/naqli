@@ -491,7 +491,8 @@ class _MyHomePageState extends State<EnterDashboardPage> {
                                     title: 'Bookings Manager',
                                     onTap: (page, _) {
                                       setState(() {
-                                        _currentContent = Bookings();
+                                        _currentContent =
+                                            Bookings(user: widget.user);
                                       });
                                       sideMenu.changePage(page);
                                     },
@@ -627,7 +628,7 @@ class _MyHomePageState extends State<EnterDashboardPage> {
                         onTap: () {
                           setState(() {
                             _currentContent = enterDashboard(
-                              user: '',
+                              user: widget.user,
                             );
                           });
                           Navigator.pop(context);
@@ -658,7 +659,9 @@ class _MyHomePageState extends State<EnterDashboardPage> {
                         ),
                         onTap: () {
                           setState(() {
-                            _currentContent = Bookings();
+                            _currentContent = Bookings(
+                              user: widget.user,
+                            );
                           });
                           Navigator.pop(context);
                         }),
@@ -718,7 +721,9 @@ class _MyHomePageState extends State<EnterDashboardPage> {
                         ),
                         onTap: () {
                           setState(() {
-                            _currentContent = Bookings();
+                            _currentContent = Bookings(
+                              user: widget.user,
+                            );
                           });
                           Navigator.pop(context);
                         }),
