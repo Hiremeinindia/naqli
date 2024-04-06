@@ -1,9 +1,12 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_application_1/Controllers/allUsersFormController.dart';
 import 'package:flutter_application_1/Widgets/customButton.dart';
 import 'package:flutter_application_1/Widgets/formText.dart';
 import 'package:flutter_application_1/homePage.dart';
+import 'package:flutter_application_1/homePageEnterprise.dart';
 import 'package:graphic/graphic.dart';
 import 'package:sizer/sizer.dart';
 
@@ -20,6 +23,8 @@ class _BookingsState extends State<Bookings> {
   final ScrollController _book2Scroll = ScrollController();
   final ScrollController _book3Scroll = ScrollController();
   final ScrollController _scrollController = ScrollController();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  AllUsersFormController controller = AllUsersFormController();
   @override
   Widget build(BuildContext context) {
     return Sizer(builder: (context, orientation, deviceType) {
@@ -134,11 +139,19 @@ class _BookingsState extends State<Bookings> {
                               ),
                             ),
                             GestureDetector(
-                              onTap: () {
+                              onTap: () async {
+                                UserCredential userCredential =
+                                    await _auth.signInWithEmailAndPassword(
+                                  email: controller.email.text,
+                                  password: controller.password.text,
+                                );
+                                String userId = userCredential.user!.uid;
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => MyHomePage(),
+                                    builder: (context) => MyHomePageEnter(
+                                      user: userId,
+                                    ),
                                   ),
                                 );
                               },

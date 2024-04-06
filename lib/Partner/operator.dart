@@ -21,7 +21,8 @@ class _OperatorState extends State<Operator> {
   String? selectedType;
   String? selectedOption;
   bool isVerified = false;
-
+  int? groupValue = 1;
+  late int _selectedValue = 0;
   TextEditingController firstNameController = TextEditingController();
   TextEditingController lastNameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
@@ -260,7 +261,7 @@ class _OperatorState extends State<Operator> {
           return Dialog(
             child: Container(
               width: 1100,
-              height: 750,
+              height: 850,
               decoration: const BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.only(
@@ -280,7 +281,7 @@ class _OperatorState extends State<Operator> {
                       Padding(
                         padding: const EdgeInsets.only(bottom: 30),
                         child: Text(
-                          'Driver/Owner',
+                          'Operator/Owner',
                           style: TextStyle(
                               fontFamily: 'HelveticaNeueRegular',
                               fontSize: 44,
@@ -292,19 +293,107 @@ class _OperatorState extends State<Operator> {
                         height: 30,
                       ),
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text("Unit"),
+                          Row(
+                            children: [
+                              Radio(
+                                value: 1,
+                                groupValue: _selectedValue,
+                                onChanged: (int? value) {
+                                  setState(() {
+                                    _selectedValue = value ??
+                                        0; // Use null-aware operator to handle null value
+                                    print('Selected value: $_selectedValue');
+                                  });
+                                },
+                              ),
+                              Text('Vehicle')
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Radio(
+                                value: 1,
+                                groupValue: _selectedValue,
+                                onChanged: (int? value) {
+                                  setState(() {
+                                    _selectedValue = value ??
+                                        0; // Use null-aware operator to handle null value
+                                    print('Selected value: $_selectedValue');
+                                  });
+                                },
+                              ),
+                              Text('Bus')
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Radio(
+                                value: 1,
+                                groupValue: _selectedValue,
+                                onChanged: (int? value) {
+                                  setState(() {
+                                    _selectedValue = value ??
+                                        0; // Use null-aware operator to handle null value
+                                    print('Selected value: $_selectedValue');
+                                  });
+                                },
+                              ),
+                              Text('Equipment')
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Radio(
+                                value: 1,
+                                groupValue: _selectedValue,
+                                onChanged: (int? value) {
+                                  setState(() {
+                                    _selectedValue = value ??
+                                        0; // Use null-aware operator to handle null value
+                                    print('Selected value: $_selectedValue');
+                                  });
+                                },
+                              ),
+                              Text('Special')
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Radio(
+                                value: 1,
+                                groupValue: _selectedValue,
+                                onChanged: (int? value) {
+                                  setState(() {
+                                    _selectedValue = value ??
+                                        0; // Use null-aware operator to handle null value
+                                    print('Selected value: $_selectedValue');
+                                  });
+                                },
+                              ),
+                              Text('Others')
+                            ],
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 15),
+                      Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           Text(
-                            'Name',
+                            'Unit Classification',
                             style: TextStyle(
                               fontSize: 16,
                               fontFamily: 'Colfax',
                             ),
                           ),
-                          SizedBox(width: 95),
+                          SizedBox(width: 15),
                           Expanded(
                             child: SizedBox(
-                              height: 45,
+                              height: 55,
+                              width: 317,
                               child: TextFormField(
                                 controller: firstNameController,
                                 validator: nameValidator,
