@@ -9,6 +9,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_application_1/Controllers/allUsersFormController.dart';
 import 'package:flutter_application_1/Users/SingleUser/dashboard_page.dart';
+import 'package:flutter_application_1/Users/SuperUser/dashboard_page.dart';
 import 'package:flutter_application_1/availableBus.dart';
 import 'package:flutter_application_1/availableEquipment.dart';
 import 'package:flutter_application_1/availableSpecial.dart';
@@ -24,7 +25,7 @@ import 'Widgets/formText.dart';
 import 'loginPage.dart';
 
 class MyHomePagesuper extends StatefulWidget {
-  final String? user;
+  final String user;
   const MyHomePagesuper({required this.user});
 
   @override
@@ -794,7 +795,10 @@ class _MyHomePagesuperState extends State<MyHomePagesuper>
                                                                           left:
                                                                               50),
                                                                       child:
-                                                                          LoginPage(),
+                                                                          SuperUserDashboardPage(
+                                                                        user: widget
+                                                                            .user,
+                                                                      ),
                                                                     );
                                                                   },
                                                                 );
