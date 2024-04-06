@@ -438,7 +438,9 @@ class _MyHomePagesuperState extends State<MyHomePagesuper>
                                                       context,
                                                       MaterialPageRoute(
                                                           builder: (context) =>
-                                                              AvailableVehicle()),
+                                                              AvailableVehicle(
+                                                                user: '',
+                                                              )),
                                                     );
                                                   },
                                                   child: Card(
@@ -795,7 +797,7 @@ class _MyHomePagesuperState extends State<MyHomePagesuper>
                                                                           left:
                                                                               50),
                                                                       child:
-                                                                          SuperUserDashboardPage(
+                                                                          AvailableVehicle(
                                                                         user: widget
                                                                             .user,
                                                                       ),
@@ -1144,7 +1146,9 @@ class _MyHomePagesuperState extends State<MyHomePagesuper>
                                               context,
                                               MaterialPageRoute(
                                                   builder: (context) =>
-                                                      AvailableVehicle()),
+                                                      AvailableVehicle(
+                                                        user: '',
+                                                      )),
                                             );
                                           },
                                           child: Card(

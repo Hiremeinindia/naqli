@@ -296,21 +296,30 @@ class _OperatorState extends State<Operator> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text("Unit"),
-                          Row(
-                            children: [
-                              Radio(
-                                value: 1,
-                                groupValue: _selectedValue,
-                                onChanged: (int? value) {
-                                  setState(() {
-                                    _selectedValue = value ??
-                                        0; // Use null-aware operator to handle null value
-                                    print('Selected value: $_selectedValue');
-                                  });
-                                },
-                              ),
-                              Text('Vehicle')
-                            ],
+                          Padding(
+                            padding: const EdgeInsets.only(left: 40),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Row(
+                                  children: [
+                                    Radio(
+                                      value: 1,
+                                      groupValue: _selectedValue,
+                                      onChanged: (int? value) {
+                                        setState(() {
+                                          _selectedValue = value ??
+                                              0; // Use null-aware operator to handle null value
+                                          print(
+                                              'Selected value: $_selectedValue');
+                                        });
+                                      },
+                                    ),
+                                    Text('Vehicle')
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
                           Row(
                             children: [
@@ -380,7 +389,6 @@ class _OperatorState extends State<Operator> {
                       ),
                       SizedBox(height: 15),
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           Text(
                             'Unit Classification',
@@ -390,50 +398,95 @@ class _OperatorState extends State<Operator> {
                             ),
                           ),
                           SizedBox(width: 15),
-                          Expanded(
-                            child: SizedBox(
-                              height: 55,
-                              width: 317,
-                              child: TextFormField(
-                                controller: firstNameController,
-                                validator: nameValidator,
-                                decoration: InputDecoration(
-                                  hintStyle: TextStyle(
-                                      fontSize: 14,
-                                      fontFamily: "Helvetica",
-                                      color: Color.fromRGBO(133, 139, 145, 1)),
-                                  hintText: 'First Name',
-                                  contentPadding: EdgeInsets.symmetric(
-                                      vertical: 2.0, horizontal: 10.0),
-                                  border: OutlineInputBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(5)),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 7),
+                            child: Row(
+                              children: [
+                                SizedBox(
+                                  height: 55,
+                                  width: 250,
+                                  child: DropdownButtonFormField<String>(
+                                    value: selectedOption,
+                                    decoration: InputDecoration(
+                                      contentPadding: EdgeInsets.symmetric(
+                                          vertical: 2.0, horizontal: 10.0),
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(5)),
+                                      ),
+                                    ),
+                                    onChanged: (String? newValue) {
+                                      setState(() {
+                                        selectedOption = newValue;
+                                      });
+                                    },
+                                    items: [
+                                      DropdownMenuItem<String>(
+                                        value: 'Vehicle',
+                                        child: Text('Vehicle'),
+                                      ),
+                                      DropdownMenuItem<String>(
+                                        value: 'Bus',
+                                        child: Text('Bus'),
+                                      ),
+                                      DropdownMenuItem<String>(
+                                        value: 'Equipment',
+                                        child: Text('Equipment'),
+                                      ),
+                                    ],
                                   ),
                                 ),
-                              ),
+                              ],
                             ),
                           ),
                           SizedBox(width: 25),
-                          Expanded(
-                            child: SizedBox(
-                              height: 45,
-                              child: TextFormField(
-                                controller: lastNameController,
-                                validator: nameValidator,
-                                decoration: InputDecoration(
-                                  hintStyle: TextStyle(
-                                      fontSize: 14,
-                                      fontFamily: "Helvetica",
-                                      color: Color.fromRGBO(133, 139, 145, 1)),
-                                  hintText: 'Last Name',
-                                  contentPadding: EdgeInsets.symmetric(
-                                      vertical: 2.0, horizontal: 10.0),
-                                  border: OutlineInputBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(5)),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 58),
+                            child: Row(
+                              children: [
+                                Text(
+                                  'Sub Classification',
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontFamily: 'Colfax',
                                   ),
                                 ),
-                              ),
+                                SizedBox(width: 15),
+                                SizedBox(
+                                  height: 55,
+                                  width: 250,
+                                  child: DropdownButtonFormField<String>(
+                                    value: selectedOption,
+                                    decoration: InputDecoration(
+                                      contentPadding: EdgeInsets.symmetric(
+                                          vertical: 2.0, horizontal: 10.0),
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(5)),
+                                      ),
+                                    ),
+                                    onChanged: (String? newValue) {
+                                      setState(() {
+                                        selectedOption = newValue;
+                                      });
+                                    },
+                                    items: [
+                                      DropdownMenuItem<String>(
+                                        value: 'Vehicle',
+                                        child: Text('Vehicle'),
+                                      ),
+                                      DropdownMenuItem<String>(
+                                        value: 'Bus',
+                                        child: Text('Bus'),
+                                      ),
+                                      DropdownMenuItem<String>(
+                                        value: 'Equipment',
+                                        child: Text('Equipment'),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                         ],
@@ -441,30 +494,79 @@ class _OperatorState extends State<Operator> {
                       SizedBox(height: 15),
                       Row(
                         children: [
-                          Text('Email ID',
-                              style: TextStyle(
-                                  fontFamily: 'Colfax', fontSize: 16)),
-                          SizedBox(width: 78),
-                          Expanded(
-                            child: SizedBox(
-                              height: 45,
-                              child: TextFormField(
-                                controller: emailController,
-                                validator: emailValidator,
-                                decoration: InputDecoration(
-                                  hintStyle: TextStyle(
-                                      fontSize: 14,
-                                      fontFamily: "Helvetica",
-                                      color: Color.fromRGBO(133, 139, 145, 1)),
-                                  hintText: 'Email address',
-                                  contentPadding: EdgeInsets.symmetric(
-                                      vertical: 2.0, horizontal: 10.0),
-                                  border: OutlineInputBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(5)),
+                          Text(
+                            'Plate Information',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontFamily: 'Colfax',
+                            ),
+                          ),
+                          SizedBox(width: 15),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 17),
+                            child: Row(
+                              children: [
+                                SizedBox(
+                                  height: 55,
+                                  width: 250,
+                                  child: TextFormField(
+                                    controller: passwordController,
+                                    validator: validatePassword,
+                                    decoration: InputDecoration(
+                                      hintStyle: TextStyle(
+                                          fontSize: 14,
+                                          fontFamily: "Helvetica",
+                                          color:
+                                              Color.fromRGBO(133, 139, 145, 1)),
+                                      hintText: 'Enter your mobile no',
+                                      contentPadding: EdgeInsets.symmetric(
+                                          vertical: 2.0, horizontal: 10.0),
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(5)),
+                                      ),
+                                    ),
                                   ),
                                 ),
-                              ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(width: 25),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 58),
+                            child: Row(
+                              children: [
+                                Text(
+                                  'Istimara no',
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontFamily: 'Colfax',
+                                  ),
+                                ),
+                                SizedBox(width: 66),
+                                SizedBox(
+                                  height: 55,
+                                  width: 250,
+                                  child: TextFormField(
+                                    controller: passwordController,
+                                    validator: validatePassword,
+                                    decoration: InputDecoration(
+                                      hintStyle: TextStyle(
+                                          fontSize: 14,
+                                          fontFamily: "Helvetica",
+                                          color:
+                                              Color.fromRGBO(133, 139, 145, 1)),
+                                      hintText: 'Enter your mobile no',
+                                      contentPadding: EdgeInsets.symmetric(
+                                          vertical: 2.0, horizontal: 10.0),
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(5)),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                         ],
@@ -477,7 +579,8 @@ class _OperatorState extends State<Operator> {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text('Mobile No', style: TextStyle(fontSize: 16)),
+                              Text('Istimara Card',
+                                  style: TextStyle(fontSize: 16)),
                               SizedBox(
                                 height: 40,
                               ),
@@ -509,23 +612,28 @@ class _OperatorState extends State<Operator> {
                                 SizedBox(
                                   height: 10,
                                 ),
-                                SizedBox(
-                                  height: 45,
-                                  child: TextFormField(
-                                    controller: passwordController,
-                                    validator: validatePassword,
-                                    decoration: InputDecoration(
-                                      hintStyle: TextStyle(
-                                          fontSize: 14,
-                                          fontFamily: "Helvetica",
-                                          color:
-                                              Color.fromRGBO(133, 139, 145, 1)),
-                                      hintText: 'Enter your mobile no',
-                                      contentPadding: EdgeInsets.symmetric(
-                                          vertical: 2.0, horizontal: 10.0),
-                                      border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(5)),
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 23),
+                                  child: SizedBox(
+                                    height: 45,
+                                    width: 160,
+                                    child: Expanded(
+                                      child: ElevatedButton(
+                                        child: Text(
+                                          'Upload a file',
+                                          style: TextStyle(
+                                              color:
+                                                  Color.fromRGBO(20, 3, 3, 1)),
+                                        ),
+                                        style: ElevatedButton.styleFrom(
+                                          elevation: 2,
+                                          backgroundColor: Colors.white,
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(5),
+                                          ),
+                                        ),
+                                        onPressed: () {},
                                       ),
                                     ),
                                   ),
@@ -658,7 +766,11 @@ class _OperatorState extends State<Operator> {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text('Iqama No.', style: TextStyle(fontSize: 16)),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 60),
+                                child: Text('Picture of Vehicle',
+                                    style: TextStyle(fontSize: 16)),
+                              ),
                               SizedBox(
                                 height: 40,
                               ),
@@ -694,22 +806,26 @@ class _OperatorState extends State<Operator> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                SizedBox(
-                                  height: 45,
-                                  child: TextFormField(
-                                    validator: validatePassword,
-                                    controller: confirmPasswordController,
-                                    decoration: InputDecoration(
-                                      hintStyle: TextStyle(
-                                          fontSize: 14,
-                                          fontFamily: "Helvetica",
-                                          color:
-                                              Color.fromRGBO(133, 139, 145, 1)),
-                                      hintText: 'XXXXXXXXXX',
-                                      contentPadding: EdgeInsets.all(5.0),
-                                      border: OutlineInputBorder(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(5))),
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 13),
+                                  child: SizedBox(
+                                    height: 45,
+                                    width: 160,
+                                    child: ElevatedButton(
+                                      child: Text(
+                                        'Upload a file',
+                                        style: TextStyle(
+                                            color: Color.fromRGBO(20, 3, 3, 1)),
+                                      ),
+                                      style: ElevatedButton.styleFrom(
+                                        elevation: 2,
+                                        backgroundColor: Colors.white,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(5),
+                                        ),
+                                      ),
+                                      onPressed: () {},
                                     ),
                                   ),
                                 ),
