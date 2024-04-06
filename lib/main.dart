@@ -13,6 +13,7 @@ import 'package:flutter_application_1/sample.dart';
 import 'package:flutter_application_1/test.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'Users/Enterprise/dashboard_page.dart';
+import 'Users/SingleUser/bookings.dart';
 import 'availableVehicle.dart';
 import 'classes/language_constants.dart';
 import 'gen_l10n/app_localizations.dart';

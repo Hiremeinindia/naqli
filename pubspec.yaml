@@ -64,6 +64,8 @@ dependencies:
   map_location_picker: ^1.2.8+3
   dropdown_model_list: ^2.0.2
   modular_customizable_dropdown: ^2.0.3
+  pin_code_text_field: ^1.8.0
+  intl_phone_field: ^3.2.0
 
 dev_dependencies:
   flutter_test:

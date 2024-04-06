@@ -58,7 +58,8 @@ class _OperatorState extends State<Operator> {
   Future<void> _saveUserDataToFirestore() async {
     print("track2");
     try {
-      CollectionReference usersCollection = _firestore.collection('users');
+      CollectionReference usersCollection =
+          _firestore.collection('partneroperatoruser');
 
       await usersCollection.add({
         'firstName': firstNameController.text,

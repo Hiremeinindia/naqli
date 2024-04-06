@@ -1,29 +1,28 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:easy_sidemenu/easy_sidemenu.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fl_chart/fl_chart.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-import 'package:flutter_application_1/Partner/Dashboard/dashboard.dart';
-import 'package:flutter_application_1/Users/SingleTimeUser/bookingDetails.dart';
-import 'package:flutter_application_1/Widgets/customButton.dart';
+import 'package:flutter_application_1/Partner/Dashboard/bookings.dart';
+import 'package:flutter_application_1/Partner/Dashboard/payments.dart';
 import 'package:flutter_application_1/classes/language.dart';
-import 'package:flutter_application_1/classes/language_constants.dart';
-import 'package:flutter_application_1/main.dart';
 
 import 'package:sizer/sizer.dart';
+import '../../Widgets/customButton.dart';
 import '../../Widgets/formText.dart';
-import 'bookings.dart';
-import 'payments.dart';
+import '../../classes/language_constants.dart';
+import '../../main.dart';
 
-class partnerDashboardPage extends StatefulWidget {
-  const partnerDashboardPage({Key? key}) : super(key: key);
+class PartnerDashboardPage extends StatefulWidget {
+  final String? user;
+  PartnerDashboardPage({required this.user});
 
   @override
-  State<partnerDashboardPage> createState() => _MyHomePageState();
+  State<PartnerDashboardPage> createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<partnerDashboardPage> {
+class _MyHomePageState extends State<PartnerDashboardPage> {
   PageController page = PageController();
   SideMenuController sideMenu = SideMenuController();
   bool value = false;
@@ -38,36 +37,9 @@ class _MyHomePageState extends State<partnerDashboardPage> {
   int? selectedRadioValue1;
   int? selectedRadioValue2;
   bool payNowButtonEnabled = false;
+  bool expandWork = false;
   String? selectedValue;
-  Widget _currentContent = Payments(); // Initial content
-
-  void _handleItem3Tap() {
-    setState(() {
-      _currentContent = Bookings();
-    });
-    Navigator.pop(context);
-  }
-
-  void _handleItem4Tap() {
-    setState(() {
-      _currentContent = Payments();
-    });
-    Navigator.pop(context);
-  }
-
-  void _handleItem5Tap() {
-    setState(() {
-      _currentContent = Bookings();
-    });
-    Navigator.pop(context);
-  }
-
-  void _handleItem6Tap() {
-    setState(() {
-      _currentContent = Payments();
-    });
-    Navigator.pop(context);
-  }
+  Widget _currentContent = Bookings(); // Initial content
 
   void handleRadioValueChanged(String? newValue) {
     setState(() {
@@ -88,6 +60,29 @@ class _MyHomePageState extends State<partnerDashboardPage> {
     setState(() {
       payNowButtonEnabled = true;
     });
+  }
+
+  Future<Map<String, dynamic>?> fetchData(String userId) async {
+    try {
+      DocumentSnapshot<Map<String, dynamic>> documentSnapshot =
+          await FirebaseFirestore.instance
+              .collection('enterpriseuser')
+              .doc(userId)
+              .get();
+
+      if (documentSnapshot.exists) {
+        Map<String, dynamic> userData = documentSnapshot.data()!;
+        String firstName = userData['firstName'];
+        String lastName = userData['lastName'];
+        return {'firstName': firstName, 'lastName': lastName};
+      } else {
+        print('Document does not exist for userId: $userId');
+        return null;
+      }
+    } catch (e) {
+      print('Error fetching data for userId $userId: $e');
+      return null;
+    }
   }
 
   void disablePayNowButton() {
@@ -285,16 +280,39 @@ class _MyHomePageState extends State<partnerDashboardPage> {
                             padding: const EdgeInsets.only(
                               left: 5,
                             ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text("Hello Faizal!",
-                                    style: TabelText.helvetica11),
-                                Text("Admin", style: TabelText.usertext),
-                                Text("Faizal industries",
-                                    style: TabelText.usertext),
-                              ],
+                            child: FutureBuilder<Map<String, dynamic>?>(
+                              future: fetchData(widget
+                                  .user!), // Pass the userId to fetchData method
+                              builder: (context, snapshot) {
+                                if (snapshot.connectionState ==
+                                    ConnectionState.waiting) {
+                                  return CircularProgressIndicator(); // Show a loading indicator while data is being fetched
+                                } else if (snapshot.hasError) {
+                                  return Text('Error: ${snapshot.error}');
+                                } else if (snapshot.hasData) {
+                                  // Extract first name and last name from snapshot data
+                                  String firstName =
+                                      snapshot.data?['firstName'] ?? '';
+                                  String lastName =
+                                      snapshot.data?['lastName'] ?? '';
+
+                                  return Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text("Hello $firstName $lastName!",
+                                          style: TabelText.helvetica11),
+                                      Text("Admin", style: TabelText.usertext),
+                                      Text("Faizal industries",
+                                          style: TabelText.usertext),
+                                    ],
+                                  );
+                                } else {
+                                  return Text(
+                                      'No data available'); // Handle case when snapshot has no data
+                                }
+                              },
                             ),
                           ),
                           Icon(
@@ -443,14 +461,20 @@ class _MyHomePageState extends State<partnerDashboardPage> {
                                   SideMenuItem(
                                     title: 'Booking',
                                     onTap: (page, _) {
+                                      setState(() {
+                                        _currentContent = Bookings();
+                                      });
                                       sideMenu.changePage(page);
                                     },
                                     icon: const Icon(Icons.person_2_outlined),
                                     // Set the style property to change the text size
                                   ),
                                   SideMenuItem(
-                                    title: 'Payment',
+                                    title: 'Payments',
                                     onTap: (page, _) {
+                                      setState(() {
+                                        _currentContent = Payments();
+                                      });
                                       sideMenu.changePage(page);
                                     },
                                     icon:
@@ -459,13 +483,20 @@ class _MyHomePageState extends State<partnerDashboardPage> {
                                   SideMenuItem(
                                     title: 'Report',
                                     onTap: (page, _) {
+                                      setState(() {
+                                        _currentContent = Bookings();
+                                      });
                                       sideMenu.changePage(page);
                                     },
-                                    icon: const Icon(Icons.person_2_outlined),
+                                    icon:
+                                        const Icon(Icons.mode_comment_outlined),
                                   ),
                                   SideMenuItem(
                                     title: 'Help',
                                     onTap: (page, _) {
+                                      setState(() {
+                                        _currentContent = Bookings();
+                                      });
                                       sideMenu.changePage(page);
                                     },
                                     icon: const Icon(Icons.inbox_outlined),
@@ -479,30 +510,24 @@ class _MyHomePageState extends State<partnerDashboardPage> {
                       Expanded(
                           child: SingleChildScrollView(
                         child: Padding(
-                          padding: EdgeInsets.fromLTRB(4.w, 1.h, 3.w, 1.h),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Container(
-                                height: 650,
-                                decoration: BoxDecoration(
-                                  boxShadow: <BoxShadow>[
-                                    BoxShadow(
-                                      color: Color.fromRGBO(199, 199, 199, 1)
-                                          .withOpacity(0.5),
-                                      blurRadius: 15,
-                                      spreadRadius: 3,
-                                    )
-                                  ],
-                                  borderRadius: BorderRadius.circular(20.0),
-                                  color: Color.fromRGBO(255, 255, 255, 0.00),
-                                ),
-                                child: PageView(controller: page, children: [
-                                  _currentContent,
-                                ]),
-                              ),
-                            ],
+                          padding: EdgeInsets.fromLTRB(4.w, 2.h, 3.w, 2.h),
+                          child: Container(
+                            height: 650,
+                            decoration: BoxDecoration(
+                              boxShadow: <BoxShadow>[
+                                BoxShadow(
+                                  color: Color.fromRGBO(199, 199, 199, 1)
+                                      .withOpacity(0.5),
+                                  blurRadius: 15,
+                                  spreadRadius: 3,
+                                )
+                              ],
+                              borderRadius: BorderRadius.circular(20.0),
+                              color: Color.fromRGBO(255, 255, 255, 0.00),
+                            ),
+                            child: PageView(controller: page, children: [
+                              _currentContent,
+                            ]),
                           ),
                         ),
                       )),
@@ -541,10 +566,15 @@ class _MyHomePageState extends State<partnerDashboardPage> {
                     ListTile(
                         hoverColor: Colors.indigo.shade100,
                         title: Text(
-                          'Bookings',
+                          'Booking',
                           style: TextStyle(color: Colors.black),
                         ),
-                        onTap: _handleItem3Tap),
+                        onTap: () {
+                          setState(() {
+                            _currentContent = Bookings();
+                          });
+                          Navigator.pop(context);
+                        }),
                     SizedBox(
                       height: 2.h,
                     ),
@@ -554,17 +584,27 @@ class _MyHomePageState extends State<partnerDashboardPage> {
                           'Payments',
                           style: TextStyle(color: Colors.black),
                         ),
-                        onTap: _handleItem4Tap),
+                        onTap: () {
+                          setState(() {
+                            _currentContent = Payments();
+                          });
+                          Navigator.pop(context);
+                        }),
                     SizedBox(
                       height: 2.h,
                     ),
                     ListTile(
                         hoverColor: Colors.indigo.shade100,
                         title: Text(
-                          'Report',
+                          'Users',
                           style: TextStyle(color: Colors.black),
                         ),
-                        onTap: _handleItem5Tap),
+                        onTap: () {
+                          setState(() {
+                            _currentContent = Bookings();
+                          });
+                          Navigator.pop(context);
+                        }),
                     SizedBox(
                       height: 2.h,
                     ),
@@ -574,7 +614,12 @@ class _MyHomePageState extends State<partnerDashboardPage> {
                           'Help',
                           style: TextStyle(color: Colors.black),
                         ),
-                        onTap: _handleItem6Tap),
+                        onTap: () {
+                          setState(() {
+                            _currentContent = Bookings();
+                          });
+                          Navigator.pop(context);
+                        }),
                   ]),
             ),
             appBar: PreferredSize(

@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -24,7 +25,7 @@ class _BookingsState extends State<Bookings> {
   bool isButtonEnabled1 = false;
   bool isButtonEnabled2 = false;
   bool showmaps = true;
-  int? selectedRadioValue;
+  int selectedRadioValue = -1;
   int? selectedRadioValue1;
   int? selectedRadioValue2;
 
@@ -33,14 +34,39 @@ class _BookingsState extends State<Bookings> {
   final ScrollController _book2Scroll = ScrollController();
   final ScrollController _book3Scroll = ScrollController();
   final ScrollController _scrollController = ScrollController();
+  late Stream<Map<String, dynamic>?> userStream;
   void _onMapCreated(GoogleMapController controller) {
     mapController = controller;
+  }
+
+  Stream<List<String>> fetchAllVendorNames() {
+    try {
+      return FirebaseFirestore.instance
+          .collection('partneruser')
+          .snapshots()
+          .map((QuerySnapshot<Map<String, dynamic>> querySnapshot) {
+        List<String> vendorNames = [];
+        for (QueryDocumentSnapshot<Map<String, dynamic>> doc
+            in querySnapshot.docs) {
+          if (doc.exists) {
+            Map<String, dynamic> data = doc.data()!;
+            String name = data['firstName'] ??
+                ''; // Assuming 'firstName' is the field containing vendor names
+            vendorNames.add(name);
+          }
+        }
+        return vendorNames;
+      });
+    } catch (e) {
+      print('Error fetching data: $e');
+      // Return an empty stream in case of an error
+      return Stream.value([]);
+    }
   }
 
   @override
   void initState() {
     super.initState();
-
     if (_markers.isNotEmpty) {
       _markers.add(const Marker(
         markerId: MarkerId("Mylocation"),
@@ -156,51 +182,58 @@ class _BookingsState extends State<Bookings> {
                   ),
                   Expanded(
                     child: Padding(
-                      padding: EdgeInsets.fromLTRB(3.w, 8.h, 0, 8.h),
+                      padding: EdgeInsets.fromLTRB(3.w, 7.h, 0, 4.h),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          CustomRadio1(
-                            onChanged: (val) {
-                              setState(() {
-                                selectedRadioValue =
-                                    val; // Unselect if already selected
-                                isButtonEnabled = true;
-                              });
+                          StreamBuilder<List<String>>(
+                            stream: fetchAllVendorNames(),
+                            builder: (context, snapshot) {
+                              if (snapshot.hasData && snapshot.data != null) {
+                                List<String> vendorNames = snapshot.data!;
+                                return Column(
+                                  children: [
+                                    Container(
+                                      height: 250,
+                                      child: ListView.builder(
+                                        itemCount: vendorNames.length,
+                                        itemBuilder: (context, index) {
+                                          String name = vendorNames[index];
+                                          return Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              CustomRadio1(
+                                                onChanged: (val) {
+                                                  setState(() {
+                                                    selectedRadioValue = val!;
+                                                    isButtonEnabled = true;
+                                                  });
+                                                },
+                                                groupValue: selectedRadioValue,
+                                                value:
+                                                    index, // Or any unique identifier for each radio button
+                                                text1: name,
+                                                colors: Colors.white,
+                                                text2: "XXXX SAR",
+                                              ),
+                                              SizedBox(
+                                                height: 23,
+                                              )
+                                            ],
+                                          );
+                                        },
+                                      ),
+                                    ),
+                                  ],
+                                );
+                              } else {
+                                // Loading or error state
+                                return Center(
+                                  child: CircularProgressIndicator(),
+                                );
+                              }
                             },
-                            groupValue: selectedRadioValue,
-                            value: 1,
-                            text1: 'Vendor 1',
-                            colors: Colors.white,
-                            text2: "XXXX SAR",
-                          ),
-                          CustomRadio1(
-                            onChanged: (val) {
-                              setState(() {
-                                selectedRadioValue =
-                                    val; // Unselect if already selected
-                                isButtonEnabled = true;
-                              });
-                            },
-                            groupValue: selectedRadioValue,
-                            value: 2,
-                            text1: 'Vendor 2',
-                            colors: Colors.white,
-                            text2: "XXXX SAR",
-                          ),
-                          CustomRadio1(
-                            onChanged: (val) {
-                              setState(() {
-                                selectedRadioValue =
-                                    val; // Unselect if already selected
-                                isButtonEnabled = true;
-                              });
-                            },
-                            groupValue: selectedRadioValue,
-                            value: 3,
-                            text1: 'Vendor 3',
-                            colors: Colors.white,
-                            text2: "XXXX SAR",
                           ),
                           SizedBox(
                             height: 20,
@@ -227,7 +260,7 @@ class _BookingsState extends State<Bookings> {
                             ],
                           ),
                           SizedBox(
-                            height: 90,
+                            height: 10.h,
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -360,47 +393,54 @@ class _BookingsState extends State<Bookings> {
                       SizedBox(
                         height: 10,
                       ),
-                      CustomRadio1(
-                        onChanged: (val) {
-                          setState(() {
-                            selectedRadioValue =
-                                val; // Unselect if already selected
-                            isButtonEnabled = true;
-                          });
+                      StreamBuilder<List<String>>(
+                        stream: fetchAllVendorNames(),
+                        builder: (context, snapshot) {
+                          if (snapshot.hasData && snapshot.data != null) {
+                            List<String> vendorNames = snapshot.data!;
+                            return Column(
+                              children: [
+                                Container(
+                                  height: 250,
+                                  child: ListView.builder(
+                                    itemCount: vendorNames.length,
+                                    itemBuilder: (context, index) {
+                                      String name = vendorNames[index];
+                                      return Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          CustomRadio1(
+                                            onChanged: (val) {
+                                              setState(() {
+                                                selectedRadioValue = val!;
+                                                isButtonEnabled = true;
+                                              });
+                                            },
+                                            groupValue: selectedRadioValue,
+                                            value:
+                                                index, // Or any unique identifier for each radio button
+                                            text1: name,
+                                            colors: Colors.white,
+                                            text2: "XXXX SAR",
+                                          ),
+                                          SizedBox(
+                                            height: 23,
+                                          )
+                                        ],
+                                      );
+                                    },
+                                  ),
+                                ),
+                              ],
+                            );
+                          } else {
+                            // Loading or error state
+                            return Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          }
                         },
-                        groupValue: selectedRadioValue,
-                        value: 1,
-                        text1: 'Vendor 1',
-                        colors: Colors.white,
-                        text2: "XXXX SAR",
-                      ),
-                      CustomRadio1(
-                        onChanged: (val) {
-                          setState(() {
-                            selectedRadioValue =
-                                val; // Unselect if already selected
-                            isButtonEnabled = true;
-                          });
-                        },
-                        groupValue: selectedRadioValue,
-                        value: 2,
-                        text1: 'Vendor 2',
-                        colors: Colors.white,
-                        text2: "XXXX SAR",
-                      ),
-                      CustomRadio1(
-                        onChanged: (val) {
-                          setState(() {
-                            selectedRadioValue =
-                                val; // Unselect if already selected
-                            isButtonEnabled = true;
-                          });
-                        },
-                        groupValue: selectedRadioValue,
-                        value: 3,
-                        text1: 'Vendor 3',
-                        colors: Colors.white,
-                        text2: "XXXX SAR",
                       ),
                       SizedBox(
                         height: 10,
