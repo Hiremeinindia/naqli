@@ -1,176 +1,151 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/Widgets/formText.dart';
-import 'package:sizer/sizer.dart';
 
-class FancyFab extends StatefulWidget {
-  final Function()? onPressed;
-  final String? tooltip;
-  final IconData? icon;
-
-  FancyFab({this.onPressed, this.tooltip, this.icon});
-
-  @override
-  _FancyFabState createState() => _FancyFabState();
-}
-
-class _FancyFabState extends State<FancyFab>
-    with SingleTickerProviderStateMixin {
-  bool isOpened = false;
-  late AnimationController _animationController;
-  late Animation<Color?> _buttonColor;
-  late Animation<double> _animateIcon;
-  late Animation<double> _translateButton;
+class Sample1 extends StatelessWidget {
+  final List<Country> countries = [
+    Country('United States', 'assets/Group68.png'),
+    Country('United Kingdom', 'assets/Group268.png'),
+    Country('Germany', 'assets/Group300.png'),
+    // Add more countries as needed
+  ];
 
   @override
-  initState() {
-    _animationController =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 500))
-          ..addListener(() {
-            setState(() {});
-          });
-    _animateIcon =
-        Tween<double>(begin: 0.0, end: 0.0).animate(_animationController);
-    _buttonColor = ColorTween(
-      begin: Colors.white,
-      end: Colors.white,
-    ).animate(CurvedAnimation(
-      parent: _animationController,
-      curve: Interval(
-        0.00,
-        1.00,
-        curve: Curves.linear,
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
       ),
-    ));
-    _translateButton = Tween<double>(
-      begin: 40,
-      end: 160.0,
-    ).animate(CurvedAnimation(
-      parent: _animationController,
-      curve: Interval(
-        0.0,
-        0.75,
-        curve: Curves.linear,
-      ),
-    ));
-    super.initState();
-  }
-
-  @override
-  dispose() {
-    _animationController.dispose();
-    super.dispose();
-  }
-
-  animate() {
-    if (!isOpened) {
-      _animationController.forward();
-    } else {
-      _animationController.reverse();
-    }
-    isOpened = !isOpened;
-  }
-
-  Widget inbox() {
-    return Container(
-        width: 600,
-        height: 100,
-        color: Colors.red.shade200,
-        child: Padding(
-          padding: EdgeInsets.fromLTRB(30, 0, 30, 0),
-          child: ListView(
-            children: [
-              Row(
-                children: [
-                  Image.asset(
-                    'Group2270.png',
-                    width: 30,
-                    height: 30,
-                  ),
-                  Text('Referigerator', style: BookingManagerText.sfpro20black)
-                ],
-              ),
-              Row(
-                children: [
-                  Image.asset(
-                    'Group2271.png',
-                    width: 30,
-                    height: 30,
-                  ),
-                  Text('Referigerator', style: BookingManagerText.sfpro20black)
-                ],
-              )
-            ],
-          ),
-        ));
-  }
-
-  Widget toggle() {
-    return Container(
-      width: 600,
-      decoration: BoxDecoration(
-        border: Border.all(color: Color.fromRGBO(183, 183, 183, 1)),
-        borderRadius: BorderRadius.all(
-          Radius.circular(15),
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('Dropdown List Example'),
         ),
-        color: Colors.white,
-      ),
-      child: FloatingActionButton(
-        elevation: 0,
-        splashColor: Colors.transparent,
-        focusColor: Colors.transparent,
-        hoverColor: Colors.transparent,
-        backgroundColor: _buttonColor.value,
-        onPressed: animate,
-        tooltip: 'Toggle',
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(20, 2, 20, 2),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Image.asset(
-                'delivery-truck.png',
-                width: 60,
-                height: 60,
-              ),
-              Text('Excavator', style: AvailableText.helvetica17black),
-              SizedBox(height: double.infinity, child: VerticalDivider()),
-              Text('Selec type', style: AvailableText.helvetica),
-              Icon(
-                Icons.arrow_drop_down,
-                size: 25,
-                color: Colors.black,
-              ),
-            ],
+        body: Center(
+          child: CountryDropdown(
+            countries: countries,
           ),
         ),
       ),
     );
   }
+}
+
+class CountryDropdown extends StatefulWidget {
+  final List<Country> countries;
+
+  const CountryDropdown({required this.countries});
+
+  @override
+  _CountryDropdownState createState() => _CountryDropdownState();
+}
+
+class _CountryDropdownState extends State<CountryDropdown> {
+  String? _selectedCountry;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(10),
-      child: Container(
-        color: Colors.amber,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            isOpened
-                ? Transform(
-                    transform: Matrix4.translationValues(
-                      0.0,
-                      _translateButton.value,
-                      0.0,
+      padding: const EdgeInsets.only(left: 10, right: 10),
+      child: Row(
+        children: [
+          Expanded(
+            child: Container(
+              padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+              height: 50,
+              decoration: BoxDecoration(
+                border: Border.all(color: Color.fromRGBO(183, 183, 183, 1)),
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(8),
+                  topRight: Radius.circular(0),
+                  bottomLeft: Radius.circular(8),
+                  bottomRight: Radius.circular(0),
+                ),
+              ),
+              child: Row(
+                children: [
+                  Image.asset(
+                    'delivery-truck.png',
+                    width: 50,
+                    height: 50,
+                  ),
+                  SizedBox(
+                    width: 20,
+                  ),
+                  SizedBox(
+                    width: 30,
+                    child: Text(
+                      'six',
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
-                    child: inbox(),
-                  )
-                : SizedBox(),
-            toggle(),
-            Text('data')
-          ],
-        ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Expanded(
+            child: Container(
+              height: 50, // Same height as the row
+              decoration: BoxDecoration(
+                border: Border.all(color: Color.fromRGBO(183, 183, 183, 1)),
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(0),
+                  topRight: Radius.circular(8),
+                  bottomLeft: Radius.circular(0),
+                  bottomRight: Radius.circular(8),
+                ),
+              ),
+              child: DropdownButtonFormField<String>(
+                isExpanded:
+                    true, // Ensures the dropdown button fills the available width
+                // isDense: false,
+                value: _selectedCountry,
+                items: widget.countries.map((Country country) {
+                  return DropdownMenuItem<String>(
+                    value: country.name,
+                    child: Container(
+                      constraints: BoxConstraints(
+                        minWidth: double
+                            .infinity, // Ensure the Row fills the available width
+                      ),
+                      child: Row(
+                        children: [
+                          if (_selectedCountry == null ||
+                              _selectedCountry != country.name)
+                            Image.asset(
+                              country.flagImage,
+                              width: 30,
+                              height: 30,
+                            ),
+                          SizedBox(width: 10),
+                          Expanded(
+                            child: Text(country.name),
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                }).toList(),
+                onChanged: (String? newValue) {
+                  setState(() {
+                    _selectedCountry = newValue;
+                  });
+                  // Handle selection
+                  print('Selected: $newValue');
+                },
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
+}
+
+class Country {
+  final String name;
+  final String flagImage;
+
+  Country(this.name, this.flagImage);
 }

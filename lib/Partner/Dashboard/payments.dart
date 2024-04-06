@@ -323,168 +323,171 @@ class _PaymentsState extends State<Payments> {
                         ),
                       ),
                       SizedBox(height: 50),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          Container(
-                            height: 35,
-                            width: 140,
-                            child: DropdownButtonHideUnderline(
-                              child: DropdownButton2<String>(
-                                isExpanded: true,
-                                value: controller.fromDate.text.isNotEmpty
-                                    ? controller.fromDate.text
-                                    : 'From Date',
-                                items: [
-                                  '14/6/2023',
-                                  '15/6/2023',
-                                  '16/6/2023',
-                                  '17/6/2023',
-                                  '18/6/2023',
-                                  'From Date'
-                                ].map((String? value) {
-                                  return DropdownMenuItem<String>(
-                                    value: value!,
-                                    child: Text(
-                                      value!,
-                                      style: HomepageText.helvetica16black,
+                      Padding(
+                        padding: EdgeInsets.only(right: 1.5.w),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Container(
+                              height: 35,
+                              width: 140,
+                              child: DropdownButtonHideUnderline(
+                                child: DropdownButton2<String>(
+                                  isExpanded: true,
+                                  value: controller.fromDate.text.isNotEmpty
+                                      ? controller.fromDate.text
+                                      : 'From Date',
+                                  items: [
+                                    '14/6/2023',
+                                    '15/6/2023',
+                                    '16/6/2023',
+                                    '17/6/2023',
+                                    '18/6/2023',
+                                    'From Date'
+                                  ].map((String? value) {
+                                    return DropdownMenuItem<String>(
+                                      value: value!,
+                                      child: Text(
+                                        value!,
+                                        style: HomepageText.helvetica16black,
+                                      ),
+                                    );
+                                  }).toList(),
+                                  onChanged: (String? newValue) {
+                                    setState(() {
+                                      controller.fromDate.text = newValue!;
+                                    });
+                                  },
+                                  buttonStyleData: ButtonStyleData(
+                                    height: 45,
+                                    padding: EdgeInsets.only(right: 9),
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                          color:
+                                              Color.fromRGBO(112, 112, 112, 1)),
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(0)),
+                                      color: Colors.white,
                                     ),
-                                  );
-                                }).toList(),
-                                onChanged: (String? newValue) {
-                                  setState(() {
-                                    controller.fromDate.text = newValue!;
-                                  });
-                                },
-                                buttonStyleData: ButtonStyleData(
-                                  height: 45,
-                                  padding: EdgeInsets.only(right: 9),
-                                  decoration: BoxDecoration(
-                                    border: Border.all(
-                                        color:
-                                            Color.fromRGBO(112, 112, 112, 1)),
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(0)),
-                                    color: Colors.white,
                                   ),
-                                ),
-                                iconStyleData: const IconStyleData(
-                                  icon: Icon(Icons.arrow_drop_down_sharp),
-                                  iconSize: 25,
-                                  iconEnabledColor: Colors.black,
-                                  iconDisabledColor: null,
-                                ),
-                                dropdownStyleData: DropdownStyleData(
-                                  elevation: 0,
-                                  maxHeight: 200,
-                                  padding: EdgeInsets.all(3),
-                                  decoration: BoxDecoration(
-                                    border: Border.all(
-                                        color:
-                                            Color.fromRGBO(112, 112, 112, 1)),
-                                    borderRadius: BorderRadius.only(
-                                      topLeft: Radius.circular(0),
-                                      topRight: Radius.circular(0),
-                                      bottomLeft: Radius.circular(5),
-                                      bottomRight: Radius.circular(5),
+                                  iconStyleData: const IconStyleData(
+                                    icon: Icon(Icons.arrow_drop_down_sharp),
+                                    iconSize: 25,
+                                    iconEnabledColor: Colors.black,
+                                    iconDisabledColor: null,
+                                  ),
+                                  dropdownStyleData: DropdownStyleData(
+                                    elevation: 0,
+                                    maxHeight: 200,
+                                    padding: EdgeInsets.all(3),
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                          color:
+                                              Color.fromRGBO(112, 112, 112, 1)),
+                                      borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(0),
+                                        topRight: Radius.circular(0),
+                                        bottomLeft: Radius.circular(5),
+                                        bottomRight: Radius.circular(5),
+                                      ),
+                                      color: Colors.white,
                                     ),
-                                    color: Colors.white,
+                                    scrollPadding: EdgeInsets.all(5),
+                                    scrollbarTheme: ScrollbarThemeData(
+                                      thickness:
+                                          MaterialStateProperty.all<double>(6),
+                                      thumbVisibility:
+                                          MaterialStateProperty.all<bool>(true),
+                                    ),
                                   ),
-                                  scrollPadding: EdgeInsets.all(5),
-                                  scrollbarTheme: ScrollbarThemeData(
-                                    thickness:
-                                        MaterialStateProperty.all<double>(6),
-                                    thumbVisibility:
-                                        MaterialStateProperty.all<bool>(true),
+                                  menuItemStyleData: MenuItemStyleData(
+                                    height: 30,
+                                    padding: EdgeInsets.only(left: 9, right: 9),
                                   ),
-                                ),
-                                menuItemStyleData: MenuItemStyleData(
-                                  height: 30,
-                                  padding: EdgeInsets.only(left: 9, right: 9),
                                 ),
                               ),
                             ),
-                          ),
-                          Container(
-                            height: 35,
-                            width: 140,
-                            child: DropdownButtonHideUnderline(
-                              child: DropdownButton2<String>(
-                                isExpanded: true,
-                                value: controller.toDate.text.isNotEmpty
-                                    ? controller.toDate.text
-                                    : 'To date',
-                                items: [
-                                  '24/8/2023',
-                                  '25/8/2023',
-                                  '26/8/2023',
-                                  '27/8/2023',
-                                  '28/8/2023',
-                                  'To date'
-                                ].map((String? value) {
-                                  return DropdownMenuItem<String>(
-                                    value: value!,
-                                    child: Text(
-                                      value!,
-                                      style: HomepageText.helvetica16black,
+                            Container(
+                              height: 35,
+                              width: 140,
+                              child: DropdownButtonHideUnderline(
+                                child: DropdownButton2<String>(
+                                  isExpanded: true,
+                                  value: controller.toDate.text.isNotEmpty
+                                      ? controller.toDate.text
+                                      : 'To date',
+                                  items: [
+                                    '24/8/2023',
+                                    '25/8/2023',
+                                    '26/8/2023',
+                                    '27/8/2023',
+                                    '28/8/2023',
+                                    'To date'
+                                  ].map((String? value) {
+                                    return DropdownMenuItem<String>(
+                                      value: value!,
+                                      child: Text(
+                                        value!,
+                                        style: HomepageText.helvetica16black,
+                                      ),
+                                    );
+                                  }).toList(),
+                                  onChanged: (String? newValue) {
+                                    setState(() {
+                                      controller.toDate.text = newValue!;
+                                    });
+                                  },
+                                  buttonStyleData: ButtonStyleData(
+                                    height: 45,
+                                    padding: EdgeInsets.only(right: 9),
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                          color:
+                                              Color.fromRGBO(112, 112, 112, 1)),
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(0)),
+                                      color: Colors.white,
                                     ),
-                                  );
-                                }).toList(),
-                                onChanged: (String? newValue) {
-                                  setState(() {
-                                    controller.toDate.text = newValue!;
-                                  });
-                                },
-                                buttonStyleData: ButtonStyleData(
-                                  height: 45,
-                                  padding: EdgeInsets.only(right: 9),
-                                  decoration: BoxDecoration(
-                                    border: Border.all(
-                                        color:
-                                            Color.fromRGBO(112, 112, 112, 1)),
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(0)),
-                                    color: Colors.white,
                                   ),
-                                ),
-                                iconStyleData: const IconStyleData(
-                                  icon: Icon(Icons.arrow_drop_down_sharp),
-                                  iconSize: 25,
-                                  iconEnabledColor: Colors.black,
-                                  iconDisabledColor: null,
-                                ),
-                                dropdownStyleData: DropdownStyleData(
-                                  elevation: 0,
-                                  maxHeight: 200,
-                                  padding: EdgeInsets.all(3),
-                                  decoration: BoxDecoration(
-                                    border: Border.all(
-                                        color:
-                                            Color.fromRGBO(112, 112, 112, 1)),
-                                    borderRadius: BorderRadius.only(
-                                      topLeft: Radius.circular(0),
-                                      topRight: Radius.circular(0),
-                                      bottomLeft: Radius.circular(5),
-                                      bottomRight: Radius.circular(5),
+                                  iconStyleData: const IconStyleData(
+                                    icon: Icon(Icons.arrow_drop_down_sharp),
+                                    iconSize: 25,
+                                    iconEnabledColor: Colors.black,
+                                    iconDisabledColor: null,
+                                  ),
+                                  dropdownStyleData: DropdownStyleData(
+                                    elevation: 0,
+                                    maxHeight: 200,
+                                    padding: EdgeInsets.all(3),
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                          color:
+                                              Color.fromRGBO(112, 112, 112, 1)),
+                                      borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(0),
+                                        topRight: Radius.circular(0),
+                                        bottomLeft: Radius.circular(5),
+                                        bottomRight: Radius.circular(5),
+                                      ),
+                                      color: Colors.white,
                                     ),
-                                    color: Colors.white,
+                                    scrollPadding: EdgeInsets.all(5),
+                                    scrollbarTheme: ScrollbarThemeData(
+                                      thickness:
+                                          MaterialStateProperty.all<double>(6),
+                                      thumbVisibility:
+                                          MaterialStateProperty.all<bool>(true),
+                                    ),
                                   ),
-                                  scrollPadding: EdgeInsets.all(5),
-                                  scrollbarTheme: ScrollbarThemeData(
-                                    thickness:
-                                        MaterialStateProperty.all<double>(6),
-                                    thumbVisibility:
-                                        MaterialStateProperty.all<bool>(true),
+                                  menuItemStyleData: MenuItemStyleData(
+                                    height: 30,
+                                    padding: EdgeInsets.only(left: 9, right: 9),
                                   ),
-                                ),
-                                menuItemStyleData: MenuItemStyleData(
-                                  height: 30,
-                                  padding: EdgeInsets.only(left: 9, right: 9),
                                 ),
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                       SizedBox(height: 10),
                       ElevationContainer(

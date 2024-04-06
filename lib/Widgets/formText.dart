@@ -266,6 +266,14 @@ class TriggerBookingText {
   );
 }
 
+class PartRegText {
+  static const TextStyle helvetica17grey = TextStyle(
+    fontFamily: 'Helvetica',
+    color: Color.fromRGBO(112, 112, 112, 1),
+    fontSize: 17,
+  );
+}
+
 class FormTextStyle {
   static const TextStyle text = TextStyle(
     fontFamily: 'Colfax',
