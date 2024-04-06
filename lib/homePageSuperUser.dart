@@ -1,5 +1,6 @@
 // ignore_for_file: dead_code
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -22,16 +23,15 @@ import 'package:sizer/sizer.dart';
 import 'Widgets/formText.dart';
 import 'loginPage.dart';
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({
-    Key? key,
-  }) : super(key: key);
+class MyHomePagesuper extends StatefulWidget {
+  final String? user;
+  const MyHomePagesuper({required this.user});
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<MyHomePagesuper> createState() => _MyHomePagesuperState();
 }
 
-class _MyHomePageState extends State<MyHomePage>
+class _MyHomePagesuperState extends State<MyHomePagesuper>
     with SingleTickerProviderStateMixin {
   String _selectedValue = '1';
   String categoryValue = '1';
@@ -51,6 +51,29 @@ class _MyHomePageState extends State<MyHomePage>
   void dispose() {
     _tabController.dispose();
     super.dispose();
+  }
+
+  Future<Map<String, dynamic>?> fetchData(String userId) async {
+    try {
+      DocumentSnapshot<Map<String, dynamic>> documentSnapshot =
+          await FirebaseFirestore.instance
+              .collection('superuser')
+              .doc(userId)
+              .get();
+
+      if (documentSnapshot.exists) {
+        Map<String, dynamic> userData = documentSnapshot.data()!;
+        String firstName = userData['firstName'];
+        String lastName = userData['lastName'];
+        return {'firstName': firstName, 'lastName': lastName};
+      } else {
+        print('Document does not exist for userId: $userId');
+        return null;
+      }
+    } catch (e) {
+      print('Error fetching data for userId $userId: $e');
+      return null;
+    }
   }
 
   @override
@@ -209,17 +232,46 @@ class _MyHomePageState extends State<MyHomePage>
                             SizedBox(
                               width: 10,
                             ),
-                            InkWell(
-                              onTap: () {
-                                showDialog(
-                                  barrierColor: Colors.grey.withOpacity(0.5),
-                                  context: context,
-                                  builder: (context) {
-                                    return LoginPage();
-                                  },
-                                );
-                              },
-                              child: Text('Log in', style: TabelText.helvetica),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                left: 5,
+                              ),
+                              child: FutureBuilder<Map<String, dynamic>?>(
+                                future: fetchData(widget
+                                    .user!), // Pass the userId to fetchData method
+                                builder: (context, snapshot) {
+                                  if (snapshot.connectionState ==
+                                      ConnectionState.waiting) {
+                                    return CircularProgressIndicator(); // Show a loading indicator while data is being fetched
+                                  } else if (snapshot.hasError) {
+                                    return Text('Error: ${snapshot.error}');
+                                  } else if (snapshot.hasData) {
+                                    // Extract first name and last name from snapshot data
+                                    String firstName =
+                                        snapshot.data?['firstName'] ?? '';
+                                    String lastName =
+                                        snapshot.data?['lastName'] ?? '';
+
+                                    return Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text("Hello $firstName $lastName!",
+                                            style: TabelText.helvetica11),
+                                        Text("Admin",
+                                            style: TabelText.usertext),
+                                        Text("Faizal industries",
+                                            style: TabelText.usertext),
+                                      ],
+                                    );
+                                  } else {
+                                    return Text(
+                                        'No data available'); // Handle case when snapshot has no data
+                                  }
+                                },
+                              ),
                             ),
                             Icon(
                               Icons.notifications,
@@ -736,7 +788,14 @@ class _MyHomePageState extends State<MyHomePage>
                                                                       context,
                                                                   builder:
                                                                       (context) {
-                                                                    return LoginPage();
+                                                                    return Padding(
+                                                                      padding: const EdgeInsets
+                                                                          .only(
+                                                                          left:
+                                                                              50),
+                                                                      child:
+                                                                          LoginPage(),
+                                                                    );
                                                                   },
                                                                 );
                                                               }

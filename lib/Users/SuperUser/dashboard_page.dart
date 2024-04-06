@@ -43,7 +43,37 @@ class _MyHomePageState extends State<SuperUserDashboardPage> {
   int? selectedRadioValue2;
   bool payNowButtonEnabled = false;
   String? selectedValue;
-  Widget _currentContent = Dashboard();
+
+  String userId = '';
+
+  Widget _currentContent = Bookings();
+
+  Future<void> fetchData1(String userId) async {
+    try {
+      DocumentSnapshot<Map<String, dynamic>> documentSnapshot =
+          await FirebaseFirestore.instance
+              .collection('superuser')
+              .doc(userId)
+              .get();
+
+      if (documentSnapshot.exists) {
+        Map<String, dynamic> userData = documentSnapshot.data()!;
+        String firstName = userData['firstName'];
+        String lastName = userData['lastName'];
+        setState(() {
+          userId = userId;
+          _currentContent = Dashboard(
+            user: widget.user,
+          );
+        });
+      } else {
+        print('Document does not exist for userId: $userId');
+      }
+    } catch (e) {
+      print('Error fetching data for userId $userId: $e');
+    }
+  }
+
   Future<Map<String, dynamic>?> fetchData(String userId) async {
     try {
       DocumentSnapshot<Map<String, dynamic>> documentSnapshot =
@@ -69,7 +99,7 @@ class _MyHomePageState extends State<SuperUserDashboardPage> {
 
   void _handleItem1Tap() {
     setState(() {
-      _currentContent = Dashboard();
+      _currentContent = Dashboard(user: widget.user);
     });
     Navigator.pop(context);
   }
@@ -115,6 +145,7 @@ class _MyHomePageState extends State<SuperUserDashboardPage> {
       page.jumpToPage(p0);
     });
     super.initState();
+    fetchData(widget.user);
   }
 
   void enablePayNowButton() {
@@ -500,7 +531,9 @@ class _MyHomePageState extends State<SuperUserDashboardPage> {
                                     title: 'Dashboard',
                                     onTap: (page, _) {
                                       setState(() {
-                                        _currentContent = Dashboard();
+                                        _currentContent = Dashboard(
+                                          user: widget.user,
+                                        );
                                       });
                                       sideMenu.changePage(page);
                                     },
@@ -542,7 +575,9 @@ class _MyHomePageState extends State<SuperUserDashboardPage> {
                                     title: 'Help',
                                     onTap: (page, _) {
                                       setState(() {
-                                        _currentContent = Dashboard();
+                                        _currentContent = Dashboard(
+                                          user: widget.user,
+                                        );
                                       });
                                       sideMenu.changePage(page);
                                     },
@@ -639,7 +674,9 @@ class _MyHomePageState extends State<SuperUserDashboardPage> {
                         ),
                         onTap: () {
                           setState(() {
-                            _currentContent = Dashboard();
+                            _currentContent = Dashboard(
+                              user: widget.user,
+                            );
                           });
                           Navigator.pop(context);
                         }),
@@ -699,7 +736,9 @@ class _MyHomePageState extends State<SuperUserDashboardPage> {
                         ),
                         onTap: () {
                           setState(() {
-                            _currentContent = Dashboard();
+                            _currentContent = Dashboard(
+                              user: widget.user,
+                            );
                           });
                           Navigator.pop(context);
                         }),

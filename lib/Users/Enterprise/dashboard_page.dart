@@ -3,6 +3,7 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:easy_sidemenu/easy_sidemenu.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fl_chart/fl_chart.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/Users/Enterprise/booking_manager.dart';
 import 'package:flutter_application_1/Users/Enterprise/contracts.dart';
@@ -19,7 +20,7 @@ import '../../classes/language_constants.dart';
 import '../../main.dart';
 
 class EnterDashboardPage extends StatefulWidget {
-  final String? user;
+  final String user;
   EnterDashboardPage({required this.user});
 
   @override
@@ -43,7 +44,9 @@ class _MyHomePageState extends State<EnterDashboardPage> {
   bool payNowButtonEnabled = false;
   bool expandWork = false;
   String? selectedValue;
-  Widget _currentContent = enterDashboard(); // Initial content
+  Widget _currentContent = enterDashboard(
+    user: '',
+  ); // Initial content
 
   void handleRadioValueChanged(String? newValue) {
     setState(() {
@@ -466,7 +469,9 @@ class _MyHomePageState extends State<EnterDashboardPage> {
                                     title: 'Dashboard',
                                     onTap: (page, _) {
                                       setState(() {
-                                        _currentContent = enterDashboard();
+                                        _currentContent = enterDashboard(
+                                          user: widget.user,
+                                        );
                                       });
                                       sideMenu.changePage(page);
                                     },
@@ -621,7 +626,9 @@ class _MyHomePageState extends State<EnterDashboardPage> {
                         ),
                         onTap: () {
                           setState(() {
-                            _currentContent = enterDashboard();
+                            _currentContent = enterDashboard(
+                              user: '',
+                            );
                           });
                           Navigator.pop(context);
                         }),

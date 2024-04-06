@@ -19,7 +19,8 @@ import 'package:sizer/sizer.dart';
 import 'dart:ui';
 
 class enterDashboard extends StatefulWidget {
-  enterDashboard();
+  final String user;
+  enterDashboard({required this.user});
   @override
   State<enterDashboard> createState() => _DashboardState();
 }
@@ -483,22 +484,13 @@ class _DashboardState extends State<enterDashboard> {
                                         ),
                                       ),
                                       InkWell(
-                                        onTap: () async {
-                                          UserCredential userCredential =
-                                              await _auth
-                                                  .signInWithEmailAndPassword(
-                                            email: controller.email.text,
-                                            password: controller.password.text,
-                                          );
-                                          String userId =
-                                              userCredential.user!.uid;
-                                          // Navigate to the specific class here
+                                        onTap: () {
                                           Navigator.push(
                                             context,
                                             MaterialPageRoute(
                                               builder: (context) =>
                                                   MyHomePageEnter(
-                                                user: userId,
+                                                user: widget.user,
                                               ),
                                             ),
                                           );
