@@ -13,7 +13,8 @@ import 'package:sizer/sizer.dart';
 import '../../Widgets/colorContainer.dart';
 
 class Bookings extends StatefulWidget {
-  Bookings();
+  final String user;
+  Bookings({required this.user});
   @override
   State<Bookings> createState() => _BookingsState();
 }
@@ -140,17 +141,11 @@ class _BookingsState extends State<Bookings> {
                             ),
                             GestureDetector(
                               onTap: () async {
-                                UserCredential userCredential =
-                                    await _auth.signInWithEmailAndPassword(
-                                  email: controller.email.text,
-                                  password: controller.password.text,
-                                );
-                                String userId = userCredential.user!.uid;
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) => MyHomePageEnter(
-                                      user: userId,
+                                      user: widget.user,
                                     ),
                                   ),
                                 );

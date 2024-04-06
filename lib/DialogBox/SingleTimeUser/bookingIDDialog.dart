@@ -61,12 +61,12 @@ class _BookingIDDialogState extends State<BookingIDDialog> {
                           icon: Icon(Icons.close),
                           onPressed: () {
                             // Navigator.of(context).pop();
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => Bookings(),
-                              ),
-                            );
+                            // Navigator.push(
+                            //   context,
+                            //   MaterialPageRoute(
+                            //     builder: (context) => Bookings(user: widget.user,),
+                            //   ),
+                            // );
                           },
                           color: Colors.white, // Setting icon color
                         ),

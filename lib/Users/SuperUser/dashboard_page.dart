@@ -46,7 +46,7 @@ class _MyHomePageState extends State<SuperUserDashboardPage> {
 
   String userId = '';
 
-  Widget _currentContent = Bookings();
+  Widget _currentContent = TriggerBooking();
 
   Future<void> fetchData1(String userId) async {
     try {
@@ -113,7 +113,7 @@ class _MyHomePageState extends State<SuperUserDashboardPage> {
 
   void _handleItem3Tap() {
     setState(() {
-      _currentContent = Bookings();
+      _currentContent = Bookings(user: widget.user);
     });
     Navigator.pop(context);
   }
@@ -553,7 +553,9 @@ class _MyHomePageState extends State<SuperUserDashboardPage> {
                                     title: 'Booking Manager',
                                     onTap: (page, _) {
                                       setState(() {
-                                        _currentContent = Bookings();
+                                        _currentContent = Bookings(
+                                          user: widget.user,
+                                        );
                                       });
                                       sideMenu.changePage(page);
                                     },
@@ -706,7 +708,9 @@ class _MyHomePageState extends State<SuperUserDashboardPage> {
                         ),
                         onTap: () {
                           setState(() {
-                            _currentContent = Bookings();
+                            _currentContent = Bookings(
+                              user: widget.user,
+                            );
                           });
                           Navigator.pop(context);
                         }),
