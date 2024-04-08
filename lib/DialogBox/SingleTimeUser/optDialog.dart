@@ -72,7 +72,10 @@ class _OTPDialogState extends State<OTPDialog> {
         print("OTP verified successfully");
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => MyHomePage()),
+          MaterialPageRoute(
+              builder: (context) => MyHomePage(
+                    user: '',
+                  )),
         );
       } else {
         showErrorDialog(

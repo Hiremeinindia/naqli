@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_application_1/Controllers/allUsersFormController.dart';
+import 'package:flutter_application_1/Users/Enterprise/dashboard_page.dart';
 import 'package:flutter_application_1/Users/SingleUser/dashboard_page.dart';
 import 'package:flutter_application_1/availableBus.dart';
 import 'package:flutter_application_1/availableEquipment.dart';
@@ -24,7 +25,7 @@ import 'Widgets/formText.dart';
 import 'loginPage.dart';
 
 class MyHomePageEnter extends StatefulWidget {
-  final String? user;
+  final String user;
   const MyHomePageEnter({required this.user});
 
   @override
@@ -437,7 +438,9 @@ class _MyHomePageEnterState extends State<MyHomePageEnter>
                                                       context,
                                                       MaterialPageRoute(
                                                           builder: (context) =>
-                                                              AvailableVehicle()),
+                                                              AvailableVehicle(
+                                                                user: '',
+                                                              )),
                                                     );
                                                   },
                                                   child: Card(
@@ -794,7 +797,10 @@ class _MyHomePageEnterState extends State<MyHomePageEnter>
                                                                           left:
                                                                               50),
                                                                       child:
-                                                                          LoginPage(),
+                                                                          AvailableVehicle(
+                                                                        user: widget
+                                                                            .user,
+                                                                      ),
                                                                     );
                                                                   },
                                                                 );
@@ -1140,7 +1146,9 @@ class _MyHomePageEnterState extends State<MyHomePageEnter>
                                               context,
                                               MaterialPageRoute(
                                                   builder: (context) =>
-                                                      AvailableVehicle()),
+                                                      AvailableVehicle(
+                                                        user: '',
+                                                      )),
                                             );
                                           },
                                           child: Card(
