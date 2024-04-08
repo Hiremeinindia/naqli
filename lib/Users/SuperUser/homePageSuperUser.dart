@@ -21,8 +21,8 @@ import 'package:flutter_application_1/main.dart';
 
 import 'package:sizer/sizer.dart';
 
-import 'Widgets/formText.dart';
-import 'loginPage.dart';
+import '../../Widgets/formText.dart';
+import '../../loginPage.dart';
 
 class MyHomePagesuper extends StatefulWidget {
   final String user;

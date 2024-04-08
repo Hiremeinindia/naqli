@@ -8,8 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_application_1/Controllers/allUsersFormController.dart';
-import 'package:flutter_application_1/Users/Enterprise/dashboard_page.dart';
 import 'package:flutter_application_1/Users/SingleUser/dashboard_page.dart';
+import 'package:flutter_application_1/Users/SuperUser/dashboard_page.dart';
 import 'package:flutter_application_1/availableBus.dart';
 import 'package:flutter_application_1/availableEquipment.dart';
 import 'package:flutter_application_1/availableSpecial.dart';
@@ -21,18 +21,18 @@ import 'package:flutter_application_1/main.dart';
 
 import 'package:sizer/sizer.dart';
 
-import 'Widgets/formText.dart';
-import 'loginPage.dart';
+import '../../Widgets/formText.dart';
+import '../../loginPage.dart';
 
-class MyHomePageEnter extends StatefulWidget {
+class MyHomePagesingle extends StatefulWidget {
   final String user;
-  const MyHomePageEnter({required this.user});
+  const MyHomePagesingle({required this.user});
 
   @override
-  State<MyHomePageEnter> createState() => _MyHomePageEnterState();
+  State<MyHomePagesingle> createState() => _MyHomePagesingleState();
 }
 
-class _MyHomePageEnterState extends State<MyHomePageEnter>
+class _MyHomePagesingleState extends State<MyHomePagesingle>
     with SingleTickerProviderStateMixin {
   String _selectedValue = '1';
   String categoryValue = '1';
@@ -57,10 +57,7 @@ class _MyHomePageEnterState extends State<MyHomePageEnter>
   Future<Map<String, dynamic>?> fetchData(String userId) async {
     try {
       DocumentSnapshot<Map<String, dynamic>> documentSnapshot =
-          await FirebaseFirestore.instance
-              .collection('enterpriseuser')
-              .doc(userId)
-              .get();
+          await FirebaseFirestore.instance.collection('user').doc(userId).get();
 
       if (documentSnapshot.exists) {
         Map<String, dynamic> userData = documentSnapshot.data()!;
@@ -439,7 +436,8 @@ class _MyHomePageEnterState extends State<MyHomePageEnter>
                                                       MaterialPageRoute(
                                                           builder: (context) =>
                                                               AvailableVehicle(
-                                                                user: '',
+                                                                user:
+                                                                    widget.user,
                                                               )),
                                                     );
                                                   },

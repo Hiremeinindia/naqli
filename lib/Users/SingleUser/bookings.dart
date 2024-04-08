@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +15,9 @@ import 'package:sizer/sizer.dart';
 import '../../DialogBox/SingleTimeUser/bookingConfirmDialog.dart';
 
 class Bookings extends StatefulWidget {
-  Bookings();
+  final String? user;
+  final String? bookingId;
+  Bookings({required this.user, this.bookingId});
   @override
   State<Bookings> createState() => _BookingsState();
 }
@@ -62,6 +66,63 @@ class _BookingsState extends State<Bookings> {
       // Return an empty stream in case of an error
       return Stream.value([]);
     }
+  }
+
+  Stream<Map<String, dynamic>> fetchData(String userId) {
+    // Create a StreamController to manage the stream
+    StreamController<Map<String, dynamic>> controller = StreamController();
+
+    try {
+      // Perform the asynchronous operation
+      FirebaseFirestore firestore = FirebaseFirestore.instance;
+      DocumentReference userDocRef = firestore.collection('user').doc(userId);
+      CollectionReference userBookingCollectionRef =
+          userDocRef.collection('userBooking');
+      Map<String, dynamic>? lastUserData;
+      // Listen to the collection's stream, order by timestamp, and limit to 1 document
+      userBookingCollectionRef
+          .orderBy('createdTime', descending: true)
+          .limit(1)
+          .snapshots()
+          .listen((querySnapshot) {
+        querySnapshot.docs.forEach((doc) {
+          if (doc.exists) {
+            // Explicitly cast doc.data() to Map<String, dynamic>
+            Map<String, dynamic>? data = doc.data() as Map<String, dynamic>?;
+
+            if (data != null) {
+              String truck = data['truck'] ?? '';
+              String load = data['load'] ?? '';
+              String size = data['size'] ?? '';
+
+              // Create a map containing truck, load, and size
+              Map<String, dynamic> userData = {
+                'truck': truck,
+                'load': load,
+                'size': size,
+              };
+
+              // Update lastUserData with the new userData
+              lastUserData = userData;
+              // Emit the data to the stream
+              controller.add(data);
+            }
+          } else {
+            print('Document does not exist');
+            controller.addError('Document does not exist');
+          }
+        });
+      }, onError: (error) {
+        print('Error fetching data: $error');
+        controller.addError(error);
+      });
+    } catch (e) {
+      print('Error fetching data: $e');
+      controller.addError(e);
+    }
+
+    // Return the stream from the StreamController
+    return controller.stream;
   }
 
   @override
@@ -133,43 +194,67 @@ class _BookingsState extends State<Bookings> {
                           Padding(
                             padding: EdgeInsets.only(
                                 right: 4.w, left: 4.w, top: 1.w, bottom: 2.w),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Column(
-                                  children: [
-                                    Text("Pick up truck",
-                                        style: DialogText.helvetica25black),
-                                    Text("Toyota Hilux",
-                                        style: BookingText.helveticablack)
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 63,
-                                  child: VerticalDivider(
-                                    color: Color.fromRGBO(112, 112, 112, 1),
-                                    thickness: 2,
-                                  ),
-                                ),
-                                Column(
-                                  children: [
-                                    Text("Load",
-                                        style: BookingText.helveticablack),
-                                    Text("Woods",
-                                        style: HomepageText.helvetica16black)
-                                  ],
-                                ),
-                                SizedBox(
-                                  child: Column(
+                            child: StreamBuilder<Map<String, dynamic>>(
+                              stream: fetchData(widget.user!),
+                              builder: (context, snapshot) {
+                                if (snapshot.connectionState ==
+                                    ConnectionState.waiting) {
+                                  return CircularProgressIndicator(); // Show a loading indicator while waiting for data
+                                } else if (snapshot.hasError) {
+                                  return Text(
+                                      'Error: ${snapshot.error}'); // Show an error message if there's an error
+                                } else {
+                                  // If data is available, build the UI using the retrieved userData
+                                  Map<String, dynamic> userData =
+                                      snapshot.data ?? {};
+
+                                  return Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Text("Size",
-                                          style: BookingText.helveticablack),
-                                      Text(" 1 to 1.5",
-                                          style: HomepageText.helvetica16black)
+                                      Column(
+                                        children: [
+                                          Text("Pick up truck",
+                                              style:
+                                                  DialogText.helvetica25black),
+                                          Text('${userData['truck']}',
+                                              style: BookingText.helveticablack)
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: 63,
+                                        child: VerticalDivider(
+                                          color:
+                                              Color.fromRGBO(112, 112, 112, 1),
+                                          thickness: 2,
+                                        ),
+                                      ),
+                                      Column(
+                                        children: [
+                                          Text("Load",
+                                              style:
+                                                  BookingText.helveticablack),
+                                          Text('${userData['load']}',
+                                              style:
+                                                  HomepageText.helvetica16black)
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        child: Column(
+                                          children: [
+                                            Text("Size",
+                                                style:
+                                                    BookingText.helveticablack),
+                                            Text('${userData['size']}',
+                                                style: HomepageText
+                                                    .helvetica16black)
+                                          ],
+                                        ),
+                                      ),
                                     ],
-                                  ),
-                                ),
-                              ],
+                                  );
+                                }
+                              },
                             ),
                           )
                         ],
