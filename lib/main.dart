@@ -83,11 +83,11 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        localizationsDelegates: AppLocalizations.localizationsDelegates,
-        supportedLocales: AppLocalizations.supportedLocales,
-        locale: _locale,
-        debugShowCheckedModeBanner: false,
-        home: MyHomePage());
-        home: AvailableEquipment());
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
+      locale: _locale,
+      debugShowCheckedModeBanner: false,
+      home: MyHomePage(),
+    );
   }
 }
