@@ -1,12 +1,15 @@
 // ignore_for_file: dead_code
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_application_1/Controllers/allUsersFormController.dart';
 import 'package:flutter_application_1/DialogBox/SingleTimeUser/bookingIDDialog.dart';
 import 'package:flutter_application_1/Users/SingleTimeUser/bookingDetails.dart';
 import 'package:flutter_application_1/Widgets/customButton.dart';
@@ -19,9 +22,10 @@ import 'package:sizer/sizer.dart';
 import 'Widgets/formText.dart';
 
 class AvailableEquipment extends StatefulWidget {
-  const AvailableEquipment({
-    Key? key,
-  }) : super(key: key);
+  String? user;
+  AvailableEquipment({
+    this.user,
+  });
 
   @override
   State<AvailableEquipment> createState() => _AvailableEquipmentState();
@@ -35,6 +39,7 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
   bool checkbox1 = false;
   final ScrollController _Scroll1 = ScrollController();
   final ScrollController _Scroll2 = ScrollController();
+  AllUsersFormController controller = AllUsersFormController();
   String trailer = 'Select Type';
   String six = 'Select Type';
   String lorry = 'Select Type';
@@ -59,6 +64,44 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
 
   void initState() {
     super.initState();
+  }
+
+  Future<void> createCollectionAndSubcollection(
+    String adminUid,
+    String book1,
+  ) async {
+    try {
+      FirebaseFirestore firestore = FirebaseFirestore.instance;
+
+      // Reference to the user's document
+      DocumentReference userDocRef =
+          firestore.collection('superuser').doc(adminUid);
+
+      // Reference to the subcollection 'enterpriseUsers' under the user's document
+      CollectionReference enterpriseUsersCollectionRef =
+          userDocRef.collection('superuserbookings');
+
+      // Data for top-level document
+      // Map<String, dynamic> adminUserData = {
+      //   'adminEmail': adminEmail,
+      //   // Add other admin fields as needed
+      // };
+
+      // Data for subcollection document
+      Map<String, dynamic> subcollectionUserData = {
+        'book1': book1,
+      };
+
+      // Add top-level document
+      // await userDocRef.set(adminUserData);
+
+      // Add document to subcollection
+      await enterpriseUsersCollectionRef.add(subcollectionUserData);
+
+      print('Collection and subcollection documents created successfully!');
+    } catch (error) {
+      print('Error creating documents: $error');
+    }
   }
 
   @override
@@ -265,7 +308,8 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                                   VerticalDivider(),
                                                             ),
                                                             Text(
-                                                              selectedTypeName,
+                                                              controller
+                                                                  .vehi.text,
                                                               style:
                                                                   AvailableText
                                                                       .helvetica,
@@ -344,8 +388,9 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                                           () {
                                                                         setState(
                                                                             () {
-                                                                          selectedTypeName =
-                                                                              name;
+                                                                          controller
+                                                                              .vehi
+                                                                              .text = name;
                                                                           expand =
                                                                               false;
                                                                         });
@@ -943,18 +988,33 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                   width: double.infinity,
                                                   height: 47,
                                                   child: CustomButton(
-                                                    onPressed: () {
-                                                      showDialog(
-                                                        barrierColor:
-                                                            Color.fromRGBO(59,
-                                                                    57, 57, 1)
-                                                                .withOpacity(
-                                                                    0.5),
-                                                        context: context,
-                                                        builder: (context) {
-                                                          return BookingIDDialog();
-                                                        },
-                                                      );
+                                                    onPressed: () async {
+                                                      String? adminUid = widget
+                                                          .user; // It's better to keep adminUid as nullable if widget.user can be null
+
+                                                      if (adminUid != null) {
+                                                        // Check if widget.user is not null
+                                                        final FirebaseAuth
+                                                            _auth = FirebaseAuth
+                                                                .instance;
+                                                        String book1 = controller
+                                                                .vehi.text ??
+                                                            ''; // Ensure controller.vehi.text is not null
+
+                                                        await createCollectionAndSubcollection(
+                                                            adminUid, book1);
+                                                        showDialog(
+                                                          barrierColor:
+                                                              Color.fromRGBO(59,
+                                                                      57, 57, 1)
+                                                                  .withOpacity(
+                                                                      0.5),
+                                                          context: context,
+                                                          builder: (context) {
+                                                            return BookingIDDialog();
+                                                          },
+                                                        );
+                                                      }
                                                     },
                                                     text: 'Create Booking',
                                                   ),

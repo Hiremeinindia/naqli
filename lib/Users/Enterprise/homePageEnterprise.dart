@@ -8,8 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_application_1/Controllers/allUsersFormController.dart';
+import 'package:flutter_application_1/Users/Enterprise/dashboard_page.dart';
 import 'package:flutter_application_1/Users/SingleUser/dashboard_page.dart';
-import 'package:flutter_application_1/Users/SuperUser/dashboard_page.dart';
 import 'package:flutter_application_1/availableBus.dart';
 import 'package:flutter_application_1/availableEquipment.dart';
 import 'package:flutter_application_1/availableSpecial.dart';
@@ -21,18 +21,18 @@ import 'package:flutter_application_1/main.dart';
 
 import 'package:sizer/sizer.dart';
 
-import 'Widgets/formText.dart';
-import 'loginPage.dart';
+import '../../Widgets/formText.dart';
+import '../../loginPage.dart';
 
-class MyHomePagesuper extends StatefulWidget {
-  final String user;
-  const MyHomePagesuper({required this.user});
+class MyHomePageEnter extends StatefulWidget {
+  final String? user;
+  const MyHomePageEnter({required this.user});
 
   @override
-  State<MyHomePagesuper> createState() => _MyHomePagesuperState();
+  State<MyHomePageEnter> createState() => _MyHomePageEnterState();
 }
 
-class _MyHomePagesuperState extends State<MyHomePagesuper>
+class _MyHomePageEnterState extends State<MyHomePageEnter>
     with SingleTickerProviderStateMixin {
   String _selectedValue = '1';
   String categoryValue = '1';
@@ -58,7 +58,7 @@ class _MyHomePagesuperState extends State<MyHomePagesuper>
     try {
       DocumentSnapshot<Map<String, dynamic>> documentSnapshot =
           await FirebaseFirestore.instance
-              .collection('superuser')
+              .collection('enterpriseuser')
               .doc(userId)
               .get();
 

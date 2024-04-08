@@ -1,5 +1,6 @@
 // ignore_for_file: dead_code
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:dropdown_model_list/dropdown_model_list.dart';
 import 'package:fl_chart/fl_chart.dart';
@@ -49,6 +50,29 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
   TextEditingController controller = TextEditingController();
   void initState() {
     super.initState();
+  }
+
+  Future<Map<String, dynamic>?> fetchData(String userId) async {
+    try {
+      DocumentSnapshot<Map<String, dynamic>> documentSnapshot =
+          await FirebaseFirestore.instance
+              .collection('enterpriseuser')
+              .doc(userId)
+              .get();
+
+      if (documentSnapshot.exists) {
+        Map<String, dynamic> userData = documentSnapshot.data()!;
+        String firstName = userData['firstName'];
+        String lastName = userData['lastName'];
+        return {'firstName': firstName, 'lastName': lastName};
+      } else {
+        print('Document does not exist for userId: $userId');
+        return null;
+      }
+    } catch (e) {
+      print('Error fetching data for userId $userId: $e');
+      return null;
+    }
   }
 
   @override
@@ -218,16 +242,41 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                               padding: const EdgeInsets.only(
                                 left: 5,
                               ),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text("Hello Faizal!",
-                                      style: TabelText.helvetica11),
-                                  Text("Admin", style: TabelText.usertext),
-                                  Text("Faizal industries",
-                                      style: TabelText.usertext),
-                                ],
+                              child: FutureBuilder<Map<String, dynamic>?>(
+                                future: fetchData(widget
+                                    .user!), // Pass the userId to fetchData method
+                                builder: (context, snapshot) {
+                                  if (snapshot.connectionState ==
+                                      ConnectionState.waiting) {
+                                    return CircularProgressIndicator(); // Show a loading indicator while data is being fetched
+                                  } else if (snapshot.hasError) {
+                                    return Text('Error: ${snapshot.error}');
+                                  } else if (snapshot.hasData) {
+                                    // Extract first name and last name from snapshot data
+                                    String firstName =
+                                        snapshot.data?['firstName'] ?? '';
+                                    String lastName =
+                                        snapshot.data?['lastName'] ?? '';
+
+                                    return Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text("Hello $firstName $lastName!",
+                                            style: TabelText.helvetica11),
+                                        Text("Admin",
+                                            style: TabelText.usertext),
+                                        Text("Faizal industries",
+                                            style: TabelText.usertext),
+                                      ],
+                                    );
+                                  } else {
+                                    return Text(
+                                        'No data available'); // Handle case when snapshot has no data
+                                  }
+                                },
                               ),
                             ),
                             Icon(
