@@ -23,9 +23,9 @@ import 'Widgets/formText.dart';
 import 'loginPage.dart';
 
 class MyHomePage extends StatefulWidget {
-  final String user;
+  final String? user;
   MyHomePage({
-    required this.user,
+    this.user,
   });
 
   @override
@@ -37,6 +37,7 @@ class _MyHomePageState extends State<MyHomePage>
   String _selectedValue = '1';
   String categoryValue = '1';
   String dropdownValues = 'None';
+  String? selectedLocation = 'Location';
   bool isUserLoggedIn = false;
   late TabController _tabController;
   final ScrollController _Scroll = ScrollController();
@@ -335,15 +336,31 @@ class _MyHomePageState extends State<MyHomePage>
                                                   DropdownButtonHideUnderline(
                                                     child:
                                                         DropdownButton<String>(
-                                                      value: 'Location',
+                                                      value:
+                                                          selectedLocation, // Assign the selected location value to the dropdown
                                                       onChanged:
                                                           (String? newValue) {
-                                                        // Handle dropdown value change
+                                                        setState(() {
+                                                          selectedLocation =
+                                                              newValue; // Update the selected location when the user selects a new value
+                                                        });
                                                       },
+
                                                       items: <String>[
                                                         'Location',
-                                                        'Location1',
-                                                        'Location2'
+                                                        'Riyadh ',
+                                                        'Mecca ',
+                                                        'Eastern ',
+                                                        'Medina',
+                                                        'Asir',
+                                                        'Jazan',
+                                                        'Al-Qassim',
+                                                        'Tabuk',
+                                                        'Hail',
+                                                        'Al-Jawaf',
+                                                        'Najran',
+                                                        'Northem Borders',
+                                                        'Al-Bahah',
                                                       ].map<
                                                           DropdownMenuItem<
                                                               String>>(
@@ -387,8 +404,8 @@ class _MyHomePageState extends State<MyHomePage>
                                                       MaterialPageRoute(
                                                           builder: (context) =>
                                                               AvailableVehicle(
-                                                                user:
-                                                                    widget.user,
+                                                                user: widget
+                                                                    .user!,
                                                               )),
                                                     );
                                                   },
@@ -1040,14 +1057,30 @@ class _MyHomePageState extends State<MyHomePage>
                                           // Replace the below DropdownButton with your actual dropdown widget
                                           DropdownButtonHideUnderline(
                                             child: DropdownButton<String>(
-                                              value: 'Location',
+                                              value:
+                                                  selectedLocation, // Assign the selected location value to the dropdown
                                               onChanged: (String? newValue) {
-                                                // Handle dropdown value change
+                                                setState(() {
+                                                  selectedLocation =
+                                                      newValue; // Update the selected location when the user selects a new value
+                                                });
                                               },
+
                                               items: <String>[
                                                 'Location',
-                                                'Location1',
-                                                'Location2'
+                                                'Riyadh ',
+                                                'Mecca ',
+                                                'Eastern ',
+                                                'Medina',
+                                                'Asir',
+                                                'Jazan',
+                                                'Al-Qassim',
+                                                'Tabuk',
+                                                'Hail',
+                                                'Al-Jawaf',
+                                                'Najran',
+                                                'Northem Borders',
+                                                'Al-Bahah',
                                               ].map<DropdownMenuItem<String>>(
                                                 (String value) {
                                                   return DropdownMenuItem<
@@ -1086,7 +1119,7 @@ class _MyHomePageState extends State<MyHomePage>
                                               MaterialPageRoute(
                                                   builder: (context) =>
                                                       AvailableVehicle(
-                                                        user: widget.user,
+                                                        user: widget.user!,
                                                       )),
                                             );
                                           },

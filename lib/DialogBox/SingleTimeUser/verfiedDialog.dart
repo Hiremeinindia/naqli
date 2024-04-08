@@ -180,9 +180,7 @@ class _VerifiedDialogState extends State<VerifiedDialog> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => MyHomePage(
-                              user: '',
-                            ),
+                            builder: (context) => MyHomePage(),
                           ),
                         );
                         setState(() {
