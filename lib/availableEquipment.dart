@@ -43,6 +43,20 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
   String pickup = 'Select Type';
   String towtruck = 'Select Type';
   String dropdownValues = 'Load Type';
+  bool expand = false;
+  bool expand1 = false;
+  bool expand2 = false;
+  String selectedTypeName = 'Select Type';
+  final List<Map<String, String>> unitNames = [
+    {'image': 'Group1660.png', 'name': 'Compactors'},
+    {'image': 'Group2052.png', 'name': 'Bulldozers'},
+    {'image': 'Group2148.png', 'name': 'Graders'},
+    {'image': 'Group2181.png', 'name': 'Dump truck'},
+    {'image': 'Group2270.png', 'name': 'Forklift'},
+    {'image': 'Group2271.png', 'name': 'Scissorlift'},
+    {'image': 'Group2148.png', 'name': 'Graders'},
+  ];
+
   void initState() {
     super.initState();
   }
@@ -205,22 +219,155 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                   MainAxisAlignment
                                                       .spaceBetween,
                                               children: [
-                                                UnitsContainer1(
-                                                  text: 'Excavator',
-                                                  items: <String>[
-                                                    'Select Type',
-                                                    'Short Sides',
-                                                    'Contract',
-                                                    'None'
-                                                  ],
-                                                  value: trailer,
-                                                  onChanged:
-                                                      (String? newValue) {
-                                                    setState(() {
-                                                      trailer =
-                                                          newValue!; // Update value in the list
-                                                    });
-                                                  },
+                                                Container(
+                                                  width: 550,
+                                                  child: Column(
+                                                    children: [
+                                                      Container(
+                                                        height: 50,
+                                                        width: 550,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          border: Border.all(
+                                                              color: Color
+                                                                  .fromRGBO(
+                                                                      183,
+                                                                      183,
+                                                                      183,
+                                                                      1)),
+                                                          borderRadius:
+                                                              BorderRadius.all(
+                                                            Radius.circular(8),
+                                                          ),
+                                                          color: Colors.white,
+                                                        ),
+                                                        padding: EdgeInsets
+                                                            .symmetric(
+                                                                horizontal: 10,
+                                                                vertical: 5),
+                                                        child: Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceBetween,
+                                                          children: [
+                                                            Image.asset(
+                                                              'delivery-truck.png',
+                                                              width: 50,
+                                                              height: 50,
+                                                            ),
+                                                            Text('Excavator',
+                                                                style: AvailableText
+                                                                    .helvetica17black),
+                                                            SizedBox(
+                                                              height: double
+                                                                  .infinity,
+                                                              child:
+                                                                  VerticalDivider(),
+                                                            ),
+                                                            Text(
+                                                              selectedTypeName,
+                                                              style:
+                                                                  AvailableText
+                                                                      .helvetica,
+                                                            ),
+                                                            IconButton(
+                                                              icon: Icon(
+                                                                Icons
+                                                                    .keyboard_arrow_down_sharp,
+                                                                size: 25,
+                                                                color: Colors
+                                                                    .black,
+                                                              ),
+                                                              onPressed: () {
+                                                                setState(() {
+                                                                  expand =
+                                                                      !expand;
+                                                                });
+                                                              },
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                      SizedBox(
+                                                        height: 5,
+                                                      ),
+                                                      Positioned(
+                                                        top:
+                                                            110, // Adjust this value as needed
+                                                        child: expand
+                                                            ? Container(
+                                                                width: 500,
+                                                                height: 200,
+                                                                decoration:
+                                                                    BoxDecoration(
+                                                                  color: Colors
+                                                                      .white,
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              8),
+                                                                  boxShadow: [
+                                                                    BoxShadow(
+                                                                      color: Colors
+                                                                          .black
+                                                                          .withOpacity(
+                                                                              0.5),
+                                                                      blurRadius:
+                                                                          5,
+                                                                      offset:
+                                                                          Offset(
+                                                                              0,
+                                                                              3),
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                                child: ListView
+                                                                    .builder(
+                                                                  itemCount:
+                                                                      unitNames
+                                                                          .length,
+                                                                  itemBuilder:
+                                                                      (context,
+                                                                          index) {
+                                                                    String
+                                                                        image =
+                                                                        unitNames[index]
+                                                                            [
+                                                                            'image']!;
+                                                                    String
+                                                                        name =
+                                                                        unitNames[index]
+                                                                            [
+                                                                            'name']!;
+                                                                    return ListTile(
+                                                                      onTap:
+                                                                          () {
+                                                                        setState(
+                                                                            () {
+                                                                          selectedTypeName =
+                                                                              name;
+                                                                          expand =
+                                                                              false;
+                                                                        });
+                                                                      },
+                                                                      leading: Image
+                                                                          .asset(
+                                                                        image,
+                                                                        width:
+                                                                            60,
+                                                                        height:
+                                                                            60,
+                                                                      ),
+                                                                      title: Text(
+                                                                          name),
+                                                                    );
+                                                                  },
+                                                                ),
+                                                              )
+                                                            : SizedBox(),
+                                                      ),
+                                                    ],
+                                                  ),
                                                 ),
                                                 UnitsContainer1(
                                                   text: 'Loaders',
