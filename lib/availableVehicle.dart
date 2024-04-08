@@ -1140,9 +1140,6 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                                   child: CustomButton(
                                                     onPressed: () async {
                                                       try {
-                                                        String? adminUid =
-                                                            widget.user;
-
                                                         String truck =
                                                             controller
                                                                 .truck.text;
@@ -1156,7 +1153,7 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                                             truck,
                                                             size,
                                                             load,
-                                                            adminUid);
+                                                            widget.user!);
                                                       } catch (e) {
                                                         print(
                                                             "Error creating user: $e");
