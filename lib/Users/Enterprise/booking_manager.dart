@@ -347,9 +347,7 @@ class _BookingsState extends State<Bookings> {
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                          builder: (context) => MyHomePage(
-                                            user: '',
-                                          ),
+                                          builder: (context) => MyHomePage(),
                                         ),
                                       );
                                     },
