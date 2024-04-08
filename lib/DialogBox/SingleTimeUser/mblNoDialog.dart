@@ -8,16 +8,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_application_1/Controllers/allUsersFormController.dart';
-import 'package:flutter_application_1/DialogBox/SingleTimeUser/optDialog.dart';
-import 'package:flutter_application_1/DialogBox/SingleTimeUser/verfiedDialog.dart';
+import 'package:flutter_application_1/Users/Enterprise/dashboard_page.dart';
+import 'package:flutter_application_1/Users/SingleUser/homePageSingleUser.dart';
+import 'package:flutter_application_1/Users/SuperUser/dashboard_page.dart';
 import 'package:flutter_application_1/Widgets/formText.dart';
+import 'package:flutter_application_1/createAccount.dart';
 import 'package:sizer/sizer.dart';
-
-import '../../Users/Enterprise/dashboard_page.dart';
-import '../../Users/SingleUser/dashboard_page.dart';
-import '../../Users/SuperUser/dashboard_page.dart';
-import '../../createAccount.dart';
-import '../../homePage.dart';
 
 class MblNoDialog extends StatefulWidget {
   String? email;
@@ -90,9 +86,9 @@ class _MblNoDialogState extends State<MblNoDialog> {
       if (widget.selectedAccounttype == 'Enterprise') {
         collectionName = 'enterpriseuser';
       } else if (widget.selectedAccounttype == 'Super User') {
-        collectionName = 'superuserdummy';
+        collectionName = 'superuser';
       } else if (widget.selectedAccounttype == 'User') {
-        collectionName = 'userdummy';
+        collectionName = 'user';
       }
 
       String adminUid = widget.adminUid!;
@@ -521,7 +517,7 @@ class _MblNoDialogState extends State<MblNoDialog> {
                                                             context,
                                                             MaterialPageRoute(
                                                                 builder: (context) =>
-                                                                    SingleUserDashboardPage(
+                                                                    MyHomePagesingle(
                                                                         user:
                                                                             userId)),
                                                           );

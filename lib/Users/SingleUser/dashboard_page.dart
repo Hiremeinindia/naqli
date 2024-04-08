@@ -21,7 +21,8 @@ import 'package:flutter_application_1/Users/SingleUser/payments.dart';
 
 class SingleUserDashboardPage extends StatefulWidget {
   final String? user;
-  const SingleUserDashboardPage({required this.user});
+  final String? bookingId;
+  const SingleUserDashboardPage({required this.user, this.bookingId});
 
   @override
   State<SingleUserDashboardPage> createState() => _MyHomePageState();
@@ -43,7 +44,8 @@ class _MyHomePageState extends State<SingleUserDashboardPage> {
   int? selectedRadioValue2;
   bool payNowButtonEnabled = false;
   String? selectedValue;
-  Widget _currentContent = Bookings(); // Initial content
+  late Widget _currentContent;
+
   Future<Map<String, dynamic>?> fetchData(String userId) async {
     try {
       DocumentSnapshot<Map<String, dynamic>> documentSnapshot =
@@ -66,7 +68,10 @@ class _MyHomePageState extends State<SingleUserDashboardPage> {
 
   void _handleItem1Tap() {
     setState(() {
-      _currentContent = Bookings();
+      _currentContent = Bookings(
+        user: widget.user,
+        bookingId: widget.bookingId,
+      );
     });
     Navigator.pop(context);
   }
@@ -112,6 +117,10 @@ class _MyHomePageState extends State<SingleUserDashboardPage> {
       page.jumpToPage(p0);
     });
     super.initState();
+    _currentContent = Bookings(
+      user: widget.user,
+      bookingId: widget.bookingId,
+    );
   }
 
   void enablePayNowButton() {
@@ -499,7 +508,10 @@ class _MyHomePageState extends State<SingleUserDashboardPage> {
                                     title: 'Booking',
                                     onTap: (page, _) {
                                       setState(() {
-                                        _currentContent = Bookings();
+                                        _currentContent = Bookings(
+                                          user: widget.user,
+                                          bookingId: widget.bookingId,
+                                        );
                                       });
                                       sideMenu.changePage(page);
                                     },
@@ -624,7 +636,10 @@ class _MyHomePageState extends State<SingleUserDashboardPage> {
                         ),
                         onTap: () {
                           setState(() {
-                            _currentContent = Bookings();
+                            _currentContent = Bookings(
+                              user: widget.user,
+                              bookingId: widget.bookingId,
+                            );
                           });
                           Navigator.pop(context);
                         }),

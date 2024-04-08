@@ -62,12 +62,12 @@ class _BookingConfirmDialogState extends State<BookingConfirmDialog> {
                               // _handleItem1Tap();
                               Widget bookingdetails;
                               Navigator.pop(context);
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => Bookings(),
-                                ),
-                              );
+                              // Navigator.push(
+                              //   context,
+                              //   MaterialPageRoute(
+                              //     builder: (context) => Bookings(    user: widget.user,),
+                              //   ),
+                              // );
                             },
                             color: Colors.white, // Setting icon color
                           ),

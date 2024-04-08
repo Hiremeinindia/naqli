@@ -923,11 +923,11 @@ class _UsersState extends State<Users> {
 
       // Reference to the user's document
       DocumentReference userDocRef =
-          firestore.collection('enterprise').doc(adminUid);
+          firestore.collection('enterpriseuser').doc(adminUid);
 
       // Reference to the subcollection 'enterpriseUsers' under the user's document
       CollectionReference enterpriseUsersCollectionRef =
-          userDocRef.collection('enterpriseUsers');
+          userDocRef.collection('userEnterprise');
 
       // Data for top-level document
       // Map<String, dynamic> adminUserData = {
