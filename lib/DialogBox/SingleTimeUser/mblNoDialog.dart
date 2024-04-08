@@ -90,9 +90,9 @@ class _MblNoDialogState extends State<MblNoDialog> {
       if (widget.selectedAccounttype == 'Enterprise') {
         collectionName = 'enterpriseuser';
       } else if (widget.selectedAccounttype == 'Super User') {
-        collectionName = 'superuserdummy';
+        collectionName = 'superuser';
       } else if (widget.selectedAccounttype == 'User') {
-        collectionName = 'userdummy';
+        collectionName = 'user';
       }
 
       String adminUid = widget.adminUid!;

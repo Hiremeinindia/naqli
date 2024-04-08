@@ -21,9 +21,9 @@ import 'Widgets/formText.dart';
 import 'main.dart';
 
 class AvailableVehicle extends StatefulWidget {
-  final String user;
+  final String? user;
 
-  const AvailableVehicle({required this.user});
+  const AvailableVehicle({this.user});
 
   @override
   State<AvailableVehicle> createState() => _AvailableVehicleState();
