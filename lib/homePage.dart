@@ -404,8 +404,8 @@ class _MyHomePageState extends State<MyHomePage>
                                                       MaterialPageRoute(
                                                           builder: (context) =>
                                                               AvailableVehicle(
-                                                                user: widget
-                                                                    .user!,
+                                                                user:
+                                                                    widget.user,
                                                               )),
                                                     );
                                                   },
