@@ -1,94 +1,96 @@
 import 'package:flutter/material.dart';
 
-class Sample1 extends StatelessWidget {
+enum Options { search, upload, copy, exit }
+
+class Sample1 extends StatefulWidget {
   const Sample1({Key? key}) : super(key: key);
-  // definition of the dialog
-  // box when value is selected
-  void _showDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text("Alert!!"),
-          content: Text("You are awesome!"),
-          actions: [
-            MaterialButton(
-              child: Text("OK"),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
+
+  @override
+  State<Sample1> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<Sample1> {
+  var _popupMenuItemIndex = 0;
+  Color _changeColorAccordingToMenuItem = Colors.red;
+  var appBarHeight = AppBar().preferredSize.height;
+
+  _buildAppBar() {
+    return AppBar(
+      title: const Text(
+        'Popup Menus',
+        style: TextStyle(color: Colors.white, fontSize: 16.0),
+      ),
+      actions: [
+        PopupMenuButton(
+          onSelected: (value) {
+            _onMenuItemSelected(value as int);
+          },
+          offset: Offset(0.0, appBarHeight),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(8.0),
+              bottomRight: Radius.circular(8.0),
+              topLeft: Radius.circular(8.0),
+              topRight: Radius.circular(8.0),
             ),
+          ),
+          itemBuilder: (ctx) => [
+            _buildPopupMenuItem('Search', Icons.search, Options.search.index),
+            _buildPopupMenuItem('Upload', Icons.upload, Options.upload.index),
+            _buildPopupMenuItem('Copy', Icons.copy, Options.copy.index),
+            _buildPopupMenuItem('Exit', Icons.exit_to_app, Options.exit.index),
           ],
-        );
-      },
+        )
+      ],
     );
+  }
+
+  PopupMenuItem _buildPopupMenuItem(
+      String title, IconData iconData, int position) {
+    return PopupMenuItem(
+      value: position,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          Icon(
+            iconData,
+            color: Colors.black,
+          ),
+          Text(title),
+        ],
+      ),
+    );
+  }
+
+  _onMenuItemSelected(int value) {
+    setState(() {
+      _popupMenuItemIndex = value;
+    });
+
+    if (value == Options.search.index) {
+      _changeColorAccordingToMenuItem = Colors.red;
+    } else if (value == Options.upload.index) {
+      _changeColorAccordingToMenuItem = Colors.green;
+    } else if (value == Options.copy.index) {
+      _changeColorAccordingToMenuItem = Colors.blue;
+    } else {
+      _changeColorAccordingToMenuItem = Colors.purple;
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    // MaterialApp  with debugShowCheckedModeBanner
-    // false and title.
     return MaterialApp(
+      title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
-      title: 'AppBar Popup Menu Button',
-      // scaffold with appbar
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
       home: Scaffold(
-        // appbar with title text
-        appBar: AppBar(
-          title: Text('AppBar Popup Menu Button'),
-          // in action widget we have PopupMenuButton
-          actions: [
-            PopupMenuButton<int>(
-              itemBuilder: (context) => [
-                // PopupMenuItem 1
-                PopupMenuItem(
-                  value: 1,
-                  // row with 2 children
-                  child: Row(
-                    children: [
-                      Icon(Icons.star),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Text("Get The App")
-                    ],
-                  ),
-                ),
-                // PopupMenuItem 2
-                PopupMenuItem(
-                  value: 2,
-                  // row with two children
-                  child: Row(
-                    children: [
-                      Icon(Icons.chrome_reader_mode),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Text("About")
-                    ],
-                  ),
-                ),
-              ],
-              offset: Offset(0, 100),
-              color: Colors.grey,
-              elevation: 2,
-              // on selected we show the dialog box
-              onSelected: (value) {
-                // if value 1 show dialog
-                if (value == 1) {
-                  _showDialog(context);
-                  // if value 2 show dialog
-                } else if (value == 2) {
-                  _showDialog(context);
-                }
-              },
-            ),
-          ],
-        ),
-        // body with centered text
-        body: Center(
-          child: Text("Press the 3 Point Button Up!"),
-        ),
+        appBar: _buildAppBar(),
+        // body: Container(
+        //   color: _changeColorAccordingToMenuItem,
+        // ),
       ),
     );
   }
