@@ -4,12 +4,24 @@ import 'package:sizer/sizer.dart';
 
 import '../../Widgets/formText.dart';
 
+import 'dart:math';
+
 class BookingIDDialog extends StatefulWidget {
   @override
   _BookingIDDialogState createState() => _BookingIDDialogState();
 }
 
 class _BookingIDDialogState extends State<BookingIDDialog> {
+  String _generateBookingID() {
+    Random random = Random();
+    // Generate a random number with 16 digits
+    String bookingID = '';
+    for (int i = 0; i < 10; i++) {
+      bookingID += random.nextInt(10).toString();
+    }
+    return bookingID;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Sizer(builder: (context, orientation, deviceType) {
@@ -51,8 +63,10 @@ class _BookingIDDialogState extends State<BookingIDDialog> {
                           child: Center(
                             child: Padding(
                               padding: const EdgeInsets.only(left: 8.0),
-                              child: Text('Booking ID ***************',
-                                  style: DialogText.helvetica21),
+                              child: Text(
+                                'Booking ID ${_generateBookingID()}',
+                                style: DialogText.helvetica21,
+                              ),
                             ),
                           ),
                         ),
@@ -60,13 +74,7 @@ class _BookingIDDialogState extends State<BookingIDDialog> {
                           padding: EdgeInsets.only(right: 2),
                           icon: Icon(Icons.close),
                           onPressed: () {
-                            // Navigator.of(context).pop();
-                            // Navigator.push(
-                            //   context,
-                            //   MaterialPageRoute(
-                            //     builder: (context) => Bookings(user: widget.user,),
-                            //   ),
-                            // );
+                            Navigator.of(context).pop();
                           },
                           color: Colors.white, // Setting icon color
                         ),
@@ -157,7 +165,7 @@ class _BookingIDDialogState extends State<BookingIDDialog> {
                         Padding(
                           padding: EdgeInsets.only(left: 8.0),
                           child: Text(
-                            'XXXXXXXXXXXXXXXXXX',
+                            _generateBookingID(),
                             overflow: TextOverflow.ellipsis,
                             textAlign: TextAlign.center,
                             style: TextStyle(
