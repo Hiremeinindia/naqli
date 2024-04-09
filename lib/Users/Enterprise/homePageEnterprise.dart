@@ -25,7 +25,7 @@ import '../../Widgets/formText.dart';
 import '../../loginPage.dart';
 
 class MyHomePageEnter extends StatefulWidget {
-  final String user;
+  final String? user;
   const MyHomePageEnter({required this.user});
 
   @override
@@ -552,7 +552,10 @@ class _MyHomePageEnterState extends State<MyHomePageEnter>
                                                       context,
                                                       MaterialPageRoute(
                                                           builder: (context) =>
-                                                              AvailableEquipment()),
+                                                              AvailableEquipment(
+                                                                user: widget
+                                                                    .user!,
+                                                              )),
                                                     );
                                                   },
                                                   child: Card(
@@ -1250,7 +1253,9 @@ class _MyHomePageEnterState extends State<MyHomePageEnter>
                                               context,
                                               MaterialPageRoute(
                                                   builder: (context) =>
-                                                      AvailableEquipment()),
+                                                      AvailableEquipment(
+                                                        user: widget.user!,
+                                                      )),
                                             );
                                           },
                                           child: Card(

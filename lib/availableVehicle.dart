@@ -1,5 +1,3 @@
-// ignore_for_file: dead_code
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:dropdown_model_list/dropdown_model_list.dart';

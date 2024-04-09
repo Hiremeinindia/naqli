@@ -37,6 +37,7 @@ class AllUsersFormController {
   final selectedTypeName7 = TextEditingController();
   final selectedTypeName8 = TextEditingController();
   final otp = TextEditingController();
+  final vehi = TextEditingController();
 
   // String get newDocId => FirebaseFirestore.instance.collection('AllUserss').doc().id;
 
