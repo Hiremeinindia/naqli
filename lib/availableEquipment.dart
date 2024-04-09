@@ -1,12 +1,15 @@
 // ignore_for_file: dead_code
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_application_1/Controllers/allUsersFormController.dart';
 import 'package:flutter_application_1/DialogBox/SingleTimeUser/bookingIDDialog.dart';
 import 'package:flutter_application_1/Users/SingleTimeUser/bookingDetails.dart';
 import 'package:flutter_application_1/Widgets/customButton.dart';
@@ -19,9 +22,10 @@ import 'package:sizer/sizer.dart';
 import 'Widgets/formText.dart';
 
 class AvailableEquipment extends StatefulWidget {
-  const AvailableEquipment({
-    Key? key,
-  }) : super(key: key);
+  String user;
+  AvailableEquipment({
+    required this.user,
+  });
 
   @override
   State<AvailableEquipment> createState() => _AvailableEquipmentState();
@@ -35,6 +39,7 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
   bool checkbox1 = false;
   final ScrollController _Scroll1 = ScrollController();
   final ScrollController _Scroll2 = ScrollController();
+  AllUsersFormController controller = AllUsersFormController();
   String trailer = 'Select Type';
   String six = 'Select Type';
   String lorry = 'Select Type';
@@ -59,6 +64,38 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
 
   void initState() {
     super.initState();
+  }
+
+  Future<void> createNewBooking(
+    String book1,
+    String adminUid,
+  ) async {
+    try {
+      FirebaseFirestore firestore = FirebaseFirestore.instance;
+
+      // Reference to the user's document
+      DocumentReference userDocRef =
+          firestore.collection('superuser').doc(adminUid);
+
+      // Reference to the subcollection 'userBooking' under the user's document
+      CollectionReference userBookingCollectionRef =
+          userDocRef.collection('superuserBookings');
+
+      // Add document to subcollection and get the document reference
+      DocumentReference newBookingDocRef = await userBookingCollectionRef.add({
+        'book1': book1,
+      });
+
+      // Store the auto-generated ID
+      String newBookingId = newBookingDocRef.id;
+
+      // // Update the document with the stored ID
+      // await newBookingDocRef.update({'id': newBookingId});
+
+      print('New booking added successfully with ID: $newBookingId');
+    } catch (error) {
+      print('Error creating new booking: $error');
+    }
   }
 
   @override
@@ -265,7 +302,8 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                                   VerticalDivider(),
                                                             ),
                                                             Text(
-                                                              selectedTypeName,
+                                                              controller
+                                                                  .vehi.text,
                                                               style:
                                                                   AvailableText
                                                                       .helvetica,
@@ -344,8 +382,9 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                                           () {
                                                                         setState(
                                                                             () {
-                                                                          selectedTypeName =
-                                                                              name;
+                                                                          controller
+                                                                              .vehi
+                                                                              .text = name;
                                                                           expand =
                                                                               false;
                                                                         });
@@ -943,7 +982,17 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                   width: double.infinity,
                                                   height: 47,
                                                   child: CustomButton(
-                                                    onPressed: () {
+                                                    onPressed: () async {
+                                                      try {
+                                                        String book1 =
+                                                            controller
+                                                                .vehi.text;
+                                                        await createNewBooking(
+                                                            book1, widget.user);
+                                                      } catch (e) {
+                                                        print(
+                                                            "Error creating user: $e");
+                                                      }
                                                       showDialog(
                                                         barrierColor:
                                                             Color.fromRGBO(59,

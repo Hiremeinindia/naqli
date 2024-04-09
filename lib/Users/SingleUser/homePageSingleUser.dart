@@ -550,7 +550,10 @@ class _MyHomePagesingleState extends State<MyHomePagesingle>
                                                       context,
                                                       MaterialPageRoute(
                                                           builder: (context) =>
-                                                              AvailableEquipment()),
+                                                              AvailableEquipment(
+                                                                user:
+                                                                    widget.user,
+                                                              )),
                                                     );
                                                   },
                                                   child: Card(
@@ -1248,7 +1251,9 @@ class _MyHomePagesingleState extends State<MyHomePagesingle>
                                               context,
                                               MaterialPageRoute(
                                                   builder: (context) =>
-                                                      AvailableEquipment()),
+                                                      AvailableEquipment(
+                                                        user: widget.user,
+                                                      )),
                                             );
                                           },
                                           child: Card(
