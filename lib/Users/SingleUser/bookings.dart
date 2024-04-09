@@ -4,6 +4,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_application_1/DialogBox/SingleTimeUser/paymentSuccessDialog.dart';
+import 'package:flutter_application_1/Widgets/colorContainer.dart';
 import 'package:flutter_application_1/Widgets/customButton.dart';
 import 'package:flutter_application_1/Widgets/customRadio.dart';
 import 'package:flutter_application_1/Widgets/formText.dart';
@@ -32,7 +34,7 @@ class _BookingsState extends State<Bookings> {
   int selectedRadioValue = -1;
   int? selectedRadioValue1;
   int? selectedRadioValue2;
-
+  int screenState = 0;
   final LatLng _center = const LatLng(45.521563, -122.677433);
   final ScrollController _book1Scroll = ScrollController();
   final ScrollController _book2Scroll = ScrollController();
@@ -41,6 +43,112 @@ class _BookingsState extends State<Bookings> {
   late Stream<Map<String, dynamic>?> userStream;
   void _onMapCreated(GoogleMapController controller) {
     mapController = controller;
+  }
+
+  void _BookingConfirm(BuildContext context, int screenState) {
+    showDialog(
+      barrierColor: Color.fromRGBO(59, 57, 57, 1).withOpacity(0.5),
+      context: context,
+      builder: (context) {
+        return Padding(
+          padding: EdgeInsets.fromLTRB(30.w, 0, 30.w, 0),
+          child: Dialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10.0),
+            ),
+            child: Expanded(
+              child: ElevationContainer(
+                width: 1000,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Container(
+                      height: 50,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(10.0),
+                            topRight: Radius.circular(10.0)),
+                        color: Color.fromRGBO(98, 106, 254, 1),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Expanded(
+                            child: Center(
+                              child: Text(
+                                'Booking Confirmation',
+                                style: DialogText.dialogtext1,
+                              ),
+                            ),
+                          ),
+                          IconButton(
+                            padding: EdgeInsets.only(right: 2),
+                            icon: Icon(Icons.close),
+                            onPressed: () {
+                              // _handleItem1Tap();
+                              Navigator.pop(
+                                context,
+                              );
+                              setState(() {
+                                screenState =
+                                    screenState; // Change the screenState to 1
+                              });
+                              // Navigator.push(
+                              //   context,
+                              //   MaterialPageRoute(
+                              //     builder: (context) => Bookings(    user: widget.user,),
+                              //   ),
+                              // );
+                            },
+                            color: Colors.white, // Setting icon color
+                          ),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      height: 200,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(10.0),
+                            bottomRight: Radius.circular(10.0)),
+                        color: Colors.white,
+                      ),
+                      child: Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text(
+                              'BOOKING ID NAQXXXXXXXX Confirmed',
+                              style: TextStyle(
+                                fontSize: 22,
+                                color: Color.fromRGBO(104, 102, 124, 1),
+                                fontFamily: 'Helvetica',
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                            Text(
+                              'With Advance Payment of SAR XXXXXX',
+                              style: TextStyle(
+                                fontSize: 16,
+                                color: Color.fromRGBO(104, 102, 124, 1),
+                                fontFamily: 'Helvetica',
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                          ],
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ),
+          ),
+        );
+      },
+    );
   }
 
   Stream<List<String>> fetchAllVendorNames() {
@@ -137,6 +245,259 @@ class _BookingsState extends State<Bookings> {
         showmaps = true;
       });
     }
+  }
+
+  Widget _buildScreen0() {
+    return Expanded(
+      child: Padding(
+        padding: EdgeInsets.fromLTRB(3.w, 7.h, 0, 4.h),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            StreamBuilder<List<String>>(
+              stream: fetchAllVendorNames(),
+              builder: (context, snapshot) {
+                if (snapshot.hasData && snapshot.data != null) {
+                  List<String> vendorNames = snapshot.data!;
+                  return Column(
+                    children: [
+                      Container(
+                        height: 250,
+                        child: ListView.builder(
+                          itemCount: vendorNames.length,
+                          itemBuilder: (context, index) {
+                            String name = vendorNames[index];
+                            return Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                CustomRadio1(
+                                  onChanged: (val) {
+                                    setState(() {
+                                      selectedRadioValue = val!;
+                                      isButtonEnabled = true;
+                                    });
+                                  },
+                                  groupValue: selectedRadioValue,
+                                  value:
+                                      index, // Or any unique identifier for each radio button
+                                  text1: name,
+                                  colors: Colors.white,
+                                  text2: "XXXX SAR",
+                                ),
+                                SizedBox(
+                                  height: 23,
+                                )
+                              ],
+                            );
+                          },
+                        ),
+                      ),
+                    ],
+                  );
+                } else {
+                  // Loading or error state
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+              },
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Row(
+              children: [
+                InkWell(
+                  onTap: () {
+                    showDialog(
+                      barrierColor: Colors.grey.withOpacity(0.5),
+                      context: context,
+                      builder: (context) {
+                        return Padding(
+                          padding: const EdgeInsets.only(left: 335),
+                          child: BookingConfirmationDialog(),
+                        );
+                      },
+                    );
+                  },
+                  child: Text("Cancel Request",
+                      style: DialogText.purplehelveticabold),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 10.h,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                  child: CustomButton2(
+                    onPressed: () {
+                      setState(() {
+                        screenState = 1; // Change the screenState to 1
+                      });
+                    },
+                    text1: 'Pay Advance: ',
+                    text2: 'XXXX',
+                  ),
+                ),
+                SizedBox(
+                  width: 1.w,
+                ),
+                Expanded(
+                  child: CustomButton2(
+                    onPressed: () {
+                      _BookingConfirm(context, 1);
+                    },
+                    text1: 'Pay: ',
+                    text2: 'XXXX',
+                  ),
+                ),
+              ],
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildScreen1() {
+    return Expanded(
+      child: Padding(
+        padding: EdgeInsets.fromLTRB(4.w, 2.h, 1.w, 2.h),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Vendor Name',
+                  style: TabelText.tableText4,
+                ),
+                Text(
+                  'Kamado',
+                  style: TabelText.tableText5,
+                ),
+              ],
+            ),
+            Divider(
+              color: Color.fromRGBO(204, 195, 195, 1),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Operator id',
+                  style: TabelText.tableText4,
+                ),
+                Text(
+                  '#456789142',
+                  style: TabelText.tableText5,
+                ),
+              ],
+            ),
+            Divider(
+              color: Color.fromRGBO(204, 195, 195, 1),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Operator name',
+                  style: TabelText.tableText4,
+                ),
+                Text(
+                  'Tanjiro',
+                  style: TabelText.tableText5,
+                ),
+              ],
+            ),
+            Divider(
+              color: Color.fromRGBO(204, 195, 195, 1),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Mode',
+                  style: TabelText.tableText4,
+                ),
+                Text(
+                  'Box truck',
+                  style: TabelText.tableText5,
+                ),
+              ],
+            ),
+            Divider(
+              color: Color.fromRGBO(204, 195, 195, 1),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'No.of units',
+                  style: TabelText.tableText4,
+                ),
+                Text(
+                  '2',
+                  style: TabelText.tableText5,
+                ),
+              ],
+            ),
+            Divider(
+              color: Color.fromRGBO(204, 195, 195, 1),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Booking status',
+                  style: TabelText.tableText4,
+                ),
+                Text(
+                  'Completed',
+                  style: TabelText.tableText5,
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 40,
+            ),
+            Text(
+              'Pending Amount',
+              style: TabelText.helveticablack16,
+            ),
+            Text(
+              'XXXXX SAR',
+              style: TextStyle(
+                  color: Color.fromRGBO(145, 79, 157, 1),
+                  fontFamily: 'Helvetica',
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold),
+            ),
+            SizedBox(
+              height: 40,
+            ),
+            CustomButton(
+              onPressed: () {
+                showDialog(
+                  barrierColor: Colors.grey.withOpacity(0.5),
+                  context: context,
+                  builder: (context) {
+                    return Padding(
+                        padding: EdgeInsets.fromLTRB(15.w, 0, 15.w, 0),
+                        child: BookingSuccessDialog());
+                  },
+                );
+              },
+              text: 'Pay Now',
+            ),
+          ],
+        ),
+      ),
+    );
   }
 
   Widget build(BuildContext context) {
@@ -265,128 +626,7 @@ class _BookingsState extends State<Bookings> {
                     color: Color.fromRGBO(204, 195, 195, 1),
                     thickness: 1,
                   ),
-                  Expanded(
-                    child: Padding(
-                      padding: EdgeInsets.fromLTRB(3.w, 7.h, 0, 4.h),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          StreamBuilder<List<String>>(
-                            stream: fetchAllVendorNames(),
-                            builder: (context, snapshot) {
-                              if (snapshot.hasData && snapshot.data != null) {
-                                List<String> vendorNames = snapshot.data!;
-                                return Column(
-                                  children: [
-                                    Container(
-                                      height: 250,
-                                      child: ListView.builder(
-                                        itemCount: vendorNames.length,
-                                        itemBuilder: (context, index) {
-                                          String name = vendorNames[index];
-                                          return Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              CustomRadio1(
-                                                onChanged: (val) {
-                                                  setState(() {
-                                                    selectedRadioValue = val!;
-                                                    isButtonEnabled = true;
-                                                  });
-                                                },
-                                                groupValue: selectedRadioValue,
-                                                value:
-                                                    index, // Or any unique identifier for each radio button
-                                                text1: name,
-                                                colors: Colors.white,
-                                                text2: "XXXX SAR",
-                                              ),
-                                              SizedBox(
-                                                height: 23,
-                                              )
-                                            ],
-                                          );
-                                        },
-                                      ),
-                                    ),
-                                  ],
-                                );
-                              } else {
-                                // Loading or error state
-                                return Center(
-                                  child: CircularProgressIndicator(),
-                                );
-                              }
-                            },
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          Row(
-                            children: [
-                              InkWell(
-                                onTap: () {
-                                  showDialog(
-                                    barrierColor: Colors.grey.withOpacity(0.5),
-                                    context: context,
-                                    builder: (context) {
-                                      return Padding(
-                                        padding:
-                                            const EdgeInsets.only(left: 335),
-                                        child: BookingConfirmationDialog(),
-                                      );
-                                    },
-                                  );
-                                },
-                                child: Text("Cancel Request",
-                                    style: DialogText.purplehelveticabold),
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 10.h,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Expanded(
-                                child: CustomButton2(
-                                  onPressed: () {},
-                                  text1: 'Pay Advance: ',
-                                  text2: 'XXXX',
-                                ),
-                              ),
-                              SizedBox(
-                                width: 1.w,
-                              ),
-                              Expanded(
-                                child: CustomButton2(
-                                  onPressed: () {
-                                    showDialog(
-                                      barrierColor:
-                                          Color.fromRGBO(59, 57, 57, 1)
-                                              .withOpacity(0.5),
-                                      context: context,
-                                      builder: (context) {
-                                        return Padding(
-                                          padding: EdgeInsets.fromLTRB(
-                                              15.w, 0, 15.w, 0),
-                                          child: BookingConfirmDialog(),
-                                        );
-                                      },
-                                    );
-                                  },
-                                  text1: 'Pay: ',
-                                  text2: 'XXXX',
-                                ),
-                              ),
-                            ],
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
+                  screenState == 0 ? _buildScreen0() : _buildScreen1()
                 ],
               ),
             ),

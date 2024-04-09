@@ -9,6 +9,7 @@ import 'package:flutter_application_1/availableEquipment.dart';
 import 'package:flutter_application_1/Partner/Dashboard/dashboard.dart';
 import 'package:flutter_application_1/availableBus.dart';
 import 'package:flutter_application_1/createAccount.dart';
+import 'package:flutter_application_1/loginPage.dart';
 import 'package:flutter_application_1/sample.dart';
 import 'package:flutter_application_1/test.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';

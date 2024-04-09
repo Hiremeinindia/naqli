@@ -1,1245 +1,242 @@
-import 'package:dropdown_button2/dropdown_button2.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:carousel_slider/carousel_slider.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter_application_1/classes/language.dart';
-import 'package:flutter_application_1/classes/language_constants.dart';
-import 'package:flutter_application_1/createAccount.dart';
-import 'package:flutter_application_1/main.dart';
-import 'package:open_street_map_search_and_pick/open_street_map_search_and_pick.dart';
-import 'package:sizer/sizer.dart';
+import 'package:flutter_application_1/Widgets/formText.dart';
 
-import 'Widgets/formText.dart';
-import 'loginPage.dart';
-
-class MyHomePage1 extends StatefulWidget {
-  const MyHomePage1({
-    Key? key,
-  }) : super(key: key);
+class Sample extends StatefulWidget {
+  const Sample({Key? key}) : super(key: key);
 
   @override
-  State<MyHomePage1> createState() => _MyHomePageState();
+  State<Sample> createState() => _SampleState();
 }
 
-class _MyHomePageState extends State<MyHomePage1>
-    with SingleTickerProviderStateMixin {
-  String? selectedLocation = 'Location';
-  String _selectedValue = '1';
-  String categoryValue = '1';
-  String dropdownValues = 'None';
-  late TabController _tabController;
-  final ScrollController _Scroll = ScrollController();
+class _SampleState extends State<Sample> {
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 2, vsync: this);
+    _buttonKey = GlobalKey();
+    _buttonKey1 = GlobalKey();
+    _buttonKey2 = GlobalKey();
   }
 
+  double screenHeight = 0;
+  double screenWidth = 0;
+  double bottom = 0;
+  bool expand = false;
+  GlobalKey? _buttonKey1;
+  GlobalKey? _buttonKey2;
+  GlobalKey? _buttonKey;
+  String selectedTypeName1 = 'Select Type';
+  String selectedTypeName2 = 'Select Type';
+  String selectedTypeName3 =
+      'Select Type'; // Define separate variables for each container
+
+  Color blue = const Color(0xff8cccff);
+
   @override
-  void dispose() {
-    _tabController.dispose();
-    super.dispose();
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.blue.shade200,
+      body: Column(
+        children: [
+          Column(
+            children: [
+              CustomContainer1(
+                unitNames: [
+                  {'image': 'Group2181.png', 'name': 'Dump truck'},
+                  {'image': 'Group2270.png', 'name': 'Forklift'},
+                  {'image': 'Group2271.png', 'name': 'Scissorlift'},
+                ],
+                buttonText: 'Excavator',
+                selectedTypeName: selectedTypeName1,
+                buttonKey: _buttonKey!,
+              ),
+              SizedBox(height: 5),
+              CustomContainer1(
+                unitNames: [
+                  {'image': 'Group1660.png', 'name': 'Compactors'},
+                ],
+                buttonText: 'Bulldozer',
+                selectedTypeName: selectedTypeName2,
+                buttonKey: _buttonKey1!,
+              ),
+              SizedBox(height: 5),
+              CustomContainer1(
+                unitNames: [
+                  {'image': 'Group2181.png', 'name': 'Dump truck'},
+                  {'image': 'Group2052.png', 'name': 'Bulldozers'},
+                  {'image': 'Group2270.png', 'name': 'Forklift'},
+                  {'image': 'Group2271.png', 'name': 'Scissorlift'},
+                  {'image': 'Group2052.png', 'name': 'Bulldozers'},
+                  {'image': 'Group2148.png', 'name': 'Graders'},
+                  {'image': 'Group2181.png', 'name': 'Dump truck'},
+                  {'image': 'Group2270.png', 'name': 'Forklift'},
+                ],
+                buttonText: 'Graders',
+                selectedTypeName: selectedTypeName3,
+                buttonKey: _buttonKey2!,
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class CustomContainer1 extends StatefulWidget {
+  final String? buttonText;
+  final void Function()? onPressed;
+  final GlobalKey? buttonKey;
+  final List<Map<String, String>> unitNames;
+  String? selectedTypeName;
+
+  CustomContainer1({
+    Key? key,
+    this.buttonText,
+    this.selectedTypeName,
+    this.onPressed,
+    required this.unitNames,
+    this.buttonKey,
+  }) : super(key: key);
+
+  @override
+  _CustomContainer1State createState() => _CustomContainer1State();
+}
+
+class _CustomContainer1State extends State<CustomContainer1> {
+  late OverlayEntry _overlayEntry;
+  bool _overlayVisible = false;
+  bool expand = false;
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  OverlayEntry _createOverlayEntry(GlobalKey key, String selectedTypeName) {
+    RenderBox? renderBox = key.currentContext?.findRenderObject() as RenderBox?;
+    final position = renderBox!.localToGlobal(Offset.zero);
+    return OverlayEntry(
+      builder: (context) => Positioned(
+        right: position.dx - 350,
+        top: position.dy + renderBox.size.height,
+        child: Material(
+          elevation: 2,
+          shape: RoundedRectangleBorder(
+            side: BorderSide(
+              width: 0.4,
+              color: Color.fromRGBO(112, 112, 112, 1).withOpacity(0.2),
+            ),
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: Container(
+            height: 400,
+            width: 500,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              border: Border.all(
+                width: 0.4,
+                color: Color.fromRGBO(112, 112, 112, 1).withOpacity(0.2),
+              ),
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: ListView.builder(
+              itemCount: widget.unitNames.length,
+              itemBuilder: (context, index) {
+                String image = widget.unitNames[index]['image']!;
+                String name = widget.unitNames[index]['name']!;
+                return ListTile(
+                  onTap: () {
+                    setState(() {
+                      widget.selectedTypeName = name;
+                      expand = false;
+                    });
+                    _hideOverlay();
+                  },
+                  leading: Image.asset(
+                    image,
+                    width: 60,
+                    height: 60,
+                  ),
+                  title: Text(name),
+                );
+              },
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  void _showOverlay(GlobalKey key, String selectedTypeName) {
+    _overlayEntry = _createOverlayEntry(key, selectedTypeName);
+    Overlay.of(context)!.insert(_overlayEntry);
+    setState(() {
+      _overlayVisible = true;
+    });
+  }
+
+  void _hideOverlay() {
+    _overlayEntry.remove();
+    setState(() {
+      _overlayVisible = false;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Sizer(builder: (context, orientation, deviceType) {
-      return LayoutBuilder(
-          builder: (BuildContext ctx, BoxConstraints constraints) {
-        if (constraints.maxWidth >= 680) {
-          return Scaffold(
-              appBar: PreferredSize(
-                preferredSize: Size.fromHeight(90),
-                child: Material(
-                  child: Padding(
-                    padding: EdgeInsets.fromLTRB(13.w, 0, 15.w, 0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.only(top: 12, bottom: 6),
-                          child: Image.asset(
-                            'naqlilogo.png',
-                          ),
-                        ),
-                        SizedBox(
-                          width: 200,
-                          child: TabBar(
-                            overlayColor:
-                                MaterialStateProperty.resolveWith((states) {
-                              if (states.contains(MaterialState.selected)) {
-                                return Colors.transparent;
-                              }
-                              return Colors.transparent;
-                            }),
-                            automaticIndicatorColorAdjustment: false,
-                            unselectedLabelStyle: TextStyle(
-                              fontSize: 20,
-                              fontFamily: "HelveticaNeueRegular",
-                              color: Color.fromRGBO(206, 203, 203, 1),
-                            ),
-                            labelStyle: TextStyle(
-                              fontSize: 20,
-                              fontFamily: "HelveticaNeueRegular",
-                              color: Color.fromRGBO(112, 112, 112, 1),
-                            ),
-                            dividerHeight: 0,
-                            indicatorColor: Colors.transparent,
-                            controller: _tabController,
-                            tabs: [
-                              Tab(
-                                text: 'User',
-                              ),
-                              Tab(
-                                text: 'Partner',
-                              ),
-                            ],
-                          ),
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            DropdownButtonHideUnderline(
-                              child: DropdownButton2<Language>(
-                                hint: Padding(
-                                  padding: EdgeInsets.only(left: 10),
-                                  child: Row(
-                                    children: [
-                                      Text(
-                                        translation(context).english,
-                                        style: TabelText.helvetica11,
-                                        overflow: TextOverflow.ellipsis,
-                                      ),
-                                      Icon(
-                                        Icons.arrow_drop_down,
-                                        color: Colors.black,
-                                        size: 25,
-                                      )
-                                    ],
-                                  ),
-                                ),
-                                onChanged: (Language? language) async {
-                                  if (language != null) {
-                                    Locale _locale =
-                                        await setLocale(language.languageCode);
-                                    MyApp.setLocale(context, _locale);
-                                  } else {
-                                    language;
-                                  }
-                                },
-                                items: Language.languageList()
-                                    .map<DropdownMenuItem<Language>>(
-                                      (e) => DropdownMenuItem<Language>(
-                                        value: e,
-                                        child: Text(
-                                          e.langname,
-                                          style: TabelText.helvetica11,
-                                          overflow: TextOverflow.ellipsis,
-                                        ),
-                                        //  Row(
-                                        //   mainAxisAlignment:
-                                        //       MainAxisAlignment.spaceAround,
-                                        //   children: <Widget>[
-                                        //     Text(
-                                        //       e.flag,
-                                        //       style: TabelText.helvetica11,
-                                        //       overflow: TextOverflow.ellipsis,
-                                        //     ),
-                                        //     Text(
-                                        //       e.langname,
-                                        //       style: TabelText.helvetica11,
-                                        //       overflow: TextOverflow.ellipsis,
-                                        //     )
-                                        //   ],
-                                        // ),
-                                      ),
-                                    )
-                                    .toList(),
-                                buttonStyleData: ButtonStyleData(
-                                  height: 25,
-                                  width: 103,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(8),
-                                    border: Border.all(
-                                      color: Colors.black26,
-                                    ),
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                iconStyleData: const IconStyleData(
-                                  icon: Icon(
-                                    Icons.arrow_drop_down_sharp,
-                                  ),
-                                  iconSize: 25,
-                                  iconEnabledColor: Colors.white,
-                                  iconDisabledColor: null,
-                                ),
-                                dropdownStyleData: DropdownStyleData(
-                                  maxHeight: 210,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(5),
-                                    border: Border.all(color: Colors.black26),
-                                    color: Colors.white,
-                                  ),
-                                  scrollPadding: EdgeInsets.all(5),
-                                  scrollbarTheme: ScrollbarThemeData(
-                                    thickness:
-                                        MaterialStateProperty.all<double>(6),
-                                    thumbVisibility:
-                                        MaterialStateProperty.all<bool>(true),
-                                  ),
-                                ),
-                                menuItemStyleData: const MenuItemStyleData(
-                                  height: 25,
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            InkWell(
-                              onTap: () {
-                                showDialog(
-                                  barrierColor: Colors.grey.withOpacity(0.5),
-                                  context: context,
-                                  builder: (context) {
-                                    return LoginPage();
-                                  },
-                                );
-                              },
-                              child: Text('Log in', style: TabelText.helvetica),
-                            ),
-                            Icon(
-                              Icons.notifications,
-                              color: Color.fromRGBO(106, 102, 209, 1),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
+    return Container(
+      width: 500,
+      child: Column(
+        children: [
+          Container(
+            height: 50,
+            width: 500,
+            decoration: BoxDecoration(
+              border: Border.all(color: Color.fromRGBO(183, 183, 183, 1)),
+              borderRadius: BorderRadius.all(
+                Radius.circular(8),
               ),
-              body: TabBarView(
-                controller: _tabController,
-                children: [
-                  SingleChildScrollView(
-                    child: Center(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: <Widget>[
-                          Stack(
-                            alignment: Alignment.topCenter,
-                            children: [
-                              Column(
-                                children: [
-                                  CarouselSlider(
-                                    options: CarouselOptions(
-                                      autoPlay: true,
-                                      viewportFraction: 1.0,
-                                      autoPlayAnimationDuration:
-                                          Durations.extralong4,
-                                      height: 500,
-                                    ),
-                                    items: [
-                                      Image(
-                                        width: double.infinity,
-                                        fit: BoxFit.cover,
-                                        image: AssetImage('truckslide.jpg'),
-                                      ),
-                                    ],
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        left: 450, right: 200, top: 200),
-                                  ),
-                                  SizedBox(
-                                    height: 20,
-                                  ),
-                                ],
-                              ),
-                              Positioned(
-                                top: 310,
-                                left: 14.w,
-                                right: 14.w,
-                                child: Card(
-                                  elevation: 4,
-                                  shadowColor: Color.fromRGBO(216, 216, 216, 1)
-                                      .withOpacity(0.5),
-                                  child: Container(
-                                    padding:
-                                        EdgeInsets.fromLTRB(20, 10, 20, 10),
-                                    width: 1250,
-                                    height: 350,
-                                    decoration: BoxDecoration(
-                                      border: Border.all(
-                                          color:
-                                              Color.fromRGBO(112, 112, 112, 1)
-                                                  .withOpacity(0.1)),
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.circular(8.0),
-                                    ),
-                                    child: Column(
-                                      // Use ListView instead of Column
-                                      children: [
-                                        SizedBox(height: 10),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.end,
-                                          children: [
-                                            // Location text
-                                            Container(
-                                              padding: EdgeInsets.symmetric(
-                                                  horizontal: 10),
-                                              decoration: BoxDecoration(
-                                                border: Border.all(
-                                                    color: Colors.black,
-                                                    width: 1.0),
-                                                borderRadius:
-                                                    BorderRadius.circular(5.0),
-                                              ),
-                                              child: Row(
-                                                children: [
-                                                  Icon(Icons
-                                                      .location_on_outlined),
-                                                  SizedBox(width: 5),
-                                                  Container(
-                                                    height: 30,
-                                                    width: 1,
-                                                    color: Colors.black,
-                                                  ),
-                                                  SizedBox(width: 5),
-                                                  // SizedBox(
-                                                  //   height: 200,
-                                                  //   width: 200,
-                                                  //   child: OpenStreetMapSearchAndPick(
-                                                  //       buttonColor: Colors.blue,
-                                                  //       buttonText:
-                                                  //           'Set Current Location',
-                                                  //       onPicked: (pickedData) {}),
-                                                  // )
-                                                  // Replace the below DropdownButton with your actual dropdown widget
-                                                  DropdownButtonHideUnderline(
-                                                    child:
-                                                        DropdownButton<String>(
-                                                      value:
-                                                          selectedLocation, // Assign the selected location value to the dropdown
-                                                      onChanged:
-                                                          (String? newValue) {
-                                                        setState(() {
-                                                          selectedLocation =
-                                                              newValue; // Update the selected location when the user selects a new value
-                                                        });
-                                                      },
-
-                                                      items: <String>[
-                                                        'Location',
-                                                        'Riyadh ',
-                                                        'Mecca ',
-                                                        'Eastern ',
-                                                        'Medina',
-                                                        'Asir',
-                                                        'Jazan',
-                                                        'Al-Qassim',
-                                                        'Tabuk',
-                                                        'Hail',
-                                                        'Al-Jawaf',
-                                                        'Najran',
-                                                        'Northem Borders',
-                                                        'Al-Bahah',
-                                                      ].map<
-                                                          DropdownMenuItem<
-                                                              String>>(
-                                                        (String value) {
-                                                          return DropdownMenuItem<
-                                                              String>(
-                                                            value: value,
-                                                            child: Text(
-                                                              value,
-                                                              style: HomepageText
-                                                                  .helvetica16black,
-                                                            ),
-                                                          );
-                                                        },
-                                                      ).toList(),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        SizedBox(
-                                          height: 30,
-                                        ),
-                                        Scrollbar(
-                                          controller: _Scroll,
-                                          thumbVisibility:
-                                              true, // Set to true to always show the scrollbar
-                                          child: SingleChildScrollView(
-                                            controller: _Scroll,
-                                            scrollDirection: Axis.horizontal,
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.spaceEvenly,
-                                              children: [
-                                                Card(
-                                                  elevation: 5.5,
-                                                  shadowColor: Color.fromRGBO(
-                                                          216, 216, 216, 1)
-                                                      .withOpacity(0.6),
-                                                  child: Container(
-                                                    width: 200,
-                                                    height: 200,
-                                                    decoration: BoxDecoration(
-                                                      color: Color.fromRGBO(
-                                                          247, 246, 255, 1),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              8.0),
-                                                    ),
-                                                    child: Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              8.0),
-                                                      child: Column(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .end,
-                                                        children: [
-                                                          Image.asset(
-                                                            'Group68.png',
-                                                            width: 150,
-                                                            height: 139,
-                                                          ),
-                                                          Divider(
-                                                            color: Colors.black,
-                                                          ),
-                                                          SizedBox(height: 2),
-                                                          Text('Vehicle',
-                                                              style: HomepageText
-                                                                  .helvetica16black),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                                SizedBox(
-                                                  width: 15,
-                                                ),
-                                                Card(
-                                                  elevation: 5.5,
-                                                  shadowColor: Color.fromRGBO(
-                                                          216, 216, 216, 1)
-                                                      .withOpacity(0.6),
-                                                  child: Container(
-                                                    width: 200,
-                                                    height: 200,
-                                                    decoration: BoxDecoration(
-                                                      color: Color.fromRGBO(
-                                                          247, 246, 255, 1),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              8.0),
-                                                    ),
-                                                    child: Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              8.0),
-                                                      child: Column(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .end,
-                                                        children: [
-                                                          Image.asset(
-                                                            'bus.png',
-                                                            width: 150,
-                                                            height: 139,
-                                                          ),
-                                                          Divider(
-                                                            color: Colors.black,
-                                                          ),
-                                                          SizedBox(height: 2),
-                                                          Text(
-                                                            'Bus',
-                                                            style: HomepageText
-                                                                .helvetica16black,
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                                SizedBox(
-                                                  width: 15,
-                                                ),
-                                                Card(
-                                                  elevation: 5.5,
-                                                  shadowColor: Color.fromRGBO(
-                                                          216, 216, 216, 1)
-                                                      .withOpacity(0.6),
-                                                  child: Container(
-                                                    width: 200,
-                                                    height: 200,
-                                                    decoration: BoxDecoration(
-                                                      color: Color.fromRGBO(
-                                                          247, 246, 255, 1),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              8.0),
-                                                    ),
-                                                    child: Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              8.0),
-                                                      child: Column(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .end,
-                                                        children: [
-                                                          Image.asset(
-                                                            'Group1496.png',
-                                                            width: 150,
-                                                            height: 139,
-                                                          ),
-                                                          Divider(
-                                                            color: Colors.black,
-                                                          ),
-                                                          SizedBox(height: 2),
-                                                          Text(
-                                                            'Equipment-2',
-                                                            style: HomepageText
-                                                                .helvetica16black,
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                                SizedBox(
-                                                  width: 15,
-                                                ),
-                                                Card(
-                                                  elevation: 5.5,
-                                                  shadowColor: Color.fromRGBO(
-                                                          216, 216, 216, 1)
-                                                      .withOpacity(0.6),
-                                                  child: Container(
-                                                    width: 200,
-                                                    height: 200,
-                                                    decoration: BoxDecoration(
-                                                      color: Color.fromRGBO(
-                                                          247, 246, 255, 1),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              8.0),
-                                                    ),
-                                                    child: Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              8.0),
-                                                      child: Column(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .end,
-                                                        children: [
-                                                          Image.asset(
-                                                            'Group1660.png',
-                                                            width: 150,
-                                                            height: 139,
-                                                          ),
-                                                          Divider(
-                                                            color: Colors.black,
-                                                          ),
-                                                          SizedBox(height: 2),
-                                                          Text(
-                                                            'Special',
-                                                            style: HomepageText
-                                                                .helvetica16black,
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                                SizedBox(
-                                                  width: 15,
-                                                ),
-                                                Card(
-                                                  elevation: 5.5,
-                                                  shadowColor: Color.fromRGBO(
-                                                          216, 216, 216, 1)
-                                                      .withOpacity(0.6),
-                                                  child: Container(
-                                                    width: 200,
-                                                    height: 200,
-                                                    decoration: BoxDecoration(
-                                                      color: Color.fromRGBO(
-                                                          247, 246, 255, 1),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              8.0),
-                                                    ),
-                                                    child: Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              8.0),
-                                                      child: Column(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .end,
-                                                        children: [
-                                                          Image.asset(
-                                                            'Group1716.png',
-                                                            width: 150,
-                                                            height: 139,
-                                                          ),
-                                                          Divider(
-                                                            color: Colors.black,
-                                                          ),
-                                                          SizedBox(height: 2),
-                                                          Text(
-                                                            'Others',
-                                                            style: HomepageText
-                                                                .helvetica16black,
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                                SizedBox(
-                                                  width: 15,
-                                                ),
-                                                Card(
-                                                  elevation: 5.5,
-                                                  shadowColor: Color.fromRGBO(
-                                                          216, 216, 216, 1)
-                                                      .withOpacity(0.6),
-                                                  child: Container(
-                                                    width: 200,
-                                                    height: 200,
-                                                    decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              8.0),
-                                                      gradient: LinearGradient(
-                                                        begin: Alignment
-                                                            .centerLeft,
-                                                        end: Alignment
-                                                            .centerRight,
-                                                        colors: [
-                                                          Color.fromRGBO(
-                                                              96, 105, 255, 1),
-                                                          Color.fromRGBO(
-                                                              123, 107, 247, 1),
-                                                        ],
-                                                      ), // RGB color fill
-                                                    ),
-                                                    child: Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              8.0),
-                                                      child: Column(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .center,
-                                                        children: [
-                                                          Text(
-                                                              "Get an Estimate",
-                                                              style: HomepageText
-                                                                  .helvetica16bold),
-                                                          SizedBox(height: 20),
-                                                          Image.asset(
-                                                            'right-arrow.png',
-                                                            width: 30,
-                                                            height: 30,
-                                                            color: Colors.white,
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  Center(child: CreateAccount())
-                ],
-              ));
-        } else {
-          return Scaffold(
-              appBar: PreferredSize(
-                preferredSize: Size.fromHeight(65),
-                child: Material(
-                  elevation: 3,
-                  child: Padding(
-                    padding: EdgeInsets.fromLTRB(5.w, 0, 8.w, 0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        PopupMenuButton<String>(
-                          icon: Icon(Icons.menu),
-                          onSelected: (String value) {
-                            setState(() {
-                              _selectedValue = value;
-                            });
-                          },
-                          itemBuilder: (BuildContext context) => [
-                            PopupMenuItem(
-                              value: '1',
-                              child: Text('User', style: TabelText.tableText),
-                            ),
-                            PopupMenuItem(
-                              value: '2',
-                              child:
-                                  Text('Partner', style: TabelText.tableText),
-                            ),
-                            PopupMenuItem(
-                              value: '3',
-                              child: Text("Contact Us",
-                                  style: TabelText.tableText),
-                            ),
-                            PopupMenuItem(
-                              child: DropdownButtonHideUnderline(
-                                child: DropdownButton2<Language>(
-                                  hint: Padding(
-                                    padding: EdgeInsets.only(left: 10),
-                                    child: Row(
-                                      children: [
-                                        Text(
-                                          translation(context).english,
-                                          style: TabelText.helvetica11,
-                                          overflow: TextOverflow.ellipsis,
-                                        ),
-                                        Icon(
-                                          Icons.arrow_drop_down,
-                                          color: Colors.black,
-                                          size: 25,
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                  onChanged: (Language? language) async {
-                                    if (language != null) {
-                                      Locale _locale = await setLocale(
-                                          language.languageCode);
-                                      MyApp.setLocale(context, _locale);
-                                    } else {
-                                      language;
-                                    }
-                                  },
-                                  items: Language.languageList()
-                                      .map<DropdownMenuItem<Language>>(
-                                        (e) => DropdownMenuItem<Language>(
-                                          value: e,
-                                          child: Text(
-                                            e.langname,
-                                            style: TabelText.helvetica11,
-                                            overflow: TextOverflow.ellipsis,
-                                          ),
-                                          //  Row(
-                                          //   mainAxisAlignment:
-                                          //       MainAxisAlignment.spaceAround,
-                                          //   children: <Widget>[
-                                          //     Text(
-                                          //       e.flag,
-                                          //       style: TabelText.helvetica11,
-                                          //       overflow: TextOverflow.ellipsis,
-                                          //     ),
-                                          //     Text(
-                                          //       e.langname,
-                                          //       style: TabelText.helvetica11,
-                                          //       overflow: TextOverflow.ellipsis,
-                                          //     )
-                                          //   ],
-                                          // ),
-                                        ),
-                                      )
-                                      .toList(),
-                                  buttonStyleData: ButtonStyleData(
-                                    height: 25,
-                                    width: 103,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(8),
-                                      border: Border.all(
-                                        color: Colors.black26,
-                                      ),
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                  iconStyleData: const IconStyleData(
-                                    icon: Icon(
-                                      Icons.arrow_drop_down_sharp,
-                                    ),
-                                    iconSize: 25,
-                                    iconEnabledColor: Colors.white,
-                                    iconDisabledColor: null,
-                                  ),
-                                  dropdownStyleData: DropdownStyleData(
-                                    maxHeight: 210,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(5),
-                                      border: Border.all(color: Colors.black26),
-                                      color: Colors.white,
-                                    ),
-                                    scrollPadding: EdgeInsets.all(5),
-                                    scrollbarTheme: ScrollbarThemeData(
-                                      thickness:
-                                          MaterialStateProperty.all<double>(6),
-                                      thumbVisibility:
-                                          MaterialStateProperty.all<bool>(true),
-                                    ),
-                                  ),
-                                  menuItemStyleData: const MenuItemStyleData(
-                                    height: 25,
-                                  ),
-                                ),
-                              ),
-                            )
-                          ],
-                        ),
-                        Image.asset(
-                          'naqlilogo.png',
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            InkWell(
-                              onTap: () {
-                                showDialog(
-                                  context: context,
-                                  builder: (context) {
-                                    return LoginPage();
-                                  },
-                                );
-                              },
-                              child: Text('Log in', style: TabelText.helvetica),
-                            ),
-                            SizedBox(
-                              width: 2,
-                            ),
-                            Icon(
-                              Icons.notifications,
-                              color: Color.fromRGBO(106, 102, 209, 1),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
+              color: Colors.white,
+            ),
+            padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Image.asset(
+                  'delivery-truck.png',
+                  width: 50,
+                  height: 50,
                 ),
-              ),
-              body: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Stack(
-                    alignment: Alignment.topCenter,
-                    children: [
-                      Column(
-                        children: [
-                          CarouselSlider(
-                            options: CarouselOptions(
-                              height: 500,
-                            ),
-                            items: [
-                              Container(
-                                margin: EdgeInsets.all(6.0),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(8.0),
-                                  image: DecorationImage(
-                                    image: AssetImage('truckslide.jpg'),
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                              ),
-                              Container(
-                                margin: EdgeInsets.all(6.0),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(8.0),
-                                  image: DecorationImage(
-                                    image: AssetImage('truckslide.jpg'),
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          Container(
-                            height: 355,
-                            width: 100,
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                        ],
-                      ),
-                      Positioned(
-                        top: 310,
-                        left: 15.w,
-                        right: 15.w,
-                        child: Card(
-                          elevation: 4,
-                          shadowColor:
-                              Color.fromRGBO(216, 216, 216, 1).withOpacity(0.5),
-                          child: Container(
-                            padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
-                            width: 300,
-                            height: 550,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
-                            child: Column(
-                              // Use ListView instead of Column
-                              children: [
-                                SizedBox(height: 10),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                    // Location text
-                                    Container(
-                                      padding:
-                                          EdgeInsets.symmetric(horizontal: 10),
-                                      decoration: BoxDecoration(
-                                        border: Border.all(
-                                            color: Colors.black, width: 1.0),
-                                        borderRadius:
-                                            BorderRadius.circular(5.0),
-                                      ),
-                                      child: Row(
-                                        children: [
-                                          Icon(Icons.location_on_outlined),
-                                          SizedBox(width: 5),
-                                          Container(
-                                            height: 30,
-                                            width: 1,
-                                            color: Colors.black,
-                                          ),
-                                          SizedBox(width: 5),
-                                          // Replace the below DropdownButton with your actual dropdown widget
-                                          DropdownButtonHideUnderline(
-                                            child: DropdownButton<String>(
-                                              value: 'Location',
-                                              onChanged: (String? newValue) {
-                                                // Handle dropdown value change
-                                              },
-                                              items: <String>[
-                                                'Location',
-                                                'Location1',
-                                                'Location2'
-                                              ].map<DropdownMenuItem<String>>(
-                                                (String value) {
-                                                  return DropdownMenuItem<
-                                                      String>(
-                                                    value: value,
-                                                    child: Text(
-                                                      value,
-                                                      style: HomepageText
-                                                          .helvetica16black,
-                                                    ),
-                                                  );
-                                                },
-                                              ).toList(),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Container(
-                                  width: 300,
-                                  height: 450,
-                                  child: SingleChildScrollView(
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
-                                      children: [
-                                        Card(
-                                          elevation: 5.5,
-                                          shadowColor:
-                                              Color.fromRGBO(216, 216, 216, 1)
-                                                  .withOpacity(0.6),
-                                          child: Container(
-                                            width: 200,
-                                            height: 200,
-                                            decoration: BoxDecoration(
-                                              color: Color.fromRGBO(
-                                                  247, 246, 255, 1),
-                                              borderRadius:
-                                                  BorderRadius.circular(8.0),
-                                            ),
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.all(8.0),
-                                              child: Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.end,
-                                                children: [
-                                                  Image.asset(
-                                                    'Group68.png',
-                                                    width: 150,
-                                                    height: 139,
-                                                  ),
-                                                  Divider(
-                                                    color: Colors.black,
-                                                  ),
-                                                  SizedBox(height: 2),
-                                                  Text('Vehicle',
-                                                      style: HomepageText
-                                                          .helvetica16black),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          height: 15,
-                                        ),
-                                        Card(
-                                          elevation: 5.5,
-                                          shadowColor:
-                                              Color.fromRGBO(216, 216, 216, 1)
-                                                  .withOpacity(0.6),
-                                          child: Container(
-                                            width: 200,
-                                            height: 200,
-                                            decoration: BoxDecoration(
-                                              color: Color.fromRGBO(
-                                                  247, 246, 255, 1),
-                                              borderRadius:
-                                                  BorderRadius.circular(8.0),
-                                            ),
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.all(8.0),
-                                              child: Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.end,
-                                                children: [
-                                                  Image.asset(
-                                                    'bus.png',
-                                                    width: 150,
-                                                    height: 139,
-                                                  ),
-                                                  Divider(
-                                                    color: Colors.black,
-                                                  ),
-                                                  SizedBox(height: 2),
-                                                  Text('Bus',
-                                                      style: HomepageText
-                                                          .helvetica16black),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          height: 15,
-                                        ),
-                                        Card(
-                                          elevation: 5.5,
-                                          shadowColor:
-                                              Color.fromRGBO(216, 216, 216, 1)
-                                                  .withOpacity(0.6),
-                                          child: Container(
-                                            width: 200,
-                                            height: 200,
-                                            decoration: BoxDecoration(
-                                              color: Color.fromRGBO(
-                                                  247, 246, 255, 1),
-                                              borderRadius:
-                                                  BorderRadius.circular(8.0),
-                                            ),
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.all(8.0),
-                                              child: Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.end,
-                                                children: [
-                                                  Image.asset(
-                                                    'Group1496.png',
-                                                    width: 150,
-                                                    height: 139,
-                                                  ),
-                                                  Divider(
-                                                    color: Colors.black,
-                                                  ),
-                                                  SizedBox(height: 2),
-                                                  Text('Equipment-2',
-                                                      style: HomepageText
-                                                          .helvetica16black),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          height: 15,
-                                        ),
-                                        Card(
-                                          elevation: 5.5,
-                                          shadowColor:
-                                              Color.fromRGBO(216, 216, 216, 1)
-                                                  .withOpacity(0.6),
-                                          child: Container(
-                                            width: 200,
-                                            height: 200,
-                                            decoration: BoxDecoration(
-                                              color: Color.fromRGBO(
-                                                  247, 246, 255, 1),
-                                              borderRadius:
-                                                  BorderRadius.circular(8.0),
-                                            ),
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.all(8.0),
-                                              child: Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.end,
-                                                children: [
-                                                  Image.asset(
-                                                    'Group1660.png',
-                                                    width: 150,
-                                                    height: 139,
-                                                  ),
-                                                  Divider(
-                                                    color: Colors.black,
-                                                  ),
-                                                  SizedBox(height: 2),
-                                                  Text('Special',
-                                                      style: HomepageText
-                                                          .helvetica16black),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          height: 15,
-                                        ),
-                                        Card(
-                                          elevation: 5.5,
-                                          shadowColor:
-                                              Color.fromRGBO(216, 216, 216, 1)
-                                                  .withOpacity(0.6),
-                                          child: Container(
-                                            width: 200,
-                                            height: 200,
-                                            decoration: BoxDecoration(
-                                              color: Color.fromRGBO(
-                                                  247, 246, 255, 1),
-                                              borderRadius:
-                                                  BorderRadius.circular(8.0),
-                                            ),
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.all(8.0),
-                                              child: Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.end,
-                                                children: [
-                                                  Image.asset(
-                                                    'Group1716.png',
-                                                    width: 150,
-                                                    height: 139,
-                                                  ),
-                                                  Divider(
-                                                    color: Colors.black,
-                                                  ),
-                                                  SizedBox(height: 2),
-                                                  Text('Others',
-                                                      style: HomepageText
-                                                          .helvetica16black),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          height: 15,
-                                        ),
-                                        Card(
-                                          elevation: 5.5,
-                                          shadowColor:
-                                              Color.fromRGBO(216, 216, 216, 1)
-                                                  .withOpacity(0.6),
-                                          child: Container(
-                                            width: 200,
-                                            height: 200,
-                                            decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(8.0),
-
-                                              gradient: LinearGradient(
-                                                begin: Alignment.centerLeft,
-                                                end: Alignment.centerRight,
-                                                colors: [
-                                                  Color.fromRGBO(
-                                                      96, 105, 255, 1),
-                                                  Color.fromRGBO(
-                                                      123, 107, 247, 1),
-                                                ],
-                                              ), // // RGB color fill
-                                            ),
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.all(8.0),
-                                              child: Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  Text("Get an Estimate",
-                                                      style: HomepageText
-                                                          .helvetica16bold),
-                                                  SizedBox(height: 20),
-                                                  Image.asset(
-                                                    'right-arrow.png',
-                                                    width: 30,
-                                                    height: 30,
-                                                    color: Colors.white,
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          height: 15,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
+                Text(widget.buttonText!, style: AvailableText.helvetica17black),
+                SizedBox(
+                  height: double.infinity,
+                  child: VerticalDivider(),
+                ),
+                Text(
+                  widget.selectedTypeName ?? '',
+                  style: AvailableText.helvetica,
+                ),
+                IconButton(
+                  key: widget.buttonKey,
+                  icon: Icon(
+                    Icons.arrow_drop_down,
+                    size: 25,
+                    color: Colors.black,
                   ),
-                ],
-              ));
-        }
-      });
-    });
+                  onPressed: () {
+                    if (!_overlayVisible) {
+                      _showOverlay(
+                          widget.buttonKey!, widget.selectedTypeName ?? '');
+                    } else {
+                      _hideOverlay();
+                    }
+                  },
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }

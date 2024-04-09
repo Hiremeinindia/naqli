@@ -78,7 +78,9 @@ class _MyHomePageState extends State<SingleUserDashboardPage> {
 
   void _handleItem2Tap() {
     setState(() {
-      _currentContent = BookingHistroy();
+      _currentContent = BookingHistroy(
+        user: widget.user,
+      );
     });
     Navigator.pop(context);
   }
@@ -99,7 +101,9 @@ class _MyHomePageState extends State<SingleUserDashboardPage> {
 
   void _handleItem5Tap() {
     setState(() {
-      _currentContent = BookingHistroy();
+      _currentContent = BookingHistroy(
+        user: widget.user,
+      );
     });
     Navigator.pop(context);
   }
@@ -521,7 +525,9 @@ class _MyHomePageState extends State<SingleUserDashboardPage> {
                                     title: 'Booking History',
                                     onTap: (page, _) {
                                       setState(() {
-                                        _currentContent = BookingHistroy();
+                                        _currentContent = BookingHistroy(
+                                          user: widget.user,
+                                        );
                                       });
                                       sideMenu.changePage(page);
                                     },
@@ -654,7 +660,9 @@ class _MyHomePageState extends State<SingleUserDashboardPage> {
                         ),
                         onTap: () {
                           setState(() {
-                            _currentContent = BookingHistroy();
+                            _currentContent = BookingHistroy(
+                              user: widget.user,
+                            );
                           });
                           Navigator.pop(context);
                         }),

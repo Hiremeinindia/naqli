@@ -8,164 +8,321 @@ import 'package:flutter_application_1/Widgets/formText.dart';
 import 'package:sizer/sizer.dart';
 
 @immutable
-final class UnitsContainer extends StatelessWidget {
-  final String? text;
-  String? value;
-  List<String>? items;
-  void Function(String?)? onChanged;
+class UnitsContainer extends StatefulWidget {
+  final String? buttonText;
+  final void Function()? onPressed;
+  final GlobalKey? buttonKey;
+  final List<Map<String, String>> unitNames;
+  String? selectedTypeName;
 
   UnitsContainer({
-    super.key,
-    this.text,
-    this.value,
-    this.items,
-    this.onChanged,
-  });
+    Key? key,
+    this.buttonText,
+    this.selectedTypeName,
+    this.onPressed,
+    required this.unitNames,
+    this.buttonKey,
+  }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Expanded(
-          child: DropdownButtonHideUnderline(
-            child: DropdownButton2<String>(
-              value: value, // Use value from the list
-              items: items!.map<DropdownMenuItem<String>>((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Image.asset(
-                        'delivery-truck.png',
-                        width: 50,
-                        height: 50,
-                      ),
-                      SizedBox(
-                        width: 2.w,
-                      ),
-                      SizedBox(
-                          width: 6.w,
-                          child: Text(text!,
-                              style: AvailableText.helvetica17black)),
-                      SizedBox(width: 2.w),
-                      SizedBox(
-                          height: double.infinity, child: VerticalDivider()),
-                      SizedBox(width: 2.w),
-                      Text(value, style: AvailableText.helvetica),
-                    ],
+  _CustomContainerState createState() => _CustomContainerState();
+}
+
+class _CustomContainerState extends State<UnitsContainer> {
+  late OverlayEntry _overlayEntry;
+  bool _overlayVisible = false;
+  bool expand = false;
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  OverlayEntry _createOverlayEntry(GlobalKey key, String selectedTypeName) {
+    RenderBox? renderBox = key.currentContext?.findRenderObject() as RenderBox?;
+    final position = renderBox!.localToGlobal(Offset.zero);
+    return OverlayEntry(
+      builder: (context) => Positioned(
+        right: position.dx + 7.w,
+        top: position.dy + 50,
+        child: Material(
+          elevation: 2,
+          shape: RoundedRectangleBorder(
+            side: BorderSide(
+              width: 0.4,
+              color: Color.fromRGBO(112, 112, 112, 1).withOpacity(0.2),
+            ),
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: Container(
+            height: 400,
+            width: 500,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              border: Border.all(
+                width: 0.4,
+                color: Color.fromRGBO(112, 112, 112, 1).withOpacity(0.2),
+              ),
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: ListView.builder(
+              itemCount: widget.unitNames.length,
+              itemBuilder: (context, index) {
+                String image = widget.unitNames[index]['image']!;
+                String name = widget.unitNames[index]['name']!;
+                return ListTile(
+                  onTap: () {
+                    setState(() {
+                      widget.selectedTypeName = name;
+                      expand = false;
+                    });
+                    _hideOverlay();
+                  },
+                  leading: Image.asset(
+                    image,
+                    width: 60,
+                    height: 60,
                   ),
+                  title: Text(name),
                 );
-              }).toList(),
-              onChanged: onChanged,
-              buttonStyleData: ButtonStyleData(
-                height: 50,
-                padding: EdgeInsets.only(left: 9, right: 9),
-                decoration: BoxDecoration(
-                  border: Border.all(color: Color.fromRGBO(183, 183, 183, 1)),
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(8),
-                  ),
-                  color: Colors.white,
-                ),
-              ),
-              iconStyleData: const IconStyleData(
-                icon: Icon(
-                  Icons.arrow_drop_down_sharp,
-                ),
-                iconSize: 25,
-                iconEnabledColor: Colors.black,
-                iconDisabledColor: null,
-              ),
-              dropdownStyleData: DropdownStyleData(
-                elevation: 0,
-                maxHeight: 200,
-                padding: EdgeInsets.all(3),
-                decoration: BoxDecoration(
-                  border: Border.all(color: Color.fromRGBO(112, 112, 112, 1)),
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(0),
-                    topRight: Radius.circular(0),
-                    bottomLeft: Radius.circular(5),
-                    bottomRight: Radius.circular(5),
-                  ),
-                  color: Colors.white,
-                ),
-                scrollPadding: EdgeInsets.all(5),
-                scrollbarTheme: ScrollbarThemeData(
-                  thickness: MaterialStateProperty.all<double>(6),
-                  thumbVisibility: MaterialStateProperty.all<bool>(true),
-                ),
-              ),
-              menuItemStyleData: MenuItemStyleData(
-                height: 30,
-                padding: EdgeInsets.only(left: 9, right: 9),
-              ),
+              },
             ),
           ),
         ),
-      ],
+      ),
+    );
+  }
+
+  void _showOverlay(GlobalKey key, String selectedTypeName) {
+    _overlayEntry = _createOverlayEntry(key, selectedTypeName);
+    Overlay.of(context)!.insert(_overlayEntry);
+    setState(() {
+      _overlayVisible = true;
+    });
+  }
+
+  void _hideOverlay() {
+    _overlayEntry.remove();
+    setState(() {
+      _overlayVisible = false;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 500,
+      child: Column(
+        children: [
+          Container(
+            height: 50,
+            width: 500,
+            decoration: BoxDecoration(
+              border: Border.all(color: Color.fromRGBO(183, 183, 183, 1)),
+              borderRadius: BorderRadius.all(
+                Radius.circular(8),
+              ),
+              color: Colors.white,
+            ),
+            padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Image.asset(
+                  'delivery-truck.png',
+                  width: 50,
+                  height: 50,
+                ),
+                Text(widget.buttonText!, style: AvailableText.helvetica17black),
+                SizedBox(
+                  height: double.infinity,
+                  child: VerticalDivider(),
+                ),
+                Text(
+                  widget.selectedTypeName ?? '',
+                  style: AvailableText.helvetica,
+                ),
+                IconButton(
+                  key: widget.buttonKey,
+                  icon: Icon(
+                    Icons.arrow_drop_down,
+                    size: 25,
+                    color: Colors.black,
+                  ),
+                  onPressed: () {
+                    if (!_overlayVisible) {
+                      _showOverlay(
+                          widget.buttonKey!, widget.selectedTypeName ?? '');
+                    } else {
+                      _hideOverlay();
+                    }
+                  },
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
 
-final class UnitsContainer1 extends StatelessWidget {
-  final String? text;
-  String? value;
-  List<String>? items;
-  void Function(String?)? onChanged;
+@immutable
+class UnitsContainer1 extends StatefulWidget {
+  final String? buttonText;
+  final void Function()? onPressed;
+  final GlobalKey? buttonKey;
+  final List<Map<String, String>> unitNames;
+  String? selectedTypeName;
 
   UnitsContainer1({
     Key? key,
-    this.text,
-    this.value,
-    this.items,
-    this.onChanged,
-  });
+    this.buttonText,
+    this.selectedTypeName,
+    this.onPressed,
+    required this.unitNames,
+    this.buttonKey,
+  }) : super(key: key);
+
   @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        Container(
-          height: 50,
-          width: 200,
-          decoration: BoxDecoration(
-            border: Border.all(color: Color.fromRGBO(183, 183, 183, 1)),
-            borderRadius: BorderRadius.all(
-              Radius.circular(8),
+  _CustomContainer1State createState() => _CustomContainer1State();
+}
+
+class _CustomContainer1State extends State<UnitsContainer1> {
+  late OverlayEntry _overlayEntry;
+  bool _overlayVisible = false;
+  bool expand = false;
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  OverlayEntry _createOverlayEntry(GlobalKey key, String selectedTypeName) {
+    RenderBox? renderBox = key.currentContext?.findRenderObject() as RenderBox?;
+    final position = renderBox!.localToGlobal(Offset.zero);
+    return OverlayEntry(
+      builder: (context) => Positioned(
+        right: position.dx + 7.w,
+        top: position.dy + 50,
+        child: Material(
+          elevation: 2,
+          shape: RoundedRectangleBorder(
+            side: BorderSide(
+              width: 0.4,
+              color: Color.fromRGBO(112, 112, 112, 1).withOpacity(0.2),
             ),
-            color: Colors.white,
+            borderRadius: BorderRadius.circular(8),
           ),
-          padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-          child: Row(
-            children: [
-              Image.asset(
-                'delivery-truck.png',
-                width: 50,
-                height: 50,
+          child: Container(
+            height: 400,
+            width: 500,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              border: Border.all(
+                width: 0.4,
+                color: Color.fromRGBO(112, 112, 112, 1).withOpacity(0.2),
               ),
-              SizedBox(
-                width: 2.w,
-              ),
-              SizedBox(
-                  width: 6.w,
-                  child:
-                      Text('Excavator', style: AvailableText.helvetica17black)),
-              SizedBox(width: 2.w),
-              SizedBox(height: double.infinity, child: VerticalDivider()),
-              SizedBox(width: 2.w),
-              Text(value!, style: AvailableText.helvetica),
-              SizedBox(width: 2.w),
-              Icon(
-                Icons.arrow_drop_down,
-                size: 25,
-                color: Colors.black,
-              ),
-            ],
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: ListView.builder(
+              itemCount: widget.unitNames.length,
+              itemBuilder: (context, index) {
+                String image = widget.unitNames[index]['image']!;
+                String name = widget.unitNames[index]['name']!;
+                return ListTile(
+                  onTap: () {
+                    setState(() {
+                      widget.selectedTypeName = name;
+                      expand = false;
+                    });
+                    _hideOverlay();
+                  },
+                  leading: Image.asset(
+                    image,
+                    width: 60,
+                    height: 60,
+                  ),
+                  title: Text(name),
+                );
+              },
+            ),
           ),
         ),
-      ],
+      ),
+    );
+  }
+
+  void _showOverlay(GlobalKey key, String selectedTypeName) {
+    _overlayEntry = _createOverlayEntry(key, selectedTypeName);
+    Overlay.of(context)!.insert(_overlayEntry);
+    setState(() {
+      _overlayVisible = true;
+    });
+  }
+
+  void _hideOverlay() {
+    _overlayEntry.remove();
+    setState(() {
+      _overlayVisible = false;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 500,
+      child: Column(
+        children: [
+          Container(
+            height: 50,
+            width: 500,
+            decoration: BoxDecoration(
+              border: Border.all(color: Color.fromRGBO(183, 183, 183, 1)),
+              borderRadius: BorderRadius.all(
+                Radius.circular(8),
+              ),
+              color: Colors.white,
+            ),
+            padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Image.asset(
+                  'delivery-truck.png',
+                  width: 50,
+                  height: 50,
+                ),
+                Text(widget.buttonText!, style: AvailableText.helvetica17black),
+                SizedBox(
+                  height: double.infinity,
+                  child: VerticalDivider(),
+                ),
+                Text(
+                  widget.selectedTypeName ?? '',
+                  style: AvailableText.helvetica,
+                ),
+                IconButton(
+                  key: widget.buttonKey,
+                  icon: Icon(
+                    Icons.arrow_drop_down,
+                    size: 25,
+                    color: Colors.black,
+                  ),
+                  onPressed: () {
+                    if (!_overlayVisible) {
+                      _showOverlay(
+                          widget.buttonKey!, widget.selectedTypeName ?? '');
+                    } else {
+                      _hideOverlay();
+                    }
+                  },
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

@@ -1,95 +1,96 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/sample.dart';
 
-class Sample1 extends StatelessWidget {
-  const Sample1({Key? key}) : super(key: key);
-  // definition of the dialog
-  // box when value is selected
-  void _showDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text("Alert!!"),
-          content: Text("You are awesome!"),
-          actions: [
-            MaterialButton(
-              child: Text("OK"),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
-      },
+class Sample1 extends StatefulWidget {
+  @override
+  _Sample1State createState() => _Sample1State();
+}
+
+class _Sample1State extends State<Sample1> {
+  late OverlayEntry _overlayEntry;
+  bool _overlayVisible = false;
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  OverlayEntry _createOverlayEntry() {
+    return OverlayEntry(
+      builder: (context) => Center(
+        child: Container(
+          width: 200,
+          height: 200,
+          color: Colors.blue.withOpacity(0.8),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'Overlay Content',
+                style: TextStyle(
+                  fontSize: 20,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: () {
+                  _hideOverlay();
+                },
+                child: Text('Close Overlay'),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
+  }
+
+  void _showOverlay() {
+    _overlayEntry = _createOverlayEntry();
+    Overlay.of(context).insert(_overlayEntry);
+    setState(() {
+      _overlayVisible = true;
+    });
+  }
+
+  void _hideOverlay() {
+    _overlayEntry.remove();
+    setState(() {
+      _overlayVisible = false;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    // MaterialApp  with debugShowCheckedModeBanner
-    // false and title.
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'AppBar Popup Menu Button',
-      // scaffold with appbar
-      home: Scaffold(
-        // appbar with title text
-        appBar: AppBar(
-          title: Text('AppBar Popup Menu Button'),
-          // in action widget we have PopupMenuButton
-          actions: [
-            PopupMenuButton<int>(
-              itemBuilder: (context) => [
-                // PopupMenuItem 1
-                PopupMenuItem(
-                  value: 1,
-                  // row with 2 children
-                  child: Row(
-                    children: [
-                      Icon(Icons.star),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Text("Get The App")
-                    ],
-                  ),
-                ),
-                // PopupMenuItem 2
-                PopupMenuItem(
-                  value: 2,
-                  // row with two children
-                  child: Row(
-                    children: [
-                      Icon(Icons.chrome_reader_mode),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Text("About")
-                    ],
-                  ),
-                ),
-              ],
-              offset: Offset(0, 100),
-              color: Colors.grey,
-              elevation: 2,
-              // on selected we show the dialog box
-              onSelected: (value) {
-                // if value 1 show dialog
-                if (value == 1) {
-                  _showDialog(context);
-                  // if value 2 show dialog
-                } else if (value == 2) {
-                  _showDialog(context);
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Overlay Example'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ElevatedButton(
+              onPressed: () {
+                if (!_overlayVisible) {
+                  _showOverlay();
                 }
               },
+              child: Text('Show Overlay'),
             ),
           ],
         ),
-        // body with centered text
-        body: Center(
-          child: Text("Press the 3 Point Button Up!"),
-        ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    if (_overlayVisible) {
+      _overlayEntry.remove();
+    }
+    super.dispose();
   }
 }
