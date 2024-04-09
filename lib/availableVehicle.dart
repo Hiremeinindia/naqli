@@ -3,14 +3,17 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:dropdown_model_list/dropdown_model_list.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_application_1/Controllers/allUsersFormController.dart';
 import 'package:flutter_application_1/DialogBox/SingleTimeUser/bookingIDDialog.dart';
 import 'package:flutter_application_1/Users/SingleTimeUser/bookingDetails.dart';
+import 'package:flutter_application_1/Users/SingleUser/dashboard_page.dart';
 import 'package:flutter_application_1/Widgets/customButton.dart';
 import 'package:flutter_application_1/Widgets/customTextField.dart';
 import 'package:flutter_application_1/Widgets/unitsContainer.dart';
@@ -46,32 +49,58 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
   String pickup = 'Select Type';
   String towtruck = 'Select Type';
   String dropdownValues = 'Load Type';
+  bool expand = false;
+  bool expand1 = false;
+  bool expand2 = false;
+  String truck = 'Select Type';
+  final List<Map<String, String>> unitNames = [
+    {'image': 'Group1660.png', 'name': 'Compactors'},
+    {'image': 'Group2052.png', 'name': 'Bulldozers'},
+    {'image': 'Group2148.png', 'name': 'Graders'},
+    {'image': 'Group2181.png', 'name': 'Dump truck'},
+    {'image': 'Group2270.png', 'name': 'Forklift'},
+    {'image': 'Group2271.png', 'name': 'Scissorlift'},
+    {'image': 'Group2148.png', 'name': 'Graders'},
+  ];
 
-  TextEditingController controller = TextEditingController();
+  AllUsersFormController controller = AllUsersFormController();
   void initState() {
     super.initState();
   }
 
-  Future<Map<String, dynamic>?> fetchData(String userId) async {
+  Future<void> createNewBooking(
+    String truck,
+    String load,
+    String size,
+    String adminUid,
+  ) async {
     try {
-      DocumentSnapshot<Map<String, dynamic>> documentSnapshot =
-          await FirebaseFirestore.instance
-              .collection('enterpriseuser')
-              .doc(userId)
-              .get();
+      FirebaseFirestore firestore = FirebaseFirestore.instance;
 
-      if (documentSnapshot.exists) {
-        Map<String, dynamic> userData = documentSnapshot.data()!;
-        String firstName = userData['firstName'];
-        String lastName = userData['lastName'];
-        return {'firstName': firstName, 'lastName': lastName};
-      } else {
-        print('Document does not exist for userId: $userId');
-        return null;
-      }
-    } catch (e) {
-      print('Error fetching data for userId $userId: $e');
-      return null;
+      // Reference to the user's document
+      DocumentReference userDocRef = firestore.collection('user').doc(adminUid);
+
+      // Reference to the subcollection 'userBooking' under the user's document
+      CollectionReference userBookingCollectionRef =
+          userDocRef.collection('userBooking');
+
+      // Add document to subcollection and get the document reference
+      DocumentReference newBookingDocRef = await userBookingCollectionRef.add({
+        'load': load,
+        'truck': truck,
+        'size': size,
+        'createdTime': Timestamp.now(),
+      });
+
+      // Store the auto-generated ID
+      String newBookingId = newBookingDocRef.id;
+
+      // Update the document with the stored ID
+      await newBookingDocRef.update({'id': newBookingId});
+
+      print('New booking added successfully with ID: $newBookingId');
+    } catch (error) {
+      print('Error creating new booking: $error');
     }
   }
 
@@ -364,39 +393,157 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                                   MainAxisAlignment
                                                       .spaceBetween,
                                               children: [
-                                                UnitsContainer(
-                                                  text: 'Tralia',
-                                                  items: <String>[
-                                                    'Select Type',
-                                                    'Short Sides',
-                                                    'Contract',
-                                                    'None'
-                                                  ],
-                                                  value: trailer,
-                                                  onChanged:
-                                                      (String? newValue) {
-                                                    setState(() {
-                                                      trailer =
-                                                          newValue!; // Update value in the list
-                                                    });
-                                                  },
-                                                ),
-                                                UnitsContainer1(
-                                                  text: 'Six',
-                                                  items: <String>[
-                                                    'Select Type',
-                                                    'Short Sides',
-                                                    'Contract',
-                                                    'None'
-                                                  ],
-                                                  value: six,
-                                                  onChanged:
-                                                      (String? newValue) {
-                                                    setState(() {
-                                                      six =
-                                                          newValue!; // Update value in the list
-                                                    });
-                                                  },
+                                                Container(
+                                                  width: 500,
+                                                  child: Column(
+                                                    children: [
+                                                      Container(
+                                                        height: 50,
+                                                        width: 500,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          border: Border.all(
+                                                              color: Color
+                                                                  .fromRGBO(
+                                                                      183,
+                                                                      183,
+                                                                      183,
+                                                                      1)),
+                                                          borderRadius:
+                                                              BorderRadius.all(
+                                                            Radius.circular(8),
+                                                          ),
+                                                          color: Colors.white,
+                                                        ),
+                                                        padding: EdgeInsets
+                                                            .symmetric(
+                                                                horizontal: 10,
+                                                                vertical: 5),
+                                                        child: Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceBetween,
+                                                          children: [
+                                                            Image.asset(
+                                                              'delivery-truck.png',
+                                                              width: 50,
+                                                              height: 50,
+                                                            ),
+                                                            Text('Excavator',
+                                                                style: AvailableText
+                                                                    .helvetica17black),
+                                                            SizedBox(
+                                                              height: double
+                                                                  .infinity,
+                                                              child:
+                                                                  VerticalDivider(),
+                                                            ),
+                                                            Text(
+                                                              controller
+                                                                  .truck.text,
+                                                              style:
+                                                                  AvailableText
+                                                                      .helvetica,
+                                                            ),
+                                                            IconButton(
+                                                              icon: Icon(
+                                                                Icons
+                                                                    .arrow_drop_down,
+                                                                size: 25,
+                                                                color: Colors
+                                                                    .black,
+                                                              ),
+                                                              onPressed: () {
+                                                                setState(() {
+                                                                  expand1 =
+                                                                      !expand1;
+                                                                });
+                                                              },
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                      SizedBox(
+                                                        height: 5,
+                                                      ),
+                                                      Positioned(
+                                                        top:
+                                                            110, // Adjust this value as needed
+                                                        child: expand1
+                                                            ? Container(
+                                                                width: 500,
+                                                                height: 200,
+                                                                decoration:
+                                                                    BoxDecoration(
+                                                                  color: Colors
+                                                                      .white,
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              8),
+                                                                  boxShadow: [
+                                                                    BoxShadow(
+                                                                      color: Colors
+                                                                          .black
+                                                                          .withOpacity(
+                                                                              0.5),
+                                                                      blurRadius:
+                                                                          5,
+                                                                      offset:
+                                                                          Offset(
+                                                                              0,
+                                                                              3),
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                                child: ListView
+                                                                    .builder(
+                                                                  itemCount:
+                                                                      unitNames
+                                                                          .length,
+                                                                  itemBuilder:
+                                                                      (context,
+                                                                          index) {
+                                                                    String
+                                                                        image =
+                                                                        unitNames[index]
+                                                                            [
+                                                                            'image']!;
+                                                                    String
+                                                                        name =
+                                                                        unitNames[index]
+                                                                            [
+                                                                            'name']!;
+                                                                    return ListTile(
+                                                                      onTap:
+                                                                          () {
+                                                                        setState(
+                                                                            () {
+                                                                          controller
+                                                                              .truck
+                                                                              .text = name;
+                                                                          expand =
+                                                                              false;
+                                                                        });
+                                                                      },
+                                                                      leading: Image
+                                                                          .asset(
+                                                                        image,
+                                                                        width:
+                                                                            60,
+                                                                        height:
+                                                                            60,
+                                                                      ),
+                                                                      title: Text(
+                                                                          name),
+                                                                    );
+                                                                  },
+                                                                ),
+                                                              )
+                                                            : SizedBox(),
+                                                      ),
+                                                    ],
+                                                  ),
                                                 ),
                                                 UnitsContainer(
                                                   text: 'Lorry 7 Metres',
@@ -509,6 +656,9 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                                               Flexible(
                                                                 child:
                                                                     CustomTextfieldGrey(
+                                                                  controller:
+                                                                      controller
+                                                                          .size,
                                                                   text:
                                                                       'Value of the Product',
                                                                 ),
@@ -594,12 +744,17 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                                             child:
                                                                 DropdownButton2<
                                                                     String>(
-                                                              value:
-                                                                  dropdownValues, // Use value from the list
+                                                              value: controller
+                                                                      .load
+                                                                      .text
+                                                                      .isNotEmpty
+                                                                  ? controller
+                                                                      .load.text
+                                                                  : 'Load Type', // Use value from the list
                                                               items: <String>[
-                                                                'Trigger Bookings',
-                                                                'Booking Manager',
-                                                                'Contract',
+                                                                'Food Items',
+                                                                'Electronics',
+                                                                'Woods',
                                                                 'Load Type',
                                                                 'None'
                                                               ].map<
@@ -618,7 +773,9 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                                               onChanged: (String?
                                                                   newValue) {
                                                                 setState(() {
-                                                                  dropdownValues =
+                                                                  controller
+                                                                          .load
+                                                                          .text =
                                                                       newValue!; // Update value in the list
                                                                 });
                                                               },
@@ -1006,17 +1163,45 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                                   width: double.infinity,
                                                   height: 47,
                                                   child: CustomButton(
-                                                    onPressed: () {
-                                                      showDialog(
-                                                        barrierColor:
-                                                            Color.fromRGBO(59,
-                                                                    57, 57, 1)
-                                                                .withOpacity(
-                                                                    0.5),
-                                                        context: context,
-                                                        builder: (context) {
-                                                          return BookingIDDialog();
-                                                        },
+                                                    onPressed: () async {
+                                                      try {
+                                                        String truck =
+                                                            controller
+                                                                .truck.text;
+                                                        String size = controller
+                                                            .size.text;
+                                                        String load = controller
+                                                            .load.text;
+
+                                                        // Call functions to create documents in collection and subcollection
+                                                        await createNewBooking(
+                                                            truck,
+                                                            size,
+                                                            load,
+                                                            widget.user!);
+                                                      } catch (e) {
+                                                        print(
+                                                            "Error creating user: $e");
+                                                      }
+                                                      // showDialog(
+                                                      //   barrierColor:
+                                                      //       Color.fromRGBO(59,
+                                                      //               57, 57, 1)
+                                                      //           .withOpacity(
+                                                      //               0.5),
+                                                      //   context: context,
+                                                      //   builder: (context) {
+                                                      //     return BookingIDDialog();
+                                                      //   },
+                                                      // );
+                                                      Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                            builder: (context) =>
+                                                                SingleUserDashboardPage(
+                                                                  user: widget
+                                                                      .user,
+                                                                )),
                                                       );
                                                     },
                                                     text: 'Create Booking',

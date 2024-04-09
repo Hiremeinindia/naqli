@@ -21,6 +21,9 @@ class AllUsersFormController {
   final selectedCity = TextEditingController();
   final fromDate = TextEditingController();
   final toDate = TextEditingController();
+  final truck = TextEditingController();
+  final load = TextEditingController();
+  final size = TextEditingController();
   final companyidNumber = TextEditingController();
   final selectedAccounttype = TextEditingController();
   final otp = TextEditingController();
@@ -31,8 +34,7 @@ class AllUsersFormController {
   DocumentReference? _reference;
 
   DocumentReference get reference {
-    _reference ??=
-        FirebaseFirestore.instance.collection('enterprisedummy').doc();
+    _reference ??= FirebaseFirestore.instance.collection('enterprise').doc();
     return _reference!;
   }
 
