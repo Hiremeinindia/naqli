@@ -22,9 +22,9 @@ import 'package:sizer/sizer.dart';
 import 'Widgets/formText.dart';
 
 class AvailableEquipment extends StatefulWidget {
-  String? user;
+  String user;
   AvailableEquipment({
-    this.user,
+    required this.user,
   });
 
   @override
@@ -66,9 +66,9 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
     super.initState();
   }
 
-  Future<void> createCollectionAndSubcollection(
-    String adminUid,
+  Future<void> createNewBooking(
     String book1,
+    String adminUid,
   ) async {
     try {
       FirebaseFirestore firestore = FirebaseFirestore.instance;
@@ -77,30 +77,24 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
       DocumentReference userDocRef =
           firestore.collection('superuser').doc(adminUid);
 
-      // Reference to the subcollection 'enterpriseUsers' under the user's document
-      CollectionReference enterpriseUsersCollectionRef =
-          userDocRef.collection('superuserbookings');
+      // Reference to the subcollection 'userBooking' under the user's document
+      CollectionReference userBookingCollectionRef =
+          userDocRef.collection('superuserBookings');
 
-      // Data for top-level document
-      // Map<String, dynamic> adminUserData = {
-      //   'adminEmail': adminEmail,
-      //   // Add other admin fields as needed
-      // };
-
-      // Data for subcollection document
-      Map<String, dynamic> subcollectionUserData = {
+      // Add document to subcollection and get the document reference
+      DocumentReference newBookingDocRef = await userBookingCollectionRef.add({
         'book1': book1,
-      };
+      });
 
-      // Add top-level document
-      // await userDocRef.set(adminUserData);
+      // Store the auto-generated ID
+      String newBookingId = newBookingDocRef.id;
 
-      // Add document to subcollection
-      await enterpriseUsersCollectionRef.add(subcollectionUserData);
+      // // Update the document with the stored ID
+      // await newBookingDocRef.update({'id': newBookingId});
 
-      print('Collection and subcollection documents created successfully!');
+      print('New booking added successfully with ID: $newBookingId');
     } catch (error) {
-      print('Error creating documents: $error');
+      print('Error creating new booking: $error');
     }
   }
 
@@ -989,32 +983,27 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                   height: 47,
                                                   child: CustomButton(
                                                     onPressed: () async {
-                                                      String? adminUid = widget
-                                                          .user; // It's better to keep adminUid as nullable if widget.user can be null
-
-                                                      if (adminUid != null) {
-                                                        // Check if widget.user is not null
-                                                        final FirebaseAuth
-                                                            _auth = FirebaseAuth
-                                                                .instance;
-                                                        String book1 = controller
-                                                                .vehi.text ??
-                                                            ''; // Ensure controller.vehi.text is not null
-
-                                                        await createCollectionAndSubcollection(
-                                                            adminUid, book1);
-                                                        showDialog(
-                                                          barrierColor:
-                                                              Color.fromRGBO(59,
-                                                                      57, 57, 1)
-                                                                  .withOpacity(
-                                                                      0.5),
-                                                          context: context,
-                                                          builder: (context) {
-                                                            return BookingIDDialog();
-                                                          },
-                                                        );
+                                                      try {
+                                                        String book1 =
+                                                            controller
+                                                                .vehi.text;
+                                                        await createNewBooking(
+                                                            book1, widget.user);
+                                                      } catch (e) {
+                                                        print(
+                                                            "Error creating user: $e");
                                                       }
+                                                      showDialog(
+                                                        barrierColor:
+                                                            Color.fromRGBO(59,
+                                                                    57, 57, 1)
+                                                                .withOpacity(
+                                                                    0.5),
+                                                        context: context,
+                                                        builder: (context) {
+                                                          return BookingIDDialog();
+                                                        },
+                                                      );
                                                     },
                                                     text: 'Create Booking',
                                                   ),
