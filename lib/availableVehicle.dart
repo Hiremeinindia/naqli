@@ -41,31 +41,32 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
   bool checkbox1 = false;
   final ScrollController _Scroll1 = ScrollController();
   final ScrollController _Scroll2 = ScrollController();
-  String trailer = 'Select Type';
-  String six = 'Select Type';
-  String lorry = 'Select Type';
-  String lorry7 = 'Select Type';
-  String diana = 'Select Type';
-  String pickup = 'Select Type';
-  String towtruck = 'Select Type';
-  String dropdownValues = 'Load Type';
-  bool expand = false;
-  bool expand1 = false;
-  bool expand2 = false;
-  String truck = 'Select Type';
-  final List<Map<String, String>> unitNames = [
-    {'image': 'Group1660.png', 'name': 'Compactors'},
-    {'image': 'Group2052.png', 'name': 'Bulldozers'},
-    {'image': 'Group2148.png', 'name': 'Graders'},
-    {'image': 'Group2181.png', 'name': 'Dump truck'},
-    {'image': 'Group2270.png', 'name': 'Forklift'},
-    {'image': 'Group2271.png', 'name': 'Scissorlift'},
-    {'image': 'Group2148.png', 'name': 'Graders'},
-  ];
+  GlobalKey? _buttonKey1;
+  GlobalKey? _buttonKey2;
+  GlobalKey? _buttonKey3;
+  GlobalKey? _buttonKey4;
+  GlobalKey? _buttonKey5;
+  GlobalKey? _buttonKey6;
+  GlobalKey? _buttonKey7;
+  String selectedTypeName1 = 'Select Type';
+  String selectedTypeName2 = 'Select Type';
+  String selectedTypeName3 = 'Select Type';
+  String selectedTypeName4 = 'Select Type';
+  String selectedTypeName5 = 'Select Type';
+  String selectedTypeName6 = 'Select Type';
+  String selectedTypeName7 = 'Select Type';
+  final List<Map<String, String>> loadList = [];
 
   AllUsersFormController controller = AllUsersFormController();
   void initState() {
     super.initState();
+    _buttonKey1 = GlobalKey();
+    _buttonKey2 = GlobalKey();
+    _buttonKey3 = GlobalKey();
+    _buttonKey4 = GlobalKey();
+    _buttonKey5 = GlobalKey();
+    _buttonKey6 = GlobalKey();
+    _buttonKey7 = GlobalKey();
   }
 
   Future<void> createNewBooking(
@@ -368,242 +369,153 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                                   MainAxisAlignment
                                                       .spaceBetween,
                                               children: [
-                                                Container(
-                                                  width: 500,
-                                                  child: Column(
-                                                    children: [
-                                                      Container(
-                                                        height: 50,
-                                                        width: 500,
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          border: Border.all(
-                                                              color: Color
-                                                                  .fromRGBO(
-                                                                      183,
-                                                                      183,
-                                                                      183,
-                                                                      1)),
-                                                          borderRadius:
-                                                              BorderRadius.all(
-                                                            Radius.circular(8),
-                                                          ),
-                                                          color: Colors.white,
-                                                        ),
-                                                        padding: EdgeInsets
-                                                            .symmetric(
-                                                                horizontal: 10,
-                                                                vertical: 5),
-                                                        child: Row(
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .spaceBetween,
-                                                          children: [
-                                                            Image.asset(
-                                                              'delivery-truck.png',
-                                                              width: 50,
-                                                              height: 50,
-                                                            ),
-                                                            Text('Excavator',
-                                                                style: AvailableText
-                                                                    .helvetica17black),
-                                                            SizedBox(
-                                                              height: double
-                                                                  .infinity,
-                                                              child:
-                                                                  VerticalDivider(),
-                                                            ),
-                                                            Text(
-                                                              controller
-                                                                  .truck.text,
-                                                              style:
-                                                                  AvailableText
-                                                                      .helvetica,
-                                                            ),
-                                                            IconButton(
-                                                              icon: Icon(
-                                                                Icons
-                                                                    .arrow_drop_down,
-                                                                size: 25,
-                                                                color: Colors
-                                                                    .black,
-                                                              ),
-                                                              onPressed: () {
-                                                                setState(() {
-                                                                  expand1 =
-                                                                      !expand1;
-                                                                });
-                                                              },
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ),
-                                                      SizedBox(
-                                                        height: 5,
-                                                      ),
-                                                      Positioned(
-                                                        top:
-                                                            110, // Adjust this value as needed
-                                                        child: expand1
-                                                            ? Container(
-                                                                width: 500,
-                                                                height: 200,
-                                                                decoration:
-                                                                    BoxDecoration(
-                                                                  color: Colors
-                                                                      .white,
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              8),
-                                                                  boxShadow: [
-                                                                    BoxShadow(
-                                                                      color: Colors
-                                                                          .black
-                                                                          .withOpacity(
-                                                                              0.5),
-                                                                      blurRadius:
-                                                                          5,
-                                                                      offset:
-                                                                          Offset(
-                                                                              0,
-                                                                              3),
-                                                                    ),
-                                                                  ],
-                                                                ),
-                                                                child: ListView
-                                                                    .builder(
-                                                                  itemCount:
-                                                                      unitNames
-                                                                          .length,
-                                                                  itemBuilder:
-                                                                      (context,
-                                                                          index) {
-                                                                    String
-                                                                        image =
-                                                                        unitNames[index]
-                                                                            [
-                                                                            'image']!;
-                                                                    String
-                                                                        name =
-                                                                        unitNames[index]
-                                                                            [
-                                                                            'name']!;
-                                                                    return ListTile(
-                                                                      onTap:
-                                                                          () {
-                                                                        setState(
-                                                                            () {
-                                                                          controller
-                                                                              .truck
-                                                                              .text = name;
-                                                                          expand =
-                                                                              false;
-                                                                        });
-                                                                      },
-                                                                      leading: Image
-                                                                          .asset(
-                                                                        image,
-                                                                        width:
-                                                                            60,
-                                                                        height:
-                                                                            60,
-                                                                      ),
-                                                                      title: Text(
-                                                                          name),
-                                                                    );
-                                                                  },
-                                                                ),
-                                                              )
-                                                            : SizedBox(),
-                                                      ),
-                                                    ],
-                                                  ),
+                                                UnitsContainer(
+                                                  unitNames: [
+                                                    {
+                                                      'image': 'img24.png',
+                                                      'name': 'Short Sides'
+                                                    },
+                                                    {
+                                                      'image': 'img25.png',
+                                                      'name': 'Curtain'
+                                                    },
+                                                    {
+                                                      'image': 'img26.png',
+                                                      'name': 'Refrigerator'
+                                                    },
+                                                    {
+                                                      'image': 'img28.png',
+                                                      'name': 'Flatbed'
+                                                    },
+                                                    {
+                                                      'image': 'img29.png',
+                                                      'name': 'High Sides '
+                                                    },
+                                                    {
+                                                      'image': 'img30.png',
+                                                      'name': 'Freezer'
+                                                    },
+                                                  ],
+                                                  buttonText: 'Tralia',
+                                                  selectedTypeName: controller
+                                                      .selectedTypeName1.text,
+                                                  buttonKey: _buttonKey1!,
                                                 ),
                                                 UnitsContainer(
-                                                  text: 'Lorry 7 Metres',
-                                                  items: <String>[
-                                                    'Select Type',
-                                                    'Short Sides',
-                                                    'Contract',
-                                                    'None'
+                                                  unitNames: [
+                                                    {
+                                                      'image': 'img5.png',
+                                                      'name': 'Sides'
+                                                    },
+                                                    {
+                                                      'image': 'img6.png',
+                                                      'name': 'Refrigerator'
+                                                    },
                                                   ],
-                                                  value: lorry7,
-                                                  onChanged:
-                                                      (String? newValue) {
-                                                    setState(() {
-                                                      lorry =
-                                                          newValue!; // Update value in the list
-                                                    });
-                                                  },
+                                                  buttonText: 'Six',
+                                                  selectedTypeName: controller
+                                                      .selectedTypeName2.text,
+                                                  buttonKey: _buttonKey2!,
                                                 ),
                                                 UnitsContainer(
-                                                  text: 'Lorry',
-                                                  items: <String>[
-                                                    'Select Type',
-                                                    'Short Sides',
-                                                    'Contract',
-                                                    'None'
+                                                  unitNames: [
+                                                    {
+                                                      'image': 'img7.png',
+                                                      'name': 'Sides'
+                                                    },
                                                   ],
-                                                  value: lorry,
-                                                  onChanged:
-                                                      (String? newValue) {
-                                                    setState(() {
-                                                      lorry =
-                                                          newValue!; // Update value in the list
-                                                    });
-                                                  },
+                                                  buttonText: 'Lorry 7 Metres',
+                                                  selectedTypeName: controller
+                                                      .selectedTypeName3.text,
+                                                  buttonKey: _buttonKey3!,
                                                 ),
                                                 UnitsContainer(
-                                                  text: 'Diana',
-                                                  items: <String>[
-                                                    'Select Type',
-                                                    'Short Sides',
-                                                    'Contract',
-                                                    'None'
+                                                  unitNames: [
+                                                    {
+                                                      'image': 'img10.png',
+                                                      'name': 'Sides'
+                                                    },
+                                                    {
+                                                      'image': 'img11.png',
+                                                      'name': 'Closed'
+                                                    },
+                                                    {
+                                                      'image': 'img12.png',
+                                                      'name': 'Referigerator'
+                                                    },
+                                                    {
+                                                      'image': 'img13.png',
+                                                      'name': 'Crane 5 TON'
+                                                    },
+                                                    {
+                                                      'image': 'img14.png',
+                                                      'name': 'Crane 7 TON'
+                                                    },
+                                                    {
+                                                      'image': 'img15.png',
+                                                      'name': 'Freezer'
+                                                    },
                                                   ],
-                                                  value: diana,
-                                                  onChanged:
-                                                      (String? newValue) {
-                                                    setState(() {
-                                                      diana =
-                                                          newValue!; // Update value in the list
-                                                    });
-                                                  },
+                                                  buttonText: 'Lorry',
+                                                  selectedTypeName: controller
+                                                      .selectedTypeName4.text,
+                                                  buttonKey: _buttonKey4!,
                                                 ),
                                                 UnitsContainer(
-                                                  text: 'Pick Up',
-                                                  items: <String>[
-                                                    'Select Type',
-                                                    'Short Sides',
-                                                    'Contract',
-                                                    'None'
+                                                  unitNames: [
+                                                    {
+                                                      'image': 'img16.png',
+                                                      'name': 'Closed'
+                                                    },
+                                                    {
+                                                      'image': 'img17.png',
+                                                      'name': 'Crane'
+                                                    },
+                                                    {
+                                                      'image': 'img18.png',
+                                                      'name': 'Referigerator'
+                                                    },
+                                                    {
+                                                      'image': 'img19.png',
+                                                      'name': 'Sides'
+                                                    },
+                                                    {
+                                                      'image': 'img20.png',
+                                                      'name': 'Freezer'
+                                                    },
                                                   ],
-                                                  value: pickup,
-                                                  onChanged:
-                                                      (String? newValue) {
-                                                    setState(() {
-                                                      pickup =
-                                                          newValue!; // Update value in the list
-                                                    });
-                                                  },
+                                                  buttonText: 'Diana',
+                                                  selectedTypeName: controller
+                                                      .selectedTypeName5.text,
+                                                  buttonKey: _buttonKey5!,
                                                 ),
                                                 UnitsContainer(
-                                                  text: 'Tow Truck',
-                                                  items: <String>[
-                                                    'Select Type',
-                                                    'Short Sides',
-                                                    'Contract',
-                                                    'None'
+                                                  unitNames: [
+                                                    {
+                                                      'image': 'img21.png',
+                                                      'name': 'Pickup'
+                                                    },
                                                   ],
-                                                  value: towtruck,
-                                                  onChanged:
-                                                      (String? newValue) {
-                                                    setState(() {
-                                                      towtruck =
-                                                          newValue!; // Update value in the list
-                                                    });
-                                                  },
+                                                  buttonText: 'Pick Up',
+                                                  selectedTypeName: controller
+                                                      .selectedTypeName6.text,
+                                                  buttonKey: _buttonKey6!,
+                                                ),
+                                                UnitsContainer(
+                                                  unitNames: [
+                                                    {
+                                                      'image': 'img22.png',
+                                                      'name': 'Regular'
+                                                    },
+                                                    {
+                                                      'image': 'img23.png',
+                                                      'name': 'Hydraulic'
+                                                    },
+                                                  ],
+                                                  buttonText: 'Tow Truck',
+                                                  selectedTypeName: controller
+                                                      .selectedTypeName7.text,
+                                                  buttonKey: _buttonKey7!,
                                                 ),
                                                 SizedBox(
                                                   height: 10,
@@ -1427,116 +1339,144 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                             MainAxisAlignment.spaceBetween,
                                         children: [
                                           UnitsContainer(
-                                            text: 'Tralia',
-                                            items: <String>[
-                                              'Select Type',
-                                              'Short Sides',
-                                              'Contract',
-                                              'None'
+                                            unitNames: [
+                                              {
+                                                'image': 'Group2181.png',
+                                                'name': 'Dump truck'
+                                              },
+                                              {
+                                                'image': 'Group2270.png',
+                                                'name': 'Forklift'
+                                              },
+                                              {
+                                                'image': 'Group2271.png',
+                                                'name': 'Scissorlift'
+                                              },
                                             ],
-                                            value: trailer,
-                                            onChanged: (String? newValue) {
-                                              setState(() {
-                                                trailer =
-                                                    newValue!; // Update value in the list
-                                              });
-                                            },
+                                            buttonText: 'Tralia',
+                                            selectedTypeName: controller
+                                                .selectedTypeName1.text,
+                                            buttonKey: _buttonKey1!,
                                           ),
                                           UnitsContainer(
-                                            text: 'Six',
-                                            items: <String>[
-                                              'Select Type',
-                                              'Short Sides',
-                                              'Contract',
-                                              'None'
+                                            unitNames: [
+                                              {
+                                                'image': 'Group2181.png',
+                                                'name': 'Dump truck'
+                                              },
+                                              {
+                                                'image': 'Group2270.png',
+                                                'name': 'Forklift'
+                                              },
+                                              {
+                                                'image': 'Group2271.png',
+                                                'name': 'Scissorlift'
+                                              },
                                             ],
-                                            value: six,
-                                            onChanged: (String? newValue) {
-                                              setState(() {
-                                                six =
-                                                    newValue!; // Update value in the list
-                                              });
-                                            },
+                                            buttonText: 'Six',
+                                            selectedTypeName: controller
+                                                .selectedTypeName2.text,
+                                            buttonKey: _buttonKey2!,
                                           ),
                                           UnitsContainer(
-                                            text: 'Lorry 7 Metres',
-                                            items: <String>[
-                                              'Select Type',
-                                              'Short Sides',
-                                              'Contract',
-                                              'None'
+                                            unitNames: [
+                                              {
+                                                'image': 'Group2181.png',
+                                                'name': 'Dump truck'
+                                              },
+                                              {
+                                                'image': 'Group2270.png',
+                                                'name': 'Forklift'
+                                              },
+                                              {
+                                                'image': 'Group2271.png',
+                                                'name': 'Scissorlift'
+                                              },
                                             ],
-                                            value: lorry7,
-                                            onChanged: (String? newValue) {
-                                              setState(() {
-                                                lorry =
-                                                    newValue!; // Update value in the list
-                                              });
-                                            },
+                                            buttonText: 'Lorry 7 Metres',
+                                            selectedTypeName: controller
+                                                .selectedTypeName3.text,
+                                            buttonKey: _buttonKey3!,
                                           ),
                                           UnitsContainer(
-                                            text: 'Lorry',
-                                            items: <String>[
-                                              'Select Type',
-                                              'Short Sides',
-                                              'Contract',
-                                              'None'
+                                            unitNames: [
+                                              {
+                                                'image': 'Group2181.png',
+                                                'name': 'Dump truck'
+                                              },
+                                              {
+                                                'image': 'Group2270.png',
+                                                'name': 'Forklift'
+                                              },
+                                              {
+                                                'image': 'Group2271.png',
+                                                'name': 'Scissorlift'
+                                              },
                                             ],
-                                            value: lorry,
-                                            onChanged: (String? newValue) {
-                                              setState(() {
-                                                lorry =
-                                                    newValue!; // Update value in the list
-                                              });
-                                            },
+                                            buttonText: 'Lorry',
+                                            selectedTypeName: controller
+                                                .selectedTypeName4.text,
+                                            buttonKey: _buttonKey4!,
                                           ),
                                           UnitsContainer(
-                                            text: 'Diana',
-                                            items: <String>[
-                                              'Select Type',
-                                              'Short Sides',
-                                              'Contract',
-                                              'None'
+                                            unitNames: [
+                                              {
+                                                'image': 'Group2181.png',
+                                                'name': 'Dump truck'
+                                              },
+                                              {
+                                                'image': 'Group2270.png',
+                                                'name': 'Forklift'
+                                              },
+                                              {
+                                                'image': 'Group2271.png',
+                                                'name': 'Scissorlift'
+                                              },
                                             ],
-                                            value: diana,
-                                            onChanged: (String? newValue) {
-                                              setState(() {
-                                                diana =
-                                                    newValue!; // Update value in the list
-                                              });
-                                            },
+                                            buttonText: 'Diana',
+                                            selectedTypeName: controller
+                                                .selectedTypeName5.text,
+                                            buttonKey: _buttonKey5!,
                                           ),
                                           UnitsContainer(
-                                            text: 'Pick Up',
-                                            items: <String>[
-                                              'Select Type',
-                                              'Short Sides',
-                                              'Contract',
-                                              'None'
+                                            unitNames: [
+                                              {
+                                                'image': 'Group2181.png',
+                                                'name': 'Dump truck'
+                                              },
+                                              {
+                                                'image': 'Group2270.png',
+                                                'name': 'Forklift'
+                                              },
+                                              {
+                                                'image': 'Group2271.png',
+                                                'name': 'Scissorlift'
+                                              },
                                             ],
-                                            value: pickup,
-                                            onChanged: (String? newValue) {
-                                              setState(() {
-                                                pickup =
-                                                    newValue!; // Update value in the list
-                                              });
-                                            },
+                                            buttonText: 'Pick Up',
+                                            selectedTypeName: controller
+                                                .selectedTypeName6.text,
+                                            buttonKey: _buttonKey6!,
                                           ),
                                           UnitsContainer(
-                                            text: 'Tow Truck',
-                                            items: <String>[
-                                              'Select Type',
-                                              'Short Sides',
-                                              'Contract',
-                                              'None'
+                                            unitNames: [
+                                              {
+                                                'image': 'Group2181.png',
+                                                'name': 'Dump truck'
+                                              },
+                                              {
+                                                'image': 'Group2270.png',
+                                                'name': 'Forklift'
+                                              },
+                                              {
+                                                'image': 'Group2271.png',
+                                                'name': 'Scissorlift'
+                                              },
                                             ],
-                                            value: towtruck,
-                                            onChanged: (String? newValue) {
-                                              setState(() {
-                                                towtruck =
-                                                    newValue!; // Update value in the list
-                                              });
-                                            },
+                                            buttonText: 'Tow Truck',
+                                            selectedTypeName: controller
+                                                .selectedTypeName7.text,
+                                            buttonKey: _buttonKey7!,
                                           ),
                                           CustomTextfieldGrey(
                                             text: 'Time',

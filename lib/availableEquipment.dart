@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_application_1/Controllers/allUsersFormController.dart';
 import 'package:flutter_application_1/DialogBox/SingleTimeUser/bookingIDDialog.dart';
 import 'package:flutter_application_1/Users/SingleTimeUser/bookingDetails.dart';
 import 'package:flutter_application_1/Widgets/customButton.dart';
@@ -35,30 +36,22 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
   bool checkbox1 = false;
   final ScrollController _Scroll1 = ScrollController();
   final ScrollController _Scroll2 = ScrollController();
-  String trailer = 'Select Type';
-  String six = 'Select Type';
-  String lorry = 'Select Type';
-  String lorry7 = 'Select Type';
-  String diana = 'Select Type';
-  String pickup = 'Select Type';
-  String towtruck = 'Select Type';
+  AllUsersFormController controller = AllUsersFormController();
   String dropdownValues = 'Load Type';
-  bool expand = false;
-  bool expand1 = false;
-  bool expand2 = false;
-  String selectedTypeName = 'Select Type';
-  final List<Map<String, String>> unitNames = [
-    {'image': 'Group1660.png', 'name': 'Compactors'},
-    {'image': 'Group2052.png', 'name': 'Bulldozers'},
-    {'image': 'Group2148.png', 'name': 'Graders'},
-    {'image': 'Group2181.png', 'name': 'Dump truck'},
-    {'image': 'Group2270.png', 'name': 'Forklift'},
-    {'image': 'Group2271.png', 'name': 'Scissorlift'},
-    {'image': 'Group2148.png', 'name': 'Graders'},
-  ];
-
+  GlobalKey? _buttonKey1;
+  GlobalKey? _buttonKey2;
+  GlobalKey? _buttonKey3;
+  GlobalKey? _buttonKey4;
+  String selectedTypeName1 = 'Select Type';
+  String selectedTypeName2 = 'Select Type';
+  String selectedTypeName3 = 'Select Type';
+  String selectedTypeName4 = 'Select Type';
   void initState() {
     super.initState();
+    _buttonKey1 = GlobalKey();
+    _buttonKey2 = GlobalKey();
+    _buttonKey3 = GlobalKey();
+    _buttonKey4 = GlobalKey();
   }
 
   @override
@@ -219,206 +212,85 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                   MainAxisAlignment
                                                       .spaceBetween,
                                               children: [
-                                                Container(
-                                                  width: 550,
-                                                  child: Column(
-                                                    children: [
-                                                      Container(
-                                                        height: 50,
-                                                        width: 550,
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          border: Border.all(
-                                                              color: Color
-                                                                  .fromRGBO(
-                                                                      183,
-                                                                      183,
-                                                                      183,
-                                                                      1)),
-                                                          borderRadius:
-                                                              BorderRadius.all(
-                                                            Radius.circular(8),
-                                                          ),
-                                                          color: Colors.white,
-                                                        ),
-                                                        padding: EdgeInsets
-                                                            .symmetric(
-                                                                horizontal: 10,
-                                                                vertical: 5),
-                                                        child: Row(
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .spaceBetween,
-                                                          children: [
-                                                            Image.asset(
-                                                              'delivery-truck.png',
-                                                              width: 50,
-                                                              height: 50,
-                                                            ),
-                                                            Text('Excavator',
-                                                                style: AvailableText
-                                                                    .helvetica17black),
-                                                            SizedBox(
-                                                              height: double
-                                                                  .infinity,
-                                                              child:
-                                                                  VerticalDivider(),
-                                                            ),
-                                                            Text(
-                                                              selectedTypeName,
-                                                              style:
-                                                                  AvailableText
-                                                                      .helvetica,
-                                                            ),
-                                                            IconButton(
-                                                              icon: Icon(
-                                                                Icons
-                                                                    .keyboard_arrow_down_sharp,
-                                                                size: 25,
-                                                                color: Colors
-                                                                    .black,
-                                                              ),
-                                                              onPressed: () {
-                                                                setState(() {
-                                                                  expand =
-                                                                      !expand;
-                                                                });
-                                                              },
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ),
-                                                      SizedBox(
-                                                        height: 5,
-                                                      ),
-                                                      Positioned(
-                                                        top:
-                                                            110, // Adjust this value as needed
-                                                        child: expand
-                                                            ? Container(
-                                                                width: 500,
-                                                                height: 200,
-                                                                decoration:
-                                                                    BoxDecoration(
-                                                                  color: Colors
-                                                                      .white,
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              8),
-                                                                  boxShadow: [
-                                                                    BoxShadow(
-                                                                      color: Colors
-                                                                          .black
-                                                                          .withOpacity(
-                                                                              0.5),
-                                                                      blurRadius:
-                                                                          5,
-                                                                      offset:
-                                                                          Offset(
-                                                                              0,
-                                                                              3),
-                                                                    ),
-                                                                  ],
-                                                                ),
-                                                                child: ListView
-                                                                    .builder(
-                                                                  itemCount:
-                                                                      unitNames
-                                                                          .length,
-                                                                  itemBuilder:
-                                                                      (context,
-                                                                          index) {
-                                                                    String
-                                                                        image =
-                                                                        unitNames[index]
-                                                                            [
-                                                                            'image']!;
-                                                                    String
-                                                                        name =
-                                                                        unitNames[index]
-                                                                            [
-                                                                            'name']!;
-                                                                    return ListTile(
-                                                                      onTap:
-                                                                          () {
-                                                                        setState(
-                                                                            () {
-                                                                          selectedTypeName =
-                                                                              name;
-                                                                          expand =
-                                                                              false;
-                                                                        });
-                                                                      },
-                                                                      leading: Image
-                                                                          .asset(
-                                                                        image,
-                                                                        width:
-                                                                            60,
-                                                                        height:
-                                                                            60,
-                                                                      ),
-                                                                      title: Text(
-                                                                          name),
-                                                                    );
-                                                                  },
-                                                                ),
-                                                              )
-                                                            : SizedBox(),
-                                                      ),
-                                                    ],
-                                                  ),
+                                                UnitsContainer1(
+                                                  unitNames: [
+                                                    {
+                                                      'image': 'Group2181.png',
+                                                      'name': 'Dump truck'
+                                                    },
+                                                    {
+                                                      'image': 'Group2270.png',
+                                                      'name': 'Forklift'
+                                                    },
+                                                    {
+                                                      'image': 'Group2271.png',
+                                                      'name': 'Scissorlift'
+                                                    },
+                                                  ],
+                                                  buttonText: 'Excavator',
+                                                  selectedTypeName: controller
+                                                      .selectedTypeName.text,
+                                                  buttonKey: _buttonKey1!,
                                                 ),
                                                 UnitsContainer1(
-                                                  text: 'Loaders',
-                                                  items: <String>[
-                                                    'Select Type',
-                                                    'Short Sides',
-                                                    'Contract',
-                                                    'None'
+                                                  unitNames: [
+                                                    {
+                                                      'image': 'Group2181.png',
+                                                      'name': 'Dump truck'
+                                                    },
+                                                    {
+                                                      'image': 'Group2270.png',
+                                                      'name': 'Forklift'
+                                                    },
+                                                    {
+                                                      'image': 'Group2271.png',
+                                                      'name': 'Scissorlift'
+                                                    },
                                                   ],
-                                                  value: six,
-                                                  onChanged:
-                                                      (String? newValue) {
-                                                    setState(() {
-                                                      six =
-                                                          newValue!; // Update value in the list
-                                                    });
-                                                  },
+                                                  buttonText: 'Loaders',
+                                                  selectedTypeName: controller
+                                                      .selectedTypeName2.text,
+                                                  buttonKey: _buttonKey2!,
                                                 ),
                                                 UnitsContainer1(
-                                                  text: 'Cranes',
-                                                  items: <String>[
-                                                    'Select Type',
-                                                    'Short Sides',
-                                                    'Contract',
-                                                    'None'
+                                                  unitNames: [
+                                                    {
+                                                      'image': 'Group2181.png',
+                                                      'name': 'Dump truck'
+                                                    },
+                                                    {
+                                                      'image': 'Group2270.png',
+                                                      'name': 'Forklift'
+                                                    },
+                                                    {
+                                                      'image': 'Group2271.png',
+                                                      'name': 'Scissorlift'
+                                                    },
                                                   ],
-                                                  value: lorry7,
-                                                  onChanged:
-                                                      (String? newValue) {
-                                                    setState(() {
-                                                      lorry =
-                                                          newValue!; // Update value in the list
-                                                    });
-                                                  },
+                                                  buttonText: 'Cranes',
+                                                  selectedTypeName: controller
+                                                      .selectedTypeName3.text,
+                                                  buttonKey: _buttonKey3!,
                                                 ),
                                                 UnitsContainer1(
-                                                  text: 'Others',
-                                                  items: <String>[
-                                                    'Select Type',
-                                                    'Short Sides',
-                                                    'Contract',
-                                                    'None'
+                                                  unitNames: [
+                                                    {
+                                                      'image': 'Group2181.png',
+                                                      'name': 'Dump truck'
+                                                    },
+                                                    {
+                                                      'image': 'Group2270.png',
+                                                      'name': 'Forklift'
+                                                    },
+                                                    {
+                                                      'image': 'Group2271.png',
+                                                      'name': 'Scissorlift'
+                                                    },
                                                   ],
-                                                  value: lorry,
-                                                  onChanged:
-                                                      (String? newValue) {
-                                                    setState(() {
-                                                      lorry =
-                                                          newValue!; // Update value in the list
-                                                    });
-                                                  },
+                                                  buttonText: 'Others',
+                                                  selectedTypeName: controller
+                                                      .selectedTypeName4.text,
+                                                  buttonKey: _buttonKey4!,
                                                 ),
                                                 SizedBox(
                                                   height: 10,
@@ -1132,73 +1004,85 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                   MainAxisAlignment
                                                       .spaceBetween,
                                               children: [
-                                                UnitsContainer(
-                                                  text: 'Excavator',
-                                                  items: <String>[
-                                                    'Select Type',
-                                                    'Short Sides',
-                                                    'Contract',
-                                                    'None'
+                                                UnitsContainer1(
+                                                  unitNames: [
+                                                    {
+                                                      'image': 'Group2181.png',
+                                                      'name': 'Dump truck'
+                                                    },
+                                                    {
+                                                      'image': 'Group2270.png',
+                                                      'name': 'Forklift'
+                                                    },
+                                                    {
+                                                      'image': 'Group2271.png',
+                                                      'name': 'Scissorlift'
+                                                    },
                                                   ],
-                                                  value: trailer,
-                                                  onChanged:
-                                                      (String? newValue) {
-                                                    setState(() {
-                                                      trailer =
-                                                          newValue!; // Update value in the list
-                                                    });
-                                                  },
+                                                  buttonText: 'Excavator',
+                                                  selectedTypeName: controller
+                                                      .selectedTypeName.text,
+                                                  buttonKey: _buttonKey1!,
                                                 ),
-                                                UnitsContainer(
-                                                  text: 'Loaders',
-                                                  items: <String>[
-                                                    'Select Type',
-                                                    'Short Sides',
-                                                    'Contract',
-                                                    'None'
+                                                UnitsContainer1(
+                                                  unitNames: [
+                                                    {
+                                                      'image': 'Group2181.png',
+                                                      'name': 'Dump truck'
+                                                    },
+                                                    {
+                                                      'image': 'Group2270.png',
+                                                      'name': 'Forklift'
+                                                    },
+                                                    {
+                                                      'image': 'Group2271.png',
+                                                      'name': 'Scissorlift'
+                                                    },
                                                   ],
-                                                  value: six,
-                                                  onChanged:
-                                                      (String? newValue) {
-                                                    setState(() {
-                                                      six =
-                                                          newValue!; // Update value in the list
-                                                    });
-                                                  },
+                                                  buttonText: 'Loaders',
+                                                  selectedTypeName: controller
+                                                      .selectedTypeName2.text,
+                                                  buttonKey: _buttonKey2!,
                                                 ),
-                                                UnitsContainer(
-                                                  text: 'Cranes',
-                                                  items: <String>[
-                                                    'Select Type',
-                                                    'Short Sides',
-                                                    'Contract',
-                                                    'None'
+                                                UnitsContainer1(
+                                                  unitNames: [
+                                                    {
+                                                      'image': 'Group2181.png',
+                                                      'name': 'Dump truck'
+                                                    },
+                                                    {
+                                                      'image': 'Group2270.png',
+                                                      'name': 'Forklift'
+                                                    },
+                                                    {
+                                                      'image': 'Group2271.png',
+                                                      'name': 'Scissorlift'
+                                                    },
                                                   ],
-                                                  value: lorry7,
-                                                  onChanged:
-                                                      (String? newValue) {
-                                                    setState(() {
-                                                      lorry =
-                                                          newValue!; // Update value in the list
-                                                    });
-                                                  },
+                                                  buttonText: 'Cranes',
+                                                  selectedTypeName: controller
+                                                      .selectedTypeName3.text,
+                                                  buttonKey: _buttonKey3!,
                                                 ),
-                                                UnitsContainer(
-                                                  text: 'Others',
-                                                  items: <String>[
-                                                    'Select Type',
-                                                    'Short Sides',
-                                                    'Contract',
-                                                    'None'
+                                                UnitsContainer1(
+                                                  unitNames: [
+                                                    {
+                                                      'image': 'Group2181.png',
+                                                      'name': 'Dump truck'
+                                                    },
+                                                    {
+                                                      'image': 'Group2270.png',
+                                                      'name': 'Forklift'
+                                                    },
+                                                    {
+                                                      'image': 'Group2271.png',
+                                                      'name': 'Scissorlift'
+                                                    },
                                                   ],
-                                                  value: lorry,
-                                                  onChanged:
-                                                      (String? newValue) {
-                                                    setState(() {
-                                                      lorry =
-                                                          newValue!; // Update value in the list
-                                                    });
-                                                  },
+                                                  buttonText: 'Others',
+                                                  selectedTypeName: controller
+                                                      .selectedTypeName4.text,
+                                                  buttonKey: _buttonKey4!,
                                                 ),
                                                 SizedBox(
                                                   height: 10,

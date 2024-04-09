@@ -1,97 +1,96 @@
 import 'package:flutter/material.dart';
-
-enum Options { search, upload, copy, exit }
+import 'package:flutter_application_1/sample.dart';
 
 class Sample1 extends StatefulWidget {
-  const Sample1({Key? key}) : super(key: key);
-
   @override
-  State<Sample1> createState() => _MyAppState();
+  _Sample1State createState() => _Sample1State();
 }
 
-class _MyAppState extends State<Sample1> {
-  var _popupMenuItemIndex = 0;
-  Color _changeColorAccordingToMenuItem = Colors.red;
-  var appBarHeight = AppBar().preferredSize.height;
+class _Sample1State extends State<Sample1> {
+  late OverlayEntry _overlayEntry;
+  bool _overlayVisible = false;
 
-  _buildAppBar() {
-    return AppBar(
-      title: const Text(
-        'Popup Menus',
-        style: TextStyle(color: Colors.white, fontSize: 16.0),
-      ),
-      actions: [
-        PopupMenuButton(
-          onSelected: (value) {
-            _onMenuItemSelected(value as int);
-          },
-          offset: Offset(0.0, appBarHeight),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(8.0),
-              bottomRight: Radius.circular(8.0),
-              topLeft: Radius.circular(8.0),
-              topRight: Radius.circular(8.0),
-            ),
-          ),
-          itemBuilder: (ctx) => [
-            _buildPopupMenuItem('Search', Icons.search, Options.search.index),
-            _buildPopupMenuItem('Upload', Icons.upload, Options.upload.index),
-            _buildPopupMenuItem('Copy', Icons.copy, Options.copy.index),
-            _buildPopupMenuItem('Exit', Icons.exit_to_app, Options.exit.index),
-          ],
-        )
-      ],
-    );
+  @override
+  void initState() {
+    super.initState();
   }
 
-  PopupMenuItem _buildPopupMenuItem(
-      String title, IconData iconData, int position) {
-    return PopupMenuItem(
-      value: position,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          Icon(
-            iconData,
-            color: Colors.black,
+  OverlayEntry _createOverlayEntry() {
+    return OverlayEntry(
+      builder: (context) => Center(
+        child: Container(
+          width: 200,
+          height: 200,
+          color: Colors.blue.withOpacity(0.8),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'Overlay Content',
+                style: TextStyle(
+                  fontSize: 20,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: () {
+                  _hideOverlay();
+                },
+                child: Text('Close Overlay'),
+              ),
+            ],
           ),
-          Text(title),
-        ],
+        ),
       ),
     );
   }
 
-  _onMenuItemSelected(int value) {
+  void _showOverlay() {
+    _overlayEntry = _createOverlayEntry();
+    Overlay.of(context).insert(_overlayEntry);
     setState(() {
-      _popupMenuItemIndex = value;
+      _overlayVisible = true;
     });
+  }
 
-    if (value == Options.search.index) {
-      _changeColorAccordingToMenuItem = Colors.red;
-    } else if (value == Options.upload.index) {
-      _changeColorAccordingToMenuItem = Colors.green;
-    } else if (value == Options.copy.index) {
-      _changeColorAccordingToMenuItem = Colors.blue;
-    } else {
-      _changeColorAccordingToMenuItem = Colors.purple;
-    }
+  void _hideOverlay() {
+    _overlayEntry.remove();
+    setState(() {
+      _overlayVisible = false;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Overlay Example'),
       ),
-      home: Scaffold(
-        appBar: _buildAppBar(),
-        // body: Container(
-        //   color: _changeColorAccordingToMenuItem,
-        // ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ElevatedButton(
+              onPressed: () {
+                if (!_overlayVisible) {
+                  _showOverlay();
+                }
+              },
+              child: Text('Show Overlay'),
+            ),
+          ],
+        ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    if (_overlayVisible) {
+      _overlayEntry.remove();
+    }
+    super.dispose();
   }
 }
