@@ -81,7 +81,7 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
 
       // Reference to the subcollection 'userBooking' under the user's document
       CollectionReference userBookingCollectionRef =
-          userDocRef.collection('userBooking');
+          userDocRef.collection('vehicleBooking');
 
       // Add document to subcollection and get the document reference
       DocumentReference newBookingDocRef = await userBookingCollectionRef.add({

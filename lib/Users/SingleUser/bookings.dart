@@ -185,7 +185,7 @@ class _BookingsState extends State<Bookings> {
       FirebaseFirestore firestore = FirebaseFirestore.instance;
       DocumentReference userDocRef = firestore.collection('user').doc(userId);
       CollectionReference userBookingCollectionRef =
-          userDocRef.collection('userBooking');
+          userDocRef.collection('vehicleBooking');
       Map<String, dynamic>? lastUserData;
       // Listen to the collection's stream, order by timestamp, and limit to 1 document
       userBookingCollectionRef
