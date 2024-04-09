@@ -41,7 +41,6 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
   final ScrollController _Scroll1 = ScrollController();
   final ScrollController _Scroll2 = ScrollController();
   AllUsersFormController controller = AllUsersFormController();
-  AllUsersFormController controller = AllUsersFormController();
   String dropdownValues = 'Load Type';
   GlobalKey? _buttonKey1;
   GlobalKey? _buttonKey2;
