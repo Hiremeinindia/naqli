@@ -1,5 +1,7 @@
 // ignore_for_file: dead_code
 
+import 'dart:math';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -40,7 +42,7 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
   final CalendarWeekController _controller = CalendarWeekController();
   String _selectedValue = '1';
   String categoryValue = '1';
-
+  late String bookingID;
   bool value = false;
   bool checkbox = false;
   int? groupValue1;
@@ -61,6 +63,7 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
   String? selectedContainerIndex;
   void initState() {
     super.initState();
+    bookingID = _generateBookingID();
     _buttonKey1 = GlobalKey<CustomContainerState>();
     _buttonKey2 = GlobalKey<CustomContainerState>();
     _buttonKey3 = GlobalKey<CustomContainerState>();
@@ -98,11 +101,28 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
   //     print('Error creating new booking: $error');
   //   }
   // }
+  String _generateBookingID() {
+    Random random = Random();
+
+    String bookingID = '';
+    for (int i = 0; i < 10; i++) {
+      bookingID += random.nextInt(10).toString();
+    }
+    return bookingID;
+  }
+
+  void updateSelectedContainerIndex(String index) {
+    setState(() {
+      selectedContainerIndex = index;
+    });
+  }
+
   Future<void> createNewBooking(
     String equip,
     String size,
     String load,
     String time,
+    String bookingid,
     String adminUid,
   ) async {
     try {
@@ -121,6 +141,7 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
         'size': size,
         'load': load,
         'time': time,
+        'bookingid': bookingid,
       });
 
       // Store the auto-generated ID
@@ -420,6 +441,8 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                       controller
                                                           .selectedTypeName
                                                           .text = value;
+                                                      updateSelectedContainerIndex(
+                                                          '${controller.selectedTypeName.text}');
                                                     });
                                                   },
                                                 ),
@@ -453,6 +476,8 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                       controller
                                                           .selectedTypeName1
                                                           .text = value;
+                                                      updateSelectedContainerIndex(
+                                                          '${controller.selectedTypeName1.text}');
                                                     });
                                                   },
                                                 ),
@@ -482,6 +507,8 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                       controller
                                                           .selectedTypeName2
                                                           .text = value;
+                                                      updateSelectedContainerIndex(
+                                                          '${controller.selectedTypeName2.text}');
                                                     });
                                                   },
                                                 ),
@@ -527,6 +554,8 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                       controller
                                                           .selectedTypeName3
                                                           .text = value;
+                                                      updateSelectedContainerIndex(
+                                                          '${controller.selectedTypeName3.text}');
                                                     });
                                                   },
                                                 ),
@@ -1103,11 +1132,14 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                             .load.text;
                                                         String time = controller
                                                             .time.text;
+                                                        String bookingid =
+                                                            bookingID;
                                                         await createNewBooking(
                                                             equip,
                                                             size,
                                                             load,
                                                             time,
+                                                            bookingid,
                                                             widget.user!);
                                                       } catch (e) {
                                                         print(
@@ -1121,18 +1153,129 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                                     0.5),
                                                         context: context,
                                                         builder: (context) {
-                                                          return BookingIDDialog();
+                                                          return Dialog(
+                                                            shape:
+                                                                RoundedRectangleBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          10.0),
+                                                            ),
+                                                            child: Container(
+                                                              height: 280,
+                                                              width: MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .width *
+                                                                  0.5,
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            10.0),
+                                                                boxShadow: [
+                                                                  BoxShadow(
+                                                                    offset:
+                                                                        Offset(
+                                                                            0,
+                                                                            1),
+                                                                    blurRadius:
+                                                                        0.1, // changes position of shadow
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                              child: Column(
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .start,
+                                                                children: <Widget>[
+                                                                  Container(
+                                                                    height: 50,
+                                                                    decoration:
+                                                                        BoxDecoration(
+                                                                      borderRadius: BorderRadius.only(
+                                                                          topLeft: Radius.circular(
+                                                                              10.0),
+                                                                          topRight:
+                                                                              Radius.circular(10.0)),
+                                                                      color: Color.fromRGBO(
+                                                                          98,
+                                                                          105,
+                                                                          254,
+                                                                          1),
+                                                                    ),
+                                                                    child: Row(
+                                                                      mainAxisAlignment:
+                                                                          MainAxisAlignment
+                                                                              .spaceBetween,
+                                                                      children: [
+                                                                        Expanded(
+                                                                          child:
+                                                                              Center(
+                                                                            child:
+                                                                                Padding(
+                                                                              padding: const EdgeInsets.only(left: 8.0),
+                                                                              child: Text(
+                                                                                'Booking ID ${bookingID}',
+                                                                                style: DialogText.helvetica21,
+                                                                              ),
+                                                                            ),
+                                                                          ),
+                                                                        ),
+                                                                        IconButton(
+                                                                          padding:
+                                                                              EdgeInsets.only(right: 2),
+                                                                          icon:
+                                                                              Icon(Icons.close),
+                                                                          onPressed:
+                                                                              () {
+                                                                            Navigator.of(context).pop();
+                                                                          },
+                                                                          color:
+                                                                              Colors.white, // Setting icon color
+                                                                        ),
+                                                                      ],
+                                                                    ),
+                                                                  ),
+                                                                  Center(
+                                                                    child:
+                                                                        Container(
+                                                                      height:
+                                                                          230,
+                                                                      decoration:
+                                                                          BoxDecoration(
+                                                                        borderRadius: BorderRadius.only(
+                                                                            bottomLeft:
+                                                                                Radius.circular(10.0),
+                                                                            bottomRight: Radius.circular(10.0)),
+                                                                        color: Colors
+                                                                            .white,
+                                                                      ),
+                                                                      child:
+                                                                          Center(
+                                                                        child: Text(
+                                                                            'Booking Generated',
+                                                                            style:
+                                                                                DialogText.helvetica40),
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ),
+                                                          );
                                                         },
                                                       );
-                                                      Navigator.push(
-                                                        context,
-                                                        MaterialPageRoute(
-                                                            builder: (context) =>
-                                                                SingleUserDashboardPage(
-                                                                  user: widget
-                                                                      .user,
-                                                                )),
-                                                      );
+                                                      // Navigator.push(
+                                                      //   context,
+                                                      //   MaterialPageRoute(
+                                                      //       builder: (context) =>
+                                                      //           SingleUserDashboardPage(
+                                                      //             user: widget
+                                                      //                 .user,
+                                                      //           )),
+                                                      // );
                                                     },
                                                     text: 'Create Booking',
                                                   ),
