@@ -76,6 +76,7 @@ class CustomContainerState extends State<UnitsContainer> {
                   onTap: () {
                     setState(() {
                       widget.onSelectionChanged!(name);
+                      widget.selectedTypeName = name;
                       expand = false;
                     });
                     _hideOverlay();
@@ -142,7 +143,7 @@ class CustomContainerState extends State<UnitsContainer> {
                   child: VerticalDivider(),
                 ),
                 Text(
-                  widget.selectedTypeName ?? '',
+                  widget.selectedTypeName ?? 'Select Type',
                   style: AvailableText.helvetica,
                 ),
                 IconButton(
@@ -154,8 +155,8 @@ class CustomContainerState extends State<UnitsContainer> {
                   ),
                   onPressed: () {
                     if (!_overlayVisible) {
-                      _showOverlay(
-                          widget.buttonKey!, widget.selectedTypeName ?? '');
+                      _showOverlay(widget.buttonKey!,
+                          widget.selectedTypeName ?? 'Select Type');
                     } else {
                       _hideOverlay();
                     }
