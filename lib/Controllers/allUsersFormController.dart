@@ -25,6 +25,7 @@ class AllUsersFormController {
   final load = TextEditingController();
   final size = TextEditingController();
   final time = TextEditingController();
+  final booking = TextEditingController();
   final companyidNumber = TextEditingController();
   final selectedAccounttype = TextEditingController();
 
