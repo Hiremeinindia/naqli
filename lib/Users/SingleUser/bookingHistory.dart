@@ -61,7 +61,7 @@ class _BookingHistroyState extends State<BookingHistroy> {
     Stream<QuerySnapshot<Map<String, dynamic>>> userStream = firestore
         .collection('user')
         .doc(widget.user)
-        .collection('userBooking')
+        .collection('vehicleBooking')
         .snapshots();
 
     // Combine both streams into one

@@ -1,8 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
-import 'package:dropdown_model_list/dropdown_model_list.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -10,7 +7,6 @@ import 'package:flutter/painting.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_application_1/Controllers/allUsersFormController.dart';
 import 'package:flutter_application_1/DialogBox/SingleTimeUser/bookingIDDialog.dart';
-import 'package:flutter_application_1/Users/SingleTimeUser/bookingDetails.dart';
 import 'package:flutter_application_1/Users/SingleUser/dashboard_page.dart';
 import 'package:flutter_application_1/Widgets/customButton.dart';
 import 'package:flutter_application_1/Widgets/customTextField.dart';
@@ -18,7 +14,6 @@ import 'package:flutter_application_1/Widgets/unitsContainer.dart';
 import 'package:flutter_application_1/classes/language.dart';
 import 'package:flutter_application_1/classes/language_constants.dart';
 import 'package:sizer/sizer.dart';
-
 import 'Widgets/formText.dart';
 import 'main.dart';
 
@@ -39,32 +34,25 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
   bool checkbox1 = false;
   final ScrollController _Scroll1 = ScrollController();
   final ScrollController _Scroll2 = ScrollController();
-  GlobalKey? _buttonKey1;
-  GlobalKey? _buttonKey2;
-  GlobalKey? _buttonKey3;
-  GlobalKey? _buttonKey4;
-  GlobalKey? _buttonKey5;
-  GlobalKey? _buttonKey6;
-  GlobalKey? _buttonKey7;
-  String selectedTypeName1 = 'Select Type';
-  String selectedTypeName2 = 'Select Type';
-  String selectedTypeName3 = 'Select Type';
-  String selectedTypeName4 = 'Select Type';
-  String selectedTypeName5 = 'Select Type';
-  String selectedTypeName6 = 'Select Type';
-  String selectedTypeName7 = 'Select Type';
+  late GlobalKey<CustomContainerState> _buttonKey1;
+  late GlobalKey<CustomContainerState> _buttonKey2;
+  late GlobalKey<CustomContainerState> _buttonKey3;
+  late GlobalKey<CustomContainerState> _buttonKey4;
+  late GlobalKey<CustomContainerState> _buttonKey5;
+  late GlobalKey<CustomContainerState> _buttonKey6;
+  late GlobalKey<CustomContainerState> _buttonKey7;
   final List<Map<String, String>> loadList = [];
 
   AllUsersFormController controller = AllUsersFormController();
   void initState() {
     super.initState();
-    _buttonKey1 = GlobalKey();
-    _buttonKey2 = GlobalKey();
-    _buttonKey3 = GlobalKey();
-    _buttonKey4 = GlobalKey();
-    _buttonKey5 = GlobalKey();
-    _buttonKey6 = GlobalKey();
-    _buttonKey7 = GlobalKey();
+    _buttonKey1 = GlobalKey<CustomContainerState>();
+    _buttonKey2 = GlobalKey<CustomContainerState>();
+    _buttonKey3 = GlobalKey<CustomContainerState>();
+    _buttonKey4 = GlobalKey<CustomContainerState>();
+    _buttonKey5 = GlobalKey<CustomContainerState>();
+    _buttonKey6 = GlobalKey<CustomContainerState>();
+    _buttonKey7 = GlobalKey<CustomContainerState>();
   }
 
   Future<void> createNewBooking(
@@ -81,7 +69,7 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
 
       // Reference to the subcollection 'userBooking' under the user's document
       CollectionReference userBookingCollectionRef =
-          userDocRef.collection('userBooking');
+          userDocRef.collection('vehicleBooking');
 
       // Add document to subcollection and get the document reference
       DocumentReference newBookingDocRef = await userBookingCollectionRef.add({
@@ -396,8 +384,21 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                                   ],
                                                   buttonText: 'Tralia',
                                                   selectedTypeName: controller
-                                                      .selectedTypeName1.text,
-                                                  buttonKey: _buttonKey1!,
+                                                          .selectedTypeName1
+                                                          .text
+                                                          .isNotEmpty
+                                                      ? controller
+                                                          .selectedTypeName1
+                                                          .text
+                                                      : 'Select Type',
+                                                  buttonKey: _buttonKey1,
+                                                  onSelectionChanged: (value) {
+                                                    setState(() {
+                                                      controller
+                                                          .selectedTypeName1
+                                                          .text = value;
+                                                    });
+                                                  },
                                                 ),
                                                 UnitsContainer(
                                                   unitNames: [
@@ -412,8 +413,21 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                                   ],
                                                   buttonText: 'Six',
                                                   selectedTypeName: controller
-                                                      .selectedTypeName2.text,
-                                                  buttonKey: _buttonKey2!,
+                                                          .selectedTypeName2
+                                                          .text
+                                                          .isNotEmpty
+                                                      ? controller
+                                                          .selectedTypeName2
+                                                          .text
+                                                      : 'Select Type',
+                                                  buttonKey: _buttonKey2,
+                                                  onSelectionChanged: (value) {
+                                                    setState(() {
+                                                      controller
+                                                          .selectedTypeName2
+                                                          .text = value;
+                                                    });
+                                                  },
                                                 ),
                                                 UnitsContainer(
                                                   unitNames: [
@@ -424,8 +438,21 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                                   ],
                                                   buttonText: 'Lorry 7 Metres',
                                                   selectedTypeName: controller
-                                                      .selectedTypeName3.text,
-                                                  buttonKey: _buttonKey3!,
+                                                          .selectedTypeName3
+                                                          .text
+                                                          .isNotEmpty
+                                                      ? controller
+                                                          .selectedTypeName2
+                                                          .text
+                                                      : 'Select Type',
+                                                  buttonKey: _buttonKey3,
+                                                  onSelectionChanged: (value) {
+                                                    setState(() {
+                                                      controller
+                                                          .selectedTypeName3
+                                                          .text = value;
+                                                    });
+                                                  },
                                                 ),
                                                 UnitsContainer(
                                                   unitNames: [
@@ -456,8 +483,21 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                                   ],
                                                   buttonText: 'Lorry',
                                                   selectedTypeName: controller
-                                                      .selectedTypeName4.text,
-                                                  buttonKey: _buttonKey4!,
+                                                          .selectedTypeName4
+                                                          .text
+                                                          .isNotEmpty
+                                                      ? controller
+                                                          .selectedTypeName4
+                                                          .text
+                                                      : 'Select Type',
+                                                  buttonKey: _buttonKey4,
+                                                  onSelectionChanged: (value) {
+                                                    setState(() {
+                                                      controller
+                                                          .selectedTypeName4
+                                                          .text = value;
+                                                    });
+                                                  },
                                                 ),
                                                 UnitsContainer(
                                                   unitNames: [
@@ -484,8 +524,14 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                                   ],
                                                   buttonText: 'Diana',
                                                   selectedTypeName: controller
-                                                      .selectedTypeName5.text,
-                                                  buttonKey: _buttonKey5!,
+                                                          .selectedTypeName5
+                                                          .text
+                                                          .isNotEmpty
+                                                      ? controller
+                                                          .selectedTypeName5
+                                                          .text
+                                                      : 'Select Type',
+                                                  buttonKey: _buttonKey5,
                                                 ),
                                                 UnitsContainer(
                                                   unitNames: [
@@ -496,8 +542,14 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                                   ],
                                                   buttonText: 'Pick Up',
                                                   selectedTypeName: controller
-                                                      .selectedTypeName6.text,
-                                                  buttonKey: _buttonKey6!,
+                                                          .selectedTypeName6
+                                                          .text
+                                                          .isNotEmpty
+                                                      ? controller
+                                                          .selectedTypeName6
+                                                          .text
+                                                      : 'Select Type',
+                                                  buttonKey: _buttonKey6,
                                                 ),
                                                 UnitsContainer(
                                                   unitNames: [
@@ -512,8 +564,14 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                                   ],
                                                   buttonText: 'Tow Truck',
                                                   selectedTypeName: controller
-                                                      .selectedTypeName7.text,
-                                                  buttonKey: _buttonKey7!,
+                                                          .selectedTypeName7
+                                                          .text
+                                                          .isNotEmpty
+                                                      ? controller
+                                                          .selectedTypeName7
+                                                          .text
+                                                      : 'Select Type',
+                                                  buttonKey: _buttonKey7,
                                                 ),
                                                 SizedBox(
                                                   height: 10,
@@ -1050,14 +1108,31 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                                   child: CustomButton(
                                                     onPressed: () async {
                                                       try {
-                                                        String truck =
-                                                            controller
-                                                                .truck.text;
+                                                        String truck = controller
+                                                            .selectedTypeName1
+                                                            .text;
+                                                        String truck2 = controller
+                                                            .selectedTypeName2
+                                                            .text;
+                                                        String truck3 = controller
+                                                            .selectedTypeName3
+                                                            .text;
+                                                        String truck4 = controller
+                                                            .selectedTypeName4
+                                                            .text;
+                                                        String truck5 = controller
+                                                            .selectedTypeName5
+                                                            .text;
+                                                        String truck6 = controller
+                                                            .selectedTypeName6
+                                                            .text;
+                                                        String truck7 = controller
+                                                            .selectedTypeName7
+                                                            .text;
                                                         String size = controller
                                                             .size.text;
                                                         String load = controller
                                                             .load.text;
-
                                                         // Call functions to create documents in collection and subcollection
                                                         await createNewBooking(
                                                             truck,
