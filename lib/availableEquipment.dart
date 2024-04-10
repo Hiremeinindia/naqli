@@ -13,6 +13,7 @@ import 'package:flutter_application_1/Controllers/allUsersFormController.dart';
 import 'package:flutter_application_1/Controllers/allUsersFormController.dart';
 import 'package:flutter_application_1/DialogBox/SingleTimeUser/bookingIDDialog.dart';
 import 'package:flutter_application_1/Users/SingleTimeUser/bookingDetails.dart';
+import 'package:flutter_application_1/Users/SingleUser/dashboard_page.dart';
 import 'package:flutter_application_1/Widgets/customButton.dart';
 import 'package:flutter_application_1/Widgets/customTextField.dart';
 import 'package:flutter_application_1/Widgets/unitsContainer.dart';
@@ -749,7 +750,9 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                               onChanged: (String?
                                                                   newValue) {
                                                                 setState(() {
-                                                                  dropdownValues =
+                                                                  controller
+                                                                          .load
+                                                                          .text =
                                                                       newValue!; // Update value in the list
                                                                 });
                                                               },
@@ -1120,6 +1123,15 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                         builder: (context) {
                                                           return BookingIDDialog();
                                                         },
+                                                      );
+                                                      Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                            builder: (context) =>
+                                                                SingleUserDashboardPage(
+                                                                  user: widget
+                                                                      .user,
+                                                                )),
                                                       );
                                                     },
                                                     text: 'Create Booking',
@@ -1546,7 +1558,7 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                                     String>(
                                                               value: controller
                                                                   .load
-                                                                  .text, // Use controller.load.text as value
+                                                                  .text, // Use value from the list
                                                               items: <String>[
                                                                 'Trigger Bookings',
                                                                 'Booking Manager',
@@ -1569,10 +1581,8 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                               onChanged: (String?
                                                                   newValue) {
                                                                 setState(() {
-                                                                  controller
-                                                                          .load
-                                                                          .text =
-                                                                      newValue!; // Update controller.load.text with the new value
+                                                                  dropdownValues =
+                                                                      newValue!; // Update value in the list
                                                                 });
                                                               },
                                                               buttonStyleData:
@@ -1594,16 +1604,30 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                                           1)),
                                                                   borderRadius:
                                                                       BorderRadius
-                                                                          .circular(
-                                                                              8),
+                                                                          .only(
+                                                                    topLeft: Radius
+                                                                        .circular(
+                                                                            8),
+                                                                    topRight: Radius
+                                                                        .circular(
+                                                                            8),
+                                                                    bottomLeft:
+                                                                        Radius.circular(
+                                                                            8),
+                                                                    bottomRight:
+                                                                        Radius.circular(
+                                                                            8),
+                                                                  ),
                                                                   color: Colors
                                                                       .white,
                                                                 ),
                                                               ),
                                                               iconStyleData:
                                                                   const IconStyleData(
-                                                                icon: Icon(Icons
-                                                                    .arrow_drop_down_sharp),
+                                                                icon: Icon(
+                                                                  Icons
+                                                                      .arrow_drop_down_sharp,
+                                                                ),
                                                                 iconSize: 25,
                                                                 iconEnabledColor:
                                                                     Colors
@@ -1628,8 +1652,20 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                                           1)),
                                                                   borderRadius:
                                                                       BorderRadius
-                                                                          .circular(
-                                                                              5),
+                                                                          .only(
+                                                                    topLeft: Radius
+                                                                        .circular(
+                                                                            5),
+                                                                    topRight: Radius
+                                                                        .circular(
+                                                                            5),
+                                                                    bottomLeft:
+                                                                        Radius.circular(
+                                                                            5),
+                                                                    bottomRight:
+                                                                        Radius.circular(
+                                                                            5),
+                                                                  ),
                                                                   color: Colors
                                                                       .white,
                                                                 ),
