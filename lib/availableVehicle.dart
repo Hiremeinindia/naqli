@@ -1285,17 +1285,17 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                                         print(
                                                             "Error creating user: $e");
                                                       }
-                                                      // showDialog(
-                                                      //   barrierColor:
-                                                      //       Color.fromRGBO(59,
-                                                      //               57, 57, 1)
-                                                      //           .withOpacity(
-                                                      //               0.5),
-                                                      //   context: context,
-                                                      //   builder: (context) {
-                                                      //     return BookingIDDialog();
-                                                      //   },
-                                                      // );
+                                                      showDialog(
+                                                        barrierColor:
+                                                            Color.fromRGBO(59,
+                                                                    57, 57, 1)
+                                                                .withOpacity(
+                                                                    0.5),
+                                                        context: context,
+                                                        builder: (context) {
+                                                          return BookingIDDialog();
+                                                        },
+                                                      );
                                                       Navigator.push(
                                                         context,
                                                         MaterialPageRoute(

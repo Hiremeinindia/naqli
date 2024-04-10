@@ -13,14 +13,18 @@ import 'package:flutter_application_1/Controllers/allUsersFormController.dart';
 import 'package:flutter_application_1/Controllers/allUsersFormController.dart';
 import 'package:flutter_application_1/DialogBox/SingleTimeUser/bookingIDDialog.dart';
 import 'package:flutter_application_1/Users/SingleTimeUser/bookingDetails.dart';
+import 'package:flutter_application_1/Users/SingleUser/dashboard_page.dart';
 import 'package:flutter_application_1/Widgets/customButton.dart';
 import 'package:flutter_application_1/Widgets/customTextField.dart';
 import 'package:flutter_application_1/Widgets/unitsContainer.dart';
 import 'package:flutter_application_1/classes/language.dart';
 import 'package:flutter_application_1/classes/language_constants.dart';
+import 'package:flutter_application_1/main.dart';
+import 'package:flutter_calendar_week/flutter_calendar_week.dart';
 import 'package:sizer/sizer.dart';
-
+import 'package:table_calendar/table_calendar.dart';
 import 'Widgets/formText.dart';
+import 'package:intl/intl.dart';
 
 class AvailableEquipment extends StatefulWidget {
   final String? user;
@@ -33,8 +37,10 @@ class AvailableEquipment extends StatefulWidget {
 }
 
 class _AvailableEquipmentState extends State<AvailableEquipment> {
+  final CalendarWeekController _controller = CalendarWeekController();
   String _selectedValue = '1';
   String categoryValue = '1';
+
   bool value = false;
   bool checkbox = false;
   int? groupValue1;
@@ -52,6 +58,7 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
   String selectedTypeName2 = 'Select Type';
   String selectedTypeName3 = 'Select Type';
   String selectedTypeName4 = 'Select Type';
+  String? selectedContainerIndex;
   void initState() {
     super.initState();
     _buttonKey1 = GlobalKey<CustomContainerState>();
@@ -60,58 +67,24 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
     _buttonKey4 = GlobalKey<CustomContainerState>();
   }
 
-  Future<void> createNewBooking(
-    String book1,
-    String adminUid,
-  ) async {
-    try {
-      FirebaseFirestore firestore = FirebaseFirestore.instance;
-
-      // Reference to the user's document
-      DocumentReference userDocRef =
-          firestore.collection('superuser').doc(adminUid);
-
-      // Reference to the subcollection 'userBooking' under the user's document
-      CollectionReference userBookingCollectionRef =
-          userDocRef.collection('superuserBookings');
-
-      // Add document to subcollection and get the document reference
-      DocumentReference newBookingDocRef = await userBookingCollectionRef.add({
-        'book1': book1,
-      });
-
-      // Store the auto-generated ID
-      String newBookingId = newBookingDocRef.id;
-
-      // // Update the document with the stored ID
-      // await newBookingDocRef.update({'id': newBookingId});
-
-      print('New booking added successfully with ID: $newBookingId');
-    } catch (error) {
-      print('Error creating new booking: $error');
-    }
-  }
   // Future<void> createNewBooking(
   //   String book1,
   //   String adminUid,
-  //   String load,
-  //   String size,
   // ) async {
   //   try {
   //     FirebaseFirestore firestore = FirebaseFirestore.instance;
 
   //     // Reference to the user's document
-  //     DocumentReference userDocRef = firestore.collection('user').doc(adminUid);
+  //     DocumentReference userDocRef =
+  //         firestore.collection('superuser').doc(adminUid);
 
   //     // Reference to the subcollection 'userBooking' under the user's document
   //     CollectionReference userBookingCollectionRef =
-  //         userDocRef.collection('equipmentBookings');
+  //         userDocRef.collection('superuserBookings');
 
   //     // Add document to subcollection and get the document reference
   //     DocumentReference newBookingDocRef = await userBookingCollectionRef.add({
   //       'book1': book1,
-  //       'size': size,
-  //       'load': load,
   //     });
 
   //     // Store the auto-generated ID
@@ -125,6 +98,42 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
   //     print('Error creating new booking: $error');
   //   }
   // }
+  Future<void> createNewBooking(
+    String equip,
+    String size,
+    String load,
+    String time,
+    String adminUid,
+  ) async {
+    try {
+      FirebaseFirestore firestore = FirebaseFirestore.instance;
+
+      // Reference to the user's document
+      DocumentReference userDocRef = firestore.collection('user').doc(adminUid);
+
+      // Reference to the subcollection 'userBooking' under the user's document
+      CollectionReference userBookingCollectionRef =
+          userDocRef.collection('equipmentBookings');
+
+      // Add document to subcollection and get the document reference
+      DocumentReference newBookingDocRef = await userBookingCollectionRef.add({
+        'equip': equip,
+        'size': size,
+        'load': load,
+        'time': time,
+      });
+
+      // Store the auto-generated ID
+      String newBookingId = newBookingDocRef.id;
+
+      // Update the document with the stored ID
+      // await newBookingDocRef.update({'id': newBookingId});
+
+      print('New booking added successfully with ID: $newBookingId');
+    } catch (error) {
+      print('Error creating new booking: $error');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -136,6 +145,7 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
               appBar: PreferredSize(
                 preferredSize: Size.fromHeight(90),
                 child: Material(
+                  elevation: 3,
                   child: Padding(
                     padding: EdgeInsets.fromLTRB(13.w, 0, 15.w, 0),
                     child: Row(
@@ -163,9 +173,8 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                               ),
                             ),
                             SizedBox(
-                              height: 20,
+                              height: 30,
                               child: VerticalDivider(
-                                thickness: 2,
                                 color: Color.fromRGBO(206, 203, 203, 1),
                               ),
                             ),
@@ -186,23 +195,129 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                         ),
                         Row(
                           children: [
-                            Icon(
-                              Icons.notifications,
-                              color: Color.fromRGBO(106, 102, 209, 1),
+                            DropdownButtonHideUnderline(
+                              child: DropdownButton2<Language>(
+                                isExpanded: true,
+                                hint: Row(
+                                  children: [
+                                    Text(
+                                      translation(context).english,
+                                      style: TabelText.helvetica11,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                    Expanded(child: SizedBox()),
+                                    Icon(
+                                      Icons.arrow_drop_down,
+                                      color: Colors.black,
+                                      size: 25,
+                                    )
+                                  ],
+                                ),
+                                onChanged: (Language? language) async {
+                                  if (language != null) {
+                                    Locale _locale =
+                                        await setLocale(language.languageCode);
+                                    MyApp.setLocale(context, _locale);
+                                  } else {
+                                    language;
+                                  }
+                                },
+                                items: Language.languageList()
+                                    .map<DropdownMenuItem<Language>>(
+                                      (e) => DropdownMenuItem<Language>(
+                                        value: e,
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceAround,
+                                          children: <Widget>[
+                                            Text(
+                                              e.flag,
+                                              style: TabelText.helvetica11,
+                                              overflow: TextOverflow.ellipsis,
+                                            ),
+                                            Text(
+                                              e.langname,
+                                              style: TabelText.helvetica11,
+                                              overflow: TextOverflow.ellipsis,
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    )
+                                    .toList(),
+                                buttonStyleData: ButtonStyleData(
+                                  height: 30,
+                                  width: 130,
+                                  padding: const EdgeInsets.only(
+                                      left: 14, right: 14),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(8),
+                                    border: Border.all(
+                                      color: Colors.black26,
+                                    ),
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                iconStyleData: const IconStyleData(
+                                  icon: Icon(
+                                    Icons.arrow_drop_down_sharp,
+                                  ),
+                                  iconSize: 25,
+                                  iconEnabledColor: Colors.white,
+                                  iconDisabledColor: null,
+                                ),
+                                dropdownStyleData: DropdownStyleData(
+                                  maxHeight: 210,
+                                  padding: EdgeInsets.only(
+                                      left: 10, right: 10, top: 5, bottom: 15),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(5),
+                                    border: Border.all(color: Colors.black26),
+                                    color: Colors.white,
+                                  ),
+                                  scrollPadding: EdgeInsets.all(5),
+                                  scrollbarTheme: ScrollbarThemeData(
+                                    thickness:
+                                        MaterialStateProperty.all<double>(6),
+                                    thumbVisibility:
+                                        MaterialStateProperty.all<bool>(true),
+                                  ),
+                                ),
+                                menuItemStyleData: const MenuItemStyleData(
+                                  height: 25,
+                                  padding: EdgeInsets.only(left: 14, right: 14),
+                                ),
+                              ),
                             ),
                             SizedBox(
-                              width: 0.1.w,
+                              width: 10,
                             ),
-                            Text("Contact Us ",
-                                style: HomepageText.helvetica16black),
                             SizedBox(
-                              height: 30,
+                              height: 40,
                               child: VerticalDivider(
                                 color: Colors.black,
                               ),
                             ),
-                            Text("Hello Customer!",
-                                style: HomepageText.helvetica16black),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                left: 5,
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text("Hello Faizal!",
+                                      style: TabelText.helvetica11),
+                                  Text("Admin", style: TabelText.usertext),
+                                  Text("Faizal industries",
+                                      style: TabelText.usertext),
+                                ],
+                              ),
+                            ),
+                            Icon(
+                              Icons.notifications,
+                              color: Color.fromRGBO(106, 102, 209, 1),
+                            ),
                           ],
                         ),
                       ],
@@ -287,82 +402,133 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                 UnitsContainer(
                                                   unitNames: [
                                                     {
-                                                      'image': 'Group2181.png',
-                                                      'name': 'Dump truck'
-                                                    },
-                                                    {
-                                                      'image': 'Group2270.png',
-                                                      'name': 'Forklift'
-                                                    },
-                                                    {
-                                                      'image': 'Group2271.png',
-                                                      'name': 'Scissorlift'
+                                                      'image': 'Group4128.png',
+                                                      'name': 'Excavator'
                                                     },
                                                   ],
                                                   buttonText: 'Excavator',
                                                   selectedTypeName: controller
-                                                      .selectedTypeName.text,
-                                                  buttonKey: _buttonKey1!,
+                                                          .selectedTypeName
+                                                          .text
+                                                          .isNotEmpty
+                                                      ? controller
+                                                          .selectedTypeName.text
+                                                      : 'Select Type',
+                                                  buttonKey: _buttonKey1,
+                                                  onSelectionChanged: (value) {
+                                                    setState(() {
+                                                      controller
+                                                          .selectedTypeName
+                                                          .text = value;
+                                                    });
+                                                  },
                                                 ),
                                                 UnitsContainer(
                                                   unitNames: [
                                                     {
-                                                      'image': 'Group2181.png',
-                                                      'name': 'Dump truck'
+                                                      'image': 'Group3071.png',
+                                                      'name': 'Back hoe'
                                                     },
                                                     {
-                                                      'image': 'Group2270.png',
-                                                      'name': 'Forklift'
+                                                      'image': 'Group2052.png',
+                                                      'name': 'Front hoe'
                                                     },
                                                     {
-                                                      'image': 'Group2271.png',
-                                                      'name': 'Scissorlift'
+                                                      'image': 'Group4137.png',
+                                                      'name': 'Skid steer'
                                                     },
                                                   ],
                                                   buttonText: 'Loaders',
                                                   selectedTypeName: controller
-                                                      .selectedTypeName2.text,
-                                                  buttonKey: _buttonKey2!,
+                                                          .selectedTypeName1
+                                                          .text
+                                                          .isNotEmpty
+                                                      ? controller
+                                                          .selectedTypeName1
+                                                          .text
+                                                      : 'Select Type',
+                                                  buttonKey: _buttonKey2,
+                                                  onSelectionChanged: (value) {
+                                                    setState(() {
+                                                      controller
+                                                          .selectedTypeName1
+                                                          .text = value;
+                                                    });
+                                                  },
                                                 ),
                                                 UnitsContainer(
                                                   unitNames: [
                                                     {
-                                                      'image': 'Group2181.png',
-                                                      'name': 'Dump truck'
-                                                    },
-                                                    {
-                                                      'image': 'Group2270.png',
-                                                      'name': 'Forklift'
-                                                    },
-                                                    {
                                                       'image': 'Group2271.png',
-                                                      'name': 'Scissorlift'
+                                                      'name': 'Crawler crane'
+                                                    },
+                                                    {
+                                                      'image': 'Group4240.png',
+                                                      'name': 'Mobile crane'
                                                     },
                                                   ],
                                                   buttonText: 'Cranes',
                                                   selectedTypeName: controller
-                                                      .selectedTypeName3.text,
-                                                  buttonKey: _buttonKey3!,
+                                                          .selectedTypeName2
+                                                          .text
+                                                          .isNotEmpty
+                                                      ? controller
+                                                          .selectedTypeName2
+                                                          .text
+                                                      : 'Select Type',
+                                                  buttonKey: _buttonKey3,
+                                                  onSelectionChanged: (value) {
+                                                    setState(() {
+                                                      controller
+                                                          .selectedTypeName2
+                                                          .text = value;
+                                                    });
+                                                  },
                                                 ),
                                                 UnitsContainer(
                                                   unitNames: [
                                                     {
-                                                      'image': 'Group2181.png',
+                                                      'image': 'Group2270.png',
+                                                      'name': 'Compactors'
+                                                    },
+                                                    {
+                                                      'image': 'Group2236.png',
+                                                      'name': 'Bulldozers'
+                                                    },
+                                                    {
+                                                      'image': 'Group4225.png',
+                                                      'name': 'Graders'
+                                                    },
+                                                    {
+                                                      'image': 'Group2148.png',
                                                       'name': 'Dump truck'
                                                     },
                                                     {
-                                                      'image': 'Group2270.png',
+                                                      'image': 'Group2181.png',
                                                       'name': 'Forklift'
                                                     },
                                                     {
-                                                      'image': 'Group2271.png',
+                                                      'image': 'Group4239.png',
                                                       'name': 'Scissorlift'
                                                     },
                                                   ],
                                                   buttonText: 'Others',
                                                   selectedTypeName: controller
-                                                      .selectedTypeName4.text,
-                                                  buttonKey: _buttonKey4!,
+                                                          .selectedTypeName3
+                                                          .text
+                                                          .isNotEmpty
+                                                      ? controller
+                                                          .selectedTypeName3
+                                                          .text
+                                                      : 'Select Type',
+                                                  buttonKey: _buttonKey4,
+                                                  onSelectionChanged: (value) {
+                                                    setState(() {
+                                                      controller
+                                                          .selectedTypeName3
+                                                          .text = value;
+                                                    });
+                                                  },
                                                 ),
                                                 SizedBox(
                                                   height: 10,
@@ -377,6 +543,9 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                               Flexible(
                                                                 child:
                                                                     CustomTextfieldGrey(
+                                                                  controller:
+                                                                      controller
+                                                                          .time,
                                                                   text: 'Time',
                                                                 ),
                                                               ),
@@ -390,6 +559,9 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                               Flexible(
                                                                 child:
                                                                     CustomTextfieldGrey(
+                                                                  controller:
+                                                                      controller
+                                                                          .size,
                                                                   text:
                                                                       'Value of the Product',
                                                                 ),
@@ -405,67 +577,141 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                     Expanded(
                                                       child: Column(
                                                         children: [
-                                                          Container(
-                                                            padding: EdgeInsets
-                                                                .fromLTRB(0.5.w,
-                                                                    0, 1.w, 0),
-                                                            height: 50,
-                                                            decoration:
-                                                                BoxDecoration(
-                                                              border: Border.all(
-                                                                  color: Color
-                                                                      .fromRGBO(
-                                                                          183,
-                                                                          183,
-                                                                          183,
-                                                                          1)),
-                                                              color:
-                                                                  Colors.white,
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .only(
-                                                                topLeft: Radius
-                                                                    .circular(
-                                                                        8),
-                                                                topRight: Radius
-                                                                    .circular(
-                                                                        8),
-                                                                bottomLeft: Radius
-                                                                    .circular(
-                                                                        8),
-                                                                bottomRight:
-                                                                    Radius
-                                                                        .circular(
-                                                                            8),
-                                                              ),
-                                                            ),
-                                                            child: Row(
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .start,
-                                                              children: [
-                                                                Icon(
-                                                                    Icons
-                                                                        .calendar_today,
+                                                          GestureDetector(
+                                                            child: Container(
+                                                              padding:
+                                                                  EdgeInsets
+                                                                      .fromLTRB(
+                                                                          0.5.w,
+                                                                          0,
+                                                                          1.w,
+                                                                          0),
+                                                              height: 50,
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                border: Border.all(
                                                                     color: Color
                                                                         .fromRGBO(
                                                                             183,
                                                                             183,
                                                                             183,
                                                                             1)),
-                                                                SizedBox(
-                                                                  width: 10,
+                                                                color: Colors
+                                                                    .white,
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .only(
+                                                                  topLeft: Radius
+                                                                      .circular(
+                                                                          8),
+                                                                  topRight: Radius
+                                                                      .circular(
+                                                                          8),
+                                                                  bottomLeft: Radius
+                                                                      .circular(
+                                                                          8),
+                                                                  bottomRight: Radius
+                                                                      .circular(
+                                                                          8),
                                                                 ),
-                                                                VerticalDivider(
-                                                                  width: 0.2,
-                                                                  color: Color
-                                                                      .fromRGBO(
-                                                                          183,
-                                                                          183,
-                                                                          183,
-                                                                          1),
-                                                                )
-                                                              ],
+                                                              ),
+                                                              child: Row(
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .start,
+                                                                children: [
+                                                                  GestureDetector(
+                                                                    onTap: () {
+                                                                      CalendarWeek(
+                                                                        controller:
+                                                                            _controller,
+                                                                        height:
+                                                                            100,
+                                                                        showMonth:
+                                                                            true,
+                                                                        minDate:
+                                                                            DateTime.now().add(
+                                                                          Duration(
+                                                                              days: -365),
+                                                                        ),
+                                                                        maxDate:
+                                                                            DateTime.now().add(
+                                                                          Duration(
+                                                                              days: 365),
+                                                                        ),
+                                                                        onDatePressed:
+                                                                            (DateTime
+                                                                                datetime) {
+                                                                          // Do something
+                                                                          setState(
+                                                                              () {});
+                                                                        },
+                                                                        onDateLongPressed:
+                                                                            (DateTime
+                                                                                datetime) {
+                                                                          // Do something
+                                                                        },
+                                                                        onWeekChanged:
+                                                                            () {
+                                                                          // Do something
+                                                                        },
+                                                                        monthViewBuilder:
+                                                                            (DateTime time) =>
+                                                                                Align(
+                                                                          alignment:
+                                                                              FractionalOffset.center,
+                                                                          child: Container(
+                                                                              margin: const EdgeInsets.symmetric(vertical: 4),
+                                                                              child: Text(
+                                                                                DateFormat.yMMMM().format(time),
+                                                                                overflow: TextOverflow.ellipsis,
+                                                                                textAlign: TextAlign.center,
+                                                                                style: TextStyle(color: Colors.blue, fontWeight: FontWeight.w600),
+                                                                              )),
+                                                                        ),
+                                                                        decorations: [
+                                                                          DecorationItem(
+                                                                              decorationAlignment: FractionalOffset.bottomRight,
+                                                                              date: DateTime.now(),
+                                                                              decoration: Icon(
+                                                                                Icons.today,
+                                                                                color: Colors.blue,
+                                                                              )),
+                                                                          DecorationItem(
+                                                                              date: DateTime.now().add(Duration(days: 3)),
+                                                                              decoration: Text(
+                                                                                'Holiday',
+                                                                                style: TextStyle(
+                                                                                  color: Colors.brown,
+                                                                                  fontWeight: FontWeight.w600,
+                                                                                ),
+                                                                              )),
+                                                                        ],
+                                                                      );
+                                                                    },
+                                                                    child: Icon(
+                                                                        Icons
+                                                                            .calendar_today,
+                                                                        color: Color.fromRGBO(
+                                                                            183,
+                                                                            183,
+                                                                            183,
+                                                                            1)),
+                                                                  ),
+                                                                  SizedBox(
+                                                                    width: 10,
+                                                                  ),
+                                                                  VerticalDivider(
+                                                                    width: 0.2,
+                                                                    color: Color
+                                                                        .fromRGBO(
+                                                                            183,
+                                                                            183,
+                                                                            183,
+                                                                            1),
+                                                                  )
+                                                                ],
+                                                              ),
                                                             ),
                                                           ),
                                                           SizedBox(
@@ -475,8 +721,13 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                             child:
                                                                 DropdownButton2<
                                                                     String>(
-                                                              value:
-                                                                  dropdownValues, // Use value from the list
+                                                              value: controller
+                                                                      .load
+                                                                      .text
+                                                                      .isNotEmpty
+                                                                  ? controller
+                                                                      .load.text
+                                                                  : 'Load Type', // Use value from the list
                                                               items: <String>[
                                                                 'Trigger Bookings',
                                                                 'Booking Manager',
@@ -499,7 +750,9 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                               onChanged: (String?
                                                                   newValue) {
                                                                 setState(() {
-                                                                  dropdownValues =
+                                                                  controller
+                                                                          .load
+                                                                          .text =
                                                                       newValue!; // Update value in the list
                                                                 });
                                                               },
@@ -810,17 +1063,51 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                   child: CustomButton(
                                                     onPressed: () async {
                                                       try {
-                                                        String book1 =
-                                                            controller
-                                                                .equip.text;
+                                                        print(
+                                                            '$selectedContainerIndex');
+                                                        String equip = '';
+
+                                                        if (controller
+                                                            .selectedTypeName
+                                                            .text
+                                                            .isNotEmpty) {
+                                                          equip = controller
+                                                              .selectedTypeName
+                                                              .text;
+                                                        } else if (controller
+                                                            .selectedTypeName1
+                                                            .text
+                                                            .isNotEmpty) {
+                                                          equip = controller
+                                                              .selectedTypeName1
+                                                              .text;
+                                                        } else if (controller
+                                                            .selectedTypeName2
+                                                            .text
+                                                            .isNotEmpty) {
+                                                          equip = controller
+                                                              .selectedTypeName2
+                                                              .text;
+                                                        } else if (controller
+                                                            .selectedTypeName3
+                                                            .text
+                                                            .isNotEmpty) {
+                                                          equip = controller
+                                                              .selectedTypeName3
+                                                              .text;
+                                                        }
+
                                                         String size = controller
                                                             .size.text;
                                                         String load = controller
                                                             .load.text;
+                                                        String time = controller
+                                                            .time.text;
                                                         await createNewBooking(
-                                                            //
-
-                                                            book1,
+                                                            equip,
+                                                            size,
+                                                            load,
+                                                            time,
                                                             widget.user!);
                                                       } catch (e) {
                                                         print(
@@ -836,6 +1123,15 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                         builder: (context) {
                                                           return BookingIDDialog();
                                                         },
+                                                      );
+                                                      Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                            builder: (context) =>
+                                                                SingleUserDashboardPage(
+                                                                  user: widget
+                                                                      .user,
+                                                                )),
                                                       );
                                                     },
                                                     text: 'Create Booking',
@@ -1172,6 +1468,9 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                               Flexible(
                                                                 child:
                                                                     CustomTextfieldGrey(
+                                                                  controller:
+                                                                      controller
+                                                                          .size,
                                                                   text:
                                                                       'Value of the Product',
                                                                 ),
@@ -1257,8 +1556,9 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                             child:
                                                                 DropdownButton2<
                                                                     String>(
-                                                              value:
-                                                                  dropdownValues, // Use value from the list
+                                                              value: controller
+                                                                  .load
+                                                                  .text, // Use value from the list
                                                               items: <String>[
                                                                 'Trigger Bookings',
                                                                 'Booking Manager',
