@@ -9,6 +9,7 @@ class SingleUserBooking {
   final String? truck;
   final String? load;
   final String? size;
+  final String? date;
   String? get docId => reference!.id;
 
   final DocumentReference? reference;
@@ -18,6 +19,7 @@ class SingleUserBooking {
     this.truck,
     this.load,
     this.size,
+    this.date,
     this.reference,
     this.activeStatus = ActiveStatus.curated,
   });
@@ -27,6 +29,7 @@ class SingleUserBooking {
         "reference": reference,
         "load": load,
         "size": size,
+        "date": date,
         "docId": docId,
       };
 
@@ -37,6 +40,7 @@ class SingleUserBooking {
       truck: data["truck"],
       load: data["load"],
       size: data["size"],
+      date: data["date"],
       reference: snapshot.reference,
     );
   }
@@ -46,6 +50,7 @@ class SingleUserBooking {
       truck: json["truck"],
       load: json["load"],
       size: json["size"],
+      date: json["date"],
       // reference: json["reference"],
       reference: reference,
     );

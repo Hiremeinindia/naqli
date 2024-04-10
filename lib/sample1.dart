@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/sample.dart';
+import 'package:intl/intl.dart';
+import 'package:open_street_map_search_and_pick/open_street_map_search_and_pick.dart';
 
 class Sample1 extends StatefulWidget {
   @override
@@ -7,38 +8,30 @@ class Sample1 extends StatefulWidget {
 }
 
 class _Sample1State extends State<Sample1> {
-  late OverlayEntry _overlayEntry;
-  bool _overlayVisible = false;
+  DateTime? _pickedDate;
 
   @override
-  void initState() {
-    super.initState();
-  }
-
-  OverlayEntry _createOverlayEntry() {
-    return OverlayEntry(
-      builder: (context) => Center(
-        child: Container(
-          width: 200,
-          height: 200,
-          color: Colors.blue.withOpacity(0.8),
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('Date Picker Example'),
+        ),
+        body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
-                'Overlay Content',
-                style: TextStyle(
-                  fontSize: 20,
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
-                  _hideOverlay();
+                  _showDatePicker(context);
                 },
-                child: Text('Close Overlay'),
+                child: Text('Pick a Date'),
+              ),
+              SizedBox(height: 20),
+              Text(
+                _pickedDate != null
+                    ? 'Selected date: ${DateFormat('dd/MM/yyyy').format(_pickedDate!)}'
+                    : 'No date selected',
               ),
             ],
           ),
@@ -47,50 +40,19 @@ class _Sample1State extends State<Sample1> {
     );
   }
 
-  void _showOverlay() {
-    _overlayEntry = _createOverlayEntry();
-    Overlay.of(context).insert(_overlayEntry);
-    setState(() {
-      _overlayVisible = true;
-    });
-  }
-
-  void _hideOverlay() {
-    _overlayEntry.remove();
-    setState(() {
-      _overlayVisible = false;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Overlay Example'),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ElevatedButton(
-              onPressed: () {
-                if (!_overlayVisible) {
-                  _showOverlay();
-                }
-              },
-              child: Text('Show Overlay'),
-            ),
-          ],
-        ),
-      ),
+  Future<void> _showDatePicker(BuildContext context) async {
+    final DateTime? pickedDate = await showDatePicker(
+      initialEntryMode: DatePickerEntryMode.calendarOnly,
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2020),
+      lastDate: DateTime(2025),
     );
-  }
 
-  @override
-  void dispose() {
-    if (_overlayVisible) {
-      _overlayEntry.remove();
+    if (pickedDate != null) {
+      setState(() {
+        _pickedDate = pickedDate;
+      });
     }
-    super.dispose();
   }
 }

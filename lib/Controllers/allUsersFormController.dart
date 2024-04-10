@@ -39,6 +39,7 @@ class AllUsersFormController {
   final selectedTypeName8 = TextEditingController();
   final otp = TextEditingController();
   final equip = TextEditingController();
+  final date = TextEditingController();
 
   // String get newDocId => FirebaseFirestore.instance.collection('AllUserss').doc().id;
 

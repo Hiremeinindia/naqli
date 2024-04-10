@@ -1,11 +1,13 @@
 import 'dart:ui';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_sidemenu/easy_sidemenu.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_application_1/Users/SingleUser/singleuser.dart';
 import 'package:flutter_application_1/Widgets/colorContainer.dart';
 import 'package:flutter_application_1/Widgets/formText.dart';
 import 'package:flutter_application_1/pieChart/app_colors.dart';
@@ -17,7 +19,8 @@ import 'package:sizer/sizer.dart';
 import 'dart:ui';
 
 class SingleUserPayment extends StatefulWidget {
-  SingleUserPayment();
+  final String? user;
+  SingleUserPayment({required this.user});
   @override
   State<SingleUserPayment> createState() => _SingleUserPaymentState();
 }
@@ -42,6 +45,7 @@ class _SingleUserPaymentState extends State<SingleUserPayment> {
   bool payNowButtonEnabled = false;
   String? selectedValue;
 
+  Stream<QuerySnapshot<Map<String, dynamic>>>? _currentStream;
   @override
   void dispose() {
     _scrollController1.dispose();
@@ -49,10 +53,25 @@ class _SingleUserPaymentState extends State<SingleUserPayment> {
     super.dispose();
   }
 
+  Stream<QuerySnapshot<Map<String, dynamic>>> allBookings() {
+    FirebaseFirestore firestore = FirebaseFirestore.instance;
+
+    // Query for user collection
+    Stream<QuerySnapshot<Map<String, dynamic>>> userStream = firestore
+        .collection('user')
+        .doc(widget.user)
+        .collection('vehicleBooking')
+        .snapshots();
+
+    // Combine both streams into one
+    return userStream;
+  }
+
   void initState() {
     sideMenu.addListener((p0) {
       page.jumpToPage(p0);
     });
+    _currentStream = allBookings();
     super.initState();
   }
 
@@ -199,148 +218,70 @@ class _SingleUserPaymentState extends State<SingleUserPayment> {
                         ),
                       ),
                       SizedBox(height: 50),
-                      ElevationContainer(
-                        //width:300; // Set width to match screen width
+                      StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+                        stream: _currentStream,
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            return Center(child: CircularProgressIndicator());
+                          } else if (snapshot.hasError) {
+                            return Center(
+                                child: Text('Error: ${snapshot.error}'));
+                          } else if (!snapshot.hasData ||
+                              snapshot.data!.docs.isEmpty) {
+                            return Center(
+                                child: Text("You haven't done any bookings"));
+                          } else {
+                            // Map documents to SingleUser objects
+                            List<SingleUserBooking> blueSingleUsers = snapshot
+                                .data!.docs
+                                .map((doc) =>
+                                    SingleUserBooking.fromSnapshot(doc))
+                                .toList();
 
-                        child: Scrollbar(
-                          controller: _scrollController2,
-                          child: SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
-                            controller: _scrollController2,
-                            child: SizedBox(
-                              width: 1070,
-                              child: DataTable(
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.only(
-                                      bottomLeft: Radius.circular(8),
-                                      bottomRight: Radius.circular(8)),
-                                  border: Border.all(
-                                    color: Color.fromRGBO(112, 112, 112, 1)
-                                        .withOpacity(0.3),
+                            return ElevationContainer(
+                              //width:300; // Set width to match screen width
+
+                              child: Scrollbar(
+                                controller: _scrollController2,
+                                thumbVisibility: true,
+                                child: SingleChildScrollView(
+                                  scrollDirection: Axis.horizontal,
+                                  controller: _scrollController2,
+                                  child: Container(
+                                    height: 340,
+                                    width: 1070,
+                                    child: DataTable(
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.only(
+                                            bottomLeft: Radius.circular(8),
+                                            bottomRight: Radius.circular(8)),
+                                        border: Border.all(
+                                          color:
+                                              Color.fromRGBO(112, 112, 112, 1)
+                                                  .withOpacity(0.3),
+                                        ),
+                                      ),
+                                      headingRowColor: MaterialStateColor
+                                          .resolveWith((states) =>
+                                              Color.fromRGBO(75, 61, 82, 1)),
+                                      dividerThickness: 1.0,
+                                      dataRowHeight: 65,
+                                      headingRowHeight: 70,
+                                      columns: DataSource.getColumns(context),
+                                      rows: blueSingleUsers.map((user) {
+                                        return DataRow(
+                                          cells: DataSource.getCells(user),
+                                        );
+                                      }).toList(),
+                                    ),
                                   ),
                                 ),
-                                headingRowColor: MaterialStateColor.resolveWith(
-                                    (states) => Color.fromRGBO(75, 61, 82, 1)),
-                                dividerThickness: 1.0,
-                                dataRowHeight: 65,
-                                headingRowHeight: 70,
-                                columns: <DataColumn>[
-                                  DataColumn(
-                                      label: Expanded(
-                                          child: Text(
-                                    'Mode',
-                                    style: BookingHistoryText.sfpro20white,
-                                    textAlign: TextAlign.center,
-                                  ))),
-                                  DataColumn(
-                                      label: Expanded(
-                                          child: Text(
-                                    'Booking ID',
-                                    style: BookingHistoryText.sfpro20white,
-                                    textAlign: TextAlign.center,
-                                  ))),
-                                  DataColumn(
-                                      label: Expanded(
-                                          child: Text(
-                                    'Date',
-                                    style: BookingHistoryText.sfpro20white,
-                                    textAlign: TextAlign.center,
-                                  ))),
-                                  DataColumn(
-                                      label: Expanded(
-                                          child: Text(
-                                    'Unit Type',
-                                    style: BookingHistoryText.sfpro20white,
-                                    textAlign: TextAlign.center,
-                                  ))),
-                                  DataColumn(
-                                      label: Expanded(
-                                          child: Text(
-                                    'Payment',
-                                    style: BookingHistoryText.sfpro20white,
-                                    textAlign: TextAlign.center,
-                                  ))),
-                                  DataColumn(
-                                      label: Expanded(
-                                          child: Text(
-                                    'Payment Status',
-                                    style: BookingHistoryText.sfpro20white,
-                                    textAlign: TextAlign.center,
-                                  ))),
-                                ],
-                                rows: <DataRow>[
-                                  DataRow(
-                                    cells: <DataCell>[
-                                      for (var item in [
-                                        'Trip',
-                                        '#456789231',
-                                        '18.2.2022',
-                                        'Box truck',
-                                        'XXXX SAR',
-                                        'Completed'
-                                      ])
-                                        DataCell(
-                                          Container(
-                                            height:
-                                                65, // Adjust height as needed
-                                            alignment: Alignment.center,
-                                            child: Text(item,
-                                                style: BookingHistoryText
-                                                    .sfpro20black),
-                                          ),
-                                        ),
-                                    ],
-                                  ),
-                                  DataRow(
-                                    cells: <DataCell>[
-                                      for (var item in [
-                                        'Bus Trip',
-                                        '#456789231',
-                                        '13.6.2022',
-                                        'Sleeper',
-                                        'XXXX SAR',
-                                        'Completed'
-                                      ])
-                                        DataCell(
-                                          Container(
-                                            height:
-                                                65, // Adjust height as needed
-                                            alignment: Alignment.center,
-                                            child: Text(item,
-                                                style: BookingHistoryText
-                                                    .sfpro20black),
-                                          ),
-                                        ),
-                                    ],
-                                  ),
-                                  DataRow(
-                                    cells: <DataCell>[
-                                      for (var item in [
-                                        'Equipment hire',
-                                        '#456789231',
-                                        '12.5.2022',
-                                        'Crane',
-                                        'XXXX SAR',
-                                        'Completed'
-                                      ])
-                                        DataCell(
-                                          Container(
-                                            height:
-                                                65, // Adjust height as needed
-                                            alignment: Alignment.center,
-                                            child: Text(item,
-                                                style: BookingHistoryText
-                                                    .sfpro20black),
-                                          ),
-                                        ),
-                                    ],
-                                  ),
-                                ],
                               ),
-                            ),
-                          ),
-                        ),
+                            );
+                          }
+                        },
                       ),
                     ],
                   ),
@@ -1018,4 +959,90 @@ class _SingleUserPaymentState extends State<SingleUserPayment> {
       ]),
     ];
   }
+}
+
+class DataSource extends DataTableSource {
+  final List<SingleUserBooking> candidates;
+  final BuildContext context;
+  final Function(SingleUserBooking) onSelect;
+
+  DataSource(this.candidates, {required this.context, required this.onSelect});
+
+  @override
+  DataRow? getRow(int index) {
+    final e = candidates[index];
+
+    return DataRow.byIndex(
+      index: index,
+      cells: [
+        DataCell(Text(e.truck?.toString() ?? 'nill')),
+        DataCell(Text('#623832623')),
+        DataCell(Text('14.02.2024')),
+        DataCell(Text(e.load.toString())),
+        DataCell(Text(e.size?.toString() ?? 'nill')),
+        DataCell(Text(e.size?.toString() ?? 'nill')),
+      ],
+    );
+  }
+
+  static List<DataColumn> getColumns(BuildContext context) {
+    return [
+      DataColumn(
+          label: Text(
+        'Mode',
+        style: BookingHistoryText.sfpro20white,
+        textAlign: TextAlign.center,
+      )),
+      DataColumn(
+          label: Text(
+        'Booking ID',
+        style: BookingHistoryText.sfpro20white,
+        textAlign: TextAlign.center,
+      )),
+      DataColumn(
+          label: Text(
+        'Date',
+        style: BookingHistoryText.sfpro20white,
+        textAlign: TextAlign.center,
+      )),
+      DataColumn(
+          label: Text(
+        'Unit Type',
+        style: BookingHistoryText.sfpro20white,
+        textAlign: TextAlign.center,
+      )),
+      DataColumn(
+          label: Text(
+        'Payment',
+        style: BookingHistoryText.sfpro20white,
+        textAlign: TextAlign.center,
+      )),
+      DataColumn(
+          label: Text(
+        'Payment Status',
+        style: BookingHistoryText.sfpro20white,
+        textAlign: TextAlign.center,
+      )),
+    ];
+  }
+
+  static List<DataCell> getCells(SingleUserBooking user) {
+    return [
+      DataCell(Text(user.truck?.toString() ?? 'nill')),
+      DataCell(Text('#623832623')),
+      DataCell(Text(user.date?.toString() ?? 'nill')),
+      DataCell(Text(user.load.toString())),
+      DataCell(Text(user.size?.toString() ?? 'nill')),
+      DataCell(Text(user.size?.toString() ?? 'nill')),
+    ];
+  }
+
+  @override
+  bool get isRowCountApproximate => false;
+
+  @override
+  int get rowCount => candidates.length;
+
+  @override
+  int get selectedRowCount => 0;
 }
