@@ -19,9 +19,11 @@ import 'package:flutter_application_1/Widgets/unitsContainer.dart';
 import 'package:flutter_application_1/classes/language.dart';
 import 'package:flutter_application_1/classes/language_constants.dart';
 import 'package:flutter_application_1/main.dart';
+import 'package:flutter_calendar_week/flutter_calendar_week.dart';
 import 'package:sizer/sizer.dart';
-
+import 'package:table_calendar/table_calendar.dart';
 import 'Widgets/formText.dart';
+import 'package:intl/intl.dart';
 
 class AvailableEquipment extends StatefulWidget {
   final String? user;
@@ -34,8 +36,10 @@ class AvailableEquipment extends StatefulWidget {
 }
 
 class _AvailableEquipmentState extends State<AvailableEquipment> {
+  final CalendarWeekController _controller = CalendarWeekController();
   String _selectedValue = '1';
   String categoryValue = '1';
+
   bool value = false;
   bool checkbox = false;
   int? groupValue1;
@@ -563,67 +567,141 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                     Expanded(
                                                       child: Column(
                                                         children: [
-                                                          Container(
-                                                            padding: EdgeInsets
-                                                                .fromLTRB(0.5.w,
-                                                                    0, 1.w, 0),
-                                                            height: 50,
-                                                            decoration:
-                                                                BoxDecoration(
-                                                              border: Border.all(
-                                                                  color: Color
-                                                                      .fromRGBO(
-                                                                          183,
-                                                                          183,
-                                                                          183,
-                                                                          1)),
-                                                              color:
-                                                                  Colors.white,
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .only(
-                                                                topLeft: Radius
-                                                                    .circular(
-                                                                        8),
-                                                                topRight: Radius
-                                                                    .circular(
-                                                                        8),
-                                                                bottomLeft: Radius
-                                                                    .circular(
-                                                                        8),
-                                                                bottomRight:
-                                                                    Radius
-                                                                        .circular(
-                                                                            8),
-                                                              ),
-                                                            ),
-                                                            child: Row(
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .start,
-                                                              children: [
-                                                                Icon(
-                                                                    Icons
-                                                                        .calendar_today,
+                                                          GestureDetector(
+                                                            child: Container(
+                                                              padding:
+                                                                  EdgeInsets
+                                                                      .fromLTRB(
+                                                                          0.5.w,
+                                                                          0,
+                                                                          1.w,
+                                                                          0),
+                                                              height: 50,
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                border: Border.all(
                                                                     color: Color
                                                                         .fromRGBO(
                                                                             183,
                                                                             183,
                                                                             183,
                                                                             1)),
-                                                                SizedBox(
-                                                                  width: 10,
+                                                                color: Colors
+                                                                    .white,
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .only(
+                                                                  topLeft: Radius
+                                                                      .circular(
+                                                                          8),
+                                                                  topRight: Radius
+                                                                      .circular(
+                                                                          8),
+                                                                  bottomLeft: Radius
+                                                                      .circular(
+                                                                          8),
+                                                                  bottomRight: Radius
+                                                                      .circular(
+                                                                          8),
                                                                 ),
-                                                                VerticalDivider(
-                                                                  width: 0.2,
-                                                                  color: Color
-                                                                      .fromRGBO(
-                                                                          183,
-                                                                          183,
-                                                                          183,
-                                                                          1),
-                                                                )
-                                                              ],
+                                                              ),
+                                                              child: Row(
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .start,
+                                                                children: [
+                                                                  GestureDetector(
+                                                                    onTap: () {
+                                                                      CalendarWeek(
+                                                                        controller:
+                                                                            _controller,
+                                                                        height:
+                                                                            100,
+                                                                        showMonth:
+                                                                            true,
+                                                                        minDate:
+                                                                            DateTime.now().add(
+                                                                          Duration(
+                                                                              days: -365),
+                                                                        ),
+                                                                        maxDate:
+                                                                            DateTime.now().add(
+                                                                          Duration(
+                                                                              days: 365),
+                                                                        ),
+                                                                        onDatePressed:
+                                                                            (DateTime
+                                                                                datetime) {
+                                                                          // Do something
+                                                                          setState(
+                                                                              () {});
+                                                                        },
+                                                                        onDateLongPressed:
+                                                                            (DateTime
+                                                                                datetime) {
+                                                                          // Do something
+                                                                        },
+                                                                        onWeekChanged:
+                                                                            () {
+                                                                          // Do something
+                                                                        },
+                                                                        monthViewBuilder:
+                                                                            (DateTime time) =>
+                                                                                Align(
+                                                                          alignment:
+                                                                              FractionalOffset.center,
+                                                                          child: Container(
+                                                                              margin: const EdgeInsets.symmetric(vertical: 4),
+                                                                              child: Text(
+                                                                                DateFormat.yMMMM().format(time),
+                                                                                overflow: TextOverflow.ellipsis,
+                                                                                textAlign: TextAlign.center,
+                                                                                style: TextStyle(color: Colors.blue, fontWeight: FontWeight.w600),
+                                                                              )),
+                                                                        ),
+                                                                        decorations: [
+                                                                          DecorationItem(
+                                                                              decorationAlignment: FractionalOffset.bottomRight,
+                                                                              date: DateTime.now(),
+                                                                              decoration: Icon(
+                                                                                Icons.today,
+                                                                                color: Colors.blue,
+                                                                              )),
+                                                                          DecorationItem(
+                                                                              date: DateTime.now().add(Duration(days: 3)),
+                                                                              decoration: Text(
+                                                                                'Holiday',
+                                                                                style: TextStyle(
+                                                                                  color: Colors.brown,
+                                                                                  fontWeight: FontWeight.w600,
+                                                                                ),
+                                                                              )),
+                                                                        ],
+                                                                      );
+                                                                    },
+                                                                    child: Icon(
+                                                                        Icons
+                                                                            .calendar_today,
+                                                                        color: Color.fromRGBO(
+                                                                            183,
+                                                                            183,
+                                                                            183,
+                                                                            1)),
+                                                                  ),
+                                                                  SizedBox(
+                                                                    width: 10,
+                                                                  ),
+                                                                  VerticalDivider(
+                                                                    width: 0.2,
+                                                                    color: Color
+                                                                        .fromRGBO(
+                                                                            183,
+                                                                            183,
+                                                                            183,
+                                                                            1),
+                                                                  )
+                                                                ],
+                                                              ),
                                                             ),
                                                           ),
                                                           SizedBox(
