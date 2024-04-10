@@ -76,7 +76,6 @@ class CustomContainerState extends State<UnitsContainer> {
                   onTap: () {
                     setState(() {
                       widget.onSelectionChanged!(name);
-                      widget.selectedTypeName = name;
                       expand = false;
                     });
                     _hideOverlay();

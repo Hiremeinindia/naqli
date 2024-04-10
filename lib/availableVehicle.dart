@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/widgets.dart';
@@ -74,15 +75,8 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
     'Others',
     'Load Type',
   ];
-  String? selectedContainerIndex;
-
-  // Function to update the selected container index
-  void updateSelectedContainerIndex(String index) {
-    setState(() {
-      selectedContainerIndex = index;
-    });
-  }
-
+  int? selectedContainerIndex;
+  DateTime? _pickedDate;
   AllUsersFormController controller = AllUsersFormController();
   void initState() {
     super.initState();
@@ -95,10 +89,28 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
     _buttonKey7 = GlobalKey<CustomContainerState>();
   }
 
+  Future<void> _showDatePicker(BuildContext context) async {
+    final DateTime? pickedDate = await showDatePicker(
+      initialEntryMode: DatePickerEntryMode.calendarOnly,
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2020),
+      lastDate: DateTime(2025),
+    );
+
+    if (pickedDate != null) {
+      setState(() {
+        _pickedDate = pickedDate;
+        controller.date.text = DateFormat('dd/MM/yyyy').format(_pickedDate!);
+      });
+    }
+  }
+
   Future<void> createNewBooking(
     String truck,
     String load,
     String size,
+    String date,
     String adminUid,
   ) async {
     try {
@@ -113,9 +125,10 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
 
       // Add document to subcollection and get the document reference
       DocumentReference newBookingDocRef = await userBookingCollectionRef.add({
-        'load': load,
         'truck': truck,
+        'load': load,
         'size': size,
+        'date': date,
         'createdTime': Timestamp.now(),
       });
 
@@ -423,27 +436,26 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                                     },
                                                   ],
                                                   buttonText: 'Tralia',
-                                                  selectedTypeName: controller
-                                                          .selectedTypeName1
-                                                          .text
-                                                          .isNotEmpty
-                                                      ? controller
-                                                          .selectedTypeName1
-                                                          .text
-                                                      : 'Select Type',
+                                                  selectedTypeName:
+                                                      selectedContainerIndex ==
+                                                              1
+                                                          ? controller
+                                                              .selectedTypeName1
+                                                              .text
+                                                          : 'Select Type',
                                                   buttonKey: _buttonKey1,
                                                   onSelectionChanged: (value) {
                                                     setState(() {
                                                       loadtype = value;
-
                                                       controller
                                                           .selectedTypeName1
                                                           .text = value;
-                                                      updateSelectedContainerIndex(
-                                                          '${controller.selectedTypeName1.text}');
+                                                      selectedContainerIndex =
+                                                          1;
                                                     });
                                                   },
                                                 ),
+                                                // UnitsContainer 2
                                                 UnitsContainer(
                                                   unitNames: [
                                                     {
@@ -456,27 +468,26 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                                     },
                                                   ],
                                                   buttonText: 'Six',
-                                                  selectedTypeName: controller
-                                                          .selectedTypeName2
-                                                          .text
-                                                          .isNotEmpty
-                                                      ? controller
-                                                          .selectedTypeName2
-                                                          .text
-                                                      : 'Select Type',
+                                                  selectedTypeName:
+                                                      selectedContainerIndex ==
+                                                              2
+                                                          ? controller
+                                                              .selectedTypeName2
+                                                              .text
+                                                          : 'Select Type',
                                                   buttonKey: _buttonKey2,
                                                   onSelectionChanged: (value) {
                                                     setState(() {
                                                       loadtype = value;
-
                                                       controller
                                                           .selectedTypeName2
                                                           .text = value;
-                                                      updateSelectedContainerIndex(
-                                                          '${controller.selectedTypeName2.text}');
+                                                      selectedContainerIndex =
+                                                          2;
                                                     });
                                                   },
                                                 ),
+                                                // UnitsContainer 3
                                                 UnitsContainer(
                                                   unitNames: [
                                                     {
@@ -485,14 +496,13 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                                     },
                                                   ],
                                                   buttonText: 'Lorry 7 Metres',
-                                                  selectedTypeName: controller
-                                                          .selectedTypeName3
-                                                          .text
-                                                          .isNotEmpty
-                                                      ? controller
-                                                          .selectedTypeName3
-                                                          .text
-                                                      : 'Select Type',
+                                                  selectedTypeName:
+                                                      selectedContainerIndex ==
+                                                              3
+                                                          ? controller
+                                                              .selectedTypeName3
+                                                              .text
+                                                          : 'Select Type',
                                                   buttonKey: _buttonKey3,
                                                   onSelectionChanged: (value) {
                                                     setState(() {
@@ -500,11 +510,12 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                                       controller
                                                           .selectedTypeName3
                                                           .text = value;
-                                                      updateSelectedContainerIndex(
-                                                          '${controller.selectedTypeName3.text}');
+                                                      selectedContainerIndex =
+                                                          3;
                                                     });
                                                   },
                                                 ),
+                                                // UnitsContainer 4
                                                 UnitsContainer(
                                                   unitNames: [
                                                     {
@@ -533,14 +544,13 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                                     },
                                                   ],
                                                   buttonText: 'Lorry',
-                                                  selectedTypeName: controller
-                                                          .selectedTypeName4
-                                                          .text
-                                                          .isNotEmpty
-                                                      ? controller
-                                                          .selectedTypeName4
-                                                          .text
-                                                      : 'Select Type',
+                                                  selectedTypeName:
+                                                      selectedContainerIndex ==
+                                                              4
+                                                          ? controller
+                                                              .selectedTypeName4
+                                                              .text
+                                                          : 'Select Type',
                                                   buttonKey: _buttonKey4,
                                                   onSelectionChanged: (value) {
                                                     setState(() {
@@ -548,8 +558,8 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                                       controller
                                                           .selectedTypeName4
                                                           .text = value;
-                                                      updateSelectedContainerIndex(
-                                                          '${controller.selectedTypeName4.text}');
+                                                      selectedContainerIndex =
+                                                          4;
                                                     });
                                                   },
                                                 ),
@@ -577,14 +587,13 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                                     },
                                                   ],
                                                   buttonText: 'Diana',
-                                                  selectedTypeName: controller
-                                                          .selectedTypeName5
-                                                          .text
-                                                          .isNotEmpty
-                                                      ? controller
-                                                          .selectedTypeName5
-                                                          .text
-                                                      : 'Select Type',
+                                                  selectedTypeName:
+                                                      selectedContainerIndex ==
+                                                              5
+                                                          ? controller
+                                                              .selectedTypeName5
+                                                              .text
+                                                          : 'Select Type',
                                                   buttonKey: _buttonKey5,
                                                   onSelectionChanged: (value) {
                                                     setState(() {
@@ -592,6 +601,8 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                                       controller
                                                           .selectedTypeName5
                                                           .text = value;
+                                                      selectedContainerIndex =
+                                                          5;
                                                     });
                                                   },
                                                 ),
@@ -603,14 +614,13 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                                     },
                                                   ],
                                                   buttonText: 'Pick Up',
-                                                  selectedTypeName: controller
-                                                          .selectedTypeName6
-                                                          .text
-                                                          .isNotEmpty
-                                                      ? controller
-                                                          .selectedTypeName6
-                                                          .text
-                                                      : 'Select Type',
+                                                  selectedTypeName:
+                                                      selectedContainerIndex ==
+                                                              6
+                                                          ? controller
+                                                              .selectedTypeName6
+                                                              .text
+                                                          : 'Select Type',
                                                   buttonKey: _buttonKey6,
                                                   onSelectionChanged: (value) {
                                                     setState(() {
@@ -618,6 +628,8 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                                       controller
                                                           .selectedTypeName6
                                                           .text = value;
+                                                      selectedContainerIndex =
+                                                          6;
                                                     });
                                                   },
                                                 ),
@@ -633,14 +645,13 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                                     },
                                                   ],
                                                   buttonText: 'Tow Truck',
-                                                  selectedTypeName: controller
-                                                          .selectedTypeName7
-                                                          .text
-                                                          .isNotEmpty
-                                                      ? controller
-                                                          .selectedTypeName7
-                                                          .text
-                                                      : 'Select Type',
+                                                  selectedTypeName:
+                                                      selectedContainerIndex ==
+                                                              7
+                                                          ? controller
+                                                              .selectedTypeName7
+                                                              .text
+                                                          : 'Select Type',
                                                   buttonKey: _buttonKey7,
                                                   onSelectionChanged: (value) {
                                                     setState(() {
@@ -648,6 +659,8 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                                       controller
                                                           .selectedTypeName7
                                                           .text = value;
+                                                      selectedContainerIndex =
+                                                          7;
                                                     });
                                                   },
                                                 ),
@@ -734,15 +747,22 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                                                   MainAxisAlignment
                                                                       .start,
                                                               children: [
-                                                                Icon(
-                                                                    Icons
-                                                                        .calendar_today,
-                                                                    color: Color
-                                                                        .fromRGBO(
-                                                                            183,
-                                                                            183,
-                                                                            183,
-                                                                            1)),
+                                                                IconButton(
+                                                                  icon: Icon(
+                                                                      Icons
+                                                                          .calendar_today,
+                                                                      size: 25,
+                                                                      color: Color.fromRGBO(
+                                                                          183,
+                                                                          183,
+                                                                          183,
+                                                                          1)),
+                                                                  onPressed:
+                                                                      () {
+                                                                    _showDatePicker(
+                                                                        context);
+                                                                  },
+                                                                ),
                                                                 SizedBox(
                                                                   width: 10,
                                                                 ),
@@ -754,7 +774,34 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                                                           183,
                                                                           183,
                                                                           1),
-                                                                )
+                                                                ),
+                                                                Expanded(
+                                                                  child:
+                                                                      TextFormField(
+                                                                    controller:
+                                                                        controller
+                                                                            .date,
+                                                                    style: AvailableText
+                                                                        .helvetica,
+                                                                    readOnly:
+                                                                        true,
+                                                                    onTap: () {
+                                                                      _showDatePicker(
+                                                                          context);
+                                                                    },
+                                                                    decoration:
+                                                                        InputDecoration(
+                                                                      contentPadding:
+                                                                          EdgeInsets.only(
+                                                                              left: 12),
+                                                                      border: InputBorder
+                                                                          .none,
+                                                                      hintStyle:
+                                                                          AvailableText
+                                                                              .helvetica,
+                                                                    ),
+                                                                  ),
+                                                                ),
                                                               ],
                                                             ),
                                                           ),
@@ -1169,10 +1216,7 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                                   child: CustomButton(
                                                     onPressed: () async {
                                                       try {
-                                                        print(
-                                                            '$selectedContainerIndex');
                                                         String truck = '';
-
                                                         if (controller
                                                             .selectedTypeName1
                                                             .text
@@ -1223,17 +1267,20 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                                               .selectedTypeName7
                                                               .text;
                                                         }
-
+                                                        String truck1 = truck;
                                                         String size = controller
                                                             .size.text;
                                                         String load = controller
                                                             .load.text;
+                                                        String date = controller
+                                                            .date.text;
                                                         // Call functions to create documents in collection and subcollection
-                                                        // await createNewBooking(
-                                                        //     truck,
-                                                        //     size,
-                                                        //     load,
-                                                        //     widget.user!);
+                                                        await createNewBooking(
+                                                            truck1,
+                                                            load,
+                                                            size,
+                                                            date,
+                                                            widget.user!);
                                                       } catch (e) {
                                                         print(
                                                             "Error creating user: $e");
@@ -1249,15 +1296,15 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                                       //     return BookingIDDialog();
                                                       //   },
                                                       // );
-                                                      // Navigator.push(
-                                                      //   context,
-                                                      //   MaterialPageRoute(
-                                                      //       builder: (context) =>
-                                                      //           SingleUserDashboardPage(
-                                                      //             user: widget
-                                                      //                 .user,
-                                                      //           )),
-                                                      // );
+                                                      Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                            builder: (context) =>
+                                                                SingleUserDashboardPage(
+                                                                  user: widget
+                                                                      .user,
+                                                                )),
+                                                      );
                                                     },
                                                     text: 'Create Booking',
                                                   ),
