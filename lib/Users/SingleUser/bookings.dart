@@ -185,27 +185,23 @@ class _BookingsState extends State<Bookings> {
       FirebaseFirestore firestore = FirebaseFirestore.instance;
       DocumentReference userDocRef = firestore.collection('user').doc(userId);
       CollectionReference userBookingCollectionRef =
-          userDocRef.collection('vehicleBooking');
+          userDocRef.collection('equipmentBookings');
       Map<String, dynamic>? lastUserData;
       // Listen to the collection's stream, order by timestamp, and limit to 1 document
-      userBookingCollectionRef
-          .orderBy('createdTime', descending: true)
-          .limit(1)
-          .snapshots()
-          .listen((querySnapshot) {
+      userBookingCollectionRef.limit(1).snapshots().listen((querySnapshot) {
         querySnapshot.docs.forEach((doc) {
           if (doc.exists) {
             // Explicitly cast doc.data() to Map<String, dynamic>
             Map<String, dynamic>? data = doc.data() as Map<String, dynamic>?;
 
             if (data != null) {
-              String truck = data['truck'] ?? '';
+              String equip = data['equip'] ?? '';
               String load = data['load'] ?? '';
               String size = data['size'] ?? '';
 
               // Create a map containing truck, load, and size
               Map<String, dynamic> userData = {
-                'truck': truck,
+                'equip': equip,
                 'load': load,
                 'size': size,
               };
@@ -578,7 +574,7 @@ class _BookingsState extends State<Bookings> {
                                           Text("Pick up truck",
                                               style:
                                                   DialogText.helvetica25black),
-                                          Text('${userData['truck']}',
+                                          Text('${userData['equip']}',
                                               style: BookingText.helveticablack)
                                         ],
                                       ),
