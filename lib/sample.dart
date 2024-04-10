@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/Widgets/customButton.dart';
 import 'package:flutter_application_1/Widgets/formText.dart';
 
 class Sample extends StatefulWidget {
@@ -9,27 +11,23 @@ class Sample extends StatefulWidget {
 }
 
 class _SampleState extends State<Sample> {
+  late GlobalKey<_CustomContainer1State> _buttonKey1;
+  late GlobalKey<_CustomContainer1State> _buttonKey2;
+  late GlobalKey<_CustomContainer1State> _buttonKey3;
+  String selectedTypeName1 = 'Select Type';
+  String selectedTypeName2 = 'Select Type';
+  String selectedTypeName3 = 'Select Type';
+  TextEditingController controller1 = TextEditingController();
+  TextEditingController controller2 = TextEditingController();
+  TextEditingController controller3 = TextEditingController();
+
   @override
   void initState() {
     super.initState();
-    _buttonKey = GlobalKey();
-    _buttonKey1 = GlobalKey();
-    _buttonKey2 = GlobalKey();
+    _buttonKey1 = GlobalKey<_CustomContainer1State>();
+    _buttonKey2 = GlobalKey<_CustomContainer1State>();
+    _buttonKey3 = GlobalKey<_CustomContainer1State>();
   }
-
-  double screenHeight = 0;
-  double screenWidth = 0;
-  double bottom = 0;
-  bool expand = false;
-  GlobalKey? _buttonKey1;
-  GlobalKey? _buttonKey2;
-  GlobalKey? _buttonKey;
-  String selectedTypeName1 = 'Select Type';
-  String selectedTypeName2 = 'Select Type';
-  String selectedTypeName3 =
-      'Select Type'; // Define separate variables for each container
-
-  Color blue = const Color(0xff8cccff);
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +45,12 @@ class _SampleState extends State<Sample> {
                 ],
                 buttonText: 'Excavator',
                 selectedTypeName: selectedTypeName1,
-                buttonKey: _buttonKey!,
+                buttonKey: _buttonKey1,
+                onSelectionChanged: (value) {
+                  setState(() {
+                    selectedTypeName1 = value;
+                  });
+                },
               ),
               SizedBox(height: 5),
               CustomContainer1(
@@ -56,7 +59,12 @@ class _SampleState extends State<Sample> {
                 ],
                 buttonText: 'Bulldozer',
                 selectedTypeName: selectedTypeName2,
-                buttonKey: _buttonKey1!,
+                buttonKey: _buttonKey2,
+                onSelectionChanged: (value) {
+                  setState(() {
+                    selectedTypeName2 = value;
+                  });
+                },
               ),
               SizedBox(height: 5),
               CustomContainer1(
@@ -72,7 +80,30 @@ class _SampleState extends State<Sample> {
                 ],
                 buttonText: 'Graders',
                 selectedTypeName: selectedTypeName3,
-                buttonKey: _buttonKey2!,
+                buttonKey: _buttonKey3,
+                onSelectionChanged: (value) {
+                  setState(() {
+                    selectedTypeName3 = value;
+                  });
+                },
+              ),
+              CustomButton(
+                onPressed: () async {
+                  try {
+                    print('$selectedTypeName1');
+                    print('$selectedTypeName2');
+                    print('$selectedTypeName3');
+                    // Call functions to create documents in collection and subcollection
+                    // await createNewBooking(
+                    //     truck,
+                    //     size,
+                    //     load,
+                    //     widget.user!);
+                  } catch (e) {
+                    print("Error creating user: $e");
+                  }
+                },
+                text: 'Create Booking',
               ),
             ],
           ),
@@ -85,9 +116,10 @@ class _SampleState extends State<Sample> {
 class CustomContainer1 extends StatefulWidget {
   final String? buttonText;
   final void Function()? onPressed;
-  final GlobalKey? buttonKey;
+  final GlobalKey<_CustomContainer1State>? buttonKey;
   final List<Map<String, String>> unitNames;
-  String? selectedTypeName;
+  final String? selectedTypeName;
+  final ValueChanged<String>? onSelectionChanged;
 
   CustomContainer1({
     Key? key,
@@ -96,6 +128,7 @@ class CustomContainer1 extends StatefulWidget {
     this.onPressed,
     required this.unitNames,
     this.buttonKey,
+    this.onSelectionChanged,
   }) : super(key: key);
 
   @override
@@ -112,7 +145,8 @@ class _CustomContainer1State extends State<CustomContainer1> {
     super.initState();
   }
 
-  OverlayEntry _createOverlayEntry(GlobalKey key, String selectedTypeName) {
+  OverlayEntry _createOverlayEntry(
+      GlobalKey<_CustomContainer1State> key, String selectedTypeName) {
     RenderBox? renderBox = key.currentContext?.findRenderObject() as RenderBox?;
     final position = renderBox!.localToGlobal(Offset.zero);
     return OverlayEntry(
@@ -147,7 +181,7 @@ class _CustomContainer1State extends State<CustomContainer1> {
                 return ListTile(
                   onTap: () {
                     setState(() {
-                      widget.selectedTypeName = name;
+                      widget.onSelectionChanged!(name);
                       expand = false;
                     });
                     _hideOverlay();
@@ -167,7 +201,8 @@ class _CustomContainer1State extends State<CustomContainer1> {
     );
   }
 
-  void _showOverlay(GlobalKey key, String selectedTypeName) {
+  void _showOverlay(
+      GlobalKey<_CustomContainer1State> key, String selectedTypeName) {
     _overlayEntry = _createOverlayEntry(key, selectedTypeName);
     Overlay.of(context)!.insert(_overlayEntry);
     setState(() {

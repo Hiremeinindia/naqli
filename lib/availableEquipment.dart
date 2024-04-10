@@ -44,20 +44,20 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
   final ScrollController _Scroll2 = ScrollController();
   AllUsersFormController controller = AllUsersFormController();
   String dropdownValues = 'Load Type';
-  GlobalKey? _buttonKey1;
-  GlobalKey? _buttonKey2;
-  GlobalKey? _buttonKey3;
-  GlobalKey? _buttonKey4;
+  late GlobalKey<CustomContainerState> _buttonKey1;
+  late GlobalKey<CustomContainerState> _buttonKey2;
+  late GlobalKey<CustomContainerState> _buttonKey3;
+  late GlobalKey<CustomContainerState> _buttonKey4;
   String selectedTypeName1 = 'Select Type';
   String selectedTypeName2 = 'Select Type';
   String selectedTypeName3 = 'Select Type';
   String selectedTypeName4 = 'Select Type';
   void initState() {
     super.initState();
-    _buttonKey1 = GlobalKey();
-    _buttonKey2 = GlobalKey();
-    _buttonKey3 = GlobalKey();
-    _buttonKey4 = GlobalKey();
+    _buttonKey1 = GlobalKey<CustomContainerState>();
+    _buttonKey2 = GlobalKey<CustomContainerState>();
+    _buttonKey3 = GlobalKey<CustomContainerState>();
+    _buttonKey4 = GlobalKey<CustomContainerState>();
   }
 
   Future<void> createNewBooking(
@@ -284,7 +284,7 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                   MainAxisAlignment
                                                       .spaceBetween,
                                               children: [
-                                                UnitsContainer1(
+                                                UnitsContainer(
                                                   unitNames: [
                                                     {
                                                       'image': 'Group2181.png',
@@ -304,7 +304,7 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                       .selectedTypeName.text,
                                                   buttonKey: _buttonKey1!,
                                                 ),
-                                                UnitsContainer1(
+                                                UnitsContainer(
                                                   unitNames: [
                                                     {
                                                       'image': 'Group2181.png',
@@ -324,7 +324,7 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                       .selectedTypeName2.text,
                                                   buttonKey: _buttonKey2!,
                                                 ),
-                                                UnitsContainer1(
+                                                UnitsContainer(
                                                   unitNames: [
                                                     {
                                                       'image': 'Group2181.png',
@@ -344,7 +344,7 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                       .selectedTypeName3.text,
                                                   buttonKey: _buttonKey3!,
                                                 ),
-                                                UnitsContainer1(
+                                                UnitsContainer(
                                                   unitNames: [
                                                     {
                                                       'image': 'Group2181.png',
@@ -1014,7 +1014,7 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                   MainAxisAlignment
                                                       .spaceBetween,
                                               children: [
-                                                UnitsContainer1(
+                                                UnitsContainer(
                                                   unitNames: [
                                                     {
                                                       'image': 'Group2181.png',
@@ -1031,10 +1031,23 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                   ],
                                                   buttonText: 'Excavator',
                                                   selectedTypeName: controller
-                                                      .selectedTypeName.text,
-                                                  buttonKey: _buttonKey1!,
+                                                          .selectedTypeName1
+                                                          .text
+                                                          .isNotEmpty
+                                                      ? controller
+                                                          .selectedTypeName1
+                                                          .text
+                                                      : 'Select Type',
+                                                  buttonKey: _buttonKey1,
+                                                  onSelectionChanged: (value) {
+                                                    setState(() {
+                                                      controller
+                                                          .selectedTypeName1
+                                                          .text = value;
+                                                    });
+                                                  },
                                                 ),
-                                                UnitsContainer1(
+                                                UnitsContainer(
                                                   unitNames: [
                                                     {
                                                       'image': 'Group2181.png',
@@ -1051,10 +1064,23 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                   ],
                                                   buttonText: 'Loaders',
                                                   selectedTypeName: controller
-                                                      .selectedTypeName2.text,
-                                                  buttonKey: _buttonKey2!,
+                                                          .selectedTypeName2
+                                                          .text
+                                                          .isNotEmpty
+                                                      ? controller
+                                                          .selectedTypeName2
+                                                          .text
+                                                      : 'Select Type',
+                                                  buttonKey: _buttonKey2,
+                                                  onSelectionChanged: (value) {
+                                                    setState(() {
+                                                      controller
+                                                          .selectedTypeName2
+                                                          .text = value;
+                                                    });
+                                                  },
                                                 ),
-                                                UnitsContainer1(
+                                                UnitsContainer(
                                                   unitNames: [
                                                     {
                                                       'image': 'Group2181.png',
@@ -1071,10 +1097,23 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                   ],
                                                   buttonText: 'Cranes',
                                                   selectedTypeName: controller
-                                                      .selectedTypeName3.text,
-                                                  buttonKey: _buttonKey3!,
+                                                          .selectedTypeName3
+                                                          .text
+                                                          .isNotEmpty
+                                                      ? controller
+                                                          .selectedTypeName2
+                                                          .text
+                                                      : 'Select Type',
+                                                  buttonKey: _buttonKey3,
+                                                  onSelectionChanged: (value) {
+                                                    setState(() {
+                                                      controller
+                                                          .selectedTypeName3
+                                                          .text = value;
+                                                    });
+                                                  },
                                                 ),
-                                                UnitsContainer1(
+                                                UnitsContainer(
                                                   unitNames: [
                                                     {
                                                       'image': 'Group2181.png',
@@ -1091,8 +1130,21 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                   ],
                                                   buttonText: 'Others',
                                                   selectedTypeName: controller
-                                                      .selectedTypeName4.text,
-                                                  buttonKey: _buttonKey4!,
+                                                          .selectedTypeName4
+                                                          .text
+                                                          .isNotEmpty
+                                                      ? controller
+                                                          .selectedTypeName4
+                                                          .text
+                                                      : 'Select Type',
+                                                  buttonKey: _buttonKey4,
+                                                  onSelectionChanged: (value) {
+                                                    setState(() {
+                                                      controller
+                                                          .selectedTypeName4
+                                                          .text = value;
+                                                    });
+                                                  },
                                                 ),
                                                 SizedBox(
                                                   height: 10,
