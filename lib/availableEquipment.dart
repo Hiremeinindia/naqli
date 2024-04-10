@@ -57,6 +57,7 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
   String selectedTypeName2 = 'Select Type';
   String selectedTypeName3 = 'Select Type';
   String selectedTypeName4 = 'Select Type';
+  String? selectedContainerIndex;
   void initState() {
     super.initState();
     _buttonKey1 = GlobalKey<CustomContainerState>();
@@ -97,10 +98,11 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
   //   }
   // }
   Future<void> createNewBooking(
-    String book1,
-    String adminUid,
-    String load,
+    String equip,
     String size,
+    String load,
+    String time,
+    String adminUid,
   ) async {
     try {
       FirebaseFirestore firestore = FirebaseFirestore.instance;
@@ -114,15 +116,16 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
 
       // Add document to subcollection and get the document reference
       DocumentReference newBookingDocRef = await userBookingCollectionRef.add({
-        'book1': book1,
+        'equip': equip,
         'size': size,
         'load': load,
+        'time': time,
       });
 
       // Store the auto-generated ID
       String newBookingId = newBookingDocRef.id;
 
-      // // Update the document with the stored ID
+      // Update the document with the stored ID
       // await newBookingDocRef.update({'id': newBookingId});
 
       print('New booking added successfully with ID: $newBookingId');
@@ -539,6 +542,9 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                               Flexible(
                                                                 child:
                                                                     CustomTextfieldGrey(
+                                                                  controller:
+                                                                      controller
+                                                                          .time,
                                                                   text: 'Time',
                                                                 ),
                                                               ),
@@ -552,6 +558,9 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                               Flexible(
                                                                 child:
                                                                     CustomTextfieldGrey(
+                                                                  controller:
+                                                                      controller
+                                                                          .size,
                                                                   text:
                                                                       'Value of the Product',
                                                                 ),
@@ -711,8 +720,13 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                             child:
                                                                 DropdownButton2<
                                                                     String>(
-                                                              value:
-                                                                  dropdownValues, // Use value from the list
+                                                              value: controller
+                                                                      .load
+                                                                      .text
+                                                                      .isNotEmpty
+                                                                  ? controller
+                                                                      .load.text
+                                                                  : 'Load Type', // Use value from the list
                                                               items: <String>[
                                                                 'Trigger Bookings',
                                                                 'Booking Manager',
@@ -1046,18 +1060,51 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                   child: CustomButton(
                                                     onPressed: () async {
                                                       try {
-                                                        String book1 =
-                                                            controller
-                                                                .equip.text;
+                                                        print(
+                                                            '$selectedContainerIndex');
+                                                        String equip = '';
+
+                                                        if (controller
+                                                            .selectedTypeName
+                                                            .text
+                                                            .isNotEmpty) {
+                                                          equip = controller
+                                                              .selectedTypeName
+                                                              .text;
+                                                        } else if (controller
+                                                            .selectedTypeName1
+                                                            .text
+                                                            .isNotEmpty) {
+                                                          equip = controller
+                                                              .selectedTypeName1
+                                                              .text;
+                                                        } else if (controller
+                                                            .selectedTypeName2
+                                                            .text
+                                                            .isNotEmpty) {
+                                                          equip = controller
+                                                              .selectedTypeName2
+                                                              .text;
+                                                        } else if (controller
+                                                            .selectedTypeName3
+                                                            .text
+                                                            .isNotEmpty) {
+                                                          equip = controller
+                                                              .selectedTypeName3
+                                                              .text;
+                                                        }
+
                                                         String size = controller
                                                             .size.text;
                                                         String load = controller
                                                             .load.text;
+                                                        String time = controller
+                                                            .time.text;
                                                         await createNewBooking(
-                                                            //
-                                                            load,
+                                                            equip,
                                                             size,
-                                                            book1,
+                                                            load,
+                                                            time,
                                                             widget.user!);
                                                       } catch (e) {
                                                         print(
@@ -1409,6 +1456,9 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                               Flexible(
                                                                 child:
                                                                     CustomTextfieldGrey(
+                                                                  controller:
+                                                                      controller
+                                                                          .size,
                                                                   text:
                                                                       'Value of the Product',
                                                                 ),
@@ -1494,8 +1544,9 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                             child:
                                                                 DropdownButton2<
                                                                     String>(
-                                                              value:
-                                                                  dropdownValues, // Use value from the list
+                                                              value: controller
+                                                                  .load
+                                                                  .text, // Use controller.load.text as value
                                                               items: <String>[
                                                                 'Trigger Bookings',
                                                                 'Booking Manager',
@@ -1518,8 +1569,10 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                               onChanged: (String?
                                                                   newValue) {
                                                                 setState(() {
-                                                                  dropdownValues =
-                                                                      newValue!; // Update value in the list
+                                                                  controller
+                                                                          .load
+                                                                          .text =
+                                                                      newValue!; // Update controller.load.text with the new value
                                                                 });
                                                               },
                                                               buttonStyleData:
@@ -1541,30 +1594,16 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                                           1)),
                                                                   borderRadius:
                                                                       BorderRadius
-                                                                          .only(
-                                                                    topLeft: Radius
-                                                                        .circular(
-                                                                            8),
-                                                                    topRight: Radius
-                                                                        .circular(
-                                                                            8),
-                                                                    bottomLeft:
-                                                                        Radius.circular(
-                                                                            8),
-                                                                    bottomRight:
-                                                                        Radius.circular(
-                                                                            8),
-                                                                  ),
+                                                                          .circular(
+                                                                              8),
                                                                   color: Colors
                                                                       .white,
                                                                 ),
                                                               ),
                                                               iconStyleData:
                                                                   const IconStyleData(
-                                                                icon: Icon(
-                                                                  Icons
-                                                                      .arrow_drop_down_sharp,
-                                                                ),
+                                                                icon: Icon(Icons
+                                                                    .arrow_drop_down_sharp),
                                                                 iconSize: 25,
                                                                 iconEnabledColor:
                                                                     Colors
@@ -1589,20 +1628,8 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                                           1)),
                                                                   borderRadius:
                                                                       BorderRadius
-                                                                          .only(
-                                                                    topLeft: Radius
-                                                                        .circular(
-                                                                            5),
-                                                                    topRight: Radius
-                                                                        .circular(
-                                                                            5),
-                                                                    bottomLeft:
-                                                                        Radius.circular(
-                                                                            5),
-                                                                    bottomRight:
-                                                                        Radius.circular(
-                                                                            5),
-                                                                  ),
+                                                                          .circular(
+                                                                              5),
                                                                   color: Colors
                                                                       .white,
                                                                 ),
