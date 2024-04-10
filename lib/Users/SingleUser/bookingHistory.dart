@@ -145,11 +145,13 @@ class _BookingHistroyState extends State<BookingHistroy> {
                         return ElevationContainer(
                           child: Scrollbar(
                             controller: _scrollController,
+                            thumbVisibility: true,
                             child: SingleChildScrollView(
                               scrollDirection: Axis.horizontal,
                               controller: _scrollController,
                               child: SizedBox(
                                 width: 1070,
+                                height: 340,
                                 child: DataTable(
                                   decoration: BoxDecoration(
                                     color: Colors.white,
@@ -392,7 +394,7 @@ class DataSource extends DataTableSource {
     return [
       DataCell(Text(user.truck?.toString() ?? 'nill')),
       DataCell(Text('#623832623')),
-      DataCell(Text('14.02.2024')),
+      DataCell(Text(user.date?.toString() ?? 'nill')),
       DataCell(Text(user.load.toString())),
       DataCell(Text(user.size?.toString() ?? 'nill')),
     ];

@@ -245,7 +245,7 @@ class _LoginPageState extends State<LoginPage> {
                                                   context,
                                                   MaterialPageRoute(
                                                     builder: (context) =>
-                                                        AvailableEquipment(
+                                                        AvailableVehicle(
                                                             user: userId),
                                                   ),
                                                 );

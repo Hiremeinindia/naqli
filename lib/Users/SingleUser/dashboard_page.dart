@@ -87,14 +87,18 @@ class _MyHomePageState extends State<SingleUserDashboardPage> {
 
   void _handleItem3Tap() {
     setState(() {
-      _currentContent = SingleUserPayment();
+      _currentContent = SingleUserPayment(
+        user: widget.user,
+      );
     });
     Navigator.pop(context);
   }
 
   void _handleItem4Tap() {
     setState(() {
-      _currentContent = SingleUserPayment();
+      _currentContent = SingleUserPayment(
+        user: widget.user,
+      );
     });
     Navigator.pop(context);
   }
@@ -537,7 +541,9 @@ class _MyHomePageState extends State<SingleUserDashboardPage> {
                                     title: 'Payments',
                                     onTap: (page, _) {
                                       setState(() {
-                                        _currentContent = SingleUserPayment();
+                                        _currentContent = SingleUserPayment(
+                                          user: widget.user,
+                                        );
                                       });
                                       sideMenu.changePage(page);
                                     },
@@ -548,7 +554,9 @@ class _MyHomePageState extends State<SingleUserDashboardPage> {
                                     title: 'Report',
                                     onTap: (page, _) {
                                       setState(() {
-                                        _currentContent = SingleUserPayment();
+                                        _currentContent = SingleUserPayment(
+                                          user: widget.user,
+                                        );
                                       });
                                       sideMenu.changePage(page);
                                     },
@@ -677,7 +685,9 @@ class _MyHomePageState extends State<SingleUserDashboardPage> {
                         ),
                         onTap: () {
                           setState(() {
-                            _currentContent = SingleUserPayment();
+                            _currentContent = SingleUserPayment(
+                              user: widget.user,
+                            );
                           });
                           Navigator.pop(context);
                         }),
@@ -692,7 +702,9 @@ class _MyHomePageState extends State<SingleUserDashboardPage> {
                         ),
                         onTap: () {
                           setState(() {
-                            _currentContent = SingleUserPayment();
+                            _currentContent = SingleUserPayment(
+                              user: widget.user,
+                            );
                           });
                           Navigator.pop(context);
                         }),
