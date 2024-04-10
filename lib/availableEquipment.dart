@@ -45,9 +45,11 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
   late String bookingID;
   bool value = false;
   bool checkbox = false;
+  String loadtype = '';
   int? groupValue1;
   int? groupValue = 1;
   bool checkbox1 = false;
+  DateTime? _pickedDate;
   final ScrollController _Scroll1 = ScrollController();
   final ScrollController _Scroll2 = ScrollController();
   AllUsersFormController controller = AllUsersFormController();
@@ -60,7 +62,7 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
   String selectedTypeName2 = 'Select Type';
   String selectedTypeName3 = 'Select Type';
   String selectedTypeName4 = 'Select Type';
-  String? selectedContainerIndex;
+  int? selectedContainerIndex;
   void initState() {
     super.initState();
     bookingID = _generateBookingID();
@@ -70,6 +72,22 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
     _buttonKey4 = GlobalKey<CustomContainerState>();
   }
 
+  Future<void> _showDatePicker(BuildContext context) async {
+    final DateTime? pickedDate = await showDatePicker(
+      initialEntryMode: DatePickerEntryMode.calendarOnly,
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2020),
+      lastDate: DateTime(2025),
+    );
+
+    if (pickedDate != null) {
+      setState(() {
+        _pickedDate = pickedDate;
+        controller.date.text = DateFormat('dd/MM/yyyy').format(_pickedDate!);
+      });
+    }
+  }
   // Future<void> createNewBooking(
   //   String book1,
   //   String adminUid,
@@ -111,18 +129,13 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
     return bookingID;
   }
 
-  void updateSelectedContainerIndex(String index) {
-    setState(() {
-      selectedContainerIndex = index;
-    });
-  }
-
   Future<void> createNewBooking(
     String equip,
     String size,
     String load,
     String time,
     String bookingid,
+    String date,
     String adminUid,
   ) async {
     try {
@@ -142,6 +155,7 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
         'load': load,
         'time': time,
         'bookingid': bookingid,
+        'date': date,
       });
 
       // Store the auto-generated ID
@@ -428,21 +442,22 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                     },
                                                   ],
                                                   buttonText: 'Excavator',
-                                                  selectedTypeName: controller
-                                                          .selectedTypeName
-                                                          .text
-                                                          .isNotEmpty
-                                                      ? controller
-                                                          .selectedTypeName.text
-                                                      : 'Select Type',
+                                                  selectedTypeName:
+                                                      selectedContainerIndex ==
+                                                              1
+                                                          ? controller
+                                                              .selectedTypeName
+                                                              .text
+                                                          : 'Select Type',
                                                   buttonKey: _buttonKey1,
                                                   onSelectionChanged: (value) {
                                                     setState(() {
+                                                      loadtype = value;
                                                       controller
                                                           .selectedTypeName
                                                           .text = value;
-                                                      updateSelectedContainerIndex(
-                                                          '${controller.selectedTypeName.text}');
+                                                      selectedContainerIndex =
+                                                          1;
                                                     });
                                                   },
                                                 ),
@@ -462,22 +477,22 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                     },
                                                   ],
                                                   buttonText: 'Loaders',
-                                                  selectedTypeName: controller
-                                                          .selectedTypeName1
-                                                          .text
-                                                          .isNotEmpty
-                                                      ? controller
-                                                          .selectedTypeName1
-                                                          .text
-                                                      : 'Select Type',
+                                                  selectedTypeName:
+                                                      selectedContainerIndex ==
+                                                              2
+                                                          ? controller
+                                                              .selectedTypeName1
+                                                              .text
+                                                          : 'Select Type',
                                                   buttonKey: _buttonKey2,
                                                   onSelectionChanged: (value) {
                                                     setState(() {
+                                                      loadtype = value;
                                                       controller
                                                           .selectedTypeName1
                                                           .text = value;
-                                                      updateSelectedContainerIndex(
-                                                          '${controller.selectedTypeName1.text}');
+                                                      selectedContainerIndex =
+                                                          2;
                                                     });
                                                   },
                                                 ),
@@ -493,22 +508,22 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                     },
                                                   ],
                                                   buttonText: 'Cranes',
-                                                  selectedTypeName: controller
-                                                          .selectedTypeName2
-                                                          .text
-                                                          .isNotEmpty
-                                                      ? controller
-                                                          .selectedTypeName2
-                                                          .text
-                                                      : 'Select Type',
+                                                  selectedTypeName:
+                                                      selectedContainerIndex ==
+                                                              3
+                                                          ? controller
+                                                              .selectedTypeName2
+                                                              .text
+                                                          : 'Select Type',
                                                   buttonKey: _buttonKey3,
                                                   onSelectionChanged: (value) {
                                                     setState(() {
+                                                      loadtype = value;
                                                       controller
                                                           .selectedTypeName2
                                                           .text = value;
-                                                      updateSelectedContainerIndex(
-                                                          '${controller.selectedTypeName2.text}');
+                                                      selectedContainerIndex =
+                                                          3;
                                                     });
                                                   },
                                                 ),
@@ -540,22 +555,22 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                     },
                                                   ],
                                                   buttonText: 'Others',
-                                                  selectedTypeName: controller
-                                                          .selectedTypeName3
-                                                          .text
-                                                          .isNotEmpty
-                                                      ? controller
-                                                          .selectedTypeName3
-                                                          .text
-                                                      : 'Select Type',
+                                                  selectedTypeName:
+                                                      selectedContainerIndex ==
+                                                              4
+                                                          ? controller
+                                                              .selectedTypeName3
+                                                              .text
+                                                          : 'Select Type',
                                                   buttonKey: _buttonKey4,
                                                   onSelectionChanged: (value) {
                                                     setState(() {
+                                                      loadtype = value;
                                                       controller
                                                           .selectedTypeName3
                                                           .text = value;
-                                                      updateSelectedContainerIndex(
-                                                          '${controller.selectedTypeName3.text}');
+                                                      selectedContainerIndex =
+                                                          4;
                                                     });
                                                   },
                                                 ),
@@ -649,83 +664,22 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                                     MainAxisAlignment
                                                                         .start,
                                                                 children: [
-                                                                  GestureDetector(
-                                                                    onTap: () {
-                                                                      CalendarWeek(
-                                                                        controller:
-                                                                            _controller,
-                                                                        height:
-                                                                            100,
-                                                                        showMonth:
-                                                                            true,
-                                                                        minDate:
-                                                                            DateTime.now().add(
-                                                                          Duration(
-                                                                              days: -365),
-                                                                        ),
-                                                                        maxDate:
-                                                                            DateTime.now().add(
-                                                                          Duration(
-                                                                              days: 365),
-                                                                        ),
-                                                                        onDatePressed:
-                                                                            (DateTime
-                                                                                datetime) {
-                                                                          // Do something
-                                                                          setState(
-                                                                              () {});
-                                                                        },
-                                                                        onDateLongPressed:
-                                                                            (DateTime
-                                                                                datetime) {
-                                                                          // Do something
-                                                                        },
-                                                                        onWeekChanged:
-                                                                            () {
-                                                                          // Do something
-                                                                        },
-                                                                        monthViewBuilder:
-                                                                            (DateTime time) =>
-                                                                                Align(
-                                                                          alignment:
-                                                                              FractionalOffset.center,
-                                                                          child: Container(
-                                                                              margin: const EdgeInsets.symmetric(vertical: 4),
-                                                                              child: Text(
-                                                                                DateFormat.yMMMM().format(time),
-                                                                                overflow: TextOverflow.ellipsis,
-                                                                                textAlign: TextAlign.center,
-                                                                                style: TextStyle(color: Colors.blue, fontWeight: FontWeight.w600),
-                                                                              )),
-                                                                        ),
-                                                                        decorations: [
-                                                                          DecorationItem(
-                                                                              decorationAlignment: FractionalOffset.bottomRight,
-                                                                              date: DateTime.now(),
-                                                                              decoration: Icon(
-                                                                                Icons.today,
-                                                                                color: Colors.blue,
-                                                                              )),
-                                                                          DecorationItem(
-                                                                              date: DateTime.now().add(Duration(days: 3)),
-                                                                              decoration: Text(
-                                                                                'Holiday',
-                                                                                style: TextStyle(
-                                                                                  color: Colors.brown,
-                                                                                  fontWeight: FontWeight.w600,
-                                                                                ),
-                                                                              )),
-                                                                        ],
-                                                                      );
-                                                                    },
-                                                                    child: Icon(
+                                                                  IconButton(
+                                                                    icon: Icon(
                                                                         Icons
                                                                             .calendar_today,
+                                                                        size:
+                                                                            25,
                                                                         color: Color.fromRGBO(
                                                                             183,
                                                                             183,
                                                                             183,
                                                                             1)),
+                                                                    onPressed:
+                                                                        () {
+                                                                      _showDatePicker(
+                                                                          context);
+                                                                    },
                                                                   ),
                                                                   SizedBox(
                                                                     width: 10,
@@ -738,7 +692,33 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                                             183,
                                                                             183,
                                                                             1),
-                                                                  )
+                                                                  ),
+                                                                  Expanded(
+                                                                    child:
+                                                                        TextFormField(
+                                                                      controller:
+                                                                          controller
+                                                                              .date,
+                                                                      style: AvailableText
+                                                                          .helvetica,
+                                                                      readOnly:
+                                                                          true,
+                                                                      onTap:
+                                                                          () {
+                                                                        _showDatePicker(
+                                                                            context);
+                                                                      },
+                                                                      decoration:
+                                                                          InputDecoration(
+                                                                        contentPadding:
+                                                                            EdgeInsets.only(left: 12),
+                                                                        border:
+                                                                            InputBorder.none,
+                                                                        hintStyle:
+                                                                            AvailableText.helvetica,
+                                                                      ),
+                                                                    ),
+                                                                  ),
                                                                 ],
                                                               ),
                                                             ),
@@ -1134,12 +1114,15 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                             .time.text;
                                                         String bookingid =
                                                             bookingID;
+                                                        String date = controller
+                                                            .date.text;
                                                         await createNewBooking(
                                                             equip,
                                                             size,
                                                             load,
                                                             time,
                                                             bookingid,
+                                                            date,
                                                             widget.user!);
                                                       } catch (e) {
                                                         print(
