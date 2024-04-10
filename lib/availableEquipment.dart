@@ -18,6 +18,7 @@ import 'package:flutter_application_1/Widgets/customTextField.dart';
 import 'package:flutter_application_1/Widgets/unitsContainer.dart';
 import 'package:flutter_application_1/classes/language.dart';
 import 'package:flutter_application_1/classes/language_constants.dart';
+import 'package:flutter_application_1/main.dart';
 import 'package:sizer/sizer.dart';
 
 import 'Widgets/formText.dart';
@@ -60,58 +61,24 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
     _buttonKey4 = GlobalKey<CustomContainerState>();
   }
 
-  Future<void> createNewBooking(
-    String book1,
-    String adminUid,
-  ) async {
-    try {
-      FirebaseFirestore firestore = FirebaseFirestore.instance;
-
-      // Reference to the user's document
-      DocumentReference userDocRef =
-          firestore.collection('superuser').doc(adminUid);
-
-      // Reference to the subcollection 'userBooking' under the user's document
-      CollectionReference userBookingCollectionRef =
-          userDocRef.collection('superuserBookings');
-
-      // Add document to subcollection and get the document reference
-      DocumentReference newBookingDocRef = await userBookingCollectionRef.add({
-        'book1': book1,
-      });
-
-      // Store the auto-generated ID
-      String newBookingId = newBookingDocRef.id;
-
-      // // Update the document with the stored ID
-      // await newBookingDocRef.update({'id': newBookingId});
-
-      print('New booking added successfully with ID: $newBookingId');
-    } catch (error) {
-      print('Error creating new booking: $error');
-    }
-  }
   // Future<void> createNewBooking(
   //   String book1,
   //   String adminUid,
-  //   String load,
-  //   String size,
   // ) async {
   //   try {
   //     FirebaseFirestore firestore = FirebaseFirestore.instance;
 
   //     // Reference to the user's document
-  //     DocumentReference userDocRef = firestore.collection('user').doc(adminUid);
+  //     DocumentReference userDocRef =
+  //         firestore.collection('superuser').doc(adminUid);
 
   //     // Reference to the subcollection 'userBooking' under the user's document
   //     CollectionReference userBookingCollectionRef =
-  //         userDocRef.collection('equipmentBookings');
+  //         userDocRef.collection('superuserBookings');
 
   //     // Add document to subcollection and get the document reference
   //     DocumentReference newBookingDocRef = await userBookingCollectionRef.add({
   //       'book1': book1,
-  //       'size': size,
-  //       'load': load,
   //     });
 
   //     // Store the auto-generated ID
@@ -125,6 +92,40 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
   //     print('Error creating new booking: $error');
   //   }
   // }
+  Future<void> createNewBooking(
+    String book1,
+    String adminUid,
+    String load,
+    String size,
+  ) async {
+    try {
+      FirebaseFirestore firestore = FirebaseFirestore.instance;
+
+      // Reference to the user's document
+      DocumentReference userDocRef = firestore.collection('user').doc(adminUid);
+
+      // Reference to the subcollection 'userBooking' under the user's document
+      CollectionReference userBookingCollectionRef =
+          userDocRef.collection('equipmentBookings');
+
+      // Add document to subcollection and get the document reference
+      DocumentReference newBookingDocRef = await userBookingCollectionRef.add({
+        'book1': book1,
+        'size': size,
+        'load': load,
+      });
+
+      // Store the auto-generated ID
+      String newBookingId = newBookingDocRef.id;
+
+      // // Update the document with the stored ID
+      // await newBookingDocRef.update({'id': newBookingId});
+
+      print('New booking added successfully with ID: $newBookingId');
+    } catch (error) {
+      print('Error creating new booking: $error');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -136,6 +137,7 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
               appBar: PreferredSize(
                 preferredSize: Size.fromHeight(90),
                 child: Material(
+                  elevation: 3,
                   child: Padding(
                     padding: EdgeInsets.fromLTRB(13.w, 0, 15.w, 0),
                     child: Row(
@@ -163,9 +165,8 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                               ),
                             ),
                             SizedBox(
-                              height: 20,
+                              height: 30,
                               child: VerticalDivider(
-                                thickness: 2,
                                 color: Color.fromRGBO(206, 203, 203, 1),
                               ),
                             ),
@@ -186,23 +187,129 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                         ),
                         Row(
                           children: [
-                            Icon(
-                              Icons.notifications,
-                              color: Color.fromRGBO(106, 102, 209, 1),
+                            DropdownButtonHideUnderline(
+                              child: DropdownButton2<Language>(
+                                isExpanded: true,
+                                hint: Row(
+                                  children: [
+                                    Text(
+                                      translation(context).english,
+                                      style: TabelText.helvetica11,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                    Expanded(child: SizedBox()),
+                                    Icon(
+                                      Icons.arrow_drop_down,
+                                      color: Colors.black,
+                                      size: 25,
+                                    )
+                                  ],
+                                ),
+                                onChanged: (Language? language) async {
+                                  if (language != null) {
+                                    Locale _locale =
+                                        await setLocale(language.languageCode);
+                                    MyApp.setLocale(context, _locale);
+                                  } else {
+                                    language;
+                                  }
+                                },
+                                items: Language.languageList()
+                                    .map<DropdownMenuItem<Language>>(
+                                      (e) => DropdownMenuItem<Language>(
+                                        value: e,
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceAround,
+                                          children: <Widget>[
+                                            Text(
+                                              e.flag,
+                                              style: TabelText.helvetica11,
+                                              overflow: TextOverflow.ellipsis,
+                                            ),
+                                            Text(
+                                              e.langname,
+                                              style: TabelText.helvetica11,
+                                              overflow: TextOverflow.ellipsis,
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    )
+                                    .toList(),
+                                buttonStyleData: ButtonStyleData(
+                                  height: 30,
+                                  width: 130,
+                                  padding: const EdgeInsets.only(
+                                      left: 14, right: 14),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(8),
+                                    border: Border.all(
+                                      color: Colors.black26,
+                                    ),
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                iconStyleData: const IconStyleData(
+                                  icon: Icon(
+                                    Icons.arrow_drop_down_sharp,
+                                  ),
+                                  iconSize: 25,
+                                  iconEnabledColor: Colors.white,
+                                  iconDisabledColor: null,
+                                ),
+                                dropdownStyleData: DropdownStyleData(
+                                  maxHeight: 210,
+                                  padding: EdgeInsets.only(
+                                      left: 10, right: 10, top: 5, bottom: 15),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(5),
+                                    border: Border.all(color: Colors.black26),
+                                    color: Colors.white,
+                                  ),
+                                  scrollPadding: EdgeInsets.all(5),
+                                  scrollbarTheme: ScrollbarThemeData(
+                                    thickness:
+                                        MaterialStateProperty.all<double>(6),
+                                    thumbVisibility:
+                                        MaterialStateProperty.all<bool>(true),
+                                  ),
+                                ),
+                                menuItemStyleData: const MenuItemStyleData(
+                                  height: 25,
+                                  padding: EdgeInsets.only(left: 14, right: 14),
+                                ),
+                              ),
                             ),
                             SizedBox(
-                              width: 0.1.w,
+                              width: 10,
                             ),
-                            Text("Contact Us ",
-                                style: HomepageText.helvetica16black),
                             SizedBox(
-                              height: 30,
+                              height: 40,
                               child: VerticalDivider(
                                 color: Colors.black,
                               ),
                             ),
-                            Text("Hello Customer!",
-                                style: HomepageText.helvetica16black),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                left: 5,
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text("Hello Faizal!",
+                                      style: TabelText.helvetica11),
+                                  Text("Admin", style: TabelText.usertext),
+                                  Text("Faizal industries",
+                                      style: TabelText.usertext),
+                                ],
+                              ),
+                            ),
+                            Icon(
+                              Icons.notifications,
+                              color: Color.fromRGBO(106, 102, 209, 1),
+                            ),
                           ],
                         ),
                       ],
@@ -247,7 +354,7 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                         child: Column(
                           children: [
                             Text(
-                              'Available Units',
+                              'Available Equipments',
                               style: AvailableText.helvetica30white,
                             ),
                             SizedBox(
@@ -287,82 +394,133 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                 UnitsContainer(
                                                   unitNames: [
                                                     {
-                                                      'image': 'Group2181.png',
-                                                      'name': 'Dump truck'
-                                                    },
-                                                    {
-                                                      'image': 'Group2270.png',
-                                                      'name': 'Forklift'
-                                                    },
-                                                    {
-                                                      'image': 'Group2271.png',
-                                                      'name': 'Scissorlift'
+                                                      'image': 'Group4128.png',
+                                                      'name': 'Excavator'
                                                     },
                                                   ],
                                                   buttonText: 'Excavator',
                                                   selectedTypeName: controller
-                                                      .selectedTypeName.text,
-                                                  buttonKey: _buttonKey1!,
+                                                          .selectedTypeName
+                                                          .text
+                                                          .isNotEmpty
+                                                      ? controller
+                                                          .selectedTypeName.text
+                                                      : 'Select Type',
+                                                  buttonKey: _buttonKey1,
+                                                  onSelectionChanged: (value) {
+                                                    setState(() {
+                                                      controller
+                                                          .selectedTypeName
+                                                          .text = value;
+                                                    });
+                                                  },
                                                 ),
                                                 UnitsContainer(
                                                   unitNames: [
                                                     {
-                                                      'image': 'Group2181.png',
-                                                      'name': 'Dump truck'
+                                                      'image': 'Group3071.png',
+                                                      'name': 'Back hoe'
                                                     },
                                                     {
-                                                      'image': 'Group2270.png',
-                                                      'name': 'Forklift'
+                                                      'image': 'Group2052.png',
+                                                      'name': 'Front hoe'
                                                     },
                                                     {
-                                                      'image': 'Group2271.png',
-                                                      'name': 'Scissorlift'
+                                                      'image': 'Group4137.png',
+                                                      'name': 'Skid steer'
                                                     },
                                                   ],
                                                   buttonText: 'Loaders',
                                                   selectedTypeName: controller
-                                                      .selectedTypeName2.text,
-                                                  buttonKey: _buttonKey2!,
+                                                          .selectedTypeName1
+                                                          .text
+                                                          .isNotEmpty
+                                                      ? controller
+                                                          .selectedTypeName1
+                                                          .text
+                                                      : 'Select Type',
+                                                  buttonKey: _buttonKey2,
+                                                  onSelectionChanged: (value) {
+                                                    setState(() {
+                                                      controller
+                                                          .selectedTypeName1
+                                                          .text = value;
+                                                    });
+                                                  },
                                                 ),
                                                 UnitsContainer(
                                                   unitNames: [
                                                     {
-                                                      'image': 'Group2181.png',
-                                                      'name': 'Dump truck'
-                                                    },
-                                                    {
-                                                      'image': 'Group2270.png',
-                                                      'name': 'Forklift'
-                                                    },
-                                                    {
                                                       'image': 'Group2271.png',
-                                                      'name': 'Scissorlift'
+                                                      'name': 'Crawler crane'
+                                                    },
+                                                    {
+                                                      'image': 'Group4240.png',
+                                                      'name': 'Mobile crane'
                                                     },
                                                   ],
                                                   buttonText: 'Cranes',
                                                   selectedTypeName: controller
-                                                      .selectedTypeName3.text,
-                                                  buttonKey: _buttonKey3!,
+                                                          .selectedTypeName2
+                                                          .text
+                                                          .isNotEmpty
+                                                      ? controller
+                                                          .selectedTypeName2
+                                                          .text
+                                                      : 'Select Type',
+                                                  buttonKey: _buttonKey3,
+                                                  onSelectionChanged: (value) {
+                                                    setState(() {
+                                                      controller
+                                                          .selectedTypeName2
+                                                          .text = value;
+                                                    });
+                                                  },
                                                 ),
                                                 UnitsContainer(
                                                   unitNames: [
                                                     {
-                                                      'image': 'Group2181.png',
+                                                      'image': 'Group2270.png',
+                                                      'name': 'Compactors'
+                                                    },
+                                                    {
+                                                      'image': 'Group2236.png',
+                                                      'name': 'Bulldozers'
+                                                    },
+                                                    {
+                                                      'image': 'Group4225.png',
+                                                      'name': 'Graders'
+                                                    },
+                                                    {
+                                                      'image': 'Group2148.png',
                                                       'name': 'Dump truck'
                                                     },
                                                     {
-                                                      'image': 'Group2270.png',
+                                                      'image': 'Group2181.png',
                                                       'name': 'Forklift'
                                                     },
                                                     {
-                                                      'image': 'Group2271.png',
+                                                      'image': 'Group4239.png',
                                                       'name': 'Scissorlift'
                                                     },
                                                   ],
                                                   buttonText: 'Others',
                                                   selectedTypeName: controller
-                                                      .selectedTypeName4.text,
-                                                  buttonKey: _buttonKey4!,
+                                                          .selectedTypeName3
+                                                          .text
+                                                          .isNotEmpty
+                                                      ? controller
+                                                          .selectedTypeName3
+                                                          .text
+                                                      : 'Select Type',
+                                                  buttonKey: _buttonKey4,
+                                                  onSelectionChanged: (value) {
+                                                    setState(() {
+                                                      controller
+                                                          .selectedTypeName3
+                                                          .text = value;
+                                                    });
+                                                  },
                                                 ),
                                                 SizedBox(
                                                   height: 10,
@@ -819,7 +977,8 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                             .load.text;
                                                         await createNewBooking(
                                                             //
-
+                                                            load,
+                                                            size,
                                                             book1,
                                                             widget.user!);
                                                       } catch (e) {
