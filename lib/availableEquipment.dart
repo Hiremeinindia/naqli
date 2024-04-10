@@ -358,7 +358,7 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                         child: Column(
                           children: [
                             Text(
-                              'Available Equipments',
+                              'Available Equipment Units',
                               style: AvailableText.helvetica30white,
                             ),
                             SizedBox(

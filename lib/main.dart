@@ -89,6 +89,7 @@ class _MyAppState extends State<MyApp> {
       locale: _locale,
       debugShowCheckedModeBanner: false,
       home: MyHomePage(),
+      home: AvailableVehicle(),
     );
   }
 }

@@ -41,7 +41,47 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
   late GlobalKey<CustomContainerState> _buttonKey5;
   late GlobalKey<CustomContainerState> _buttonKey6;
   late GlobalKey<CustomContainerState> _buttonKey7;
-  final List<Map<String, String>> loadList = [];
+  String loadtype = '';
+  final List<String> loadList = [
+    'Food Items',
+    'Building materials',
+    'Auto parts',
+    'Tools and Equipments',
+    'Others',
+    'Load Type',
+  ];
+  final List<String> loadList1 = [
+    'Food ',
+    'Perfumes and Cosmetics',
+    'Medicinal products',
+    'Others',
+    'Load Type',
+  ];
+  final List<String> loadList2 = [
+    'Food Items',
+    'Building materials',
+    'Auto parts',
+    'Tools and Equipments',
+    'Fodder',
+    'Others',
+    'Container 20',
+    'Container 40',
+    'Load Type',
+  ];
+  final List<String> loadList3 = [
+    'Scrap',
+    'Steel',
+    'Others',
+    'Load Type',
+  ];
+  String? selectedContainerIndex;
+
+  // Function to update the selected container index
+  void updateSelectedContainerIndex(String index) {
+    setState(() {
+      selectedContainerIndex = index;
+    });
+  }
 
   AllUsersFormController controller = AllUsersFormController();
   void initState() {
@@ -394,9 +434,13 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                                   buttonKey: _buttonKey1,
                                                   onSelectionChanged: (value) {
                                                     setState(() {
+                                                      loadtype = value;
+
                                                       controller
                                                           .selectedTypeName1
                                                           .text = value;
+                                                      updateSelectedContainerIndex(
+                                                          '${controller.selectedTypeName1.text}');
                                                     });
                                                   },
                                                 ),
@@ -423,9 +467,13 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                                   buttonKey: _buttonKey2,
                                                   onSelectionChanged: (value) {
                                                     setState(() {
+                                                      loadtype = value;
+
                                                       controller
                                                           .selectedTypeName2
                                                           .text = value;
+                                                      updateSelectedContainerIndex(
+                                                          '${controller.selectedTypeName2.text}');
                                                     });
                                                   },
                                                 ),
@@ -442,15 +490,18 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                                           .text
                                                           .isNotEmpty
                                                       ? controller
-                                                          .selectedTypeName2
+                                                          .selectedTypeName3
                                                           .text
                                                       : 'Select Type',
                                                   buttonKey: _buttonKey3,
                                                   onSelectionChanged: (value) {
                                                     setState(() {
+                                                      loadtype = value;
                                                       controller
                                                           .selectedTypeName3
                                                           .text = value;
+                                                      updateSelectedContainerIndex(
+                                                          '${controller.selectedTypeName3.text}');
                                                     });
                                                   },
                                                 ),
@@ -493,9 +544,12 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                                   buttonKey: _buttonKey4,
                                                   onSelectionChanged: (value) {
                                                     setState(() {
+                                                      loadtype = value;
                                                       controller
                                                           .selectedTypeName4
                                                           .text = value;
+                                                      updateSelectedContainerIndex(
+                                                          '${controller.selectedTypeName4.text}');
                                                     });
                                                   },
                                                 ),
@@ -532,6 +586,14 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                                           .text
                                                       : 'Select Type',
                                                   buttonKey: _buttonKey5,
+                                                  onSelectionChanged: (value) {
+                                                    setState(() {
+                                                      loadtype = value;
+                                                      controller
+                                                          .selectedTypeName5
+                                                          .text = value;
+                                                    });
+                                                  },
                                                 ),
                                                 UnitsContainer(
                                                   unitNames: [
@@ -550,6 +612,14 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                                           .text
                                                       : 'Select Type',
                                                   buttonKey: _buttonKey6,
+                                                  onSelectionChanged: (value) {
+                                                    setState(() {
+                                                      loadtype = value;
+                                                      controller
+                                                          .selectedTypeName6
+                                                          .text = value;
+                                                    });
+                                                  },
                                                 ),
                                                 UnitsContainer(
                                                   unitNames: [
@@ -572,6 +642,14 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                                           .text
                                                       : 'Select Type',
                                                   buttonKey: _buttonKey7,
+                                                  onSelectionChanged: (value) {
+                                                    setState(() {
+                                                      loadtype = value;
+                                                      controller
+                                                          .selectedTypeName7
+                                                          .text = value;
+                                                    });
+                                                  },
                                                 ),
                                                 SizedBox(
                                                   height: 10,
@@ -694,25 +772,8 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                                                   ? controller
                                                                       .load.text
                                                                   : 'Load Type', // Use value from the list
-                                                              items: <String>[
-                                                                'Food Items',
-                                                                'Electronics',
-                                                                'Woods',
-                                                                'Load Type',
-                                                                'None'
-                                                              ].map<
-                                                                  DropdownMenuItem<
-                                                                      String>>((String
-                                                                  value) {
-                                                                return DropdownMenuItem<
-                                                                    String>(
-                                                                  value: value,
-                                                                  child: Text(
-                                                                      value,
-                                                                      style: AvailableText
-                                                                          .helvetica),
-                                                                );
-                                                              }).toList(),
+                                                              items:
+                                                                  _getLoadItems(),
                                                               onChanged: (String?
                                                                   newValue) {
                                                                 setState(() {
@@ -1108,37 +1169,71 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                                   child: CustomButton(
                                                     onPressed: () async {
                                                       try {
-                                                        String truck = controller
+                                                        print(
+                                                            '$selectedContainerIndex');
+                                                        String truck = '';
+
+                                                        if (controller
                                                             .selectedTypeName1
-                                                            .text;
-                                                        String truck2 = controller
+                                                            .text
+                                                            .isNotEmpty) {
+                                                          truck = controller
+                                                              .selectedTypeName1
+                                                              .text;
+                                                        } else if (controller
                                                             .selectedTypeName2
-                                                            .text;
-                                                        String truck3 = controller
+                                                            .text
+                                                            .isNotEmpty) {
+                                                          truck = controller
+                                                              .selectedTypeName2
+                                                              .text;
+                                                        } else if (controller
                                                             .selectedTypeName3
-                                                            .text;
-                                                        String truck4 = controller
+                                                            .text
+                                                            .isNotEmpty) {
+                                                          truck = controller
+                                                              .selectedTypeName3
+                                                              .text;
+                                                        } else if (controller
                                                             .selectedTypeName4
-                                                            .text;
-                                                        String truck5 = controller
+                                                            .text
+                                                            .isNotEmpty) {
+                                                          truck = controller
+                                                              .selectedTypeName4
+                                                              .text;
+                                                        } else if (controller
                                                             .selectedTypeName5
-                                                            .text;
-                                                        String truck6 = controller
+                                                            .text
+                                                            .isNotEmpty) {
+                                                          truck = controller
+                                                              .selectedTypeName5
+                                                              .text;
+                                                        } else if (controller
                                                             .selectedTypeName6
-                                                            .text;
-                                                        String truck7 = controller
+                                                            .text
+                                                            .isNotEmpty) {
+                                                          truck = controller
+                                                              .selectedTypeName6
+                                                              .text;
+                                                        } else if (controller
                                                             .selectedTypeName7
-                                                            .text;
+                                                            .text
+                                                            .isNotEmpty) {
+                                                          truck = controller
+                                                              .selectedTypeName7
+                                                              .text;
+                                                        }
+
                                                         String size = controller
                                                             .size.text;
                                                         String load = controller
                                                             .load.text;
                                                         // Call functions to create documents in collection and subcollection
-                                                        await createNewBooking(
-                                                            truck,
-                                                            size,
-                                                            load,
-                                                            widget.user!);
+                                                        // await createNewBooking(
+                                                        //     truck,
+                                                        //     size,
+                                                        //     load,
+                                                        //     widget.user!);
                                                       } catch (e) {
                                                         print(
                                                             "Error creating user: $e");
@@ -1154,15 +1249,15 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                                       //     return BookingIDDialog();
                                                       //   },
                                                       // );
-                                                      Navigator.push(
-                                                        context,
-                                                        MaterialPageRoute(
-                                                            builder: (context) =>
-                                                                SingleUserDashboardPage(
-                                                                  user: widget
-                                                                      .user,
-                                                                )),
-                                                      );
+                                                      // Navigator.push(
+                                                      //   context,
+                                                      //   MaterialPageRoute(
+                                                      //       builder: (context) =>
+                                                      //           SingleUserDashboardPage(
+                                                      //             user: widget
+                                                      //                 .user,
+                                                      //           )),
+                                                      // );
                                                     },
                                                     text: 'Create Booking',
                                                   ),
@@ -1414,16 +1509,28 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                           UnitsContainer(
                                             unitNames: [
                                               {
-                                                'image': 'Group2181.png',
-                                                'name': 'Dump truck'
+                                                'image': 'img24.png',
+                                                'name': 'Short Sides'
                                               },
                                               {
-                                                'image': 'Group2270.png',
-                                                'name': 'Forklift'
+                                                'image': 'img25.png',
+                                                'name': 'Curtain'
                                               },
                                               {
-                                                'image': 'Group2271.png',
-                                                'name': 'Scissorlift'
+                                                'image': 'img26.png',
+                                                'name': 'Refrigerator'
+                                              },
+                                              {
+                                                'image': 'img28.png',
+                                                'name': 'Flatbed'
+                                              },
+                                              {
+                                                'image': 'img29.png',
+                                                'name': 'High Sides '
+                                              },
+                                              {
+                                                'image': 'img30.png',
+                                                'name': 'Freezer'
                                               },
                                             ],
                                             buttonText: 'Tralia',
@@ -1434,16 +1541,12 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                           UnitsContainer(
                                             unitNames: [
                                               {
-                                                'image': 'Group2181.png',
-                                                'name': 'Dump truck'
+                                                'image': 'img5.png',
+                                                'name': 'Sides'
                                               },
                                               {
-                                                'image': 'Group2270.png',
-                                                'name': 'Forklift'
-                                              },
-                                              {
-                                                'image': 'Group2271.png',
-                                                'name': 'Scissorlift'
+                                                'image': 'img6.png',
+                                                'name': 'Refrigerator'
                                               },
                                             ],
                                             buttonText: 'Six',
@@ -1454,16 +1557,8 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                           UnitsContainer(
                                             unitNames: [
                                               {
-                                                'image': 'Group2181.png',
-                                                'name': 'Dump truck'
-                                              },
-                                              {
-                                                'image': 'Group2270.png',
-                                                'name': 'Forklift'
-                                              },
-                                              {
-                                                'image': 'Group2271.png',
-                                                'name': 'Scissorlift'
+                                                'image': 'img7.png',
+                                                'name': 'Sides'
                                               },
                                             ],
                                             buttonText: 'Lorry 7 Metres',
@@ -1474,16 +1569,28 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                           UnitsContainer(
                                             unitNames: [
                                               {
-                                                'image': 'Group2181.png',
-                                                'name': 'Dump truck'
+                                                'image': 'img10.png',
+                                                'name': 'Sides'
                                               },
                                               {
-                                                'image': 'Group2270.png',
-                                                'name': 'Forklift'
+                                                'image': 'img11.png',
+                                                'name': 'Closed'
                                               },
                                               {
-                                                'image': 'Group2271.png',
-                                                'name': 'Scissorlift'
+                                                'image': 'img12.png',
+                                                'name': 'Referigerator'
+                                              },
+                                              {
+                                                'image': 'img13.png',
+                                                'name': 'Crane 5 TON'
+                                              },
+                                              {
+                                                'image': 'img14.png',
+                                                'name': 'Crane 7 TON'
+                                              },
+                                              {
+                                                'image': 'img15.png',
+                                                'name': 'Freezer'
                                               },
                                             ],
                                             buttonText: 'Lorry',
@@ -1494,16 +1601,24 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                           UnitsContainer(
                                             unitNames: [
                                               {
-                                                'image': 'Group2181.png',
-                                                'name': 'Dump truck'
+                                                'image': 'img16.png',
+                                                'name': 'Closed'
                                               },
                                               {
-                                                'image': 'Group2270.png',
-                                                'name': 'Forklift'
+                                                'image': 'img17.png',
+                                                'name': 'Crane'
                                               },
                                               {
-                                                'image': 'Group2271.png',
-                                                'name': 'Scissorlift'
+                                                'image': 'img18.png',
+                                                'name': 'Referigerator'
+                                              },
+                                              {
+                                                'image': 'img19.png',
+                                                'name': 'Sides'
+                                              },
+                                              {
+                                                'image': 'img20.png',
+                                                'name': 'Freezer'
                                               },
                                             ],
                                             buttonText: 'Diana',
@@ -1514,16 +1629,8 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                           UnitsContainer(
                                             unitNames: [
                                               {
-                                                'image': 'Group2181.png',
-                                                'name': 'Dump truck'
-                                              },
-                                              {
-                                                'image': 'Group2270.png',
-                                                'name': 'Forklift'
-                                              },
-                                              {
-                                                'image': 'Group2271.png',
-                                                'name': 'Scissorlift'
+                                                'image': 'img21.png',
+                                                'name': 'Pickup'
                                               },
                                             ],
                                             buttonText: 'Pick Up',
@@ -1534,16 +1641,12 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                           UnitsContainer(
                                             unitNames: [
                                               {
-                                                'image': 'Group2181.png',
-                                                'name': 'Dump truck'
+                                                'image': 'img22.png',
+                                                'name': 'Regular'
                                               },
                                               {
-                                                'image': 'Group2270.png',
-                                                'name': 'Forklift'
-                                              },
-                                              {
-                                                'image': 'Group2271.png',
-                                                'name': 'Scissorlift'
+                                                'image': 'img23.png',
+                                                'name': 'Hydraulic'
                                               },
                                             ],
                                             buttonText: 'Tow Truck',
@@ -1772,5 +1875,41 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
         }
       });
     });
+  }
+
+  // Method to get the load items dynamically
+  List<DropdownMenuItem<String>> _getLoadItems() {
+    // Determine which load list to use based on some conditions
+
+    if (loadtype == 'Short Sides' ||
+        loadtype == 'Curtain' ||
+        loadtype == 'High sides' ||
+        loadtype == 'Sides' ||
+        loadtype == 'Closed') {
+      return loadList.map((String value) {
+        return DropdownMenuItem<String>(
+            value: value, child: Text(value, style: AvailableText.helvetica));
+      }).toList();
+    } else if (loadtype == 'Refrigerator' || loadtype == 'Freezer') {
+      return loadList1.map((String value) {
+        return DropdownMenuItem<String>(
+            value: value, child: Text(value, style: AvailableText.helvetica));
+      }).toList();
+    } else if (loadtype == 'Flatbed') {
+      return loadList2.map((String value) {
+        return DropdownMenuItem<String>(
+            value: value, child: Text(value, style: AvailableText.helvetica));
+      }).toList();
+    } else if (loadtype == 'Crane 5 Ton' || loadtype == 'Crane 7 Ton') {
+      return loadList3.map((String value) {
+        return DropdownMenuItem<String>(
+            value: value, child: Text(value, style: AvailableText.helvetica));
+      }).toList();
+    } else {
+      return loadList3.map((String value) {
+        return DropdownMenuItem<String>(
+            value: value, child: Text(value, style: AvailableText.helvetica));
+      }).toList();
+    }
   }
 }
