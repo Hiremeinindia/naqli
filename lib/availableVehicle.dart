@@ -1238,26 +1238,26 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                                         print(
                                                             "Error creating user: $e");
                                                       }
-                                                      // showDialog(
-                                                      //   barrierColor:
-                                                      //       Color.fromRGBO(59,
-                                                      //               57, 57, 1)
-                                                      //           .withOpacity(
-                                                      //               0.5),
-                                                      //   context: context,
-                                                      //   builder: (context) {
-                                                      //     return BookingIDDialog();
-                                                      //   },
-                                                      // );
-                                                      // Navigator.push(
-                                                      //   context,
-                                                      //   MaterialPageRoute(
-                                                      //       builder: (context) =>
-                                                      //           SingleUserDashboardPage(
-                                                      //             user: widget
-                                                      //                 .user,
-                                                      //           )),
-                                                      // );
+                                                      showDialog(
+                                                        barrierColor:
+                                                            Color.fromRGBO(59,
+                                                                    57, 57, 1)
+                                                                .withOpacity(
+                                                                    0.5),
+                                                        context: context,
+                                                        builder: (context) {
+                                                          return BookingIDDialog();
+                                                        },
+                                                      );
+                                                      Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                            builder: (context) =>
+                                                                SingleUserDashboardPage(
+                                                                  user: widget
+                                                                      .user,
+                                                                )),
+                                                      );
                                                     },
                                                     text: 'Create Booking',
                                                   ),

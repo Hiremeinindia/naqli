@@ -1,277 +1,106 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/Widgets/customButton.dart';
-import 'package:flutter_application_1/Widgets/formText.dart';
+import 'package:flutter_calendar_week/flutter_calendar_week.dart';
+import 'package:intl/intl.dart';
 
-class Sample extends StatefulWidget {
-  const Sample({Key? key}) : super(key: key);
+void main() => runApp(MyApp());
 
+class MyApp extends StatelessWidget {
   @override
-  State<Sample> createState() => _SampleState();
+  Widget build(BuildContext context) => MaterialApp(
+        title: 'CalendarWeek Example',
+        home: HomePage(),
+      );
 }
 
-class _SampleState extends State<Sample> {
-  late GlobalKey<_CustomContainer1State> _buttonKey1;
-  late GlobalKey<_CustomContainer1State> _buttonKey2;
-  late GlobalKey<_CustomContainer1State> _buttonKey3;
-  String selectedTypeName1 = 'Select Type';
-  String selectedTypeName2 = 'Select Type';
-  String selectedTypeName3 = 'Select Type';
-  TextEditingController controller1 = TextEditingController();
-  TextEditingController controller2 = TextEditingController();
-  TextEditingController controller3 = TextEditingController();
-
+class HomePage extends StatefulWidget {
   @override
-  void initState() {
-    super.initState();
-    _buttonKey1 = GlobalKey<_CustomContainer1State>();
-    _buttonKey2 = GlobalKey<_CustomContainer1State>();
-    _buttonKey3 = GlobalKey<_CustomContainer1State>();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.blue.shade200,
-      body: Column(
-        children: [
-          Column(
-            children: [
-              CustomContainer1(
-                unitNames: [
-                  {'image': 'Group2181.png', 'name': 'Dump truck'},
-                  {'image': 'Group2270.png', 'name': 'Forklift'},
-                  {'image': 'Group2271.png', 'name': 'Scissorlift'},
-                ],
-                buttonText: 'Excavator',
-                selectedTypeName: selectedTypeName1,
-                buttonKey: _buttonKey1,
-                onSelectionChanged: (value) {
-                  setState(() {
-                    selectedTypeName1 = value;
-                  });
-                },
-              ),
-              SizedBox(height: 5),
-              CustomContainer1(
-                unitNames: [
-                  {'image': 'Group1660.png', 'name': 'Compactors'},
-                ],
-                buttonText: 'Bulldozer',
-                selectedTypeName: selectedTypeName2,
-                buttonKey: _buttonKey2,
-                onSelectionChanged: (value) {
-                  setState(() {
-                    selectedTypeName2 = value;
-                  });
-                },
-              ),
-              SizedBox(height: 5),
-              CustomContainer1(
-                unitNames: [
-                  {'image': 'Group2181.png', 'name': 'Dump truck'},
-                  {'image': 'Group2052.png', 'name': 'Bulldozers'},
-                  {'image': 'Group2270.png', 'name': 'Forklift'},
-                  {'image': 'Group2271.png', 'name': 'Scissorlift'},
-                  {'image': 'Group2052.png', 'name': 'Bulldozers'},
-                  {'image': 'Group2148.png', 'name': 'Graders'},
-                  {'image': 'Group2181.png', 'name': 'Dump truck'},
-                  {'image': 'Group2270.png', 'name': 'Forklift'},
-                ],
-                buttonText: 'Graders',
-                selectedTypeName: selectedTypeName3,
-                buttonKey: _buttonKey3,
-                onSelectionChanged: (value) {
-                  setState(() {
-                    selectedTypeName3 = value;
-                  });
-                },
-              ),
-              CustomButton(
-                onPressed: () async {
-                  try {
-                    print('$selectedTypeName1');
-                    print('$selectedTypeName2');
-                    print('$selectedTypeName3');
-                    // Call functions to create documents in collection and subcollection
-                    // await createNewBooking(
-                    //     truck,
-                    //     size,
-                    //     load,
-                    //     widget.user!);
-                  } catch (e) {
-                    print("Error creating user: $e");
-                  }
-                },
-                text: 'Create Booking',
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
+  _HomePageState createState() => _HomePageState();
 }
 
-class CustomContainer1 extends StatefulWidget {
-  final String? buttonText;
-  final void Function()? onPressed;
-  final GlobalKey<_CustomContainer1State>? buttonKey;
-  final List<Map<String, String>> unitNames;
-  final String? selectedTypeName;
-  final ValueChanged<String>? onSelectionChanged;
-
-  CustomContainer1({
-    Key? key,
-    this.buttonText,
-    this.selectedTypeName,
-    this.onPressed,
-    required this.unitNames,
-    this.buttonKey,
-    this.onSelectionChanged,
-  }) : super(key: key);
+class _HomePageState extends State<HomePage> {
+  final CalendarWeekController _controller = CalendarWeekController();
 
   @override
-  _CustomContainer1State createState() => _CustomContainer1State();
-}
-
-class _CustomContainer1State extends State<CustomContainer1> {
-  late OverlayEntry _overlayEntry;
-  bool _overlayVisible = false;
-  bool expand = false;
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  OverlayEntry _createOverlayEntry(
-      GlobalKey<_CustomContainer1State> key, String selectedTypeName) {
-    RenderBox? renderBox = key.currentContext?.findRenderObject() as RenderBox?;
-    final position = renderBox!.localToGlobal(Offset.zero);
-    return OverlayEntry(
-      builder: (context) => Positioned(
-        right: position.dx - 350,
-        top: position.dy + renderBox.size.height,
-        child: Material(
-          elevation: 2,
-          shape: RoundedRectangleBorder(
-            side: BorderSide(
-              width: 0.4,
-              color: Color.fromRGBO(112, 112, 112, 1).withOpacity(0.2),
-            ),
-            borderRadius: BorderRadius.circular(8),
-          ),
-          child: Container(
-            height: 400,
-            width: 500,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              border: Border.all(
-                width: 0.4,
-                color: Color.fromRGBO(112, 112, 112, 1).withOpacity(0.2),
-              ),
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: ListView.builder(
-              itemCount: widget.unitNames.length,
-              itemBuilder: (context, index) {
-                String image = widget.unitNames[index]['image']!;
-                String name = widget.unitNames[index]['name']!;
-                return ListTile(
-                  onTap: () {
-                    setState(() {
-                      widget.onSelectionChanged!(name);
-                      expand = false;
-                    });
-                    _hideOverlay();
-                  },
-                  leading: Image.asset(
-                    image,
-                    width: 60,
-                    height: 60,
-                  ),
-                  title: Text(name),
-                );
-              },
-            ),
-          ),
+  Widget build(BuildContext context) => Scaffold(
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            _controller.jumpToDate(DateTime.now());
+            setState(() {});
+          },
+          child: Icon(Icons.today),
         ),
-      ),
-    );
-  }
-
-  void _showOverlay(
-      GlobalKey<_CustomContainer1State> key, String selectedTypeName) {
-    _overlayEntry = _createOverlayEntry(key, selectedTypeName);
-    Overlay.of(context)!.insert(_overlayEntry);
-    setState(() {
-      _overlayVisible = true;
-    });
-  }
-
-  void _hideOverlay() {
-    _overlayEntry.remove();
-    setState(() {
-      _overlayVisible = false;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 500,
-      child: Column(
-        children: [
+        appBar: AppBar(
+          elevation: 0,
+          backgroundColor: Colors.blue,
+          title: Text('CalendarWeek'),
+        ),
+        body: Column(children: [
           Container(
-            height: 50,
-            width: 500,
-            decoration: BoxDecoration(
-              border: Border.all(color: Color.fromRGBO(183, 183, 183, 1)),
-              borderRadius: BorderRadius.all(
-                Radius.circular(8),
+              decoration: BoxDecoration(boxShadow: [
+                BoxShadow(
+                    color: Colors.black.withOpacity(0.2),
+                    blurRadius: 10,
+                    spreadRadius: 1)
+              ]),
+              child: CalendarWeek(
+                controller: _controller,
+                height: 100,
+                showMonth: true,
+                minDate: DateTime.now().add(
+                  Duration(days: -365),
+                ),
+                maxDate: DateTime.now().add(
+                  Duration(days: 365),
+                ),
+                onDatePressed: (DateTime datetime) {
+                  // Do something
+                  setState(() {});
+                },
+                onDateLongPressed: (DateTime datetime) {
+                  // Do something
+                },
+                onWeekChanged: () {
+                  // Do something
+                },
+                monthViewBuilder: (DateTime time) => Align(
+                  alignment: FractionalOffset.center,
+                  child: Container(
+                      margin: const EdgeInsets.symmetric(vertical: 4),
+                      child: Text(
+                        DateFormat.yMMMM().format(time),
+                        overflow: TextOverflow.ellipsis,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            color: Colors.blue, fontWeight: FontWeight.w600),
+                      )),
+                ),
+                decorations: [
+                  DecorationItem(
+                      decorationAlignment: FractionalOffset.bottomRight,
+                      date: DateTime.now(),
+                      decoration: Icon(
+                        Icons.today,
+                        color: Colors.blue,
+                      )),
+                  DecorationItem(
+                      date: DateTime.now().add(Duration(days: 3)),
+                      decoration: Text(
+                        'Holiday',
+                        style: TextStyle(
+                          color: Colors.brown,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      )),
+                ],
+              )),
+          Expanded(
+            child: Center(
+              child: Text(
+                '${_controller.selectedDate.day}/${_controller.selectedDate.month}/${_controller.selectedDate.year}',
+                style: TextStyle(fontSize: 30),
               ),
-              color: Colors.white,
             ),
-            padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Image.asset(
-                  'delivery-truck.png',
-                  width: 50,
-                  height: 50,
-                ),
-                Text(widget.buttonText!, style: AvailableText.helvetica17black),
-                SizedBox(
-                  height: double.infinity,
-                  child: VerticalDivider(),
-                ),
-                Text(
-                  widget.selectedTypeName ?? '',
-                  style: AvailableText.helvetica,
-                ),
-                IconButton(
-                  key: widget.buttonKey,
-                  icon: Icon(
-                    Icons.arrow_drop_down,
-                    size: 25,
-                    color: Colors.black,
-                  ),
-                  onPressed: () {
-                    if (!_overlayVisible) {
-                      _showOverlay(
-                          widget.buttonKey!, widget.selectedTypeName ?? '');
-                    } else {
-                      _hideOverlay();
-                    }
-                  },
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
+          )
+        ]),
+      );
 }

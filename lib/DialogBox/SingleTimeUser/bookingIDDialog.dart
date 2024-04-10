@@ -14,7 +14,7 @@ class BookingIDDialog extends StatefulWidget {
 class _BookingIDDialogState extends State<BookingIDDialog> {
   String _generateBookingID() {
     Random random = Random();
-    // Generate a random number with 16 digits
+
     String bookingID = '';
     for (int i = 0; i < 10; i++) {
       bookingID += random.nextInt(10).toString();
@@ -34,8 +34,7 @@ class _BookingIDDialogState extends State<BookingIDDialog> {
             ),
             child: Container(
               height: 280,
-              width: MediaQuery.of(context).size.width *
-                  0.5, // Adjust width responsively
+              width: MediaQuery.of(context).size.width * 0.5,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10.0),
                 boxShadow: [

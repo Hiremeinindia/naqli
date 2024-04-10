@@ -24,6 +24,7 @@ class AllUsersFormController {
   final truck = TextEditingController();
   final load = TextEditingController();
   final size = TextEditingController();
+  final time = TextEditingController();
   final companyidNumber = TextEditingController();
   final selectedAccounttype = TextEditingController();
 
