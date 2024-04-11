@@ -35,13 +35,13 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
   bool checkbox1 = false;
   final ScrollController _Scroll1 = ScrollController();
   final ScrollController _Scroll2 = ScrollController();
-  late GlobalKey<CustomContainerState> _buttonKey1;
-  late GlobalKey<CustomContainerState> _buttonKey2;
-  late GlobalKey<CustomContainerState> _buttonKey3;
-  late GlobalKey<CustomContainerState> _buttonKey4;
-  late GlobalKey<CustomContainerState> _buttonKey5;
-  late GlobalKey<CustomContainerState> _buttonKey6;
-  late GlobalKey<CustomContainerState> _buttonKey7;
+  late GlobalKey<CustomContainerState> _vechiKey1;
+  late GlobalKey<CustomContainerState> _vechiKey2;
+  late GlobalKey<CustomContainerState> _vechiKey3;
+  late GlobalKey<CustomContainerState> _vechiKey4;
+  late GlobalKey<CustomContainerState> _vechiKey5;
+  late GlobalKey<CustomContainerState> _vechiKey6;
+  late GlobalKey<CustomContainerState> _vechiKey7;
   String loadtype = '';
   final List<String> loadList = [
     'Food Items',
@@ -80,13 +80,13 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
   AllUsersFormController controller = AllUsersFormController();
   void initState() {
     super.initState();
-    _buttonKey1 = GlobalKey<CustomContainerState>();
-    _buttonKey2 = GlobalKey<CustomContainerState>();
-    _buttonKey3 = GlobalKey<CustomContainerState>();
-    _buttonKey4 = GlobalKey<CustomContainerState>();
-    _buttonKey5 = GlobalKey<CustomContainerState>();
-    _buttonKey6 = GlobalKey<CustomContainerState>();
-    _buttonKey7 = GlobalKey<CustomContainerState>();
+    _vechiKey1 = GlobalKey<CustomContainerState>();
+    _vechiKey2 = GlobalKey<CustomContainerState>();
+    _vechiKey3 = GlobalKey<CustomContainerState>();
+    _vechiKey4 = GlobalKey<CustomContainerState>();
+    _vechiKey5 = GlobalKey<CustomContainerState>();
+    _vechiKey6 = GlobalKey<CustomContainerState>();
+    _vechiKey7 = GlobalKey<CustomContainerState>();
   }
 
   Future<void> _showDatePicker(BuildContext context) async {
@@ -443,7 +443,7 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                                               .selectedTypeName1
                                                               .text
                                                           : 'Select Type',
-                                                  buttonKey: _buttonKey1,
+                                                  buttonKey: _vechiKey1,
                                                   onSelectionChanged: (value) {
                                                     setState(() {
                                                       loadtype = value;
@@ -475,7 +475,7 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                                               .selectedTypeName2
                                                               .text
                                                           : 'Select Type',
-                                                  buttonKey: _buttonKey2,
+                                                  buttonKey: _vechiKey2,
                                                   onSelectionChanged: (value) {
                                                     setState(() {
                                                       loadtype = value;
@@ -503,7 +503,7 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                                               .selectedTypeName3
                                                               .text
                                                           : 'Select Type',
-                                                  buttonKey: _buttonKey3,
+                                                  buttonKey: _vechiKey3,
                                                   onSelectionChanged: (value) {
                                                     setState(() {
                                                       loadtype = value;
@@ -551,7 +551,7 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                                               .selectedTypeName4
                                                               .text
                                                           : 'Select Type',
-                                                  buttonKey: _buttonKey4,
+                                                  buttonKey: _vechiKey4,
                                                   onSelectionChanged: (value) {
                                                     setState(() {
                                                       loadtype = value;
@@ -594,7 +594,7 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                                               .selectedTypeName5
                                                               .text
                                                           : 'Select Type',
-                                                  buttonKey: _buttonKey5,
+                                                  buttonKey: _vechiKey5,
                                                   onSelectionChanged: (value) {
                                                     setState(() {
                                                       loadtype = value;
@@ -621,7 +621,7 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                                               .selectedTypeName6
                                                               .text
                                                           : 'Select Type',
-                                                  buttonKey: _buttonKey6,
+                                                  buttonKey: _vechiKey6,
                                                   onSelectionChanged: (value) {
                                                     setState(() {
                                                       loadtype = value;
@@ -652,7 +652,7 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                                               .selectedTypeName7
                                                               .text
                                                           : 'Select Type',
-                                                  buttonKey: _buttonKey7,
+                                                  buttonKey: _vechiKey7,
                                                   onSelectionChanged: (value) {
                                                     setState(() {
                                                       loadtype = value;
@@ -1587,7 +1587,7 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                             buttonText: 'Tralia',
                                             selectedTypeName: controller
                                                 .selectedTypeName1.text,
-                                            buttonKey: _buttonKey1!,
+                                            buttonKey: _vechiKey1!,
                                           ),
                                           UnitsContainer(
                                             unitNames: [
@@ -1603,7 +1603,7 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                             buttonText: 'Six',
                                             selectedTypeName: controller
                                                 .selectedTypeName2.text,
-                                            buttonKey: _buttonKey2!,
+                                            buttonKey: _vechiKey2!,
                                           ),
                                           UnitsContainer(
                                             unitNames: [
@@ -1615,7 +1615,7 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                             buttonText: 'Lorry 7 Metres',
                                             selectedTypeName: controller
                                                 .selectedTypeName3.text,
-                                            buttonKey: _buttonKey3!,
+                                            buttonKey: _vechiKey3!,
                                           ),
                                           UnitsContainer(
                                             unitNames: [
@@ -1647,7 +1647,7 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                             buttonText: 'Lorry',
                                             selectedTypeName: controller
                                                 .selectedTypeName4.text,
-                                            buttonKey: _buttonKey4!,
+                                            buttonKey: _vechiKey4!,
                                           ),
                                           UnitsContainer(
                                             unitNames: [
@@ -1675,7 +1675,7 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                             buttonText: 'Diana',
                                             selectedTypeName: controller
                                                 .selectedTypeName5.text,
-                                            buttonKey: _buttonKey5!,
+                                            buttonKey: _vechiKey5!,
                                           ),
                                           UnitsContainer(
                                             unitNames: [
@@ -1687,7 +1687,7 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                             buttonText: 'Pick Up',
                                             selectedTypeName: controller
                                                 .selectedTypeName6.text,
-                                            buttonKey: _buttonKey6!,
+                                            buttonKey: _vechiKey6!,
                                           ),
                                           UnitsContainer(
                                             unitNames: [
@@ -1703,7 +1703,7 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                             buttonText: 'Tow Truck',
                                             selectedTypeName: controller
                                                 .selectedTypeName7.text,
-                                            buttonKey: _buttonKey7!,
+                                            buttonKey: _vechiKey7!,
                                           ),
                                           CustomTextfieldGrey(
                                             text: 'Time',
