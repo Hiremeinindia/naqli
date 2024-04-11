@@ -443,7 +443,8 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                   unitNames: [
                                                     {
                                                       'image': 'Group4128.png',
-                                                      'name': 'Excavator'
+                                                      'name': 'Excavator',
+                                                      'size': '',
                                                     },
                                                   ],
                                                   buttonText: 'Excavator',
@@ -470,15 +471,18 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                   unitNames: [
                                                     {
                                                       'image': 'Group3071.png',
-                                                      'name': 'Back hoe'
+                                                      'name': 'Back hoe',
+                                                      'size': '',
                                                     },
                                                     {
                                                       'image': 'Group2052.png',
-                                                      'name': 'Front hoe'
+                                                      'name': 'Front hoe',
+                                                      'size': '',
                                                     },
                                                     {
                                                       'image': 'Group4137.png',
-                                                      'name': 'Skid steer'
+                                                      'name': 'Skid steer',
+                                                      'size': '',
                                                     },
                                                   ],
                                                   buttonText: 'Loaders',
@@ -505,11 +509,13 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                   unitNames: [
                                                     {
                                                       'image': 'Group2271.png',
-                                                      'name': 'Crawler crane'
+                                                      'name': 'Crawler crane',
+                                                      'size': '',
                                                     },
                                                     {
                                                       'image': 'Group4240.png',
-                                                      'name': 'Mobile crane'
+                                                      'name': 'Mobile crane',
+                                                      'size': '',
                                                     },
                                                   ],
                                                   buttonText: 'Cranes',
@@ -536,27 +542,33 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                   unitNames: [
                                                     {
                                                       'image': 'Group2270.png',
-                                                      'name': 'Compactors'
+                                                      'name': 'Compactors',
+                                                      'size': '',
                                                     },
                                                     {
                                                       'image': 'Group2236.png',
-                                                      'name': 'Bulldozers'
+                                                      'name': 'Bulldozers',
+                                                      'size': '',
                                                     },
                                                     {
                                                       'image': 'Group4225.png',
-                                                      'name': 'Graders'
+                                                      'name': 'Graders',
+                                                      'size': '',
                                                     },
                                                     {
                                                       'image': 'Group2148.png',
-                                                      'name': 'Dump truck'
+                                                      'name': 'Dump truck',
+                                                      'size': '',
                                                     },
                                                     {
                                                       'image': 'Group2181.png',
-                                                      'name': 'Forklift'
+                                                      'name': 'Forklift',
+                                                      'size': '',
                                                     },
                                                     {
                                                       'image': 'Group4239.png',
-                                                      'name': 'Scissorlift'
+                                                      'name': 'Scissorlift',
+                                                      'size': '',
                                                     },
                                                   ],
                                                   buttonText: 'Others',
