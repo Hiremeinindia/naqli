@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_application_1/Controllers/allUsersFormController.dart';
+import 'package:flutter_application_1/DialogBox/SingleTimeUser/mblNoDialog.dart';
 import 'package:flutter_application_1/Users/SingleUser/dashboard_page.dart';
 import 'package:flutter_application_1/availableBus.dart';
 import 'package:flutter_application_1/availableEquipment.dart';
@@ -399,14 +400,55 @@ class _MyHomePageState extends State<MyHomePage>
                                               children: [
                                                 GestureDetector(
                                                   onTap: () {
-                                                    Navigator.push(
-                                                      context,
-                                                      MaterialPageRoute(
-                                                          builder: (context) =>
-                                                              AvailableVehicle(
-                                                                user:
-                                                                    widget.user,
-                                                              )),
+                                                    showDialog(
+                                                      barrierColor:
+                                                          Color.fromRGBO(
+                                                                  59, 57, 57, 1)
+                                                              .withOpacity(0.5),
+                                                      context: context,
+                                                      builder: (context) {
+                                                        String? email = '';
+                                                        String password = '';
+                                                        String
+                                                            selectedAccounttype =
+                                                            '';
+                                                        String firstName = '';
+                                                        String lastName = '';
+                                                        String legalName = '';
+                                                        String adminUid = '';
+                                                        String contactNumber =
+                                                            '';
+                                                        String address = '';
+                                                        String selectedGovtId =
+                                                            '';
+                                                        String confirmPassword =
+                                                            '';
+                                                        String alternateNumber =
+                                                            '';
+                                                        String address2 = '';
+                                                        String idNumber = '';
+                                                        String selectedCity =
+                                                            '';
+                                                        String companyidNumber =
+                                                            '';
+                                                        return MblNoDialog(
+                                                            email,
+                                                            password,
+                                                            selectedAccounttype,
+                                                            firstName,
+                                                            lastName,
+                                                            legalName,
+                                                            address,
+                                                            address2,
+                                                            alternateNumber,
+                                                            companyidNumber,
+                                                            confirmPassword,
+                                                            contactNumber,
+                                                            idNumber,
+                                                            selectedCity,
+                                                            selectedGovtId,
+                                                            adminUid);
+                                                      },
                                                     );
                                                   },
                                                   child: Card(
