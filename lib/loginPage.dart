@@ -7,6 +7,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_application_1/Users/Enterprise/dashboard_page.dart';
 import 'package:flutter_application_1/Users/SingleUser/dashboard_page.dart';
+import 'package:flutter_application_1/Users/SingleUser/homePageSingleUser.dart';
 import 'package:flutter_application_1/Users/SuperUser/dashboard_page.dart';
 import 'package:flutter_application_1/availableEquipment.dart';
 import 'package:flutter_application_1/availableVehicle.dart';
@@ -244,10 +245,10 @@ class _LoginPageState extends State<LoginPage> {
                                                 Navigator.pushReplacement(
                                                   context,
                                                   MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        AvailableEquipment(
-                                                            user: userId),
-                                                  ),
+                                                      builder: (context) =>
+                                                          MyHomePagesingle(
+                                                            user: userId,
+                                                          )),
                                                 );
                                               } else if (userRole ==
                                                   'Superuser') {
@@ -356,7 +357,6 @@ class _LoginPageState extends State<LoginPage> {
                                     String? email = '';
                                     String password = '';
                                     String selectedAccounttype = '';
-
                                     String firstName = '';
                                     String lastName = '';
                                     String legalName = '';

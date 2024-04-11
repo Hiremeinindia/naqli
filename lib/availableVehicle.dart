@@ -785,10 +785,10 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                                                         .helvetica,
                                                                     readOnly:
                                                                         true,
-                                                                    onTap: () {
-                                                                      _showDatePicker(
-                                                                          context);
-                                                                    },
+                                                                    // onTap: () {
+                                                                    //   _showDatePicker(
+                                                                    //       context);
+                                                                    // },
                                                                     decoration:
                                                                         InputDecoration(
                                                                       contentPadding:
@@ -1296,11 +1296,15 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                                           return BookingIDDialog();
                                                         },
                                                       );
+                                                      String unitType =
+                                                          'Vehicle';
                                                       Navigator.push(
                                                         context,
                                                         MaterialPageRoute(
                                                             builder: (context) =>
                                                                 SingleUserDashboardPage(
+                                                                  unitType:
+                                                                      unitType,
                                                                   user: widget
                                                                       .user,
                                                                 )),

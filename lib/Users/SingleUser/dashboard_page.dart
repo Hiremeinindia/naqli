@@ -22,7 +22,9 @@ import 'package:flutter_application_1/Users/SingleUser/payments.dart';
 class SingleUserDashboardPage extends StatefulWidget {
   final String? user;
   final String? bookingId;
-  const SingleUserDashboardPage({required this.user, this.bookingId});
+  final String? unitType;
+  const SingleUserDashboardPage(
+      {required this.user, this.unitType, this.bookingId});
 
   @override
   State<SingleUserDashboardPage> createState() => _MyHomePageState();
@@ -69,6 +71,7 @@ class _MyHomePageState extends State<SingleUserDashboardPage> {
   void _handleItem1Tap() {
     setState(() {
       _currentContent = Bookings(
+        unitType: widget.unitType,
         user: widget.user,
         bookingId: widget.bookingId,
       );
@@ -126,6 +129,7 @@ class _MyHomePageState extends State<SingleUserDashboardPage> {
     });
     super.initState();
     _currentContent = Bookings(
+      unitType: widget.unitType,
       user: widget.user,
       bookingId: widget.bookingId,
     );
@@ -517,6 +521,7 @@ class _MyHomePageState extends State<SingleUserDashboardPage> {
                                     onTap: (page, _) {
                                       setState(() {
                                         _currentContent = Bookings(
+                                          unitType: widget.unitType,
                                           user: widget.user,
                                           bookingId: widget.bookingId,
                                         );
@@ -652,6 +657,7 @@ class _MyHomePageState extends State<SingleUserDashboardPage> {
                           setState(() {
                             _currentContent = Bookings(
                               user: widget.user,
+                              unitType: widget.unitType,
                               bookingId: widget.bookingId,
                             );
                           });
