@@ -46,6 +46,7 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
   bool value = false;
   bool checkbox = false;
   String loadtype = '';
+  int? lab;
   int? groupValue1;
   int? groupValue = 1;
   bool checkbox1 = false;
@@ -63,9 +64,11 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
   String selectedTypeName3 = 'Select Type';
   String selectedTypeName4 = 'Select Type';
   int? selectedContainerIndex;
+  int? selectedRadioValue;
   void initState() {
     super.initState();
     bookingID = _generateBookingID();
+    lab = selectedRadioValue;
     _equipKey1 = GlobalKey<CustomContainerState>();
     _equipKey2 = GlobalKey<CustomContainerState>();
     _equipKey3 = GlobalKey<CustomContainerState>();
@@ -136,6 +139,7 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
     String time,
     String bookingid,
     String date,
+    String labour,
     String adminUid,
   ) async {
     try {
@@ -156,6 +160,7 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
         'time': time,
         'bookingid': bookingid,
         'date': date,
+        'labour': labour,
       });
 
       // Store the auto-generated ID
@@ -898,6 +903,8 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                         });
                                                       },
                                                     ),
+                                                    // Variable to store the selected radio button value
+
                                                     Text(
                                                       'Need Additional Labour',
                                                       style: AvailableText
@@ -939,18 +946,15 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                                   .withOpacity(
                                                                       .8),
                                                               value: i,
-                                                              groupValue: checkbox1
-                                                                  ? groupValue
-                                                                  : null, // Enable/disable based on checkbox state
-                                                              onChanged: checkbox1
-                                                                  ? (int? value) {
-                                                                      setState(
-                                                                          () {
-                                                                        groupValue =
-                                                                            value;
-                                                                      });
-                                                                    }
-                                                                  : null, // Set onChanged to null if checkbox is unchecked
+                                                              groupValue:
+                                                                  selectedRadioValue, // Set groupValue to the selectedRadioValue variable
+                                                              onChanged:
+                                                                  (int? value) {
+                                                                setState(() {
+                                                                  selectedRadioValue =
+                                                                      value; // Update the selectedRadioValue when radio button is changed
+                                                                });
+                                                              },
                                                             ),
                                                           ),
                                                           Text(
@@ -1116,6 +1120,10 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                             bookingID;
                                                         String date = controller
                                                             .date.text;
+                                                        String labour =
+                                                            selectedRadioValue
+                                                                .toString();
+
                                                         await createNewBooking(
                                                             truck1,
                                                             size,
@@ -1123,6 +1131,7 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                             time,
                                                             bookingid,
                                                             date,
+                                                            labour,
                                                             widget.user!);
                                                       } catch (e) {
                                                         print(

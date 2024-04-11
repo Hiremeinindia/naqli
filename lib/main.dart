@@ -88,9 +88,7 @@ class _MyAppState extends State<MyApp> {
       supportedLocales: AppLocalizations.supportedLocales,
       locale: _locale,
       debugShowCheckedModeBanner: false,
-      home: SingleUserDashboardPage(
-        user: '',
-      ),
+      home: MyHomePage(),
     );
   }
 }
