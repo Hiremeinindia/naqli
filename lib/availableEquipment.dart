@@ -1105,7 +1105,7 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                               .selectedTypeName3
                                                               .text;
                                                         }
-
+                                                        String truck1 = truck;
                                                         String size = controller
                                                             .size.text;
                                                         String load = controller
@@ -1117,7 +1117,7 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                         String date = controller
                                                             .date.text;
                                                         await createNewBooking(
-                                                            truck,
+                                                            truck1,
                                                             size,
                                                             load,
                                                             time,
@@ -1213,7 +1213,18 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                                               Icon(Icons.close),
                                                                           onPressed:
                                                                               () {
-                                                                            Navigator.of(context).pop();
+                                                                            String
+                                                                                unitType =
+                                                                                'Equipment';
+                                                                            Navigator.push(
+                                                                              context,
+                                                                              MaterialPageRoute(
+                                                                                  builder: (context) => SingleUserDashboardPage(
+                                                                                        unitType: unitType,
+                                                                                        user: widget.user,
+                                                                                        bookingId: bookingID,
+                                                                                      )),
+                                                                            );
                                                                           },
                                                                           color:
                                                                               Colors.white, // Setting icon color
@@ -1249,19 +1260,6 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                             ),
                                                           );
                                                         },
-                                                      );
-                                                      String unitType =
-                                                          'Equipment';
-                                                      Navigator.push(
-                                                        context,
-                                                        MaterialPageRoute(
-                                                            builder: (context) =>
-                                                                SingleUserDashboardPage(
-                                                                  unitType:
-                                                                      unitType,
-                                                                  user: widget
-                                                                      .user,
-                                                                )),
                                                       );
                                                     },
                                                     text: 'Create Booking',
