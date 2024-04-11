@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/Controllers/allUsersFormController.dart';
 import 'package:flutter_application_1/Partner/Dashboard/dashboard_page.dart';
 import 'package:flutter_application_1/Partner/homepage.dart';
+import 'package:flutter_application_1/Partner/operator.dart';
 import 'package:flutter_application_1/Widgets/customTextField.dart';
 import 'package:flutter_application_1/Widgets/formText.dart';
 import 'package:pin_code_text_field/pin_code_text_field.dart';
@@ -11,6 +12,10 @@ import 'package:quiver/time.dart';
 import 'package:sizer/sizer.dart';
 
 class Partner extends StatefulWidget {
+  final String? user;
+  Partner({
+    this.user,
+  });
   @override
   _State createState() => _State();
 }
@@ -526,7 +531,7 @@ class _State extends State<Partner> {
                                                   context,
                                                   MaterialPageRoute(
                                                       builder: (context) =>
-                                                          PartnerDashboardPage(
+                                                          Operator(
                                                             user: userId,
                                                           )),
                                                 );

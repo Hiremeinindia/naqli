@@ -263,7 +263,9 @@ class _MyHomePageState extends State<HomePagePartner> {
                                               barrierDismissible: true,
                                               context: context,
                                               builder: (context) {
-                                                return (Operator());
+                                                return (Operator(
+                                                  user: '',
+                                                ));
                                               },
                                             ); // Add your onPressed functionality here
                                           },
@@ -637,7 +639,9 @@ class _MyHomePageState extends State<HomePagePartner> {
                             barrierDismissible: false,
                             context: context,
                             builder: (context) {
-                              return (Operator());
+                              return (Operator(
+                                user: '',
+                              ));
                             },
                           ); // Add your onPressed functionality here
                         },
@@ -664,7 +668,9 @@ class _MyHomePageState extends State<HomePagePartner> {
                             barrierDismissible: false,
                             context: context,
                             builder: (context) {
-                              return (Operator());
+                              return (Operator(
+                                user: '',
+                              ));
                             },
                           ); // Add your onPressed functionality here
                         },
