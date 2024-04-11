@@ -99,7 +99,7 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
   //   }
   // }
   Future<void> createNewBooking(
-    String equip,
+    String truck,
     String size,
     String load,
     String time,
@@ -117,7 +117,7 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
 
       // Add document to subcollection and get the document reference
       DocumentReference newBookingDocRef = await userBookingCollectionRef.add({
-        'equip': equip,
+        'truck': truck,
         'size': size,
         'load': load,
         'time': time,
@@ -1065,34 +1065,34 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                       try {
                                                         print(
                                                             '$selectedContainerIndex');
-                                                        String equip = '';
+                                                        String truck = '';
 
                                                         if (controller
                                                             .selectedTypeName
                                                             .text
                                                             .isNotEmpty) {
-                                                          equip = controller
+                                                          truck = controller
                                                               .selectedTypeName
                                                               .text;
                                                         } else if (controller
                                                             .selectedTypeName1
                                                             .text
                                                             .isNotEmpty) {
-                                                          equip = controller
+                                                          truck = controller
                                                               .selectedTypeName1
                                                               .text;
                                                         } else if (controller
                                                             .selectedTypeName2
                                                             .text
                                                             .isNotEmpty) {
-                                                          equip = controller
+                                                          truck = controller
                                                               .selectedTypeName2
                                                               .text;
                                                         } else if (controller
                                                             .selectedTypeName3
                                                             .text
                                                             .isNotEmpty) {
-                                                          equip = controller
+                                                          truck = controller
                                                               .selectedTypeName3
                                                               .text;
                                                         }
@@ -1104,7 +1104,7 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                         String time = controller
                                                             .time.text;
                                                         await createNewBooking(
-                                                            equip,
+                                                            truck,
                                                             size,
                                                             load,
                                                             time,
@@ -1124,6 +1124,8 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                           return BookingIDDialog();
                                                         },
                                                       );
+                                                      String unitType =
+                                                          'Equipment';
                                                       Navigator.push(
                                                         context,
                                                         MaterialPageRoute(
@@ -1131,6 +1133,8 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                                 SingleUserDashboardPage(
                                                                   user: widget
                                                                       .user,
+                                                                  unitType:
+                                                                      unitType,
                                                                 )),
                                                       );
                                                     },

@@ -356,7 +356,6 @@ class _LoginPageState extends State<LoginPage> {
                                     String? email = '';
                                     String password = '';
                                     String selectedAccounttype = '';
-
                                     String firstName = '';
                                     String lastName = '';
                                     String legalName = '';

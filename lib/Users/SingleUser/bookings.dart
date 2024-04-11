@@ -19,7 +19,8 @@ import '../../DialogBox/SingleTimeUser/bookingConfirmDialog.dart';
 class Bookings extends StatefulWidget {
   final String? user;
   final String? bookingId;
-  Bookings({required this.user, this.bookingId});
+  final String? unitType;
+  Bookings({required this.user, this.unitType, this.bookingId});
   @override
   State<Bookings> createState() => _BookingsState();
 }
@@ -182,10 +183,18 @@ class _BookingsState extends State<Bookings> {
 
     try {
       // Perform the asynchronous operation
+      String userCollection;
+      if (widget.unitType == 'Vehicle') {
+        userCollection = 'vehicleBooking';
+      } else if (widget.unitType == 'Equipment') {
+        userCollection = 'equipmentBookings';
+      } else {
+        throw Exception('Invalid selected type');
+      }
       FirebaseFirestore firestore = FirebaseFirestore.instance;
       DocumentReference userDocRef = firestore.collection('user').doc(userId);
       CollectionReference userBookingCollectionRef =
-          userDocRef.collection('equipmentBookings');
+          userDocRef.collection(userCollection);
       Map<String, dynamic>? lastUserData;
       // Listen to the collection's stream, order by timestamp, and limit to 1 document
       userBookingCollectionRef.limit(1).snapshots().listen((querySnapshot) {
@@ -195,13 +204,13 @@ class _BookingsState extends State<Bookings> {
             Map<String, dynamic>? data = doc.data() as Map<String, dynamic>?;
 
             if (data != null) {
-              String equip = data['equip'] ?? '';
+              String truck = data['truck'] ?? '';
               String load = data['load'] ?? '';
               String size = data['size'] ?? '';
 
               // Create a map containing truck, load, and size
               Map<String, dynamic> userData = {
-                'equip': equip,
+                'truck': truck,
                 'load': load,
                 'size': size,
               };
@@ -574,7 +583,7 @@ class _BookingsState extends State<Bookings> {
                                           Text("Pick up truck",
                                               style:
                                                   DialogText.helvetica25black),
-                                          Text('${userData['equip']}',
+                                          Text('${userData['truck']}',
                                               style: BookingText.helveticablack)
                                         ],
                                       ),
