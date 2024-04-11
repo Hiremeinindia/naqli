@@ -536,7 +536,7 @@ class _BookingsState extends State<Bookings> {
                               SizedBox(
                                 width: 10,
                               ),
-                              Text("Booking Id #1345789345",
+                              Text("Booking Id ${widget.bookingId}",
                                   style: BookingText.helvetica21),
                             ],
                           ),
