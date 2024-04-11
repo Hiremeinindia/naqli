@@ -15,6 +15,8 @@ class UnitsContainer extends StatefulWidget {
   final List<Map<String, String>> unitNames;
   String? selectedTypeName;
   final ValueChanged<String>? onSelectionChanged;
+  final ValueChanged<String>? onSelectionChanged1;
+  String? size;
 
   UnitsContainer({
     Key? key,
@@ -23,7 +25,9 @@ class UnitsContainer extends StatefulWidget {
     this.onPressed,
     required this.unitNames,
     this.buttonKey,
+    this.size,
     this.onSelectionChanged,
+    this.onSelectionChanged1,
   }) : super(key: key);
 
   @override
@@ -40,12 +44,13 @@ class CustomContainerState extends State<UnitsContainer> {
     super.initState();
   }
 
-  OverlayEntry _createOverlayEntry(GlobalKey key, String selectedTypeName) {
+  OverlayEntry _createOverlayEntry(
+      GlobalKey key, String selectedTypeName, String size) {
     RenderBox? renderBox = key.currentContext?.findRenderObject() as RenderBox?;
     final position = renderBox!.localToGlobal(Offset.zero);
     return OverlayEntry(
       builder: (context) => Positioned(
-        right: position.dx + 7.w,
+        right: position.dx + 7.5.w,
         top: position.dy + 50,
         child: Material(
           elevation: 2,
@@ -56,38 +61,52 @@ class CustomContainerState extends State<UnitsContainer> {
             ),
             borderRadius: BorderRadius.circular(8),
           ),
-          child: Container(
-            height: 400,
-            width: 500,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              border: Border.all(
-                width: 0.4,
-                color: Color.fromRGBO(112, 112, 112, 1).withOpacity(0.2),
+          child: SizedBox(
+            width: 480,
+            height: widget.unitNames.length *
+                70.0, // Assuming each ListTile has a height of 70
+            child: Container(
+              padding: EdgeInsets.fromLTRB(5, 15, 0, 15),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                border: Border.all(
+                  width: 0.4,
+                  color: Color.fromRGBO(112, 112, 112, 1).withOpacity(0.2),
+                ),
+                borderRadius: BorderRadius.circular(8),
               ),
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: ListView.builder(
-              itemCount: widget.unitNames.length,
-              itemBuilder: (context, index) {
-                String image = widget.unitNames[index]['image']!;
-                String name = widget.unitNames[index]['name']!;
-                return ListTile(
-                  onTap: () {
-                    setState(() {
-                      widget.onSelectionChanged!(name);
-                      expand = false;
-                    });
-                    _hideOverlay();
-                  },
-                  leading: Image.asset(
-                    image,
-                    width: 60,
-                    height: 60,
-                  ),
-                  title: Text(name),
-                );
-              },
+              child: ListView.builder(
+                itemCount: widget.unitNames.length,
+                itemExtent: 65, // Height of each ListTile
+                itemBuilder: (context, index) {
+                  String image = widget.unitNames[index]['image']!;
+                  String name = widget.unitNames[index]['name']!;
+                  String size = widget.unitNames[index]['size']!;
+                  return ListTile(
+                    onTap: () {
+                      setState(() {
+                        widget.onSelectionChanged!(name);
+                        widget.onSelectionChanged1!(size);
+                        expand = false;
+                      });
+                      _hideOverlay();
+                    },
+                    leading: Image.asset(
+                      image,
+                      width: 120,
+                      height: 70,
+                    ),
+                    title: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(name, style: BookingManagerText.sfpro20black),
+                        Text(size, style: TriggerBookingText.sfpro16)
+                      ],
+                    ),
+                  );
+                },
+              ),
             ),
           ),
         ),
@@ -95,9 +114,9 @@ class CustomContainerState extends State<UnitsContainer> {
     );
   }
 
-  void _showOverlay(
-      GlobalKey<CustomContainerState> key, String selectedTypeName) {
-    _overlayEntry = _createOverlayEntry(key, selectedTypeName);
+  void _showOverlay(GlobalKey<CustomContainerState> key,
+      String selectedTypeName, String size) {
+    _overlayEntry = _createOverlayEntry(key, selectedTypeName, size);
     Overlay.of(context)!.insert(_overlayEntry);
     setState(() {
       _overlayVisible = true;
@@ -133,8 +152,8 @@ class CustomContainerState extends State<UnitsContainer> {
               children: [
                 Image.asset(
                   'delivery-truck.png',
-                  width: 50,
-                  height: 50,
+                  width: 100,
+                  height: 100,
                 ),
                 Text(widget.buttonText!, style: AvailableText.helvetica17black),
                 SizedBox(
@@ -154,8 +173,10 @@ class CustomContainerState extends State<UnitsContainer> {
                   ),
                   onPressed: () {
                     if (!_overlayVisible) {
-                      _showOverlay(widget.buttonKey!,
-                          widget.selectedTypeName ?? 'Select Type');
+                      _showOverlay(
+                          widget.buttonKey!,
+                          widget.selectedTypeName ?? 'Select Type',
+                          widget.size ?? '-');
                     } else {
                       _hideOverlay();
                     }
