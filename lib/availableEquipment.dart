@@ -54,10 +54,10 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
   final ScrollController _Scroll2 = ScrollController();
   AllUsersFormController controller = AllUsersFormController();
   String dropdownValues = 'Load Type';
-  late GlobalKey<CustomContainerState> _buttonKey1;
-  late GlobalKey<CustomContainerState> _buttonKey2;
-  late GlobalKey<CustomContainerState> _buttonKey3;
-  late GlobalKey<CustomContainerState> _buttonKey4;
+  late GlobalKey<CustomContainerState> _equipKey1;
+  late GlobalKey<CustomContainerState> _equipKey2;
+  late GlobalKey<CustomContainerState> _equipKey3;
+  late GlobalKey<CustomContainerState> _equipKey4;
   String selectedTypeName1 = 'Select Type';
   String selectedTypeName2 = 'Select Type';
   String selectedTypeName3 = 'Select Type';
@@ -66,10 +66,10 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
   void initState() {
     super.initState();
     bookingID = _generateBookingID();
-    _buttonKey1 = GlobalKey<CustomContainerState>();
-    _buttonKey2 = GlobalKey<CustomContainerState>();
-    _buttonKey3 = GlobalKey<CustomContainerState>();
-    _buttonKey4 = GlobalKey<CustomContainerState>();
+    _equipKey1 = GlobalKey<CustomContainerState>();
+    _equipKey2 = GlobalKey<CustomContainerState>();
+    _equipKey3 = GlobalKey<CustomContainerState>();
+    _equipKey4 = GlobalKey<CustomContainerState>();
   }
 
   Future<void> _showDatePicker(BuildContext context) async {
@@ -449,7 +449,7 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                               .selectedTypeName
                                                               .text
                                                           : 'Select Type',
-                                                  buttonKey: _buttonKey1,
+                                                  buttonKey: _equipKey1,
                                                   onSelectionChanged: (value) {
                                                     setState(() {
                                                       loadtype = value;
@@ -484,7 +484,7 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                               .selectedTypeName1
                                                               .text
                                                           : 'Select Type',
-                                                  buttonKey: _buttonKey2,
+                                                  buttonKey: _equipKey2,
                                                   onSelectionChanged: (value) {
                                                     setState(() {
                                                       loadtype = value;
@@ -515,7 +515,7 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                               .selectedTypeName2
                                                               .text
                                                           : 'Select Type',
-                                                  buttonKey: _buttonKey3,
+                                                  buttonKey: _equipKey3,
                                                   onSelectionChanged: (value) {
                                                     setState(() {
                                                       loadtype = value;
@@ -562,7 +562,7 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                               .selectedTypeName3
                                                               .text
                                                           : 'Select Type',
-                                                  buttonKey: _buttonKey4,
+                                                  buttonKey: _equipKey4,
                                                   onSelectionChanged: (value) {
                                                     setState(() {
                                                       loadtype = value;
@@ -1462,7 +1462,7 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                           .selectedTypeName1
                                                           .text
                                                       : 'Select Type',
-                                                  buttonKey: _buttonKey1,
+                                                  buttonKey: _equipKey1,
                                                   onSelectionChanged: (value) {
                                                     setState(() {
                                                       controller
@@ -1495,7 +1495,7 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                           .selectedTypeName2
                                                           .text
                                                       : 'Select Type',
-                                                  buttonKey: _buttonKey2,
+                                                  buttonKey: _equipKey2,
                                                   onSelectionChanged: (value) {
                                                     setState(() {
                                                       controller
@@ -1528,7 +1528,7 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                           .selectedTypeName2
                                                           .text
                                                       : 'Select Type',
-                                                  buttonKey: _buttonKey3,
+                                                  buttonKey: _equipKey3,
                                                   onSelectionChanged: (value) {
                                                     setState(() {
                                                       controller
@@ -1561,7 +1561,7 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                           .selectedTypeName4
                                                           .text
                                                       : 'Select Type',
-                                                  buttonKey: _buttonKey4,
+                                                  buttonKey: _equipKey4,
                                                   onSelectionChanged: (value) {
                                                     setState(() {
                                                       controller

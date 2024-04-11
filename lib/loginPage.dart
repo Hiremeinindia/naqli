@@ -353,45 +353,12 @@ class _LoginPageState extends State<LoginPage> {
                                   child: Text('Use without Log in',
                                       style: LoginpageText.purplehelvetica),
                                   onTap: () async {
-                                    // _showOtpVerificationDialog();
-                                    String? email = '';
-                                    String password = '';
-                                    String selectedAccounttype = '';
-                                    String firstName = '';
-                                    String lastName = '';
-                                    String legalName = '';
-                                    String adminUid = '';
-                                    String contactNumber = '';
-                                    String address = '';
-                                    String selectedGovtId = '';
-                                    String confirmPassword = '';
-                                    String alternateNumber = '';
-                                    String address2 = '';
-                                    String idNumber = '';
-                                    String selectedCity = '';
-                                    String companyidNumber = '';
                                     showDialog(
                                       barrierColor:
                                           Colors.grey.withOpacity(0.5),
                                       context: context,
                                       builder: (context) {
-                                        return MblNoDialog(
-                                            email,
-                                            password,
-                                            selectedAccounttype,
-                                            firstName,
-                                            lastName,
-                                            legalName,
-                                            address,
-                                            address2,
-                                            alternateNumber,
-                                            companyidNumber,
-                                            confirmPassword,
-                                            contactNumber,
-                                            idNumber,
-                                            selectedCity,
-                                            selectedGovtId,
-                                            adminUid);
+                                        return MblNoDialog();
                                       },
                                     );
                                   },

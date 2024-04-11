@@ -20,7 +20,8 @@ import 'dart:ui';
 
 class BookingHistroy extends StatefulWidget {
   final String? user;
-  BookingHistroy({required this.user});
+  final String? unitType;
+  BookingHistroy({this.unitType, this.user});
   @override
   State<BookingHistroy> createState() => _BookingHistroyState();
 }
@@ -55,13 +56,22 @@ class _BookingHistroyState extends State<BookingHistroy> {
   }
 
   Stream<QuerySnapshot<Map<String, dynamic>>> allBookings() {
+    String userCollection;
+    if (widget.unitType == 'Vehicle') {
+      userCollection = 'vehicleBooking';
+    } else if (widget.unitType == 'Equipment') {
+      userCollection = 'equipmentBookings';
+    } else {
+      throw Exception('Invalid selected type');
+    }
+
     FirebaseFirestore firestore = FirebaseFirestore.instance;
 
     // Query for user collection
     Stream<QuerySnapshot<Map<String, dynamic>>> userStream = firestore
         .collection('user')
         .doc(widget.user)
-        .collection('vehicleBooking')
+        .collection(userCollection)
         .snapshots();
 
     // Combine both streams into one
@@ -222,73 +232,64 @@ class _BookingHistroyState extends State<BookingHistroy> {
                 ),
                 Padding(
                   padding: EdgeInsets.fromLTRB(4.w, 12.h, 4.w, 2.h),
-                  child: ElevationContainer(
-                    //width:300; // Set width to match screen width
+                  child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+                    stream: _currentStream,
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return Center(child: CircularProgressIndicator());
+                      } else if (snapshot.hasError) {
+                        return Center(child: Text('Error: ${snapshot.error}'));
+                      } else if (!snapshot.hasData ||
+                          snapshot.data!.docs.isEmpty) {
+                        return Center(
+                            child: Text("You haven't done any bookings"));
+                      } else {
+                        // Map documents to SingleUser objects
+                        List<SingleUserBooking> blueSingleUsers = snapshot
+                            .data!.docs
+                            .map((doc) => SingleUserBooking.fromSnapshot(doc))
+                            .toList();
 
-                    child: Scrollbar(
-                      controller: _scrollController,
-                      child: SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        controller: _scrollController,
-                        child: SizedBox(
-                          width: 1070,
-                          child: DataTable(
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.only(
-                                    bottomLeft: Radius.circular(8),
-                                    bottomRight: Radius.circular(8)),
-                                border: Border.all(
-                                  color: Color.fromRGBO(112, 112, 112, 1)
-                                      .withOpacity(0.3),
+                        return ElevationContainer(
+                          //width:300; // Set width to match screen width
+
+                          child: Scrollbar(
+                            controller: _scrollController,
+                            child: SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              controller: _scrollController,
+                              child: SizedBox(
+                                width: 1070,
+                                child: DataTable(
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.only(
+                                        bottomLeft: Radius.circular(8),
+                                        bottomRight: Radius.circular(8)),
+                                    border: Border.all(
+                                      color: Color.fromRGBO(112, 112, 112, 1)
+                                          .withOpacity(0.3),
+                                    ),
+                                  ),
+                                  headingRowColor:
+                                      MaterialStateColor.resolveWith((states) =>
+                                          Color.fromRGBO(75, 61, 82, 1)),
+                                  dividerThickness: 1.0,
+                                  dataRowHeight: 65,
+                                  headingRowHeight: 70,
+                                  columns: DataSource.getColumns(context),
+                                  rows: blueSingleUsers.map((user) {
+                                    return DataRow(
+                                      cells: DataSource.getCells(user),
+                                    );
+                                  }).toList(),
                                 ),
                               ),
-                              headingRowColor: MaterialStateColor.resolveWith(
-                                  (states) => Color.fromRGBO(75, 61, 82, 1)),
-                              dividerThickness: 1.0,
-                              dataRowHeight: 65,
-                              headingRowHeight: 70,
-                              columns: <DataColumn>[
-                                DataColumn(
-                                    label: Expanded(
-                                        child: Text(
-                                  'Mode',
-                                  style: BookingHistoryText.sfpro20white,
-                                  textAlign: TextAlign.center,
-                                ))),
-                                DataColumn(
-                                    label: Expanded(
-                                        child: Text(
-                                  'Booking ID',
-                                  style: BookingHistoryText.sfpro20white,
-                                  textAlign: TextAlign.center,
-                                ))),
-                                DataColumn(
-                                    label: Expanded(
-                                        child: Text(
-                                  'Date',
-                                  style: BookingHistoryText.sfpro20white,
-                                  textAlign: TextAlign.center,
-                                ))),
-                                DataColumn(
-                                    label: Expanded(
-                                        child: Text(
-                                  'Unit Type',
-                                  style: BookingHistoryText.sfpro20white,
-                                  textAlign: TextAlign.center,
-                                ))),
-                                DataColumn(
-                                    label: Expanded(
-                                        child: Text(
-                                  'Payment',
-                                  style: BookingHistoryText.sfpro20white,
-                                  textAlign: TextAlign.center,
-                                ))),
-                              ],
-                              rows: _pendingbookRows()),
-                        ),
-                      ),
-                    ),
+                            ),
+                          ),
+                        );
+                      }
+                    },
                   ),
                 ),
               ],
@@ -298,38 +299,6 @@ class _BookingHistroyState extends State<BookingHistroy> {
       });
     });
   }
-
-  List<DataRow> _pendingbookRows() {
-    return [
-      DataRow(
-        cells: <DataCell>[
-          for (var item in [
-            'Trip',
-            '#456789231',
-            '18.2.2022',
-            'Box truck',
-            'XXXX SAR'
-          ])
-            DataCell(
-              Container(
-                height: 65, // Adjust height as needed
-                alignment: Alignment.center,
-                child: Text(item, style: BookingHistoryText.sfpro20black),
-              ),
-            ),
-        ],
-      ),
-    ];
-  }
-  // List<DataRow> _createRows() {
-  //   return _books
-  //       .map((book) => DataRow(cells: [
-  //             DataCell(Text('#' + book['id'].toString())),
-  //             DataCell(Text(book['title'])),
-  //             DataCell(Text(book['author']))
-  //           ]))
-  //       .toList();
-  // }
 }
 
 class DataSource extends DataTableSource {
