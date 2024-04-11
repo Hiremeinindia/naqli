@@ -10,6 +10,7 @@ class SingleUserBooking {
   final String? load;
   final String? size;
   final String? date;
+  final String? bookingid;
   String? get docId => reference!.id;
 
   final DocumentReference? reference;
@@ -20,6 +21,7 @@ class SingleUserBooking {
     this.load,
     this.size,
     this.date,
+    this.bookingid,
     this.reference,
     this.activeStatus = ActiveStatus.curated,
   });
@@ -30,6 +32,7 @@ class SingleUserBooking {
         "load": load,
         "size": size,
         "date": date,
+        "bookingid": bookingid,
         "docId": docId,
       };
 
@@ -41,6 +44,7 @@ class SingleUserBooking {
       load: data["load"],
       size: data["size"],
       date: data["date"],
+      bookingid: data["bookingid"],
       reference: snapshot.reference,
     );
   }
@@ -51,6 +55,7 @@ class SingleUserBooking {
       load: json["load"],
       size: json["size"],
       date: json["date"],
+      bookingid: json["bookingid"],
       // reference: json["reference"],
       reference: reference,
     );
