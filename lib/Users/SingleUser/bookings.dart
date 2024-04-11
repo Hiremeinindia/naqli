@@ -53,96 +53,99 @@ class _BookingsState extends State<Bookings> {
       builder: (context) {
         return Padding(
           padding: EdgeInsets.fromLTRB(30.w, 0, 30.w, 0),
-          child: Dialog(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10.0),
-            ),
-            child: Expanded(
-              child: ElevationContainer(
-                width: 1000,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Container(
-                      height: 50,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(10.0),
-                            topRight: Radius.circular(10.0)),
-                        color: Color.fromRGBO(98, 106, 254, 1),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Expanded(
-                            child: Center(
-                              child: Text(
-                                'Booking Confirmation',
-                                style: DialogText.dialogtext1,
-                              ),
-                            ),
-                          ),
-                          IconButton(
-                            padding: EdgeInsets.only(right: 2),
-                            icon: Icon(Icons.close),
-                            onPressed: () {
-                              // _handleItem1Tap();
-                              Navigator.pop(
-                                context,
-                              );
-                              setState(() {
-                                screenState =
-                                    screenState; // Change the screenState to 1
-                              });
-                              // Navigator.push(
-                              //   context,
-                              //   MaterialPageRoute(
-                              //     builder: (context) => Bookings(    user: widget.user,),
-                              //   ),
-                              // );
-                            },
-                            color: Colors.white, // Setting icon color
-                          ),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      height: 200,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.only(
-                            bottomLeft: Radius.circular(10.0),
-                            bottomRight: Radius.circular(10.0)),
-                        color: Colors.white,
-                      ),
-                      child: Center(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
+          child: Padding(
+            padding: const EdgeInsets.only(left: 350),
+            child: Dialog(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.0),
+              ),
+              child: Expanded(
+                child: ElevationContainer(
+                  width: 1000,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Container(
+                        height: 50,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(10.0),
+                              topRight: Radius.circular(10.0)),
+                          color: Color.fromRGBO(98, 106, 254, 1),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(
-                              'BOOKING ID NAQXXXXXXXX Confirmed',
-                              style: TextStyle(
-                                fontSize: 22,
-                                color: Color.fromRGBO(104, 102, 124, 1),
-                                fontFamily: 'Helvetica',
+                            Expanded(
+                              child: Center(
+                                child: Text(
+                                  'Booking Confirmation',
+                                  style: DialogText.dialogtext1,
+                                ),
                               ),
-                              textAlign: TextAlign.center,
                             ),
-                            Text(
-                              'With Advance Payment of SAR XXXXXX',
-                              style: TextStyle(
-                                fontSize: 16,
-                                color: Color.fromRGBO(104, 102, 124, 1),
-                                fontFamily: 'Helvetica',
-                              ),
-                              textAlign: TextAlign.center,
+                            IconButton(
+                              padding: EdgeInsets.only(right: 2),
+                              icon: Icon(Icons.close),
+                              onPressed: () {
+                                // _handleItem1Tap();
+                                Navigator.pop(
+                                  context,
+                                );
+                                setState(() {
+                                  screenState =
+                                      screenState; // Change the screenState to 1
+                                });
+                                // Navigator.push(
+                                //   context,
+                                //   MaterialPageRoute(
+                                //     builder: (context) => Bookings(    user: widget.user,),
+                                //   ),
+                                // );
+                              },
+                              color: Colors.white, // Setting icon color
                             ),
                           ],
                         ),
                       ),
-                    )
-                  ],
+                      Container(
+                        height: 200,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.only(
+                              bottomLeft: Radius.circular(10.0),
+                              bottomRight: Radius.circular(10.0)),
+                          color: Colors.white,
+                        ),
+                        child: Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text(
+                                'BOOKING ID ${widget.bookingId} Confirmed',
+                                style: TextStyle(
+                                  fontSize: 22,
+                                  color: Color.fromRGBO(104, 102, 124, 1),
+                                  fontFamily: 'Helvetica',
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
+                              Text(
+                                'With Advance Payment of SAR XXXXXX',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  color: Color.fromRGBO(104, 102, 124, 1),
+                                  fontFamily: 'Helvetica',
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
+                            ],
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ),
             ),
