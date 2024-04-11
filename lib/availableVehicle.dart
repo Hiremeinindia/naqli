@@ -412,27 +412,33 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                                   unitNames: [
                                                     {
                                                       'image': 'img24.png',
-                                                      'name': 'Short Sides'
+                                                      'name': 'Short Sides',
+                                                      'size': '(12m to 13.5m)'
                                                     },
                                                     {
                                                       'image': 'img25.png',
-                                                      'name': 'Curtain'
+                                                      'name': 'Curtain',
+                                                      'size': '(12m to 13.5m)'
                                                     },
                                                     {
                                                       'image': 'img26.png',
-                                                      'name': 'Refrigerator'
+                                                      'name': 'Refrigerator',
+                                                      'size': '(12m to 13.5m)'
                                                     },
                                                     {
                                                       'image': 'img28.png',
-                                                      'name': 'Flatbed'
+                                                      'name': 'Flatbed',
+                                                      'size': '(12m to 13.5m)'
                                                     },
                                                     {
                                                       'image': 'img29.png',
-                                                      'name': 'High Sides '
+                                                      'name': 'High Sides ',
+                                                      'size': '(12m to 13.5m)'
                                                     },
                                                     {
                                                       'image': 'img30.png',
-                                                      'name': 'Freezer'
+                                                      'name': 'Freezer',
+                                                      'size': '(12m to 13.5m)'
                                                     },
                                                   ],
                                                   buttonText: 'Tralia',
@@ -443,6 +449,14 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                                               .selectedTypeName1
                                                               .text
                                                           : 'Select Type',
+                                                  onSelectionChanged1: (value) {
+                                                    setState(() {
+                                                      controller.size.text =
+                                                          value;
+                                                      selectedContainerIndex =
+                                                          1;
+                                                    });
+                                                  },
                                                   buttonKey: _vechiKey1,
                                                   onSelectionChanged: (value) {
                                                     setState(() {
@@ -460,11 +474,13 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                                   unitNames: [
                                                     {
                                                       'image': 'img5.png',
-                                                      'name': 'Sides'
+                                                      'name': 'Sides',
+                                                      'size': '(6.5m to 7m)'
                                                     },
                                                     {
                                                       'image': 'img6.png',
-                                                      'name': 'Refrigerator'
+                                                      'name': 'Refrigerator',
+                                                      'size': '(6.5m to 7m)'
                                                     },
                                                   ],
                                                   buttonText: 'Six',
@@ -476,6 +492,14 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                                               .text
                                                           : 'Select Type',
                                                   buttonKey: _vechiKey2,
+                                                  onSelectionChanged1: (value) {
+                                                    setState(() {
+                                                      controller.size.text =
+                                                          value;
+                                                      selectedContainerIndex =
+                                                          2;
+                                                    });
+                                                  },
                                                   onSelectionChanged: (value) {
                                                     setState(() {
                                                       loadtype = value;
@@ -492,10 +516,19 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                                   unitNames: [
                                                     {
                                                       'image': 'img7.png',
-                                                      'name': 'Sides'
+                                                      'name': 'Sides',
+                                                      'size': '(7m to 7.5m)'
                                                     },
                                                   ],
                                                   buttonText: 'Lorry 7 Metres',
+                                                  onSelectionChanged1: (value) {
+                                                    setState(() {
+                                                      controller.size.text =
+                                                          value;
+                                                      selectedContainerIndex =
+                                                          3;
+                                                    });
+                                                  },
                                                   selectedTypeName:
                                                       selectedContainerIndex ==
                                                               3
@@ -520,30 +553,44 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                                   unitNames: [
                                                     {
                                                       'image': 'img10.png',
-                                                      'name': 'Sides'
+                                                      'name': 'Sides',
+                                                      'size': '(6m to 6.5m)'
                                                     },
                                                     {
                                                       'image': 'img11.png',
-                                                      'name': 'Closed'
+                                                      'name': 'Closed',
+                                                      'size': '(6m to 6.5m)'
                                                     },
                                                     {
                                                       'image': 'img12.png',
-                                                      'name': 'Referigerator'
+                                                      'name': 'Referigerator',
+                                                      'size': '(6m to 6.5m)'
                                                     },
                                                     {
                                                       'image': 'img13.png',
-                                                      'name': 'Crane 5 TON'
+                                                      'name': 'Crane 5 TON',
+                                                      'size': '(6m to 6.5m)'
                                                     },
                                                     {
                                                       'image': 'img14.png',
-                                                      'name': 'Crane 7 TON'
+                                                      'name': 'Crane 7 TON',
+                                                      'size': '(6m to 6.5m)'
                                                     },
                                                     {
                                                       'image': 'img15.png',
-                                                      'name': 'Freezer'
+                                                      'name': 'Freezer',
+                                                      'size': '(6m to 6.5m)'
                                                     },
                                                   ],
                                                   buttonText: 'Lorry',
+                                                  onSelectionChanged1: (value) {
+                                                    setState(() {
+                                                      controller.size.text =
+                                                          value;
+                                                      selectedContainerIndex =
+                                                          4;
+                                                    });
+                                                  },
                                                   selectedTypeName:
                                                       selectedContainerIndex ==
                                                               4
@@ -567,23 +614,28 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                                   unitNames: [
                                                     {
                                                       'image': 'img16.png',
-                                                      'name': 'Closed'
+                                                      'name': 'Closed',
+                                                      'size': '(4m to 4.5m)'
                                                     },
                                                     {
                                                       'image': 'img17.png',
-                                                      'name': 'Crane'
+                                                      'name': 'Crane',
+                                                      'size': '(4m to 4.5m)'
                                                     },
                                                     {
                                                       'image': 'img18.png',
-                                                      'name': 'Referigerator'
+                                                      'name': 'Referigerator',
+                                                      'size': '(4m to 4.5m)'
                                                     },
                                                     {
                                                       'image': 'img19.png',
-                                                      'name': 'Sides'
+                                                      'name': 'Sides',
+                                                      'size': '(4m to 4.5m)'
                                                     },
                                                     {
                                                       'image': 'img20.png',
-                                                      'name': 'Freezer'
+                                                      'name': 'Freezer',
+                                                      'size': '(4m to 4.5m)'
                                                     },
                                                   ],
                                                   buttonText: 'Diana',
@@ -595,6 +647,14 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                                               .text
                                                           : 'Select Type',
                                                   buttonKey: _vechiKey5,
+                                                  onSelectionChanged1: (value) {
+                                                    setState(() {
+                                                      controller.size.text =
+                                                          value;
+                                                      selectedContainerIndex =
+                                                          5;
+                                                    });
+                                                  },
                                                   onSelectionChanged: (value) {
                                                     setState(() {
                                                       loadtype = value;
@@ -610,7 +670,8 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                                   unitNames: [
                                                     {
                                                       'image': 'img21.png',
-                                                      'name': 'Pickup'
+                                                      'name': 'Pickup',
+                                                      'size': '(1m to 1.5m)'
                                                     },
                                                   ],
                                                   buttonText: 'Pick Up',
@@ -622,6 +683,14 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                                               .text
                                                           : 'Select Type',
                                                   buttonKey: _vechiKey6,
+                                                  onSelectionChanged1: (value) {
+                                                    setState(() {
+                                                      controller.size.text =
+                                                          value;
+                                                      selectedContainerIndex =
+                                                          6;
+                                                    });
+                                                  },
                                                   onSelectionChanged: (value) {
                                                     setState(() {
                                                       loadtype = value;
@@ -637,14 +706,24 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                                   unitNames: [
                                                     {
                                                       'image': 'img22.png',
-                                                      'name': 'Regular'
+                                                      'name': 'Regular',
+                                                      'size': ''
                                                     },
                                                     {
                                                       'image': 'img23.png',
-                                                      'name': 'Hydraulic'
+                                                      'name': 'Hydraulic',
+                                                      'size': ''
                                                     },
                                                   ],
                                                   buttonText: 'Tow Truck',
+                                                  onSelectionChanged1: (value) {
+                                                    setState(() {
+                                                      controller.size.text =
+                                                          value;
+                                                      selectedContainerIndex =
+                                                          7;
+                                                    });
+                                                  },
                                                   selectedTypeName:
                                                       selectedContainerIndex ==
                                                               7
@@ -690,9 +769,9 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                                               Flexible(
                                                                 child:
                                                                     CustomTextfieldGrey(
-                                                                  controller:
-                                                                      controller
-                                                                          .size,
+                                                                  // controller:
+                                                                  //     controller
+                                                                  //         .size,
                                                                   text:
                                                                       'Value of the Product',
                                                                 ),
