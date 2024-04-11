@@ -785,10 +785,10 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                                                         .helvetica,
                                                                     readOnly:
                                                                         true,
-                                                                    onTap: () {
-                                                                      _showDatePicker(
-                                                                          context);
-                                                                    },
+                                                                    // onTap: () {
+                                                                    //   _showDatePicker(
+                                                                    //       context);
+                                                                    // },
                                                                     decoration:
                                                                         InputDecoration(
                                                                       contentPadding:

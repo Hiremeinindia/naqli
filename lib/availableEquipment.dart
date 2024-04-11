@@ -1250,15 +1250,19 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                           );
                                                         },
                                                       );
-                                                      // Navigator.push(
-                                                      //   context,
-                                                      //   MaterialPageRoute(
-                                                      //       builder: (context) =>
-                                                      //           SingleUserDashboardPage(
-                                                      //             user: widget
-                                                      //                 .user,
-                                                      //           )),
-                                                      // );
+                                                      String unitType =
+                                                          'Equipment';
+                                                      Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                            builder: (context) =>
+                                                                SingleUserDashboardPage(
+                                                                  unitType:
+                                                                      unitType,
+                                                                  user: widget
+                                                                      .user,
+                                                                )),
+                                                      );
                                                     },
                                                     text: 'Create Booking',
                                                   ),
