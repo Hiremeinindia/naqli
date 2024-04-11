@@ -16,24 +16,26 @@ import 'package:flutter_application_1/createAccount.dart';
 import 'package:sizer/sizer.dart';
 
 class MblNoDialog extends StatefulWidget {
-  String? email;
-  String? password;
-  String? selectedAccounttype;
-  String? firstName;
-  String? lastName;
-  String? legalName;
-  String? contactNumber;
-  String? address;
-  String? selectedGovtId;
-  String? confirmPassword;
-  String? alternateNumber;
-  String? address2;
-  String? idNumber;
-  String? selectedCity;
-  String? companyidNumber;
-  String? adminUid;
+  final String? email;
+  final String? password;
+  final String? selectedAccounttype;
+  final String? firstName;
+  final String? lastName;
+  final String? legalName;
+  final String? contactNumber;
+  final String? address;
+  final String? govtId;
+  final String? selectedGovtId;
+  final String? confirmPassword;
+  final String? alternateNumber;
+  final String? address2;
+  final String? idNumber;
+  final String? city;
+  final String? selectedCity;
+  final String? companyidNumber;
+  final String? adminUid;
 
-  MblNoDialog(
+  const MblNoDialog({
     this.email,
     this.password,
     this.selectedAccounttype,
@@ -41,6 +43,8 @@ class MblNoDialog extends StatefulWidget {
     this.lastName,
     this.legalName,
     this.address,
+    this.city,
+    this.govtId,
     this.address2,
     this.alternateNumber,
     this.companyidNumber,
@@ -50,10 +54,10 @@ class MblNoDialog extends StatefulWidget {
     this.selectedCity,
     this.selectedGovtId,
     this.adminUid,
-  );
+  });
 
   @override
-  _MblNoDialogState createState() => _MblNoDialogState();
+  State<MblNoDialog> createState() => _MblNoDialogState();
 }
 
 class _MblNoDialogState extends State<MblNoDialog> {
