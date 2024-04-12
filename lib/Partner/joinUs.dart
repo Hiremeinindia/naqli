@@ -60,6 +60,21 @@ class _State extends State<Partner> {
     return null;
   }
 
+  String? validatePassword(String? value) {
+    RegExp regex = RegExp(
+      r'^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#\$&*~]).{8,}$',
+    );
+    if (value!.isEmpty) {
+      return 'Please enter password';
+    } else {
+      if (!regex.hasMatch(value)) {
+        return 'Enter valid password';
+      } else {
+        return null;
+      }
+    }
+  }
+
   Future<void> verifyPhone(String number) async {
     await FirebaseAuth.instance.verifyPhoneNumber(
       timeout: Duration(seconds: 20),
@@ -479,7 +494,7 @@ class _State extends State<Partner> {
                                         ),
                                       ],
                                     ),
-                                    Text('Email (Optional)',
+                                    Text('Email',
                                         style: TextStyle(
                                           fontSize: 14,
                                           fontWeight: FontWeight.bold,
@@ -491,6 +506,19 @@ class _State extends State<Partner> {
                                     ),
                                     SizedBox(
                                       height: 15,
+                                    ),
+                                    Text('Password',
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.bold,
+                                        )),
+                                    CustomTextfield(
+                                      controller: controller.password,
+                                      validator: validatePassword,
+                                      text: 'Enter your Password',
+                                    ),
+                                    SizedBox(
+                                      height: 13,
                                     ),
                                     Align(
                                       alignment: Alignment.center,
@@ -519,9 +547,12 @@ class _State extends State<Partner> {
                                                       smsCode: otpPin);
                                               // Sign in with phone credential
                                               UserCredential userCredential =
-                                                  await FirebaseAuth.instance
-                                                      .signInWithCredential(
-                                                          _credential);
+                                                  await _auth
+                                                      .createUserWithEmailAndPassword(
+                                                email: controller.email.text,
+                                                password:
+                                                    controller.password.text,
+                                              );
                                               await _saveUserDataToFirestore();
                                               String userId =
                                                   userCredential.user!.uid;
