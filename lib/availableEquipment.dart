@@ -46,6 +46,7 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
   bool value = false;
   bool checkbox = false;
   String loadtype = '';
+  int? lab;
   int? groupValue1;
   int? groupValue = 1;
   bool checkbox1 = false;
@@ -63,8 +64,10 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
   String selectedTypeName3 = 'Select Type';
   String selectedTypeName4 = 'Select Type';
   int? selectedContainerIndex;
+  int? selectedRadioValue;
   void initState() {
     super.initState();
+    lab = selectedRadioValue;
     _equipKey1 = GlobalKey<CustomContainerState>();
     _equipKey2 = GlobalKey<CustomContainerState>();
     _equipKey3 = GlobalKey<CustomContainerState>();
@@ -93,6 +96,7 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
     String load,
     String size,
     String date,
+    String labour,
     String adminUid,
   ) async {
     try {
@@ -112,6 +116,7 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
         'size': size,
         'date': date,
         'createdTime': Timestamp.now(),
+        'labour': labour,
       });
 
       // Store the auto-generated ID
@@ -398,7 +403,8 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                   unitNames: [
                                                     {
                                                       'image': 'Group4128.png',
-                                                      'name': 'Excavator'
+                                                      'name': 'Excavator',
+                                                      'size': '',
                                                     },
                                                   ],
                                                   buttonText: 'Excavator',
@@ -425,15 +431,18 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                   unitNames: [
                                                     {
                                                       'image': 'Group3071.png',
-                                                      'name': 'Back hoe'
+                                                      'name': 'Back hoe',
+                                                      'size': '',
                                                     },
                                                     {
                                                       'image': 'Group2052.png',
-                                                      'name': 'Front hoe'
+                                                      'name': 'Front hoe',
+                                                      'size': '',
                                                     },
                                                     {
                                                       'image': 'Group4137.png',
-                                                      'name': 'Skid steer'
+                                                      'name': 'Skid steer',
+                                                      'size': '',
                                                     },
                                                   ],
                                                   buttonText: 'Loaders',
@@ -460,11 +469,13 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                   unitNames: [
                                                     {
                                                       'image': 'Group2271.png',
-                                                      'name': 'Crawler crane'
+                                                      'name': 'Crawler crane',
+                                                      'size': '',
                                                     },
                                                     {
                                                       'image': 'Group4240.png',
-                                                      'name': 'Mobile crane'
+                                                      'name': 'Mobile crane',
+                                                      'size': '',
                                                     },
                                                   ],
                                                   buttonText: 'Cranes',
@@ -491,27 +502,33 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                   unitNames: [
                                                     {
                                                       'image': 'Group2270.png',
-                                                      'name': 'Compactors'
+                                                      'name': 'Compactors',
+                                                      'size': '',
                                                     },
                                                     {
                                                       'image': 'Group2236.png',
-                                                      'name': 'Bulldozers'
+                                                      'name': 'Bulldozers',
+                                                      'size': '',
                                                     },
                                                     {
                                                       'image': 'Group4225.png',
-                                                      'name': 'Graders'
+                                                      'name': 'Graders',
+                                                      'size': '',
                                                     },
                                                     {
                                                       'image': 'Group2148.png',
-                                                      'name': 'Dump truck'
+                                                      'name': 'Dump truck',
+                                                      'size': '',
                                                     },
                                                     {
                                                       'image': 'Group2181.png',
-                                                      'name': 'Forklift'
+                                                      'name': 'Forklift',
+                                                      'size': '',
                                                     },
                                                     {
                                                       'image': 'Group4239.png',
-                                                      'name': 'Scissorlift'
+                                                      'name': 'Scissorlift',
+                                                      'size': '',
                                                     },
                                                   ],
                                                   buttonText: 'Others',
@@ -858,6 +875,8 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                         });
                                                       },
                                                     ),
+                                                    // Variable to store the selected radio button value
+
                                                     Text(
                                                       'Need Additional Labour',
                                                       style: AvailableText
@@ -899,18 +918,15 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                                   .withOpacity(
                                                                       .8),
                                                               value: i,
-                                                              groupValue: checkbox1
-                                                                  ? groupValue
-                                                                  : null, // Enable/disable based on checkbox state
-                                                              onChanged: checkbox1
-                                                                  ? (int? value) {
-                                                                      setState(
-                                                                          () {
-                                                                        groupValue =
-                                                                            value;
-                                                                      });
-                                                                    }
-                                                                  : null, // Set onChanged to null if checkbox is unchecked
+                                                              groupValue:
+                                                                  selectedRadioValue, // Set groupValue to the selectedRadioValue variable
+                                                              onChanged:
+                                                                  (int? value) {
+                                                                setState(() {
+                                                                  selectedRadioValue =
+                                                                      value; // Update the selectedRadioValue when radio button is changed
+                                                                });
+                                                              },
                                                             ),
                                                           ),
                                                           Text(
@@ -1090,13 +1106,16 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                             .load.text;
                                                         String date = controller
                                                             .date.text;
-
+                                                        String labour =
+                                                            selectedRadioValue
+                                                                .toString();
                                                         String newBookingId =
                                                             await createNewBooking(
                                                                 truck,
                                                                 load,
                                                                 size,
                                                                 date,
+                                                                labour,
                                                                 widget.user!);
                                                         showDialog(
                                                           barrierDismissible:
