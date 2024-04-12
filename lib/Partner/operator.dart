@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -5,8 +7,8 @@ import 'package:flutter/widgets.dart';
 import 'package:sizer/sizer.dart';
 
 class Operator extends StatefulWidget {
-  final String user;
-  const Operator({required this.user});
+  final String? user;
+  const Operator({this.user});
 
   @override
   _OperatorState createState() => _OperatorState();
@@ -20,43 +22,64 @@ class _OperatorState extends State<Operator> {
 
   String? selectedCity;
   String? selectedType;
-  String? selectedOption;
+  String? selectedUnitOption;
+  String? selectedSubOption;
   bool isVerified = false;
   int? groupValue = 1;
   late int _selectedValue = 0;
-  TextEditingController firstNameController = TextEditingController();
-  TextEditingController lastNameController = TextEditingController();
+  late String operatorID;
+  TextEditingController opfirstNameController = TextEditingController();
+  TextEditingController oplastNameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
+  TextEditingController plateController = TextEditingController();
+  TextEditingController unitController = TextEditingController();
+  TextEditingController subController = TextEditingController();
+
   TextEditingController contactNumberController = TextEditingController();
-  TextEditingController addressController = TextEditingController();
-  TextEditingController govtIdController = TextEditingController();
-  TextEditingController confirmPasswordController = TextEditingController();
-  TextEditingController alternateNumberController = TextEditingController();
-  TextEditingController address2Controller = TextEditingController();
-  TextEditingController idNumberController = TextEditingController();
-  TextEditingController cityController = TextEditingController();
+  TextEditingController panelinfoController = TextEditingController();
+
+  TextEditingController dobController = TextEditingController();
+  TextEditingController iqamaController = TextEditingController();
+
+  TextEditingController istimaraController = TextEditingController();
+  // TextEditingController idNumberController = TextEditingController();
+  TextEditingController mobilenoController = TextEditingController();
   TextEditingController accounttypeController = TextEditingController();
   TextEditingController otpController = TextEditingController();
+  String _generateBookingID() {
+    Random random = Random();
+
+    String operatorID = '';
+    for (int i = 0; i < 10; i++) {
+      operatorID += random.nextInt(10).toString();
+    }
+    return operatorID;
+  }
+
+  void initState() {
+    super.initState();
+    operatorID = _generateBookingID();
+  }
+
   Future<void> createNewBooking(
     String name,
-    String adminUid,
+    String operatorid,
+    String user,
   ) async {
     try {
       FirebaseFirestore firestore = FirebaseFirestore.instance;
 
       // Reference to the user's document
-      DocumentReference userDocRef =
-          firestore.collection('partneruser').doc(adminUid);
+      DocumentReference partneruserDocRef =
+          firestore.collection('partneruserfinal').doc(user);
 
       // Reference to the subcollection 'userBooking' under the user's document
-      CollectionReference userBookingCollectionRef =
-          userDocRef.collection('operatorReg');
+      CollectionReference partneruserRegCollectionRef =
+          partneruserDocRef.collection('operatorReg');
 
       // Add document to subcollection and get the document reference
-      DocumentReference newBookingDocRef = await userBookingCollectionRef.add({
-        'name': name,
-      });
+      DocumentReference newBookingDocRef = await partneruserRegCollectionRef
+          .add({'name': name, 'operatorid': operatorID});
 
       // Store the auto-generated ID
       String newBookingId = newBookingDocRef.id;
@@ -95,19 +118,17 @@ class _OperatorState extends State<Operator> {
           _firestore.collection('partneroperatoruser');
 
       await usersCollection.add({
-        'firstName': firstNameController.text,
-        'lastName': lastNameController.text,
-        'email': emailController.text,
-        'password': passwordController.text,
-        'phoneNumber': contactNumberController.text,
-        'address': addressController.text,
-        'city': selectedCity,
-        'govtId': selectedOption,
-        'confirmPassword': confirmPasswordController.text,
-        'alternateNumber': alternateNumberController.text,
-        'address2': address2Controller.text,
-        'accountType': selectedType,
-        'idNumber': idNumberController.text,
+        'UnitClassification': unitController.text,
+        'SubClassification': subController.text,
+        'PlateInformation': plateController.text,
+        'IstimaraNo': istimaraController.text,
+        'operatorName':
+            '${opfirstNameController.text} ${oplastNameController.text}',
+        'EmailId': emailController.text,
+        'MobileNo': mobilenoController.text,
+        'IqamaNo': iqamaController.text,
+        'DateOfBirth': dobController.text,
+        'PanelInformation': panelinfoController.text,
       });
 
       print('User data saved to Firestore successfully!');
@@ -455,7 +476,9 @@ class _OperatorState extends State<Operator> {
                                 height: 45,
                                 width: 275,
                                 child: DropdownButtonFormField<String>(
-                                  value: selectedOption,
+                                  value: unitController.text.isNotEmpty
+                                      ? unitController.text
+                                      : 'Vehicle',
                                   decoration: InputDecoration(
                                     contentPadding: EdgeInsets.symmetric(
                                         vertical: 2.0, horizontal: 10.0),
@@ -466,7 +489,7 @@ class _OperatorState extends State<Operator> {
                                   ),
                                   onChanged: (String? newValue) {
                                     setState(() {
-                                      selectedOption = newValue;
+                                      unitController.text = newValue!;
                                     });
                                   },
                                   items: [
@@ -504,7 +527,9 @@ class _OperatorState extends State<Operator> {
                                 height: 45,
                                 width: 275,
                                 child: DropdownButtonFormField<String>(
-                                  value: selectedOption,
+                                  value: subController.text.isNotEmpty
+                                      ? subController.text
+                                      : 'Vehicle',
                                   decoration: InputDecoration(
                                     contentPadding: EdgeInsets.symmetric(
                                         vertical: 2.0, horizontal: 10.0),
@@ -515,7 +540,7 @@ class _OperatorState extends State<Operator> {
                                   ),
                                   onChanged: (String? newValue) {
                                     setState(() {
-                                      selectedOption = newValue;
+                                      subController.text = newValue!;
                                     });
                                   },
                                   items: [
@@ -555,7 +580,7 @@ class _OperatorState extends State<Operator> {
                             height: 45,
                             width: 275,
                             child: TextFormField(
-                              controller: passwordController,
+                              controller: plateController,
                               validator: validatePassword,
                               decoration: InputDecoration(
                                 hintStyle: TextStyle(
@@ -589,7 +614,7 @@ class _OperatorState extends State<Operator> {
                                 height: 45,
                                 width: 275,
                                 child: TextFormField(
-                                  controller: passwordController,
+                                  controller: istimaraController,
                                   validator: validatePassword,
                                   decoration: InputDecoration(
                                     hintStyle: TextStyle(
@@ -755,7 +780,7 @@ class _OperatorState extends State<Operator> {
                                 height: 45,
                                 width: 352,
                                 child: TextFormField(
-                                  controller: passwordController,
+                                  controller: opfirstNameController,
                                   validator: validatePassword,
                                   decoration: InputDecoration(
                                     hintStyle: TextStyle(
@@ -781,7 +806,7 @@ class _OperatorState extends State<Operator> {
                                 height: 45,
                                 width: 352,
                                 child: TextFormField(
-                                  controller: passwordController,
+                                  controller: oplastNameController,
                                   validator: validatePassword,
                                   decoration: InputDecoration(
                                     hintStyle: TextStyle(
@@ -859,7 +884,7 @@ class _OperatorState extends State<Operator> {
                             height: 45,
                             width: 275,
                             child: TextFormField(
-                              controller: passwordController,
+                              controller: mobilenoController,
                               validator: validatePassword,
                               decoration: InputDecoration(
                                 hintStyle: TextStyle(
@@ -882,7 +907,7 @@ class _OperatorState extends State<Operator> {
                               SizedBox(
                                 width: 150,
                                 child: Text(
-                                  'Mobile No',
+                                  'Iqama No',
                                   style: TextStyle(
                                     fontSize: 16,
                                     fontFamily: "Helvetica",
@@ -893,7 +918,7 @@ class _OperatorState extends State<Operator> {
                                 height: 45,
                                 width: 275,
                                 child: TextFormField(
-                                  controller: passwordController,
+                                  controller: iqamaController,
                                   validator: validatePassword,
                                   decoration: InputDecoration(
                                     hintStyle: TextStyle(
@@ -933,7 +958,7 @@ class _OperatorState extends State<Operator> {
                             height: 45,
                             width: 275,
                             child: TextFormField(
-                              controller: passwordController,
+                              controller: dobController,
                               validator: validatePassword,
                               decoration: InputDecoration(
                                 hintStyle: TextStyle(
@@ -968,7 +993,7 @@ class _OperatorState extends State<Operator> {
                                 height: 45,
                                 width: 275,
                                 child: TextFormField(
-                                  controller: passwordController,
+                                  controller: panelinfoController,
                                   validator: validatePassword,
                                   decoration: InputDecoration(
                                     hintStyle: TextStyle(
@@ -1122,8 +1147,12 @@ class _OperatorState extends State<Operator> {
                                 // _showOtpVerificationDialog();
                                 // Save user data and start phone authentication
                                 await _saveUserDataToFirestore();
-                                String name = firstNameController.text;
-                                await createNewBooking(name, widget.user!);
+                                String name =
+                                    '${opfirstNameController.text} ${oplastNameController.text}';
+                                String operatorid = operatorID;
+
+                                await createNewBooking(
+                                    name, operatorid, widget.user!);
                               },
                               style: ElevatedButton.styleFrom(
                                 backgroundColor:
@@ -1200,7 +1229,7 @@ class _OperatorState extends State<Operator> {
                             child: SizedBox(
                               height: 40,
                               child: TextFormField(
-                                controller: firstNameController,
+                                controller: opfirstNameController,
                                 validator: nameValidator,
                                 decoration: InputDecoration(
                                   hintStyle: TextStyle(fontSize: 12),
@@ -1228,7 +1257,7 @@ class _OperatorState extends State<Operator> {
                             child: SizedBox(
                               height: 40,
                               child: TextFormField(
-                                controller: lastNameController,
+                                controller: oplastNameController,
                                 validator: nameValidator,
                                 decoration: InputDecoration(
                                   hintStyle: TextStyle(fontSize: 12),
@@ -1381,7 +1410,7 @@ class _OperatorState extends State<Operator> {
                             child: SizedBox(
                               height: 40,
                               child: DropdownButtonFormField<String>(
-                                value: selectedOption,
+                                value: selectedSubOption,
                                 decoration: InputDecoration(
                                   contentPadding: EdgeInsets.all(5.0),
                                   border: OutlineInputBorder(
@@ -1391,7 +1420,7 @@ class _OperatorState extends State<Operator> {
                                 ),
                                 onChanged: (String? newValue) {
                                   setState(() {
-                                    selectedOption = newValue;
+                                    selectedSubOption = newValue;
                                   });
                                 },
                                 items: [
@@ -1422,7 +1451,7 @@ class _OperatorState extends State<Operator> {
                             child: SizedBox(
                               height: 40,
                               child: DropdownButtonFormField<String>(
-                                value: selectedOption,
+                                value: selectedSubOption,
                                 decoration: InputDecoration(
                                   contentPadding: EdgeInsets.all(5.0),
                                   border: OutlineInputBorder(
@@ -1432,7 +1461,7 @@ class _OperatorState extends State<Operator> {
                                 ),
                                 onChanged: (String? newValue) {
                                   setState(() {
-                                    selectedOption = newValue;
+                                    selectedSubOption = newValue;
                                   });
                                 },
                                 items: [
