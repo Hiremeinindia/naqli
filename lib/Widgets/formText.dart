@@ -76,6 +76,17 @@ class DialogText {
     color: Color.fromRGBO(81, 40, 137, 1),
     fontSize: 30,
   );
+  static TextStyle helvetica30 = TextStyle(
+    fontFamily: 'Helvetica',
+    color: Colors.black,
+    fontSize: 28,
+  );
+  static TextStyle helvetica30bold = TextStyle(
+    fontWeight: FontWeight.bold,
+    fontFamily: 'Helvetica',
+    color: Colors.black,
+    fontSize: 28,
+  );
   static TextStyle helvetica42 = TextStyle(
     fontFamily: 'Helvetica',
     color: Color.fromRGBO(78, 68, 68, 1),
