@@ -18,6 +18,7 @@ import 'package:flutter_application_1/classes/language.dart';
 import 'package:flutter_application_1/classes/language_constants.dart';
 import 'package:flutter_application_1/createAccount.dart';
 import 'package:flutter_application_1/main.dart';
+import 'package:flutter_application_1/mobile.dart';
 
 import 'package:sizer/sizer.dart';
 
@@ -408,7 +409,7 @@ class _MyHomePageState extends State<MyHomePage>
                                                               .withOpacity(0.5),
                                                       context: context,
                                                       builder: (context) {
-                                                        return MblNoDialog();
+                                                        return LoginPage();
                                                       },
                                                     );
                                                   },
@@ -460,11 +461,15 @@ class _MyHomePageState extends State<MyHomePage>
                                                 ),
                                                 GestureDetector(
                                                   onTap: () {
-                                                    Navigator.push(
-                                                      context,
-                                                      MaterialPageRoute(
-                                                          builder: (context) =>
-                                                              AvailableBus()),
+                                                    showDialog(
+                                                      barrierColor:
+                                                          Color.fromRGBO(
+                                                                  59, 57, 57, 1)
+                                                              .withOpacity(0.5),
+                                                      context: context,
+                                                      builder: (context) {
+                                                        return LoginPage();
+                                                      },
                                                     );
                                                   },
                                                   child: Card(
@@ -517,14 +522,15 @@ class _MyHomePageState extends State<MyHomePage>
                                                 ),
                                                 GestureDetector(
                                                   onTap: () {
-                                                    Navigator.push(
-                                                      context,
-                                                      MaterialPageRoute(
-                                                          builder: (context) =>
-                                                              AvailableEquipment(
-                                                                user: widget
-                                                                    .user!,
-                                                              )),
+                                                    showDialog(
+                                                      barrierColor:
+                                                          Color.fromRGBO(
+                                                                  59, 57, 57, 1)
+                                                              .withOpacity(0.5),
+                                                      context: context,
+                                                      builder: (context) {
+                                                        return LoginPage();
+                                                      },
                                                     );
                                                   },
                                                   child: Card(
@@ -577,11 +583,15 @@ class _MyHomePageState extends State<MyHomePage>
                                                 ),
                                                 GestureDetector(
                                                   onTap: () {
-                                                    Navigator.push(
-                                                      context,
-                                                      MaterialPageRoute(
-                                                          builder: (context) =>
-                                                              AvailableSpecial()),
+                                                    showDialog(
+                                                      barrierColor:
+                                                          Color.fromRGBO(
+                                                                  59, 57, 57, 1)
+                                                              .withOpacity(0.5),
+                                                      context: context,
+                                                      builder: (context) {
+                                                        return LoginPage();
+                                                      },
                                                     );
                                                   },
                                                   child: Card(
@@ -634,11 +644,15 @@ class _MyHomePageState extends State<MyHomePage>
                                                 ),
                                                 GestureDetector(
                                                   onTap: () {
-                                                    Navigator.push(
-                                                      context,
-                                                      MaterialPageRoute(
-                                                          builder: (context) =>
-                                                              AvailableSpecial()),
+                                                    showDialog(
+                                                      barrierColor:
+                                                          Color.fromRGBO(
+                                                                  59, 57, 57, 1)
+                                                              .withOpacity(0.5),
+                                                      context: context,
+                                                      builder: (context) {
+                                                        return LoginPage();
+                                                      },
                                                     );
                                                   },
                                                   child: Card(

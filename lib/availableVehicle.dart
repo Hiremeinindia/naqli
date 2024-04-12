@@ -106,7 +106,7 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
     }
   }
 
-  Future<void> createNewBooking(
+  Future<String> createNewBooking(
     String truck,
     String load,
     String size,
@@ -139,8 +139,12 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
       await newBookingDocRef.update({'id': newBookingId});
 
       print('New booking added successfully with ID: $newBookingId');
+
+      // Return the generated ID
+      return newBookingId;
     } catch (error) {
       print('Error creating new booking: $error');
+      return ''; // Return empty string if there's an error
     }
   }
 
@@ -1034,155 +1038,76 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                                       onChanged:
                                                           (bool? newValue) {
                                                         setState(() {
-                                                          value = newValue!;
+                                                          checkbox1 = newValue!;
+                                                          if (!checkbox1) {
+                                                            groupValue =
+                                                                null; // Disable all radio buttons
+                                                          }
                                                         });
                                                       },
                                                     ),
                                                     Text(
-                                                        'Need Additional Labour',
-                                                        style: AvailableText
-                                                            .helveticablack),
-                                                    Transform.scale(
-                                                      scale: 0.7,
-                                                      child: Radio<int?>(
-                                                          splashRadius: 5,
-                                                          fillColor:
-                                                              MaterialStateProperty
+                                                      'Need Additional Labour',
+                                                      style: AvailableText
+                                                          .helveticablack,
+                                                    ),
+                                                    for (int i = 1; i <= 3; i++)
+                                                      Row(
+                                                        children: [
+                                                          Transform.scale(
+                                                            scale: 0.7,
+                                                            child: Radio<int?>(
+                                                              splashRadius: 5,
+                                                              fillColor: MaterialStateProperty
                                                                   .resolveWith(
                                                                       (states) {
-                                                            if (states.contains(
-                                                                MaterialState
-                                                                    .selected)) {
-                                                              return Color
-                                                                  .fromRGBO(
-                                                                      183,
-                                                                      183,
-                                                                      183,
-                                                                      1);
-                                                            }
-                                                            return Color
-                                                                .fromRGBO(
-                                                                    208,
-                                                                    205,
-                                                                    205,
-                                                                    1);
-                                                          }),
-                                                          hoverColor:
-                                                              Color.fromRGBO(
-                                                                      183,
-                                                                      183,
-                                                                      183,
-                                                                      1)
+                                                                if (states.contains(
+                                                                    MaterialState
+                                                                        .selected)) {
+                                                                  return Color
+                                                                      .fromRGBO(
+                                                                          183,
+                                                                          183,
+                                                                          183,
+                                                                          1);
+                                                                }
+                                                                return Color
+                                                                    .fromRGBO(
+                                                                        208,
+                                                                        205,
+                                                                        205,
+                                                                        1);
+                                                              }),
+                                                              hoverColor: Color
+                                                                      .fromRGBO(
+                                                                          183,
+                                                                          183,
+                                                                          183,
+                                                                          1)
                                                                   .withOpacity(
                                                                       .8),
-                                                          value: 1,
-                                                          groupValue:
-                                                              groupValue,
-                                                          onChanged:
-                                                              (int? value) {
-                                                            setState(() {
-                                                              groupValue =
-                                                                  value;
-                                                            });
-                                                          }),
-                                                    ),
-                                                    Text('1',
-                                                        style: AvailableText
-                                                            .helveticablack),
-                                                    Transform.scale(
-                                                      scale: 0.7,
-                                                      child: Radio<int?>(
-                                                          splashRadius: 5,
-                                                          fillColor:
-                                                              MaterialStateProperty
-                                                                  .resolveWith(
-                                                                      (states) {
-                                                            if (states.contains(
-                                                                MaterialState
-                                                                    .selected)) {
-                                                              return Color
-                                                                  .fromRGBO(
-                                                                      183,
-                                                                      183,
-                                                                      183,
-                                                                      1);
-                                                            }
-                                                            return Color
-                                                                .fromRGBO(
-                                                                    208,
-                                                                    205,
-                                                                    205,
-                                                                    1);
-                                                          }),
-                                                          hoverColor:
-                                                              Color.fromRGBO(
-                                                                      183,
-                                                                      183,
-                                                                      183,
-                                                                      1)
-                                                                  .withOpacity(
-                                                                      .8),
-                                                          value: 2,
-                                                          groupValue:
-                                                              groupValue,
-                                                          onChanged:
-                                                              (int? value) {
-                                                            setState(() {
-                                                              groupValue =
-                                                                  value;
-                                                            });
-                                                          }),
-                                                    ),
-                                                    Text('2',
-                                                        style: AvailableText
-                                                            .helveticablack),
-                                                    Transform.scale(
-                                                      scale: 0.7,
-                                                      child: Radio<int?>(
-                                                          splashRadius: 5,
-                                                          fillColor:
-                                                              MaterialStateProperty
-                                                                  .resolveWith(
-                                                                      (states) {
-                                                            if (states.contains(
-                                                                MaterialState
-                                                                    .selected)) {
-                                                              return Color
-                                                                  .fromRGBO(
-                                                                      183,
-                                                                      183,
-                                                                      183,
-                                                                      1);
-                                                            }
-                                                            return Color
-                                                                .fromRGBO(
-                                                                    208,
-                                                                    205,
-                                                                    205,
-                                                                    1);
-                                                          }),
-                                                          hoverColor:
-                                                              Color.fromRGBO(
-                                                                      183,
-                                                                      183,
-                                                                      183,
-                                                                      1)
-                                                                  .withOpacity(
-                                                                      .8),
-                                                          value: 3,
-                                                          groupValue:
-                                                              groupValue,
-                                                          onChanged:
-                                                              (int? value) {
-                                                            setState(() {
-                                                              groupValue =
-                                                                  value;
-                                                            });
-                                                          }),
-                                                    ),
-                                                    Text('3',
-                                                        style: AvailableText
-                                                            .helveticablack),
+                                                              value: i,
+                                                              groupValue: checkbox1
+                                                                  ? groupValue
+                                                                  : null, // Enable/disable based on checkbox state
+                                                              onChanged: checkbox1
+                                                                  ? (int? value) {
+                                                                      setState(
+                                                                          () {
+                                                                        groupValue =
+                                                                            value;
+                                                                      });
+                                                                    }
+                                                                  : null, // Set onChanged to null if checkbox is unchecked
+                                                            ),
+                                                          ),
+                                                          Text(
+                                                            '$i',
+                                                            style: AvailableText
+                                                                .helveticablack,
+                                                          ),
+                                                        ],
+                                                      ),
                                                   ],
                                                 ),
                                                 SizedBox(
@@ -1353,41 +1278,36 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                                             .load.text;
                                                         String date = controller
                                                             .date.text;
-                                                        // Call functions to create documents in collection and subcollection
-                                                        await createNewBooking(
-                                                            truck1,
-                                                            load,
-                                                            size,
-                                                            date,
-                                                            widget.user!);
+                                                        print('load: $load');
+
+                                                        String newBookingId =
+                                                            await createNewBooking(
+                                                                truck,
+                                                                load,
+                                                                size,
+                                                                date,
+                                                                widget.user!);
+                                                        showDialog(
+                                                          barrierDismissible:
+                                                              true,
+                                                          barrierColor:
+                                                              Color.fromRGBO(59,
+                                                                      57, 57, 1)
+                                                                  .withOpacity(
+                                                                      0.5),
+                                                          context: context,
+                                                          builder: (context) {
+                                                            return BookingIDDialog(
+                                                              user: widget.user,
+                                                              newBookingId:
+                                                                  newBookingId,
+                                                            );
+                                                          },
+                                                        );
                                                       } catch (e) {
                                                         print(
                                                             "Error creating user: $e");
                                                       }
-                                                      showDialog(
-                                                        barrierColor:
-                                                            Color.fromRGBO(59,
-                                                                    57, 57, 1)
-                                                                .withOpacity(
-                                                                    0.5),
-                                                        context: context,
-                                                        builder: (context) {
-                                                          return BookingIDDialog();
-                                                        },
-                                                      );
-                                                      String unitType =
-                                                          'Vehicle';
-                                                      Navigator.push(
-                                                        context,
-                                                        MaterialPageRoute(
-                                                            builder: (context) =>
-                                                                SingleUserDashboardPage(
-                                                                  unitType:
-                                                                      unitType,
-                                                                  user: widget
-                                                                      .user,
-                                                                )),
-                                                      );
                                                     },
                                                     text: 'Create Booking',
                                                   ),
@@ -1796,106 +1716,69 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                                 value: checkbox1,
                                                 onChanged: (bool? newValue) {
                                                   setState(() {
-                                                    value = newValue!;
+                                                    checkbox1 = newValue!;
+                                                    if (!checkbox1) {
+                                                      groupValue =
+                                                          null; // Disable all radio buttons
+                                                    }
                                                   });
                                                 },
                                               ),
-                                              Text('Need Additional Labour',
-                                                  style:
-                                                      AvailableText.helvetica),
-                                              Transform.scale(
-                                                scale: 0.7,
-                                                child: Radio<int?>(
-                                                    splashRadius: 5,
-                                                    fillColor:
-                                                        MaterialStateProperty
-                                                            .resolveWith(
-                                                                (states) {
-                                                      if (states.contains(
-                                                          MaterialState
-                                                              .selected)) {
-                                                        return Color.fromRGBO(
-                                                            183, 183, 183, 1);
-                                                      }
-                                                      return Color.fromRGBO(
-                                                          208, 205, 205, 1);
-                                                    }),
-                                                    hoverColor: Color.fromRGBO(
-                                                            183, 183, 183, 1)
-                                                        .withOpacity(.8),
-                                                    value: 1,
-                                                    groupValue: groupValue,
-                                                    onChanged: (int? value) {
-                                                      setState(() {
-                                                        groupValue = value;
-                                                      });
-                                                    }),
+                                              Text(
+                                                'Need Additional Labour',
+                                                style: AvailableText
+                                                    .helveticablack,
                                               ),
-                                              Text('1',
-                                                  style: AvailableText
-                                                      .helveticablack),
-                                              Transform.scale(
-                                                scale: 0.7,
-                                                child: Radio<int?>(
-                                                    splashRadius: 5,
-                                                    fillColor:
-                                                        MaterialStateProperty
-                                                            .resolveWith(
-                                                                (states) {
-                                                      if (states.contains(
-                                                          MaterialState
-                                                              .selected)) {
-                                                        return Color.fromRGBO(
-                                                            183, 183, 183, 1);
-                                                      }
-                                                      return Color.fromRGBO(
-                                                          208, 205, 205, 1);
-                                                    }),
-                                                    hoverColor: Color.fromRGBO(
-                                                            183, 183, 183, 1)
-                                                        .withOpacity(.8),
-                                                    value: 2,
-                                                    groupValue: groupValue,
-                                                    onChanged: (int? value) {
-                                                      setState(() {
-                                                        groupValue = value;
-                                                      });
-                                                    }),
-                                              ),
-                                              Text('2',
-                                                  style: AvailableText
-                                                      .helveticablack),
-                                              Transform.scale(
-                                                scale: 0.7,
-                                                child: Radio<int?>(
-                                                    splashRadius: 5,
-                                                    fillColor:
-                                                        MaterialStateProperty
-                                                            .resolveWith(
-                                                                (states) {
-                                                      if (states.contains(
-                                                          MaterialState
-                                                              .selected)) {
-                                                        return Color.fromRGBO(
-                                                            183, 183, 183, 1);
-                                                      }
-                                                      return Color.fromRGBO(
-                                                          208, 205, 205, 1);
-                                                    }),
-                                                    hoverColor: Color.fromRGBO(
-                                                            183, 183, 183, 1)
-                                                        .withOpacity(.8),
-                                                    value: 3,
-                                                    groupValue: groupValue,
-                                                    onChanged: (int? value) {
-                                                      setState(() {
-                                                        groupValue = value;
-                                                      });
-                                                    }),
-                                              ),
-                                              Text('3',
-                                                  style: AvailableText
-                                                      .helveticablack),
+                                              for (int i = 1; i <= 3; i++)
+                                                Row(
+                                                  children: [
+                                                    Transform.scale(
+                                                      scale: 0.7,
+                                                      child: Radio<int?>(
+                                                        splashRadius: 5,
+                                                        fillColor:
+                                                            MaterialStateProperty
+                                                                .resolveWith(
+                                                                    (states) {
+                                                          if (states.contains(
+                                                              MaterialState
+                                                                  .selected)) {
+                                                            return Color
+                                                                .fromRGBO(
+                                                                    183,
+                                                                    183,
+                                                                    183,
+                                                                    1);
+                                                          }
+                                                          return Color.fromRGBO(
+                                                              208, 205, 205, 1);
+                                                        }),
+                                                        hoverColor:
+                                                            Color.fromRGBO(183,
+                                                                    183, 183, 1)
+                                                                .withOpacity(
+                                                                    .8),
+                                                        value: i,
+                                                        groupValue: checkbox1
+                                                            ? groupValue
+                                                            : null, // Enable/disable based on checkbox state
+                                                        onChanged: checkbox1
+                                                            ? (int? value) {
+                                                                setState(() {
+                                                                  groupValue =
+                                                                      value;
+                                                                });
+                                                              }
+                                                            : null, // Set onChanged to null if checkbox is unchecked
+                                                      ),
+                                                    ),
+                                                    Text(
+                                                      '$i',
+                                                      style: AvailableText
+                                                          .helveticablack,
+                                                    ),
+                                                  ],
+                                                ),
                                             ],
                                           ),
                                           Container(
@@ -1981,7 +1864,9 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                                       .withOpacity(0.5),
                                                   context: context,
                                                   builder: (context) {
-                                                    return BookingIDDialog();
+                                                    return BookingIDDialog(
+                                                      user: widget.user,
+                                                    );
                                                   },
                                                 );
                                               },

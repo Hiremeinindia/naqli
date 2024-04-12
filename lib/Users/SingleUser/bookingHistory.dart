@@ -15,6 +15,7 @@ import 'package:flutter_application_1/pieChart/indicator.dart';
 import 'package:flutter_application_1/Widgets/customButton.dart';
 import 'package:flutter_application_1/echarts_data.dart';
 import 'package:graphic/graphic.dart';
+import 'package:rxdart/rxdart.dart';
 import 'package:sizer/sizer.dart';
 import 'dart:ui';
 
@@ -60,26 +61,27 @@ class _BookingHistroyState extends State<BookingHistroy> {
   }
 
   Stream<QuerySnapshot<Map<String, dynamic>>> allBookings() {
-    String userCollection;
-    if (widget.unitType == 'Vehicle') {
-      userCollection = 'vehicleBooking';
-    } else if (widget.unitType == 'Equipment') {
-      userCollection = 'equipmentBookings';
-    } else {
-      throw Exception('Invalid selected type');
-    }
-
     FirebaseFirestore firestore = FirebaseFirestore.instance;
 
-    // Query for user collection
-    Stream<QuerySnapshot<Map<String, dynamic>>> userStream = firestore
+    // Query for 'vehicleBooking' collection
+    Stream<QuerySnapshot<Map<String, dynamic>>> vehicleStream = firestore
         .collection('user')
         .doc(widget.user)
-        .collection(userCollection)
+        .collection('vehicleBooking')
         .snapshots();
 
-    // Combine both streams into one
-    return userStream;
+    // Query for 'equipmentBookings' collection
+    Stream<QuerySnapshot<Map<String, dynamic>>> equipmentStream = firestore
+        .collection('user')
+        .doc(widget.user)
+        .collection('equipmentBookings')
+        .snapshots();
+
+    // Combine both streams into one using StreamGroup
+    Stream<QuerySnapshot<Map<String, dynamic>>> combinedStream =
+        vehicleStream.mergeWith([equipmentStream]);
+
+    return combinedStream;
   }
 
   void enablePayNowButton() {
