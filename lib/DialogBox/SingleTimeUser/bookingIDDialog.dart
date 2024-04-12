@@ -1,5 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/Users/Enterprise/booking_manager.dart';
+import 'package:flutter_application_1/Users/SingleUser/dashboard_page.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../Widgets/formText.dart';
@@ -7,6 +9,10 @@ import '../../Widgets/formText.dart';
 import 'dart:math';
 
 class BookingIDDialog extends StatefulWidget {
+  final String? user;
+  final String? newBookingId;
+  final String? unitType;
+  const BookingIDDialog({this.user, this.unitType, this.newBookingId});
   @override
   _BookingIDDialogState createState() => _BookingIDDialogState();
 }
@@ -19,6 +25,24 @@ class _BookingIDDialogState extends State<BookingIDDialog> {
     for (int i = 0; i < 10; i++) {
       bookingID += random.nextInt(10).toString();
     }
+    String userCollection;
+    if (widget.unitType == 'Vehicle') {
+      userCollection = 'vehicleBooking';
+    } else if (widget.unitType == 'Equipment') {
+      userCollection = 'equipmentBookings';
+    } else {
+      throw Exception('Invalid selected type');
+    }
+    FirebaseFirestore.instance
+        .collection('user')
+        .doc(widget.user)
+        .collection(
+            userCollection) // Replace 'subcollectionName' with your subcollection name
+        .doc(widget
+            .newBookingId) // Replace 'subdocId' with the ID of the document in the subcollection
+        .update({
+      "bookingid": bookingID,
+    });
     return bookingID;
   }
 
@@ -73,7 +97,15 @@ class _BookingIDDialogState extends State<BookingIDDialog> {
                           padding: EdgeInsets.only(right: 2),
                           icon: Icon(Icons.close),
                           onPressed: () {
-                            Navigator.of(context).pop();
+                            String unitType = 'Vehicle';
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => SingleUserDashboardPage(
+                                        unitType: unitType,
+                                        user: widget.user,
+                                      )),
+                            );
                           },
                           color: Colors.white, // Setting icon color
                         ),

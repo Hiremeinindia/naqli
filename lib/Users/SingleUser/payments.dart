@@ -15,6 +15,7 @@ import 'package:flutter_application_1/pieChart/indicator.dart';
 import 'package:flutter_application_1/Widgets/customButton.dart';
 import 'package:flutter_application_1/echarts_data.dart';
 import 'package:graphic/graphic.dart';
+import 'package:rxdart/rxdart.dart';
 import 'package:sizer/sizer.dart';
 import 'dart:ui';
 
@@ -46,7 +47,7 @@ class _SingleUserPaymentState extends State<SingleUserPayment> {
   bool payNowButtonEnabled = false;
   String? selectedValue;
 
-  Stream<QuerySnapshot<Map<String, dynamic>>>? _currentStream;
+  Stream<List<QuerySnapshot<Map<String, dynamic>>>>? _currentStream;
   @override
   void dispose() {
     _scrollController1.dispose();
@@ -54,26 +55,34 @@ class _SingleUserPaymentState extends State<SingleUserPayment> {
     super.dispose();
   }
 
-  Stream<QuerySnapshot<Map<String, dynamic>>> allBookings() {
-    String userCollection;
-    if (widget.unitType == 'Vehicle') {
-      userCollection = 'vehicleBooking';
-    } else if (widget.unitType == 'Equipment') {
-      userCollection = 'equipmentBookings';
-    } else {
-      throw Exception('Invalid selected type');
-    }
+  Stream<List<QuerySnapshot<Map<String, dynamic>>>> allBookings() {
     FirebaseFirestore firestore = FirebaseFirestore.instance;
 
-    // Query for user collection
-    Stream<QuerySnapshot<Map<String, dynamic>>> userStream = firestore
+    // Query for vehicleBooking collection
+    Stream<QuerySnapshot<Map<String, dynamic>>> vehicleStream = firestore
         .collection('user')
         .doc(widget.user)
-        .collection(userCollection)
+        .collection('vehicleBooking')
         .snapshots();
 
-    // Combine both streams into one
-    return userStream;
+    // Query for equipmentBookings collection
+    Stream<QuerySnapshot<Map<String, dynamic>>> equipmentStream = firestore
+        .collection('user')
+        .doc(widget.user)
+        .collection('equipmentBookings')
+        .snapshots();
+
+    // Merge both streams using Rx.combineLatest2
+    Stream<List<QuerySnapshot<Map<String, dynamic>>>> mergedStream =
+        Rx.combineLatest2(
+            vehicleStream,
+            equipmentStream,
+            (QuerySnapshot<Map<String, dynamic>> a,
+                    QuerySnapshot<Map<String, dynamic>> b) =>
+                [a, b]).asBroadcastStream();
+
+    // Return the merged stream
+    return mergedStream;
   }
 
   void initState() {
@@ -227,7 +236,7 @@ class _SingleUserPaymentState extends State<SingleUserPayment> {
                         ),
                       ),
                       SizedBox(height: 50),
-                      StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+                      StreamBuilder<List<QuerySnapshot<Map<String, dynamic>>>>(
                         stream: _currentStream,
                         builder: (context, snapshot) {
                           if (snapshot.connectionState ==
@@ -237,20 +246,20 @@ class _SingleUserPaymentState extends State<SingleUserPayment> {
                             return Center(
                                 child: Text('Error: ${snapshot.error}'));
                           } else if (!snapshot.hasData ||
-                              snapshot.data!.docs.isEmpty) {
+                              snapshot.data!.isEmpty) {
                             return Center(
                                 child: Text("You haven't done any bookings"));
                           } else {
-                            // Map documents to SingleUser objects
-                            List<SingleUserBooking> blueSingleUsers = snapshot
-                                .data!.docs
-                                .map((doc) =>
-                                    SingleUserBooking.fromSnapshot(doc))
-                                .toList();
+                            // Flatten the list of QuerySnapshot into a single List<DocumentSnapshot>
+                            List<SingleUserBooking> blueSingleUsers = [];
+                            snapshot.data!.forEach((querySnapshot) {
+                              querySnapshot.docs.forEach((doc) {
+                                blueSingleUsers
+                                    .add(SingleUserBooking.fromSnapshot(doc));
+                              });
+                            });
 
                             return ElevationContainer(
-                              //width:300; // Set width to match screen width
-
                               child: Scrollbar(
                                 controller: _scrollController2,
                                 thumbVisibility: true,
@@ -264,8 +273,9 @@ class _SingleUserPaymentState extends State<SingleUserPayment> {
                                       decoration: BoxDecoration(
                                         color: Colors.white,
                                         borderRadius: BorderRadius.only(
-                                            bottomLeft: Radius.circular(8),
-                                            bottomRight: Radius.circular(8)),
+                                          bottomLeft: Radius.circular(8),
+                                          bottomRight: Radius.circular(8),
+                                        ),
                                         border: Border.all(
                                           color:
                                               Color.fromRGBO(112, 112, 112, 1)
@@ -420,7 +430,7 @@ class _SingleUserPaymentState extends State<SingleUserPayment> {
                         ),
                       ),
                       SizedBox(height: 50),
-                      StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+                      StreamBuilder<List<QuerySnapshot<Map<String, dynamic>>>>(
                         stream: _currentStream,
                         builder: (context, snapshot) {
                           if (snapshot.connectionState ==
@@ -430,20 +440,20 @@ class _SingleUserPaymentState extends State<SingleUserPayment> {
                             return Center(
                                 child: Text('Error: ${snapshot.error}'));
                           } else if (!snapshot.hasData ||
-                              snapshot.data!.docs.isEmpty) {
+                              snapshot.data!.isEmpty) {
                             return Center(
                                 child: Text("You haven't done any bookings"));
                           } else {
-                            // Map documents to SingleUser objects
-                            List<SingleUserBooking> blueSingleUsers = snapshot
-                                .data!.docs
-                                .map((doc) =>
-                                    SingleUserBooking.fromSnapshot(doc))
-                                .toList();
+                            // Flatten the list of QuerySnapshot into a single List<DocumentSnapshot>
+                            List<SingleUserBooking> blueSingleUsers = [];
+                            snapshot.data!.forEach((querySnapshot) {
+                              querySnapshot.docs.forEach((doc) {
+                                blueSingleUsers
+                                    .add(SingleUserBooking.fromSnapshot(doc));
+                              });
+                            });
 
                             return ElevationContainer(
-                              //width:300; // Set width to match screen width
-
                               child: Scrollbar(
                                 controller: _scrollController2,
                                 thumbVisibility: true,
@@ -457,8 +467,9 @@ class _SingleUserPaymentState extends State<SingleUserPayment> {
                                       decoration: BoxDecoration(
                                         color: Colors.white,
                                         borderRadius: BorderRadius.only(
-                                            bottomLeft: Radius.circular(8),
-                                            bottomRight: Radius.circular(8)),
+                                          bottomLeft: Radius.circular(8),
+                                          bottomRight: Radius.circular(8),
+                                        ),
                                         border: Border.all(
                                           color:
                                               Color.fromRGBO(112, 112, 112, 1)

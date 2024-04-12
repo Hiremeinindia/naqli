@@ -28,7 +28,7 @@ class AllUsersFormController {
   final booking = TextEditingController();
   final companyidNumber = TextEditingController();
   final selectedAccounttype = TextEditingController();
-
+  TextEditingController contactNumberError = TextEditingController();
   final selectedTypeName = TextEditingController();
   final selectedTypeName1 = TextEditingController();
   final selectedTypeName2 = TextEditingController();

@@ -732,123 +732,76 @@ class _EditContractState extends State<EditContract> {
                                                   value: checkbox1,
                                                   onChanged: (bool? newValue) {
                                                     setState(() {
-                                                      value = newValue!;
+                                                      checkbox1 = newValue!;
+                                                      if (!checkbox1) {
+                                                        groupValue =
+                                                            null; // Disable all radio buttons
+                                                      }
                                                     });
                                                   },
                                                 ),
-                                                Text('Need Additional Labour',
-                                                    style: AvailableText
-                                                        .helveticablack),
-                                              ],
-                                            ),
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              children: [
-                                                Transform.scale(
-                                                  scale: 0.7,
-                                                  child: Radio<int?>(
-                                                      splashRadius: 5,
-                                                      fillColor:
-                                                          MaterialStateProperty
-                                                              .resolveWith(
-                                                                  (states) {
-                                                        if (states.contains(
-                                                            MaterialState
-                                                                .selected)) {
-                                                          return Color.fromRGBO(
-                                                              183, 183, 183, 1);
-                                                        }
-                                                        return Color.fromRGBO(
-                                                            208, 205, 205, 1);
-                                                      }),
-                                                      hoverColor:
-                                                          Color.fromRGBO(183,
-                                                                  183, 183, 1)
-                                                              .withOpacity(.8),
-                                                      value: 1,
-                                                      groupValue: groupValue,
-                                                      onChanged: (int? value) {
-                                                        setState(() {
-                                                          groupValue = value;
-                                                        });
-                                                      }),
+                                                Text(
+                                                  'Need Additional Labour',
+                                                  style: AvailableText
+                                                      .helveticablack,
                                                 ),
-                                                Text('1',
-                                                    style: AvailableText
-                                                        .helveticablack),
-                                              ],
-                                            ),
-                                            Row(
-                                              children: [
-                                                Transform.scale(
-                                                  scale: 0.7,
-                                                  child: Radio<int?>(
-                                                      splashRadius: 5,
-                                                      fillColor:
-                                                          MaterialStateProperty
-                                                              .resolveWith(
-                                                                  (states) {
-                                                        if (states.contains(
-                                                            MaterialState
-                                                                .selected)) {
-                                                          return Color.fromRGBO(
-                                                              183, 183, 183, 1);
-                                                        }
-                                                        return Color.fromRGBO(
-                                                            208, 205, 205, 1);
-                                                      }),
-                                                      hoverColor:
-                                                          Color.fromRGBO(183,
-                                                                  183, 183, 1)
-                                                              .withOpacity(.8),
-                                                      value: 2,
-                                                      groupValue: groupValue,
-                                                      onChanged: (int? value) {
-                                                        setState(() {
-                                                          groupValue = value;
-                                                        });
-                                                      }),
-                                                ),
-                                                Text('2',
-                                                    style: AvailableText
-                                                        .helveticablack),
-                                              ],
-                                            ),
-                                            Row(
-                                              children: [
-                                                Transform.scale(
-                                                  scale: 0.7,
-                                                  child: Radio<int?>(
-                                                      splashRadius: 5,
-                                                      fillColor:
-                                                          MaterialStateProperty
-                                                              .resolveWith(
-                                                                  (states) {
-                                                        if (states.contains(
-                                                            MaterialState
-                                                                .selected)) {
-                                                          return Color.fromRGBO(
-                                                              183, 183, 183, 1);
-                                                        }
-                                                        return Color.fromRGBO(
-                                                            208, 205, 205, 1);
-                                                      }),
-                                                      hoverColor:
-                                                          Color.fromRGBO(183,
-                                                                  183, 183, 1)
-                                                              .withOpacity(.8),
-                                                      value: 3,
-                                                      groupValue: groupValue,
-                                                      onChanged: (int? value) {
-                                                        setState(() {
-                                                          groupValue = value;
-                                                        });
-                                                      }),
-                                                ),
-                                                Text('3',
-                                                    style: AvailableText
-                                                        .helveticablack),
+                                                for (int i = 1; i <= 3; i++)
+                                                  Row(
+                                                    children: [
+                                                      Transform.scale(
+                                                        scale: 0.7,
+                                                        child: Radio<int?>(
+                                                          splashRadius: 5,
+                                                          fillColor:
+                                                              MaterialStateProperty
+                                                                  .resolveWith(
+                                                                      (states) {
+                                                            if (states.contains(
+                                                                MaterialState
+                                                                    .selected)) {
+                                                              return Color
+                                                                  .fromRGBO(
+                                                                      183,
+                                                                      183,
+                                                                      183,
+                                                                      1);
+                                                            }
+                                                            return Color
+                                                                .fromRGBO(
+                                                                    208,
+                                                                    205,
+                                                                    205,
+                                                                    1);
+                                                          }),
+                                                          hoverColor:
+                                                              Color.fromRGBO(
+                                                                      183,
+                                                                      183,
+                                                                      183,
+                                                                      1)
+                                                                  .withOpacity(
+                                                                      .8),
+                                                          value: i,
+                                                          groupValue: checkbox1
+                                                              ? groupValue
+                                                              : null, // Enable/disable based on checkbox state
+                                                          onChanged: checkbox1
+                                                              ? (int? value) {
+                                                                  setState(() {
+                                                                    groupValue =
+                                                                        value;
+                                                                  });
+                                                                }
+                                                              : null, // Set onChanged to null if checkbox is unchecked
+                                                        ),
+                                                      ),
+                                                      Text(
+                                                        '$i',
+                                                        style: AvailableText
+                                                            .helveticablack,
+                                                      ),
+                                                    ],
+                                                  ),
                                               ],
                                             ),
                                           ],
@@ -1551,123 +1504,76 @@ class _EditContractState extends State<EditContract> {
                                                   value: checkbox1,
                                                   onChanged: (bool? newValue) {
                                                     setState(() {
-                                                      value = newValue!;
+                                                      checkbox1 = newValue!;
+                                                      if (!checkbox1) {
+                                                        groupValue =
+                                                            null; // Disable all radio buttons
+                                                      }
                                                     });
                                                   },
                                                 ),
-                                                Text('Need Additional Labour',
-                                                    style: AvailableText
-                                                        .helveticablack),
-                                              ],
-                                            ),
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              children: [
-                                                Transform.scale(
-                                                  scale: 0.7,
-                                                  child: Radio<int?>(
-                                                      splashRadius: 5,
-                                                      fillColor:
-                                                          MaterialStateProperty
-                                                              .resolveWith(
-                                                                  (states) {
-                                                        if (states.contains(
-                                                            MaterialState
-                                                                .selected)) {
-                                                          return Color.fromRGBO(
-                                                              183, 183, 183, 1);
-                                                        }
-                                                        return Color.fromRGBO(
-                                                            208, 205, 205, 1);
-                                                      }),
-                                                      hoverColor:
-                                                          Color.fromRGBO(183,
-                                                                  183, 183, 1)
-                                                              .withOpacity(.8),
-                                                      value: 1,
-                                                      groupValue: groupValue,
-                                                      onChanged: (int? value) {
-                                                        setState(() {
-                                                          groupValue = value;
-                                                        });
-                                                      }),
+                                                Text(
+                                                  'Need Additional Labour',
+                                                  style: AvailableText
+                                                      .helveticablack,
                                                 ),
-                                                Text('1',
-                                                    style: AvailableText
-                                                        .helveticablack),
-                                              ],
-                                            ),
-                                            Row(
-                                              children: [
-                                                Transform.scale(
-                                                  scale: 0.7,
-                                                  child: Radio<int?>(
-                                                      splashRadius: 5,
-                                                      fillColor:
-                                                          MaterialStateProperty
-                                                              .resolveWith(
-                                                                  (states) {
-                                                        if (states.contains(
-                                                            MaterialState
-                                                                .selected)) {
-                                                          return Color.fromRGBO(
-                                                              183, 183, 183, 1);
-                                                        }
-                                                        return Color.fromRGBO(
-                                                            208, 205, 205, 1);
-                                                      }),
-                                                      hoverColor:
-                                                          Color.fromRGBO(183,
-                                                                  183, 183, 1)
-                                                              .withOpacity(.8),
-                                                      value: 2,
-                                                      groupValue: groupValue,
-                                                      onChanged: (int? value) {
-                                                        setState(() {
-                                                          groupValue = value;
-                                                        });
-                                                      }),
-                                                ),
-                                                Text('2',
-                                                    style: AvailableText
-                                                        .helveticablack),
-                                              ],
-                                            ),
-                                            Row(
-                                              children: [
-                                                Transform.scale(
-                                                  scale: 0.7,
-                                                  child: Radio<int?>(
-                                                      splashRadius: 5,
-                                                      fillColor:
-                                                          MaterialStateProperty
-                                                              .resolveWith(
-                                                                  (states) {
-                                                        if (states.contains(
-                                                            MaterialState
-                                                                .selected)) {
-                                                          return Color.fromRGBO(
-                                                              183, 183, 183, 1);
-                                                        }
-                                                        return Color.fromRGBO(
-                                                            208, 205, 205, 1);
-                                                      }),
-                                                      hoverColor:
-                                                          Color.fromRGBO(183,
-                                                                  183, 183, 1)
-                                                              .withOpacity(.8),
-                                                      value: 3,
-                                                      groupValue: groupValue,
-                                                      onChanged: (int? value) {
-                                                        setState(() {
-                                                          groupValue = value;
-                                                        });
-                                                      }),
-                                                ),
-                                                Text('3',
-                                                    style: AvailableText
-                                                        .helveticablack),
+                                                for (int i = 1; i <= 3; i++)
+                                                  Row(
+                                                    children: [
+                                                      Transform.scale(
+                                                        scale: 0.7,
+                                                        child: Radio<int?>(
+                                                          splashRadius: 5,
+                                                          fillColor:
+                                                              MaterialStateProperty
+                                                                  .resolveWith(
+                                                                      (states) {
+                                                            if (states.contains(
+                                                                MaterialState
+                                                                    .selected)) {
+                                                              return Color
+                                                                  .fromRGBO(
+                                                                      183,
+                                                                      183,
+                                                                      183,
+                                                                      1);
+                                                            }
+                                                            return Color
+                                                                .fromRGBO(
+                                                                    208,
+                                                                    205,
+                                                                    205,
+                                                                    1);
+                                                          }),
+                                                          hoverColor:
+                                                              Color.fromRGBO(
+                                                                      183,
+                                                                      183,
+                                                                      183,
+                                                                      1)
+                                                                  .withOpacity(
+                                                                      .8),
+                                                          value: i,
+                                                          groupValue: checkbox1
+                                                              ? groupValue
+                                                              : null, // Enable/disable based on checkbox state
+                                                          onChanged: checkbox1
+                                                              ? (int? value) {
+                                                                  setState(() {
+                                                                    groupValue =
+                                                                        value;
+                                                                  });
+                                                                }
+                                                              : null, // Set onChanged to null if checkbox is unchecked
+                                                        ),
+                                                      ),
+                                                      Text(
+                                                        '$i',
+                                                        style: AvailableText
+                                                            .helveticablack,
+                                                      ),
+                                                    ],
+                                                  ),
                                               ],
                                             ),
                                           ],

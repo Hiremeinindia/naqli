@@ -67,7 +67,6 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
   int? selectedRadioValue;
   void initState() {
     super.initState();
-    bookingID = _generateBookingID();
     lab = selectedRadioValue;
     _equipKey1 = GlobalKey<CustomContainerState>();
     _equipKey2 = GlobalKey<CustomContainerState>();
@@ -91,53 +90,11 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
       });
     }
   }
-  // Future<void> createNewBooking(
-  //   String book1,
-  //   String adminUid,
-  // ) async {
-  //   try {
-  //     FirebaseFirestore firestore = FirebaseFirestore.instance;
 
-  //     // Reference to the user's document
-  //     DocumentReference userDocRef =
-  //         firestore.collection('superuser').doc(adminUid);
-
-  //     // Reference to the subcollection 'userBooking' under the user's document
-  //     CollectionReference userBookingCollectionRef =
-  //         userDocRef.collection('superuserBookings');
-
-  //     // Add document to subcollection and get the document reference
-  //     DocumentReference newBookingDocRef = await userBookingCollectionRef.add({
-  //       'book1': book1,
-  //     });
-
-  //     // Store the auto-generated ID
-  //     String newBookingId = newBookingDocRef.id;
-
-  //     // // Update the document with the stored ID
-  //     // await newBookingDocRef.update({'id': newBookingId});
-
-  //     print('New booking added successfully with ID: $newBookingId');
-  //   } catch (error) {
-  //     print('Error creating new booking: $error');
-  //   }
-  // }
-  String _generateBookingID() {
-    Random random = Random();
-
-    String bookingID = '';
-    for (int i = 0; i < 10; i++) {
-      bookingID += random.nextInt(10).toString();
-    }
-    return bookingID;
-  }
-
-  Future<void> createNewBooking(
+  Future<String> createNewBooking(
     String truck,
-    String size,
     String load,
-    String time,
-    String bookingid,
+    String size,
     String date,
     String labour,
     String adminUid,
@@ -155,11 +112,10 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
       // Add document to subcollection and get the document reference
       DocumentReference newBookingDocRef = await userBookingCollectionRef.add({
         'truck': truck,
-        'size': size,
         'load': load,
-        'time': time,
-        'bookingid': bookingid,
+        'size': size,
         'date': date,
+        'createdTime': Timestamp.now(),
         'labour': labour,
       });
 
@@ -167,11 +123,15 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
       String newBookingId = newBookingDocRef.id;
 
       // Update the document with the stored ID
-      // await newBookingDocRef.update({'id': newBookingId});
+      await newBookingDocRef.update({'id': newBookingId});
 
       print('New booking added successfully with ID: $newBookingId');
+
+      // Return the generated ID
+      return newBookingId;
     } catch (error) {
       print('Error creating new booking: $error');
+      return ''; // Return empty string if there's an error
     }
   }
 
@@ -1088,18 +1048,8 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                   child: CustomButton(
                                                     onPressed: () async {
                                                       try {
-                                                        print(
-                                                            '$selectedContainerIndex');
                                                         String truck = '';
-
                                                         if (controller
-                                                            .selectedTypeName
-                                                            .text
-                                                            .isNotEmpty) {
-                                                          truck = controller
-                                                              .selectedTypeName
-                                                              .text;
-                                                        } else if (controller
                                                             .selectedTypeName1
                                                             .text
                                                             .isNotEmpty) {
@@ -1120,168 +1070,78 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                           truck = controller
                                                               .selectedTypeName3
                                                               .text;
+                                                        } else if (controller
+                                                            .selectedTypeName4
+                                                            .text
+                                                            .isNotEmpty) {
+                                                          truck = controller
+                                                              .selectedTypeName4
+                                                              .text;
+                                                        } else if (controller
+                                                            .selectedTypeName5
+                                                            .text
+                                                            .isNotEmpty) {
+                                                          truck = controller
+                                                              .selectedTypeName5
+                                                              .text;
+                                                        } else if (controller
+                                                            .selectedTypeName6
+                                                            .text
+                                                            .isNotEmpty) {
+                                                          truck = controller
+                                                              .selectedTypeName6
+                                                              .text;
+                                                        } else if (controller
+                                                            .selectedTypeName7
+                                                            .text
+                                                            .isNotEmpty) {
+                                                          truck = controller
+                                                              .selectedTypeName7
+                                                              .text;
                                                         }
                                                         String truck1 = truck;
                                                         String size = controller
                                                             .size.text;
                                                         String load = controller
                                                             .load.text;
-                                                        String time = controller
-                                                            .time.text;
-                                                        String bookingid =
-                                                            bookingID;
                                                         String date = controller
                                                             .date.text;
                                                         String labour =
                                                             selectedRadioValue
                                                                 .toString();
-
-                                                        await createNewBooking(
-                                                            truck1,
-                                                            size,
-                                                            load,
-                                                            time,
-                                                            bookingid,
-                                                            date,
-                                                            labour,
-                                                            widget.user!);
+                                                        String newBookingId =
+                                                            await createNewBooking(
+                                                                truck,
+                                                                load,
+                                                                size,
+                                                                date,
+                                                                labour,
+                                                                widget.user!);
+                                                        String unitType =
+                                                            'Equipment';
+                                                        showDialog(
+                                                          barrierDismissible:
+                                                              true,
+                                                          barrierColor:
+                                                              Color.fromRGBO(59,
+                                                                      57, 57, 1)
+                                                                  .withOpacity(
+                                                                      0.5),
+                                                          context: context,
+                                                          builder: (context) {
+                                                            return BookingIDDialog(
+                                                              user: widget.user,
+                                                              newBookingId:
+                                                                  newBookingId,
+                                                              unitType:
+                                                                  unitType,
+                                                            );
+                                                          },
+                                                        );
                                                       } catch (e) {
                                                         print(
                                                             "Error creating user: $e");
                                                       }
-                                                      showDialog(
-                                                        barrierColor:
-                                                            Color.fromRGBO(59,
-                                                                    57, 57, 1)
-                                                                .withOpacity(
-                                                                    0.5),
-                                                        context: context,
-                                                        builder: (context) {
-                                                          return Dialog(
-                                                            shape:
-                                                                RoundedRectangleBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          10.0),
-                                                            ),
-                                                            child: Container(
-                                                              height: 280,
-                                                              width: MediaQuery.of(
-                                                                          context)
-                                                                      .size
-                                                                      .width *
-                                                                  0.5,
-                                                              decoration:
-                                                                  BoxDecoration(
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            10.0),
-                                                                boxShadow: [
-                                                                  BoxShadow(
-                                                                    offset:
-                                                                        Offset(
-                                                                            0,
-                                                                            1),
-                                                                    blurRadius:
-                                                                        0.1, // changes position of shadow
-                                                                  ),
-                                                                ],
-                                                              ),
-                                                              child: Column(
-                                                                crossAxisAlignment:
-                                                                    CrossAxisAlignment
-                                                                        .start,
-                                                                children: <Widget>[
-                                                                  Container(
-                                                                    height: 50,
-                                                                    decoration:
-                                                                        BoxDecoration(
-                                                                      borderRadius: BorderRadius.only(
-                                                                          topLeft: Radius.circular(
-                                                                              10.0),
-                                                                          topRight:
-                                                                              Radius.circular(10.0)),
-                                                                      color: Color.fromRGBO(
-                                                                          98,
-                                                                          105,
-                                                                          254,
-                                                                          1),
-                                                                    ),
-                                                                    child: Row(
-                                                                      mainAxisAlignment:
-                                                                          MainAxisAlignment
-                                                                              .spaceBetween,
-                                                                      children: [
-                                                                        Expanded(
-                                                                          child:
-                                                                              Center(
-                                                                            child:
-                                                                                Padding(
-                                                                              padding: const EdgeInsets.only(left: 8.0),
-                                                                              child: Text(
-                                                                                'Booking ID ${bookingID}',
-                                                                                style: DialogText.helvetica21,
-                                                                              ),
-                                                                            ),
-                                                                          ),
-                                                                        ),
-                                                                        IconButton(
-                                                                          padding:
-                                                                              EdgeInsets.only(right: 2),
-                                                                          icon:
-                                                                              Icon(Icons.close),
-                                                                          onPressed:
-                                                                              () {
-                                                                            String
-                                                                                unitType =
-                                                                                'Equipment';
-                                                                            Navigator.push(
-                                                                              context,
-                                                                              MaterialPageRoute(
-                                                                                  builder: (context) => SingleUserDashboardPage(
-                                                                                        unitType: unitType,
-                                                                                        user: widget.user,
-                                                                                        bookingId: bookingID,
-                                                                                      )),
-                                                                            );
-                                                                          },
-                                                                          color:
-                                                                              Colors.white, // Setting icon color
-                                                                        ),
-                                                                      ],
-                                                                    ),
-                                                                  ),
-                                                                  Center(
-                                                                    child:
-                                                                        Container(
-                                                                      height:
-                                                                          230,
-                                                                      decoration:
-                                                                          BoxDecoration(
-                                                                        borderRadius: BorderRadius.only(
-                                                                            bottomLeft:
-                                                                                Radius.circular(10.0),
-                                                                            bottomRight: Radius.circular(10.0)),
-                                                                        color: Colors
-                                                                            .white,
-                                                                      ),
-                                                                      child:
-                                                                          Center(
-                                                                        child: Text(
-                                                                            'Booking Generated',
-                                                                            style:
-                                                                                DialogText.helvetica40),
-                                                                      ),
-                                                                    ),
-                                                                  ),
-                                                                ],
-                                                              ),
-                                                            ),
-                                                          );
-                                                        },
-                                                      );
                                                     },
                                                     text: 'Create Booking',
                                                   ),
@@ -1859,155 +1719,76 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                       onChanged:
                                                           (bool? newValue) {
                                                         setState(() {
-                                                          value = newValue!;
+                                                          checkbox1 = newValue!;
+                                                          if (!checkbox1) {
+                                                            groupValue =
+                                                                null; // Disable all radio buttons
+                                                          }
                                                         });
                                                       },
                                                     ),
                                                     Text(
-                                                        'Need Additional Labour',
-                                                        style: AvailableText
-                                                            .helveticablack),
-                                                    Transform.scale(
-                                                      scale: 0.7,
-                                                      child: Radio<int?>(
-                                                          splashRadius: 5,
-                                                          fillColor:
-                                                              MaterialStateProperty
+                                                      'Need Additional Labour',
+                                                      style: AvailableText
+                                                          .helveticablack,
+                                                    ),
+                                                    for (int i = 1; i <= 3; i++)
+                                                      Row(
+                                                        children: [
+                                                          Transform.scale(
+                                                            scale: 0.7,
+                                                            child: Radio<int?>(
+                                                              splashRadius: 5,
+                                                              fillColor: MaterialStateProperty
                                                                   .resolveWith(
                                                                       (states) {
-                                                            if (states.contains(
-                                                                MaterialState
-                                                                    .selected)) {
-                                                              return Color
-                                                                  .fromRGBO(
-                                                                      183,
-                                                                      183,
-                                                                      183,
-                                                                      1);
-                                                            }
-                                                            return Color
-                                                                .fromRGBO(
-                                                                    208,
-                                                                    205,
-                                                                    205,
-                                                                    1);
-                                                          }),
-                                                          hoverColor:
-                                                              Color.fromRGBO(
-                                                                      183,
-                                                                      183,
-                                                                      183,
-                                                                      1)
+                                                                if (states.contains(
+                                                                    MaterialState
+                                                                        .selected)) {
+                                                                  return Color
+                                                                      .fromRGBO(
+                                                                          183,
+                                                                          183,
+                                                                          183,
+                                                                          1);
+                                                                }
+                                                                return Color
+                                                                    .fromRGBO(
+                                                                        208,
+                                                                        205,
+                                                                        205,
+                                                                        1);
+                                                              }),
+                                                              hoverColor: Color
+                                                                      .fromRGBO(
+                                                                          183,
+                                                                          183,
+                                                                          183,
+                                                                          1)
                                                                   .withOpacity(
                                                                       .8),
-                                                          value: 1,
-                                                          groupValue:
-                                                              groupValue,
-                                                          onChanged:
-                                                              (int? value) {
-                                                            setState(() {
-                                                              groupValue =
-                                                                  value;
-                                                            });
-                                                          }),
-                                                    ),
-                                                    Text('1',
-                                                        style: AvailableText
-                                                            .helveticablack),
-                                                    Transform.scale(
-                                                      scale: 0.7,
-                                                      child: Radio<int?>(
-                                                          splashRadius: 5,
-                                                          fillColor:
-                                                              MaterialStateProperty
-                                                                  .resolveWith(
-                                                                      (states) {
-                                                            if (states.contains(
-                                                                MaterialState
-                                                                    .selected)) {
-                                                              return Color
-                                                                  .fromRGBO(
-                                                                      183,
-                                                                      183,
-                                                                      183,
-                                                                      1);
-                                                            }
-                                                            return Color
-                                                                .fromRGBO(
-                                                                    208,
-                                                                    205,
-                                                                    205,
-                                                                    1);
-                                                          }),
-                                                          hoverColor:
-                                                              Color.fromRGBO(
-                                                                      183,
-                                                                      183,
-                                                                      183,
-                                                                      1)
-                                                                  .withOpacity(
-                                                                      .8),
-                                                          value: 2,
-                                                          groupValue:
-                                                              groupValue,
-                                                          onChanged:
-                                                              (int? value) {
-                                                            setState(() {
-                                                              groupValue =
-                                                                  value;
-                                                            });
-                                                          }),
-                                                    ),
-                                                    Text('2',
-                                                        style: AvailableText
-                                                            .helveticablack),
-                                                    Transform.scale(
-                                                      scale: 0.7,
-                                                      child: Radio<int?>(
-                                                          splashRadius: 5,
-                                                          fillColor:
-                                                              MaterialStateProperty
-                                                                  .resolveWith(
-                                                                      (states) {
-                                                            if (states.contains(
-                                                                MaterialState
-                                                                    .selected)) {
-                                                              return Color
-                                                                  .fromRGBO(
-                                                                      183,
-                                                                      183,
-                                                                      183,
-                                                                      1);
-                                                            }
-                                                            return Color
-                                                                .fromRGBO(
-                                                                    208,
-                                                                    205,
-                                                                    205,
-                                                                    1);
-                                                          }),
-                                                          hoverColor:
-                                                              Color.fromRGBO(
-                                                                      183,
-                                                                      183,
-                                                                      183,
-                                                                      1)
-                                                                  .withOpacity(
-                                                                      .8),
-                                                          value: 3,
-                                                          groupValue:
-                                                              groupValue,
-                                                          onChanged:
-                                                              (int? value) {
-                                                            setState(() {
-                                                              groupValue =
-                                                                  value;
-                                                            });
-                                                          }),
-                                                    ),
-                                                    Text('3',
-                                                        style: AvailableText
-                                                            .helveticablack),
+                                                              value: i,
+                                                              groupValue: checkbox1
+                                                                  ? groupValue
+                                                                  : null, // Enable/disable based on checkbox state
+                                                              onChanged: checkbox1
+                                                                  ? (int? value) {
+                                                                      setState(
+                                                                          () {
+                                                                        groupValue =
+                                                                            value;
+                                                                      });
+                                                                    }
+                                                                  : null, // Set onChanged to null if checkbox is unchecked
+                                                            ),
+                                                          ),
+                                                          Text(
+                                                            '$i',
+                                                            style: AvailableText
+                                                                .helveticablack,
+                                                          ),
+                                                        ],
+                                                      ),
                                                   ],
                                                 ),
                                                 SizedBox(
@@ -2127,7 +1908,9 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                                     0.5),
                                                         context: context,
                                                         builder: (context) {
-                                                          return BookingIDDialog();
+                                                          return BookingIDDialog(
+                                                            user: widget.user,
+                                                          );
                                                         },
                                                       );
                                                     },
