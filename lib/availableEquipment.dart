@@ -1117,6 +1117,8 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                                 date,
                                                                 labour,
                                                                 widget.user!);
+                                                        String unitType =
+                                                            'Equipment';
                                                         showDialog(
                                                           barrierDismissible:
                                                               true,
@@ -1131,6 +1133,8 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                               user: widget.user,
                                                               newBookingId:
                                                                   newBookingId,
+                                                              unitType:
+                                                                  unitType,
                                                             );
                                                           },
                                                         );

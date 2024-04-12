@@ -21,10 +21,8 @@ import 'dart:ui';
 
 class BookingHistroy extends StatefulWidget {
   final String? user;
-  final String? unitType;
 
   BookingHistroy({
-    this.unitType,
     this.user,
   });
   @override
@@ -35,8 +33,7 @@ class _BookingHistroyState extends State<BookingHistroy> {
   PageController page = PageController();
   SideMenuController sideMenu = SideMenuController();
   ScrollController _scrollController = ScrollController();
-
-  Stream<QuerySnapshot<Map<String, dynamic>>>? _currentStream;
+  Stream<List<QuerySnapshot<Map<String, dynamic>>>>? _currentStream;
   bool value = false;
   String month = '';
   bool checkbox1 = false;
@@ -60,28 +57,34 @@ class _BookingHistroyState extends State<BookingHistroy> {
     super.initState();
   }
 
-  Stream<QuerySnapshot<Map<String, dynamic>>> allBookings() {
+  Stream<List<QuerySnapshot<Map<String, dynamic>>>> allBookings() {
     FirebaseFirestore firestore = FirebaseFirestore.instance;
 
-    // Query for 'vehicleBooking' collection
+    // Query for vehicleBooking collection
     Stream<QuerySnapshot<Map<String, dynamic>>> vehicleStream = firestore
         .collection('user')
         .doc(widget.user)
         .collection('vehicleBooking')
         .snapshots();
 
-    // Query for 'equipmentBookings' collection
+    // Query for equipmentBookings collection
     Stream<QuerySnapshot<Map<String, dynamic>>> equipmentStream = firestore
         .collection('user')
         .doc(widget.user)
         .collection('equipmentBookings')
         .snapshots();
 
-    // Combine both streams into one using StreamGroup
-    Stream<QuerySnapshot<Map<String, dynamic>>> combinedStream =
-        vehicleStream.mergeWith([equipmentStream]);
+    // Merge both streams using Rx.combineLatest2
+    Stream<List<QuerySnapshot<Map<String, dynamic>>>> mergedStream =
+        Rx.combineLatest2(
+            vehicleStream,
+            equipmentStream,
+            (QuerySnapshot<Map<String, dynamic>> a,
+                    QuerySnapshot<Map<String, dynamic>> b) =>
+                [a, b]).asBroadcastStream();
 
-    return combinedStream;
+    // Return the merged stream
+    return mergedStream;
   }
 
   void enablePayNowButton() {
@@ -140,23 +143,26 @@ class _BookingHistroyState extends State<BookingHistroy> {
                 ),
                 Padding(
                   padding: EdgeInsets.fromLTRB(4.w, 12.h, 4.w, 2.h),
-                  child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+                  child:
+                      StreamBuilder<List<QuerySnapshot<Map<String, dynamic>>>>(
                     stream: _currentStream,
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
                         return Center(child: CircularProgressIndicator());
                       } else if (snapshot.hasError) {
                         return Center(child: Text('Error: ${snapshot.error}'));
-                      } else if (!snapshot.hasData ||
-                          snapshot.data!.docs.isEmpty) {
+                      } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
                         return Center(
                             child: Text("You haven't done any bookings"));
                       } else {
-                        // Map documents to SingleUser objects
-                        List<SingleUserBooking> blueSingleUsers = snapshot
-                            .data!.docs
-                            .map((doc) => SingleUserBooking.fromSnapshot(doc))
-                            .toList();
+                        // Flatten the list of QuerySnapshot into a single List<DocumentSnapshot>
+                        List<SingleUserBooking> blueSingleUsers = [];
+                        snapshot.data!.forEach((querySnapshot) {
+                          querySnapshot.docs.forEach((doc) {
+                            blueSingleUsers
+                                .add(SingleUserBooking.fromSnapshot(doc));
+                          });
+                        });
 
                         return ElevationContainer(
                           child: Scrollbar(
@@ -238,24 +244,26 @@ class _BookingHistroyState extends State<BookingHistroy> {
                 ),
                 Padding(
                   padding: EdgeInsets.fromLTRB(4.w, 12.h, 4.w, 2.h),
-                  child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+                  child:
+                      StreamBuilder<List<QuerySnapshot<Map<String, dynamic>>>>(
                     stream: _currentStream,
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
                         return Center(child: CircularProgressIndicator());
                       } else if (snapshot.hasError) {
                         return Center(child: Text('Error: ${snapshot.error}'));
-                      } else if (!snapshot.hasData ||
-                          snapshot.data!.docs.isEmpty) {
+                      } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
                         return Center(
                             child: Text("You haven't done any bookings"));
                       } else {
-                        // Map documents to SingleUser objects
-                        List<SingleUserBooking> blueSingleUsers = snapshot
-                            .data!.docs
-                            .map((doc) => SingleUserBooking.fromSnapshot(doc))
-                            .toList();
-
+                        // Flatten the list of QuerySnapshot into a single List<DocumentSnapshot>
+                        List<SingleUserBooking> blueSingleUsers = [];
+                        snapshot.data!.forEach((querySnapshot) {
+                          querySnapshot.docs.forEach((doc) {
+                            blueSingleUsers
+                                .add(SingleUserBooking.fromSnapshot(doc));
+                          });
+                        });
                         return ElevationContainer(
                           //width:300; // Set width to match screen width
 

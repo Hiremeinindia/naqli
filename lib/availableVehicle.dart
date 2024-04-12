@@ -42,6 +42,7 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
   late GlobalKey<CustomContainerState> _vechiKey5;
   late GlobalKey<CustomContainerState> _vechiKey6;
   late GlobalKey<CustomContainerState> _vechiKey7;
+  int? selectedRadioValue;
   String loadtype = '';
   final List<String> loadList = [
     'Food Items',
@@ -111,6 +112,7 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
     String load,
     String size,
     String date,
+    String labour,
     String adminUid,
   ) async {
     try {
@@ -130,6 +132,7 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
         'size': size,
         'date': date,
         'createdTime': Timestamp.now(),
+        'labour': labour,
       });
 
       // Store the auto-generated ID
@@ -1279,14 +1282,19 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                                         String date = controller
                                                             .date.text;
                                                         print('load: $load');
-
+                                                        String labour =
+                                                            selectedRadioValue
+                                                                .toString();
                                                         String newBookingId =
                                                             await createNewBooking(
                                                                 truck,
                                                                 load,
                                                                 size,
                                                                 date,
+                                                                labour,
                                                                 widget.user!);
+                                                        String unitType =
+                                                            'Vehicle';
                                                         showDialog(
                                                           barrierDismissible:
                                                               true,
@@ -1301,6 +1309,8 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                                               user: widget.user,
                                                               newBookingId:
                                                                   newBookingId,
+                                                              unitType:
+                                                                  unitType,
                                                             );
                                                           },
                                                         );

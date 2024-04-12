@@ -82,7 +82,6 @@ class _MyHomePageState extends State<SingleUserDashboardPage> {
   void _handleItem2Tap() {
     setState(() {
       _currentContent = BookingHistroy(
-        unitType: widget.unitType,
         user: widget.user,
       );
     });
@@ -112,7 +111,6 @@ class _MyHomePageState extends State<SingleUserDashboardPage> {
   void _handleItem5Tap() {
     setState(() {
       _currentContent = BookingHistroy(
-        unitType: widget.unitType,
         user: widget.user,
       );
     });
@@ -539,7 +537,6 @@ class _MyHomePageState extends State<SingleUserDashboardPage> {
                                     onTap: (page, _) {
                                       setState(() {
                                         _currentContent = BookingHistroy(
-                                          unitType: widget.unitType,
                                           user: widget.user,
                                         );
                                       });
@@ -682,7 +679,6 @@ class _MyHomePageState extends State<SingleUserDashboardPage> {
                         onTap: () {
                           setState(() {
                             _currentContent = BookingHistroy(
-                              unitType: widget.unitType,
                               user: widget.user,
                             );
                           });

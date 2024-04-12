@@ -11,7 +11,8 @@ import 'dart:math';
 class BookingIDDialog extends StatefulWidget {
   final String? user;
   final String? newBookingId;
-  const BookingIDDialog({this.user, this.newBookingId});
+  final String? unitType;
+  const BookingIDDialog({this.user, this.unitType, this.newBookingId});
   @override
   _BookingIDDialogState createState() => _BookingIDDialogState();
 }
@@ -24,11 +25,19 @@ class _BookingIDDialogState extends State<BookingIDDialog> {
     for (int i = 0; i < 10; i++) {
       bookingID += random.nextInt(10).toString();
     }
+    String userCollection;
+    if (widget.unitType == 'Vehicle') {
+      userCollection = 'vehicleBooking';
+    } else if (widget.unitType == 'Equipment') {
+      userCollection = 'equipmentBookings';
+    } else {
+      throw Exception('Invalid selected type');
+    }
     FirebaseFirestore.instance
         .collection('user')
         .doc(widget.user)
         .collection(
-            'vehicleBooking') // Replace 'subcollectionName' with your subcollection name
+            userCollection) // Replace 'subcollectionName' with your subcollection name
         .doc(widget
             .newBookingId) // Replace 'subdocId' with the ID of the document in the subcollection
         .update({
