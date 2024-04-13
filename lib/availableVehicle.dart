@@ -907,15 +907,27 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                                                   : 'Load Type', // Use value from the list
                                                               items:
                                                                   _getLoadItems(),
-                                                              onChanged: (String?
-                                                                  newValue) {
-                                                                setState(() {
-                                                                  controller
-                                                                          .load
-                                                                          .text =
-                                                                      newValue!; // Update value in the list
-                                                                });
-                                                              },
+                                                              onChanged: loadtype == 'Short Sides' ||
+                                                                      loadtype ==
+                                                                          'Curtain' ||
+                                                                      loadtype ==
+                                                                          'High sides' ||
+                                                                      loadtype ==
+                                                                          'Sides' ||
+                                                                      loadtype ==
+                                                                          'Crane' ||
+                                                                      loadtype ==
+                                                                          'Closed'
+                                                                  ? (String?
+                                                                      newValue) {
+                                                                      setState(
+                                                                          () {
+                                                                        controller
+                                                                            .load
+                                                                            .text = newValue!; // Update value in the list
+                                                                      });
+                                                                    }
+                                                                  : null, // Set onChanged to null to disable the dropdown
                                                               buttonStyleData:
                                                                   ButtonStyleData(
                                                                 height: 50,
@@ -1902,14 +1914,12 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
     });
   }
 
-  // Method to get the load items dynamically
   List<DropdownMenuItem<String>> _getLoadItems() {
-    // Determine which load list to use based on some conditions
-
     if (loadtype == 'Short Sides' ||
         loadtype == 'Curtain' ||
         loadtype == 'High sides' ||
         loadtype == 'Sides' ||
+        loadtype == 'Crane' ||
         loadtype == 'Closed') {
       return loadList.map((String value) {
         return DropdownMenuItem<String>(

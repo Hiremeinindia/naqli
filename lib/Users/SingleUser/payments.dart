@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:ui';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -109,6 +110,61 @@ class _SingleUserPaymentState extends State<SingleUserPayment> {
     return checkbox1 || checkbox2 || checkbox3;
   }
 
+  Stream<Map<String, dynamic>> fetchData(String userId) {
+    // Create a StreamController to manage the stream
+    StreamController<Map<String, dynamic>> controller = StreamController();
+
+    try {
+      // Perform the asynchronous operation
+      String userCollection;
+      if (widget.unitType == 'Vehicle') {
+        userCollection = 'vehicleBooking';
+      } else if (widget.unitType == 'Equipment') {
+        userCollection = 'equipmentBookings';
+      } else {
+        throw Exception('Invalid selected type');
+      }
+      FirebaseFirestore firestore = FirebaseFirestore.instance;
+      DocumentReference userDocRef = firestore.collection('user').doc(userId);
+      CollectionReference userBookingCollectionRef =
+          userDocRef.collection(userCollection);
+      Map<String, dynamic>? lastUserData;
+      // Listen to the collection's stream, order by timestamp, and limit to 1 document
+      userBookingCollectionRef.limit(1).snapshots().listen((querySnapshot) {
+        querySnapshot.docs.forEach((doc) {
+          if (doc.exists) {
+            // Explicitly cast doc.data() to Map<String, dynamic>
+            Map<String, dynamic>? data = doc.data() as Map<String, dynamic>?;
+
+            if (data != null) {
+              String bookingid = data['bookingid'] ?? '';
+
+              // Create a map containing truck, load, and size
+              Map<String, dynamic> userData = {'bookingid': bookingid};
+
+              // Update lastUserData with the new userData
+              lastUserData = userData;
+              // Emit the data to the stream
+              controller.add(data);
+            }
+          } else {
+            print('Document does not exist');
+            controller.addError('Document does not exist');
+          }
+        });
+      }, onError: (error) {
+        print('Error fetching data: $error');
+        controller.addError(error);
+      });
+    } catch (e) {
+      print('Error fetching data: $e');
+      controller.addError(e);
+    }
+
+    // Return the stream from the StreamController
+    return controller.stream;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Sizer(builder: (context, orientation, deviceType) {
@@ -161,66 +217,85 @@ class _SingleUserPaymentState extends State<SingleUserPayment> {
                               width: 1070,
                               height:
                                   100, // Increased height to accommodate button
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  Text(
-                                    'Booking ID  XXXXX',
-                                    style: TextStyle(
-                                        fontSize: 20.0,
-                                        fontFamily: 'SFProText',
-                                        color: Color.fromRGBO(92, 86, 86, 1)),
-                                  ),
-                                  Text(
-                                    'Booking Value : SAR xxxxxx',
-                                    style: TextStyle(
-                                        fontSize: 20.0,
-                                        fontFamily: 'SFProText',
-                                        color:
-                                            Color.fromRGBO(149, 143, 143, 1)),
-                                  ),
-                                  Text(
-                                    'Paid : SAR xxxxx',
-                                    style: TextStyle(
-                                        fontSize: 20.0,
-                                        fontFamily: 'SFProText',
-                                        color:
-                                            Color.fromRGBO(149, 143, 143, 1)),
-                                  ),
-                                  Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        'Balance',
-                                        style: TextStyle(
-                                            fontSize: 17.0,
-                                            fontFamily: 'SFProText'),
-                                      ),
-                                      ElevatedButton(
-                                        onPressed: () {
-                                          // Add your button functionality here
-                                        },
-                                        style: ElevatedButton.styleFrom(
-                                          backgroundColor:
-                                              Color.fromRGBO(98, 105, 254, 1),
-                                          foregroundColor: Colors.white,
-                                          minimumSize: Size(200, 35),
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(20),
-                                          ),
+                              child: StreamBuilder<Map<String, dynamic>>(
+                                stream: fetchData(widget.user!),
+                                builder: (context, snapshot) {
+                                  if (snapshot.connectionState ==
+                                      ConnectionState.waiting) {
+                                    return CircularProgressIndicator(); // Show a loading indicator while waiting for data
+                                  } else if (snapshot.hasError) {
+                                    return Text(
+                                        'Error: ${snapshot.error}'); // Show an error message if there's an error
+                                  } else {
+                                    // If data is available, build the UI using the retrieved userData
+                                    Map<String, dynamic> userData =
+                                        snapshot.data ?? {};
+
+                                    return Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        Text(
+                                          'Booking ID ${userData['bookingid']}',
+                                          style: TextStyle(
+                                              fontSize: 20.0,
+                                              fontFamily: 'SFProText',
+                                              color: Color.fromRGBO(
+                                                  92, 86, 86, 1)),
                                         ),
-                                        child: Text('XXXXX SAR',
-                                            style: TextStyle(
-                                                fontSize: 17.0,
-                                                fontFamily: 'SFProText')),
-                                      ),
-                                    ],
-                                  )
-                                ],
+                                        Text(
+                                          'Booking Value : SAR xxxxxx',
+                                          style: TextStyle(
+                                              fontSize: 20.0,
+                                              fontFamily: 'SFProText',
+                                              color: Color.fromRGBO(
+                                                  149, 143, 143, 1)),
+                                        ),
+                                        Text(
+                                          'Paid : SAR xxxxx',
+                                          style: TextStyle(
+                                              fontSize: 20.0,
+                                              fontFamily: 'SFProText',
+                                              color: Color.fromRGBO(
+                                                  149, 143, 143, 1)),
+                                        ),
+                                        Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            Text(
+                                              'Balance',
+                                              style: TextStyle(
+                                                  fontSize: 17.0,
+                                                  fontFamily: 'SFProText'),
+                                            ),
+                                            ElevatedButton(
+                                              onPressed: () {
+                                                // Add your button functionality here
+                                              },
+                                              style: ElevatedButton.styleFrom(
+                                                backgroundColor: Color.fromRGBO(
+                                                    98, 105, 254, 1),
+                                                foregroundColor: Colors.white,
+                                                minimumSize: Size(200, 35),
+                                                shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(20),
+                                                ),
+                                              ),
+                                              child: Text('XXXXX SAR',
+                                                  style: TextStyle(
+                                                      fontSize: 17.0,
+                                                      fontFamily: 'SFProText')),
+                                            ),
+                                          ],
+                                        )
+                                      ],
+                                    );
+                                  }
+                                },
                               ),
 
                               decoration: BoxDecoration(
@@ -355,66 +430,85 @@ class _SingleUserPaymentState extends State<SingleUserPayment> {
                               width: 1070,
                               height:
                                   100, // Increased height to accommodate button
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  Text(
-                                    'Booking ID  XXXXX',
-                                    style: TextStyle(
-                                        fontSize: 20.0,
-                                        fontFamily: 'SFProText',
-                                        color: Color.fromRGBO(92, 86, 86, 1)),
-                                  ),
-                                  Text(
-                                    'Booking Value : SAR xxxxxx',
-                                    style: TextStyle(
-                                        fontSize: 20.0,
-                                        fontFamily: 'SFProText',
-                                        color:
-                                            Color.fromRGBO(149, 143, 143, 1)),
-                                  ),
-                                  Text(
-                                    'Paid : SAR xxxxx',
-                                    style: TextStyle(
-                                        fontSize: 20.0,
-                                        fontFamily: 'SFProText',
-                                        color:
-                                            Color.fromRGBO(149, 143, 143, 1)),
-                                  ),
-                                  Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        'Balance',
-                                        style: TextStyle(
-                                            fontSize: 17.0,
-                                            fontFamily: 'SFProText'),
-                                      ),
-                                      ElevatedButton(
-                                        onPressed: () {
-                                          // Add your button functionality here
-                                        },
-                                        style: ElevatedButton.styleFrom(
-                                          backgroundColor:
-                                              Color.fromRGBO(98, 105, 254, 1),
-                                          foregroundColor: Colors.white,
-                                          minimumSize: Size(200, 35),
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(20),
-                                          ),
+                              child: StreamBuilder<Map<String, dynamic>>(
+                                stream: fetchData(widget.user!),
+                                builder: (context, snapshot) {
+                                  if (snapshot.connectionState ==
+                                      ConnectionState.waiting) {
+                                    return CircularProgressIndicator(); // Show a loading indicator while waiting for data
+                                  } else if (snapshot.hasError) {
+                                    return Text(
+                                        'Error: ${snapshot.error}'); // Show an error message if there's an error
+                                  } else {
+                                    // If data is available, build the UI using the retrieved userData
+                                    Map<String, dynamic> userData =
+                                        snapshot.data ?? {};
+
+                                    return Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        Text(
+                                          'Booking ID ${userData['bookingid']}',
+                                          style: TextStyle(
+                                              fontSize: 20.0,
+                                              fontFamily: 'SFProText',
+                                              color: Color.fromRGBO(
+                                                  92, 86, 86, 1)),
                                         ),
-                                        child: Text('XXXXX SAR',
-                                            style: TextStyle(
-                                                fontSize: 17.0,
-                                                fontFamily: 'SFProText')),
-                                      ),
-                                    ],
-                                  )
-                                ],
+                                        Text(
+                                          'Booking Value : SAR xxxxxx',
+                                          style: TextStyle(
+                                              fontSize: 20.0,
+                                              fontFamily: 'SFProText',
+                                              color: Color.fromRGBO(
+                                                  149, 143, 143, 1)),
+                                        ),
+                                        Text(
+                                          'Paid : SAR xxxxx',
+                                          style: TextStyle(
+                                              fontSize: 20.0,
+                                              fontFamily: 'SFProText',
+                                              color: Color.fromRGBO(
+                                                  149, 143, 143, 1)),
+                                        ),
+                                        Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            Text(
+                                              'Balance',
+                                              style: TextStyle(
+                                                  fontSize: 17.0,
+                                                  fontFamily: 'SFProText'),
+                                            ),
+                                            ElevatedButton(
+                                              onPressed: () {
+                                                // Add your button functionality here
+                                              },
+                                              style: ElevatedButton.styleFrom(
+                                                backgroundColor: Color.fromRGBO(
+                                                    98, 105, 254, 1),
+                                                foregroundColor: Colors.white,
+                                                minimumSize: Size(200, 35),
+                                                shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(20),
+                                                ),
+                                              ),
+                                              child: Text('XXXXX SAR',
+                                                  style: TextStyle(
+                                                      fontSize: 17.0,
+                                                      fontFamily: 'SFProText')),
+                                            ),
+                                          ],
+                                        )
+                                      ],
+                                    );
+                                  }
+                                },
                               ),
 
                               decoration: BoxDecoration(
