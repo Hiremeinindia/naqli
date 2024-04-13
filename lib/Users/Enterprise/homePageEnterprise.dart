@@ -495,7 +495,10 @@ class _MyHomePageEnterState extends State<MyHomePageEnter>
                                                       context,
                                                       MaterialPageRoute(
                                                           builder: (context) =>
-                                                              AvailableBus()),
+                                                              AvailableBus(
+                                                                user: widget
+                                                                    .user!,
+                                                              )),
                                                     );
                                                   },
                                                   child: Card(
@@ -1202,7 +1205,9 @@ class _MyHomePageEnterState extends State<MyHomePageEnter>
                                               context,
                                               MaterialPageRoute(
                                                   builder: (context) =>
-                                                      AvailableBus()),
+                                                      AvailableBus(
+                                                        user: widget.user!,
+                                                      )),
                                             );
                                           },
                                           child: Card(

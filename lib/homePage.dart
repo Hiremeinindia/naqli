@@ -1206,7 +1206,9 @@ class _MyHomePageState extends State<MyHomePage>
                                               context,
                                               MaterialPageRoute(
                                                   builder: (context) =>
-                                                      AvailableBus()),
+                                                      AvailableBus(
+                                                        user: widget.user!,
+                                                      )),
                                             );
                                           },
                                           child: Card(
