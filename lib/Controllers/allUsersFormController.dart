@@ -22,6 +22,9 @@ class AllUsersFormController {
   final fromDate = TextEditingController();
   final toDate = TextEditingController();
   final truck = TextEditingController();
+  final truck1 = TextEditingController();
+  final truck2 = TextEditingController();
+  final truck3 = TextEditingController();
   final load = TextEditingController();
   final size = TextEditingController();
   final time = TextEditingController();
