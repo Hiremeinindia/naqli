@@ -614,7 +614,9 @@ class _MyHomePagesuperState extends State<MyHomePagesuper>
                                                       context,
                                                       MaterialPageRoute(
                                                           builder: (context) =>
-                                                              AvailableSpecial()),
+                                                              AvailableSpecial(
+                                                                user: '',
+                                                              )),
                                                     );
                                                   },
                                                   child: Card(
@@ -671,7 +673,10 @@ class _MyHomePagesuperState extends State<MyHomePagesuper>
                                                       context,
                                                       MaterialPageRoute(
                                                           builder: (context) =>
-                                                              AvailableSpecial()),
+                                                              AvailableSpecial(
+                                                                user:
+                                                                    widget.user,
+                                                              )),
                                                     );
                                                   },
                                                   child: Card(
@@ -1310,7 +1315,9 @@ class _MyHomePagesuperState extends State<MyHomePagesuper>
                                               context,
                                               MaterialPageRoute(
                                                   builder: (context) =>
-                                                      AvailableSpecial()),
+                                                      AvailableSpecial(
+                                                        user: widget.user,
+                                                      )),
                                             );
                                           },
                                           child: Card(
@@ -1361,7 +1368,9 @@ class _MyHomePagesuperState extends State<MyHomePagesuper>
                                               context,
                                               MaterialPageRoute(
                                                   builder: (context) =>
-                                                      AvailableSpecial()),
+                                                      AvailableSpecial(
+                                                        user: widget.user,
+                                                      )),
                                             );
                                           },
                                           child: Card(

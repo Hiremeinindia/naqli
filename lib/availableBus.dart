@@ -123,10 +123,7 @@ class _AvailableBusState extends State<AvailableBus> {
   Future<Map<String, dynamic>?> fetchData(String userId) async {
     try {
       DocumentSnapshot<Map<String, dynamic>> documentSnapshot =
-          await FirebaseFirestore.instance
-              .collection('superuser')
-              .doc(userId)
-              .get();
+          await FirebaseFirestore.instance.collection('user').doc(userId).get();
 
       if (documentSnapshot.exists) {
         Map<String, dynamic> userData = documentSnapshot.data()!;
@@ -1058,7 +1055,7 @@ class _AvailableBusState extends State<AvailableBus> {
                                                             String
                                                                 newBookingId =
                                                                 await createNewBooking(
-                                                                    truck,
+                                                                    truck1,
                                                                     load,
                                                                     size,
                                                                     time,
