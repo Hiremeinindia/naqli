@@ -1064,7 +1064,7 @@ class _AvailableBusState extends State<AvailableBus> {
                                                                     widget
                                                                         .user!);
                                                             String unitType =
-                                                                'Equipment';
+                                                                'Bus';
                                                             showDialog(
                                                               barrierColor: Color
                                                                       .fromRGBO(
