@@ -1159,7 +1159,7 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                                 .toString();
                                                         String newBookingId =
                                                             await createNewBooking(
-                                                                truck,
+                                                                truck1,
                                                                 load,
                                                                 size,
                                                                 date,

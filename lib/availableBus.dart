@@ -1048,15 +1048,14 @@ class _AvailableBusState extends State<AvailableBus> {
                                                           groupValue.toString();
                                                       String newBookingId =
                                                           await createNewBooking(
-                                                              truck,
+                                                              truck1,
                                                               load,
                                                               size,
                                                               time,
                                                               date,
                                                               labour,
                                                               widget.user!);
-                                                      String unitType =
-                                                          'Equipment';
+                                                      String unitType = 'Bus';
                                                       showDialog(
                                                         barrierColor:
                                                             Color.fromRGBO(59,
