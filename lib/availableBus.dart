@@ -28,8 +28,8 @@ import 'Widgets/formText.dart';
 import 'main.dart';
 
 class AvailableBus extends StatefulWidget {
-  final String user;
-  const AvailableBus({required this.user});
+  final String? user;
+  const AvailableBus({this.user});
 
   @override
   State<AvailableBus> createState() => _AvailableBusState();
@@ -1012,71 +1012,98 @@ class _AvailableBusState extends State<AvailableBus> {
                                                 SizedBox(
                                                   height: 20,
                                                 ),
-                                                SizedBox(
-                                                  width: double.infinity,
-                                                  height: 47,
-                                                  child: CustomButton(
-                                                    onPressed: () async {
-                                                      String truck = '';
-                                                      if (controller.truck1.text
-                                                          .isNotEmpty) {
-                                                        truck = controller
-                                                            .truck1.text;
-                                                      } else if (controller
-                                                          .truck2
-                                                          .text
-                                                          .isNotEmpty) {
-                                                        truck = controller
-                                                            .truck2.text;
-                                                      } else if (controller
-                                                          .truck3
-                                                          .text
-                                                          .isNotEmpty) {
-                                                        truck = controller
-                                                            .truck3.text;
-                                                      }
-                                                      String truck1 = truck;
-                                                      String size =
-                                                          controller.size.text;
-                                                      String time =
-                                                          controller.time.text;
-                                                      String load =
-                                                          controller.load.text;
-                                                      String date =
-                                                          controller.date.text;
-                                                      String labour =
-                                                          groupValue.toString();
-                                                      String newBookingId =
-                                                          await createNewBooking(
-                                                              truck,
-                                                              load,
-                                                              size,
-                                                              time,
-                                                              date,
-                                                              labour,
-                                                              widget.user!);
-                                                      String unitType =
-                                                          'Equipment';
-                                                      showDialog(
-                                                        barrierColor:
-                                                            Color.fromRGBO(59,
-                                                                    57, 57, 1)
-                                                                .withOpacity(
-                                                                    0.5),
-                                                        context: context,
-                                                        builder: (context) {
-                                                          return BookingIDDialog(
-                                                            user: widget.user,
-                                                            newBookingId:
-                                                                newBookingId,
-                                                            unitType: unitType,
-                                                          );
-                                                        },
-                                                      );
-                                                    },
-                                                    text: 'Create Booking',
-                                                  ),
-                                                ),
+                                                widget.user != null
+                                                    ? SizedBox(
+                                                        width: double.infinity,
+                                                        height: 47,
+                                                        child: CustomButton(
+                                                          onPressed: () async {
+                                                            String truck = '';
+                                                            if (controller
+                                                                .truck1
+                                                                .text
+                                                                .isNotEmpty) {
+                                                              truck = controller
+                                                                  .truck1.text;
+                                                            } else if (controller
+                                                                .truck2
+                                                                .text
+                                                                .isNotEmpty) {
+                                                              truck = controller
+                                                                  .truck2.text;
+                                                            } else if (controller
+                                                                .truck3
+                                                                .text
+                                                                .isNotEmpty) {
+                                                              truck = controller
+                                                                  .truck3.text;
+                                                            }
+                                                            String truck1 =
+                                                                truck;
+                                                            String size =
+                                                                controller
+                                                                    .size.text;
+                                                            String time =
+                                                                controller
+                                                                    .time.text;
+                                                            String load =
+                                                                controller
+                                                                    .load.text;
+                                                            String date =
+                                                                controller
+                                                                    .date.text;
+                                                            String labour =
+                                                                groupValue
+                                                                    .toString();
+                                                            String
+                                                                newBookingId =
+                                                                await createNewBooking(
+                                                                    truck,
+                                                                    load,
+                                                                    size,
+                                                                    time,
+                                                                    date,
+                                                                    labour,
+                                                                    widget
+                                                                        .user!);
+                                                            String unitType =
+                                                                'Equipment';
+                                                            showDialog(
+                                                              barrierColor: Color
+                                                                      .fromRGBO(
+                                                                          59,
+                                                                          57,
+                                                                          57,
+                                                                          1)
+                                                                  .withOpacity(
+                                                                      0.5),
+                                                              context: context,
+                                                              builder:
+                                                                  (context) {
+                                                                return BookingIDDialog(
+                                                                  user: widget
+                                                                      .user,
+                                                                  newBookingId:
+                                                                      newBookingId,
+                                                                  unitType:
+                                                                      unitType,
+                                                                );
+                                                              },
+                                                            );
+                                                          },
+                                                          text:
+                                                              'Create Booking',
+                                                        ),
+                                                      )
+                                                    : SizedBox(
+                                                        width: double.infinity,
+                                                        height: 47,
+                                                        child: CustomButton(
+                                                          onPressed: () {},
+                                                          text:
+                                                              'Get an Estimate',
+                                                        ),
+                                                      ),
                                                 SizedBox(
                                                   height: 20,
                                                 ),

@@ -966,15 +966,19 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                                       .8),
                                                               value: i,
                                                               groupValue: checkbox1
-                                                                  ? groupValue
-                                                                  : null, // // Set groupValue to the selectedRadioValue variable
+                                                                  ? selectedRadioValue
+                                                                  : null, // Set groupValue to the selectedRadioValue variable
                                                               onChanged:
-                                                                  (int? value) {
-                                                                setState(() {
-                                                                  groupValue =
-                                                                      value;
-                                                                });
-                                                              },
+                                                                  checkbox1
+                                                                      ? (int?
+                                                                          value) {
+                                                                          setState(
+                                                                              () {
+                                                                            selectedRadioValue =
+                                                                                value; // Update the selectedRadioValue when radio button is changed
+                                                                          });
+                                                                        }
+                                                                      : null,
                                                             ),
                                                           ),
                                                           Text(
@@ -1090,110 +1094,136 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                 SizedBox(
                                                   height: 20,
                                                 ),
-                                                SizedBox(
-                                                  width: double.infinity,
-                                                  height: 47,
-                                                  child: CustomButton(
-                                                    onPressed: () async {
-                                                      try {
-                                                        String truck = '';
-                                                        if (controller
-                                                            .selectedTypeName1
-                                                            .text
-                                                            .isNotEmpty) {
-                                                          truck = controller
-                                                              .selectedTypeName1
-                                                              .text;
-                                                        } else if (controller
-                                                            .selectedTypeName2
-                                                            .text
-                                                            .isNotEmpty) {
-                                                          truck = controller
-                                                              .selectedTypeName2
-                                                              .text;
-                                                        } else if (controller
-                                                            .selectedTypeName3
-                                                            .text
-                                                            .isNotEmpty) {
-                                                          truck = controller
-                                                              .selectedTypeName3
-                                                              .text;
-                                                        } else if (controller
-                                                            .selectedTypeName4
-                                                            .text
-                                                            .isNotEmpty) {
-                                                          truck = controller
-                                                              .selectedTypeName4
-                                                              .text;
-                                                        } else if (controller
-                                                            .selectedTypeName5
-                                                            .text
-                                                            .isNotEmpty) {
-                                                          truck = controller
-                                                              .selectedTypeName5
-                                                              .text;
-                                                        } else if (controller
-                                                            .selectedTypeName6
-                                                            .text
-                                                            .isNotEmpty) {
-                                                          truck = controller
-                                                              .selectedTypeName6
-                                                              .text;
-                                                        } else if (controller
-                                                            .selectedTypeName7
-                                                            .text
-                                                            .isNotEmpty) {
-                                                          truck = controller
-                                                              .selectedTypeName7
-                                                              .text;
-                                                        }
-                                                        String truck1 = truck;
-                                                        String size = controller
-                                                            .size.text;
-                                                        String load = controller
-                                                            .load.text;
-                                                        String date = controller
-                                                            .date.text;
-                                                        String labour =
-                                                            selectedRadioValue
-                                                                .toString();
-                                                        String newBookingId =
-                                                            await createNewBooking(
-                                                                truck,
-                                                                load,
-                                                                size,
-                                                                date,
-                                                                labour,
-                                                                widget.user!);
-                                                        String unitType =
-                                                            'Equipment';
-                                                        showDialog(
-                                                          barrierDismissible:
-                                                              true,
-                                                          barrierColor:
-                                                              Color.fromRGBO(59,
-                                                                      57, 57, 1)
-                                                                  .withOpacity(
-                                                                      0.5),
-                                                          context: context,
-                                                          builder: (context) {
-                                                            return BookingIDDialog(
-                                                              user: widget.user,
-                                                              newBookingId:
-                                                                  newBookingId,
-                                                              unitType:
-                                                                  unitType,
-                                                            );
+                                                widget.user != null
+                                                    ? SizedBox(
+                                                        width: double.infinity,
+                                                        height: 47,
+                                                        child: CustomButton(
+                                                          onPressed: () async {
+                                                            try {
+                                                              String truck = '';
+                                                              if (controller
+                                                                  .selectedTypeName1
+                                                                  .text
+                                                                  .isNotEmpty) {
+                                                                truck = controller
+                                                                    .selectedTypeName1
+                                                                    .text;
+                                                              } else if (controller
+                                                                  .selectedTypeName2
+                                                                  .text
+                                                                  .isNotEmpty) {
+                                                                truck = controller
+                                                                    .selectedTypeName2
+                                                                    .text;
+                                                              } else if (controller
+                                                                  .selectedTypeName3
+                                                                  .text
+                                                                  .isNotEmpty) {
+                                                                truck = controller
+                                                                    .selectedTypeName3
+                                                                    .text;
+                                                              } else if (controller
+                                                                  .selectedTypeName4
+                                                                  .text
+                                                                  .isNotEmpty) {
+                                                                truck = controller
+                                                                    .selectedTypeName4
+                                                                    .text;
+                                                              } else if (controller
+                                                                  .selectedTypeName5
+                                                                  .text
+                                                                  .isNotEmpty) {
+                                                                truck = controller
+                                                                    .selectedTypeName5
+                                                                    .text;
+                                                              } else if (controller
+                                                                  .selectedTypeName6
+                                                                  .text
+                                                                  .isNotEmpty) {
+                                                                truck = controller
+                                                                    .selectedTypeName6
+                                                                    .text;
+                                                              } else if (controller
+                                                                  .selectedTypeName7
+                                                                  .text
+                                                                  .isNotEmpty) {
+                                                                truck = controller
+                                                                    .selectedTypeName7
+                                                                    .text;
+                                                              }
+                                                              String truck1 =
+                                                                  truck;
+                                                              String size =
+                                                                  controller
+                                                                      .size
+                                                                      .text;
+                                                              String load =
+                                                                  controller
+                                                                      .load
+                                                                      .text;
+                                                              String date =
+                                                                  controller
+                                                                      .date
+                                                                      .text;
+                                                              String labour =
+                                                                  selectedRadioValue
+                                                                      .toString();
+                                                              String
+                                                                  newBookingId =
+                                                                  await createNewBooking(
+                                                                      truck,
+                                                                      load,
+                                                                      size,
+                                                                      date,
+                                                                      labour,
+                                                                      widget
+                                                                          .user!);
+                                                              String unitType =
+                                                                  'Equipment';
+                                                              showDialog(
+                                                                barrierDismissible:
+                                                                    true,
+                                                                barrierColor: Color
+                                                                        .fromRGBO(
+                                                                            59,
+                                                                            57,
+                                                                            57,
+                                                                            1)
+                                                                    .withOpacity(
+                                                                        0.5),
+                                                                context:
+                                                                    context,
+                                                                builder:
+                                                                    (context) {
+                                                                  return BookingIDDialog(
+                                                                    user: widget
+                                                                        .user,
+                                                                    newBookingId:
+                                                                        newBookingId,
+                                                                    unitType:
+                                                                        unitType,
+                                                                  );
+                                                                },
+                                                              );
+                                                            } catch (e) {
+                                                              print(
+                                                                  "Error creating user: $e");
+                                                            }
                                                           },
-                                                        );
-                                                      } catch (e) {
-                                                        print(
-                                                            "Error creating user: $e");
-                                                      }
-                                                    },
-                                                    text: 'Create Booking',
-                                                  ),
-                                                ),
+                                                          text:
+                                                              'Create Booking',
+                                                        ),
+                                                      )
+                                                    : SizedBox(
+                                                        width: double.infinity,
+                                                        height: 47,
+                                                        child: CustomButton(
+                                                          onPressed: () {},
+                                                          text:
+                                                              'Get an Estimate',
+                                                        ),
+                                                      ),
                                                 SizedBox(
                                                   height: 20,
                                                 ),
