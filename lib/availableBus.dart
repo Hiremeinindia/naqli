@@ -28,8 +28,8 @@ import 'Widgets/formText.dart';
 import 'main.dart';
 
 class AvailableBus extends StatefulWidget {
-  final String user;
-  const AvailableBus({required this.user});
+  final String? user;
+  const AvailableBus({this.user});
 
   @override
   State<AvailableBus> createState() => _AvailableBusState();
