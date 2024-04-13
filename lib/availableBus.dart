@@ -2,6 +2,7 @@
 
 // ignore_for_file: dead_code
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:dropdown_model_list/dropdown_model_list.dart';
 import 'package:fl_chart/fl_chart.dart';
@@ -10,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_application_1/Controllers/allUsersFormController.dart';
 import 'package:flutter_application_1/DialogBox/SingleTimeUser/bookingIDDialog.dart';
 import 'package:flutter_application_1/Users/SingleTimeUser/bookingDetails.dart';
 import 'package:flutter_application_1/Widgets/colorContainer.dart';
@@ -18,14 +20,16 @@ import 'package:flutter_application_1/Widgets/customTextField.dart';
 import 'package:flutter_application_1/Widgets/unitsContainer.dart';
 import 'package:flutter_application_1/classes/language.dart';
 import 'package:flutter_application_1/classes/language_constants.dart';
+import 'package:flutter_calendar_week/flutter_calendar_week.dart';
 import 'package:sizer/sizer.dart';
+import 'package:intl/intl.dart';
 
 import 'Widgets/formText.dart';
 import 'main.dart';
 
 class AvailableBus extends StatefulWidget {
-  final String? user;
-  const AvailableBus({this.user});
+  final String user;
+  const AvailableBus({required this.user});
 
   @override
   State<AvailableBus> createState() => _AvailableBusState();
@@ -39,6 +43,8 @@ class _AvailableBusState extends State<AvailableBus> {
   bool checkbox1 = false;
   final ScrollController _Scroll1 = ScrollController();
   final ScrollController _Scroll2 = ScrollController();
+  AllUsersFormController controller = AllUsersFormController();
+  final CalendarWeekController _controller = CalendarWeekController();
   String trailer = 'Select Type';
   String six = 'Select Type';
   String lorry = 'Select Type';
@@ -47,8 +53,94 @@ class _AvailableBusState extends State<AvailableBus> {
   String pickup = 'Select Type';
   String towtruck = 'Select Type';
   String dropdownValues = 'Load Type';
+  DateTime? _pickedDate;
   void initState() {
     super.initState();
+  }
+
+  Future<String> createNewBooking(
+    String truck,
+    String load,
+    String size,
+    String time,
+    String date,
+    String labour,
+    String adminUid,
+  ) async {
+    try {
+      FirebaseFirestore firestore = FirebaseFirestore.instance;
+
+      // Reference to the user's document
+      DocumentReference userDocRef = firestore.collection('user').doc(adminUid);
+
+      // Reference to the subcollection 'userBooking' under the user's document
+      CollectionReference userBookingCollectionRef =
+          userDocRef.collection('busBookings');
+
+      // Add document to subcollection and get the document reference
+      DocumentReference newBookingDocRef = await userBookingCollectionRef.add({
+        'truck': truck,
+        'load': load,
+        'size': size,
+        'time': time,
+        'date': date,
+        'labour': labour,
+      });
+
+      // Store the auto-generated ID
+      String newBookingId = newBookingDocRef.id;
+
+      // Update the document with the stored ID
+      await newBookingDocRef.update({'id': newBookingId});
+
+      print('New booking added successfully with ID: $newBookingId');
+
+      // Return the generated ID
+      return newBookingId;
+    } catch (error) {
+      print('Error creating new booking: $error');
+      return ''; // Return empty string if there's an error
+    }
+  }
+
+  Future<void> _showDatePicker(BuildContext context) async {
+    final DateTime? pickedDate = await showDatePicker(
+      initialEntryMode: DatePickerEntryMode.calendarOnly,
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2020),
+      lastDate: DateTime(2025),
+    );
+
+    if (pickedDate != null) {
+      setState(() {
+        _pickedDate = pickedDate;
+        controller.date.text = DateFormat('dd/MM/yyyy').format(_pickedDate!);
+      });
+    }
+  }
+
+  Future<Map<String, dynamic>?> fetchData(String userId) async {
+    try {
+      DocumentSnapshot<Map<String, dynamic>> documentSnapshot =
+          await FirebaseFirestore.instance
+              .collection('superuser')
+              .doc(userId)
+              .get();
+
+      if (documentSnapshot.exists) {
+        Map<String, dynamic> userData = documentSnapshot.data()!;
+        String firstName = userData['firstName'];
+        String lastName = userData['lastName'];
+        return {'firstName': firstName, 'lastName': lastName};
+      } else {
+        print('Document does not exist for userId: $userId');
+        return null;
+      }
+    } catch (e) {
+      print('Error fetching data for userId $userId: $e');
+      return null;
+    }
   }
 
   @override
@@ -218,16 +310,41 @@ class _AvailableBusState extends State<AvailableBus> {
                               padding: const EdgeInsets.only(
                                 left: 5,
                               ),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text("Hello Faizal!",
-                                      style: TabelText.helvetica11),
-                                  Text("Admin", style: TabelText.usertext),
-                                  Text("Faizal industries",
-                                      style: TabelText.usertext),
-                                ],
+                              child: FutureBuilder<Map<String, dynamic>?>(
+                                future: fetchData(widget
+                                    .user!), // Pass the userId to fetchData method
+                                builder: (context, snapshot) {
+                                  if (snapshot.connectionState ==
+                                      ConnectionState.waiting) {
+                                    return CircularProgressIndicator(); // Show a loading indicator while data is being fetched
+                                  } else if (snapshot.hasError) {
+                                    return Text('Error: ${snapshot.error}');
+                                  } else if (snapshot.hasData) {
+                                    // Extract first name and last name from snapshot data
+                                    String firstName =
+                                        snapshot.data?['firstName'] ?? '';
+                                    String lastName =
+                                        snapshot.data?['lastName'] ?? '';
+
+                                    return Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text("Hello $firstName $lastName!",
+                                            style: TabelText.helvetica11),
+                                        Text("Admin",
+                                            style: TabelText.usertext),
+                                        Text("Faizal industries",
+                                            style: TabelText.usertext),
+                                      ],
+                                    );
+                                  } else {
+                                    return Text(
+                                        'No data available'); // Handle case when snapshot has no data
+                                  }
+                                },
                               ),
                             ),
                             Icon(
@@ -340,13 +457,35 @@ class _AvailableBusState extends State<AvailableBus> {
                                                       MainAxisAlignment
                                                           .spaceEvenly,
                                                   children: [
-                                                    ElevationUnitsContainer(
-                                                      text1: '< 15 Pax',
-                                                      imgpath: 'Group 2775.png',
+                                                    GestureDetector(
+                                                      onTap: () {
+                                                        setState(() {
+                                                          controller
+                                                                  .truck1.text =
+                                                              '< 15 Pax';
+                                                        });
+                                                      },
+                                                      child:
+                                                          ElevationUnitsContainer(
+                                                        text1: '< 15 Pax',
+                                                        imgpath:
+                                                            'Group15549.png',
+                                                      ),
                                                     ),
-                                                    ElevationUnitsContainer(
-                                                      text1: '15 - 30 pax',
-                                                      imgpath: 'Group 2709.png',
+                                                    GestureDetector(
+                                                      onTap: () {
+                                                        setState(() {
+                                                          controller
+                                                                  .truck2.text =
+                                                              '15 - 30 pax';
+                                                        });
+                                                      },
+                                                      child:
+                                                          ElevationUnitsContainer(
+                                                        text1: '15 - 30 pax',
+                                                        imgpath:
+                                                            'Group2775.png',
+                                                      ),
                                                     ),
                                                   ],
                                                 ),
@@ -358,9 +497,19 @@ class _AvailableBusState extends State<AvailableBus> {
                                                       MainAxisAlignment
                                                           .spaceEvenly,
                                                   children: [
-                                                    ElevationUnitsContainer(
-                                                      text1: '+30 pax',
-                                                      imgpath: 'Group 2860.png',
+                                                    GestureDetector(
+                                                      onTap: () {
+                                                        setState(() {
+                                                          controller.truck3
+                                                              .text = '+30 pax';
+                                                        });
+                                                      },
+                                                      child:
+                                                          ElevationUnitsContainer(
+                                                        text1: '+30 pax',
+                                                        imgpath:
+                                                            'Group2860.png',
+                                                      ),
                                                     ),
                                                     Container(
                                                         height: 170,
@@ -385,6 +534,9 @@ class _AvailableBusState extends State<AvailableBus> {
                                                                 child:
                                                                     CustomTextfieldGrey(
                                                                   text: 'Time',
+                                                                  controller:
+                                                                      controller
+                                                                          .time,
                                                                 ),
                                                               ),
                                                             ],
@@ -399,6 +551,9 @@ class _AvailableBusState extends State<AvailableBus> {
                                                                     CustomTextfieldGrey(
                                                                   text:
                                                                       'Value of the Product',
+                                                                  controller:
+                                                                      controller
+                                                                          .size,
                                                                 ),
                                                               ),
                                                             ],
@@ -412,67 +567,106 @@ class _AvailableBusState extends State<AvailableBus> {
                                                     Expanded(
                                                       child: Column(
                                                         children: [
-                                                          Container(
-                                                            padding: EdgeInsets
-                                                                .fromLTRB(0.5.w,
-                                                                    0, 1.w, 0),
-                                                            height: 50,
-                                                            decoration:
-                                                                BoxDecoration(
-                                                              border: Border.all(
-                                                                  color: Color
-                                                                      .fromRGBO(
-                                                                          183,
-                                                                          183,
-                                                                          183,
-                                                                          1)),
-                                                              color:
-                                                                  Colors.white,
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .only(
-                                                                topLeft: Radius
-                                                                    .circular(
-                                                                        8),
-                                                                topRight: Radius
-                                                                    .circular(
-                                                                        8),
-                                                                bottomLeft: Radius
-                                                                    .circular(
-                                                                        8),
-                                                                bottomRight:
-                                                                    Radius
-                                                                        .circular(
-                                                                            8),
-                                                              ),
-                                                            ),
-                                                            child: Row(
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .start,
-                                                              children: [
-                                                                Icon(
-                                                                    Icons
-                                                                        .calendar_today,
+                                                          GestureDetector(
+                                                            child: Container(
+                                                              padding:
+                                                                  EdgeInsets
+                                                                      .fromLTRB(
+                                                                          0.5.w,
+                                                                          0,
+                                                                          1.w,
+                                                                          0),
+                                                              height: 50,
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                border: Border.all(
                                                                     color: Color
                                                                         .fromRGBO(
                                                                             183,
                                                                             183,
                                                                             183,
                                                                             1)),
-                                                                SizedBox(
-                                                                  width: 10,
+                                                                color: Colors
+                                                                    .white,
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .only(
+                                                                  topLeft: Radius
+                                                                      .circular(
+                                                                          8),
+                                                                  topRight: Radius
+                                                                      .circular(
+                                                                          8),
+                                                                  bottomLeft: Radius
+                                                                      .circular(
+                                                                          8),
+                                                                  bottomRight: Radius
+                                                                      .circular(
+                                                                          8),
                                                                 ),
-                                                                VerticalDivider(
-                                                                  width: 0.2,
-                                                                  color: Color
-                                                                      .fromRGBO(
-                                                                          183,
-                                                                          183,
-                                                                          183,
-                                                                          1),
-                                                                )
-                                                              ],
+                                                              ),
+                                                              child: Row(
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .start,
+                                                                children: [
+                                                                  IconButton(
+                                                                    icon: Icon(
+                                                                        Icons
+                                                                            .calendar_today,
+                                                                        size:
+                                                                            25,
+                                                                        color: Color.fromRGBO(
+                                                                            183,
+                                                                            183,
+                                                                            183,
+                                                                            1)),
+                                                                    onPressed:
+                                                                        () {
+                                                                      _showDatePicker(
+                                                                          context);
+                                                                    },
+                                                                  ),
+                                                                  SizedBox(
+                                                                    width: 10,
+                                                                  ),
+                                                                  VerticalDivider(
+                                                                    width: 0.2,
+                                                                    color: Color
+                                                                        .fromRGBO(
+                                                                            183,
+                                                                            183,
+                                                                            183,
+                                                                            1),
+                                                                  ),
+                                                                  Expanded(
+                                                                    child:
+                                                                        TextFormField(
+                                                                      controller:
+                                                                          controller
+                                                                              .date,
+                                                                      style: AvailableText
+                                                                          .helvetica,
+                                                                      readOnly:
+                                                                          true,
+                                                                      onTap:
+                                                                          () {
+                                                                        _showDatePicker(
+                                                                            context);
+                                                                      },
+                                                                      decoration:
+                                                                          InputDecoration(
+                                                                        contentPadding:
+                                                                            EdgeInsets.only(left: 12),
+                                                                        border:
+                                                                            InputBorder.none,
+                                                                        hintStyle:
+                                                                            AvailableText.helvetica,
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              ),
                                                             ),
                                                           ),
                                                           SizedBox(
@@ -482,8 +676,13 @@ class _AvailableBusState extends State<AvailableBus> {
                                                             child:
                                                                 DropdownButton2<
                                                                     String>(
-                                                              value:
-                                                                  dropdownValues, // Use value from the list
+                                                              value: controller
+                                                                      .load
+                                                                      .text
+                                                                      .isNotEmpty
+                                                                  ? controller
+                                                                      .load.text
+                                                                  : 'Load Type', // Use value from the list
                                                               items: <String>[
                                                                 'Trigger Bookings',
                                                                 'Booking Manager',
@@ -506,7 +705,9 @@ class _AvailableBusState extends State<AvailableBus> {
                                                               onChanged: (String?
                                                                   newValue) {
                                                                 setState(() {
-                                                                  dropdownValues =
+                                                                  controller
+                                                                          .load
+                                                                          .text =
                                                                       newValue!; // Update value in the list
                                                                 });
                                                               },
@@ -815,7 +1016,47 @@ class _AvailableBusState extends State<AvailableBus> {
                                                   width: double.infinity,
                                                   height: 47,
                                                   child: CustomButton(
-                                                    onPressed: () {
+                                                    onPressed: () async {
+                                                      String truck = '';
+                                                      if (controller.truck1.text
+                                                          .isNotEmpty) {
+                                                        truck = controller
+                                                            .truck1.text;
+                                                      } else if (controller
+                                                          .truck2
+                                                          .text
+                                                          .isNotEmpty) {
+                                                        truck = controller
+                                                            .truck2.text;
+                                                      } else if (controller
+                                                          .truck3
+                                                          .text
+                                                          .isNotEmpty) {
+                                                        truck = controller
+                                                            .truck3.text;
+                                                      }
+                                                      String truck1 = truck;
+                                                      String size =
+                                                          controller.size.text;
+                                                      String time =
+                                                          controller.time.text;
+                                                      String load =
+                                                          controller.load.text;
+                                                      String date =
+                                                          controller.date.text;
+                                                      String labour =
+                                                          groupValue.toString();
+                                                      String newBookingId =
+                                                          await createNewBooking(
+                                                              truck,
+                                                              load,
+                                                              size,
+                                                              time,
+                                                              date,
+                                                              labour,
+                                                              widget.user!);
+                                                      String unitType =
+                                                          'Equipment';
                                                       showDialog(
                                                         barrierColor:
                                                             Color.fromRGBO(59,
@@ -826,6 +1067,9 @@ class _AvailableBusState extends State<AvailableBus> {
                                                         builder: (context) {
                                                           return BookingIDDialog(
                                                             user: widget.user,
+                                                            newBookingId:
+                                                                newBookingId,
+                                                            unitType: unitType,
                                                           );
                                                         },
                                                       );
@@ -1290,9 +1534,11 @@ class _AvailableBusState extends State<AvailableBus> {
                                           ),
                                           CustomTextfieldGrey(
                                             text: 'Time',
+                                            controller: controller.time,
                                           ),
                                           CustomTextfieldGrey(
                                             text: 'Value of the Product',
+                                            controller: controller.size,
                                           ),
                                           Row(
                                             children: [

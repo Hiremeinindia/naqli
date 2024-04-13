@@ -91,6 +91,29 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
     }
   }
 
+  Future<Map<String, dynamic>?> fetchData(String userId) async {
+    try {
+      DocumentSnapshot<Map<String, dynamic>> documentSnapshot =
+          await FirebaseFirestore.instance
+              .collection('superuser')
+              .doc(userId)
+              .get();
+
+      if (documentSnapshot.exists) {
+        Map<String, dynamic> userData = documentSnapshot.data()!;
+        String firstName = userData['firstName'];
+        String lastName = userData['lastName'];
+        return {'firstName': firstName, 'lastName': lastName};
+      } else {
+        print('Document does not exist for userId: $userId');
+        return null;
+      }
+    } catch (e) {
+      print('Error fetching data for userId $userId: $e');
+      return null;
+    }
+  }
+
   Future<String> createNewBooking(
     String truck,
     String load,
@@ -115,7 +138,6 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
         'load': load,
         'size': size,
         'date': date,
-        'createdTime': Timestamp.now(),
         'labour': labour,
       });
 
@@ -302,16 +324,41 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                               padding: const EdgeInsets.only(
                                 left: 5,
                               ),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text("Hello Faizal!",
-                                      style: TabelText.helvetica11),
-                                  Text("Admin", style: TabelText.usertext),
-                                  Text("Faizal industries",
-                                      style: TabelText.usertext),
-                                ],
+                              child: FutureBuilder<Map<String, dynamic>?>(
+                                future: fetchData(widget
+                                    .user!), // Pass the userId to fetchData method
+                                builder: (context, snapshot) {
+                                  if (snapshot.connectionState ==
+                                      ConnectionState.waiting) {
+                                    return CircularProgressIndicator(); // Show a loading indicator while data is being fetched
+                                  } else if (snapshot.hasError) {
+                                    return Text('Error: ${snapshot.error}');
+                                  } else if (snapshot.hasData) {
+                                    // Extract first name and last name from snapshot data
+                                    String firstName =
+                                        snapshot.data?['firstName'] ?? '';
+                                    String lastName =
+                                        snapshot.data?['lastName'] ?? '';
+
+                                    return Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text("Hello $firstName $lastName!",
+                                            style: TabelText.helvetica11),
+                                        Text("Admin",
+                                            style: TabelText.usertext),
+                                        Text("Faizal industries",
+                                            style: TabelText.usertext),
+                                      ],
+                                    );
+                                  } else {
+                                    return Text(
+                                        'No data available'); // Handle case when snapshot has no data
+                                  }
+                                },
                               ),
                             ),
                             Icon(
@@ -918,13 +965,14 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                                   .withOpacity(
                                                                       .8),
                                                               value: i,
-                                                              groupValue:
-                                                                  selectedRadioValue, // Set groupValue to the selectedRadioValue variable
+                                                              groupValue: checkbox1
+                                                                  ? groupValue
+                                                                  : null, // // Set groupValue to the selectedRadioValue variable
                                                               onChanged:
                                                                   (int? value) {
                                                                 setState(() {
-                                                                  selectedRadioValue =
-                                                                      value; // Update the selectedRadioValue when radio button is changed
+                                                                  groupValue =
+                                                                      value;
                                                                 });
                                                               },
                                                             ),

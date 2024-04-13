@@ -129,6 +129,7 @@ class _OperatorState extends State<Operator> {
         'IqamaNo': iqamaController.text,
         'DateOfBirth': dobController.text,
         'PanelInformation': panelinfoController.text,
+        'Unit': _selectedValue,
       });
 
       print('User data saved to Firestore successfully!');
@@ -394,7 +395,7 @@ class _OperatorState extends State<Operator> {
                           Row(
                             children: [
                               Radio(
-                                value: 1,
+                                value: 2,
                                 groupValue: _selectedValue,
                                 onChanged: (int? value) {
                                   setState(() {
@@ -410,7 +411,7 @@ class _OperatorState extends State<Operator> {
                           Row(
                             children: [
                               Radio(
-                                value: 1,
+                                value: 3,
                                 groupValue: _selectedValue,
                                 onChanged: (int? value) {
                                   setState(() {
@@ -426,7 +427,7 @@ class _OperatorState extends State<Operator> {
                           Row(
                             children: [
                               Radio(
-                                value: 1,
+                                value: 4,
                                 groupValue: _selectedValue,
                                 onChanged: (int? value) {
                                   setState(() {
@@ -442,7 +443,7 @@ class _OperatorState extends State<Operator> {
                           Row(
                             children: [
                               Radio(
-                                value: 1,
+                                value: 5,
                                 groupValue: _selectedValue,
                                 onChanged: (int? value) {
                                   setState(() {

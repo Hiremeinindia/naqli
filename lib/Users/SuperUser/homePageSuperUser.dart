@@ -495,7 +495,10 @@ class _MyHomePagesuperState extends State<MyHomePagesuper>
                                                       context,
                                                       MaterialPageRoute(
                                                           builder: (context) =>
-                                                              AvailableBus()),
+                                                              AvailableBus(
+                                                                user:
+                                                                    widget.user,
+                                                              )),
                                                     );
                                                   },
                                                   child: Card(
@@ -1201,7 +1204,9 @@ class _MyHomePagesuperState extends State<MyHomePagesuper>
                                               context,
                                               MaterialPageRoute(
                                                   builder: (context) =>
-                                                      AvailableBus()),
+                                                      AvailableBus(
+                                                        user: widget.user,
+                                                      )),
                                             );
                                           },
                                           child: Card(
