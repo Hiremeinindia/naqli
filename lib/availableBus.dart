@@ -811,28 +811,44 @@ class _AvailableBusState extends State<AvailableBus> {
                                                 SizedBox(
                                                   height: 20,
                                                 ),
-                                                SizedBox(
-                                                  width: double.infinity,
-                                                  height: 47,
-                                                  child: CustomButton(
-                                                    onPressed: () {
-                                                      showDialog(
-                                                        barrierColor:
-                                                            Color.fromRGBO(59,
-                                                                    57, 57, 1)
-                                                                .withOpacity(
-                                                                    0.5),
-                                                        context: context,
-                                                        builder: (context) {
-                                                          return BookingIDDialog(
-                                                            user: widget.user,
-                                                          );
-                                                        },
-                                                      );
-                                                    },
-                                                    text: 'Create Booking',
-                                                  ),
-                                                ),
+                                                widget.user != null
+                                                    ? SizedBox(
+                                                        width: double.infinity,
+                                                        height: 47,
+                                                        child: CustomButton(
+                                                          onPressed: () {
+                                                            showDialog(
+                                                              barrierColor: Color
+                                                                      .fromRGBO(
+                                                                          59,
+                                                                          57,
+                                                                          57,
+                                                                          1)
+                                                                  .withOpacity(
+                                                                      0.5),
+                                                              context: context,
+                                                              builder:
+                                                                  (context) {
+                                                                return BookingIDDialog(
+                                                                  user: widget
+                                                                      .user,
+                                                                );
+                                                              },
+                                                            );
+                                                          },
+                                                          text:
+                                                              'Create Booking',
+                                                        ),
+                                                      )
+                                                    : SizedBox(
+                                                        width: double.infinity,
+                                                        height: 47,
+                                                        child: CustomButton(
+                                                          onPressed: () {},
+                                                          text:
+                                                              'Get an Estimate',
+                                                        ),
+                                                      ),
                                                 SizedBox(
                                                   height: 20,
                                                 ),
