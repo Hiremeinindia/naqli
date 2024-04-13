@@ -46,7 +46,7 @@ class _BookingsState extends State<Bookings> {
     mapController = controller;
   }
 
-  void _BookingConfirm(BuildContext context, int screenState) {
+  void _BookingConfirm(BuildContext context) {
     showDialog(
       barrierColor: Color.fromRGBO(59, 57, 57, 1).withOpacity(0.5),
       context: context,
@@ -95,7 +95,7 @@ class _BookingsState extends State<Bookings> {
                                 );
                                 setState(() {
                                   screenState =
-                                      screenState; // Change the screenState to 1
+                                      1; // Change the screenState to 1
                                 });
                                 // Navigator.push(
                                 //   context,
@@ -210,12 +210,14 @@ class _BookingsState extends State<Bookings> {
               String truck = data['truck'] ?? '';
               String load = data['load'] ?? '';
               String size = data['size'] ?? '';
+              String bookingid = data['bookingid'] ?? '';
 
               // Create a map containing truck, load, and size
               Map<String, dynamic> userData = {
                 'truck': truck,
                 'load': load,
                 'size': size,
+                'bookingid': bookingid
               };
 
               // Update lastUserData with the new userData
@@ -356,7 +358,7 @@ class _BookingsState extends State<Bookings> {
                 Expanded(
                   child: CustomButton2(
                     onPressed: () {
-                      _BookingConfirm(context, 1);
+                      _BookingConfirm(context);
                     },
                     text1: 'Pay: ',
                     text2: 'XXXX',
@@ -526,107 +528,109 @@ class _BookingsState extends State<Bookings> {
                   Expanded(
                     child: Container(
                       padding: EdgeInsets.only(right: 3.w),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            children: [
-                              Image.asset(
-                                'Group1787.png',
-                                width: 62,
-                                height: 61,
-                              ),
-                              SizedBox(
-                                width: 10,
-                              ),
-                              Text("Booking Id ${widget.bookingId}",
-                                  style: BookingText.helvetica21),
-                            ],
-                          ),
-                          Container(
-                            height: 380,
-                            width: 700,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(12)),
-                            child: GoogleMap(
-                                onMapCreated: (controller) {
-                                  setState(() {
-                                    mapController = controller;
-                                  });
-                                },
-                                markers: Set<Marker>.of(_markers),
-                                mapType: MapType.normal,
-                                initialCameraPosition: CameraPosition(
-                                    target: LatLng(24.755562, 46.589584),
-                                    zoom: 13)),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(
-                                right: 4.w, left: 4.w, top: 1.w, bottom: 2.w),
-                            child: StreamBuilder<Map<String, dynamic>>(
-                              stream: fetchData(widget.user!),
-                              builder: (context, snapshot) {
-                                if (snapshot.connectionState ==
-                                    ConnectionState.waiting) {
-                                  return CircularProgressIndicator(); // Show a loading indicator while waiting for data
-                                } else if (snapshot.hasError) {
-                                  return Text(
-                                      'Error: ${snapshot.error}'); // Show an error message if there's an error
-                                } else {
-                                  // If data is available, build the UI using the retrieved userData
-                                  Map<String, dynamic> userData =
-                                      snapshot.data ?? {};
+                      child: StreamBuilder<Map<String, dynamic>>(
+                        stream: fetchData(widget.user!),
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            return CircularProgressIndicator(); // Show a loading indicator while waiting for data
+                          } else if (snapshot.hasError) {
+                            return Text(
+                                'Error: ${snapshot.error}'); // Show an error message if there's an error
+                          } else {
+                            // If data is available, build the UI using the retrieved userData
+                            Map<String, dynamic> userData = snapshot.data ?? {};
 
-                                  return Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Column(
-                                        children: [
-                                          Text("Pick up truck",
-                                              style:
-                                                  DialogText.helvetica25black),
-                                          Text('${userData['truck']}',
-                                              style: BookingText.helveticablack)
-                                        ],
-                                      ),
-                                      SizedBox(
-                                        height: 63,
-                                        child: VerticalDivider(
-                                          color:
-                                              Color.fromRGBO(112, 112, 112, 1),
-                                          thickness: 2,
-                                        ),
-                                      ),
-                                      Column(
-                                        children: [
-                                          Text("Load",
-                                              style:
-                                                  BookingText.helveticablack),
-                                          Text('${userData['load']}',
-                                              style:
-                                                  HomepageText.helvetica16black)
-                                        ],
-                                      ),
-                                      SizedBox(
-                                        child: Column(
+                            return Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Row(
+                                  children: [
+                                    Image.asset(
+                                      'Group1787.png',
+                                      width: 62,
+                                      height: 61,
+                                    ),
+                                    SizedBox(
+                                      width: 10,
+                                    ),
+                                    Text("Booking Id ${userData['bookingid']}",
+                                        style: BookingText.helvetica21),
+                                  ],
+                                ),
+                                Container(
+                                  height: 380,
+                                  width: 700,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(12)),
+                                  child: GoogleMap(
+                                      onMapCreated: (controller) {
+                                        setState(() {
+                                          mapController = controller;
+                                        });
+                                      },
+                                      markers: Set<Marker>.of(_markers),
+                                      mapType: MapType.normal,
+                                      initialCameraPosition: CameraPosition(
+                                          target: LatLng(24.755562, 46.589584),
+                                          zoom: 13)),
+                                ),
+                                Padding(
+                                    padding: EdgeInsets.only(
+                                        right: 4.w,
+                                        left: 4.w,
+                                        top: 1.w,
+                                        bottom: 2.w),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Column(
                                           children: [
-                                            Text("Size",
+                                            Text("Pick up truck",
+                                                style: DialogText
+                                                    .helvetica25black),
+                                            Text('${userData['truck']}',
+                                                style:
+                                                    BookingText.helveticablack)
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: 63,
+                                          child: VerticalDivider(
+                                            color: Color.fromRGBO(
+                                                112, 112, 112, 1),
+                                            thickness: 2,
+                                          ),
+                                        ),
+                                        Column(
+                                          children: [
+                                            Text("Load",
                                                 style:
                                                     BookingText.helveticablack),
-                                            Text('${userData['size']}',
+                                            Text('${userData['load']}',
                                                 style: HomepageText
                                                     .helvetica16black)
                                           ],
                                         ),
-                                      ),
-                                    ],
-                                  );
-                                }
-                              },
-                            ),
-                          )
-                        ],
+                                        SizedBox(
+                                          child: Column(
+                                            children: [
+                                              Text("Size",
+                                                  style: BookingText
+                                                      .helveticablack),
+                                              Text('${userData['size']}',
+                                                  style: HomepageText
+                                                      .helvetica16black)
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ))
+                              ],
+                            );
+                          }
+                        },
                       ),
                     ),
                   ),

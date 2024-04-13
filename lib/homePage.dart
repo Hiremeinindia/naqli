@@ -17,6 +17,7 @@ import 'package:flutter_application_1/availableVehicle.dart';
 import 'package:flutter_application_1/classes/language.dart';
 import 'package:flutter_application_1/classes/language_constants.dart';
 import 'package:flutter_application_1/createAccount.dart';
+import 'package:flutter_application_1/get_an_estimate.dart';
 import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/mobile.dart';
 
@@ -738,49 +739,63 @@ class _MyHomePageState extends State<MyHomePage>
                                                                 .center,
                                                         children: [
                                                           GestureDetector(
-                                                            onTap: () async {
-                                                              // Check if user is logged in
-                                                              if (isUserLoggedIn) {
-                                                                UserCredential
-                                                                    userCredential =
-                                                                    await _auth
-                                                                        .signInWithEmailAndPassword(
-                                                                  email: controller
-                                                                      .email
-                                                                      .text
-                                                                      .trim(), // Trim to remove whitespace
-                                                                  password:
-                                                                      controller
-                                                                          .password
-                                                                          .text,
-                                                                );
-                                                                // Navigate to dashboard
-                                                                // Navigator.push(
-                                                                //   context,
-                                                                //   MaterialPageRoute(
-                                                                //       builder: (context) =>
-                                                                //           SingleUserDashboardPage(
-                                                                //               user:user)),
-                                                                // );
-                                                              } else {
-                                                                // Navigate to login page
-                                                                showDialog(
-                                                                  barrierColor: Color
-                                                                          .fromRGBO(
-                                                                              59,
-                                                                              57,
-                                                                              57,
-                                                                              1)
-                                                                      .withOpacity(
-                                                                          0.5),
-                                                                  context:
-                                                                      context,
-                                                                  builder:
-                                                                      (context) {
-                                                                    return LoginPage();
-                                                                  },
-                                                                );
-                                                              }
+                                                            // onTap: () async {
+                                                            //   // Check if user is logged in
+                                                            //   if (isUserLoggedIn) {
+                                                            //     UserCredential
+                                                            //         userCredential =
+                                                            //         await _auth
+                                                            //             .signInWithEmailAndPassword(
+                                                            //       email: controller
+                                                            //           .email
+                                                            //           .text
+                                                            //           .trim(), // Trim to remove whitespace
+                                                            //       password:
+                                                            //           controller
+                                                            //               .password
+                                                            //               .text,
+                                                            //     );
+                                                            //     // Navigate to dashboard
+                                                            //     // Navigator.push(
+                                                            //     //   context,
+                                                            //     //   MaterialPageRoute(
+                                                            //     //       builder: (context) =>
+                                                            //     //           SingleUserDashboardPage(
+                                                            //     //               user:user)),
+                                                            //     // );
+                                                            //   } else {
+                                                            //     // Navigate to login page
+                                                            //     showDialog(
+                                                            //       barrierColor: Color
+                                                            //               .fromRGBO(
+                                                            //                   59,
+                                                            //                   57,
+                                                            //                   57,
+                                                            //                   1)
+                                                            //           .withOpacity(
+                                                            //               0.5),
+                                                            //       context:
+                                                            //           context,
+                                                            //       builder:
+                                                            //           (context) {
+                                                            //         return LoginPage();
+                                                            //       },
+                                                            //     );
+                                                            //   }
+                                                            // },
+                                                            onTap: () {
+                                                              showDialog(
+                                                                barrierColor: Colors
+                                                                    .grey
+                                                                    .withOpacity(
+                                                                        0.5),
+                                                                context:
+                                                                    context,
+                                                                builder:
+                                                                    (context) {
+                                                                  return GetanEstimate();
+                                                                },
+                                                              );
                                                             },
                                                             child: Column(
                                                               children: [

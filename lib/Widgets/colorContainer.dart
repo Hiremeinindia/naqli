@@ -161,3 +161,53 @@ final class ElevationUnitsContainer extends StatelessWidget {
     );
   }
 }
+
+final class ElevationUnitContainer extends StatelessWidget {
+  final String? text1;
+  final String? imgpath;
+  ElevationUnitContainer({
+    super.key,
+    this.text1,
+    this.imgpath,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      elevation: 4,
+      shadowColor: Color.fromRGBO(112, 112, 112, 1).withOpacity(0.6),
+      child: Container(
+        height: 100,
+        decoration: BoxDecoration(
+          border: Border.all(
+              color: Color.fromRGBO(112, 112, 112, 1).withOpacity(0.3)),
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(8.0),
+        ),
+        child: Padding(
+          padding: EdgeInsets.all(10.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Image(
+                width: 160,
+                height: 80,
+                image: AssetImage(imgpath!),
+              ),
+              SizedBox(width: 75),
+              Text(
+                text1!,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    letterSpacing: 1.5,
+                    fontSize: 18,
+                    fontFamily: "Helvetica",
+                    color: Color.fromRGBO(0, 0, 0, 1)),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
