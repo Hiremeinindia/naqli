@@ -440,7 +440,7 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                                     },
                                                     {
                                                       'image': 'img29.png',
-                                                      'name': 'High Sides ',
+                                                      'name': 'High Sides',
                                                       'size': '(12m to 13.5m)'
                                                     },
                                                     {
@@ -568,7 +568,7 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                                     },
                                                     {
                                                       'image': 'img12.png',
-                                                      'name': 'Referigerator',
+                                                      'name': 'Refrigerator',
                                                       'size': '(6m to 6.5m)'
                                                     },
                                                     {
@@ -629,7 +629,7 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                                     },
                                                     {
                                                       'image': 'img18.png',
-                                                      'name': 'Referigerator',
+                                                      'name': 'Refrigerator',
                                                       'size': '(4m to 4.5m)'
                                                     },
                                                     {
@@ -909,13 +909,27 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                                                       loadtype ==
                                                                           'Curtain' ||
                                                                       loadtype ==
-                                                                          'High sides' ||
+                                                                          'High Sides' ||
                                                                       loadtype ==
                                                                           'Sides' ||
                                                                       loadtype ==
                                                                           'Crane' ||
                                                                       loadtype ==
-                                                                          'Closed'
+                                                                          'Closed' ||
+                                                                      loadtype ==
+                                                                          'Refrigerator' ||
+                                                                      loadtype ==
+                                                                          'Freezer' ||
+                                                                      loadtype ==
+                                                                          'Flatbed' ||
+                                                                      loadtype ==
+                                                                          'Crane 5 TON' ||
+                                                                      loadtype ==
+                                                                          'Crane 7 TON' ||
+                                                                      loadtype ==
+                                                                          'Hydraulic' ||
+                                                                      loadtype ==
+                                                                          'Regular'
                                                                   ? (String?
                                                                       newValue) {
                                                                       setState(
@@ -1623,7 +1637,7 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                               },
                                               {
                                                 'image': 'img29.png',
-                                                'name': 'High Sides '
+                                                'name': 'High Sides'
                                               },
                                               {
                                                 'image': 'img30.png',
@@ -1675,7 +1689,7 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                               },
                                               {
                                                 'image': 'img12.png',
-                                                'name': 'Referigerator'
+                                                'name': 'Refrigerator'
                                               },
                                               {
                                                 'image': 'img13.png',
@@ -1707,7 +1721,7 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                               },
                                               {
                                                 'image': 'img18.png',
-                                                'name': 'Referigerator'
+                                                'name': 'Refrigerator'
                                               },
                                               {
                                                 'image': 'img19.png',
@@ -1942,7 +1956,7 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
   List<DropdownMenuItem<String>> _getLoadItems() {
     if (loadtype == 'Short Sides' ||
         loadtype == 'Curtain' ||
-        loadtype == 'High sides' ||
+        loadtype == 'High Sides' ||
         loadtype == 'Sides' ||
         loadtype == 'Crane' ||
         loadtype == 'Closed') {
@@ -1960,7 +1974,7 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
         return DropdownMenuItem<String>(
             value: value, child: Text(value, style: AvailableText.helvetica));
       }).toList();
-    } else if (loadtype == 'Crane 5 Ton' || loadtype == 'Crane 7 Ton') {
+    } else if (loadtype == 'Crane 5 TON' || loadtype == 'Crane 7 TON') {
       return loadList3.map((String value) {
         return DropdownMenuItem<String>(
             value: value, child: Text(value, style: AvailableText.helvetica));

@@ -41,6 +41,14 @@ class AllUsersFormController {
   final selectedTypeName6 = TextEditingController();
   final selectedTypeName7 = TextEditingController();
   final selectedTypeName8 = TextEditingController();
+  final unitClassi = TextEditingController();
+  final subClassi = TextEditingController();
+  final plateInfo = TextEditingController();
+  final istimaraNo = TextEditingController();
+  final iqamaNo = TextEditingController();
+  final dob = TextEditingController();
+  final operPlatInfo = TextEditingController();
+  final partnerName = TextEditingController();
   final otp = TextEditingController();
   final equip = TextEditingController();
   final date = TextEditingController();
