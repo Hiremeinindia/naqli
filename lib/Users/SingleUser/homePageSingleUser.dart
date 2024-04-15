@@ -613,7 +613,10 @@ class _MyHomePagesingleState extends State<MyHomePagesingle>
                                                       context,
                                                       MaterialPageRoute(
                                                           builder: (context) =>
-                                                              AvailableSpecial()),
+                                                              AvailableSpecial(
+                                                                user:
+                                                                    widget.user,
+                                                              )),
                                                     );
                                                   },
                                                   child: Card(
@@ -670,7 +673,10 @@ class _MyHomePagesingleState extends State<MyHomePagesingle>
                                                       context,
                                                       MaterialPageRoute(
                                                           builder: (context) =>
-                                                              AvailableSpecial()),
+                                                              AvailableSpecial(
+                                                                user:
+                                                                    widget.user,
+                                                              )),
                                                     );
                                                   },
                                                   child: Card(
@@ -1309,7 +1315,9 @@ class _MyHomePagesingleState extends State<MyHomePagesingle>
                                               context,
                                               MaterialPageRoute(
                                                   builder: (context) =>
-                                                      AvailableSpecial()),
+                                                      AvailableSpecial(
+                                                        user: widget.user,
+                                                      )),
                                             );
                                           },
                                           child: Card(
@@ -1360,7 +1368,9 @@ class _MyHomePagesingleState extends State<MyHomePagesingle>
                                               context,
                                               MaterialPageRoute(
                                                   builder: (context) =>
-                                                      AvailableSpecial()),
+                                                      AvailableSpecial(
+                                                        user: widget.user,
+                                                      )),
                                             );
                                           },
                                           child: Card(

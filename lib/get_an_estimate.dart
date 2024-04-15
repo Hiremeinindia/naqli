@@ -9,6 +9,8 @@ import 'package:flutter_application_1/availableVehicle.dart';
 import 'package:sizer/sizer.dart';
 
 class GetanEstimate extends StatefulWidget {
+  final String? user;
+  const GetanEstimate({this.user});
   @override
   _GetanEstimateState createState() => _GetanEstimateState();
 }
@@ -182,7 +184,9 @@ class _GetanEstimateState extends State<GetanEstimate> {
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) =>
-                                                  AvailableSpecial()),
+                                                  AvailableSpecial(
+                                                    user: widget.user!,
+                                                  )),
                                         );
                                       },
                                       child: ElevationUnitContainer(
@@ -199,7 +203,9 @@ class _GetanEstimateState extends State<GetanEstimate> {
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) =>
-                                                  AvailableSpecial()),
+                                                  AvailableSpecial(
+                                                    user: widget.user!,
+                                                  )),
                                         );
                                       },
                                       child: ElevationUnitContainer(

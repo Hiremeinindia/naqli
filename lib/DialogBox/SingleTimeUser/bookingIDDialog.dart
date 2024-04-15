@@ -30,6 +30,10 @@ class _BookingIDDialogState extends State<BookingIDDialog> {
       userCollection = 'vehicleBooking';
     } else if (widget.unitType == 'Equipment') {
       userCollection = 'equipmentBookings';
+    } else if (widget.unitType == 'Bus') {
+      userCollection = 'busBookings';
+    } else if (widget.unitType == 'Special/Others') {
+      userCollection = 'specialothersBookings';
     } else {
       throw Exception('Invalid selected type');
     }

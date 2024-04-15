@@ -94,10 +94,7 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
   Future<Map<String, dynamic>?> fetchData(String userId) async {
     try {
       DocumentSnapshot<Map<String, dynamic>> documentSnapshot =
-          await FirebaseFirestore.instance
-              .collection('superuser')
-              .doc(userId)
-              .get();
+          await FirebaseFirestore.instance.collection('user').doc(userId).get();
 
       if (documentSnapshot.exists) {
         Map<String, dynamic> userData = documentSnapshot.data()!;
