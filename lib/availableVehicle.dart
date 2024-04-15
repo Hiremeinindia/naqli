@@ -21,7 +21,7 @@ import 'main.dart';
 class AvailableVehicle extends StatefulWidget {
   final String? user;
 
-  const AvailableVehicle({this.user});
+  AvailableVehicle({this.user});
 
   @override
   State<AvailableVehicle> createState() => _AvailableVehicleState();
@@ -113,6 +113,7 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
     String load,
     String size,
     String date,
+    String time,
     String labour,
     String adminUid,
   ) async {
@@ -132,7 +133,7 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
         'load': load,
         'size': size,
         'date': date,
-        'createdTime': Timestamp.now(),
+        'time': time,
         'labour': labour,
       });
 
@@ -762,6 +763,9 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                                                 child:
                                                                     CustomTextfieldGrey(
                                                                   text: 'Time',
+                                                                  controller:
+                                                                      controller
+                                                                          .time,
                                                                 ),
                                                               ),
                                                             ],
@@ -1309,6 +1313,10 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                                                   controller
                                                                       .load
                                                                       .text;
+                                                              String time =
+                                                                  controller
+                                                                      .time
+                                                                      .text;
                                                               String date =
                                                                   controller
                                                                       .date
@@ -1325,6 +1333,7 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                                                       load,
                                                                       size,
                                                                       date,
+                                                                      time,
                                                                       labour,
                                                                       widget
                                                                           .user!);

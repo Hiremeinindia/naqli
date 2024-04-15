@@ -215,6 +215,7 @@ class _State extends State<Partner> {
         'firstName': controller.firstName.text,
         'email': controller.email.text,
         'phoneNumber': controller.contactNumber.text,
+        'password': controller.password.text
       };
       userCollection = 'partneruser';
       await FirebaseFirestore.instance
@@ -561,13 +562,15 @@ class _State extends State<Partner> {
                                                   userId);
 
                                               if (userCredential.user != null) {
-                                                Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          Operator(
-                                                            user: userId,
-                                                          )),
+                                                showDialog(
+                                                  barrierColor:
+                                                      Colors.transparent,
+                                                  context: context,
+                                                  builder: (context) {
+                                                    return Operator(
+                                                      user: userId,
+                                                    );
+                                                  },
                                                 );
                                               } else {
                                                 showErrorDialog(
