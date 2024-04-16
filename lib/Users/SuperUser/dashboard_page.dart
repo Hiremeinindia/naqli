@@ -440,7 +440,7 @@ class _MyHomePageState extends State<SuperUserDashboardPage> {
                                 image: DecorationImage(
                                   fit: BoxFit.fill,
                                   image: NetworkImage(
-                                    'Circleavatar.png',
+                                    'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/Circleavatar.png?alt=media&token=1204cc77-6756-42ab-ba0e-3946a3fe6c9f',
                                   ),
                                 ),
                                 // color: Color.fromRGBO(255, 255, 255, 1),
@@ -472,8 +472,8 @@ class _MyHomePageState extends State<SuperUserDashboardPage> {
                                         maxRadius: 70,
                                         minRadius: 67,
                                         child: CircleAvatar(
-                                          backgroundImage:
-                                              NetworkImage('uploadimage.png'),
+                                          backgroundImage: NetworkImage(
+                                              'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/uploadimage.png?alt=media&token=1793876b-63ca-4730-831b-4fcf4e96da0a'),
                                           maxRadius: 65,
                                           minRadius: 65,
                                         )),

@@ -180,7 +180,8 @@ class _LoginPageState extends State<LoginPage> {
                                         Navigator.pop(context);
                                       },
                                       child: ImageIcon(
-                                        NetworkImage('cancel.png'),
+                                        NetworkImage(
+                                            'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/cancel.png?alt=media&token=dd1ed39b-abda-4780-94dd-f5c15e7d12f5'),
                                         color: Color.fromRGBO(112, 112, 112, 1),
                                       ),
                                     ),
@@ -426,7 +427,8 @@ class _LoginPageState extends State<LoginPage> {
                                 Navigator.pop(context);
                               },
                               child: ImageIcon(
-                                NetworkImage('cancel.png'),
+                                NetworkImage(
+                                    'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/cancel.png?alt=media&token=dd1ed39b-abda-4780-94dd-f5c15e7d12f5'),
                                 color: Color.fromRGBO(112, 112, 112, 1),
                               ),
                             ),
@@ -657,7 +659,8 @@ class ForgotPasswordPage extends StatelessWidget {
                           Navigator.pop(context);
                         },
                         child: ImageIcon(
-                          NetworkImage('cancel.png'),
+                          NetworkImage(
+                              'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/cancel.png?alt=media&token=dd1ed39b-abda-4780-94dd-f5c15e7d12f5'),
                           color: Colors.black,
                         ),
                       ),
@@ -752,7 +755,8 @@ class ForgotPasswordPage extends StatelessWidget {
                           Navigator.pop(context);
                         },
                         child: ImageIcon(
-                          NetworkImage('cancel.png'),
+                          NetworkImage(
+                              'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/cancel.png?alt=media&token=dd1ed39b-abda-4780-94dd-f5c15e7d12f5'),
                           color: Colors.black,
                         ),
                       ),

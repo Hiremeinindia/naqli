@@ -150,7 +150,7 @@ class _CreateAccountState extends State<CreateAccount> {
                                 },
                                 child: ImageIcon(
                                   NetworkImage(
-                                      'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/Group11635.png?alt=media&token=38685789-db55-4d28-8eef-a005ef287d39'),
+                                      'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/cancel.png?alt=media&token=dd1ed39b-abda-4780-94dd-f5c15e7d12f5'),
                                   color: Color.fromRGBO(112, 112, 112, 1),
                                 ),
                               ),
@@ -638,7 +638,7 @@ class _CreateAccountState extends State<CreateAccount> {
                                 },
                                 child: ImageIcon(
                                   NetworkImage(
-                                      'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/Group11635.png?alt=media&token=38685789-db55-4d28-8eef-a005ef287d39'),
+                                      'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/cancel.png?alt=media&token=dd1ed39b-abda-4780-94dd-f5c15e7d12f5'),
                                   color: Color.fromRGBO(112, 112, 112, 1),
                                 ),
                               ),

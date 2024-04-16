@@ -408,7 +408,7 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                 width: double.infinity,
                                 fit: BoxFit.cover,
                                 image: NetworkImage(
-                                    'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/truckslide.jpg?alt=media&token=69e327e8-91b3-4a55-b640-04f1673d83d9'),
+                                    'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/truckslide.jpg?alt=media&token=3abaaa7a-3c22-44e3-81d2-d16af7336273'),
                               ),
                             ],
                           ),
@@ -1363,7 +1363,7 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                 width: double.infinity,
                                 fit: BoxFit.cover,
                                 image: NetworkImage(
-                                    'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/truckslide.jpg?alt=media&token=69e327e8-91b3-4a55-b640-04f1673d83d9'),
+                                    'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/truckslide.jpg?alt=media&token=3abaaa7a-3c22-44e3-81d2-d16af7336273'),
                               ),
                             ],
                           ),
