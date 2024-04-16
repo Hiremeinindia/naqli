@@ -201,7 +201,8 @@ class _TriggerBookingState extends State<TriggerBooking> {
                                             padding: EdgeInsets.zero,
                                             constraints: BoxConstraints(),
                                             onPressed: () {},
-                                            icon: Image.asset('editicon.png')),
+                                            icon:
+                                                Image.network('editicon.png')),
                                         SizedBox(
                                           width: 1.w,
                                         ),
@@ -209,8 +210,8 @@ class _TriggerBookingState extends State<TriggerBooking> {
                                             padding: EdgeInsets.zero,
                                             constraints: BoxConstraints(),
                                             onPressed: () {},
-                                            icon:
-                                                Image.asset('deleteicon.png')),
+                                            icon: image
+                                                .network('deleteicon.png')),
                                         SizedBox(
                                           width: 2.w,
                                         ),
@@ -384,7 +385,8 @@ class _TriggerBookingState extends State<TriggerBooking> {
                                             padding: EdgeInsets.zero,
                                             constraints: BoxConstraints(),
                                             onPressed: () {},
-                                            icon: Image.asset('editicon.png')),
+                                            icon:
+                                                Image.network('editicon.png')),
                                         SizedBox(
                                           width: 1.w,
                                         ),
@@ -392,8 +394,8 @@ class _TriggerBookingState extends State<TriggerBooking> {
                                             padding: EdgeInsets.zero,
                                             constraints: BoxConstraints(),
                                             onPressed: () {},
-                                            icon:
-                                                Image.asset('deleteicon.png')),
+                                            icon: image
+                                                .network('deleteicon.png')),
                                         SizedBox(
                                           width: 2.w,
                                         ),
@@ -569,7 +571,8 @@ class _TriggerBookingState extends State<TriggerBooking> {
                                             padding: EdgeInsets.zero,
                                             constraints: BoxConstraints(),
                                             onPressed: () {},
-                                            icon: Image.asset('editicon.png')),
+                                            icon:
+                                                Image.network('editicon.png')),
                                         SizedBox(
                                           width: 1.w,
                                         ),
@@ -577,8 +580,8 @@ class _TriggerBookingState extends State<TriggerBooking> {
                                             padding: EdgeInsets.zero,
                                             constraints: BoxConstraints(),
                                             onPressed: () {},
-                                            icon:
-                                                Image.asset('deleteicon.png')),
+                                            icon: image
+                                                .network('deleteicon.png')),
                                         SizedBox(
                                           width: 2.w,
                                         ),
@@ -834,7 +837,7 @@ class _TriggerBookingState extends State<TriggerBooking> {
                                                       constraints:
                                                           BoxConstraints(),
                                                       onPressed: () {},
-                                                      icon: Image.asset(
+                                                      icon: Image.network(
                                                           'editicon.png')),
                                                   SizedBox(
                                                     width: 1.w,
@@ -844,7 +847,7 @@ class _TriggerBookingState extends State<TriggerBooking> {
                                                       constraints:
                                                           BoxConstraints(),
                                                       onPressed: () {},
-                                                      icon: Image.asset(
+                                                      icon: Image.network(
                                                           'deleteicon.png')),
                                                   SizedBox(
                                                     width: 2.w,
@@ -1058,7 +1061,7 @@ class _TriggerBookingState extends State<TriggerBooking> {
                                                       constraints:
                                                           BoxConstraints(),
                                                       onPressed: () {},
-                                                      icon: Image.asset(
+                                                      icon: Image.network(
                                                           'editicon.png')),
                                                   SizedBox(
                                                     width: 1.w,
@@ -1068,7 +1071,7 @@ class _TriggerBookingState extends State<TriggerBooking> {
                                                       constraints:
                                                           BoxConstraints(),
                                                       onPressed: () {},
-                                                      icon: Image.asset(
+                                                      icon: Image.network(
                                                           'deleteicon.png')),
                                                   SizedBox(
                                                     width: 2.w,
@@ -1285,7 +1288,7 @@ class _TriggerBookingState extends State<TriggerBooking> {
                                                       constraints:
                                                           BoxConstraints(),
                                                       onPressed: () {},
-                                                      icon: Image.asset(
+                                                      icon: Image.network(
                                                           'editicon.png')),
                                                   SizedBox(
                                                     width: 1.w,
@@ -1295,7 +1298,7 @@ class _TriggerBookingState extends State<TriggerBooking> {
                                                       constraints:
                                                           BoxConstraints(),
                                                       onPressed: () {},
-                                                      icon: Image.asset(
+                                                      icon: Image.network(
                                                           'deleteicon.png')),
                                                   SizedBox(
                                                     width: 2.w,

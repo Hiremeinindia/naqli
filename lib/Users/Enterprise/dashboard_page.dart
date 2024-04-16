@@ -138,7 +138,7 @@ class _MyHomePageState extends State<EnterDashboardPage> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Image.asset(
+                      Image.network(
                         'naqlilogo.png',
                         width: 10.w,
                       ),
@@ -426,7 +426,7 @@ class _MyHomePageState extends State<EnterDashboardPage> {
                                     children: [
                                       IconButton(
                                           onPressed: () {},
-                                          icon: Image.asset(
+                                          icon: Image.network(
                                             'editicon.png',
                                             width: 16,
                                             height: 16,
@@ -609,7 +609,7 @@ class _MyHomePageState extends State<EnterDashboardPage> {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(
                             30.0), // Adjust the radius as needed
-                        child: Image.asset(
+                        child: Image.network(
                           'Circleavatar.png',
                           width: 550, // Adjust the height as needed
                           fit: BoxFit.cover,
@@ -750,7 +750,7 @@ class _MyHomePageState extends State<EnterDashboardPage> {
                                     color: Colors.indigo.shade900,
                                   ),
                                 )),
-                        Image.asset(
+                        Image.network(
                           'naqlilogo.png',
                           width: 10.w,
                         ),

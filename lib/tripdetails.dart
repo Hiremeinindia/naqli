@@ -24,7 +24,7 @@ class _MyHomePageState extends State<TripDetails> {
             elevation: 0.0,
             title: Container(
               padding: const EdgeInsets.only(left: 400),
-              child: Image.asset(
+              child: Image.network(
                 'naqlilogo.png',
                 width: 140,
                 height: 140,
@@ -318,7 +318,7 @@ class _MyHomePageState extends State<TripDetails> {
                                             SizedBox(
                                                 width:
                                                     10), // Adjust this space as needed
-                                            Image.asset(
+                                            Image.network(
                                               'right-arrow.png',
                                               width: 30,
                                               height: 20,

@@ -671,7 +671,7 @@ class _OperatorState extends State<Operator> {
                                       },
                                       child: Row(
                                         children: [
-                                          Image.asset(
+                                          Image.network(
                                             'assets/cancel.png', // Assuming you have an image asset named 'upload_icon.png' in your assets folder
                                             width: 17,
                                             height: 17,
@@ -727,7 +727,7 @@ class _OperatorState extends State<Operator> {
                                           },
                                           child: Row(
                                             children: [
-                                              Image.asset(
+                                              Image.network(
                                                 'assets/cancel.png', // Assuming you have an image asset named 'upload_icon.png' in your assets folder
                                                 width: 17,
                                                 height: 17,
@@ -1048,7 +1048,7 @@ class _OperatorState extends State<Operator> {
                                       },
                                       child: Row(
                                         children: [
-                                          Image.asset(
+                                          Image.network(
                                             'assets/cancel.png', // Assuming you have an image asset named 'upload_icon.png' in your assets folder
                                             width: 17,
                                             height: 17,
@@ -1104,7 +1104,7 @@ class _OperatorState extends State<Operator> {
                                           },
                                           child: Row(
                                             children: [
-                                              Image.asset(
+                                              Image.network(
                                                 'assets/cancel.png', // Assuming you have an image asset named 'upload_icon.png' in your assets folder
                                                 width: 17,
                                                 height: 17,

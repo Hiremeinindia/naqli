@@ -137,7 +137,7 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                             child: Align(
                               alignment: Alignment.bottomCenter,
-                              child: Image.asset(
+                              child: Image.network(
                                 'loginlogo.png',
                                 width: 600,
                               ),
