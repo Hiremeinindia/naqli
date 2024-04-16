@@ -138,7 +138,7 @@ class _LoginPageState extends State<LoginPage> {
                             child: Align(
                               alignment: Alignment.bottomCenter,
                               child: Image.network(
-                                'loginlogo.png',
+                                'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/loginlogo.png?alt=media&token=a1a83b51-32e5-4ebf-b457-6049bd8b7074',
                                 width: 600,
                               ),
                             ),
