@@ -234,10 +234,10 @@ class _MblNoDialogState extends State<MblNoDialog> {
             context: context,
             barrierDismissible: false,
             builder: (context) {
-              return AlertDialog(
-                titlePadding: EdgeInsets.zero,
-                contentPadding: EdgeInsets.zero,
-                content: Container(
+              return Dialog(
+                // titlePadding: EdgeInsets.zero,
+                // contentPadding: EdgeInsets.zero,
+                child: Container(
                   height: 310,
                   width: 1215,
                   decoration: const BoxDecoration(
