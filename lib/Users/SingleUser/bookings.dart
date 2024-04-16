@@ -250,15 +250,15 @@ class _BookingsState extends State<Bookings> {
   @override
   void initState() {
     super.initState();
-    if (_markers.isNotEmpty) {
-      _markers.add(const Marker(
-        markerId: MarkerId("Mylocation"),
-        position: LatLng(59.948680, 11.010630),
-      ));
-      setState(() {
-        showmaps = true;
-      });
-    }
+    // if (_markers.isNotEmpty) {
+    //   _markers.add(const Marker(
+    //     markerId: MarkerId("Mylocation"),
+    //     position: LatLng(59.948680, 11.010630),
+    //   ));
+    //   setState(() {
+    //     showmaps = true;
+    //   });
+    // }
   }
 
   Widget _buildScreen0() {
@@ -566,8 +566,8 @@ class _BookingsState extends State<Bookings> {
                               children: [
                                 Row(
                                   children: [
-                                    Image.asset(
-                                      'Group1787.png',
+                                    Image.network(
+                                      'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/Group1787.png?alt=media&token=d2066c85-560c-4a61-80bc-d020dcd73f95',
                                       width: 62,
                                       height: 61,
                                     ),
