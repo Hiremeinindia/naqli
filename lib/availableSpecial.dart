@@ -176,7 +176,7 @@ class _AvailableSpecialState extends State<AvailableSpecial> {
                       children: [
                         Padding(
                           padding: EdgeInsets.only(top: 12, bottom: 6),
-                          child: Image.asset(
+                          child: Image.network(
                             'naqlilogo.png',
                           ),
                         ),
@@ -1487,7 +1487,7 @@ class _AvailableSpecialState extends State<AvailableSpecial> {
               //           child: ClipRRect(
               //             borderRadius: BorderRadius.circular(
               //                 30.0), // Adjust the radius as needed
-              //             child: Image.asset(
+              //             child: Image.network(
               //               'Circleavatar.png',
               //               width: 550, // Adjust the height as needed
               //               fit: BoxFit.cover,

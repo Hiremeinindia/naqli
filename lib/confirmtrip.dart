@@ -23,7 +23,7 @@ class _ConfirmTrip extends State<ConfirmTrip> {
             elevation: 0.0,
             title: Container(
               padding: const EdgeInsets.only(left: 400),
-              child: Image.asset(
+              child: Image.network(
                 'naqlilogo.png',
                 width: 140,
                 height: 140,
@@ -145,7 +145,7 @@ class _ConfirmTrip extends State<ConfirmTrip> {
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      Image.asset(
+                                      Image.network(
                                         'delivery-truck.png',
                                         width: 300,
                                         height: 300,

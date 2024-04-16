@@ -1057,7 +1057,7 @@ class _UsersState extends State<Users> {
                 padding: EdgeInsets.zero,
                 constraints: BoxConstraints(),
                 onPressed: () {},
-                icon: Image.asset('editicon.png')),
+                icon: Image.network('editicon.png')),
             SizedBox(
               width: 1.w,
             ),
@@ -1065,7 +1065,7 @@ class _UsersState extends State<Users> {
                 padding: EdgeInsets.zero,
                 constraints: BoxConstraints(),
                 onPressed: () {},
-                icon: Image.asset('deleteicon.png')),
+                icon: Image.network('deleteicon.png')),
           ],
         ))
       ]),
@@ -1093,7 +1093,7 @@ class _UsersState extends State<Users> {
                 padding: EdgeInsets.zero,
                 constraints: BoxConstraints(),
                 onPressed: () {},
-                icon: Image.asset('editicon.png')),
+                icon: Image.network('editicon.png')),
             SizedBox(
               width: 1.w,
             ),
@@ -1101,7 +1101,7 @@ class _UsersState extends State<Users> {
                 padding: EdgeInsets.zero,
                 constraints: BoxConstraints(),
                 onPressed: () {},
-                icon: Image.asset('deleteicon.png')),
+                icon: Image.network('deleteicon.png')),
           ],
         ))
       ]),
@@ -1130,7 +1130,7 @@ class _UsersState extends State<Users> {
                 padding: EdgeInsets.zero,
                 constraints: BoxConstraints(),
                 onPressed: () {},
-                icon: Image.asset('editicon.png')),
+                icon: Image.network('editicon.png')),
             SizedBox(
               width: 1.w,
             ),
@@ -1138,7 +1138,7 @@ class _UsersState extends State<Users> {
                 padding: EdgeInsets.zero,
                 constraints: BoxConstraints(),
                 onPressed: () {},
-                icon: Image.asset('deleteicon.png')),
+                icon: Image.network('deleteicon.png')),
           ],
         ))
       ]),
@@ -1165,7 +1165,7 @@ class _UsersState extends State<Users> {
                 padding: EdgeInsets.zero,
                 constraints: BoxConstraints(),
                 onPressed: () {},
-                icon: Image.asset('editicon.png')),
+                icon: Image.network('editicon.png')),
             SizedBox(
               width: 1.w,
             ),
@@ -1173,7 +1173,7 @@ class _UsersState extends State<Users> {
                 padding: EdgeInsets.zero,
                 constraints: BoxConstraints(),
                 onPressed: () {},
-                icon: Image.asset('deleteicon.png')),
+                icon: Image.network('deleteicon.png')),
           ],
         ))
       ]),
@@ -1211,7 +1211,7 @@ class _UsersState extends State<Users> {
 //                 padding: EdgeInsets.zero,
 //                 constraints: BoxConstraints(),
 //                 onPressed: () {},
-//                 icon: Image.asset('editicon.png')),
+//                 icon: Image.network('editicon.png')),
 //             SizedBox(
 //               width: 1.w,
 //             ),
@@ -1219,7 +1219,7 @@ class _UsersState extends State<Users> {
 //                 padding: EdgeInsets.zero,
 //                 constraints: BoxConstraints(),
 //                 onPressed: () {},
-//                 icon: Image.asset('deleteicon.png')),
+//                 icon: Image.network('deleteicon.png')),
 //           ],
 //         ))
 //         // DataCell(
@@ -1325,7 +1325,7 @@ class SimpleCandidateListSource extends DataTableSource {
               padding: EdgeInsets.zero,
               constraints: BoxConstraints(),
               onPressed: () {},
-              icon: Image.asset('editicon.png')),
+              icon: Image.network('editicon.png')),
           SizedBox(
             width: 1.w,
           ),
@@ -1333,7 +1333,7 @@ class SimpleCandidateListSource extends DataTableSource {
               padding: EdgeInsets.zero,
               constraints: BoxConstraints(),
               onPressed: () {},
-              icon: Image.asset('deleteicon.png')),
+              icon: Image.network('deleteicon.png')),
         ],
       ))
     ]);
@@ -1364,7 +1364,7 @@ final List<SimpleCandidate> simpleCandidates = [
               padding: EdgeInsets.zero,
               constraints: BoxConstraints(),
               onPressed: () {},
-              icon: Image.asset('editicon.png')),
+              icon: Image.network('editicon.png')),
           SizedBox(
             width: 1.w,
           ),
@@ -1372,7 +1372,7 @@ final List<SimpleCandidate> simpleCandidates = [
               padding: EdgeInsets.zero,
               constraints: BoxConstraints(),
               onPressed: () {},
-              icon: Image.asset('deleteicon.png')),
+              icon: Image.network('deleteicon.png')),
         ],
       )),
   SimpleCandidate(
@@ -1389,7 +1389,7 @@ final List<SimpleCandidate> simpleCandidates = [
               padding: EdgeInsets.zero,
               constraints: BoxConstraints(),
               onPressed: () {},
-              icon: Image.asset('editicon.png')),
+              icon: Image.network('editicon.png')),
           SizedBox(
             width: 1.w,
           ),
@@ -1397,7 +1397,7 @@ final List<SimpleCandidate> simpleCandidates = [
               padding: EdgeInsets.zero,
               constraints: BoxConstraints(),
               onPressed: () {},
-              icon: Image.asset('deleteicon.png')),
+              icon: Image.network('deleteicon.png')),
         ],
       )),
   SimpleCandidate(
@@ -1414,7 +1414,7 @@ final List<SimpleCandidate> simpleCandidates = [
               padding: EdgeInsets.zero,
               constraints: BoxConstraints(),
               onPressed: () {},
-              icon: Image.asset('editicon.png')),
+              icon: Image.network('editicon.png')),
           SizedBox(
             width: 1.w,
           ),
@@ -1422,7 +1422,7 @@ final List<SimpleCandidate> simpleCandidates = [
               padding: EdgeInsets.zero,
               constraints: BoxConstraints(),
               onPressed: () {},
-              icon: Image.asset('deleteicon.png')),
+              icon: Image.network('deleteicon.png')),
         ],
       )),
   SimpleCandidate(
@@ -1439,7 +1439,7 @@ final List<SimpleCandidate> simpleCandidates = [
               padding: EdgeInsets.zero,
               constraints: BoxConstraints(),
               onPressed: () {},
-              icon: Image.asset('editicon.png')),
+              icon: Image.network('editicon.png')),
           SizedBox(
             width: 1.w,
           ),
@@ -1447,7 +1447,7 @@ final List<SimpleCandidate> simpleCandidates = [
               padding: EdgeInsets.zero,
               constraints: BoxConstraints(),
               onPressed: () {},
-              icon: Image.asset('deleteicon.png')),
+              icon: Image.network('deleteicon.png')),
         ],
       )),
 ];

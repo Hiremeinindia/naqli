@@ -76,7 +76,7 @@ class _MyHomePageState extends State<MyHomePage>
                       children: [
                         Padding(
                           padding: EdgeInsets.only(top: 12, bottom: 6),
-                          child: Image.asset(
+                          child: Image.network(
                             'naqlilogo.png',
                           ),
                         ),
@@ -442,7 +442,7 @@ class _MyHomePageState extends State<MyHomePage>
                                                               MainAxisAlignment
                                                                   .end,
                                                           children: [
-                                                            Image.asset(
+                                                            Image.network(
                                                               'Group68.png',
                                                               width: 150,
                                                               height: 139,
@@ -501,7 +501,7 @@ class _MyHomePageState extends State<MyHomePage>
                                                               MainAxisAlignment
                                                                   .end,
                                                           children: [
-                                                            Image.asset(
+                                                            Image.network(
                                                               'bus.png',
                                                               width: 150,
                                                               height: 139,
@@ -562,7 +562,7 @@ class _MyHomePageState extends State<MyHomePage>
                                                               MainAxisAlignment
                                                                   .end,
                                                           children: [
-                                                            Image.asset(
+                                                            Image.network(
                                                               'Group1496.png',
                                                               width: 150,
                                                               height: 139,
@@ -623,7 +623,7 @@ class _MyHomePageState extends State<MyHomePage>
                                                               MainAxisAlignment
                                                                   .end,
                                                           children: [
-                                                            Image.asset(
+                                                            Image.network(
                                                               'Group1660.png',
                                                               width: 150,
                                                               height: 139,
@@ -684,7 +684,7 @@ class _MyHomePageState extends State<MyHomePage>
                                                               MainAxisAlignment
                                                                   .end,
                                                           children: [
-                                                            Image.asset(
+                                                            Image.network(
                                                               'Group1716.png',
                                                               width: 150,
                                                               height: 139,
@@ -810,7 +810,7 @@ class _MyHomePageState extends State<MyHomePage>
                                                                 ),
                                                                 SizedBox(
                                                                     height: 20),
-                                                                Image.asset(
+                                                                Image.network(
                                                                   'right-arrow.png',
                                                                   width: 30,
                                                                   height: 30,
@@ -975,7 +975,7 @@ class _MyHomePageState extends State<MyHomePage>
                             )
                           ],
                         ),
-                        Image.asset(
+                        Image.network(
                           'naqlilogo.png',
                         ),
                         Row(
@@ -1185,8 +1185,8 @@ class _MyHomePageState extends State<MyHomePage>
                                                   mainAxisAlignment:
                                                       MainAxisAlignment.end,
                                                   children: [
-                                                    Image.asset(
-                                                      'Group68.png',
+                                                    Image.network(
+                                                      'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/Group68.png?alt=media&token=5fe75cdd-40f3-48ff-9838-dfadcaf41ae4',
                                                       width: 150,
                                                       height: 139,
                                                     ),
@@ -1238,8 +1238,8 @@ class _MyHomePageState extends State<MyHomePage>
                                                   mainAxisAlignment:
                                                       MainAxisAlignment.end,
                                                   children: [
-                                                    Image.asset(
-                                                      'bus.png',
+                                                    Image.network(
+                                                      'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/bus.png?alt=media&token=62ffdc20-210e-447e-a0e5-51e14b06b449',
                                                       width: 150,
                                                       height: 139,
                                                     ),
@@ -1291,8 +1291,8 @@ class _MyHomePageState extends State<MyHomePage>
                                                   mainAxisAlignment:
                                                       MainAxisAlignment.end,
                                                   children: [
-                                                    Image.asset(
-                                                      'Group1496.png',
+                                                    Image.network(
+                                                      'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/Group1496.png?alt=media&token=68985bbe-ba8a-4cd3-b4c9-b5f07ab7f3a5',
                                                       width: 150,
                                                       height: 139,
                                                     ),
@@ -1344,8 +1344,8 @@ class _MyHomePageState extends State<MyHomePage>
                                                   mainAxisAlignment:
                                                       MainAxisAlignment.end,
                                                   children: [
-                                                    Image.asset(
-                                                      'Group1660.png',
+                                                    Image.network(
+                                                      'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/Group1660.png?alt=media&token=e1bdac76-bbdc-4d25-9003-665b2b936a99',
                                                       width: 150,
                                                       height: 139,
                                                     ),
@@ -1397,8 +1397,8 @@ class _MyHomePageState extends State<MyHomePage>
                                                   mainAxisAlignment:
                                                       MainAxisAlignment.end,
                                                   children: [
-                                                    Image.asset(
-                                                      'Group1716.png',
+                                                    Image.network(
+                                                      'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/Group1716.png?alt=media&token=416db349-0c72-4bbe-b160-74792ba49f6e',
                                                       width: 150,
                                                       height: 139,
                                                     ),
@@ -1452,7 +1452,7 @@ class _MyHomePageState extends State<MyHomePage>
                                                       style: HomepageText
                                                           .helvetica16bold),
                                                   SizedBox(height: 20),
-                                                  Image.asset(
+                                                  Image.network(
                                                     'right-arrow.png',
                                                     width: 30,
                                                     height: 30,
