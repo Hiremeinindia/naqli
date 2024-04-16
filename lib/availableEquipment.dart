@@ -194,7 +194,7 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                         Padding(
                           padding: EdgeInsets.only(top: 12, bottom: 6),
                           child: Image.network(
-                            'naqlilogo.png',
+                            'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/naqlilogo.png?alt=media&token=db201cb1-dd7b-4b9e-b364-8fb7fa3b95db',
                           ),
                         ),
                         Row(
@@ -468,7 +468,8 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                 UnitsContainer(
                                                   unitNames: [
                                                     {
-                                                      'image': 'Group4128.png',
+                                                      'image':
+                                                          'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/Group4128.png?alt=media&token=059bdbcf-5284-45db-970f-dac34d34d828',
                                                       'name': 'Excavator',
                                                       'size': '',
                                                     },
@@ -496,17 +497,20 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                 UnitsContainer(
                                                   unitNames: [
                                                     {
-                                                      'image': 'Group3071.png',
+                                                      'image':
+                                                          'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/Group3071.png?alt=media&token=ea1181da-3870-4070-a76d-4d7350ae36cf',
                                                       'name': 'Back hoe',
                                                       'size': '',
                                                     },
                                                     {
-                                                      'image': 'Group2052.png',
+                                                      'image':
+                                                          'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/Group%202052.png?alt=media&token=f007cbeb-0403-4f10-8656-676338385563',
                                                       'name': 'Front hoe',
                                                       'size': '',
                                                     },
                                                     {
-                                                      'image': 'Group4137.png',
+                                                      'image':
+                                                          'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/Group4137.png?alt=media&token=147859f3-29e9-4d74-9124-9eb050678b74',
                                                       'name': 'Skid steer',
                                                       'size': '',
                                                     },
@@ -534,12 +538,14 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                 UnitsContainer(
                                                   unitNames: [
                                                     {
-                                                      'image': 'Group2271.png',
+                                                      'image':
+                                                          'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/Group%202271.png?alt=media&token=a908e28e-1818-4786-a1e6-bb36943c9592',
                                                       'name': 'Crawler crane',
                                                       'size': '',
                                                     },
                                                     {
-                                                      'image': 'Group4240.png',
+                                                      'image':
+                                                          'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/Group4240.png?alt=media&token=c2f68053-1088-47a7-9822-290084dc7f0b',
                                                       'name': 'Mobile crane',
                                                       'size': '',
                                                     },
@@ -567,32 +573,38 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                 UnitsContainer(
                                                   unitNames: [
                                                     {
-                                                      'image': 'Group2270.png',
+                                                      'image':
+                                                          'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/Group%202270.png?alt=media&token=628e8fe5-1435-4441-832d-c131a00e62ac',
                                                       'name': 'Compactors',
                                                       'size': '',
                                                     },
                                                     {
-                                                      'image': 'Group2236.png',
+                                                      'image':
+                                                          'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/Group2236.png?alt=media&token=b524badf-e101-422a-b3a2-615e95592f4e',
                                                       'name': 'Bulldozers',
                                                       'size': '',
                                                     },
                                                     {
-                                                      'image': 'Group4225.png',
+                                                      'image':
+                                                          'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/Group4225.png?alt=media&token=92ffcee1-5703-4602-812f-e8b8a0993b4a',
                                                       'name': 'Graders',
                                                       'size': '',
                                                     },
                                                     {
-                                                      'image': 'Group2148.png',
+                                                      'image':
+                                                          'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/Group2148.png?alt=media&token=8e651f25-a871-4f32-881e-edb02e0c1b3b',
                                                       'name': 'Dump truck',
                                                       'size': '',
                                                     },
                                                     {
-                                                      'image': 'Group2181.png',
+                                                      'image':
+                                                          'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/Group2181.png?alt=media&token=456cf532-6b18-4173-9665-51298359399f',
                                                       'name': 'Forklift',
                                                       'size': '',
                                                     },
                                                     {
-                                                      'image': 'Group4239.png',
+                                                      'image':
+                                                          'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/Group4239.png?alt=media&token=4acb7436-884b-41af-bb87-f82341a5ff1b',
                                                       'name': 'Scissorlift',
                                                       'size': '',
                                                     },
@@ -1279,7 +1291,7 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                         Padding(
                           padding: EdgeInsets.only(top: 12, bottom: 6),
                           child: Image.network(
-                            'naqlilogo.png',
+                            'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/naqlilogo.png?alt=media&token=db201cb1-dd7b-4b9e-b364-8fb7fa3b95db',
                           ),
                         ),
                         Row(
@@ -1423,15 +1435,18 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                 UnitsContainer(
                                                   unitNames: [
                                                     {
-                                                      'image': 'Group2181.png',
+                                                      'image':
+                                                          'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/Group%202181.png?alt=media&token=d1037eba-4e97-4688-be85-b76c1774baef',
                                                       'name': 'Dump truck'
                                                     },
                                                     {
-                                                      'image': 'Group2270.png',
+                                                      'image':
+                                                          'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/Group%202270.png?alt=media&token=628e8fe5-1435-4441-832d-c131a00e62ac',
                                                       'name': 'Forklift'
                                                     },
                                                     {
-                                                      'image': 'Group2271.png',
+                                                      'image':
+                                                          'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/Group%202271.png?alt=media&token=a908e28e-1818-4786-a1e6-bb36943c9592',
                                                       'name': 'Scissorlift'
                                                     },
                                                   ],
@@ -1456,15 +1471,18 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                 UnitsContainer(
                                                   unitNames: [
                                                     {
-                                                      'image': 'Group2181.png',
+                                                      'image':
+                                                          'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/Group2181.png?alt=media&token=456cf532-6b18-4173-9665-51298359399f',
                                                       'name': 'Dump truck'
                                                     },
                                                     {
-                                                      'image': 'Group2270.png',
+                                                      'image':
+                                                          'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/Group2270.png?alt=media&token=98262fea-5430-4e39-852d-7c05d3cdbe1c',
                                                       'name': 'Forklift'
                                                     },
                                                     {
-                                                      'image': 'Group2271.png',
+                                                      'image':
+                                                          'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/Group2271.png?alt=media&token=d76e90fe-7136-4a44-8cba-ae930c1ec451',
                                                       'name': 'Scissorlift'
                                                     },
                                                   ],
@@ -1489,15 +1507,18 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                 UnitsContainer(
                                                   unitNames: [
                                                     {
-                                                      'image': 'Group2181.png',
+                                                      'image':
+                                                          'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/Group2181.png?alt=media&token=456cf532-6b18-4173-9665-51298359399f',
                                                       'name': 'Dump truck'
                                                     },
                                                     {
-                                                      'image': 'Group2270.png',
+                                                      'image':
+                                                          'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/Group2270.png?alt=media&token=98262fea-5430-4e39-852d-7c05d3cdbe1c',
                                                       'name': 'Forklift'
                                                     },
                                                     {
-                                                      'image': 'Group2271.png',
+                                                      'image':
+                                                          'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/Group%202271.png?alt=media&token=a908e28e-1818-4786-a1e6-bb36943c9592',
                                                       'name': 'Scissorlift'
                                                     },
                                                   ],
@@ -1522,15 +1543,18 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                 UnitsContainer(
                                                   unitNames: [
                                                     {
-                                                      'image': 'Group2181.png',
+                                                      'image':
+                                                          'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/Group2181.png?alt=media&token=456cf532-6b18-4173-9665-51298359399f',
                                                       'name': 'Dump truck'
                                                     },
                                                     {
-                                                      'image': 'Group2270.png',
+                                                      'image':
+                                                          'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/Group2270.png?alt=media&token=98262fea-5430-4e39-852d-7c05d3cdbe1c',
                                                       'name': 'Forklift'
                                                     },
                                                     {
-                                                      'image': 'Group2271.png',
+                                                      'image':
+                                                          'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/Group2271.png?alt=media&token=d76e90fe-7136-4a44-8cba-ae930c1ec451',
                                                       'name': 'Scissorlift'
                                                     },
                                                   ],
