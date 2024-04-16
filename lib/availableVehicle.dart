@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/cupertino.dart';
@@ -89,6 +91,27 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
     _vechiKey5 = GlobalKey<CustomContainerState>();
     _vechiKey6 = GlobalKey<CustomContainerState>();
     _vechiKey7 = GlobalKey<CustomContainerState>();
+  }
+
+  String _generateBookingID(String newBookingId) {
+    Random random = Random();
+
+    String bookingID = '';
+    for (int i = 0; i < 10; i++) {
+      bookingID += random.nextInt(10).toString();
+    }
+
+    FirebaseFirestore.instance
+        .collection('user')
+        .doc(widget.user)
+        .collection(
+            'vehicleBooking') // Replace 'subcollectionName' with your subcollection name
+        .doc(
+            newBookingId) // Replace 'subdocId' with the ID of the document in the subcollection
+        .update({
+      "bookingid": bookingID,
+    });
+    return bookingID;
   }
 
   Future<void> _showDatePicker(BuildContext context) async {
@@ -1339,6 +1362,9 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                                                           .user!);
                                                               String unitType =
                                                                   'Vehicle';
+                                                              String bookingId =
+                                                                  _generateBookingID(
+                                                                      newBookingId);
                                                               showDialog(
                                                                 barrierDismissible:
                                                                     true,
@@ -1357,8 +1383,8 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                                                   return BookingIDDialog(
                                                                     user: widget
                                                                         .user,
-                                                                    newBookingId:
-                                                                        newBookingId,
+                                                                    bookingId:
+                                                                        bookingId,
                                                                     unitType:
                                                                         unitType,
                                                                   );

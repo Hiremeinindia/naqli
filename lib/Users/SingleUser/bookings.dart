@@ -46,11 +46,15 @@ class _BookingsState extends State<Bookings> {
     mapController = controller;
   }
 
-  void _BookingConfirm(BuildContext context) {
+  void _BookingConfirm(BuildContext context, String bookingId) {
+    print('track 2');
+    print('==================$bookingId');
     showDialog(
       barrierColor: Color.fromRGBO(59, 57, 57, 1).withOpacity(0.5),
       context: context,
       builder: (context) {
+        print('track 3');
+        print('------------------$bookingId');
         return Padding(
           padding: EdgeInsets.fromLTRB(30.w, 0, 30.w, 0),
           child: Padding(
@@ -123,7 +127,7 @@ class _BookingsState extends State<Bookings> {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Text(
-                                'BOOKING ID ${widget.bookingId} Confirmed',
+                                'BOOKING ID $bookingId Confirmed',
                                 style: TextStyle(
                                   fontSize: 22,
                                   color: Color.fromRGBO(104, 102, 124, 1),
@@ -344,9 +348,13 @@ class _BookingsState extends State<Bookings> {
                 Expanded(
                   child: CustomButton2(
                     onPressed: () {
-                      setState(() {
-                        screenState = 1; // Change the screenState to 1
-                      });
+                      print('track 1');
+                      if (widget.bookingId != null) {
+                        _BookingConfirm(context, widget.bookingId!);
+                      } else {
+                        // Handle the case where widget.bookingId is null
+                        print('Error: bookingId is null');
+                      }
                     },
                     text1: 'Pay Advance: ',
                     text2: 'XXXX',
@@ -358,7 +366,19 @@ class _BookingsState extends State<Bookings> {
                 Expanded(
                   child: CustomButton2(
                     onPressed: () {
-                      _BookingConfirm(context);
+                      showDialog(
+                          barrierColor:
+                              Color.fromRGBO(59, 57, 57, 1).withOpacity(0.5),
+                          context: context,
+                          builder: (context) {
+                            return Padding(
+                              padding: EdgeInsets.fromLTRB(30.w, 0, 30.w, 0),
+                              child: Padding(
+                                  padding: const EdgeInsets.only(left: 350),
+                                  child: BookingSuccessDialog(
+                                      bookingId: widget.bookingId)),
+                            );
+                          });
                     },
                     text1: 'Pay: ',
                     text2: 'XXXX',

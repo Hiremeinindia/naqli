@@ -111,6 +111,27 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
     }
   }
 
+  String _generateBookingID(String newBookingId) {
+    Random random = Random();
+
+    String bookingID = '';
+    for (int i = 0; i < 10; i++) {
+      bookingID += random.nextInt(10).toString();
+    }
+
+    FirebaseFirestore.instance
+        .collection('user')
+        .doc(widget.user)
+        .collection(
+            'equipmentBookings') // Replace 'subcollectionName' with your subcollection name
+        .doc(
+            newBookingId) // Replace 'subdocId' with the ID of the document in the subcollection
+        .update({
+      "bookingid": bookingID,
+    });
+    return bookingID;
+  }
+
   Future<String> createNewBooking(
     String truck,
     String load,
@@ -1178,6 +1199,9 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                                           .user!);
                                                               String unitType =
                                                                   'Equipment';
+                                                              String bookingId =
+                                                                  _generateBookingID(
+                                                                      newBookingId);
                                                               showDialog(
                                                                 barrierDismissible:
                                                                     true,
@@ -1196,8 +1220,8 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                                                   return BookingIDDialog(
                                                                     user: widget
                                                                         .user,
-                                                                    newBookingId:
-                                                                        newBookingId,
+                                                                    bookingId:
+                                                                        bookingId,
                                                                     unitType:
                                                                         unitType,
                                                                   );
