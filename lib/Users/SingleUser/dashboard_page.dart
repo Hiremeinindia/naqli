@@ -27,7 +27,7 @@ class SingleUserDashboardPage extends StatefulWidget {
       {required this.user, this.unitType, this.bookingId});
 
   @override
-  State<SingleUserDashboardPage> createState() => _MyHomePageState();
+  _MyHomePageState createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<SingleUserDashboardPage> {
