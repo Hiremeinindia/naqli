@@ -210,8 +210,8 @@ class _TriggerBookingState extends State<TriggerBooking> {
                                             padding: EdgeInsets.zero,
                                             constraints: BoxConstraints(),
                                             onPressed: () {},
-                                            icon: image
-                                                .network('deleteicon.png')),
+                                            icon: Image.network(
+                                                'deleteicon.png')),
                                         SizedBox(
                                           width: 2.w,
                                         ),
@@ -394,8 +394,8 @@ class _TriggerBookingState extends State<TriggerBooking> {
                                             padding: EdgeInsets.zero,
                                             constraints: BoxConstraints(),
                                             onPressed: () {},
-                                            icon: image
-                                                .network('deleteicon.png')),
+                                            icon: Image.network(
+                                                'deleteicon.png')),
                                         SizedBox(
                                           width: 2.w,
                                         ),
@@ -580,8 +580,8 @@ class _TriggerBookingState extends State<TriggerBooking> {
                                             padding: EdgeInsets.zero,
                                             constraints: BoxConstraints(),
                                             onPressed: () {},
-                                            icon: image
-                                                .network('deleteicon.png')),
+                                            icon: Image.network(
+                                                'deleteicon.png')),
                                         SizedBox(
                                           width: 2.w,
                                         ),
