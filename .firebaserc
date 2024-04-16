@@ -1,5 +1,9 @@
 {
   "projects": {
-    "default": "naqli-5825c"
-  }
+    "default": "naqlifordomain",
+    "naqlifordomain": "naqlifordomain",
+    "naqli-5825c": "naqli-5825c"
+  },
+  "targets": {},
+  "etags": {}
 }

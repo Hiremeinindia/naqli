@@ -612,7 +612,7 @@ class _State extends State<Partner> {
                       title: Container(
                         padding: const EdgeInsets.only(left: 5, top: 5),
                         child: Image.network(
-                          'naqlilogo.png',
+                          'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/naqlilogo.png?alt=media&token=db201cb1-dd7b-4b9e-b364-8fb7fa3b95db',
                           width: 50,
                           height: 50,
                         ),

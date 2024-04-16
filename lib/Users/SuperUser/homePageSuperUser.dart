@@ -95,7 +95,7 @@ class _MyHomePagesuperState extends State<MyHomePagesuper>
                         Padding(
                           padding: EdgeInsets.only(top: 12, bottom: 6),
                           child: Image.network(
-                            'naqlilogo.png',
+                            'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/naqlilogo.png?alt=media&token=db201cb1-dd7b-4b9e-b364-8fb7fa3b95db',
                           ),
                         ),
                         SizedBox(
@@ -992,7 +992,7 @@ class _MyHomePagesuperState extends State<MyHomePagesuper>
                           ],
                         ),
                         Image.network(
-                          'naqlilogo.png',
+                          'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/naqlilogo.png?alt=media&token=db201cb1-dd7b-4b9e-b364-8fb7fa3b95db',
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
