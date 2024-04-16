@@ -385,8 +385,8 @@ class _TriggerBookingState extends State<TriggerBooking> {
                                             padding: EdgeInsets.zero,
                                             constraints: BoxConstraints(),
                                             onPressed: () {},
-                                            icon:
-                                                Image.network('editicon.png')),
+                                            icon: Image.network(
+                                                'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/editicon.png?alt=media&token=b0315743-5ecb-437e-94e2-c6c3c82d343b')),
                                         SizedBox(
                                           width: 1.w,
                                         ),
@@ -395,7 +395,7 @@ class _TriggerBookingState extends State<TriggerBooking> {
                                             constraints: BoxConstraints(),
                                             onPressed: () {},
                                             icon: Image.network(
-                                                'deleteicon.png')),
+                                                'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/deleteicon.png?alt=media&token=ffdc3710-03dc-482a-90e5-72c72c83eb87')),
                                         SizedBox(
                                           width: 2.w,
                                         ),
@@ -571,8 +571,8 @@ class _TriggerBookingState extends State<TriggerBooking> {
                                             padding: EdgeInsets.zero,
                                             constraints: BoxConstraints(),
                                             onPressed: () {},
-                                            icon:
-                                                Image.network('editicon.png')),
+                                            icon: Image.network(
+                                                'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/editicon.png?alt=media&token=b0315743-5ecb-437e-94e2-c6c3c82d343b')),
                                         SizedBox(
                                           width: 1.w,
                                         ),
@@ -581,7 +581,7 @@ class _TriggerBookingState extends State<TriggerBooking> {
                                             constraints: BoxConstraints(),
                                             onPressed: () {},
                                             icon: Image.network(
-                                                'deleteicon.png')),
+                                                'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/deleteicon.png?alt=media&token=ffdc3710-03dc-482a-90e5-72c72c83eb87')),
                                         SizedBox(
                                           width: 2.w,
                                         ),

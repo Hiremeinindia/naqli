@@ -77,7 +77,7 @@ class _MyHomePageState extends State<MyHomePage>
                         Padding(
                           padding: EdgeInsets.only(top: 12, bottom: 6),
                           child: Image.network(
-                            'naqlilogo.png',
+                            'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/naqlilogo.png?alt=media&token=db201cb1-dd7b-4b9e-b364-8fb7fa3b95db',
                           ),
                         ),
                         SizedBox(
@@ -443,7 +443,7 @@ class _MyHomePageState extends State<MyHomePage>
                                                                   .end,
                                                           children: [
                                                             Image.network(
-                                                              'Group68.png',
+                                                              'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/Group68.png?alt=media&token=5fe75cdd-40f3-48ff-9838-dfadcaf41ae4',
                                                               width: 150,
                                                               height: 139,
                                                             ),
@@ -502,7 +502,7 @@ class _MyHomePageState extends State<MyHomePage>
                                                                   .end,
                                                           children: [
                                                             Image.network(
-                                                              'bus.png',
+                                                              'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/bus.png?alt=media&token=62ffdc20-210e-447e-a0e5-51e14b06b449',
                                                               width: 150,
                                                               height: 139,
                                                             ),
@@ -563,7 +563,7 @@ class _MyHomePageState extends State<MyHomePage>
                                                                   .end,
                                                           children: [
                                                             Image.network(
-                                                              'Group1496.png',
+                                                              'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/Group1496.png?alt=media&token=68985bbe-ba8a-4cd3-b4c9-b5f07ab7f3a5',
                                                               width: 150,
                                                               height: 139,
                                                             ),
@@ -624,7 +624,7 @@ class _MyHomePageState extends State<MyHomePage>
                                                                   .end,
                                                           children: [
                                                             Image.network(
-                                                              'Group1660.png',
+                                                              'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/Group1660.png?alt=media&token=e1bdac76-bbdc-4d25-9003-665b2b936a99',
                                                               width: 150,
                                                               height: 139,
                                                             ),
@@ -685,7 +685,7 @@ class _MyHomePageState extends State<MyHomePage>
                                                                   .end,
                                                           children: [
                                                             Image.network(
-                                                              'Group1716.png',
+                                                              'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/Group1716.png?alt=media&token=416db349-0c72-4bbe-b160-74792ba49f6e',
                                                               width: 150,
                                                               height: 139,
                                                             ),
@@ -811,7 +811,7 @@ class _MyHomePageState extends State<MyHomePage>
                                                                 SizedBox(
                                                                     height: 20),
                                                                 Image.network(
-                                                                  'right-arrow.png',
+                                                                  'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/right-arrow.png?alt=media&token=cba6795c-11eb-449b-8a9a-ac790bf408f5',
                                                                   width: 30,
                                                                   height: 30,
                                                                   color: Colors
@@ -976,7 +976,7 @@ class _MyHomePageState extends State<MyHomePage>
                           ],
                         ),
                         Image.network(
-                          'naqlilogo.png',
+                          'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/naqlilogo.png?alt=media&token=db201cb1-dd7b-4b9e-b364-8fb7fa3b95db',
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
