@@ -265,7 +265,7 @@ class _BookingDetailsState extends State<Bookings> {
                                               Navigator.pop(context);
                                             },
                                             child: ImageIcon(
-                                              AssetImage('Path1379.png'),
+                                              NetworkImage('Path1379.png'),
                                               color: Color.fromRGBO(
                                                   112, 207, 151, 1),
                                             ),
@@ -420,7 +420,7 @@ class _BookingDetailsState extends State<Bookings> {
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(8.0),
                                       image: DecorationImage(
-                                        image: AssetImage('truckslide.jpg'),
+                                        image: NetworkImage('truckslide.jpg'),
                                         fit: BoxFit.cover,
                                       ),
                                     ),
@@ -430,7 +430,7 @@ class _BookingDetailsState extends State<Bookings> {
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(8.0),
                                       image: DecorationImage(
-                                        image: AssetImage('truckslide.jpg'),
+                                        image: NetworkImage('truckslide.jpg'),
                                         fit: BoxFit.cover,
                                       ),
                                     ),

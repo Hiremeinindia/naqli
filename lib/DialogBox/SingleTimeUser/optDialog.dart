@@ -126,7 +126,7 @@ class _OTPDialogState extends State<OTPDialog> {
                                 Navigator.pop(context);
                               },
                               child: ImageIcon(
-                                AssetImage('cancel.png'),
+                                NetworkImage('cancel.png'),
                                 color: Colors.black,
                               ),
                             ),

@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'dart:html';
+
 import 'dart:ui';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -182,7 +182,7 @@ class _MblNoDialogState extends State<MblNoDialog1> {
                           Navigator.pop(context);
                         },
                         child: ImageIcon(
-                          AssetImage('cancel.png'),
+                          NetworkImage('cancel.png'),
                           color: Colors.black,
                         ),
                       ),
@@ -382,7 +382,7 @@ class _MblNoDialogState extends State<MblNoDialog1> {
                               child: Row(
                                 children: [
                                   ImageIcon(
-                                    AssetImage(
+                                    NetworkImage(
                                       'approved.png',
                                     ),
                                     color: Color.fromRGBO(60, 55, 148, 1),
@@ -406,7 +406,7 @@ class _MblNoDialogState extends State<MblNoDialog1> {
                                           SingleTimeUserDashboardPage()));
                             },
                             child: ImageIcon(
-                              AssetImage('cancel.png'),
+                              NetworkImage('cancel.png'),
                               color: Colors.black,
                             ),
                           ),
@@ -476,7 +476,7 @@ class _MblNoDialogState extends State<MblNoDialog1> {
                                 Navigator.pop(context);
                               },
                               child: ImageIcon(
-                                AssetImage('cancel.png'),
+                                NetworkImage('cancel.png'),
                                 color: Colors.black,
                               ),
                             ),

@@ -100,7 +100,7 @@ class _MyHomePageState extends State<TripDetails> {
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(8.0),
                                 image: DecorationImage(
-                                  image: AssetImage('bridge.jpg'),
+                                  image: NetworkImage('bridge.jpg'),
                                   fit: BoxFit.cover,
                                 ),
                               ),
@@ -113,7 +113,7 @@ class _MyHomePageState extends State<TripDetails> {
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(8.0),
                                 image: DecorationImage(
-                                  image: AssetImage('bridge.jpg'),
+                                  image: NetworkImage('bridge.jpg'),
                                   fit: BoxFit.cover,
                                 ),
                               ),

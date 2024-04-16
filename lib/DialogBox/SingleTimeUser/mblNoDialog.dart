@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'dart:html';
+
 import 'dart:ui';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -266,7 +266,7 @@ class _MblNoDialogState extends State<MblNoDialog> {
                               Navigator.pop(context);
                             },
                             child: ImageIcon(
-                              AssetImage('cancel.png'),
+                              NetworkImage('cancel.png'),
                               color: Colors.black,
                             ),
                           ),
@@ -459,7 +459,7 @@ class _MblNoDialogState extends State<MblNoDialog> {
                                                                 .center,
                                                         children: [
                                                           ImageIcon(
-                                                            AssetImage(
+                                                            NetworkImage(
                                                                 'approved.png'),
                                                             color:
                                                                 Color.fromRGBO(
@@ -538,7 +538,7 @@ class _MblNoDialogState extends State<MblNoDialog> {
                                                         children: [
                                                           Center(
                                                             child: ImageIcon(
-                                                              AssetImage(
+                                                              NetworkImage(
                                                                   'cancel.png'),
                                                               color:
                                                                   Colors.black,
@@ -697,7 +697,7 @@ class _MblNoDialogState extends State<MblNoDialog> {
                                 Navigator.pop(context);
                               },
                               child: ImageIcon(
-                                AssetImage('cancel.png'),
+                                NetworkImage('cancel.png'),
                                 color: Colors.black,
                               ),
                             ),
@@ -815,7 +815,7 @@ class _MblNoDialogState extends State<MblNoDialog> {
                                 Navigator.pop(context);
                               },
                               child: ImageIcon(
-                                AssetImage('cancel.png'),
+                                NetworkImage('cancel.png'),
                                 color: Colors.black,
                               ),
                             ),

@@ -122,7 +122,7 @@ class _State extends State<Partner> {
                               Navigator.pop(context);
                             },
                             child: ImageIcon(
-                              AssetImage('cancel.png'),
+                              NetworkImage('cancel.png'),
                               color: Colors.black,
                             ),
                           ),

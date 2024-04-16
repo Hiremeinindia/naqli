@@ -371,7 +371,7 @@ class _BookingDetailsState extends State<BookingDetails> {
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(8.0),
                                       image: DecorationImage(
-                                        image: AssetImage('truckslide.jpg'),
+                                        image: NetworkImage('truckslide.jpg'),
                                         fit: BoxFit.cover,
                                       ),
                                     ),
@@ -381,7 +381,7 @@ class _BookingDetailsState extends State<BookingDetails> {
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(8.0),
                                       image: DecorationImage(
-                                        image: AssetImage('truckslide.jpg'),
+                                        image: NetworkImage('truckslide.jpg'),
                                         fit: BoxFit.cover,
                                       ),
                                     ),

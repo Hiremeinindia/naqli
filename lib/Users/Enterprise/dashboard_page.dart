@@ -377,7 +377,7 @@ class _MyHomePageState extends State<EnterDashboardPage> {
                               decoration: BoxDecoration(
                                 image: DecorationImage(
                                   fit: BoxFit.fill,
-                                  image: AssetImage(
+                                  image: NetworkImage(
                                     'Circleavatar.png',
                                   ),
                                 ),
@@ -411,7 +411,7 @@ class _MyHomePageState extends State<EnterDashboardPage> {
                                         minRadius: 67,
                                         child: CircleAvatar(
                                           backgroundImage:
-                                              AssetImage('uploadimage.png'),
+                                              NetworkImage('uploadimage.png'),
                                           maxRadius: 65,
                                           minRadius: 65,
                                         )),
