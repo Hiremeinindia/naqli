@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/cupertino.dart';
@@ -21,7 +23,7 @@ import 'main.dart';
 class AvailableVehicle extends StatefulWidget {
   final String? user;
 
-  const AvailableVehicle({this.user});
+  AvailableVehicle({this.user});
 
   @override
   State<AvailableVehicle> createState() => _AvailableVehicleState();
@@ -91,6 +93,27 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
     _vechiKey7 = GlobalKey<CustomContainerState>();
   }
 
+  String _generateBookingID(String newBookingId) {
+    Random random = Random();
+
+    String bookingID = '';
+    for (int i = 0; i < 10; i++) {
+      bookingID += random.nextInt(10).toString();
+    }
+
+    FirebaseFirestore.instance
+        .collection('user')
+        .doc(widget.user)
+        .collection(
+            'vehicleBooking') // Replace 'subcollectionName' with your subcollection name
+        .doc(
+            newBookingId) // Replace 'subdocId' with the ID of the document in the subcollection
+        .update({
+      "bookingid": bookingID,
+    });
+    return bookingID;
+  }
+
   Future<void> _showDatePicker(BuildContext context) async {
     final DateTime? pickedDate = await showDatePicker(
       initialEntryMode: DatePickerEntryMode.calendarOnly,
@@ -113,6 +136,7 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
     String load,
     String size,
     String date,
+    String time,
     String labour,
     String adminUid,
   ) async {
@@ -132,7 +156,7 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
         'load': load,
         'size': size,
         'date': date,
-        'createdTime': Timestamp.now(),
+        'time': time,
         'labour': labour,
       });
 
@@ -762,6 +786,9 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                                                 child:
                                                                     CustomTextfieldGrey(
                                                                   text: 'Time',
+                                                                  controller:
+                                                                      controller
+                                                                          .time,
                                                                 ),
                                                               ),
                                                             ],
@@ -1309,6 +1336,10 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                                                   controller
                                                                       .load
                                                                       .text;
+                                                              String time =
+                                                                  controller
+                                                                      .time
+                                                                      .text;
                                                               String date =
                                                                   controller
                                                                       .date
@@ -1325,11 +1356,15 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                                                       load,
                                                                       size,
                                                                       date,
+                                                                      time,
                                                                       labour,
                                                                       widget
                                                                           .user!);
                                                               String unitType =
                                                                   'Vehicle';
+                                                              String bookingId =
+                                                                  _generateBookingID(
+                                                                      newBookingId);
                                                               showDialog(
                                                                 barrierDismissible:
                                                                     true,
@@ -1348,8 +1383,8 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                                                   return BookingIDDialog(
                                                                     user: widget
                                                                         .user,
-                                                                    newBookingId:
-                                                                        newBookingId,
+                                                                    bookingId:
+                                                                        bookingId,
                                                                     unitType:
                                                                         unitType,
                                                                   );

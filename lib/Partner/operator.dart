@@ -138,33 +138,6 @@ class _OperatorState extends State<Operator> {
     );
   }
 
-  Future<void> _saveUserDataToFirestore() async {
-    print("track2");
-    try {
-      CollectionReference usersCollection =
-          _firestore.collection('partneroperatoruser');
-
-      await usersCollection.add({
-        'UnitClassification': unitController.text,
-        'SubClassification': subController.text,
-        'PlateInformation': plateController.text,
-        'IstimaraNo': istimaraController.text,
-        'operatorName':
-            '${opfirstNameController.text} ${oplastNameController.text}',
-        'EmailId': emailController.text,
-        'MobileNo': mobilenoController.text,
-        'IqamaNo': iqamaController.text,
-        'DateOfBirth': dobController.text,
-        'PanelInformation': panelinfoController.text,
-        'Unit': _selectedValue,
-      });
-
-      print('User data saved to Firestore successfully!');
-    } catch (e) {
-      print('Error saving user data to Firestore: $e');
-    }
-  }
-
   Future<void> _startPhoneAuth(String phoneNumber) async {
     print("track3");
 
@@ -1174,7 +1147,6 @@ class _OperatorState extends State<Operator> {
                                     contactNumberController.text);
                                 // _showOtpVerificationDialog();
                                 // Save user data and start phone authentication
-                                await _saveUserDataToFirestore();
 
                                 String unit = controller.unitClassi.text;
                                 String sub = controller.subClassi.text;
@@ -1679,7 +1651,36 @@ class _OperatorState extends State<Operator> {
                                       contactNumberController.text);
                                   // _showOtpVerificationDialog();
                                   // Save user data and start phone authentication
-                                  await _saveUserDataToFirestore();
+                                  String unit = controller.unitClassi.text;
+                                  String sub = controller.subClassi.text;
+                                  String plateNo = controller.plateInfo.text;
+                                  String istimaraNo =
+                                      controller.istimaraNo.text;
+
+                                  String name =
+                                      '${opfirstNameController.text} ${oplastNameController.text}';
+                                  String email = controller.email.text;
+                                  String mblno = controller.contactNumber.text;
+                                  String iqamaNo = controller.iqamaNo.text;
+                                  String dob = controller.dob.text;
+                                  String plateinfo =
+                                      controller.operPlatInfo.text;
+                                  String operName = controller.partnerName.text;
+                                  String operatorid = operatorID;
+                                  await createOperator(
+                                      unit,
+                                      sub,
+                                      plateNo,
+                                      istimaraNo,
+                                      name,
+                                      email,
+                                      mblno,
+                                      iqamaNo,
+                                      dob,
+                                      plateinfo,
+                                      operName,
+                                      operatorid,
+                                      widget.user!);
                                 }
                               },
                               style: ElevatedButton.styleFrom(
