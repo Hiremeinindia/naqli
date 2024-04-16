@@ -782,118 +782,120 @@ class _MblNoDialogState extends State<MblNoDialog> {
             ),
           );
         } else {
-          return Padding(
-            padding: EdgeInsets.fromLTRB(18.w, 33.h, 18.w, 33.h),
-            child: SingleChildScrollView(
-              child: Expanded(
-                child: Card(
-                  elevation: 5,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(31))),
-                  child: Container(
-                    height: 280,
-                    decoration: const BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(31),
-                      ),
-                    ),
-                    padding: EdgeInsets.fromLTRB(4.w, 4.h, 2.w, 4.h),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Expanded(
-                              child: Center(
-                                child: Text('Enter Mobile No',
-                                    style: LoginpageText.helvetica30bold),
-                              ),
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.pop(context);
-                              },
-                              child: ImageIcon(
-                                NetworkImage(
-                                    'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/cancel.png?alt=media&token=dd1ed39b-abda-4780-94dd-f5c15e7d12f5'),
-                                color: Colors.black,
-                              ),
-                            ),
-                          ],
+          return Dialog(
+            child: Padding(
+              padding: EdgeInsets.fromLTRB(18.w, 33.h, 18.w, 33.h),
+              child: SingleChildScrollView(
+                child: Expanded(
+                  child: Card(
+                    elevation: 5,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(31))),
+                    child: Container(
+                      height: 280,
+                      decoration: const BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(31),
                         ),
-                        SizedBox(height: 20),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            SizedBox(
-                              height: 30,
-                              width: 200,
-                              child: TextField(
-                                controller: contactNumberController,
-                                keyboardType: TextInputType.number,
-                                decoration: InputDecoration(
-                                  hintText: '99999 99999',
-                                  contentPadding: EdgeInsets.only(
-                                    left: 1.w,
-                                  ),
-                                  hintStyle: DialogText.helvetica16sandal,
-                                  border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(0)),
+                      ),
+                      padding: EdgeInsets.fromLTRB(4.w, 4.h, 2.w, 4.h),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Expanded(
+                                child: Center(
+                                  child: Text('Enter Mobile No',
+                                      style: LoginpageText.helvetica30bold),
                                 ),
                               ),
-                            ),
-                            SizedBox(
-                              height: 30,
-                              child: ElevatedButton(
-                                onPressed: () async {
-                                  String adminUid = widget.adminUid!;
-                                  await _startPhoneAuth(
-                                      contactNumberController.text, adminUid);
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.pop(context);
                                 },
-                                style: ElevatedButton.styleFrom(
-                                    backgroundColor:
-                                        Color.fromRGBO(60, 55, 148, 1),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(0),
-                                    )),
-                                child: Text("Get OTP",
-                                    style: LoginpageText.helvetica16white),
+                                child: ImageIcon(
+                                  NetworkImage(
+                                      'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/cancel.png?alt=media&token=dd1ed39b-abda-4780-94dd-f5c15e7d12f5'),
+                                  color: Colors.black,
+                                ),
                               ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: 40),
-                        Padding(
-                          padding: EdgeInsets.only(left: 2.w, right: 5.w),
-                          child: Divider(
-                            color: Color.fromRGBO(112, 112, 112, 1),
+                            ],
                           ),
-                        ),
-                        SizedBox(height: 10),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text("Don't have an account?",
-                                style: HomepageText.helvetica16black),
-                            InkWell(
-                              child: Text('Create One!',
-                                  style: LoginpageText.purplehelvetica),
-                              onTap: () {
-                                showDialog(
-                                  barrierColor: Colors.grey.withOpacity(0.5),
-                                  context: context,
-                                  builder: (context) {
-                                    return CreateAccount();
+                          SizedBox(height: 20),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SizedBox(
+                                height: 30,
+                                width: 200,
+                                child: TextField(
+                                  controller: contactNumberController,
+                                  keyboardType: TextInputType.number,
+                                  decoration: InputDecoration(
+                                    hintText: '99999 99999',
+                                    contentPadding: EdgeInsets.only(
+                                      left: 1.w,
+                                    ),
+                                    hintStyle: DialogText.helvetica16sandal,
+                                    border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(0)),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                height: 30,
+                                child: ElevatedButton(
+                                  onPressed: () async {
+                                    String adminUid = widget.adminUid!;
+                                    await _startPhoneAuth(
+                                        contactNumberController.text, adminUid);
                                   },
-                                );
-                              },
+                                  style: ElevatedButton.styleFrom(
+                                      backgroundColor:
+                                          Color.fromRGBO(60, 55, 148, 1),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(0),
+                                      )),
+                                  child: Text("Get OTP",
+                                      style: LoginpageText.helvetica16white),
+                                ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(height: 40),
+                          Padding(
+                            padding: EdgeInsets.only(left: 2.w, right: 5.w),
+                            child: Divider(
+                              color: Color.fromRGBO(112, 112, 112, 1),
                             ),
-                          ],
-                        ),
-                      ],
+                          ),
+                          SizedBox(height: 10),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text("Don't have an account?",
+                                  style: HomepageText.helvetica16black),
+                              InkWell(
+                                child: Text('Create One!',
+                                    style: LoginpageText.purplehelvetica),
+                                onTap: () {
+                                  showDialog(
+                                    barrierColor: Colors.grey.withOpacity(0.5),
+                                    context: context,
+                                    builder: (context) {
+                                      return CreateAccount();
+                                    },
+                                  );
+                                },
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
