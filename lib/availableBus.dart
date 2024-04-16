@@ -382,7 +382,7 @@ class _AvailableBusState extends State<AvailableBus> {
                                 width: double.infinity,
                                 fit: BoxFit.cover,
                                 image: NetworkImage(
-                                    'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/truckslide.jpg?alt=media&token=3abaaa7a-3c22-44e3-81d2-d16af7336273'),
+                                    'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/truckslide.jpg?alt=media&token=69e327e8-91b3-4a55-b640-04f1673d83d9'),
                               ),
                             ],
                           ),
@@ -1418,7 +1418,7 @@ class _AvailableBusState extends State<AvailableBus> {
                                                           width: 150,
                                                           height: 100,
                                                           image: NetworkImage(
-                                                              'assets/Group 2775.png'),
+                                                              'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/Group2775.png?alt=media&token=863e2800-a09a-401d-8eb1-474d30025c89'),
                                                         ),
                                                         Divider(
                                                           color: Color.fromRGBO(
@@ -1476,7 +1476,7 @@ class _AvailableBusState extends State<AvailableBus> {
                                                           width: 150,
                                                           height: 100,
                                                           image: NetworkImage(
-                                                              'assets/Group 2709.png'),
+                                                              'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/Group%202709.png?alt=media&token=97297395-0f33-46b5-bc0f-0a68245fca78'),
                                                         ),
                                                         Divider(
                                                           color: Color.fromRGBO(
@@ -1540,7 +1540,7 @@ class _AvailableBusState extends State<AvailableBus> {
                                                           width: 150,
                                                           height: 100,
                                                           image: NetworkImage(
-                                                              'assets/Group 2860.png'),
+                                                              'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/Group2860.png?alt=media&token=e8d3012c-6bd4-4583-81b8-0f0ac41131a0'),
                                                         ),
                                                         Divider(
                                                           color: Color.fromRGBO(
