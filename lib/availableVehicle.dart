@@ -383,7 +383,8 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                               Image(
                                 width: double.infinity,
                                 fit: BoxFit.cover,
-                                image: AssetImage('truckslide.jpg'),
+                                image: NetworkImage(
+                                    'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/truckslide.jpg?alt=media&token=3abaaa7a-3c22-44e3-81d2-d16af7336273'),
                               ),
                             ],
                           ),
@@ -1604,7 +1605,8 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                               Image(
                                 width: double.infinity,
                                 fit: BoxFit.cover,
-                                image: AssetImage('truckslide.jpg'),
+                                image: NetworkImage(
+                                    'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/truckslide.jpg?alt=media&token=3abaaa7a-3c22-44e3-81d2-d16af7336273'),
                               ),
                             ],
                           ),

@@ -112,7 +112,8 @@ class _GetanEstimateState extends State<GetanEstimate> {
                                         Navigator.pop(context);
                                       },
                                       child: ImageIcon(
-                                        AssetImage('cancel.png'),
+                                        NetworkImage(
+                                            'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/cancel.png?alt=media&token=dd1ed39b-abda-4780-94dd-f5c15e7d12f5'),
                                         color: Color.fromRGBO(112, 112, 112, 1),
                                       ),
                                     ),
@@ -138,7 +139,8 @@ class _GetanEstimateState extends State<GetanEstimate> {
                                       },
                                       child: ElevationUnitContainer(
                                         text1: 'Vehicle',
-                                        imgpath: 'Group68.png',
+                                        imgpath:
+                                            'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/Group68.png?alt=media&token=5fe75cdd-40f3-48ff-9838-dfadcaf41ae4',
                                       ),
                                     ),
                                     SizedBox(
@@ -155,7 +157,8 @@ class _GetanEstimateState extends State<GetanEstimate> {
                                       },
                                       child: ElevationUnitContainer(
                                         text1: 'Bus',
-                                        imgpath: 'bus.png',
+                                        imgpath:
+                                            'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/bus.png?alt=media&token=62ffdc20-210e-447e-a0e5-51e14b06b449',
                                       ),
                                     ),
                                     SizedBox(
@@ -172,7 +175,8 @@ class _GetanEstimateState extends State<GetanEstimate> {
                                       },
                                       child: ElevationUnitContainer(
                                         text1: 'Equipment',
-                                        imgpath: 'Group1496.png',
+                                        imgpath:
+                                            'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/Group1496.png?alt=media&token=68985bbe-ba8a-4cd3-b4c9-b5f07ab7f3a5',
                                       ),
                                     ),
                                     SizedBox(
@@ -191,7 +195,8 @@ class _GetanEstimateState extends State<GetanEstimate> {
                                       },
                                       child: ElevationUnitContainer(
                                         text1: 'Special',
-                                        imgpath: 'Group1660.png',
+                                        imgpath:
+                                            'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/Group1660.png?alt=media&token=e1bdac76-bbdc-4d25-9003-665b2b936a99',
                                       ),
                                     ),
                                     SizedBox(
@@ -210,7 +215,8 @@ class _GetanEstimateState extends State<GetanEstimate> {
                                       },
                                       child: ElevationUnitContainer(
                                         text1: 'Others',
-                                        imgpath: 'Group1716.png',
+                                        imgpath:
+                                            'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/Group1716.png?alt=media&token=416db349-0c72-4bbe-b160-74792ba49f6e',
                                       ),
                                     ),
                                     SizedBox(height: 25),

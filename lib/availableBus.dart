@@ -381,7 +381,8 @@ class _AvailableBusState extends State<AvailableBus> {
                               Image(
                                 width: double.infinity,
                                 fit: BoxFit.cover,
-                                image: AssetImage('truckslide.jpg'),
+                                image: NetworkImage(
+                                    'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/truckslide.jpg?alt=media&token=3abaaa7a-3c22-44e3-81d2-d16af7336273'),
                               ),
                             ],
                           ),
@@ -475,7 +476,7 @@ class _AvailableBusState extends State<AvailableBus> {
                                                           ElevationUnitsContainer(
                                                         text1: '< 15 Pax',
                                                         imgpath:
-                                                            'Group15549.png',
+                                                            'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/Group15549.png?alt=media&token=7cce4067-5c4a-4bd5-878c-5c1d110b2d32',
                                                       ),
                                                     ),
                                                     GestureDetector(
@@ -490,7 +491,7 @@ class _AvailableBusState extends State<AvailableBus> {
                                                           ElevationUnitsContainer(
                                                         text1: '15 - 30 pax',
                                                         imgpath:
-                                                            'Group2775.png',
+                                                            'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/Group2775.png?alt=media&token=966f966c-fbba-4d8f-acca-ddf2d5b09717',
                                                       ),
                                                     ),
                                                   ],
@@ -514,7 +515,7 @@ class _AvailableBusState extends State<AvailableBus> {
                                                           ElevationUnitsContainer(
                                                         text1: '+30 pax',
                                                         imgpath:
-                                                            'Group2860.png',
+                                                            'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/Group2860.png?alt=media&token=6a22d498-6cce-47f5-84bd-986cbdeafa94',
                                                       ),
                                                     ),
                                                     Container(
@@ -1311,7 +1312,8 @@ class _AvailableBusState extends State<AvailableBus> {
                               Image(
                                 width: double.infinity,
                                 fit: BoxFit.cover,
-                                image: AssetImage('truckslide.jpg'),
+                                image: NetworkImage(
+                                    'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/truckslide.jpg?alt=media&token=3abaaa7a-3c22-44e3-81d2-d16af7336273'),
                               ),
                             ],
                           ),
@@ -1415,7 +1417,7 @@ class _AvailableBusState extends State<AvailableBus> {
                                                         Image(
                                                           width: 150,
                                                           height: 100,
-                                                          image: AssetImage(
+                                                          image: NetworkImage(
                                                               'assets/Group 2775.png'),
                                                         ),
                                                         Divider(
@@ -1473,7 +1475,7 @@ class _AvailableBusState extends State<AvailableBus> {
                                                         Image(
                                                           width: 150,
                                                           height: 100,
-                                                          image: AssetImage(
+                                                          image: NetworkImage(
                                                               'assets/Group 2709.png'),
                                                         ),
                                                         Divider(
@@ -1537,7 +1539,7 @@ class _AvailableBusState extends State<AvailableBus> {
                                                         Image(
                                                           width: 150,
                                                           height: 100,
-                                                          image: AssetImage(
+                                                          image: NetworkImage(
                                                               'assets/Group 2860.png'),
                                                         ),
                                                         Divider(

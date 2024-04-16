@@ -370,7 +370,7 @@ class _MyHomePageState extends State<PartnerDashboardPage> {
                               decoration: BoxDecoration(
                                 image: DecorationImage(
                                   fit: BoxFit.fill,
-                                  image: AssetImage(
+                                  image: NetworkImage(
                                     'Circleavatar.png',
                                   ),
                                 ),
@@ -403,8 +403,8 @@ class _MyHomePageState extends State<PartnerDashboardPage> {
                                         maxRadius: 70,
                                         minRadius: 67,
                                         child: CircleAvatar(
-                                          backgroundImage:
-                                              AssetImage('uploadimage.png'),
+                                          backgroundImage: NetworkImage(
+                                              'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/uploadimage.png?alt=media&token=1793876b-63ca-4730-831b-4fcf4e96da0a'),
                                           maxRadius: 65,
                                           minRadius: 65,
                                         )),

@@ -214,7 +214,8 @@ class _MyHomePageState extends State<HomePagePartner> {
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(8.0),
                                 image: DecorationImage(
-                                  image: AssetImage('Group716.png'),
+                                  image: NetworkImage(
+                                      'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/Group716.png?alt=media&token=023be9e2-6405-499e-9e42-9165dd81e42e'),
                                   fit: BoxFit.cover,
                                 ),
                               ),
@@ -224,7 +225,8 @@ class _MyHomePageState extends State<HomePagePartner> {
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(8.0),
                                 image: DecorationImage(
-                                  image: AssetImage('Group716.png'),
+                                  image: NetworkImage(
+                                      'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/Group716.png?alt=media&token=023be9e2-6405-499e-9e42-9165dd81e42e'),
                                   fit: BoxFit.cover,
                                 ),
                               ),
@@ -607,7 +609,8 @@ class _MyHomePageState extends State<HomePagePartner> {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8.0),
                         image: DecorationImage(
-                          image: AssetImage('Group716.png'),
+                          image: NetworkImage(
+                              'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/Group716.png?alt=media&token=023be9e2-6405-499e-9e42-9165dd81e42e'),
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -617,7 +620,8 @@ class _MyHomePageState extends State<HomePagePartner> {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8.0),
                         image: DecorationImage(
-                          image: AssetImage('Group716.png'),
+                          image: NetworkImage(
+                              'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/Group716.png?alt=media&token=023be9e2-6405-499e-9e42-9165dd81e42e'),
                           fit: BoxFit.cover,
                         ),
                       ),

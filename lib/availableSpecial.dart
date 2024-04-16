@@ -390,7 +390,8 @@ class _AvailableSpecialState extends State<AvailableSpecial> {
                               Image(
                                 width: double.infinity,
                                 fit: BoxFit.cover,
-                                image: AssetImage('truckslide.jpg'),
+                                image: NetworkImage(
+                                    'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/truckslide.jpg?alt=media&token=3abaaa7a-3c22-44e3-81d2-d16af7336273'),
                               ),
                             ],
                           ),
@@ -514,7 +515,7 @@ class _AvailableSpecialState extends State<AvailableSpecial> {
                                                                 child: Image(
                                                                   width: 100,
                                                                   height: 90,
-                                                                  image: AssetImage(
+                                                                  image: NetworkImage(
                                                                       'Group2366.png'),
                                                                 ),
                                                               ),
@@ -588,7 +589,7 @@ class _AvailableSpecialState extends State<AvailableSpecial> {
                                                                 child: Image(
                                                                   width: 100,
                                                                   height: 90,
-                                                                  image: AssetImage(
+                                                                  image: NetworkImage(
                                                                       'Group2491.png'),
                                                                 ),
                                                               ),
@@ -661,7 +662,7 @@ class _AvailableSpecialState extends State<AvailableSpecial> {
                                                                 child: Image(
                                                                   width: 100,
                                                                   height: 90,
-                                                                  image: AssetImage(
+                                                                  image: NetworkImage(
                                                                       'Group11635.png'),
                                                                 ),
                                                               ),
@@ -748,7 +749,7 @@ class _AvailableSpecialState extends State<AvailableSpecial> {
                                                                   child: Image(
                                                                     width: 100,
                                                                     height: 90,
-                                                                    image: AssetImage(
+                                                                    image: NetworkImage(
                                                                         'Group2676.png'),
                                                                   ),
                                                                 ),
@@ -826,7 +827,7 @@ class _AvailableSpecialState extends State<AvailableSpecial> {
                                                                 child: Image(
                                                                   width: 100,
                                                                   height: 90,
-                                                                  image: AssetImage(
+                                                                  image: NetworkImage(
                                                                       'Group15533.png'),
                                                                 ),
                                                               ),
@@ -1646,7 +1647,8 @@ class _AvailableSpecialState extends State<AvailableSpecial> {
                               Image(
                                 width: double.infinity,
                                 fit: BoxFit.cover,
-                                image: AssetImage('truckslide.jpg'),
+                                image: NetworkImage(
+                                    'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/truckslide.jpg?alt=media&token=3abaaa7a-3c22-44e3-81d2-d16af7336273'),
                               ),
                             ],
                           ),
@@ -1745,7 +1747,7 @@ class _AvailableSpecialState extends State<AvailableSpecial> {
                                                         Image(
                                                           width: 100,
                                                           height: 90,
-                                                          image: AssetImage(
+                                                          image: NetworkImage(
                                                               'Group 2366.png'),
                                                         ),
                                                         Divider(
@@ -1797,7 +1799,7 @@ class _AvailableSpecialState extends State<AvailableSpecial> {
                                                         Image(
                                                           width: 100,
                                                           height: 90,
-                                                          image: AssetImage(
+                                                          image: NetworkImage(
                                                               'Group 2491.png'),
                                                         ),
                                                         Divider(
@@ -1848,7 +1850,7 @@ class _AvailableSpecialState extends State<AvailableSpecial> {
                                                         Image(
                                                           width: 100,
                                                           height: 90,
-                                                          image: AssetImage(
+                                                          image: NetworkImage(
                                                               'Group 2676.png'),
                                                         ),
                                                         Divider(
@@ -1912,7 +1914,7 @@ class _AvailableSpecialState extends State<AvailableSpecial> {
                                                           Image(
                                                             width: 100,
                                                             height: 90,
-                                                            image: AssetImage(
+                                                            image: NetworkImage(
                                                                 'Group 2676.png'),
                                                           ),
                                                           Divider(
@@ -1971,7 +1973,7 @@ class _AvailableSpecialState extends State<AvailableSpecial> {
                                                         Image(
                                                           width: 100,
                                                           height: 90,
-                                                          image: AssetImage(
+                                                          image: NetworkImage(
                                                               'Group 2676.png'),
                                                         ),
                                                         Divider(
