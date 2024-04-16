@@ -150,8 +150,8 @@ class _State extends State<Partner> {
                         child: ElevatedButton(
                           onPressed: () async {
                             if (otpPin.length >= 6) {
-                              screenState = 1;
                               verifyOTP();
+                              screenState = 1;
                             } else {
                               SnackBar(
                                 content: Text('Enter OTP Correctly'),
@@ -206,21 +206,24 @@ class _State extends State<Partner> {
     );
   }
 
-  Future<void> _saveUserDataToFirestore() async {
+  Future<void> _saveUserDataToFirestore(String uid) async {
     print("track2");
-    try {
-      CollectionReference usersCollection =
-          _firestore.collection('partneruser');
 
-      await usersCollection.add({
+    try {
+      String userCollection;
+      Map<String, dynamic> userData = {
         'firstName': controller.firstName.text,
         'email': controller.email.text,
         'phoneNumber': controller.contactNumber.text,
-      });
-
-      print('User data saved to Firestore successfully!');
+        'password': controller.password.text
+      };
+      userCollection = 'partneruser';
+      await FirebaseFirestore.instance
+          .collection(userCollection)
+          .doc(uid)
+          .set(userData);
     } catch (e) {
-      print('Error saving user data to Firestore: $e');
+      print("Data doesn't store : $e");
     }
   }
 
@@ -553,18 +556,21 @@ class _State extends State<Partner> {
                                                 password:
                                                     controller.password.text,
                                               );
-                                              await _saveUserDataToFirestore();
                                               String userId =
                                                   userCredential.user!.uid;
+                                              await _saveUserDataToFirestore(
+                                                  userId);
 
                                               if (userCredential.user != null) {
-                                                Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          Operator(
-                                                            user: userId,
-                                                          )),
+                                                showDialog(
+                                                  barrierColor:
+                                                      Colors.transparent,
+                                                  context: context,
+                                                  builder: (context) {
+                                                    return Operator(
+                                                      user: userId,
+                                                    );
+                                                  },
                                                 );
                                               } else {
                                                 showErrorDialog(

@@ -12,6 +12,7 @@ import 'package:flutter_application_1/Widgets/customButton.dart';
 import 'package:flutter_application_1/Widgets/customDropdown.dart';
 import 'package:flutter_application_1/Widgets/customTextField.dart';
 import 'package:flutter_application_1/Widgets/formText.dart';
+import 'package:flutter_application_1/loginPage.dart';
 import 'package:sizer/sizer.dart';
 
 class CreateAccount extends StatefulWidget {
@@ -561,7 +562,7 @@ class _CreateAccountState extends State<CreateAccount> {
                                   style: HomepageText.helvetica16black),
                               InkWell(
                                 onTap: () {
-                                  // Call _register function when onTap is triggered
+                                  Navigator.pop(context);
                                 },
                                 child: Text(
                                   'Sign In',
@@ -1054,7 +1055,9 @@ class _CreateAccountState extends State<CreateAccount> {
                               Text('Already have an account? ',
                                   style: HomepageText.helvetica16black),
                               InkWell(
-                                onTap: () {},
+                                onTap: () {
+                                  Navigator.pop(context);
+                                },
                                 child: Text(
                                   'Sign In',
                                   style: TextStyle(

@@ -1,5 +1,7 @@
 // ignore_for_file: dead_code
 
+import 'dart:math';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:dropdown_model_list/dropdown_model_list.dart';
@@ -88,6 +90,27 @@ class _AvailableSpecialState extends State<AvailableSpecial> {
         controller.date.text = DateFormat('dd/MM/yyyy').format(_pickedDate!);
       });
     }
+  }
+
+  String _generateBookingID(String newBookingId) {
+    Random random = Random();
+
+    String bookingID = '';
+    for (int i = 0; i < 10; i++) {
+      bookingID += random.nextInt(10).toString();
+    }
+
+    FirebaseFirestore.instance
+        .collection('user')
+        .doc(widget.user)
+        .collection(
+            'specialothersBookings') // Replace 'subcollectionName' with your subcollection name
+        .doc(
+            newBookingId) // Replace 'subdocId' with the ID of the document in the subcollection
+        .update({
+      "bookingid": bookingID,
+    });
+    return bookingID;
   }
 
   Future<String> createNewBooking(
@@ -1387,7 +1410,12 @@ class _AvailableSpecialState extends State<AvailableSpecial> {
                                                                         .user!);
                                                             String unitType =
                                                                 'Special/Others';
+                                                            String bookingId =
+                                                                _generateBookingID(
+                                                                    newBookingId);
                                                             showDialog(
+                                                              barrierDismissible:
+                                                                  true,
                                                               barrierColor: Color
                                                                       .fromRGBO(
                                                                           59,
@@ -1402,8 +1430,8 @@ class _AvailableSpecialState extends State<AvailableSpecial> {
                                                                 return BookingIDDialog(
                                                                   user: widget
                                                                       .user,
-                                                                  newBookingId:
-                                                                      newBookingId,
+                                                                  bookingId:
+                                                                      bookingId,
                                                                   unitType:
                                                                       unitType,
                                                                 );

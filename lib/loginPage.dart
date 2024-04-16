@@ -554,7 +554,7 @@ class _LoginPageState extends State<LoginPage> {
                               style: LoginpageText.purplehelvetica),
                           onTap: () {
                             showDialog(
-                              barrierColor: Colors.transparent,
+                              barrierColor: Colors.grey.withOpacity(0.5),
                               context: context,
                               builder: (context) {
                                 return ForgotPasswordPage();

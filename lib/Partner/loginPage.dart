@@ -8,6 +8,8 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_application_1/Controllers/allUsersFormController.dart';
 import 'package:flutter_application_1/DialogBox/SingleTimeUser/mblNoDialog.dart';
 import 'package:flutter_application_1/DialogBox/SingleTimeUser/verfiedDialog.dart';
+import 'package:flutter_application_1/Partner/Dashboard/dashboard_page.dart';
+import 'package:flutter_application_1/Partner/joinUs.dart';
 import 'package:flutter_application_1/Users/Enterprise/dashboard_page.dart';
 import 'package:flutter_application_1/Users/SingleUser/dashboard_page.dart';
 import 'package:flutter_application_1/Users/SingleUser/homePageSingleUser.dart';
@@ -200,7 +202,7 @@ class _LoginPageState extends State<LoginPage> {
                                 SizedBox(
                                   height: 20,
                                 ),
-                                Text('Email ID',
+                                Text('Parnter Id / Mobile No / Mail Id',
                                     style: HomepageText.helvetica16black),
                                 CustomTextfield(
                                   controller: controller.email,
@@ -225,65 +227,76 @@ class _LoginPageState extends State<LoginPage> {
                                         height: 50,
                                         child: ElevatedButton(
                                           onPressed: () async {
+                                            String email =
+                                                controller.email.text;
+                                            String password =
+                                                controller.password.text;
                                             try {
-                                              // Sign in with email and password
-                                              UserCredential userCredential =
-                                                  await _auth
-                                                      .signInWithEmailAndPassword(
-                                                email: controller.email.text,
-                                                password:
-                                                    controller.password.text,
-                                              );
-                                              String userId =
-                                                  userCredential.user!.uid;
-                                              // Check the user's role after successful sign-in
-                                              String userRole =
-                                                  await getUserRole(userId);
+                                              // Check if the entered text is an email or a phone number
+                                              if (email.contains('@')) {
+                                                // Sign in with email and password
+                                                UserCredential userCredential =
+                                                    await FirebaseAuth.instance
+                                                        .signInWithEmailAndPassword(
+                                                            email: email,
+                                                            password: password);
+                                                String userId =
+                                                    userCredential.user!.uid;
 
-                                              print('User Role = $userRole');
-                                              // Navigate to the appropriate dashboard based on the user's role
-                                              if (userRole == 'User') {
+                                                // Navigate to the appropriate dashboard based on the user's role
                                                 Navigator.pushReplacement(
                                                   context,
                                                   MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          MyHomePagesingle(
-                                                            user: userId,
-                                                          )),
-                                                );
-                                              } else if (userRole ==
-                                                  'Superuser') {
-                                                Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
                                                     builder: (context) =>
-                                                        SuperUserDashboardPage(
-                                                            user: userId),
-                                                  ),
-                                                );
-                                              } else if (userRole ==
-                                                  'Enterprise') {
-                                                Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        EnterDashboardPage(
+                                                        PartnerDashboardPage(
                                                             user: userId),
                                                   ),
                                                 );
                                               } else {
-                                                print('Unknown user role');
+                                                // Sign in with phone number
+                                                QuerySnapshot querySnapshot =
+                                                    await FirebaseFirestore
+                                                        .instance
+                                                        .collection(
+                                                            'partneruser')
+                                                        .where('phoneNumber',
+                                                            isEqualTo: email)
+                                                        .get();
+                                                if (querySnapshot
+                                                    .docs.isNotEmpty) {
+                                                  // User found with the phone number, now check password
+                                                  String storedPassword =
+                                                      querySnapshot.docs
+                                                          .first['password'];
+                                                  if (password ==
+                                                      storedPassword) {
+                                                    String userId =
+                                                        querySnapshot
+                                                            .docs.first.id;
+
+                                                    // Navigate to the appropriate dashboard based on the user's role
+                                                    Navigator.pushReplacement(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            PartnerDashboardPage(
+                                                                user: userId),
+                                                      ),
+                                                    );
+                                                  } else {
+                                                    // Incorrect password
+                                                    print('Incorrect password');
+                                                    // Handle incorrect password scenario
+                                                  }
+                                                } else {
+                                                  // User not found with the phone number
+                                                  print('User not found');
+                                                  // Handle user not found scenario
+                                                }
                                               }
-                                            } on FirebaseAuthException catch (e) {
-                                              // Handle authentication exceptions
-                                              if (e.code == 'user-not-found') {
-                                                print(
-                                                    'No user found for that email.');
-                                              } else if (e.code ==
-                                                  'wrong-password') {
-                                                print(
-                                                    'Wrong password provided.');
-                                              }
+                                            } catch (e) {
+                                              print("Failed to sign in: $e");
+                                              // Handle sign-in failure, show error message to the user
                                             }
                                           },
                                           style: ElevatedButton.styleFrom(
@@ -339,30 +352,17 @@ class _LoginPageState extends State<LoginPage> {
                                       child: Text(' Create One!',
                                           style: LoginpageText.purplehelvetica),
                                       onTap: () {
+                                        Navigator.pop(context);
                                         showDialog(
-                                          barrierColor: Colors.transparent,
+                                          barrierDismissible: true,
                                           context: context,
                                           builder: (context) {
-                                            return CreateAccount();
+                                            return Partner();
                                           },
                                         );
                                       },
                                     ),
                                   ],
-                                ),
-                                InkWell(
-                                  child: Text('Use without Log in',
-                                      style: LoginpageText.purplehelvetica),
-                                  onTap: () async {
-                                    showDialog(
-                                      barrierColor:
-                                          Colors.grey.withOpacity(0.5),
-                                      context: context,
-                                      builder: (context) {
-                                        return MblNoDialog();
-                                      },
-                                    );
-                                  },
                                 ),
                                 SizedBox(
                                   height: 60,

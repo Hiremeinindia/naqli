@@ -213,7 +213,7 @@ class _MyHomePageState extends State<MyHomePage>
                               ),
                             ),
                             SizedBox(
-                              width: 10,
+                              width: 20,
                             ),
                             InkWell(
                               onTap: () {
@@ -226,6 +226,9 @@ class _MyHomePageState extends State<MyHomePage>
                                 );
                               },
                               child: Text('Log in', style: TabelText.helvetica),
+                            ),
+                            SizedBox(
+                              width: 10,
                             ),
                             Icon(
                               Icons.notifications,

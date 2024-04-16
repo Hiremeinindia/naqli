@@ -1,11 +1,7 @@
-// ignore_for_file: dead_code
-
-// ignore_for_file: dead_code
+import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
-import 'package:dropdown_model_list/dropdown_model_list.dart';
-import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -13,11 +9,9 @@ import 'package:flutter/painting.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_application_1/Controllers/allUsersFormController.dart';
 import 'package:flutter_application_1/DialogBox/SingleTimeUser/bookingIDDialog.dart';
-import 'package:flutter_application_1/Users/SingleTimeUser/bookingDetails.dart';
 import 'package:flutter_application_1/Widgets/colorContainer.dart';
 import 'package:flutter_application_1/Widgets/customButton.dart';
 import 'package:flutter_application_1/Widgets/customTextField.dart';
-import 'package:flutter_application_1/Widgets/unitsContainer.dart';
 import 'package:flutter_application_1/classes/language.dart';
 import 'package:flutter_application_1/classes/language_constants.dart';
 import 'package:flutter_calendar_week/flutter_calendar_week.dart';
@@ -29,7 +23,7 @@ import 'main.dart';
 
 class AvailableBus extends StatefulWidget {
   final String? user;
-  const AvailableBus({this.user});
+  AvailableBus({this.user});
 
   @override
   State<AvailableBus> createState() => _AvailableBusState();
@@ -45,14 +39,8 @@ class _AvailableBusState extends State<AvailableBus> {
   final ScrollController _Scroll2 = ScrollController();
   AllUsersFormController controller = AllUsersFormController();
   final CalendarWeekController _controller = CalendarWeekController();
-  String trailer = 'Select Type';
-  String six = 'Select Type';
-  String lorry = 'Select Type';
-  String lorry7 = 'Select Type';
-  String diana = 'Select Type';
-  String pickup = 'Select Type';
-  String towtruck = 'Select Type';
-  String dropdownValues = 'Load Type';
+  int screenState = 0;
+  int? selectedRadioValue;
   DateTime? _pickedDate;
   void initState() {
     super.initState();
@@ -101,6 +89,27 @@ class _AvailableBusState extends State<AvailableBus> {
       print('Error creating new booking: $error');
       return ''; // Return empty string if there's an error
     }
+  }
+
+  String _generateBookingID(String newBookingId) {
+    Random random = Random();
+
+    String bookingID = '';
+    for (int i = 0; i < 10; i++) {
+      bookingID += random.nextInt(10).toString();
+    }
+
+    FirebaseFirestore.instance
+        .collection('user')
+        .doc(widget.user)
+        .collection(
+            'busBookings') // Replace 'subcollectionName' with your subcollection name
+        .doc(
+            newBookingId) // Replace 'subdocId' with the ID of the document in the subcollection
+        .update({
+      "bookingid": bookingID,
+    });
+    return bookingID;
   }
 
   Future<void> _showDatePicker(BuildContext context) async {
@@ -884,13 +893,13 @@ class _AvailableBusState extends State<AvailableBus> {
                                                                       .8),
                                                               value: i,
                                                               groupValue: checkbox1
-                                                                  ? groupValue
+                                                                  ? selectedRadioValue
                                                                   : null, // Enable/disable based on checkbox state
                                                               onChanged: checkbox1
                                                                   ? (int? value) {
                                                                       setState(
                                                                           () {
-                                                                        groupValue =
+                                                                        selectedRadioValue =
                                                                             value;
                                                                       });
                                                                     }
@@ -1066,7 +1075,12 @@ class _AvailableBusState extends State<AvailableBus> {
                                                                         .user!);
                                                             String unitType =
                                                                 'Bus';
+                                                            String bookingId =
+                                                                _generateBookingID(
+                                                                    newBookingId);
                                                             showDialog(
+                                                              barrierDismissible:
+                                                                  true,
                                                               barrierColor: Color
                                                                       .fromRGBO(
                                                                           59,
@@ -1081,8 +1095,8 @@ class _AvailableBusState extends State<AvailableBus> {
                                                                 return BookingIDDialog(
                                                                   user: widget
                                                                       .user,
-                                                                  newBookingId:
-                                                                      newBookingId,
+                                                                  bookingId:
+                                                                      bookingId,
                                                                   unitType:
                                                                       unitType,
                                                                 );

@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_application_1/Partner/Dashboard/dashboard.dart';
 import 'package:flutter_application_1/Partner/joinUs.dart';
+import 'package:flutter_application_1/Partner/loginPage.dart';
 
 import 'package:flutter_application_1/Partner/operator.dart';
 
@@ -263,11 +264,18 @@ class _MyHomePageState extends State<HomePagePartner> {
                                               barrierDismissible: true,
                                               context: context,
                                               builder: (context) {
-                                                return (Operator(
-                                                  user: '',
-                                                ));
+                                                return Partner();
                                               },
-                                            ); // Add your onPressed functionality here
+                                            );
+                                            // showDialog(
+                                            //   barrierDismissible: true,
+                                            //   context: context,
+                                            //   builder: (context) {
+                                            //     return (Operator(
+                                            //       user: '',
+                                            //     ));
+                                            //   },
+                                            // ); // Add your onPressed functionality here
                                           },
                                         ),
                                       ],
@@ -321,7 +329,7 @@ class _MyHomePageState extends State<HomePagePartner> {
                                               barrierDismissible: true,
                                               context: context,
                                               builder: (context) {
-                                                return (Partner());
+                                                return (LoginPage());
                                               },
                                             );
                                             print(
