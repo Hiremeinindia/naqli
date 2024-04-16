@@ -310,7 +310,7 @@ class _MyHomePageEnterState extends State<MyHomePageEnter>
                                       Image(
                                         width: double.infinity,
                                         fit: BoxFit.cover,
-                                        image: AssetImage('truckslide.jpg'),
+                                        image: NetworkImage('truckslide.jpg'),
                                       ),
                                     ],
                                   ),
@@ -1041,7 +1041,7 @@ class _MyHomePageEnterState extends State<MyHomePageEnter>
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(8.0),
                                   image: DecorationImage(
-                                    image: AssetImage('truckslide.jpg'),
+                                    image: NetworkImage('truckslide.jpg'),
                                     fit: BoxFit.cover,
                                   ),
                                 ),
@@ -1051,7 +1051,7 @@ class _MyHomePageEnterState extends State<MyHomePageEnter>
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(8.0),
                                   image: DecorationImage(
-                                    image: AssetImage('truckslide.jpg'),
+                                    image: NetworkImage('truckslide.jpg'),
                                     fit: BoxFit.cover,
                                   ),
                                 ),

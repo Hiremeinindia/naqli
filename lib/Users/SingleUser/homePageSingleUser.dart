@@ -307,7 +307,7 @@ class _MyHomePagesingleState extends State<MyHomePagesingle>
                                       Image(
                                         width: double.infinity,
                                         fit: BoxFit.cover,
-                                        image: AssetImage('truckslide.jpg'),
+                                        image: NetworkImage('truckslide.jpg'),
                                       ),
                                     ],
                                   ),
@@ -1039,7 +1039,7 @@ class _MyHomePagesingleState extends State<MyHomePagesingle>
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(8.0),
                                   image: DecorationImage(
-                                    image: AssetImage('truckslide.jpg'),
+                                    image: NetworkImage('truckslide.jpg'),
                                     fit: BoxFit.cover,
                                   ),
                                 ),
@@ -1049,7 +1049,7 @@ class _MyHomePagesingleState extends State<MyHomePagesingle>
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(8.0),
                                   image: DecorationImage(
-                                    image: AssetImage('truckslide.jpg'),
+                                    image: NetworkImage('truckslide.jpg'),
                                     fit: BoxFit.cover,
                                   ),
                                 ),

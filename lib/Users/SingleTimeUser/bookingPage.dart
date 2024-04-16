@@ -504,7 +504,7 @@ class _BookingPageState extends State<BookingPage> {
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(8.0),
                                       image: DecorationImage(
-                                        image: AssetImage('truckslide.jpg'),
+                                        image: NetworkImage('truckslide.jpg'),
                                         fit: BoxFit.cover,
                                       ),
                                     ),
@@ -514,7 +514,7 @@ class _BookingPageState extends State<BookingPage> {
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(8.0),
                                       image: DecorationImage(
-                                        image: AssetImage('truckslide.jpg'),
+                                        image: NetworkImage('truckslide.jpg'),
                                         fit: BoxFit.cover,
                                       ),
                                     ),

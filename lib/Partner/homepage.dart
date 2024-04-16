@@ -214,7 +214,7 @@ class _MyHomePageState extends State<HomePagePartner> {
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(8.0),
                                 image: DecorationImage(
-                                  image: AssetImage('Group716.png'),
+                                  image: NetworkImage('Group716.png'),
                                   fit: BoxFit.cover,
                                 ),
                               ),
@@ -224,7 +224,7 @@ class _MyHomePageState extends State<HomePagePartner> {
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(8.0),
                                 image: DecorationImage(
-                                  image: AssetImage('Group716.png'),
+                                  image: NetworkImage('Group716.png'),
                                   fit: BoxFit.cover,
                                 ),
                               ),
@@ -607,7 +607,7 @@ class _MyHomePageState extends State<HomePagePartner> {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8.0),
                         image: DecorationImage(
-                          image: AssetImage('Group716.png'),
+                          image: NetworkImage('Group716.png'),
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -617,7 +617,7 @@ class _MyHomePageState extends State<HomePagePartner> {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8.0),
                         image: DecorationImage(
-                          image: AssetImage('Group716.png'),
+                          image: NetworkImage('Group716.png'),
                           fit: BoxFit.cover,
                         ),
                       ),

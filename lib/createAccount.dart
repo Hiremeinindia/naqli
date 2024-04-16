@@ -149,7 +149,8 @@ class _CreateAccountState extends State<CreateAccount> {
                                   Navigator.pop(context);
                                 },
                                 child: ImageIcon(
-                                  AssetImage('cancel.png'),
+                                  NetworkImage(
+                                      'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/Group11635.png?alt=media&token=38685789-db55-4d28-8eef-a005ef287d39'),
                                   color: Color.fromRGBO(112, 112, 112, 1),
                                 ),
                               ),
@@ -636,7 +637,8 @@ class _CreateAccountState extends State<CreateAccount> {
                                   Navigator.pop(context);
                                 },
                                 child: ImageIcon(
-                                  AssetImage('cancel.png'),
+                                  NetworkImage(
+                                      'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/Group11635.png?alt=media&token=38685789-db55-4d28-8eef-a005ef287d39'),
                                   color: Color.fromRGBO(112, 112, 112, 1),
                                 ),
                               ),

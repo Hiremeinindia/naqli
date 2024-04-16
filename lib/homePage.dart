@@ -266,7 +266,8 @@ class _MyHomePageState extends State<MyHomePage>
                                       Image(
                                         width: double.infinity,
                                         fit: BoxFit.cover,
-                                        image: AssetImage('truckslide.jpg'),
+                                        image: NetworkImage(
+                                            'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/truckslide.jpg?alt=media&token=69e327e8-91b3-4a55-b640-04f1673d83d9'),
                                       ),
                                     ],
                                   ),
@@ -1023,7 +1024,8 @@ class _MyHomePageState extends State<MyHomePage>
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(8.0),
                                   image: DecorationImage(
-                                    image: AssetImage('truckslide.jpg'),
+                                    image: NetworkImage(
+                                        'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/truckslide.jpg?alt=media&token=69e327e8-91b3-4a55-b640-04f1673d83d9'),
                                     fit: BoxFit.cover,
                                   ),
                                 ),
@@ -1033,7 +1035,8 @@ class _MyHomePageState extends State<MyHomePage>
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(8.0),
                                   image: DecorationImage(
-                                    image: AssetImage('truckslide.jpg'),
+                                    image: NetworkImage(
+                                        'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/truckslide.jpg?alt=media&token=69e327e8-91b3-4a55-b640-04f1673d83d9'),
                                     fit: BoxFit.cover,
                                   ),
                                 ),

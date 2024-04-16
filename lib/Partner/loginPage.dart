@@ -180,7 +180,7 @@ class _LoginPageState extends State<LoginPage> {
                                         Navigator.pop(context);
                                       },
                                       child: ImageIcon(
-                                        AssetImage('cancel.png'),
+                                        NetworkImage('cancel.png'),
                                         color: Color.fromRGBO(112, 112, 112, 1),
                                       ),
                                     ),
@@ -426,7 +426,7 @@ class _LoginPageState extends State<LoginPage> {
                                 Navigator.pop(context);
                               },
                               child: ImageIcon(
-                                AssetImage('cancel.png'),
+                                NetworkImage('cancel.png'),
                                 color: Color.fromRGBO(112, 112, 112, 1),
                               ),
                             ),
@@ -657,7 +657,7 @@ class ForgotPasswordPage extends StatelessWidget {
                           Navigator.pop(context);
                         },
                         child: ImageIcon(
-                          AssetImage('cancel.png'),
+                          NetworkImage('cancel.png'),
                           color: Colors.black,
                         ),
                       ),
@@ -752,7 +752,7 @@ class ForgotPasswordPage extends StatelessWidget {
                           Navigator.pop(context);
                         },
                         child: ImageIcon(
-                          AssetImage('cancel.png'),
+                          NetworkImage('cancel.png'),
                           color: Colors.black,
                         ),
                       ),
