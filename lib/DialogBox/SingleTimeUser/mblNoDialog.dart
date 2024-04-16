@@ -266,7 +266,8 @@ class _MblNoDialogState extends State<MblNoDialog> {
                               Navigator.pop(context);
                             },
                             child: ImageIcon(
-                              NetworkImage('cancel.png'),
+                              NetworkImage(
+                                  'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/cancel.png?alt=media&token=dd1ed39b-abda-4780-94dd-f5c15e7d12f5'),
                               color: Colors.black,
                             ),
                           ),
@@ -697,7 +698,8 @@ class _MblNoDialogState extends State<MblNoDialog> {
                                 Navigator.pop(context);
                               },
                               child: ImageIcon(
-                                NetworkImage('cancel.png'),
+                                NetworkImage(
+                                    'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/cancel.png?alt=media&token=dd1ed39b-abda-4780-94dd-f5c15e7d12f5'),
                                 color: Colors.black,
                               ),
                             ),
@@ -815,7 +817,8 @@ class _MblNoDialogState extends State<MblNoDialog> {
                                 Navigator.pop(context);
                               },
                               child: ImageIcon(
-                                NetworkImage('cancel.png'),
+                                NetworkImage(
+                                    'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/cancel.png?alt=media&token=dd1ed39b-abda-4780-94dd-f5c15e7d12f5'),
                                 color: Colors.black,
                               ),
                             ),

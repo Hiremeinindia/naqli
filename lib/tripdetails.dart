@@ -100,7 +100,8 @@ class _MyHomePageState extends State<TripDetails> {
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(8.0),
                                 image: DecorationImage(
-                                  image: NetworkImage('bridge.jpg'),
+                                  image: NetworkImage(
+                                      'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/bridge.jpg?alt=media&token=2e6245a3-09b3-49c3-a71c-ab1e8a8da677'),
                                   fit: BoxFit.cover,
                                 ),
                               ),
@@ -113,7 +114,8 @@ class _MyHomePageState extends State<TripDetails> {
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(8.0),
                                 image: DecorationImage(
-                                  image: NetworkImage('bridge.jpg'),
+                                  image: NetworkImage(
+                                      'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/bridge.jpg?alt=media&token=2e6245a3-09b3-49c3-a71c-ab1e8a8da677'),
                                   fit: BoxFit.cover,
                                 ),
                               ),
