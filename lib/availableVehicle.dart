@@ -195,7 +195,7 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                         Padding(
                           padding: EdgeInsets.only(top: 12, bottom: 6),
                           child: Image.network(
-                            'naqlilogo.png',
+                            'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/naqlilogo.png?alt=media&token=db201cb1-dd7b-4b9e-b364-8fb7fa3b95db',
                           ),
                         ),
                         Row(
@@ -444,32 +444,38 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                                 UnitsContainer(
                                                   unitNames: [
                                                     {
-                                                      'image': 'img24.png',
+                                                      'image':
+                                                          'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/img24.png?alt=media&token=d33751f1-20d4-4381-83d8-25231631e2d7',
                                                       'name': 'Short Sides',
                                                       'size': '(12m to 13.5m)'
                                                     },
                                                     {
-                                                      'image': 'img25.png',
+                                                      'image':
+                                                          'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/img25.png?alt=media&token=04c48763-8b01-4c7d-9f40-647ae4c36911',
                                                       'name': 'Curtain',
                                                       'size': '(12m to 13.5m)'
                                                     },
                                                     {
-                                                      'image': 'img26.png',
+                                                      'image':
+                                                          'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/img26.png?alt=media&token=45d68d3e-90d6-44bd-893c-269bdce30097',
                                                       'name': 'Refrigerator',
                                                       'size': '(12m to 13.5m)'
                                                     },
                                                     {
-                                                      'image': 'img28.png',
+                                                      'image':
+                                                          'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/img28.png?alt=media&token=c13a796f-483d-4ecc-a2bf-0ea618b2f2c0',
                                                       'name': 'Flatbed',
                                                       'size': '(12m to 13.5m)'
                                                     },
                                                     {
-                                                      'image': 'img29.png',
+                                                      'image':
+                                                          'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/img29.png?alt=media&token=579954e4-eba9-4046-ba85-238f3017e14c',
                                                       'name': 'High Sides',
                                                       'size': '(12m to 13.5m)'
                                                     },
                                                     {
-                                                      'image': 'img30.png',
+                                                      'image':
+                                                          'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/img30.png?alt=media&token=929ce26b-d55b-44db-b521-22056af39f22',
                                                       'name': 'Freezer',
                                                       'size': '(12m to 13.5m)'
                                                     },
@@ -505,12 +511,14 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                                 UnitsContainer(
                                                   unitNames: [
                                                     {
-                                                      'image': 'img5.png',
+                                                      'image':
+                                                          'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/img5.png?alt=media&token=a1a353e3-677b-4ca7-9932-3e7db7d5bd7a',
                                                       'name': 'Sides',
                                                       'size': '(6.5m to 7m)'
                                                     },
                                                     {
-                                                      'image': 'img6.png',
+                                                      'image':
+                                                          'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/img6.png?alt=media&token=3424bce8-e2fe-4cb6-843a-dc6fac8d72de',
                                                       'name': 'Refrigerator',
                                                       'size': '(6.5m to 7m)'
                                                     },
@@ -546,7 +554,8 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                                 UnitsContainer(
                                                   unitNames: [
                                                     {
-                                                      'image': 'img7.png',
+                                                      'image':
+                                                          'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/img7.png?alt=media&token=90368ea4-098c-49c3-9f69-9530b2ae9ba6',
                                                       'name': 'Sides',
                                                       'size': '(7m to 7.5m)'
                                                     },
@@ -582,32 +591,38 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                                 UnitsContainer(
                                                   unitNames: [
                                                     {
-                                                      'image': 'img10.png',
+                                                      'image':
+                                                          'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/img10.png?alt=media&token=750a4d60-2050-4d66-b30b-1c58ff01c0e0',
                                                       'name': 'Sides',
                                                       'size': '(6m to 6.5m)'
                                                     },
                                                     {
-                                                      'image': 'img11.png',
+                                                      'image':
+                                                          'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/img11.png?alt=media&token=323ef06a-2a01-456f-b36d-acb3fb1f5043',
                                                       'name': 'Closed',
                                                       'size': '(6m to 6.5m)'
                                                     },
                                                     {
-                                                      'image': 'img12.png',
+                                                      'image':
+                                                          'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/img12.png?alt=media&token=8a8b6263-58be-48a1-a7ef-14902688b6ae',
                                                       'name': 'Refrigerator',
                                                       'size': '(6m to 6.5m)'
                                                     },
                                                     {
-                                                      'image': 'img13.png',
+                                                      'image':
+                                                          'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/img13.png?alt=media&token=1d2275b8-88fd-4117-9576-3ef64071ca84',
                                                       'name': 'Crane 5 TON',
                                                       'size': '(6m to 6.5m)'
                                                     },
                                                     {
-                                                      'image': 'img14.png',
+                                                      'image':
+                                                          'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/img14.png?alt=media&token=9f8664b8-5db9-441f-a13c-47d0c00eba2a',
                                                       'name': 'Crane 7 TON',
                                                       'size': '(6m to 6.5m)'
                                                     },
                                                     {
-                                                      'image': 'img15.png',
+                                                      'image':
+                                                          'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/img15.png?alt=media&token=2cb4b9da-042c-4acd-bc72-7b5802523c56',
                                                       'name': 'Freezer',
                                                       'size': '(6m to 6.5m)'
                                                     },
@@ -643,27 +658,32 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                                 UnitsContainer(
                                                   unitNames: [
                                                     {
-                                                      'image': 'img16.png',
+                                                      'image':
+                                                          'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/img16.png?alt=media&token=17254826-c309-476f-ae4b-b4f4f08f483e',
                                                       'name': 'Closed',
                                                       'size': '(4m to 4.5m)'
                                                     },
                                                     {
-                                                      'image': 'img17.png',
+                                                      'image':
+                                                          'https://console.firebase.google.com/project/naqli-5825c/storage/naqli-5825c.appspot.com/files',
                                                       'name': 'Crane',
                                                       'size': '(4m to 4.5m)'
                                                     },
                                                     {
-                                                      'image': 'img18.png',
+                                                      'image':
+                                                          'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/img18.png?alt=media&token=82b08eda-4637-4850-b25b-d4cf8210703e',
                                                       'name': 'Refrigerator',
                                                       'size': '(4m to 4.5m)'
                                                     },
                                                     {
-                                                      'image': 'img19.png',
+                                                      'image':
+                                                          'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/img19.png?alt=media&token=8c985cfe-4588-4d67-87b4-181101c0b93c',
                                                       'name': 'Sides',
                                                       'size': '(4m to 4.5m)'
                                                     },
                                                     {
-                                                      'image': 'img20.png',
+                                                      'image':
+                                                          'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/img20.png?alt=media&token=20d9ce46-7c5e-4671-8f32-135b624c1f06',
                                                       'name': 'Freezer',
                                                       'size': '(4m to 4.5m)'
                                                     },
@@ -699,7 +719,8 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                                 UnitsContainer(
                                                   unitNames: [
                                                     {
-                                                      'image': 'img21.png',
+                                                      'image':
+                                                          'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/img21.png?alt=media&token=823a5ea0-fee8-447f-b82a-f86731608c9c',
                                                       'name': 'Pickup',
                                                       'size': '(1m to 1.5m)'
                                                     },
@@ -735,12 +756,14 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                                 UnitsContainer(
                                                   unitNames: [
                                                     {
-                                                      'image': 'img22.png',
+                                                      'image':
+                                                          'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/img22.png?alt=media&token=a96d6ed8-37f1-46bd-bbba-7cdddc87aae1',
                                                       'name': 'Regular',
                                                       'size': ''
                                                     },
                                                     {
-                                                      'image': 'img23.png',
+                                                      'image':
+                                                          'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/img23.png?alt=media&token=1a748d02-a87a-4e8e-8243-899cc81accc7',
                                                       'name': 'Hydraulic',
                                                       'size': ''
                                                     },
@@ -1657,27 +1680,33 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                           UnitsContainer(
                                             unitNames: [
                                               {
-                                                'image': 'img24.png',
+                                                'image':
+                                                    'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/img24.png?alt=media&token=d33751f1-20d4-4381-83d8-25231631e2d7',
                                                 'name': 'Short Sides'
                                               },
                                               {
-                                                'image': 'img25.png',
+                                                'image':
+                                                    'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/img25.png?alt=media&token=04c48763-8b01-4c7d-9f40-647ae4c36911',
                                                 'name': 'Curtain'
                                               },
                                               {
-                                                'image': 'img26.png',
+                                                'image':
+                                                    'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/img26.png?alt=media&token=45d68d3e-90d6-44bd-893c-269bdce30097',
                                                 'name': 'Refrigerator'
                                               },
                                               {
-                                                'image': 'img28.png',
+                                                'image':
+                                                    'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/img28.png?alt=media&token=c13a796f-483d-4ecc-a2bf-0ea618b2f2c0',
                                                 'name': 'Flatbed'
                                               },
                                               {
-                                                'image': 'img29.png',
+                                                'image':
+                                                    'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/img29.png?alt=media&token=579954e4-eba9-4046-ba85-238f3017e14c',
                                                 'name': 'High Sides'
                                               },
                                               {
-                                                'image': 'img30.png',
+                                                'image':
+                                                    'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/img30.png?alt=media&token=929ce26b-d55b-44db-b521-22056af39f22',
                                                 'name': 'Freezer'
                                               },
                                             ],
@@ -1689,11 +1718,13 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                           UnitsContainer(
                                             unitNames: [
                                               {
-                                                'image': 'img5.png',
+                                                'image':
+                                                    'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/img5.png?alt=media&token=a1a353e3-677b-4ca7-9932-3e7db7d5bd7a',
                                                 'name': 'Sides'
                                               },
                                               {
-                                                'image': 'img6.png',
+                                                'image':
+                                                    'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/img6.png?alt=media&token=3424bce8-e2fe-4cb6-843a-dc6fac8d72de',
                                                 'name': 'Refrigerator'
                                               },
                                             ],
@@ -1705,7 +1736,8 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                           UnitsContainer(
                                             unitNames: [
                                               {
-                                                'image': 'img7.png',
+                                                'image':
+                                                    'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/img7.png?alt=media&token=90368ea4-098c-49c3-9f69-9530b2ae9ba6',
                                                 'name': 'Sides'
                                               },
                                             ],
@@ -1717,27 +1749,33 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                           UnitsContainer(
                                             unitNames: [
                                               {
-                                                'image': 'img10.png',
+                                                'image':
+                                                    'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/img10.png?alt=media&token=750a4d60-2050-4d66-b30b-1c58ff01c0e0',
                                                 'name': 'Sides'
                                               },
                                               {
-                                                'image': 'img11.png',
+                                                'image':
+                                                    'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/img11.png?alt=media&token=323ef06a-2a01-456f-b36d-acb3fb1f5043',
                                                 'name': 'Closed'
                                               },
                                               {
-                                                'image': 'img12.png',
+                                                'image':
+                                                    'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/img12.png?alt=media&token=8a8b6263-58be-48a1-a7ef-14902688b6ae',
                                                 'name': 'Refrigerator'
                                               },
                                               {
-                                                'image': 'img13.png',
+                                                'image':
+                                                    'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/img13.png?alt=media&token=1d2275b8-88fd-4117-9576-3ef64071ca84',
                                                 'name': 'Crane 5 TON'
                                               },
                                               {
-                                                'image': 'img14.png',
+                                                'image':
+                                                    'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/img14.png?alt=media&token=9f8664b8-5db9-441f-a13c-47d0c00eba2a',
                                                 'name': 'Crane 7 TON'
                                               },
                                               {
-                                                'image': 'img15.png',
+                                                'image':
+                                                    'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/img15.png?alt=media&token=2cb4b9da-042c-4acd-bc72-7b5802523c56',
                                                 'name': 'Freezer'
                                               },
                                             ],
@@ -1749,23 +1787,28 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                           UnitsContainer(
                                             unitNames: [
                                               {
-                                                'image': 'img16.png',
+                                                'image':
+                                                    'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/img16.png?alt=media&token=17254826-c309-476f-ae4b-b4f4f08f483e',
                                                 'name': 'Closed'
                                               },
                                               {
-                                                'image': 'img17.png',
+                                                'image':
+                                                    'https://console.firebase.google.com/project/naqli-5825c/storage/naqli-5825c.appspot.com/files',
                                                 'name': 'Crane'
                                               },
                                               {
-                                                'image': 'img18.png',
+                                                'image':
+                                                    'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/img18.png?alt=media&token=82b08eda-4637-4850-b25b-d4cf8210703e',
                                                 'name': 'Refrigerator'
                                               },
                                               {
-                                                'image': 'img19.png',
+                                                'image':
+                                                    'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/img19.png?alt=media&token=8c985cfe-4588-4d67-87b4-181101c0b93c',
                                                 'name': 'Sides'
                                               },
                                               {
-                                                'image': 'img20.png',
+                                                'image':
+                                                    'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/img20.png?alt=media&token=20d9ce46-7c5e-4671-8f32-135b624c1f06',
                                                 'name': 'Freezer'
                                               },
                                             ],
@@ -1777,7 +1820,8 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                           UnitsContainer(
                                             unitNames: [
                                               {
-                                                'image': 'img21.png',
+                                                'image':
+                                                    'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/img21.png?alt=media&token=823a5ea0-fee8-447f-b82a-f86731608c9c',
                                                 'name': 'Pickup'
                                               },
                                             ],
@@ -1789,11 +1833,13 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                           UnitsContainer(
                                             unitNames: [
                                               {
-                                                'image': 'img22.png',
+                                                'image':
+                                                    'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/img22.png?alt=media&token=a96d6ed8-37f1-46bd-bbba-7cdddc87aae1',
                                                 'name': 'Regular'
                                               },
                                               {
-                                                'image': 'img23.png',
+                                                'image':
+                                                    'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/img23.png?alt=media&token=1a748d02-a87a-4e8e-8243-899cc81accc7',
                                                 'name': 'Hydraulic'
                                               },
                                             ],
