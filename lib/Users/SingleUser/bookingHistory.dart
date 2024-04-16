@@ -470,7 +470,7 @@ class DataSource extends DataTableSource {
             Text('Xxxxxxxx',
                 style: TextStyle(fontFamily: 'SFProText', fontSize: 17)),
             SizedBox(width: 30),
-            Image.asset(
+            Image.network(
               'assets/path 1514.png',
               width: 24,
               height: 20,
@@ -503,7 +503,7 @@ class DataSource extends DataTableSource {
                         fontSize: 13)),
               ),
               SizedBox(width: 10),
-              Image.asset(
+              Image.network(
                 'assets/Group 1982.png',
                 width: 35,
                 height: 35,

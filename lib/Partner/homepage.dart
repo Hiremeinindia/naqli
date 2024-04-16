@@ -104,7 +104,7 @@ class _MyHomePageState extends State<HomePagePartner> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Image.asset(
+                        Image.network(
                           'naqlilogo.png',
                           width: 10.w,
                         ),
@@ -384,7 +384,7 @@ class _MyHomePageState extends State<HomePagePartner> {
                               crossAxisAlignment: CrossAxisAlignment
                                   .center, // Adjust this line for proper alignment
                               children: [
-                                Image.asset(
+                                Image.network(
                                   'delivery.png',
                                 ),
                                 SizedBox(
@@ -417,7 +417,7 @@ class _MyHomePageState extends State<HomePagePartner> {
                               crossAxisAlignment: CrossAxisAlignment
                                   .center, // Adjust this line for proper alignment
                               children: [
-                                Image.asset(
+                                Image.network(
                                   'stock.png',
                                 ),
                                 SizedBox(
@@ -453,7 +453,7 @@ class _MyHomePageState extends State<HomePagePartner> {
                               crossAxisAlignment: CrossAxisAlignment
                                   .center, // Adjust this line for proper alignment
                               children: [
-                                Image.asset(
+                                Image.network(
                                   'payment.png',
                                 ),
                                 SizedBox(
@@ -502,7 +502,7 @@ class _MyHomePageState extends State<HomePagePartner> {
                     padding: EdgeInsets.fromLTRB(2.5.w, 0, 2.5.w, 0),
                     child: Row(
                       children: [
-                        Image.asset(
+                        Image.network(
                           'naqlilogo.png',
                           width: 10.w,
                         ),
@@ -746,7 +746,7 @@ class _MyHomePageState extends State<HomePagePartner> {
                         crossAxisAlignment: CrossAxisAlignment
                             .center, // Adjust this line for proper alignment
                         children: [
-                          Image.asset(
+                          Image.network(
                             'delivery.png',
                             width: 50,
                             height: 50,
@@ -783,7 +783,7 @@ class _MyHomePageState extends State<HomePagePartner> {
                           crossAxisAlignment: CrossAxisAlignment
                               .center, // Adjust this line for proper alignment
                           children: [
-                            Image.asset(
+                            Image.network(
                               'stock.png',
                               width: 50,
                               height: 50,
@@ -822,7 +822,7 @@ class _MyHomePageState extends State<HomePagePartner> {
                         crossAxisAlignment: CrossAxisAlignment
                             .center, // Adjust this line for proper alignment
                         children: [
-                          Image.asset(
+                          Image.network(
                             'payment.png',
                             width: 50,
                             height: 50,

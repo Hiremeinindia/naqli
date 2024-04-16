@@ -94,7 +94,7 @@ class _MyHomePagesuperState extends State<MyHomePagesuper>
                       children: [
                         Padding(
                           padding: EdgeInsets.only(top: 12, bottom: 6),
-                          child: Image.asset(
+                          child: Image.network(
                             'naqlilogo.png',
                           ),
                         ),
@@ -468,7 +468,7 @@ class _MyHomePagesuperState extends State<MyHomePagesuper>
                                                               MainAxisAlignment
                                                                   .end,
                                                           children: [
-                                                            Image.asset(
+                                                            Image.network(
                                                               'Group68.png',
                                                               width: 150,
                                                               height: 139,
@@ -526,7 +526,7 @@ class _MyHomePagesuperState extends State<MyHomePagesuper>
                                                               MainAxisAlignment
                                                                   .end,
                                                           children: [
-                                                            Image.asset(
+                                                            Image.network(
                                                               'bus.png',
                                                               width: 150,
                                                               height: 139,
@@ -585,7 +585,7 @@ class _MyHomePagesuperState extends State<MyHomePagesuper>
                                                               MainAxisAlignment
                                                                   .end,
                                                           children: [
-                                                            Image.asset(
+                                                            Image.network(
                                                               'Group1496.png',
                                                               width: 150,
                                                               height: 139,
@@ -644,7 +644,7 @@ class _MyHomePagesuperState extends State<MyHomePagesuper>
                                                               MainAxisAlignment
                                                                   .end,
                                                           children: [
-                                                            Image.asset(
+                                                            Image.network(
                                                               'Group1660.png',
                                                               width: 150,
                                                               height: 139,
@@ -704,7 +704,7 @@ class _MyHomePagesuperState extends State<MyHomePagesuper>
                                                               MainAxisAlignment
                                                                   .end,
                                                           children: [
-                                                            Image.asset(
+                                                            Image.network(
                                                               'Group1716.png',
                                                               width: 150,
                                                               height: 139,
@@ -826,7 +826,7 @@ class _MyHomePagesuperState extends State<MyHomePagesuper>
                                                                 ),
                                                                 SizedBox(
                                                                     height: 20),
-                                                                Image.asset(
+                                                                Image.network(
                                                                   'right-arrow.png',
                                                                   width: 30,
                                                                   height: 30,
@@ -991,7 +991,7 @@ class _MyHomePagesuperState extends State<MyHomePagesuper>
                             )
                           ],
                         ),
-                        Image.asset(
+                        Image.network(
                           'naqlilogo.png',
                         ),
                         Row(
@@ -1185,7 +1185,7 @@ class _MyHomePagesuperState extends State<MyHomePagesuper>
                                                   mainAxisAlignment:
                                                       MainAxisAlignment.end,
                                                   children: [
-                                                    Image.asset(
+                                                    Image.network(
                                                       'Group68.png',
                                                       width: 150,
                                                       height: 139,
@@ -1238,7 +1238,7 @@ class _MyHomePagesuperState extends State<MyHomePagesuper>
                                                   mainAxisAlignment:
                                                       MainAxisAlignment.end,
                                                   children: [
-                                                    Image.asset(
+                                                    Image.network(
                                                       'bus.png',
                                                       width: 150,
                                                       height: 139,
@@ -1291,7 +1291,7 @@ class _MyHomePagesuperState extends State<MyHomePagesuper>
                                                   mainAxisAlignment:
                                                       MainAxisAlignment.end,
                                                   children: [
-                                                    Image.asset(
+                                                    Image.network(
                                                       'Group1496.png',
                                                       width: 150,
                                                       height: 139,
@@ -1344,7 +1344,7 @@ class _MyHomePagesuperState extends State<MyHomePagesuper>
                                                   mainAxisAlignment:
                                                       MainAxisAlignment.end,
                                                   children: [
-                                                    Image.asset(
+                                                    Image.network(
                                                       'Group1660.png',
                                                       width: 150,
                                                       height: 139,
@@ -1397,7 +1397,7 @@ class _MyHomePagesuperState extends State<MyHomePagesuper>
                                                   mainAxisAlignment:
                                                       MainAxisAlignment.end,
                                                   children: [
-                                                    Image.asset(
+                                                    Image.network(
                                                       'Group1716.png',
                                                       width: 150,
                                                       height: 139,
@@ -1452,7 +1452,7 @@ class _MyHomePagesuperState extends State<MyHomePagesuper>
                                                       style: HomepageText
                                                           .helvetica16bold),
                                                   SizedBox(height: 20),
-                                                  Image.asset(
+                                                  Image.network(
                                                     'right-arrow.png',
                                                     width: 30,
                                                     height: 30,

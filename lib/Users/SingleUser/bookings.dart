@@ -680,7 +680,7 @@ class _BookingsState extends State<Bookings> {
                     children: [
                       Row(
                         children: [
-                          Image.asset(
+                          Image.network(
                             'Group1787.png',
                             width: 62,
                             height: 61,

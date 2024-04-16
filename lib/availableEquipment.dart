@@ -193,7 +193,7 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                       children: [
                         Padding(
                           padding: EdgeInsets.only(top: 12, bottom: 6),
-                          child: Image.asset(
+                          child: Image.network(
                             'naqlilogo.png',
                           ),
                         ),
@@ -1278,7 +1278,7 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                       children: [
                         Padding(
                           padding: EdgeInsets.only(top: 12, bottom: 6),
-                          child: Image.asset(
+                          child: Image.network(
                             'naqlilogo.png',
                           ),
                         ),

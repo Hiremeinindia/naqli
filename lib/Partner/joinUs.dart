@@ -611,7 +611,7 @@ class _State extends State<Partner> {
                       centerTitle: false,
                       title: Container(
                         padding: const EdgeInsets.only(left: 5, top: 5),
-                        child: Image.asset(
+                        child: Image.network(
                           'naqlilogo.png',
                           width: 50,
                           height: 50,
