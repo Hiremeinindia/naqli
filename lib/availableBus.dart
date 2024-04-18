@@ -1,5 +1,4 @@
 import 'dart:math';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/cupertino.dart';
@@ -14,10 +13,8 @@ import 'package:flutter_application_1/Widgets/customButton.dart';
 import 'package:flutter_application_1/Widgets/customTextField.dart';
 import 'package:flutter_application_1/classes/language.dart';
 import 'package:flutter_application_1/classes/language_constants.dart';
-import 'package:flutter_calendar_week/flutter_calendar_week.dart';
 import 'package:sizer/sizer.dart';
 import 'package:intl/intl.dart';
-
 import 'Widgets/formText.dart';
 import 'main.dart';
 
@@ -30,16 +27,12 @@ class AvailableBus extends StatefulWidget {
 }
 
 class _AvailableBusState extends State<AvailableBus> {
-  String _selectedValue = '1';
   String categoryValue = '1';
   bool value = false;
   int? groupValue = 1;
   bool checkbox1 = false;
   final ScrollController _Scroll1 = ScrollController();
-  final ScrollController _Scroll2 = ScrollController();
   AllUsersFormController controller = AllUsersFormController();
-  final CalendarWeekController _controller = CalendarWeekController();
-  int screenState = 0;
   int? selectedRadioValue;
   DateTime? _pickedDate;
   void initState() {
@@ -58,14 +51,11 @@ class _AvailableBusState extends State<AvailableBus> {
     try {
       FirebaseFirestore firestore = FirebaseFirestore.instance;
 
-      // Reference to the user's document
       DocumentReference userDocRef = firestore.collection('user').doc(adminUid);
 
-      // Reference to the subcollection 'userBooking' under the user's document
       CollectionReference userBookingCollectionRef =
           userDocRef.collection('busBookings');
 
-      // Add document to subcollection and get the document reference
       DocumentReference newBookingDocRef = await userBookingCollectionRef.add({
         'truck': truck,
         'load': load,
@@ -312,47 +302,69 @@ class _AvailableBusState extends State<AvailableBus> {
                                 color: Colors.black,
                               ),
                             ),
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                left: 5,
-                              ),
-                              child: FutureBuilder<Map<String, dynamic>?>(
-                                future: fetchData(widget
-                                    .user!), // Pass the userId to fetchData method
-                                builder: (context, snapshot) {
-                                  if (snapshot.connectionState ==
-                                      ConnectionState.waiting) {
-                                    return CircularProgressIndicator(); // Show a loading indicator while data is being fetched
-                                  } else if (snapshot.hasError) {
-                                    return Text('Error: ${snapshot.error}');
-                                  } else if (snapshot.hasData) {
-                                    // Extract first name and last name from snapshot data
-                                    String firstName =
-                                        snapshot.data?['firstName'] ?? '';
-                                    String lastName =
-                                        snapshot.data?['lastName'] ?? '';
+                            widget.user != null
+                                ? Padding(
+                                    padding: const EdgeInsets.only(
+                                      left: 5,
+                                    ),
+                                    child: FutureBuilder<Map<String, dynamic>?>(
+                                      future: fetchData(widget
+                                          .user!), // Pass the userId to fetchData method
+                                      builder: (context, snapshot) {
+                                        if (snapshot.connectionState ==
+                                            ConnectionState.waiting) {
+                                          return CircularProgressIndicator(); // Show a loading indicator while data is being fetched
+                                        } else if (snapshot.hasError) {
+                                          return Text(
+                                              'Error: ${snapshot.error}');
+                                        } else if (snapshot.hasData) {
+                                          // Extract first name and last name from snapshot data
+                                          String firstName =
+                                              snapshot.data?['firstName'] ?? '';
+                                          String lastName =
+                                              snapshot.data?['lastName'] ?? '';
 
-                                    return Column(
+                                          return Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Text(
+                                                  "Hello $firstName $lastName!",
+                                                  style: TabelText.helvetica11),
+                                              Text("Admin",
+                                                  style: TabelText.usertext),
+                                              Text("Faizal industries",
+                                                  style: TabelText.usertext),
+                                            ],
+                                          );
+                                        } else {
+                                          return Text(
+                                              'No data available'); // Handle case when snapshot has no data
+                                        }
+                                      },
+                                    ),
+                                  )
+                                : Padding(
+                                    padding: const EdgeInsets.only(
+                                      left: 5,
+                                    ),
+                                    child: Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
                                       children: [
-                                        Text("Hello $firstName $lastName!",
+                                        Text("Hello Faizal!",
                                             style: TabelText.helvetica11),
                                         Text("Admin",
                                             style: TabelText.usertext),
                                         Text("Faizal industries",
                                             style: TabelText.usertext),
                                       ],
-                                    );
-                                  } else {
-                                    return Text(
-                                        'No data available'); // Handle case when snapshot has no data
-                                  }
-                                },
-                              ),
-                            ),
+                                    ),
+                                  ),
                             Icon(
                               Icons.notifications,
                               color: Color.fromRGBO(106, 102, 209, 1),

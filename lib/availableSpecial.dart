@@ -1,11 +1,6 @@
-// ignore_for_file: dead_code
-
 import 'dart:math';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
-import 'package:dropdown_model_list/dropdown_model_list.dart';
-import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -13,82 +8,76 @@ import 'package:flutter/painting.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_application_1/Controllers/allUsersFormController.dart';
 import 'package:flutter_application_1/DialogBox/SingleTimeUser/bookingIDDialog.dart';
-import 'package:flutter_application_1/Users/SingleTimeUser/bookingDetails.dart';
+import 'package:flutter_application_1/Widgets/colorContainer.dart';
 import 'package:flutter_application_1/Widgets/customButton.dart';
 import 'package:flutter_application_1/Widgets/customTextField.dart';
-import 'package:flutter_application_1/Widgets/unitsContainer.dart';
 import 'package:flutter_application_1/classes/language.dart';
 import 'package:flutter_application_1/classes/language_constants.dart';
 import 'package:sizer/sizer.dart';
-
 import 'Widgets/formText.dart';
 import 'main.dart';
 import 'package:intl/intl.dart';
 
 class AvailableSpecial extends StatefulWidget {
-  final String user;
-  const AvailableSpecial({required this.user});
+  final String? user;
+  AvailableSpecial({this.user});
 
   @override
   State<AvailableSpecial> createState() => _AvailableSpecialState();
 }
 
 class _AvailableSpecialState extends State<AvailableSpecial> {
-  String _selectedValue = '1';
   String categoryValue = '1';
   bool value = false;
   int? groupValue = 1;
   bool checkbox1 = false;
   final ScrollController _Scroll1 = ScrollController();
-  final ScrollController _Scroll2 = ScrollController();
   AllUsersFormController controller = AllUsersFormController();
-  String trailer = 'Select Type';
-  String six = 'Select Type';
-  String lorry = 'Select Type';
-  String lorry7 = 'Select Type';
-  String diana = 'Select Type';
-  String pickup = 'Select Type';
-  String towtruck = 'Select Type';
-  String dropdownValues = 'Load Type';
+  int? selectedRadioValue;
   DateTime? _pickedDate;
   void initState() {
     super.initState();
   }
 
-  Future<Map<String, dynamic>?> fetchData(String userId) async {
+  Future<String> createNewBooking(
+    String truck,
+    String load,
+    String size,
+    String time,
+    String date,
+    String labour,
+    String adminUid,
+  ) async {
     try {
-      DocumentSnapshot<Map<String, dynamic>> documentSnapshot =
-          await FirebaseFirestore.instance.collection('user').doc(userId).get();
+      FirebaseFirestore firestore = FirebaseFirestore.instance;
 
-      if (documentSnapshot.exists) {
-        Map<String, dynamic> userData = documentSnapshot.data()!;
-        String firstName = userData['firstName'];
-        String lastName = userData['lastName'];
-        return {'firstName': firstName, 'lastName': lastName};
-      } else {
-        print('Document does not exist for userId: $userId');
-        return null;
-      }
-    } catch (e) {
-      print('Error fetching data for userId $userId: $e');
-      return null;
-    }
-  }
+      DocumentReference userDocRef = firestore.collection('user').doc(adminUid);
 
-  Future<void> _showDatePicker(BuildContext context) async {
-    final DateTime? pickedDate = await showDatePicker(
-      initialEntryMode: DatePickerEntryMode.calendarOnly,
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(2020),
-      lastDate: DateTime(2025),
-    );
+      CollectionReference userBookingCollectionRef =
+          userDocRef.collection('specialothersBookings');
 
-    if (pickedDate != null) {
-      setState(() {
-        _pickedDate = pickedDate;
-        controller.date.text = DateFormat('dd/MM/yyyy').format(_pickedDate!);
+      DocumentReference newBookingDocRef = await userBookingCollectionRef.add({
+        'truck': truck,
+        'load': load,
+        'size': size,
+        'time': time,
+        'date': date,
+        'labour': labour,
       });
+
+      // Store the auto-generated ID
+      String newBookingId = newBookingDocRef.id;
+
+      // Update the document with the stored ID
+      await newBookingDocRef.update({'id': newBookingId});
+
+      print('New booking added successfully with ID: $newBookingId');
+
+      // Return the generated ID
+      return newBookingId;
+    } catch (error) {
+      print('Error creating new booking: $error');
+      return ''; // Return empty string if there's an error
     }
   }
 
@@ -113,48 +102,40 @@ class _AvailableSpecialState extends State<AvailableSpecial> {
     return bookingID;
   }
 
-  Future<String> createNewBooking(
-    String truck,
-    String load,
-    String size,
-    String time,
-    String date,
-    String labour,
-    String adminUid,
-  ) async {
-    try {
-      FirebaseFirestore firestore = FirebaseFirestore.instance;
+  Future<void> _showDatePicker(BuildContext context) async {
+    final DateTime? pickedDate = await showDatePicker(
+      initialEntryMode: DatePickerEntryMode.calendarOnly,
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2020),
+      lastDate: DateTime(2025),
+    );
 
-      // Reference to the user's document
-      DocumentReference userDocRef = firestore.collection('user').doc(adminUid);
-
-      // Reference to the subcollection 'userBooking' under the user's document
-      CollectionReference userBookingCollectionRef =
-          userDocRef.collection('specialothersBookings');
-
-      // Add document to subcollection and get the document reference
-      DocumentReference newBookingDocRef = await userBookingCollectionRef.add({
-        'truck': truck,
-        'load': load,
-        'size': size,
-        'time': time,
-        'date': date,
-        'labour': labour,
+    if (pickedDate != null) {
+      setState(() {
+        _pickedDate = pickedDate;
+        controller.date.text = DateFormat('dd/MM/yyyy').format(_pickedDate!);
       });
+    }
+  }
 
-      // Store the auto-generated ID
-      String newBookingId = newBookingDocRef.id;
+  Future<Map<String, dynamic>?> fetchData(String userId) async {
+    try {
+      DocumentSnapshot<Map<String, dynamic>> documentSnapshot =
+          await FirebaseFirestore.instance.collection('user').doc(userId).get();
 
-      // Update the document with the stored ID
-      await newBookingDocRef.update({'id': newBookingId});
-
-      print('New booking added successfully with ID: $newBookingId');
-
-      // Return the generated ID
-      return newBookingId;
-    } catch (error) {
-      print('Error creating new booking: $error');
-      return ''; // Return empty string if there's an error
+      if (documentSnapshot.exists) {
+        Map<String, dynamic> userData = documentSnapshot.data()!;
+        String firstName = userData['firstName'];
+        String lastName = userData['lastName'];
+        return {'firstName': firstName, 'lastName': lastName};
+      } else {
+        print('Document does not exist for userId: $userId');
+        return null;
+      }
+    } catch (e) {
+      print('Error fetching data for userId $userId: $e');
+      return null;
     }
   }
 
@@ -321,47 +302,69 @@ class _AvailableSpecialState extends State<AvailableSpecial> {
                                 color: Colors.black,
                               ),
                             ),
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                left: 5,
-                              ),
-                              child: FutureBuilder<Map<String, dynamic>?>(
-                                future: fetchData(widget
-                                    .user!), // Pass the userId to fetchData method
-                                builder: (context, snapshot) {
-                                  if (snapshot.connectionState ==
-                                      ConnectionState.waiting) {
-                                    return CircularProgressIndicator(); // Show a loading indicator while data is being fetched
-                                  } else if (snapshot.hasError) {
-                                    return Text('Error: ${snapshot.error}');
-                                  } else if (snapshot.hasData) {
-                                    // Extract first name and last name from snapshot data
-                                    String firstName =
-                                        snapshot.data?['firstName'] ?? '';
-                                    String lastName =
-                                        snapshot.data?['lastName'] ?? '';
+                            widget.user != null
+                                ? Padding(
+                                    padding: const EdgeInsets.only(
+                                      left: 5,
+                                    ),
+                                    child: FutureBuilder<Map<String, dynamic>?>(
+                                      future: fetchData(widget
+                                          .user!), // Pass the userId to fetchData method
+                                      builder: (context, snapshot) {
+                                        if (snapshot.connectionState ==
+                                            ConnectionState.waiting) {
+                                          return CircularProgressIndicator(); // Show a loading indicator while data is being fetched
+                                        } else if (snapshot.hasError) {
+                                          return Text(
+                                              'Error: ${snapshot.error}');
+                                        } else if (snapshot.hasData) {
+                                          // Extract first name and last name from snapshot data
+                                          String firstName =
+                                              snapshot.data?['firstName'] ?? '';
+                                          String lastName =
+                                              snapshot.data?['lastName'] ?? '';
 
-                                    return Column(
+                                          return Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Text(
+                                                  "Hello $firstName $lastName!",
+                                                  style: TabelText.helvetica11),
+                                              Text("Admin",
+                                                  style: TabelText.usertext),
+                                              Text("Faizal industries",
+                                                  style: TabelText.usertext),
+                                            ],
+                                          );
+                                        } else {
+                                          return Text(
+                                              'No data available'); // Handle case when snapshot has no data
+                                        }
+                                      },
+                                    ),
+                                  )
+                                : Padding(
+                                    padding: const EdgeInsets.only(
+                                      left: 5,
+                                    ),
+                                    child: Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
                                       children: [
-                                        Text("Hello $firstName $lastName!",
+                                        Text("Hello Faizal!",
                                             style: TabelText.helvetica11),
                                         Text("Admin",
                                             style: TabelText.usertext),
                                         Text("Faizal industries",
                                             style: TabelText.usertext),
                                       ],
-                                    );
-                                  } else {
-                                    return Text(
-                                        'No data available'); // Handle case when snapshot has no data
-                                  }
-                                },
-                              ),
-                            ),
+                                    ),
+                                  ),
                             Icon(
                               Icons.notifications,
                               color: Color.fromRGBO(106, 102, 209, 1),
@@ -455,7 +458,7 @@ class _AvailableSpecialState extends State<AvailableSpecial> {
                                                       MainAxisAlignment.center,
                                                   children: [
                                                     Text(
-                                                      " Special / Others",
+                                                      "Special / Others",
                                                       style: TextStyle(
                                                         fontWeight:
                                                             FontWeight.bold,
@@ -473,226 +476,50 @@ class _AvailableSpecialState extends State<AvailableSpecial> {
                                                       MainAxisAlignment
                                                           .spaceEvenly,
                                                   children: [
-                                                    Card(
-                                                      elevation: 4,
-                                                      shadowColor:
-                                                          Color.fromRGBO(112,
-                                                                  112, 112, 1)
-                                                              .withOpacity(0.6),
-                                                      child: Container(
-                                                        width: 130,
-                                                        height: 150,
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          color: Colors.white,
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                      8.0),
-                                                        ),
-                                                        child: Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                  .only(
-                                                                  top: 5,
-                                                                  bottom: 15,
-                                                                  left: 7,
-                                                                  right: 7),
-                                                          child: Column(
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .end,
-                                                            children: [
-                                                              GestureDetector(
-                                                                onTap: () {
-                                                                  setState(() {
-                                                                    controller
-                                                                            .truck1
-                                                                            .text =
-                                                                        'Fuel Track';
-                                                                  });
-                                                                },
-                                                                child: Image(
-                                                                  width: 100,
-                                                                  height: 90,
-                                                                  image: NetworkImage(
-                                                                      'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/Group2366.png?alt=media&token=57072109-5025-47ca-b90e-ef582da899f6'),
-                                                                ),
-                                                              ),
-                                                              Divider(
-                                                                color: Colors
-                                                                    .black,
-                                                              ),
-                                                              SizedBox(
-                                                                  height: 2),
-                                                              Text(
-                                                                'Fuel Track',
-                                                                textAlign:
-                                                                    TextAlign
-                                                                        .center,
-                                                                style: TextStyle(
-                                                                    fontSize:
-                                                                        13,
-                                                                    fontFamily:
-                                                                        'Helvetica',
-                                                                    color: Color
-                                                                        .fromRGBO(
-                                                                            0,
-                                                                            0,
-                                                                            0,
-                                                                            1)),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                        ),
+                                                    GestureDetector(
+                                                      onTap: () {
+                                                        setState(() {
+                                                          controller
+                                                                  .truck1.text =
+                                                              'Fuel Track';
+                                                        });
+                                                      },
+                                                      child:
+                                                          ElevationUnitsContainer(
+                                                        text1: 'Fuel Track',
+                                                        imgpath:
+                                                            'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/Group2366.png?alt=media&token=57072109-5025-47ca-b90e-ef582da899f6',
                                                       ),
                                                     ),
-                                                    Card(
-                                                      elevation: 4,
-                                                      shadowColor:
-                                                          Color.fromRGBO(112,
-                                                                  112, 112, 1)
-                                                              .withOpacity(0.6),
-                                                      child: Container(
-                                                        width: 130,
-                                                        height: 150,
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          color: Colors.white,
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                      8.0),
-                                                        ),
-                                                        child: Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                  .only(
-                                                                  top: 5,
-                                                                  bottom: 15,
-                                                                  left: 7,
-                                                                  right: 7),
-                                                          child: Column(
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .end,
-                                                            children: [
-                                                              GestureDetector(
-                                                                onTap: () {
-                                                                  setState(() {
-                                                                    controller
-                                                                            .truck2
-                                                                            .text =
-                                                                        'Concrete Mixer';
-                                                                  });
-                                                                },
-                                                                child: Image(
-                                                                  width: 100,
-                                                                  height: 90,
-                                                                  image: NetworkImage(
-                                                                      'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/Group2491.png?alt=media&token=7be13f1c-6ac4-4205-8ece-a82e6084f571'),
-                                                                ),
-                                                              ),
-                                                              Divider(
-                                                                color: Colors
-                                                                    .black,
-                                                              ),
-                                                              SizedBox(
-                                                                  height: 2),
-                                                              Text(
-                                                                'Concrete Mixer',
-                                                                textAlign:
-                                                                    TextAlign
-                                                                        .center,
-                                                                style: TextStyle(
-                                                                    fontSize:
-                                                                        13,
-                                                                    fontFamily:
-                                                                        'Helvetica',
-                                                                    color: Color
-                                                                        .fromRGBO(
-                                                                            0,
-                                                                            0,
-                                                                            0,
-                                                                            1)),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                        ),
+                                                    GestureDetector(
+                                                      onTap: () {
+                                                        setState(() {
+                                                          controller
+                                                                  .truck1.text =
+                                                              'Concrete Mixer';
+                                                        });
+                                                      },
+                                                      child:
+                                                          ElevationUnitsContainer(
+                                                        text1: 'Concrete Mixer',
+                                                        imgpath:
+                                                            'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/Group2491.png?alt=media&token=7be13f1c-6ac4-4205-8ece-a82e6084f571',
                                                       ),
                                                     ),
-                                                    Card(
-                                                      elevation: 4,
-                                                      shadowColor:
-                                                          Color.fromRGBO(112,
-                                                                  112, 112, 1)
-                                                              .withOpacity(0.6),
-                                                      child: Container(
-                                                        width: 130,
-                                                        height: 150,
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          color: Colors.white,
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                      5.0),
-                                                        ),
-                                                        child: Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                  .only(
-                                                                  left: 7,
-                                                                  right: 7,
-                                                                  top: 4),
-                                                          child: Column(
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .end,
-                                                            children: [
-                                                              GestureDetector(
-                                                                onTap: () {
-                                                                  setState(() {
-                                                                    controller
-                                                                            .truck3
-                                                                            .text =
-                                                                        'Concerte Pump Track';
-                                                                  });
-                                                                },
-                                                                child: Image(
-                                                                  width: 100,
-                                                                  height: 90,
-                                                                  image: NetworkImage(
-                                                                      'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/Group11635.png?alt=media&token=38685789-db55-4d28-8eef-a005ef287d39'),
-                                                                ),
-                                                              ),
-                                                              Divider(
-                                                                color: Colors
-                                                                    .black,
-                                                              ),
-                                                              SizedBox(
-                                                                  height: 2),
-                                                              Text(
-                                                                'Concerte Pump Track',
-                                                                textAlign:
-                                                                    TextAlign
-                                                                        .center,
-                                                                softWrap: true,
-                                                                style: TextStyle(
-                                                                    fontSize:
-                                                                        13,
-                                                                    fontFamily:
-                                                                        'Helvetica',
-                                                                    color: Color
-                                                                        .fromRGBO(
-                                                                            0,
-                                                                            0,
-                                                                            0,
-                                                                            1)),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                        ),
+                                                    GestureDetector(
+                                                      onTap: () {
+                                                        setState(() {
+                                                          controller
+                                                                  .truck1.text =
+                                                              'Concerte Pump Track';
+                                                        });
+                                                      },
+                                                      child:
+                                                          ElevationUnitsContainer(
+                                                        text1:
+                                                            'Concerte Pump Track',
+                                                        imgpath:
+                                                            'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/Group11635.png?alt=media&token=38685789-db55-4d28-8eef-a005ef287d39',
                                                       ),
                                                     ),
                                                   ],
@@ -702,162 +529,35 @@ class _AvailableSpecialState extends State<AvailableSpecial> {
                                                 ),
                                                 Row(
                                                   children: [
-                                                    Padding(
-                                                      padding:
-                                                          const EdgeInsets.only(
-                                                              left: 27),
-                                                      child: Card(
-                                                        elevation: 4,
-                                                        shadowColor:
-                                                            Color.fromRGBO(112,
-                                                                    112, 112, 1)
-                                                                .withOpacity(
-                                                                    0.6),
-                                                        child: Container(
-                                                          width: 130,
-                                                          height: 150,
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            color: Colors.white,
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        8.0),
-                                                          ),
-                                                          child: Padding(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                    .only(
-                                                                    left: 7,
-                                                                    right: 7,
-                                                                    top: 5,
-                                                                    bottom: 15),
-                                                            child: Column(
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .end,
-                                                              children: [
-                                                                GestureDetector(
-                                                                  onTap: () {
-                                                                    setState(
-                                                                        () {
-                                                                      controller
-                                                                          .truck4
-                                                                          .text = 'Lorry Crane';
-                                                                    });
-                                                                  },
-                                                                  child: Image(
-                                                                    width: 100,
-                                                                    height: 90,
-                                                                    image: NetworkImage(
-                                                                        'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/Group2676.png?alt=media&token=158080c5-f5db-4e85-a596-4c0731927e8e'),
-                                                                  ),
-                                                                ),
-                                                                Divider(
-                                                                  color: Colors
-                                                                      .black,
-                                                                ),
-                                                                SizedBox(
-                                                                    height: 2),
-                                                                Text(
-                                                                  'Lorry Crane',
-                                                                  textAlign:
-                                                                      TextAlign
-                                                                          .center,
-                                                                  style: TextStyle(
-                                                                      fontSize:
-                                                                          13,
-                                                                      fontFamily:
-                                                                          'Helvetica',
-                                                                      color: Color
-                                                                          .fromRGBO(
-                                                                              0,
-                                                                              0,
-                                                                              0,
-                                                                              1)),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                          ),
-                                                        ),
+                                                    GestureDetector(
+                                                      onTap: () {
+                                                        setState(() {
+                                                          controller
+                                                                  .truck1.text =
+                                                              'Lorry Crane';
+                                                        });
+                                                      },
+                                                      child:
+                                                          ElevationUnitsContainer(
+                                                        text1: 'Lorry Crane',
+                                                        imgpath:
+                                                            'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/Group2676.png?alt=media&token=158080c5-f5db-4e85-a596-4c0731927e8e',
                                                       ),
                                                     ),
-                                                    SizedBox(
-                                                      width: 29,
-                                                    ),
-                                                    Card(
-                                                      elevation: 4,
-                                                      shadowColor:
-                                                          Color.fromRGBO(112,
-                                                                  112, 112, 1)
-                                                              .withOpacity(0.6),
-                                                      child: Container(
-                                                        width: 130,
-                                                        height: 150,
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          color: Colors.white,
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                      8.0),
-                                                        ),
-                                                        child: Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                  .only(
-                                                                  top: 5,
-                                                                  bottom: 15,
-                                                                  left: 7,
-                                                                  right: 7),
-                                                          child: Column(
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .end,
-                                                            children: [
-                                                              GestureDetector(
-                                                                onTap: () {
-                                                                  setState(() {
-                                                                    controller
-                                                                            .truck5
-                                                                            .text =
-                                                                        'Power Generators';
-                                                                  });
-                                                                },
-                                                                child: Image(
-                                                                  width: 100,
-                                                                  height: 90,
-                                                                  image: NetworkImage(
-                                                                      'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/Group15533.png?alt=media&token=361f469f-0466-4da7-96dc-64e8d2359a2c'),
-                                                                ),
-                                                              ),
-                                                              Divider(
-                                                                color: Colors
-                                                                    .black,
-                                                              ),
-                                                              SizedBox(
-                                                                  height: 2),
-                                                              Text(
-                                                                'Power Generators',
-                                                                softWrap: true,
-                                                                textAlign:
-                                                                    TextAlign
-                                                                        .center,
-                                                                style: TextStyle(
-                                                                    fontSize:
-                                                                        13,
-                                                                    fontFamily:
-                                                                        'Helvetica',
-                                                                    color: Color
-                                                                        .fromRGBO(
-                                                                            0,
-                                                                            0,
-                                                                            0,
-                                                                            1)),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                        ),
+                                                    GestureDetector(
+                                                      onTap: () {
+                                                        setState(() {
+                                                          controller
+                                                                  .truck1.text =
+                                                              'Power Generators';
+                                                        });
+                                                      },
+                                                      child:
+                                                          ElevationUnitsContainer(
+                                                        text1:
+                                                            'Power Generators',
+                                                        imgpath:
+                                                            'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/Group15533.png?alt=media&token=361f469f-0466-4da7-96dc-64e8d2359a2c',
                                                       ),
                                                     ),
                                                   ],
