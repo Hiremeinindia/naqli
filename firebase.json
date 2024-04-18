@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "flutter build web --web-renderer html --release",
+    "public": "build/web",
     "ignore": [
       "firebase.json",
       "**/.*",

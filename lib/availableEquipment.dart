@@ -338,47 +338,69 @@ class _AvailableEquipmentState extends State<AvailableEquipment> {
                                 color: Colors.black,
                               ),
                             ),
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                left: 5,
-                              ),
-                              child: FutureBuilder<Map<String, dynamic>?>(
-                                future: fetchData(widget
-                                    .user!), // Pass the userId to fetchData method
-                                builder: (context, snapshot) {
-                                  if (snapshot.connectionState ==
-                                      ConnectionState.waiting) {
-                                    return CircularProgressIndicator(); // Show a loading indicator while data is being fetched
-                                  } else if (snapshot.hasError) {
-                                    return Text('Error: ${snapshot.error}');
-                                  } else if (snapshot.hasData) {
-                                    // Extract first name and last name from snapshot data
-                                    String firstName =
-                                        snapshot.data?['firstName'] ?? '';
-                                    String lastName =
-                                        snapshot.data?['lastName'] ?? '';
+                            widget.user != null
+                                ? Padding(
+                                    padding: const EdgeInsets.only(
+                                      left: 5,
+                                    ),
+                                    child: FutureBuilder<Map<String, dynamic>?>(
+                                      future: fetchData(widget
+                                          .user!), // Pass the userId to fetchData method
+                                      builder: (context, snapshot) {
+                                        if (snapshot.connectionState ==
+                                            ConnectionState.waiting) {
+                                          return CircularProgressIndicator(); // Show a loading indicator while data is being fetched
+                                        } else if (snapshot.hasError) {
+                                          return Text(
+                                              'Error: ${snapshot.error}');
+                                        } else if (snapshot.hasData) {
+                                          // Extract first name and last name from snapshot data
+                                          String firstName =
+                                              snapshot.data?['firstName'] ?? '';
+                                          String lastName =
+                                              snapshot.data?['lastName'] ?? '';
 
-                                    return Column(
+                                          return Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Text(
+                                                  "Hello $firstName $lastName!",
+                                                  style: TabelText.helvetica11),
+                                              Text("Admin",
+                                                  style: TabelText.usertext),
+                                              Text("Faizal industries",
+                                                  style: TabelText.usertext),
+                                            ],
+                                          );
+                                        } else {
+                                          return Text(
+                                              'No data available'); // Handle case when snapshot has no data
+                                        }
+                                      },
+                                    ),
+                                  )
+                                : Padding(
+                                    padding: const EdgeInsets.only(
+                                      left: 5,
+                                    ),
+                                    child: Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
                                       children: [
-                                        Text("Hello $firstName $lastName!",
+                                        Text("Hello Faizal!",
                                             style: TabelText.helvetica11),
                                         Text("Admin",
                                             style: TabelText.usertext),
                                         Text("Faizal industries",
                                             style: TabelText.usertext),
                                       ],
-                                    );
-                                  } else {
-                                    return Text(
-                                        'No data available'); // Handle case when snapshot has no data
-                                  }
-                                },
-                              ),
-                            ),
+                                    ),
+                                  ),
                             Icon(
                               Icons.notifications,
                               color: Color.fromRGBO(106, 102, 209, 1),
