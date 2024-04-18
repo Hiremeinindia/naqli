@@ -204,11 +204,11 @@ class _MblNoDialogState extends State<MblNoDialog> {
   String?
       storedVerificationId; // Declare a variable to store the verification ID
 
-  Future<void> _startPhoneAuth(String phoneNumber, String adminUid) async {
+  Future<void> _startPhoneAuth(String phoneNumber) async {
     print("mobtrack3");
 
     FirebaseAuth _auth = FirebaseAuth.instance;
-
+    String? adminUid = widget.adminUid;
     try {
       await _auth.verifyPhoneNumber(
         phoneNumber: "+91${contactNumberController.text}",
@@ -453,25 +453,31 @@ class _MblNoDialogState extends State<MblNoDialog> {
                                                       MainAxisAlignment
                                                           .spaceBetween,
                                                   children: [
-                                                    Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .center,
-                                                      children: [
-                                                        ImageIcon(
-                                                          NetworkImage(
-                                                              'approved.png'),
-                                                          color: Color.fromRGBO(
-                                                              60, 55, 148, 1),
-                                                          size: 30,
-                                                        ),
-                                                        SizedBox(width: 5),
-                                                        Text(
-                                                          'Account Verified',
-                                                          style: TabelText
-                                                              .helveticablack19,
-                                                        ),
-                                                      ],
+                                                    Expanded(
+                                                      child: Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .center,
+                                                        children: [
+                                                          ImageIcon(
+                                                            NetworkImage(
+                                                                'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/approved.png?alt=media&token=1464e391-a8a7-4e1f-9ff8-90154603b7c9'),
+                                                            color:
+                                                                Color.fromRGBO(
+                                                                    60,
+                                                                    55,
+                                                                    148,
+                                                                    1),
+                                                            size: 30,
+                                                          ),
+                                                          SizedBox(width: 5),
+                                                          Text(
+                                                            'Account Verified',
+                                                            style: TabelText
+                                                                .helveticablack19,
+                                                          ),
+                                                        ],
+                                                      ),
                                                     ),
                                                     GestureDetector(
                                                       onTap: () async {
@@ -627,7 +633,8 @@ class _MblNoDialogState extends State<MblNoDialog> {
                                 style: FormTextStyle.purplehelvetica),
                             onTap: () async {
                               await _startPhoneAuth(
-                                  contactNumberController.text, adminUid);
+                                contactNumberController.text,
+                              );
                             },
                           ),
                         ],
@@ -720,23 +727,31 @@ class _MblNoDialogState extends State<MblNoDialog> {
                             ),
                           ),
                           SizedBox(
-                            height: 30,
-                            child: ElevatedButton(
-                              onPressed: () async {
-                                String adminUid = widget.adminUid!;
-                                await _startPhoneAuth(
-                                    contactNumberController.text, adminUid);
-                              },
-                              style: ElevatedButton.styleFrom(
+                              height: 30,
+                              child: ElevatedButton(
+                                onPressed: () async {
+                                  if (widget.adminUid != null) {
+                                    String adminUid = widget.adminUid!;
+                                    await _startPhoneAuth(
+                                      contactNumberController.text,
+                                    );
+                                  } else {
+                                    await _startPhoneAuth(
+                                        contactNumberController.text);
+                                  }
+                                },
+                                style: ElevatedButton.styleFrom(
                                   backgroundColor:
                                       Color.fromRGBO(60, 55, 148, 1),
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(0),
-                                  )),
-                              child: Text("Get OTP",
-                                  style: LoginpageText.helvetica16white),
-                            ),
-                          ),
+                                  ),
+                                ),
+                                child: Text(
+                                  "Get OTP",
+                                  style: LoginpageText.helvetica16white,
+                                ),
+                              )),
                         ],
                       ),
                       SizedBox(height: 40),
@@ -778,116 +793,113 @@ class _MblNoDialogState extends State<MblNoDialog> {
             child: Padding(
               padding: EdgeInsets.fromLTRB(18.w, 33.h, 18.w, 33.h),
               child: SingleChildScrollView(
-                child: Expanded(
-                  child: Card(
-                    elevation: 5,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(31))),
-                    child: Container(
-                      height: 280,
-                      decoration: const BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(31),
-                        ),
+                child: Card(
+                  elevation: 5,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(31))),
+                  child: Container(
+                    height: 280,
+                    decoration: const BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(31),
                       ),
-                      padding: EdgeInsets.fromLTRB(4.w, 4.h, 2.w, 4.h),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Expanded(
-                                child: Center(
-                                  child: Text('Enter Mobile No',
-                                      style: LoginpageText.helvetica30bold),
-                                ),
-                              ),
-                              GestureDetector(
-                                onTap: () {
-                                  Navigator.pop(context);
-                                },
-                                child: ImageIcon(
-                                  NetworkImage(
-                                      'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/cancel.png?alt=media&token=dd1ed39b-abda-4780-94dd-f5c15e7d12f5'),
-                                  color: Colors.black,
-                                ),
-                              ),
-                            ],
-                          ),
-                          SizedBox(height: 20),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SizedBox(
-                                height: 30,
-                                width: 200,
-                                child: TextField(
-                                  controller: contactNumberController,
-                                  keyboardType: TextInputType.number,
-                                  decoration: InputDecoration(
-                                    hintText: '99999 99999',
-                                    contentPadding: EdgeInsets.only(
-                                      left: 1.w,
-                                    ),
-                                    hintStyle: DialogText.helvetica16sandal,
-                                    border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(0)),
-                                  ),
-                                ),
-                              ),
-                              SizedBox(
-                                height: 30,
-                                child: ElevatedButton(
-                                  onPressed: () async {
-                                    String adminUid = widget.adminUid!;
-                                    await _startPhoneAuth(
-                                        contactNumberController.text, adminUid);
-                                  },
-                                  style: ElevatedButton.styleFrom(
-                                      backgroundColor:
-                                          Color.fromRGBO(60, 55, 148, 1),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(0),
-                                      )),
-                                  child: Text("Get OTP",
-                                      style: LoginpageText.helvetica16white),
-                                ),
-                              ),
-                            ],
-                          ),
-                          SizedBox(height: 40),
-                          Padding(
-                            padding: EdgeInsets.only(left: 2.w, right: 5.w),
-                            child: Divider(
-                              color: Color.fromRGBO(112, 112, 112, 1),
+                    ),
+                    padding: EdgeInsets.fromLTRB(4.w, 4.h, 2.w, 4.h),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Center(
+                              child: Text('Enter Mobile No',
+                                  style: LoginpageText.helvetica30bold),
                             ),
-                          ),
-                          SizedBox(height: 10),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text("Don't have an account?",
-                                  style: HomepageText.helvetica16black),
-                              InkWell(
-                                child: Text('Create One!',
-                                    style: LoginpageText.purplehelvetica),
-                                onTap: () {
-                                  showDialog(
-                                    barrierColor: Colors.grey.withOpacity(0.5),
-                                    context: context,
-                                    builder: (context) {
-                                      return CreateAccount();
-                                    },
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.pop(context);
+                              },
+                              child: ImageIcon(
+                                NetworkImage(
+                                    'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/cancel.png?alt=media&token=dd1ed39b-abda-4780-94dd-f5c15e7d12f5'),
+                                color: Colors.black,
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 20),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SizedBox(
+                              height: 30,
+                              width: 200,
+                              child: TextField(
+                                controller: contactNumberController,
+                                keyboardType: TextInputType.number,
+                                decoration: InputDecoration(
+                                  hintText: '99999 99999',
+                                  contentPadding: EdgeInsets.only(
+                                    left: 1.w,
+                                  ),
+                                  hintStyle: DialogText.helvetica16sandal,
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(0)),
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 30,
+                              child: ElevatedButton(
+                                onPressed: () async {
+                                  String adminUid = widget.adminUid!;
+                                  await _startPhoneAuth(
+                                    contactNumberController.text,
                                   );
                                 },
+                                style: ElevatedButton.styleFrom(
+                                    backgroundColor:
+                                        Color.fromRGBO(60, 55, 148, 1),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(0),
+                                    )),
+                                child: Text("Get OTP",
+                                    style: LoginpageText.helvetica16white),
                               ),
-                            ],
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 40),
+                        Padding(
+                          padding: EdgeInsets.only(left: 2.w, right: 5.w),
+                          child: Divider(
+                            color: Color.fromRGBO(112, 112, 112, 1),
                           ),
-                        ],
-                      ),
+                        ),
+                        SizedBox(height: 10),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text("Don't have an account?",
+                                style: HomepageText.helvetica16black),
+                            InkWell(
+                              child: Text('Create One!',
+                                  style: LoginpageText.purplehelvetica),
+                              onTap: () {
+                                showDialog(
+                                  barrierColor: Colors.grey.withOpacity(0.5),
+                                  context: context,
+                                  builder: (context) {
+                                    return CreateAccount();
+                                  },
+                                );
+                              },
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
                   ),
                 ),
