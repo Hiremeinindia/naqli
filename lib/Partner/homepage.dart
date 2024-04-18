@@ -385,7 +385,7 @@ class _MyHomePageState extends State<HomePagePartner> {
                                   .center, // Adjust this line for proper alignment
                               children: [
                                 Image.network(
-                                  'delivery.png',
+                                  'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/delivery.png?alt=media&token=983158fd-58d2-4867-8d2a-bf562c885673',
                                 ),
                                 SizedBox(
                                   height: 20,
@@ -454,7 +454,7 @@ class _MyHomePageState extends State<HomePagePartner> {
                                   .center, // Adjust this line for proper alignment
                               children: [
                                 Image.network(
-                                  'payment.png',
+                                  'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/payment.png?alt=media&token=b9fdb0be-8d4e-4ab1-a318-00a790171a5c',
                                 ),
                                 SizedBox(
                                   height: 20,
@@ -747,7 +747,7 @@ class _MyHomePageState extends State<HomePagePartner> {
                             .center, // Adjust this line for proper alignment
                         children: [
                           Image.network(
-                            'delivery.png',
+                            'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/delivery.png?alt=media&token=983158fd-58d2-4867-8d2a-bf562c885673',
                             width: 50,
                             height: 50,
                           ),
@@ -823,7 +823,7 @@ class _MyHomePageState extends State<HomePagePartner> {
                             .center, // Adjust this line for proper alignment
                         children: [
                           Image.network(
-                            'payment.png',
+                            'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/payment.png?alt=media&token=b9fdb0be-8d4e-4ab1-a318-00a790171a5c',
                             width: 50,
                             height: 50,
                           ),
