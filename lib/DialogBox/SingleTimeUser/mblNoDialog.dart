@@ -461,7 +461,7 @@ class _MblNoDialogState extends State<MblNoDialog> {
                                                         children: [
                                                           ImageIcon(
                                                             NetworkImage(
-                                                                'approved.png'),
+                                                                'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/approved.png?alt=media&token=1464e391-a8a7-4e1f-9ff8-90154603b7c9'),
                                                             color:
                                                                 Color.fromRGBO(
                                                                     60,
@@ -540,7 +540,7 @@ class _MblNoDialogState extends State<MblNoDialog> {
                                                           Center(
                                                             child: ImageIcon(
                                                               NetworkImage(
-                                                                  'cancel.png'),
+                                                                  'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/cancel.png?alt=media&token=dd1ed39b-abda-4780-94dd-f5c15e7d12f5'),
                                                               color:
                                                                   Colors.black,
                                                             ),
