@@ -453,31 +453,25 @@ class _MblNoDialogState extends State<MblNoDialog> {
                                                       MainAxisAlignment
                                                           .spaceBetween,
                                                   children: [
-                                                    Expanded(
-                                                      child: Row(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .center,
-                                                        children: [
-                                                          ImageIcon(
-                                                            NetworkImage(
-                                                                'approved.png'),
-                                                            color:
-                                                                Color.fromRGBO(
-                                                                    60,
-                                                                    55,
-                                                                    148,
-                                                                    1),
-                                                            size: 30,
-                                                          ),
-                                                          SizedBox(width: 5),
-                                                          Text(
-                                                            'Account Verified',
-                                                            style: TabelText
-                                                                .helveticablack19,
-                                                          ),
-                                                        ],
-                                                      ),
+                                                    Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .center,
+                                                      children: [
+                                                        ImageIcon(
+                                                          NetworkImage(
+                                                              'approved.png'),
+                                                          color: Color.fromRGBO(
+                                                              60, 55, 148, 1),
+                                                          size: 30,
+                                                        ),
+                                                        SizedBox(width: 5),
+                                                        Text(
+                                                          'Account Verified',
+                                                          style: TabelText
+                                                              .helveticablack19,
+                                                        ),
+                                                      ],
                                                     ),
                                                     GestureDetector(
                                                       onTap: () async {
@@ -540,7 +534,7 @@ class _MblNoDialogState extends State<MblNoDialog> {
                                                           Center(
                                                             child: ImageIcon(
                                                               NetworkImage(
-                                                                  'cancel.png'),
+                                                                  'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/cancel.png?alt=media&token=dd1ed39b-abda-4780-94dd-f5c15e7d12f5'),
                                                               color:
                                                                   Colors.black,
                                                             ),
