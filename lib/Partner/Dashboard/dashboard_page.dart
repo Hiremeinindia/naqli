@@ -43,7 +43,7 @@ class _MyHomePageState extends State<PartnerDashboardPage> {
   bool payNowButtonEnabled = false;
   bool expandWork = false;
   String? selectedValue;
-  Widget _currentContent = Bookingpartner(); // Initial content
+  late Widget _currentContent; // Initial content
 
   void handleRadioValueChanged(String? newValue) {
     setState(() {
@@ -58,6 +58,7 @@ class _MyHomePageState extends State<PartnerDashboardPage> {
       page.jumpToPage(p0);
     });
     super.initState();
+    _currentContent = Bookingpartner();
   }
 
   void enablePayNowButton() {
@@ -100,27 +101,6 @@ class _MyHomePageState extends State<PartnerDashboardPage> {
     setState(() {
       payNowButtonEnabled = false;
     });
-  }
-
-  void tapOnPieChart(FlTouchEvent event, PieTouchResponse? response) {
-    if (response != null) {
-      final sectionIndex = response.touchedSection!.touchedSectionIndex;
-      final value = response.touchedSection!.touchedSection!.value;
-      if (sectionIndex == 0) {
-        month = 'January - $value';
-      } else if (sectionIndex == 1) {
-        month = 'February - $value';
-      } else if (sectionIndex == 2) {
-        month = 'March - $value';
-      } else if (sectionIndex == 3) {
-        month = 'April - $value';
-      } else if (sectionIndex == 4) {
-        month = 'May - $value';
-      }
-      setState(() {});
-      print('Tapped on section: $sectionIndex');
-      // You can add your custom logic here to respond to the tap on the Pie Chart
-    }
   }
 
   bool isAnyCheckboxSelected() {

@@ -12,7 +12,8 @@ import 'package:sizer/sizer.dart';
 
 class Payments extends StatefulWidget {
   final String? user;
-  Payments({this.user});
+  final String? unitType;
+  Payments({this.user, this.unitType});
   @override
   State<Payments> createState() => _PaymentsState();
 }
@@ -32,8 +33,12 @@ class _PaymentsState extends State<Payments> {
     super.dispose();
   }
 
-  Stream<List<QuerySnapshot<Map<String, dynamic>>>> allBookings() {
+  Stream<List<Map<String, dynamic>>> allBookings() {
     FirebaseFirestore firestore = FirebaseFirestore.instance;
+
+    // Query for user document to get firstName
+    Stream<DocumentSnapshot<Map<String, dynamic>>> userStream =
+        firestore.collection('user').doc(widget.user).snapshots();
 
     // Query for vehicleBooking collection
     Stream<QuerySnapshot<Map<String, dynamic>>> vehicleStream = firestore
@@ -42,21 +47,26 @@ class _PaymentsState extends State<Payments> {
         .collection('vehicleBooking')
         .snapshots();
 
-    // Query for equipmentBookings collection
-    Stream<QuerySnapshot<Map<String, dynamic>>> equipmentStream = firestore
-        .collection('user')
-        .doc(widget.user)
-        .collection('equipmentBookings')
-        .snapshots();
-
     // Merge both streams using Rx.combineLatest2
-    Stream<List<QuerySnapshot<Map<String, dynamic>>>> mergedStream =
-        Rx.combineLatest2(
-            vehicleStream,
-            equipmentStream,
-            (QuerySnapshot<Map<String, dynamic>> a,
-                    QuerySnapshot<Map<String, dynamic>> b) =>
-                [a, b]).asBroadcastStream();
+    Stream<List<Map<String, dynamic>>> mergedStream =
+        Rx.combineLatest2(userStream, vehicleStream,
+            (DocumentSnapshot<Map<String, dynamic>> userDoc,
+                QuerySnapshot<Map<String, dynamic>> vehicleSnapshot) {
+      List<Map<String, dynamic>> combinedData = [];
+      // Extract firstName from user document
+      String firstName = userDoc.data()?['firstName'] ?? '';
+      // Iterate through vehicleBooking documents and extract relevant fields
+      vehicleSnapshot.docs.forEach((vehicleDoc) {
+        Map<String, dynamic> bookingData = {
+          'firstName': firstName,
+          'truck': vehicleDoc['truck'],
+          'size': vehicleDoc['size'],
+          'bookingid': vehicleDoc['bookingid'],
+        };
+        combinedData.add(bookingData);
+      });
+      return combinedData;
+    }).asBroadcastStream();
 
     // Return the merged stream
     return mergedStream;
@@ -68,11 +78,18 @@ class _PaymentsState extends State<Payments> {
 
     try {
       // Perform the asynchronous operation
-
+      String userCollection;
+      if (widget.unitType == 'Vehicle') {
+        userCollection = 'vehicleBooking';
+      } else if (widget.unitType == 'Equipment') {
+        userCollection = 'equipmentBookings';
+      } else {
+        throw Exception('Invalid selected type');
+      }
       FirebaseFirestore firestore = FirebaseFirestore.instance;
       DocumentReference userDocRef = firestore.collection('user').doc(userId);
       CollectionReference userBookingCollectionRef =
-          userDocRef.collection('vehicleBookings');
+          userDocRef.collection(userCollection);
       Map<String, dynamic>? lastUserData;
       // Listen to the collection's stream, order by timestamp, and limit to 1 document
       userBookingCollectionRef.limit(1).snapshots().listen((querySnapshot) {
@@ -108,6 +125,12 @@ class _PaymentsState extends State<Payments> {
 
     // Return the stream from the StreamController
     return controller.stream;
+  }
+
+  void initState() {
+    _currentStream =
+        allBookings() as Stream<List<QuerySnapshot<Map<String, dynamic>>>>?;
+    super.initState();
   }
 
   @override

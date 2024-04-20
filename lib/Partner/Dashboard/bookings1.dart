@@ -21,10 +21,9 @@ import 'dart:ui';
 
 class Bookings1 extends StatefulWidget {
   final String? user;
+  final String? unitType;
 
-  Bookings1({
-    this.user,
-  });
+  Bookings1({this.user, this.unitType});
   @override
   State<Bookings1> createState() => _Bookings1State();
 }
