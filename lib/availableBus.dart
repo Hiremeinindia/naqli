@@ -205,63 +205,97 @@ class _AvailableBusState extends State<AvailableBus> {
                             ),
                           ],
                         ),
-                        Row(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                left: 5,
-                              ),
-                              child: FutureBuilder<Map<String, dynamic>?>(
-                                future: fetchData(widget
-                                    .user!), // Pass the userId to fetchData method
-                                builder: (context, snapshot) {
-                                  if (snapshot.connectionState ==
-                                      ConnectionState.waiting) {
-                                    return CircularProgressIndicator(); // Show a loading indicator while data is being fetched
-                                  } else if (snapshot.hasError) {
-                                    return Text('Error: ${snapshot.error}');
-                                  } else if (snapshot.hasData) {
-                                    // Extract first name and last name from snapshot data
-                                    String firstName =
-                                        snapshot.data?['firstName'] ?? '';
+                        widget.user != null
+                            ? Row(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                      left: 5,
+                                    ),
+                                    child: FutureBuilder<Map<String, dynamic>?>(
+                                      future: fetchData(widget
+                                          .user!), // Pass the userId to fetchData method
+                                      builder: (context, snapshot) {
+                                        if (snapshot.connectionState ==
+                                            ConnectionState.waiting) {
+                                          return CircularProgressIndicator(); // Show a loading indicator while data is being fetched
+                                        } else if (snapshot.hasError) {
+                                          return Text(
+                                              'Error: ${snapshot.error}');
+                                        } else if (snapshot.hasData) {
+                                          // Extract first name and last name from snapshot data
+                                          String firstName =
+                                              snapshot.data?['firstName'] ?? '';
 
-                                    return Row(
-                                      children: [
-                                        Icon(
-                                          Icons.notifications,
-                                          color:
-                                              Color.fromRGBO(106, 102, 209, 1),
-                                        ),
-                                        SizedBox(
-                                          width: 0.5.w,
-                                        ),
-                                        Text("Contact Us ",
-                                            style:
-                                                HomepageText.helvetica16black),
-                                        SizedBox(
-                                          height: 30,
-                                          child: VerticalDivider(
-                                            color: Colors.black,
+                                          return Row(
+                                            children: [
+                                              Icon(
+                                                Icons.notifications,
+                                                color: Color.fromRGBO(
+                                                    106, 102, 209, 1),
+                                              ),
+                                              SizedBox(
+                                                width: 0.5.w,
+                                              ),
+                                              Text("Contact Us ",
+                                                  style: HomepageText
+                                                      .helvetica16black),
+                                              SizedBox(
+                                                height: 30,
+                                                child: VerticalDivider(
+                                                  color: Colors.black,
+                                                ),
+                                              ),
+                                              widget.user != null
+                                                  ? Text("Hello $firstName!",
+                                                      style: HomepageText
+                                                          .helvetica16black)
+                                                  : Text("Hello Customer!",
+                                                      style: HomepageText
+                                                          .helvetica16black),
+                                            ],
+                                          );
+                                        } else {
+                                          return Text(
+                                              'No data available'); // Handle case when snapshot has no data
+                                        }
+                                      },
+                                    ),
+                                  ),
+                                ],
+                              )
+                            : Row(
+                                children: [
+                                  Padding(
+                                      padding: const EdgeInsets.only(
+                                        left: 5,
+                                      ),
+                                      child: Row(
+                                        children: [
+                                          Icon(
+                                            Icons.notifications,
+                                            color: Color.fromRGBO(
+                                                106, 102, 209, 1),
                                           ),
-                                        ),
-                                        widget.user != null
-                                            ? Text("Hello $firstName!",
-                                                style: HomepageText
-                                                    .helvetica16black)
-                                            : Text("Hello Customer!",
-                                                style: HomepageText
-                                                    .helvetica16black),
-                                      ],
-                                    );
-                                  } else {
-                                    return Text(
-                                        'No data available'); // Handle case when snapshot has no data
-                                  }
-                                },
+                                          SizedBox(
+                                            width: 0.5.w,
+                                          ),
+                                          Text("Contact Us ",
+                                              style: HomepageText
+                                                  .helvetica16black),
+                                          SizedBox(
+                                            height: 30,
+                                            child: VerticalDivider(
+                                              color: Colors.black,
+                                            ),
+                                          ),
+                                          Text("Hello Customer!",
+                                              style: HomepageText
+                                                  .helvetica16black),
+                                        ],
+                                      )),
+                                ],
                               ),
-                            ),
-                          ],
-                        ),
                       ],
                     ),
                   ),
@@ -878,19 +912,32 @@ class _AvailableBusState extends State<AvailableBus> {
                                                               183,
                                                               1)),
                                                       Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceBetween,
                                                         children: [
-                                                          Icon(
-                                                            Icons.circle,
-                                                            color: Colors.red,
-                                                            size: 20,
+                                                          Row(
+                                                            children: [
+                                                              Icon(
+                                                                Icons.circle,
+                                                                color:
+                                                                    Colors.red,
+                                                                size: 20,
+                                                              ),
+                                                              SizedBox(
+                                                                width: 10,
+                                                              ),
+                                                              Text(
+                                                                'Drop Point A',
+                                                                style: AvailableText
+                                                                    .helvetica17grey,
+                                                              ),
+                                                            ],
                                                           ),
-                                                          SizedBox(
-                                                            width: 10,
-                                                          ),
-                                                          Text(
-                                                            'Drop Point A',
-                                                            style: AvailableText
-                                                                .helvetica17grey,
+                                                          ImageIcon(
+                                                            NetworkImage(
+                                                                'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/add(1).png?alt=media&token=aa9024ab-b917-4166-aaf0-abe740e28de0'),
+                                                            color: Colors.black,
                                                           ),
                                                         ],
                                                       ),

@@ -58,12 +58,12 @@ class _MyHomePageState extends State<SingleUserDashboardPage> {
         String address = userData['address'] ?? '';
         String firstName = userData['firstName'] ?? '';
         String lastName = userData['lastName'] ?? '';
-        String bookingid = userData['bookingid'] ?? '';
+        String userId = userData['userId'] ?? '';
         return {
           'firstName': firstName,
           'lastName': lastName,
           'address': address,
-          'bookingid': bookingid
+          'userId': userId
         };
       } else {
         print('Document does not exist for userId: $userId');
@@ -368,8 +368,8 @@ class _MyHomePageState extends State<SingleUserDashboardPage> {
                                       snapshot.data?['lastName'] ?? '';
                                   String address =
                                       snapshot.data?['address'] ?? '';
-                                  String bookingid =
-                                      snapshot.data?['bookingid'] ?? '';
+                                  String userId =
+                                      snapshot.data?['userId'] ?? '';
 
                                   return Column(
                                     mainAxisAlignment:
@@ -404,7 +404,7 @@ class _MyHomePageState extends State<SingleUserDashboardPage> {
                                       SizedBox(
                                         height: 10,
                                       ),
-                                      Text('ID No : $bookingid',
+                                      Text('ID No : $userId',
                                           style: DashboardText.sfpro12),
                                       Row(
                                         mainAxisAlignment:
