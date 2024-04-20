@@ -1,24 +1,24 @@
 // ignore_for_file: dead_code
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:carousel_slider/carousel_slider.dart';
+
 import 'package:flutter/painting.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_application_1/Widgets/customButton.dart';
+import 'package:flutter_application_1/Widgets/formText.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+
 import 'package:sizer/sizer.dart';
 
-import '../../DialogBox/SingleTimeUser/paymentSuccessDialog.dart';
-import '../../Widgets/formText.dart';
-
-class Bookings extends StatefulWidget {
-  Bookings();
+class Bookingpartner extends StatefulWidget {
+  Bookingpartner();
 
   @override
-  State<Bookings> createState() => _BookingDetailsState();
+  State<Bookingpartner> createState() => _BookingDetailsState();
 }
 
-class _BookingDetailsState extends State<Bookings> {
+class _BookingDetailsState extends State<Bookingpartner> {
   String _selectedValue = '1';
   String categoryValue = '1';
   bool isClicked = false;
