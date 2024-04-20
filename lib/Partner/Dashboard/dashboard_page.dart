@@ -7,6 +7,7 @@ import 'package:fl_chart/fl_chart.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/Partner/Dashboard/bookings.dart';
+import 'package:flutter_application_1/Partner/Dashboard/bookings1.dart';
 import 'package:flutter_application_1/Partner/Dashboard/payments.dart';
 import 'package:flutter_application_1/classes/language.dart';
 import 'package:flutter_application_1/classes/language_constants.dart';
@@ -19,7 +20,7 @@ import '../../main.dart';
 
 class PartnerDashboardPage extends StatefulWidget {
   final String? user;
-  PartnerDashboardPage({required this.user});
+  PartnerDashboardPage({this.user});
 
   @override
   State<PartnerDashboardPage> createState() => _MyHomePageState();
@@ -42,7 +43,7 @@ class _MyHomePageState extends State<PartnerDashboardPage> {
   bool payNowButtonEnabled = false;
   bool expandWork = false;
   String? selectedValue;
-  Widget _currentContent = Bookingpartner(); // Initial content
+  late Widget _currentContent; // Initial content
 
   void handleRadioValueChanged(String? newValue) {
     setState(() {
@@ -57,6 +58,7 @@ class _MyHomePageState extends State<PartnerDashboardPage> {
       page.jumpToPage(p0);
     });
     super.initState();
+    _currentContent = Bookingpartner();
   }
 
   void enablePayNowButton() {
@@ -69,15 +71,22 @@ class _MyHomePageState extends State<PartnerDashboardPage> {
     try {
       DocumentSnapshot<Map<String, dynamic>> documentSnapshot =
           await FirebaseFirestore.instance
-              .collection('enterpriseuser')
+              .collection('partneruser')
               .doc(userId)
               .get();
 
       if (documentSnapshot.exists) {
         Map<String, dynamic> userData = documentSnapshot.data()!;
-        String firstName = userData['firstName'];
-        String lastName = userData['lastName'];
-        return {'firstName': firstName, 'lastName': lastName};
+        String address = userData['address'] ?? '';
+        String firstName = userData['firstName'] ?? '';
+        String lastName = userData['lastName'] ?? '';
+        String userId = userData['userId'] ?? '';
+        return {
+          'firstName': firstName,
+          'lastName': lastName,
+          'address': address,
+          'userId': userId
+        };
       } else {
         print('Document does not exist for userId: $userId');
         return null;
@@ -92,27 +101,6 @@ class _MyHomePageState extends State<PartnerDashboardPage> {
     setState(() {
       payNowButtonEnabled = false;
     });
-  }
-
-  void tapOnPieChart(FlTouchEvent event, PieTouchResponse? response) {
-    if (response != null) {
-      final sectionIndex = response.touchedSection!.touchedSectionIndex;
-      final value = response.touchedSection!.touchedSection!.value;
-      if (sectionIndex == 0) {
-        month = 'January - $value';
-      } else if (sectionIndex == 1) {
-        month = 'February - $value';
-      } else if (sectionIndex == 2) {
-        month = 'March - $value';
-      } else if (sectionIndex == 3) {
-        month = 'April - $value';
-      } else if (sectionIndex == 4) {
-        month = 'May - $value';
-      }
-      setState(() {});
-      print('Tapped on section: $sectionIndex');
-      // You can add your custom logic here to respond to the tap on the Pie Chart
-    }
   }
 
   bool isAnyCheckboxSelected() {
@@ -381,56 +369,87 @@ class _MyHomePageState extends State<PartnerDashboardPage> {
                                 Radius.circular(7),
                               ),
                             ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                SizedBox(
-                                  height: 20,
-                                ),
-                                Text('Faizal Khan', style: DashboardText.acre),
-                                Text('Location', style: DashboardText.sfpro19),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                CircleAvatar(
-                                  backgroundColor:
-                                      Color.fromRGBO(127, 106, 255, 1),
-                                  maxRadius: 76,
-                                  minRadius: 72,
-                                  child: CircleAvatar(
-                                      backgroundColor: Colors.white,
-                                      maxRadius: 70,
-                                      minRadius: 67,
-                                      child: CircleAvatar(
-                                        backgroundImage: NetworkImage(
-                                            'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/uploadimage.png?alt=media&token=1793876b-63ca-4730-831b-4fcf4e96da0a'),
-                                        maxRadius: 65,
-                                        minRadius: 65,
-                                      )),
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Text('ID No : xxxxxxxxxx',
-                                    style: DashboardText.sfpro12),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    IconButton(
-                                        onPressed: () {},
-                                        icon: Image.network(
-                                          'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/editicon.png?alt=media&token=b0315743-5ecb-437e-94e2-c6c3c82d343b',
-                                          width: 16,
-                                          height: 16,
-                                        )),
-                                    Text('Edit Profile',
-                                        style: DashboardText.sfpro12black),
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                              ],
+                            child: FutureBuilder<Map<String, dynamic>?>(
+                              future: fetchData(widget
+                                  .user!), // Pass the userId to fetchData method
+                              builder: (context, snapshot) {
+                                if (snapshot.connectionState ==
+                                    ConnectionState.waiting) {
+                                  return CircularProgressIndicator(); // Show a loading indicator while data is being fetched
+                                } else if (snapshot.hasError) {
+                                  return Text('Error: ${snapshot.error}');
+                                } else if (snapshot.hasData) {
+                                  // Extract first name and last name from snapshot data
+                                  String firstName =
+                                      snapshot.data?['firstName'] ?? '';
+                                  String lastName =
+                                      snapshot.data?['lastName'] ?? '';
+                                  String address =
+                                      snapshot.data?['address'] ?? '';
+                                  String userId =
+                                      snapshot.data?['userId'] ?? '';
+
+                                  return Column(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      SizedBox(
+                                        height: 20,
+                                      ),
+                                      Text(" $firstName $lastName !",
+                                          style: DashboardText.acre),
+                                      Text('$address',
+                                          style: DashboardText.sfpro19),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      CircleAvatar(
+                                        backgroundColor:
+                                            Color.fromRGBO(127, 106, 255, 1),
+                                        maxRadius: 76,
+                                        minRadius: 72,
+                                        child: CircleAvatar(
+                                            backgroundColor: Colors.white,
+                                            maxRadius: 70,
+                                            minRadius: 67,
+                                            child: CircleAvatar(
+                                              backgroundImage: NetworkImage(
+                                                  'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/uploadimage.png?alt=media&token=1793876b-63ca-4730-831b-4fcf4e96da0a'),
+                                              maxRadius: 65,
+                                              minRadius: 65,
+                                            )),
+                                      ),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      Text('ID No : $userId',
+                                          style: DashboardText.sfpro12),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          IconButton(
+                                              onPressed: () {},
+                                              icon: Image.network(
+                                                'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/editicon.png?alt=media&token=b0315743-5ecb-437e-94e2-c6c3c82d343b',
+                                                width: 16,
+                                                height: 16,
+                                              )),
+                                          Text('Edit Profile',
+                                              style:
+                                                  DashboardText.sfpro12black),
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                    ],
+                                  );
+                                } else {
+                                  return Text(
+                                      'No data available'); // Handle case when snapshot has no data
+                                }
+                              },
                             ),
                           ),
                           Container(
@@ -481,7 +500,7 @@ class _MyHomePageState extends State<PartnerDashboardPage> {
                                   title: 'Report',
                                   onTap: (page, _) {
                                     setState(() {
-                                      _currentContent = Bookingpartner();
+                                      _currentContent = Bookings1();
                                     });
                                     sideMenu.changePage(page);
                                   },
@@ -503,7 +522,8 @@ class _MyHomePageState extends State<PartnerDashboardPage> {
                         ],
                       ),
                     ),
-                    SingleChildScrollView(
+                    Expanded(
+                        child: SingleChildScrollView(
                       child: Padding(
                         padding: EdgeInsets.fromLTRB(4.w, 2.h, 3.w, 2.h),
                         child: Container(
@@ -525,7 +545,7 @@ class _MyHomePageState extends State<PartnerDashboardPage> {
                           ]),
                         ),
                       ),
-                    ),
+                    )),
                   ],
                 ),
               ),
