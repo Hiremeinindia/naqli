@@ -268,18 +268,20 @@ class _State extends State<Partner> {
                   children: [
                     Row(
                       children: [
-                        Container(
-                          height: 50,
-                          color: Color.fromRGBO(142, 151, 160, 1),
-                          child: Padding(
-                            padding: EdgeInsets.only(top: 10),
-                            child: Text('Join Us',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 25,
-                                ),
-                                textAlign: TextAlign.center),
+                        Expanded(
+                          child: Container(
+                            height: 50,
+                            color: Color.fromRGBO(142, 151, 160, 1),
+                            child: Padding(
+                              padding: EdgeInsets.only(top: 10),
+                              child: Text('Join Us',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 25,
+                                  ),
+                                  textAlign: TextAlign.center),
+                            ),
                           ),
                         ),
                       ],
@@ -682,279 +684,283 @@ class _State extends State<Partner> {
                         SizedBox(width: 5),
                       ]),
                 ),
-                body: Stack(
-                  alignment: Alignment.topCenter,
-                  children: <Widget>[
-                    Column(
-                      children: <Widget>[
-                        Container(
-                          height: 53.h,
-                          width: 100.w,
-                          color: Colors.blue[900],
-                        ),
-                        Container(
-                          height: 40.h,
-                          width: 100.w,
-                          color: Colors.brown[50],
-                        ),
-                      ],
-                    ),
-                    Positioned(
-                      top: 90,
-                      left: 30,
-                      right: 30,
-                      child: Container(
-                        height: 450,
-                        width: 70,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.only(
-                            bottomLeft: Radius.circular(31),
-                            bottomRight: Radius.circular(31),
+                body: SingleChildScrollView(
+                  // Wrap with SingleChildScrollView
+                  child: Stack(
+                    alignment: Alignment.topCenter,
+                    children: <Widget>[
+                      Column(
+                        children: <Widget>[
+                          Container(
+                            height: 53.h,
+                            width: 100.w,
+                            color: Colors.blue[900],
+                          ),
+                          Container(
+                            height: 40.h,
+                            width: 100.w,
+                            color: Colors.brown[50],
+                          ),
+                        ],
+                      ),
+                      Positioned(
+                        top: 90,
+                        left: 30,
+                        right: 30,
+                        child: Container(
+                          height: 450,
+                          width: 70,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.only(
+                              bottomLeft: Radius.circular(31),
+                              bottomRight: Radius.circular(31),
+                            ),
+                          ),
+                          child: Column(
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  SizedBox(
+                                    height: 6.h,
+                                    child: Container(
+                                      color: Colors.blueGrey[400],
+                                      child: Padding(
+                                        padding: EdgeInsets.only(top: 10),
+                                        child: Text('Join Us',
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 18,
+                                            ),
+                                            textAlign: TextAlign.center),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(height: 5),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Radio(
+                                        value: 1,
+                                        groupValue: _selectedValue,
+                                        onChanged: (int? value) {
+                                          setState(() {
+                                            _selectedValue = value ??
+                                                0; // Use null-aware operator to handle null value
+                                            print(
+                                                'Selected value: $_selectedValue');
+                                          });
+                                        },
+                                      ),
+                                      Text('Enterprice')
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      Radio(
+                                        value: 2,
+                                        groupValue: _selectedValue,
+                                        onChanged: (int? value) {
+                                          setState(() {
+                                            _selectedValue = value ??
+                                                0; // Use null-aware operator to handle null value
+                                            print(
+                                                'Selected value: $_selectedValue');
+                                          });
+                                        },
+                                      ),
+                                      Text('Multiple Units'),
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      Radio(
+                                        value: 3,
+                                        groupValue: _selectedValue,
+                                        onChanged: (int? value) {
+                                          setState(() {
+                                            _selectedValue = value ??
+                                                0; // Use null-aware operator to handle null value
+                                            print(
+                                                'Selected value: $_selectedValue');
+                                          });
+                                        },
+                                      ),
+                                      Text('Operator/Owner')
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      Radio(
+                                        value: 4,
+                                        groupValue: _selectedValue,
+                                        onChanged: (int? value) {
+                                          setState(() {
+                                            _selectedValue = value ??
+                                                0; // Use null-aware operator to handle null value
+                                            print(
+                                                'Selected value: $_selectedValue');
+                                          });
+                                        },
+                                      ),
+                                      Text('owner')
+                                    ],
+                                  ),
+                                ],
+                              ),
+                              SizedBox(height: 60),
+                              Padding(
+                                padding: EdgeInsets.only(left: 260),
+                                child: Row(
+                                  children: [
+                                    Text('Name',
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.bold,
+                                        ))
+                                  ],
+                                ),
+                              ),
+                              SizedBox(height: 5),
+                              Row(
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsets.only(left: 260),
+                                    child: SizedBox(
+                                      height: 35,
+                                      width: 400,
+                                      child: TextField(
+                                        decoration: InputDecoration(
+                                          hintText: 'Enter Your name',
+                                          contentPadding: EdgeInsets.all(5.0),
+                                          border: OutlineInputBorder(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(5)),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(height: 20),
+                              Padding(
+                                padding: EdgeInsets.only(left: 260),
+                                child: Row(
+                                  children: [
+                                    Text('Mobile No',
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.bold,
+                                        ))
+                                  ],
+                                ),
+                              ),
+                              SizedBox(height: 5),
+                              Row(
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsets.only(left: 260),
+                                    child: SizedBox(
+                                      height: 35,
+                                      width: 400,
+                                      child: TextField(
+                                        decoration: InputDecoration(
+                                          hintText: 'Enter Your Mobile No',
+                                          contentPadding: EdgeInsets.all(5.0),
+                                          border: OutlineInputBorder(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(5)),
+                                          ),
+                                          suffixIcon: ElevatedButton(
+                                            style: ElevatedButton.styleFrom(
+                                              backgroundColor: Colors.blue[
+                                                  900], // Set button color to blue
+                                              foregroundColor: Colors.white,
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius: BorderRadius.circular(
+                                                    0), // Make button shape square
+                                              ),
+                                            ),
+                                            onPressed: () {},
+                                            child: Text('Verify'),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(height: 20),
+                              Padding(
+                                padding: EdgeInsets.only(left: 260),
+                                child: Row(
+                                  children: [
+                                    Text('Email (Opational)',
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.bold,
+                                        ))
+                                  ],
+                                ),
+                              ),
+                              SizedBox(height: 5),
+                              Row(
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsets.only(left: 260),
+                                    child: SizedBox(
+                                      height: 35,
+                                      width: 400,
+                                      child: TextField(
+                                        decoration: InputDecoration(
+                                          hintText: 'Enter Your Email',
+                                          contentPadding: EdgeInsets.all(5.0),
+                                          border: OutlineInputBorder(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(5)),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(height: 20),
+                              Row(children: [
+                                Padding(
+                                  padding: EdgeInsets.only(left: 285),
+                                  child: ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: Colors.indigo[
+                                          800], // Set button color to blue
+                                      foregroundColor: Colors.white,
+                                      minimumSize:
+                                          Size(230, 50), // Set button size
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(
+                                            10), // Set button shape to rounded rectangle
+                                      ),
+                                    ),
+                                    onPressed: () {},
+                                    child: Text('Register'),
+                                  ),
+                                ),
+                              ])
+                            ],
                           ),
                         ),
-                        child: Column(
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                SizedBox(
-                                  height: 6.h,
-                                  child: Container(
-                                    color: Colors.blueGrey[400],
-                                    child: Padding(
-                                      padding: EdgeInsets.only(top: 10),
-                                      child: Text('Join Us',
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 18,
-                                          ),
-                                          textAlign: TextAlign.center),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(height: 5),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                Row(
-                                  children: [
-                                    Radio(
-                                      value: 1,
-                                      groupValue: _selectedValue,
-                                      onChanged: (int? value) {
-                                        setState(() {
-                                          _selectedValue = value ??
-                                              0; // Use null-aware operator to handle null value
-                                          print(
-                                              'Selected value: $_selectedValue');
-                                        });
-                                      },
-                                    ),
-                                    Text('Enterprice')
-                                  ],
-                                ),
-                                Row(
-                                  children: [
-                                    Radio(
-                                      value: 2,
-                                      groupValue: _selectedValue,
-                                      onChanged: (int? value) {
-                                        setState(() {
-                                          _selectedValue = value ??
-                                              0; // Use null-aware operator to handle null value
-                                          print(
-                                              'Selected value: $_selectedValue');
-                                        });
-                                      },
-                                    ),
-                                    Text('Multiple Units'),
-                                  ],
-                                ),
-                                Row(
-                                  children: [
-                                    Radio(
-                                      value: 3,
-                                      groupValue: _selectedValue,
-                                      onChanged: (int? value) {
-                                        setState(() {
-                                          _selectedValue = value ??
-                                              0; // Use null-aware operator to handle null value
-                                          print(
-                                              'Selected value: $_selectedValue');
-                                        });
-                                      },
-                                    ),
-                                    Text('Operator/Owner')
-                                  ],
-                                ),
-                                Row(
-                                  children: [
-                                    Radio(
-                                      value: 4,
-                                      groupValue: _selectedValue,
-                                      onChanged: (int? value) {
-                                        setState(() {
-                                          _selectedValue = value ??
-                                              0; // Use null-aware operator to handle null value
-                                          print(
-                                              'Selected value: $_selectedValue');
-                                        });
-                                      },
-                                    ),
-                                    Text('owner')
-                                  ],
-                                ),
-                              ],
-                            ),
-                            SizedBox(height: 60),
-                            Padding(
-                              padding: EdgeInsets.only(left: 260),
-                              child: Row(
-                                children: [
-                                  Text('Name',
-                                      style: TextStyle(
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.bold,
-                                      ))
-                                ],
-                              ),
-                            ),
-                            SizedBox(height: 5),
-                            Row(
-                              children: [
-                                Padding(
-                                  padding: EdgeInsets.only(left: 260),
-                                  child: SizedBox(
-                                    height: 35,
-                                    width: 400,
-                                    child: TextField(
-                                      decoration: InputDecoration(
-                                        hintText: 'Enter Your name',
-                                        contentPadding: EdgeInsets.all(5.0),
-                                        border: OutlineInputBorder(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(5)),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(height: 20),
-                            Padding(
-                              padding: EdgeInsets.only(left: 260),
-                              child: Row(
-                                children: [
-                                  Text('Mobile No',
-                                      style: TextStyle(
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.bold,
-                                      ))
-                                ],
-                              ),
-                            ),
-                            SizedBox(height: 5),
-                            Row(
-                              children: [
-                                Padding(
-                                  padding: EdgeInsets.only(left: 260),
-                                  child: SizedBox(
-                                    height: 35,
-                                    width: 400,
-                                    child: TextField(
-                                      decoration: InputDecoration(
-                                        hintText: 'Enter Your Mobile No',
-                                        contentPadding: EdgeInsets.all(5.0),
-                                        border: OutlineInputBorder(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(5)),
-                                        ),
-                                        suffixIcon: ElevatedButton(
-                                          style: ElevatedButton.styleFrom(
-                                            backgroundColor: Colors.blue[
-                                                900], // Set button color to blue
-                                            foregroundColor: Colors.white,
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.circular(
-                                                  0), // Make button shape square
-                                            ),
-                                          ),
-                                          onPressed: () {},
-                                          child: Text('Verify'),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(height: 20),
-                            Padding(
-                              padding: EdgeInsets.only(left: 260),
-                              child: Row(
-                                children: [
-                                  Text('Email (Opational)',
-                                      style: TextStyle(
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.bold,
-                                      ))
-                                ],
-                              ),
-                            ),
-                            SizedBox(height: 5),
-                            Row(
-                              children: [
-                                Padding(
-                                  padding: EdgeInsets.only(left: 260),
-                                  child: SizedBox(
-                                    height: 35,
-                                    width: 400,
-                                    child: TextField(
-                                      decoration: InputDecoration(
-                                        hintText: 'Enter Your Email',
-                                        contentPadding: EdgeInsets.all(5.0),
-                                        border: OutlineInputBorder(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(5)),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(height: 20),
-                            Row(children: [
-                              Padding(
-                                padding: EdgeInsets.only(left: 285),
-                                child: ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor: Colors.indigo[
-                                        800], // Set button color to blue
-                                    foregroundColor: Colors.white,
-                                    minimumSize:
-                                        Size(230, 50), // Set button size
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(
-                                          10), // Set button shape to rounded rectangle
-                                    ),
-                                  ),
-                                  onPressed: () {},
-                                  child: Text('Register'),
-                                ),
-                              ),
-                            ])
-                          ],
-                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ));
         }
