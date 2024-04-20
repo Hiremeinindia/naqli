@@ -14,9 +14,9 @@ import 'package:flutter_application_1/Widgets/customTextField.dart';
 import 'package:flutter_application_1/classes/language.dart';
 import 'package:flutter_application_1/classes/language_constants.dart';
 import 'package:sizer/sizer.dart';
+import 'package:intl/intl.dart';
 import 'Widgets/formText.dart';
 import 'main.dart';
-import 'package:intl/intl.dart';
 
 class AvailableSpecial extends StatefulWidget {
   final String? user;
@@ -205,63 +205,97 @@ class _AvailableSpecialState extends State<AvailableSpecial> {
                             ),
                           ],
                         ),
-                        Row(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                left: 5,
-                              ),
-                              child: FutureBuilder<Map<String, dynamic>?>(
-                                future: fetchData(widget
-                                    .user!), // Pass the userId to fetchData method
-                                builder: (context, snapshot) {
-                                  if (snapshot.connectionState ==
-                                      ConnectionState.waiting) {
-                                    return CircularProgressIndicator(); // Show a loading indicator while data is being fetched
-                                  } else if (snapshot.hasError) {
-                                    return Text('Error: ${snapshot.error}');
-                                  } else if (snapshot.hasData) {
-                                    // Extract first name and last name from snapshot data
-                                    String firstName =
-                                        snapshot.data?['firstName'] ?? '';
+                        widget.user != null
+                            ? Row(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                      left: 5,
+                                    ),
+                                    child: FutureBuilder<Map<String, dynamic>?>(
+                                      future: fetchData(widget
+                                          .user!), // Pass the userId to fetchData method
+                                      builder: (context, snapshot) {
+                                        if (snapshot.connectionState ==
+                                            ConnectionState.waiting) {
+                                          return CircularProgressIndicator(); // Show a loading indicator while data is being fetched
+                                        } else if (snapshot.hasError) {
+                                          return Text(
+                                              'Error: ${snapshot.error}');
+                                        } else if (snapshot.hasData) {
+                                          // Extract first name and last name from snapshot data
+                                          String firstName =
+                                              snapshot.data?['firstName'] ?? '';
 
-                                    return Row(
-                                      children: [
-                                        Icon(
-                                          Icons.notifications,
-                                          color:
-                                              Color.fromRGBO(106, 102, 209, 1),
-                                        ),
-                                        SizedBox(
-                                          width: 0.5.w,
-                                        ),
-                                        Text("Contact Us ",
-                                            style:
-                                                HomepageText.helvetica16black),
-                                        SizedBox(
-                                          height: 30,
-                                          child: VerticalDivider(
-                                            color: Colors.black,
+                                          return Row(
+                                            children: [
+                                              Icon(
+                                                Icons.notifications,
+                                                color: Color.fromRGBO(
+                                                    106, 102, 209, 1),
+                                              ),
+                                              SizedBox(
+                                                width: 0.5.w,
+                                              ),
+                                              Text("Contact Us ",
+                                                  style: HomepageText
+                                                      .helvetica16black),
+                                              SizedBox(
+                                                height: 30,
+                                                child: VerticalDivider(
+                                                  color: Colors.black,
+                                                ),
+                                              ),
+                                              widget.user != null
+                                                  ? Text("Hello $firstName!",
+                                                      style: HomepageText
+                                                          .helvetica16black)
+                                                  : Text("Hello Customer!",
+                                                      style: HomepageText
+                                                          .helvetica16black),
+                                            ],
+                                          );
+                                        } else {
+                                          return Text(
+                                              'No data available'); // Handle case when snapshot has no data
+                                        }
+                                      },
+                                    ),
+                                  ),
+                                ],
+                              )
+                            : Row(
+                                children: [
+                                  Padding(
+                                      padding: const EdgeInsets.only(
+                                        left: 5,
+                                      ),
+                                      child: Row(
+                                        children: [
+                                          Icon(
+                                            Icons.notifications,
+                                            color: Color.fromRGBO(
+                                                106, 102, 209, 1),
                                           ),
-                                        ),
-                                        widget.user != null
-                                            ? Text("Hello $firstName!",
-                                                style: HomepageText
-                                                    .helvetica16black)
-                                            : Text("Hello Customer!",
-                                                style: HomepageText
-                                                    .helvetica16black),
-                                      ],
-                                    );
-                                  } else {
-                                    return Text(
-                                        'No data available'); // Handle case when snapshot has no data
-                                  }
-                                },
+                                          SizedBox(
+                                            width: 0.5.w,
+                                          ),
+                                          Text("Contact Us ",
+                                              style: HomepageText
+                                                  .helvetica16black),
+                                          SizedBox(
+                                            height: 30,
+                                            child: VerticalDivider(
+                                              color: Colors.black,
+                                            ),
+                                          ),
+                                          Text("Hello Customer!",
+                                              style: HomepageText
+                                                  .helvetica16black),
+                                        ],
+                                      )),
+                                ],
                               ),
-                            ),
-                          ],
-                        ),
                       ],
                     ),
                   ),
@@ -285,7 +319,7 @@ class _AvailableSpecialState extends State<AvailableSpecial> {
                                 width: double.infinity,
                                 fit: BoxFit.cover,
                                 image: NetworkImage(
-                                    'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/truckslide.jpg?alt=media&token=3abaaa7a-3c22-44e3-81d2-d16af7336273'),
+                                    'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/truckslide.jpg?alt=media&token=69e327e8-91b3-4a55-b640-04f1673d83d9'),
                               ),
                             ],
                           ),
@@ -353,8 +387,8 @@ class _AvailableSpecialState extends State<AvailableSpecial> {
                                                       style: TextStyle(
                                                         fontWeight:
                                                             FontWeight.bold,
-                                                        fontSize: 28,
                                                         fontFamily: 'Helvetica',
+                                                        fontSize: 28,
                                                       ),
                                                     ),
                                                   ],
@@ -386,7 +420,7 @@ class _AvailableSpecialState extends State<AvailableSpecial> {
                                                       onTap: () {
                                                         setState(() {
                                                           controller
-                                                                  .truck1.text =
+                                                                  .truck2.text =
                                                               'Concrete Mixer';
                                                         });
                                                       },
@@ -401,7 +435,7 @@ class _AvailableSpecialState extends State<AvailableSpecial> {
                                                       onTap: () {
                                                         setState(() {
                                                           controller
-                                                                  .truck1.text =
+                                                                  .truck3.text =
                                                               'Concerte Pump Track';
                                                         });
                                                       },
@@ -419,12 +453,15 @@ class _AvailableSpecialState extends State<AvailableSpecial> {
                                                   height: 10,
                                                 ),
                                                 Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceEvenly,
                                                   children: [
                                                     GestureDetector(
                                                       onTap: () {
                                                         setState(() {
                                                           controller
-                                                                  .truck1.text =
+                                                                  .truck4.text =
                                                               'Lorry Crane';
                                                         });
                                                       },
@@ -439,7 +476,7 @@ class _AvailableSpecialState extends State<AvailableSpecial> {
                                                       onTap: () {
                                                         setState(() {
                                                           controller
-                                                                  .truck1.text =
+                                                                  .truck5.text =
                                                               'Power Generators';
                                                         });
                                                       },
@@ -451,6 +488,13 @@ class _AvailableSpecialState extends State<AvailableSpecial> {
                                                             'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/Group15533.png?alt=media&token=361f469f-0466-4da7-96dc-64e8d2359a2c',
                                                       ),
                                                     ),
+                                                    Container(
+                                                        height: 170,
+                                                        width: 170,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          color: Colors.white,
+                                                        )),
                                                   ],
                                                 ),
                                                 SizedBox(
@@ -819,13 +863,13 @@ class _AvailableSpecialState extends State<AvailableSpecial> {
                                                                       .8),
                                                               value: i,
                                                               groupValue: checkbox1
-                                                                  ? groupValue
+                                                                  ? selectedRadioValue
                                                                   : null, // Enable/disable based on checkbox state
                                                               onChanged: checkbox1
                                                                   ? (int? value) {
                                                                       setState(
                                                                           () {
-                                                                        groupValue =
+                                                                        selectedRadioValue =
                                                                             value;
                                                                       });
                                                                     }
@@ -901,19 +945,32 @@ class _AvailableSpecialState extends State<AvailableSpecial> {
                                                               183,
                                                               1)),
                                                       Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceBetween,
                                                         children: [
-                                                          Icon(
-                                                            Icons.circle,
-                                                            color: Colors.red,
-                                                            size: 20,
+                                                          Row(
+                                                            children: [
+                                                              Icon(
+                                                                Icons.circle,
+                                                                color:
+                                                                    Colors.red,
+                                                                size: 20,
+                                                              ),
+                                                              SizedBox(
+                                                                width: 10,
+                                                              ),
+                                                              Text(
+                                                                'Drop Point A',
+                                                                style: AvailableText
+                                                                    .helvetica17grey,
+                                                              ),
+                                                            ],
                                                           ),
-                                                          SizedBox(
-                                                            width: 10,
-                                                          ),
-                                                          Text(
-                                                            'Drop Point A',
-                                                            style: AvailableText
-                                                                .helvetica17grey,
+                                                          ImageIcon(
+                                                            NetworkImage(
+                                                                'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/add(1).png?alt=media&token=aa9024ab-b917-4166-aaf0-abe740e28de0'),
+                                                            color: Colors.black,
                                                           ),
                                                         ],
                                                       ),
@@ -970,6 +1027,18 @@ class _AvailableSpecialState extends State<AvailableSpecial> {
                                                                 .isNotEmpty) {
                                                               truck = controller
                                                                   .truck3.text;
+                                                            } else if (controller
+                                                                .truck4
+                                                                .text
+                                                                .isNotEmpty) {
+                                                              truck = controller
+                                                                  .truck4.text;
+                                                            } else if (controller
+                                                                .truck5
+                                                                .text
+                                                                .isNotEmpty) {
+                                                              truck = controller
+                                                                  .truck5.text;
                                                             }
                                                             String truck1 =
                                                                 truck;
@@ -1297,8 +1366,8 @@ class _AvailableSpecialState extends State<AvailableSpecial> {
                                                 " Special / Others",
                                                 style: TextStyle(
                                                   fontWeight: FontWeight.bold,
-                                                  fontSize: 28,
                                                   fontFamily: 'Helvetica',
+                                                  fontSize: 28,
                                                 ),
                                               ),
                                             ],
@@ -1316,43 +1385,49 @@ class _AvailableSpecialState extends State<AvailableSpecial> {
                                                         112, 112, 112, 1)
                                                     .withOpacity(0.6),
                                                 child: Container(
-                                                  width: 130,
-                                                  height: 150,
+                                                  width: 170,
+                                                  height: 170,
                                                   decoration: BoxDecoration(
                                                     color: Colors.white,
+                                                    boxShadow: [
+                                                      BoxShadow(
+                                                        color: Color.fromRGBO(
+                                                            112, 112, 112, 1),
+                                                        spreadRadius: 0.1,
+                                                        blurRadius: 0.1,
+                                                      ),
+                                                    ],
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             8.0),
                                                   ),
                                                   child: Padding(
                                                     padding:
-                                                        const EdgeInsets.only(
-                                                            top: 5,
-                                                            bottom: 15,
-                                                            left: 7,
-                                                            right: 7),
+                                                        const EdgeInsets.all(
+                                                            8.0),
                                                     child: Column(
                                                       mainAxisAlignment:
                                                           MainAxisAlignment.end,
                                                       children: [
                                                         Image(
-                                                          width: 100,
-                                                          height: 90,
+                                                          width: 150,
+                                                          height: 100,
                                                           image: NetworkImage(
-                                                              'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/Group2366.png?alt=media&token=57072109-5025-47ca-b90e-ef582da899f6'),
+                                                              'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/Group2775.png?alt=media&token=863e2800-a09a-401d-8eb1-474d30025c89'),
                                                         ),
                                                         Divider(
-                                                          color: Colors.black,
+                                                          color: Color.fromRGBO(
+                                                              112, 112, 112, 1),
                                                         ),
                                                         SizedBox(height: 2),
                                                         Text(
-                                                          'Fuel Track',
+                                                          '< 15 Pax',
                                                           textAlign:
                                                               TextAlign.center,
                                                           style: TextStyle(
-                                                              fontSize: 13,
+                                                              fontSize: 14,
                                                               fontFamily:
-                                                                  'Helvetica',
+                                                                  'SFProText',
                                                               color: Color
                                                                   .fromRGBO(0,
                                                                       0, 0, 1)),
@@ -1368,95 +1443,49 @@ class _AvailableSpecialState extends State<AvailableSpecial> {
                                                         112, 112, 112, 1)
                                                     .withOpacity(0.6),
                                                 child: Container(
-                                                  width: 130,
-                                                  height: 150,
+                                                  width: 170,
+                                                  height: 170,
                                                   decoration: BoxDecoration(
                                                     color: Colors.white,
+                                                    boxShadow: [
+                                                      BoxShadow(
+                                                        color: Color.fromRGBO(
+                                                            112, 112, 112, 1),
+                                                        spreadRadius: 0.1,
+                                                        blurRadius: 0.1,
+                                                      ),
+                                                    ],
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             8.0),
                                                   ),
                                                   child: Padding(
                                                     padding:
-                                                        const EdgeInsets.only(
-                                                            top: 5,
-                                                            bottom: 15,
-                                                            left: 7,
-                                                            right: 7),
+                                                        const EdgeInsets.all(
+                                                            8.0),
                                                     child: Column(
                                                       mainAxisAlignment:
                                                           MainAxisAlignment.end,
                                                       children: [
                                                         Image(
-                                                          width: 100,
-                                                          height: 90,
+                                                          width: 150,
+                                                          height: 100,
                                                           image: NetworkImage(
-                                                              'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/Group2491.png?alt=media&token=7be13f1c-6ac4-4205-8ece-a82e6084f571'),
+                                                              'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/Group%202709.png?alt=media&token=97297395-0f33-46b5-bc0f-0a68245fca78'),
                                                         ),
                                                         Divider(
-                                                          color: Colors.black,
+                                                          color: Color.fromRGBO(
+                                                              112, 112, 112, 1),
                                                         ),
                                                         SizedBox(height: 2),
                                                         Text(
-                                                          'Concrete Mixer',
+                                                          '15 - 30 pax',
                                                           textAlign:
                                                               TextAlign.center,
                                                           style: TextStyle(
-                                                              fontSize: 13,
+                                                              fontSize: 14,
                                                               fontFamily:
-                                                                  'Helvetica',
-                                                              color: Color
-                                                                  .fromRGBO(0,
-                                                                      0, 0, 1)),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                              Card(
-                                                elevation: 4,
-                                                shadowColor: Color.fromRGBO(
-                                                        112, 112, 112, 1)
-                                                    .withOpacity(0.6),
-                                                child: Container(
-                                                  width: 130,
-                                                  height: 150,
-                                                  decoration: BoxDecoration(
-                                                    color: Colors.white,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            5.0),
-                                                  ),
-                                                  child: Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            left: 7,
-                                                            right: 7,
-                                                            top: 4),
-                                                    child: Column(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment.end,
-                                                      children: [
-                                                        Image(
-                                                          width: 100,
-                                                          height: 90,
-                                                          image: NetworkImage(
-                                                              'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/Group2676.png?alt=media&token=158080c5-f5db-4e85-a596-4c0731927e8e'),
-                                                        ),
-                                                        Divider(
-                                                          color: Colors.black,
-                                                        ),
-                                                        SizedBox(height: 2),
-                                                        Text(
-                                                          'Concerte Pump Track',
-                                                          textAlign:
-                                                              TextAlign.center,
-                                                          softWrap: true,
-                                                          style: TextStyle(
-                                                              fontSize: 13,
-                                                              fontFamily:
-                                                                  'Helvetica',
+                                                                  'SFProText',
                                                               color: Color
                                                                   .fromRGBO(0,
                                                                       0, 0, 1)),
@@ -1467,119 +1496,60 @@ class _AvailableSpecialState extends State<AvailableSpecial> {
                                                 ),
                                               ),
                                             ],
-                                          ),
-                                          SizedBox(
-                                            height: 10,
                                           ),
                                           Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceEvenly,
                                             children: [
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                    left: 27),
-                                                child: Card(
-                                                  elevation: 4,
-                                                  shadowColor: Color.fromRGBO(
-                                                          112, 112, 112, 1)
-                                                      .withOpacity(0.6),
-                                                  child: Container(
-                                                    width: 130,
-                                                    height: 150,
-                                                    decoration: BoxDecoration(
-                                                      color: Colors.white,
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              8.0),
-                                                    ),
-                                                    child: Padding(
-                                                      padding:
-                                                          const EdgeInsets.only(
-                                                              left: 7,
-                                                              right: 7,
-                                                              top: 5,
-                                                              bottom: 15),
-                                                      child: Column(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .end,
-                                                        children: [
-                                                          Image(
-                                                            width: 100,
-                                                            height: 90,
-                                                            image: NetworkImage(
-                                                                'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/Group2676.png?alt=media&token=158080c5-f5db-4e85-a596-4c0731927e8e'),
-                                                          ),
-                                                          Divider(
-                                                            color: Colors.black,
-                                                          ),
-                                                          SizedBox(height: 2),
-                                                          Text(
-                                                            'Lorry Crane',
-                                                            textAlign: TextAlign
-                                                                .center,
-                                                            style: TextStyle(
-                                                                fontSize: 13,
-                                                                fontFamily:
-                                                                    'Helvetica',
-                                                                color: Color
-                                                                    .fromRGBO(
-                                                                        0,
-                                                                        0,
-                                                                        0,
-                                                                        1)),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                width: 29,
-                                              ),
                                               Card(
                                                 elevation: 4,
                                                 shadowColor: Color.fromRGBO(
                                                         112, 112, 112, 1)
                                                     .withOpacity(0.6),
                                                 child: Container(
-                                                  width: 130,
-                                                  height: 150,
+                                                  width: 170,
+                                                  height: 170,
                                                   decoration: BoxDecoration(
                                                     color: Colors.white,
+                                                    boxShadow: [
+                                                      BoxShadow(
+                                                        color: Color.fromRGBO(
+                                                            112, 112, 112, 1),
+                                                        spreadRadius: 0.1,
+                                                        blurRadius: 0.1,
+                                                      ),
+                                                    ],
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             8.0),
                                                   ),
                                                   child: Padding(
                                                     padding:
-                                                        const EdgeInsets.only(
-                                                            top: 5,
-                                                            bottom: 15,
-                                                            left: 7,
-                                                            right: 7),
+                                                        const EdgeInsets.all(
+                                                            8.0),
                                                     child: Column(
                                                       mainAxisAlignment:
                                                           MainAxisAlignment.end,
                                                       children: [
                                                         Image(
-                                                          width: 100,
-                                                          height: 90,
+                                                          width: 150,
+                                                          height: 100,
                                                           image: NetworkImage(
-                                                              'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/Group2676.png?alt=media&token=158080c5-f5db-4e85-a596-4c0731927e8e'),
+                                                              'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/Group2860.png?alt=media&token=e8d3012c-6bd4-4583-81b8-0f0ac41131a0'),
                                                         ),
                                                         Divider(
-                                                          color: Colors.black,
+                                                          color: Color.fromRGBO(
+                                                              112, 112, 112, 1),
                                                         ),
                                                         SizedBox(height: 2),
                                                         Text(
-                                                          'Power Generators',
-                                                          softWrap: true,
+                                                          '+30 pax',
                                                           textAlign:
                                                               TextAlign.center,
                                                           style: TextStyle(
-                                                              fontSize: 13,
+                                                              fontSize: 14,
                                                               fontFamily:
-                                                                  'Helvetica',
+                                                                  'SFProText',
                                                               color: Color
                                                                   .fromRGBO(0,
                                                                       0, 0, 1)),
@@ -1589,16 +1559,21 @@ class _AvailableSpecialState extends State<AvailableSpecial> {
                                                   ),
                                                 ),
                                               ),
+                                              Container(
+                                                  height: 170,
+                                                  width: 170,
+                                                  decoration: BoxDecoration(
+                                                    color: Colors.white,
+                                                  )),
                                             ],
-                                          ),
-                                          SizedBox(
-                                            height: 10,
                                           ),
                                           CustomTextfieldGrey(
                                             text: 'Time',
+                                            controller: controller.time,
                                           ),
                                           CustomTextfieldGrey(
                                             text: 'Value of the Product',
+                                            controller: controller.size,
                                           ),
                                           Row(
                                             children: [
