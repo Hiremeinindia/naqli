@@ -71,87 +71,85 @@ class _BookingDetailsState extends State<Bookingpartner> {
               padding: EdgeInsets.fromLTRB(6.w, 6.h, 4.w, 6.h),
               child: Row(
                 children: [
-                  Expanded(
-                    child: Container(
-                      padding: EdgeInsets.only(right: 3.w),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
+                  Container(
+                    padding: EdgeInsets.only(right: 3.w),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                            Image.network(
+                              'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/Group1787.png?alt=media&token=d2066c85-560c-4a61-80bc-d020dcd73f95',
+                              width: 62,
+                              height: 61,
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Text("Booking Id: NAQ########",
+                                style: BookingText.helvetica21),
+                          ],
+                        ),
+                        Container(
+                          height: 380,
+                          width: 750,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(12)),
+                          child: GoogleMap(
+                              onMapCreated: (controller) {
+                                setState(() {
+                                  mapController = controller;
+                                });
+                              },
+                              markers: Set<Marker>.of(_markers),
+                              mapType: MapType.normal,
+                              initialCameraPosition: CameraPosition(
+                                  target: LatLng(24.755562, 46.589584),
+                                  zoom: 13)),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(
+                              right: 4.w, left: 4.w, top: 1.w, bottom: 2.w),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Image.network(
-                                'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/Group1787.png?alt=media&token=d2066c85-560c-4a61-80bc-d020dcd73f95',
-                                width: 62,
-                                height: 61,
+                              Column(
+                                children: [
+                                  Text("Box truck",
+                                      style: DialogText.helvetica25black),
+                                  Text("Toyota Hilux",
+                                      style: BookingText.helveticablack)
+                                ],
                               ),
                               SizedBox(
-                                width: 10,
+                                height: 63,
+                                child: VerticalDivider(
+                                  color: Color.fromRGBO(112, 112, 112, 1),
+                                  thickness: 2,
+                                ),
                               ),
-                              Text("Booking Id: NAQ########",
-                                  style: BookingText.helvetica21),
-                            ],
-                          ),
-                          Container(
-                            height: 380,
-                            width: 750,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(12)),
-                            child: GoogleMap(
-                                onMapCreated: (controller) {
-                                  setState(() {
-                                    mapController = controller;
-                                  });
-                                },
-                                markers: Set<Marker>.of(_markers),
-                                mapType: MapType.normal,
-                                initialCameraPosition: CameraPosition(
-                                    target: LatLng(24.755562, 46.589584),
-                                    zoom: 13)),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(
-                                right: 4.w, left: 4.w, top: 1.w, bottom: 2.w),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Column(
+                              Column(
+                                children: [
+                                  Text("Load",
+                                      style: BookingText.helveticablack),
+                                  Text("Electronics ",
+                                      style: HomepageText.helvetica16black)
+                                ],
+                              ),
+                              SizedBox(
+                                child: Column(
                                   children: [
-                                    Text("Box truck",
-                                        style: DialogText.helvetica25black),
-                                    Text("Toyota Hilux",
-                                        style: BookingText.helveticablack)
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 63,
-                                  child: VerticalDivider(
-                                    color: Color.fromRGBO(112, 112, 112, 1),
-                                    thickness: 2,
-                                  ),
-                                ),
-                                Column(
-                                  children: [
-                                    Text("Load",
+                                    Text("Size",
                                         style: BookingText.helveticablack),
-                                    Text("Electronics ",
+                                    Text(" 1 to 1.5",
                                         style: HomepageText.helvetica16black)
                                   ],
                                 ),
-                                SizedBox(
-                                  child: Column(
-                                    children: [
-                                      Text("Size",
-                                          style: BookingText.helveticablack),
-                                      Text(" 1 to 1.5",
-                                          style: HomepageText.helvetica16black)
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
+                              ),
+                            ],
+                          ),
+                        )
+                      ],
                     ),
                   ),
                   Padding(
@@ -161,188 +159,185 @@ class _BookingDetailsState extends State<Bookingpartner> {
                       thickness: 2,
                     ),
                   ),
-                  Expanded(
-                    child: Padding(
-                      padding: EdgeInsets.fromLTRB(4.w, 10.h, 1.w, 2.h),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          SizedBox(
-                            height: 40,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                'User Name',
-                                style: BookingText.helvetica16bold,
-                              ),
-                              Text(
-                                'Muzan',
-                                style: TabelText.tableText5,
-                              ),
-                            ],
-                          ),
-                          Divider(
-                            color: Color.fromRGBO(204, 195, 195, 1)
-                                .withOpacity(0.5),
-                            thickness: 1,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text('User id',
-                                  style: BookingText.helvetica16bold),
-                              Text(
-                                '#456789142',
-                                style: TabelText.tableText5,
-                              ),
-                            ],
-                          ),
-                          Divider(
-                            color: Color.fromRGBO(204, 195, 195, 1)
-                                .withOpacity(0.5),
-                            thickness: 1,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text('Mode', style: BookingText.helvetica16bold),
-                              Text(
-                                'Box truck',
-                                style: TabelText.tableText5,
-                              ),
-                            ],
-                          ),
-                          Divider(
-                            color: Color.fromRGBO(204, 195, 195, 1)
-                                .withOpacity(0.5),
-                            thickness: 1,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text('No.of units',
-                                  style: BookingText.helvetica16bold),
-                              Text(
-                                '2',
-                                style: TabelText.tableText5,
-                              ),
-                            ],
-                          ),
-                          Divider(
-                            color: Color.fromRGBO(204, 195, 195, 1)
-                                .withOpacity(0.5),
-                            thickness: 1,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text('Booking status',
-                                  style: BookingText.helvetica16bold),
-                              Text(
-                                'Running',
-                                style: TabelText.tableText5,
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          isClicked
-                              ? Container(
-                                  child: Column(
-                                    children: [
-                                      SizedBox(
-                                        height: 70,
-                                      ),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          GestureDetector(
-                                            onTap: () {
-                                              Navigator.pop(context);
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(4.w, 10.h, 1.w, 2.h),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        SizedBox(
+                          height: 40,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'User Name',
+                              style: BookingText.helvetica16bold,
+                            ),
+                            Text(
+                              'Muzan',
+                              style: TabelText.tableText5,
+                            ),
+                          ],
+                        ),
+                        Divider(
+                          color:
+                              Color.fromRGBO(204, 195, 195, 1).withOpacity(0.5),
+                          thickness: 1,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text('User id', style: BookingText.helvetica16bold),
+                            Text(
+                              '#456789142',
+                              style: TabelText.tableText5,
+                            ),
+                          ],
+                        ),
+                        Divider(
+                          color:
+                              Color.fromRGBO(204, 195, 195, 1).withOpacity(0.5),
+                          thickness: 1,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text('Mode', style: BookingText.helvetica16bold),
+                            Text(
+                              'Box truck',
+                              style: TabelText.tableText5,
+                            ),
+                          ],
+                        ),
+                        Divider(
+                          color:
+                              Color.fromRGBO(204, 195, 195, 1).withOpacity(0.5),
+                          thickness: 1,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text('No.of units',
+                                style: BookingText.helvetica16bold),
+                            Text(
+                              '2',
+                              style: TabelText.tableText5,
+                            ),
+                          ],
+                        ),
+                        Divider(
+                          color:
+                              Color.fromRGBO(204, 195, 195, 1).withOpacity(0.5),
+                          thickness: 1,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text('Booking status',
+                                style: BookingText.helvetica16bold),
+                            Text(
+                              'Running',
+                              style: TabelText.tableText5,
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        isClicked
+                            ? Container(
+                                child: Column(
+                                  children: [
+                                    SizedBox(
+                                      height: 70,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        GestureDetector(
+                                          onTap: () {
+                                            Navigator.pop(context);
+                                          },
+                                          child: ImageIcon(
+                                            NetworkImage(
+                                                'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/Path1379.png?alt=media&token=3a1c816d-8612-4482-a2d2-e5006173c191'),
+                                            color: Color.fromRGBO(
+                                                112, 207, 151, 1),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: 10,
+                                        ),
+                                        Text('Payment Successful',
+                                            style: TextStyle(
+                                              letterSpacing: 1,
+                                              fontFamily: 'Helvetica',
+                                              color: Color.fromRGBO(
+                                                  116, 106, 106, 1),
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 19,
+                                            )),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 70,
+                                    ),
+                                  ],
+                                ),
+                              )
+                            : Container(
+                                child: Column(
+                                  children: [
+                                    SizedBox(
+                                      height: 40,
+                                    ),
+                                    Text('Pending Amount',
+                                        style: BookingText.helvetica21),
+                                    Text(
+                                      'XXXXX SAR',
+                                      style: TextStyle(
+                                          color:
+                                              Color.fromRGBO(145, 79, 157, 1),
+                                          fontFamily: 'Helvetica',
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    SizedBox(
+                                      height: 40,
+                                    ),
+                                    Row(
+                                      children: [
+                                        Expanded(
+                                          child: CustomButton3(
+                                            onPressed: () {
+                                              setState(() {
+                                                isClicked = !isClicked;
+                                              });
                                             },
-                                            child: ImageIcon(
-                                              NetworkImage(
-                                                  'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/Path1379.png?alt=media&token=3a1c816d-8612-4482-a2d2-e5006173c191'),
-                                              color: Color.fromRGBO(
-                                                  112, 207, 151, 1),
-                                            ),
-                                          ),
-                                          SizedBox(
-                                            width: 10,
-                                          ),
-                                          Text('Payment Successful',
-                                              style: TextStyle(
-                                                letterSpacing: 1,
-                                                fontFamily: 'Helvetica',
-                                                color: Color.fromRGBO(
-                                                    116, 106, 106, 1),
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 19,
-                                              )),
-                                        ],
-                                      ),
-                                      SizedBox(
-                                        height: 70,
-                                      ),
-                                    ],
-                                  ),
-                                )
-                              : Container(
-                                  child: Column(
-                                    children: [
-                                      SizedBox(
-                                        height: 40,
-                                      ),
-                                      Text('Pending Amount',
-                                          style: BookingText.helvetica21),
-                                      Text(
-                                        'XXXXX SAR',
-                                        style: TextStyle(
                                             color:
-                                                Color.fromRGBO(145, 79, 157, 1),
-                                            fontFamily: 'Helvetica',
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      SizedBox(
-                                        height: 40,
-                                      ),
-                                      Row(
-                                        children: [
-                                          Expanded(
-                                            child: CustomButton3(
-                                              onPressed: () {
-                                                setState(() {
-                                                  isClicked = !isClicked;
-                                                });
-                                              },
-                                              color: Color.fromRGBO(
-                                                  98, 105, 254, 1),
-                                              text: 'Complete Payment',
-                                            ),
+                                                Color.fromRGBO(98, 105, 254, 1),
+                                            text: 'Complete Payment',
                                           ),
-                                          SizedBox(
-                                            width: 2.w,
+                                        ),
+                                        SizedBox(
+                                          width: 2.w,
+                                        ),
+                                        Expanded(
+                                          child: CustomButton3(
+                                            onPressed: () {},
+                                            color:
+                                                Color.fromRGBO(111, 24, 28, 1),
+                                            text: 'Terminate',
                                           ),
-                                          Expanded(
-                                            child: CustomButton3(
-                                              onPressed: () {},
-                                              color: Color.fromRGBO(
-                                                  111, 24, 28, 1),
-                                              text: 'Terminate',
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                )
-                        ],
-                      ),
+                                        )
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              )
+                      ],
                     ),
                   )
                 ],
