@@ -20,7 +20,7 @@ import '../../main.dart';
 
 class PartnerDashboardPage extends StatefulWidget {
   final String? user;
-  PartnerDashboardPage({required this.user});
+  PartnerDashboardPage({this.user});
 
   @override
   State<PartnerDashboardPage> createState() => _MyHomePageState();

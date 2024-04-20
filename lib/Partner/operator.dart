@@ -6,6 +6,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_application_1/Controllers/allUsersFormController.dart';
 import 'package:flutter_application_1/Partner/Dashboard/bookings.dart';
+import 'package:flutter_application_1/Partner/Dashboard/dashboard_page.dart';
 import 'package:sizer/sizer.dart';
 
 class Operator extends StatefulWidget {
@@ -1183,7 +1184,8 @@ class _OperatorState extends State<Operator> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => Bookingpartner(),
+                                    builder: (context) =>
+                                        PartnerDashboardPage(),
                                   ),
                                 );
                               },
