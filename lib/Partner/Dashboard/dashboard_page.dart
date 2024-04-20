@@ -756,7 +756,7 @@ class _MyHomePageState extends State<PartnerDashboardPage> {
               padding: EdgeInsets.fromLTRB(6.w, 3.h, 6.w, 3.h),
               child: Container(
                   color: Color.fromRGBO(240, 237, 250, 1),
-                  child: Expanded(child: _currentContent)),
+                  child: _currentContent),
             ),
           );
         }
