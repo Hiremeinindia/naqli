@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -1102,8 +1104,17 @@ class _CreateAccountState extends State<CreateAccount> {
     });
   }
 
-  Future<void> _createAccount(String uid, String selectedType) async {
+  Future<void> _createAccount(
+    String uid,
+    String selectedType,
+  ) async {
     try {
+      Random random = Random();
+
+      String bookingID = '';
+      for (int i = 0; i < 10; i++) {
+        bookingID += random.nextInt(10).toString();
+      }
       String userCollection;
       Map<String, dynamic> userData = {
         'firstName': controller.firstName.text,
@@ -1116,6 +1127,7 @@ class _CreateAccountState extends State<CreateAccount> {
         'address2': controller.address2.text,
         'city': controller.selectedCity.text,
         'accounttype': controller.selectedAccounttype.text,
+        'userId': bookingID,
       };
 
       if (selectedType == 'Enterprise') {
