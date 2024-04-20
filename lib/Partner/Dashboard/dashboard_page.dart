@@ -1,17 +1,20 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:easy_sidemenu/easy_sidemenu.dart';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fl_chart/fl_chart.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/Partner/Dashboard/bookings.dart';
 import 'package:flutter_application_1/Partner/Dashboard/payments.dart';
 import 'package:flutter_application_1/classes/language.dart';
+import 'package:flutter_application_1/classes/language_constants.dart';
 
 import 'package:sizer/sizer.dart';
 import '../../Widgets/customButton.dart';
 import '../../Widgets/formText.dart';
-import '../../classes/language_constants.dart';
+
 import '../../main.dart';
 
 class PartnerDashboardPage extends StatefulWidget {
@@ -39,7 +42,7 @@ class _MyHomePageState extends State<PartnerDashboardPage> {
   bool payNowButtonEnabled = false;
   bool expandWork = false;
   String? selectedValue;
-  Widget _currentContent = Bookings(); // Initial content
+  Widget _currentContent = Bookingpartner(); // Initial content
 
   void handleRadioValueChanged(String? newValue) {
     setState(() {
@@ -462,7 +465,7 @@ class _MyHomePageState extends State<PartnerDashboardPage> {
                                     title: 'Booking',
                                     onTap: (page, _) {
                                       setState(() {
-                                        _currentContent = Bookings();
+                                        _currentContent = Bookingpartner();
                                       });
                                       sideMenu.changePage(page);
                                     },
@@ -484,7 +487,7 @@ class _MyHomePageState extends State<PartnerDashboardPage> {
                                     title: 'Report',
                                     onTap: (page, _) {
                                       setState(() {
-                                        _currentContent = Bookings();
+                                        _currentContent = Bookingpartner();
                                       });
                                       sideMenu.changePage(page);
                                     },
@@ -495,7 +498,7 @@ class _MyHomePageState extends State<PartnerDashboardPage> {
                                     title: 'Help',
                                     onTap: (page, _) {
                                       setState(() {
-                                        _currentContent = Bookings();
+                                        _currentContent = Bookingpartner();
                                       });
                                       sideMenu.changePage(page);
                                     },
@@ -571,7 +574,7 @@ class _MyHomePageState extends State<PartnerDashboardPage> {
                         ),
                         onTap: () {
                           setState(() {
-                            _currentContent = Bookings();
+                            _currentContent = Bookingpartner();
                           });
                           Navigator.pop(context);
                         }),
@@ -601,7 +604,7 @@ class _MyHomePageState extends State<PartnerDashboardPage> {
                         ),
                         onTap: () {
                           setState(() {
-                            _currentContent = Bookings();
+                            _currentContent = Bookingpartner();
                           });
                           Navigator.pop(context);
                         }),
@@ -616,7 +619,7 @@ class _MyHomePageState extends State<PartnerDashboardPage> {
                         ),
                         onTap: () {
                           setState(() {
-                            _currentContent = Bookings();
+                            _currentContent = Bookingpartner();
                           });
                           Navigator.pop(context);
                         }),

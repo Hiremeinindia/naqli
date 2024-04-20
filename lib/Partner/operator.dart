@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_application_1/Controllers/allUsersFormController.dart';
+import 'package:flutter_application_1/Partner/Dashboard/bookings.dart';
 import 'package:sizer/sizer.dart';
 
 class Operator extends StatefulWidget {
@@ -1163,19 +1164,28 @@ class _OperatorState extends State<Operator> {
                                 String operName = controller.partnerName.text;
                                 String operatorid = operatorID;
                                 await createOperator(
-                                    unit,
-                                    sub,
-                                    plateNo,
-                                    istimaraNo,
-                                    name,
-                                    email,
-                                    mblno,
-                                    iqamaNo,
-                                    dob,
-                                    plateinfo,
-                                    operName,
-                                    operatorid,
-                                    widget.user!);
+                                  unit,
+                                  sub,
+                                  plateNo,
+                                  istimaraNo,
+                                  name,
+                                  email,
+                                  mblno,
+                                  iqamaNo,
+                                  dob,
+                                  plateinfo,
+                                  operName,
+                                  operatorid,
+                                  widget.user!,
+                                );
+
+                                // Navigate to the desired class after submitting
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => Bookingpartner(),
+                                  ),
+                                );
                               },
                               style: ElevatedButton.styleFrom(
                                 backgroundColor:
@@ -1189,10 +1199,11 @@ class _OperatorState extends State<Operator> {
                                 child: Text(
                                   'Submit',
                                   style: TextStyle(
-                                      fontFamily: 'Colfax',
-                                      fontSize: 16,
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold),
+                                    fontFamily: 'Colfax',
+                                    fontSize: 16,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
                               ),
                             ),
