@@ -264,339 +264,324 @@ class _State extends State<Partner> {
                     bottomRight: Radius.circular(15),
                   ),
                 ),
-                child: Expanded(
-                  child: Column(
-                    children: [
-                      Row(
-                        children: [
-                          Expanded(
-                            child: Container(
-                              height: 50,
-                              color: Color.fromRGBO(142, 151, 160, 1),
-                              child: Padding(
-                                padding: EdgeInsets.only(top: 10),
-                                child: Text('Join Us',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 25,
-                                    ),
-                                    textAlign: TextAlign.center),
+                child: Column(
+                  children: [
+                    Row(
+                      children: [
+                        Container(
+                          height: 50,
+                          color: Color.fromRGBO(142, 151, 160, 1),
+                          child: Padding(
+                            padding: EdgeInsets.only(top: 10),
+                            child: Text('Join Us',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 25,
+                                ),
+                                textAlign: TextAlign.center),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.fromLTRB(0.5.w, 2.h, 0.5.w, 3.h),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Transform.scale(
+                                scale: 0.8,
+                                child: Radio(
+                                  value: 1,
+                                  groupValue: _selectedValue,
+                                  toggleable: false,
+                                  onChanged: (int? value) {
+                                    setState(() {
+                                      _selectedValue = value ??
+                                          0; // Use null-aware operator to handle null value
+                                      print('Selected value: $_selectedValue');
+                                    });
+                                  },
+                                ),
                               ),
-                            ),
+                              Text('Enterprise',
+                                  style: PartRegText.helvetica17grey),
+                              Transform.scale(
+                                scale: 0.8,
+                                child: Radio(
+                                  value: 2,
+                                  groupValue: _selectedValue,
+                                  onChanged: (int? value) {
+                                    setState(() {
+                                      _selectedValue = value ??
+                                          0; // Use null-aware operator to handle null value
+                                      print('Selected value: $_selectedValue');
+                                    });
+                                  },
+                                ),
+                              ),
+                              Text('Multiple Units',
+                                  style: PartRegText.helvetica17grey),
+                              Transform.scale(
+                                scale: 0.8,
+                                child: Radio(
+                                  value: 3,
+                                  groupValue: _selectedValue,
+                                  onChanged: (int? value) {
+                                    setState(() {
+                                      _selectedValue = value ??
+                                          0; // Use null-aware operator to handle null value
+                                      print('Selected value: $_selectedValue');
+                                    });
+                                  },
+                                ),
+                              ),
+                              Text('Single Unit + operator',
+                                  style: PartRegText.helvetica17grey),
+                              Transform.scale(
+                                scale: 0.8,
+                                child: Radio(
+                                  value: 4,
+                                  groupValue: _selectedValue,
+                                  onChanged: (int? value) {
+                                    setState(() {
+                                      _selectedValue = value ??
+                                          0; // Use null-aware operator to handle null value
+                                      print('Selected value: $_selectedValue');
+                                    });
+                                  },
+                                ),
+                              ),
+                              Text('Operator',
+                                  style: PartRegText.helvetica17grey),
+                            ],
                           ),
-                        ],
-                      ),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Padding(
-                            padding:
-                                EdgeInsets.fromLTRB(0.5.w, 2.h, 0.5.w, 3.h),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Transform.scale(
-                                  scale: 0.8,
-                                  child: Radio(
-                                    value: 1,
-                                    groupValue: _selectedValue,
-                                    toggleable: false,
-                                    onChanged: (int? value) {
-                                      setState(() {
-                                        _selectedValue = value ??
-                                            0; // Use null-aware operator to handle null value
-                                        print(
-                                            'Selected value: $_selectedValue');
-                                      });
-                                    },
+                        ),
+                        Padding(
+                          padding: EdgeInsets.fromLTRB(5.w, 6.h, 5.w, 0),
+                          child: Container(
+                            height: 350,
+                            child: Form(
+                              key: _formKey,
+                              child: Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text('Name',
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.bold,
+                                      )),
+                                  CustomTextfield(
+                                    validator: nameValidator,
+                                    controller: controller.firstName,
+                                    text: 'Enter your Name',
                                   ),
-                                ),
-                                Text('Enterprise',
-                                    style: PartRegText.helvetica17grey),
-                                Transform.scale(
-                                  scale: 0.8,
-                                  child: Radio(
-                                    value: 2,
-                                    groupValue: _selectedValue,
-                                    onChanged: (int? value) {
-                                      setState(() {
-                                        _selectedValue = value ??
-                                            0; // Use null-aware operator to handle null value
-                                        print(
-                                            'Selected value: $_selectedValue');
-                                      });
-                                    },
-                                  ),
-                                ),
-                                Text('Multiple Units',
-                                    style: PartRegText.helvetica17grey),
-                                Transform.scale(
-                                  scale: 0.8,
-                                  child: Radio(
-                                    value: 3,
-                                    groupValue: _selectedValue,
-                                    onChanged: (int? value) {
-                                      setState(() {
-                                        _selectedValue = value ??
-                                            0; // Use null-aware operator to handle null value
-                                        print(
-                                            'Selected value: $_selectedValue');
-                                      });
-                                    },
-                                  ),
-                                ),
-                                Text('Single Unit + operator',
-                                    style: PartRegText.helvetica17grey),
-                                Transform.scale(
-                                  scale: 0.8,
-                                  child: Radio(
-                                    value: 4,
-                                    groupValue: _selectedValue,
-                                    onChanged: (int? value) {
-                                      setState(() {
-                                        _selectedValue = value ??
-                                            0; // Use null-aware operator to handle null value
-                                        print(
-                                            'Selected value: $_selectedValue');
-                                      });
-                                    },
-                                  ),
-                                ),
-                                Text('Operator',
-                                    style: PartRegText.helvetica17grey),
-                              ],
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.fromLTRB(5.w, 6.h, 5.w, 0),
-                            child: Container(
-                              height: 350,
-                              child: Form(
-                                key: _formKey,
-                                child: Column(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text('Name',
-                                        style: TextStyle(
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.bold,
-                                        )),
-                                    CustomTextfield(
-                                      validator: nameValidator,
-                                      controller: controller.firstName,
-                                      text: 'Enter your Name',
-                                    ),
-                                    Text('Mobile No',
-                                        style: TextStyle(
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.bold,
-                                        )),
-                                    Row(
-                                      children: [
-                                        Expanded(
-                                          child: SizedBox(
-                                            height: 50,
-                                            child: TextFormField(
-                                              style: TextStyle(height: 1),
-                                              validator: (value) {
-                                                if (value!.length != 10)
-                                                  return 'Mobile Number must be of 10 digit';
-                                                else
-                                                  return null;
-                                              },
-                                              controller:
-                                                  controller.contactNumber,
-                                              decoration: InputDecoration(
-                                                contentPadding: EdgeInsets.only(
-                                                    left: 0.9.w),
-                                                hintStyle: TextStyle(
-                                                    fontStyle: FontStyle.normal,
-                                                    fontSize: 13,
-                                                    fontFamily: 'SegoeItalic',
-                                                    color: Color.fromRGBO(
-                                                            112, 112, 112, 1)
-                                                        .withOpacity(0.5)),
-                                                hintText:
-                                                    'Enter your Mobile Number',
-                                                errorStyle: TextStyle(
-                                                    height: 0, fontSize: 8.5),
-                                                errorMaxLines: 2,
-                                                border: OutlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                    color: Color.fromRGBO(
-                                                        202, 202, 202, 1),
-                                                  ),
-                                                  borderRadius:
-                                                      BorderRadius.only(
-                                                          bottomLeft: Radius
-                                                              .circular(5),
-                                                          topLeft:
-                                                              Radius.circular(
-                                                                  5)),
+                                  Text('Mobile No',
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.bold,
+                                      )),
+                                  Row(
+                                    children: [
+                                      Expanded(
+                                        child: SizedBox(
+                                          height: 50,
+                                          child: TextFormField(
+                                            style: TextStyle(height: 1),
+                                            validator: (value) {
+                                              if (value!.length != 10)
+                                                return 'Mobile Number must be of 10 digit';
+                                              else
+                                                return null;
+                                            },
+                                            controller:
+                                                controller.contactNumber,
+                                            decoration: InputDecoration(
+                                              contentPadding:
+                                                  EdgeInsets.only(left: 0.9.w),
+                                              hintStyle: TextStyle(
+                                                  fontStyle: FontStyle.normal,
+                                                  fontSize: 13,
+                                                  fontFamily: 'SegoeItalic',
+                                                  color: Color.fromRGBO(
+                                                          112, 112, 112, 1)
+                                                      .withOpacity(0.5)),
+                                              hintText:
+                                                  'Enter your Mobile Number',
+                                              errorStyle: TextStyle(
+                                                  height: 0, fontSize: 8.5),
+                                              errorMaxLines: 2,
+                                              border: OutlineInputBorder(
+                                                borderSide: BorderSide(
+                                                  color: Color.fromRGBO(
+                                                      202, 202, 202, 1),
                                                 ),
+                                                borderRadius: BorderRadius.only(
+                                                    bottomLeft:
+                                                        Radius.circular(5),
+                                                    topLeft:
+                                                        Radius.circular(5)),
                                               ),
                                             ),
                                           ),
                                         ),
-                                        SizedBox(
-                                          height: 49,
-                                          width: 100,
-                                          child: ElevatedButton(
-                                              style: ElevatedButton.styleFrom(
-                                                backgroundColor: Color.fromRGBO(
-                                                    98, 105, 254, 1),
-                                                foregroundColor: Colors.white,
-                                                shape: RoundedRectangleBorder(
-                                                  borderRadius: BorderRadius.only(
-                                                      bottomRight:
-                                                          Radius.circular(5),
-                                                      topRight: Radius.circular(
-                                                          5)), // Make button shape square
-                                                ),
+                                      ),
+                                      SizedBox(
+                                        height: 49,
+                                        width: 100,
+                                        child: ElevatedButton(
+                                            style: ElevatedButton.styleFrom(
+                                              backgroundColor: Color.fromRGBO(
+                                                  98, 105, 254, 1),
+                                              foregroundColor: Colors.white,
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius: BorderRadius.only(
+                                                    bottomRight:
+                                                        Radius.circular(5),
+                                                    topRight: Radius.circular(
+                                                        5)), // Make button shape square
                                               ),
-                                              onPressed: () {
-                                                print('track 1');
-                                                // if (screenState == 0) {
-                                                if (controller
-                                                    .firstName.text.isEmpty) {
-                                                  print('track 2');
-                                                  SnackBar(
-                                                    content: Text(
-                                                        'Username is still empty'),
-                                                  );
-                                                } else if (controller
-                                                    .companyidNumber
-                                                    .text
-                                                    .isEmpty) {
-                                                  print('track 3');
-                                                  SnackBar(
-                                                    content: Text(
-                                                        'Mobil Number is still empty'),
-                                                  );
-                                                } else {
-                                                  print('track 4');
-                                                }
-                                                // } else {
-                                                //   if (otpPin.length >= 6) {
-                                                //     verifyOTP();
-                                                //   } else {
-                                                //     SnackBar(
-                                                //       content: Text(
-                                                //           'Enter OTP Correctly'),
-                                                //     );
-                                                //   }
-                                                // }
-                                                verifyPhone(controller
-                                                    .contactNumber.text);
-                                              },
-                                              child: screenState == 0
-                                                  ? Text('Verify')
-                                                  : Text('Verified')),
-                                        ),
-                                      ],
-                                    ),
-                                    Text('Email',
-                                        style: TextStyle(
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.bold,
-                                        )),
-                                    CustomTextfield(
-                                      controller: controller.email,
-                                      validator: emailValidator,
-                                      text: 'Enter your Email ID',
-                                    ),
-                                    SizedBox(
-                                      height: 15,
-                                    ),
-                                    Text('Password',
-                                        style: TextStyle(
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.bold,
-                                        )),
-                                    CustomTextfield(
-                                      controller: controller.password,
-                                      validator: validatePassword,
-                                      text: 'Enter your Password',
-                                    ),
-                                    SizedBox(
-                                      height: 13,
-                                    ),
-                                    Align(
-                                      alignment: Alignment.center,
-                                      child: ElevatedButton(
-                                        style: ElevatedButton.styleFrom(
-                                          backgroundColor: Color.fromRGBO(
-                                              98,
-                                              105,
-                                              254,
-                                              1), // Set button color to blue
-                                          foregroundColor: Colors.white,
-                                          minimumSize:
-                                              Size(230, 50), // Set button size
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.circular(
-                                                10), // Set button shape to rounded rectangle
-                                          ),
-                                        ),
-                                        onPressed: () async {
-                                          if (_formKey.currentState!
-                                              .validate()) {
-                                            try {
-                                              PhoneAuthCredential _credential =
-                                                  PhoneAuthProvider.credential(
-                                                      verificationId: verID,
-                                                      smsCode: otpPin);
-                                              // Sign in with phone credential
-                                              UserCredential userCredential =
-                                                  await _auth
-                                                      .createUserWithEmailAndPassword(
-                                                email: controller.email.text,
-                                                password:
-                                                    controller.password.text,
-                                              );
-                                              String userId =
-                                                  userCredential.user!.uid;
-                                              await _saveUserDataToFirestore(
-                                                  userId);
-
-                                              if (userCredential.user != null) {
-                                                showDialog(
-                                                  barrierColor:
-                                                      Colors.transparent,
-                                                  context: context,
-                                                  builder: (context) {
-                                                    return Operator(
-                                                      user: userId,
-                                                    );
-                                                  },
+                                            ),
+                                            onPressed: () {
+                                              print('track 1');
+                                              // if (screenState == 0) {
+                                              if (controller
+                                                  .firstName.text.isEmpty) {
+                                                print('track 2');
+                                                SnackBar(
+                                                  content: Text(
+                                                      'Username is still empty'),
+                                                );
+                                              } else if (controller
+                                                  .companyidNumber
+                                                  .text
+                                                  .isEmpty) {
+                                                print('track 3');
+                                                SnackBar(
+                                                  content: Text(
+                                                      'Mobil Number is still empty'),
                                                 );
                                               } else {
-                                                showErrorDialog(
-                                                    "Invalid verification code. Please enter the correct code.");
+                                                print('track 4');
                                               }
-                                            } catch (e) {
-                                              print(
-                                                  "Error signing in with credential: $e");
-                                              // Handle error during sign-in
-                                              // Show an error message or take appropriate action
-                                            }
-                                          }
-                                        },
-                                        child: Text('Register'),
+                                              // } else {
+                                              //   if (otpPin.length >= 6) {
+                                              //     verifyOTP();
+                                              //   } else {
+                                              //     SnackBar(
+                                              //       content: Text(
+                                              //           'Enter OTP Correctly'),
+                                              //     );
+                                              //   }
+                                              // }
+                                              verifyPhone(controller
+                                                  .contactNumber.text);
+                                            },
+                                            child: screenState == 0
+                                                ? Text('Verify')
+                                                : Text('Verified')),
                                       ),
+                                    ],
+                                  ),
+                                  Text('Email',
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.bold,
+                                      )),
+                                  CustomTextfield(
+                                    controller: controller.email,
+                                    validator: emailValidator,
+                                    text: 'Enter your Email ID',
+                                  ),
+                                  SizedBox(
+                                    height: 15,
+                                  ),
+                                  Text('Password',
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.bold,
+                                      )),
+                                  CustomTextfield(
+                                    controller: controller.password,
+                                    validator: validatePassword,
+                                    text: 'Enter your Password',
+                                  ),
+                                  SizedBox(
+                                    height: 13,
+                                  ),
+                                  Align(
+                                    alignment: Alignment.center,
+                                    child: ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: Color.fromRGBO(98, 105,
+                                            254, 1), // Set button color to blue
+                                        foregroundColor: Colors.white,
+                                        minimumSize:
+                                            Size(230, 50), // Set button size
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(
+                                              10), // Set button shape to rounded rectangle
+                                        ),
+                                      ),
+                                      onPressed: () async {
+                                        if (_formKey.currentState!.validate()) {
+                                          try {
+                                            PhoneAuthCredential _credential =
+                                                PhoneAuthProvider.credential(
+                                                    verificationId: verID,
+                                                    smsCode: otpPin);
+                                            // Sign in with phone credential
+                                            UserCredential userCredential =
+                                                await _auth
+                                                    .createUserWithEmailAndPassword(
+                                              email: controller.email.text,
+                                              password:
+                                                  controller.password.text,
+                                            );
+                                            String userId =
+                                                userCredential.user!.uid;
+                                            await _saveUserDataToFirestore(
+                                                userId);
+
+                                            if (userCredential.user != null) {
+                                              showDialog(
+                                                barrierColor:
+                                                    Colors.transparent,
+                                                context: context,
+                                                builder: (context) {
+                                                  return Operator(
+                                                    user: userId,
+                                                  );
+                                                },
+                                              );
+                                            } else {
+                                              showErrorDialog(
+                                                  "Invalid verification code. Please enter the correct code.");
+                                            }
+                                          } catch (e) {
+                                            print(
+                                                "Error signing in with credential: $e");
+                                            // Handle error during sign-in
+                                            // Show an error message or take appropriate action
+                                          }
+                                        }
+                                      },
+                                      child: Text('Register'),
                                     ),
-                                  ],
-                                ),
+                                  ),
+                                ],
                               ),
                             ),
                           ),
-                        ],
-                      )
-                    ],
-                  ),
+                        ),
+                      ],
+                    )
+                  ],
                 ),
               ),
             ),
