@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -211,12 +213,19 @@ class _State extends State<Partner> {
     print("track2");
 
     try {
+      Random random = Random();
+
+      String bookingID = '';
+      for (int i = 0; i < 10; i++) {
+        bookingID += random.nextInt(10).toString();
+      }
       String userCollection;
       Map<String, dynamic> userData = {
         'firstName': controller.firstName.text,
         'email': controller.email.text,
         'phoneNumber': controller.contactNumber.text,
-        'password': controller.password.text
+        'password': controller.password.text,
+        'userId': bookingID,
       };
       userCollection = 'partneruser';
       await FirebaseFirestore.instance

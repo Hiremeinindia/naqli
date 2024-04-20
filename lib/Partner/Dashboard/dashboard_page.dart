@@ -7,6 +7,7 @@ import 'package:fl_chart/fl_chart.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/Partner/Dashboard/bookings.dart';
+import 'package:flutter_application_1/Partner/Dashboard/bookings1.dart';
 import 'package:flutter_application_1/Partner/Dashboard/payments.dart';
 import 'package:flutter_application_1/classes/language.dart';
 import 'package:flutter_application_1/classes/language_constants.dart';
@@ -69,15 +70,22 @@ class _MyHomePageState extends State<PartnerDashboardPage> {
     try {
       DocumentSnapshot<Map<String, dynamic>> documentSnapshot =
           await FirebaseFirestore.instance
-              .collection('enterpriseuser')
+              .collection('partneruser')
               .doc(userId)
               .get();
 
       if (documentSnapshot.exists) {
         Map<String, dynamic> userData = documentSnapshot.data()!;
-        String firstName = userData['firstName'];
-        String lastName = userData['lastName'];
-        return {'firstName': firstName, 'lastName': lastName};
+        String address = userData['address'] ?? '';
+        String firstName = userData['firstName'] ?? '';
+        String lastName = userData['lastName'] ?? '';
+        String userId = userData['userId'] ?? '';
+        return {
+          'firstName': firstName,
+          'lastName': lastName,
+          'address': address,
+          'userId': userId
+        };
       } else {
         print('Document does not exist for userId: $userId');
         return null;
@@ -331,211 +339,234 @@ class _MyHomePageState extends State<PartnerDashboardPage> {
             ),
             body: Padding(
               padding: EdgeInsets.fromLTRB(6.w, 4.h, 6.w, 4.h),
-              child: Expanded(
-                child: Container(
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: Color.fromRGBO(112, 112, 112, 1).withOpacity(0.1),
+              child: Container(
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: Color.fromRGBO(112, 112, 112, 1).withOpacity(0.1),
+                  ),
+                  boxShadow: <BoxShadow>[
+                    BoxShadow(
+                      color:
+                          Color.fromARGB(255, 199, 198, 198).withOpacity(0.3),
+                      blurRadius: 5,
+                      spreadRadius: 5,
+                      offset: Offset(0, 0), // Bottom side shadow
                     ),
-                    boxShadow: <BoxShadow>[
-                      BoxShadow(
-                        color:
-                            Color.fromARGB(255, 199, 198, 198).withOpacity(0.3),
-                        blurRadius: 5,
-                        spreadRadius: 5,
-                        offset: Offset(0, 0), // Bottom side shadow
-                      ),
-                      BoxShadow(
-                        color:
-                            Color.fromARGB(255, 255, 255, 255).withOpacity(0.2),
-                        blurRadius: 1,
-                        spreadRadius: 0, // Bottom side shadow
-                      ),
-                    ],
-                    borderRadius: BorderRadius.circular(3),
-                    color: Color.fromRGBO(247, 246, 255, 1).withOpacity(1),
-                  ),
-                  child: Row(
-                    children: [
-                      Container(
-                        height: 850,
-                        width: 360,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(13),
-                          ),
-                          color: Color.fromRGBO(236, 233, 250, 1),
+                    BoxShadow(
+                      color:
+                          Color.fromARGB(255, 255, 255, 255).withOpacity(0.2),
+                      blurRadius: 1,
+                      spreadRadius: 0, // Bottom side shadow
+                    ),
+                  ],
+                  borderRadius: BorderRadius.circular(3),
+                  color: Color.fromRGBO(247, 246, 255, 1).withOpacity(1),
+                ),
+                child: Row(
+                  children: [
+                    Container(
+                      height: 850,
+                      width: 360,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(13),
                         ),
-                        child: Column(
-                          children: [
-                            Container(
-                              height: 330,
-                              decoration: BoxDecoration(
-                                image: DecorationImage(
-                                  fit: BoxFit.fill,
-                                  image: NetworkImage(
-                                    'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/Circleavatar.png?alt=media&token=1204cc77-6756-42ab-ba0e-3946a3fe6c9f',
-                                  ),
-                                ),
-                                // color: Color.fromRGBO(255, 255, 255, 1),
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(7),
-                                ),
-                              ),
-                              child: Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  SizedBox(
-                                    height: 20,
-                                  ),
-                                  Text('Faizal Khan',
-                                      style: DashboardText.acre),
-                                  Text('Location',
-                                      style: DashboardText.sfpro19),
-                                  SizedBox(
-                                    height: 10,
-                                  ),
-                                  CircleAvatar(
-                                    backgroundColor:
-                                        Color.fromRGBO(127, 106, 255, 1),
-                                    maxRadius: 76,
-                                    minRadius: 72,
-                                    child: CircleAvatar(
-                                        backgroundColor: Colors.white,
-                                        maxRadius: 70,
-                                        minRadius: 67,
-                                        child: CircleAvatar(
-                                          backgroundImage: NetworkImage(
-                                              'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/uploadimage.png?alt=media&token=1793876b-63ca-4730-831b-4fcf4e96da0a'),
-                                          maxRadius: 65,
-                                          minRadius: 65,
-                                        )),
-                                  ),
-                                  SizedBox(
-                                    height: 10,
-                                  ),
-                                  Text('ID No : xxxxxxxxxx',
-                                      style: DashboardText.sfpro12),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      IconButton(
-                                          onPressed: () {},
-                                          icon: Image.network(
-                                            'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/editicon.png?alt=media&token=b0315743-5ecb-437e-94e2-c6c3c82d343b',
-                                            width: 16,
-                                            height: 16,
-                                          )),
-                                      Text('Edit Profile',
-                                          style: DashboardText.sfpro12black),
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    height: 10,
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Container(
-                              height: 37.h,
-                              padding: EdgeInsets.only(left: 1.5.w, top: 20),
-                              child: SideMenu(
-                                controller: sideMenu,
-                                style: SideMenuStyle(
-                                  displayMode: SideMenuDisplayMode.auto,
-                                  selectedColor:
-                                      Color.fromRGBO(98, 105, 254, 1),
-                                  unselectedTitleTextStyle: const TextStyle(
-                                    fontFamily: 'SFProText',
-                                    fontSize: 18,
-                                    color: Color.fromRGBO(128, 118, 118, 1),
-                                  ),
-                                  selectedTitleTextStyle: const TextStyle(
-                                      fontFamily: 'SFProText',
-                                      color: Colors.white,
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w600),
-                                  unselectedIconColor:
-                                      Color.fromRGBO(128, 118, 118, 1),
-                                  selectedIconColor: Colors.white,
-                                ),
-                                items: [
-                                  SideMenuItem(
-                                    title: 'Booking',
-                                    onTap: (page, _) {
-                                      setState(() {
-                                        _currentContent = Bookingpartner();
-                                      });
-                                      sideMenu.changePage(page);
-                                    },
-                                    icon: const Icon(Icons.person_2_outlined),
-                                    // Set the style property to change the text size
-                                  ),
-                                  SideMenuItem(
-                                    title: 'Payments',
-                                    onTap: (page, _) {
-                                      setState(() {
-                                        _currentContent = Payments();
-                                      });
-                                      sideMenu.changePage(page);
-                                    },
-                                    icon:
-                                        const Icon(Icons.mode_comment_outlined),
-                                  ),
-                                  SideMenuItem(
-                                    title: 'Report',
-                                    onTap: (page, _) {
-                                      setState(() {
-                                        _currentContent = Bookingpartner();
-                                      });
-                                      sideMenu.changePage(page);
-                                    },
-                                    icon:
-                                        const Icon(Icons.mode_comment_outlined),
-                                  ),
-                                  SideMenuItem(
-                                    title: 'Help',
-                                    onTap: (page, _) {
-                                      setState(() {
-                                        _currentContent = Bookingpartner();
-                                      });
-                                      sideMenu.changePage(page);
-                                    },
-                                    icon: const Icon(Icons.inbox_outlined),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
+                        color: Color.fromRGBO(236, 233, 250, 1),
                       ),
-                      Expanded(
-                          child: SingleChildScrollView(
-                        child: Padding(
-                          padding: EdgeInsets.fromLTRB(4.w, 2.h, 3.w, 2.h),
-                          child: Container(
-                            height: 650,
+                      child: Column(
+                        children: [
+                          Container(
+                            height: 330,
                             decoration: BoxDecoration(
-                              boxShadow: <BoxShadow>[
-                                BoxShadow(
-                                  color: Color.fromRGBO(199, 199, 199, 1)
-                                      .withOpacity(0.5),
-                                  blurRadius: 15,
-                                  spreadRadius: 3,
-                                )
-                              ],
-                              borderRadius: BorderRadius.circular(20.0),
-                              color: Color.fromRGBO(255, 255, 255, 0.00),
+                              image: DecorationImage(
+                                fit: BoxFit.fill,
+                                image: NetworkImage(
+                                  'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/Circleavatar.png?alt=media&token=1204cc77-6756-42ab-ba0e-3946a3fe6c9f',
+                                ),
+                              ),
+                              // color: Color.fromRGBO(255, 255, 255, 1),
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(7),
+                              ),
                             ),
-                            child: PageView(controller: page, children: [
-                              _currentContent,
-                            ]),
+                            child: FutureBuilder<Map<String, dynamic>?>(
+                              future: fetchData(widget
+                                  .user!), // Pass the userId to fetchData method
+                              builder: (context, snapshot) {
+                                if (snapshot.connectionState ==
+                                    ConnectionState.waiting) {
+                                  return CircularProgressIndicator(); // Show a loading indicator while data is being fetched
+                                } else if (snapshot.hasError) {
+                                  return Text('Error: ${snapshot.error}');
+                                } else if (snapshot.hasData) {
+                                  // Extract first name and last name from snapshot data
+                                  String firstName =
+                                      snapshot.data?['firstName'] ?? '';
+                                  String lastName =
+                                      snapshot.data?['lastName'] ?? '';
+                                  String address =
+                                      snapshot.data?['address'] ?? '';
+                                  String userId =
+                                      snapshot.data?['userId'] ?? '';
+
+                                  return Column(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      SizedBox(
+                                        height: 20,
+                                      ),
+                                      Text(" $firstName $lastName !",
+                                          style: DashboardText.acre),
+                                      Text('$address',
+                                          style: DashboardText.sfpro19),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      CircleAvatar(
+                                        backgroundColor:
+                                            Color.fromRGBO(127, 106, 255, 1),
+                                        maxRadius: 76,
+                                        minRadius: 72,
+                                        child: CircleAvatar(
+                                            backgroundColor: Colors.white,
+                                            maxRadius: 70,
+                                            minRadius: 67,
+                                            child: CircleAvatar(
+                                              backgroundImage: NetworkImage(
+                                                  'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/uploadimage.png?alt=media&token=1793876b-63ca-4730-831b-4fcf4e96da0a'),
+                                              maxRadius: 65,
+                                              minRadius: 65,
+                                            )),
+                                      ),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      Text('ID No : $userId',
+                                          style: DashboardText.sfpro12),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          IconButton(
+                                              onPressed: () {},
+                                              icon: Image.network(
+                                                'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/editicon.png?alt=media&token=b0315743-5ecb-437e-94e2-c6c3c82d343b',
+                                                width: 16,
+                                                height: 16,
+                                              )),
+                                          Text('Edit Profile',
+                                              style:
+                                                  DashboardText.sfpro12black),
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                    ],
+                                  );
+                                } else {
+                                  return Text(
+                                      'No data available'); // Handle case when snapshot has no data
+                                }
+                              },
+                            ),
                           ),
+                          Container(
+                            height: 37.h,
+                            padding: EdgeInsets.only(left: 1.5.w, top: 20),
+                            child: SideMenu(
+                              controller: sideMenu,
+                              style: SideMenuStyle(
+                                displayMode: SideMenuDisplayMode.auto,
+                                selectedColor: Color.fromRGBO(98, 105, 254, 1),
+                                unselectedTitleTextStyle: const TextStyle(
+                                  fontFamily: 'SFProText',
+                                  fontSize: 18,
+                                  color: Color.fromRGBO(128, 118, 118, 1),
+                                ),
+                                selectedTitleTextStyle: const TextStyle(
+                                    fontFamily: 'SFProText',
+                                    color: Colors.white,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w600),
+                                unselectedIconColor:
+                                    Color.fromRGBO(128, 118, 118, 1),
+                                selectedIconColor: Colors.white,
+                              ),
+                              items: [
+                                SideMenuItem(
+                                  title: 'Booking',
+                                  onTap: (page, _) {
+                                    setState(() {
+                                      _currentContent = Bookingpartner();
+                                    });
+                                    sideMenu.changePage(page);
+                                  },
+                                  icon: const Icon(Icons.person_2_outlined),
+                                  // Set the style property to change the text size
+                                ),
+                                SideMenuItem(
+                                  title: 'Payments',
+                                  onTap: (page, _) {
+                                    setState(() {
+                                      _currentContent = Payments();
+                                    });
+                                    sideMenu.changePage(page);
+                                  },
+                                  icon: const Icon(Icons.mode_comment_outlined),
+                                ),
+                                SideMenuItem(
+                                  title: 'Report',
+                                  onTap: (page, _) {
+                                    setState(() {
+                                      _currentContent = Bookings1();
+                                    });
+                                    sideMenu.changePage(page);
+                                  },
+                                  icon: const Icon(Icons.mode_comment_outlined),
+                                ),
+                                SideMenuItem(
+                                  title: 'Help',
+                                  onTap: (page, _) {
+                                    setState(() {
+                                      _currentContent = Bookingpartner();
+                                    });
+                                    sideMenu.changePage(page);
+                                  },
+                                  icon: const Icon(Icons.inbox_outlined),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Expanded(
+                        child: SingleChildScrollView(
+                      child: Padding(
+                        padding: EdgeInsets.fromLTRB(4.w, 2.h, 3.w, 2.h),
+                        child: Container(
+                          height: 650,
+                          decoration: BoxDecoration(
+                            boxShadow: <BoxShadow>[
+                              BoxShadow(
+                                color: Color.fromRGBO(199, 199, 199, 1)
+                                    .withOpacity(0.5),
+                                blurRadius: 15,
+                                spreadRadius: 3,
+                              )
+                            ],
+                            borderRadius: BorderRadius.circular(20.0),
+                            color: Color.fromRGBO(255, 255, 255, 0.00),
+                          ),
+                          child: PageView(controller: page, children: [
+                            _currentContent,
+                          ]),
                         ),
-                      )),
-                    ],
-                  ),
+                      ),
+                    )),
+                  ],
                 ),
               ),
             ),
