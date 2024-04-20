@@ -542,113 +542,110 @@ class _BookingsState extends State<Bookings> {
               padding: EdgeInsets.fromLTRB(6.w, 10.h, 4.w, 10.h),
               child: Row(
                 children: [
-                  Expanded(
-                    child: Container(
-                      padding: EdgeInsets.only(right: 3.w),
-                      child: StreamBuilder<Map<String, dynamic>>(
-                        stream: fetchData(widget.user!),
-                        builder: (context, snapshot) {
-                          if (snapshot.connectionState ==
-                              ConnectionState.waiting) {
-                            return CircularProgressIndicator(); // Show a loading indicator while waiting for data
-                          } else if (snapshot.hasError) {
-                            return Text(
-                                'Error: ${snapshot.error}'); // Show an error message if there's an error
-                          } else {
-                            // If data is available, build the UI using the retrieved userData
-                            Map<String, dynamic> userData = snapshot.data ?? {};
+                  Container(
+                    padding: EdgeInsets.only(right: 3.w),
+                    child: StreamBuilder<Map<String, dynamic>>(
+                      stream: fetchData(widget.user!),
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return CircularProgressIndicator(); // Show a loading indicator while waiting for data
+                        } else if (snapshot.hasError) {
+                          return Text(
+                              'Error: ${snapshot.error}'); // Show an error message if there's an error
+                        } else {
+                          // If data is available, build the UI using the retrieved userData
+                          Map<String, dynamic> userData = snapshot.data ?? {};
 
-                            return Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Row(
-                                  children: [
-                                    Image.network(
-                                      'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/Group1787.png?alt=media&token=d2066c85-560c-4a61-80bc-d020dcd73f95',
-                                      width: 62,
-                                      height: 61,
-                                    ),
-                                    SizedBox(
-                                      width: 10,
-                                    ),
-                                    Text("Booking Id ${userData['bookingid']}",
-                                        style: BookingText.helvetica21),
-                                  ],
-                                ),
-                                Container(
-                                  height: 380,
-                                  width: 700,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(12)),
-                                  child: GoogleMap(
-                                      onMapCreated: (controller) {
-                                        setState(() {
-                                          mapController = controller;
-                                        });
-                                      },
-                                      markers: Set<Marker>.of(_markers),
-                                      mapType: MapType.normal,
-                                      initialCameraPosition: CameraPosition(
-                                          target: LatLng(24.755562, 46.589584),
-                                          zoom: 13)),
-                                ),
-                                Padding(
-                                    padding: EdgeInsets.only(
-                                        right: 4.w,
-                                        left: 4.w,
-                                        top: 1.w,
-                                        bottom: 2.w),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Column(
-                                          children: [
-                                            Text("Pick up truck",
-                                                style: DialogText
-                                                    .helvetica25black),
-                                            Text('${userData['truck']}',
-                                                style:
-                                                    BookingText.helveticablack)
-                                          ],
+                          return Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(
+                                children: [
+                                  Image.network(
+                                    'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/Group1787.png?alt=media&token=d2066c85-560c-4a61-80bc-d020dcd73f95',
+                                    width: 62,
+                                    height: 61,
+                                  ),
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  Text("Booking Id ${userData['bookingid']}",
+                                      style: BookingText.helvetica21),
+                                ],
+                              ),
+                              Container(
+                                height: 380,
+                                width: 700,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(12)),
+                                child: GoogleMap(
+                                    onMapCreated: (controller) {
+                                      setState(() {
+                                        mapController = controller;
+                                      });
+                                    },
+                                    markers: Set<Marker>.of(_markers),
+                                    mapType: MapType.normal,
+                                    initialCameraPosition: CameraPosition(
+                                        target: LatLng(24.755562, 46.589584),
+                                        zoom: 13)),
+                              ),
+                              Padding(
+                                  padding: EdgeInsets.only(
+                                      right: 4.w,
+                                      left: 4.w,
+                                      top: 1.w,
+                                      bottom: 2.w),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Column(
+                                        children: [
+                                          Text("Pick up truck",
+                                              style:
+                                                  DialogText.helvetica25black),
+                                          Text('${userData['truck']}',
+                                              style: BookingText.helveticablack)
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: 63,
+                                        child: VerticalDivider(
+                                          color:
+                                              Color.fromRGBO(112, 112, 112, 1),
+                                          thickness: 2,
                                         ),
-                                        SizedBox(
-                                          height: 63,
-                                          child: VerticalDivider(
-                                            color: Color.fromRGBO(
-                                                112, 112, 112, 1),
-                                            thickness: 2,
-                                          ),
-                                        ),
-                                        Column(
+                                      ),
+                                      Column(
+                                        children: [
+                                          Text("Load",
+                                              style:
+                                                  BookingText.helveticablack),
+                                          Text('${userData['load']}',
+                                              style:
+                                                  HomepageText.helvetica16black)
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        child: Column(
                                           children: [
-                                            Text("Load",
+                                            Text("Size",
                                                 style:
                                                     BookingText.helveticablack),
-                                            Text('${userData['load']}',
+                                            Text('${userData['size']}',
                                                 style: HomepageText
                                                     .helvetica16black)
                                           ],
                                         ),
-                                        SizedBox(
-                                          child: Column(
-                                            children: [
-                                              Text("Size",
-                                                  style: BookingText
-                                                      .helveticablack),
-                                              Text('${userData['size']}',
-                                                  style: HomepageText
-                                                      .helvetica16black)
-                                            ],
-                                          ),
-                                        ),
-                                      ],
-                                    ))
-                              ],
-                            );
-                          }
-                        },
-                      ),
+                                      ),
+                                    ],
+                                  ))
+                            ],
+                          );
+                        }
+                      },
                     ),
                   ),
                   VerticalDivider(
@@ -825,35 +822,31 @@ class _BookingsState extends State<Bookings> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Expanded(
-                            child: CustomButton2(
-                              onPressed: () {},
-                              text1: 'Pay Advance: ',
-                              text2: 'XXXX',
-                            ),
+                          CustomButton2(
+                            onPressed: () {},
+                            text1: 'Pay Advance: ',
+                            text2: 'XXXX',
                           ),
                           SizedBox(
                             width: 1.w,
                           ),
-                          Expanded(
-                            child: CustomButton2(
-                              onPressed: () {
-                                showDialog(
-                                  barrierColor: Color.fromRGBO(59, 57, 57, 1)
-                                      .withOpacity(0.5),
-                                  context: context,
-                                  builder: (context) {
-                                    return Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 380, top: 40),
-                                      child: BookingConfirmDialog(),
-                                    );
-                                  },
-                                );
-                              },
-                              text1: 'Pay: ',
-                              text2: 'XXXX',
-                            ),
+                          CustomButton2(
+                            onPressed: () {
+                              showDialog(
+                                barrierColor: Color.fromRGBO(59, 57, 57, 1)
+                                    .withOpacity(0.5),
+                                context: context,
+                                builder: (context) {
+                                  return Padding(
+                                    padding: const EdgeInsets.only(
+                                        left: 380, top: 40),
+                                    child: BookingConfirmDialog(),
+                                  );
+                                },
+                              );
+                            },
+                            text1: 'Pay: ',
+                            text2: 'XXXX',
                           ),
                         ],
                       ),

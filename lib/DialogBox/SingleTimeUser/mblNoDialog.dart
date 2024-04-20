@@ -204,11 +204,11 @@ class _MblNoDialogState extends State<MblNoDialog> {
   String?
       storedVerificationId; // Declare a variable to store the verification ID
 
-  Future<void> _startPhoneAuth(String phoneNumber, String adminUid) async {
+  Future<void> _startPhoneAuth(String phoneNumber) async {
     print("mobtrack3");
 
     FirebaseAuth _auth = FirebaseAuth.instance;
-
+    String? adminUid = widget.adminUid;
     try {
       await _auth.verifyPhoneNumber(
         phoneNumber: "+91${contactNumberController.text}",
@@ -633,7 +633,8 @@ class _MblNoDialogState extends State<MblNoDialog> {
                                 style: FormTextStyle.purplehelvetica),
                             onTap: () async {
                               await _startPhoneAuth(
-                                  contactNumberController.text, adminUid);
+                                contactNumberController.text,
+                              );
                             },
                           ),
                         ],
@@ -726,23 +727,31 @@ class _MblNoDialogState extends State<MblNoDialog> {
                             ),
                           ),
                           SizedBox(
-                            height: 30,
-                            child: ElevatedButton(
-                              onPressed: () async {
-                                String adminUid = widget.adminUid!;
-                                await _startPhoneAuth(
-                                    contactNumberController.text, adminUid);
-                              },
-                              style: ElevatedButton.styleFrom(
+                              height: 30,
+                              child: ElevatedButton(
+                                onPressed: () async {
+                                  if (widget.adminUid != null) {
+                                    String adminUid = widget.adminUid!;
+                                    await _startPhoneAuth(
+                                      contactNumberController.text,
+                                    );
+                                  } else {
+                                    await _startPhoneAuth(
+                                        contactNumberController.text);
+                                  }
+                                },
+                                style: ElevatedButton.styleFrom(
                                   backgroundColor:
                                       Color.fromRGBO(60, 55, 148, 1),
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(0),
-                                  )),
-                              child: Text("Get OTP",
-                                  style: LoginpageText.helvetica16white),
-                            ),
-                          ),
+                                  ),
+                                ),
+                                child: Text(
+                                  "Get OTP",
+                                  style: LoginpageText.helvetica16white,
+                                ),
+                              )),
                         ],
                       ),
                       SizedBox(height: 40),
@@ -847,7 +856,8 @@ class _MblNoDialogState extends State<MblNoDialog> {
                                 onPressed: () async {
                                   String adminUid = widget.adminUid!;
                                   await _startPhoneAuth(
-                                      contactNumberController.text, adminUid);
+                                    contactNumberController.text,
+                                  );
                                 },
                                 style: ElevatedButton.styleFrom(
                                     backgroundColor:
