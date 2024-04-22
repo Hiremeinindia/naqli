@@ -401,12 +401,12 @@ class _CreateAccountState extends State<CreateAccount> {
                                       height: 15,
                                     ),
                                     CustomTextfield(
-                                      validator: (value) {
-                                        if (value!.length != 10)
-                                          return 'Mobile Number must be of 10 digit';
-                                        else
-                                          return null;
-                                      },
+                                      // validator: (value) {
+                                      //   if (value!.length != 10)
+                                      //     return 'Mobile Number must be of 10 digit';
+                                      //   else
+                                      //     return null;
+                                      // },
                                       controller: controller.alternateNumber,
                                       text: 'Phone Number',
                                     ),
