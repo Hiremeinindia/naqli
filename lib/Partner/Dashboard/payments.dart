@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:easy_sidemenu/easy_sidemenu.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/Controllers/allUsersFormController.dart';
 import 'package:flutter_application_1/Users/SingleUser/singleuser.dart';
@@ -19,13 +20,14 @@ class Payments extends StatefulWidget {
 }
 
 class _PaymentsState extends State<Payments> {
-  final ScrollController _paymentScroll = ScrollController();
+  PageController page = PageController();
+  SideMenuController sideMenu = SideMenuController();
   final ScrollController _scrollController1 = ScrollController();
   final ScrollController _scrollController2 = ScrollController();
   AllUsersFormController controller = AllUsersFormController();
   final fromDate = TextEditingController();
   final toDate = TextEditingController();
-  Stream<List<QuerySnapshot<Map<String, dynamic>>>>? _currentStream;
+  Stream<List<Map<String, dynamic>>>? _currentStream;
   @override
   void dispose() {
     _scrollController1.dispose();
@@ -127,9 +129,12 @@ class _PaymentsState extends State<Payments> {
     return controller.stream;
   }
 
+  @override
   void initState() {
-    _currentStream =
-        allBookings() as Stream<List<QuerySnapshot<Map<String, dynamic>>>>?;
+    _currentStream = allBookings();
+    sideMenu.addListener((p0) {
+      page.jumpToPage(p0);
+    });
     super.initState();
   }
 
@@ -446,7 +451,7 @@ class _PaymentsState extends State<Payments> {
                         ),
                       ),
                       SizedBox(height: 10),
-                      StreamBuilder<List<QuerySnapshot<Map<String, dynamic>>>>(
+                      StreamBuilder<List<Map<String, dynamic>>>(
                         stream: _currentStream,
                         builder: (context, snapshot) {
                           if (snapshot.connectionState ==
@@ -460,13 +465,21 @@ class _PaymentsState extends State<Payments> {
                             return Center(
                                 child: Text("You haven't done any bookings"));
                           } else {
-                            // Flatten the list of QuerySnapshot into a single List<DocumentSnapshot>
                             List<SingleUserBooking> blueSingleUsers = [];
-                            snapshot.data!.forEach((querySnapshot) {
-                              querySnapshot.docs.forEach((doc) {
-                                blueSingleUsers
-                                    .add(SingleUserBooking.fromSnapshot(doc));
-                              });
+                            snapshot.data!.forEach((bookingData) {
+                              String truck = bookingData['truck'];
+                              String size = bookingData['size'];
+                              String bookingid = bookingData['bookingid'];
+
+                              SingleUserBooking singleUserBooking =
+                                  SingleUserBooking(
+                                truck: truck,
+                                size: size,
+                                bookingid: bookingid,
+                                // Add any additional fields needed for your SingleUserBooking constructor
+                              );
+
+                              blueSingleUsers.add(singleUserBooking);
                             });
 
                             return ElevationContainer(
