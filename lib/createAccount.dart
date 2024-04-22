@@ -103,6 +103,21 @@ class _CreateAccountState extends State<CreateAccount> {
     }
   }
 
+  String? validateAddress(String? value) {
+    RegExp regex = RegExp(
+      r'^[a-zA-Z0-9 ]+$',
+    );
+    if (value!.isEmpty) {
+      return 'Please enter your address';
+    } else {
+      if (!regex.hasMatch(value)) {
+        return 'Address must contain only letters and numbers';
+      } else {
+        return null;
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Sizer(builder: (context, orientation, deviceType) {
@@ -273,7 +288,7 @@ class _CreateAccountState extends State<CreateAccount> {
                                     ),
                                     CustomTextfield(
                                       controller: controller.address,
-                                      validator: nameValidator,
+                                      validator: validateAddress,
                                       text: 'Address',
                                     ),
                                     SizedBox(
@@ -399,7 +414,7 @@ class _CreateAccountState extends State<CreateAccount> {
                                       height: 15,
                                     ),
                                     CustomTextfield(
-                                      validator: nameValidator,
+                                      validator: validateAddress,
                                       controller: controller.address2,
                                       text: 'Address',
                                     ),
@@ -776,12 +791,12 @@ class _CreateAccountState extends State<CreateAccount> {
                               SizedBox(width: 5),
                               Expanded(
                                 child: CustomTextfield(
-                                  validator: (value) {
-                                    if (value!.length != 10)
-                                      return 'Mobile Number must be of 10 digit';
-                                    else
-                                      return null;
-                                  },
+                                  // validator: (value) {
+                                  //   if (value!.length != 10)
+                                  //     return 'Mobile Number must be of 10 digit';
+                                  //   else
+                                  //     return null;
+                                  // },
                                   controller: controller.alternateNumber,
                                   text: 'Phone Number',
                                 ),
@@ -800,7 +815,7 @@ class _CreateAccountState extends State<CreateAccount> {
                               SizedBox(width: 5),
                               Expanded(
                                 child: CustomTextfield(
-                                  validator: nameValidator,
+                                  validator: validateAddress,
                                   controller: controller.address,
                                   text: 'Address',
                                 ),
@@ -819,7 +834,7 @@ class _CreateAccountState extends State<CreateAccount> {
                               SizedBox(width: 5),
                               Expanded(
                                 child: CustomTextfield(
-                                  validator: nameValidator,
+                                  validator: validateAddress,
                                   controller: controller.address2,
                                   text: 'Address',
                                 ),
