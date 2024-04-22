@@ -791,12 +791,12 @@ class _CreateAccountState extends State<CreateAccount> {
                               SizedBox(width: 5),
                               Expanded(
                                 child: CustomTextfield(
-                                  validator: (value) {
-                                    if (value!.length != 10)
-                                      return 'Mobile Number must be of 10 digit';
-                                    else
-                                      return null;
-                                  },
+                                  // validator: (value) {
+                                  //   if (value!.length != 10)
+                                  //     return 'Mobile Number must be of 10 digit';
+                                  //   else
+                                  //     return null;
+                                  // },
                                   controller: controller.alternateNumber,
                                   text: 'Phone Number',
                                 ),
@@ -815,7 +815,7 @@ class _CreateAccountState extends State<CreateAccount> {
                               SizedBox(width: 5),
                               Expanded(
                                 child: CustomTextfield(
-                                  validator: nameValidator,
+                                  validator: validateAddress,
                                   controller: controller.address,
                                   text: 'Address',
                                 ),
@@ -834,7 +834,7 @@ class _CreateAccountState extends State<CreateAccount> {
                               SizedBox(width: 5),
                               Expanded(
                                 child: CustomTextfield(
-                                  validator: nameValidator,
+                                  validator: validateAddress,
                                   controller: controller.address2,
                                   text: 'Address',
                                 ),

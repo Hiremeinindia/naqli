@@ -306,92 +306,92 @@ class _MyHomePageState extends State<MyHomePage>
                                       // Use ListView instead of Column
                                       children: [
                                         SizedBox(height: 10),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.end,
-                                          children: [
-                                            // Location text
-                                            Container(
-                                              padding: EdgeInsets.symmetric(
-                                                  horizontal: 10),
-                                              decoration: BoxDecoration(
-                                                border: Border.all(
-                                                    color: Colors.black,
-                                                    width: 1.0),
-                                                borderRadius:
-                                                    BorderRadius.circular(5.0),
-                                              ),
-                                              child: Row(
-                                                children: [
-                                                  Icon(Icons
-                                                      .location_on_outlined),
-                                                  SizedBox(width: 5),
-                                                  Container(
-                                                    height: 30,
-                                                    width: 1,
-                                                    color: Colors.black,
-                                                  ),
-                                                  SizedBox(width: 5),
-                                                  // SizedBox(
-                                                  //   height: 200,
-                                                  //   width: 200,
-                                                  //   child: OpenStreetMapSearchAndPick(
-                                                  //       buttonColor: Colors.blue,
-                                                  //       buttonText:
-                                                  //           'Set Current Location',
-                                                  //       onPicked: (pickedData) {}),
-                                                  // )
-                                                  // Replace the below DropdownButton with your actual dropdown widget
-                                                  DropdownButtonHideUnderline(
-                                                    child:
-                                                        DropdownButton<String>(
-                                                      value:
-                                                          selectedLocation, // Assign the selected location value to the dropdown
-                                                      onChanged:
-                                                          (String? newValue) {
-                                                        setState(() {
-                                                          selectedLocation =
-                                                              newValue; // Update the selected location when the user selects a new value
-                                                        });
-                                                      },
+                                        // Row(
+                                        //   mainAxisAlignment:
+                                        //       MainAxisAlignment.end,
+                                        //   children: [
+                                        //     // Location text
+                                        //     Container(
+                                        //       padding: EdgeInsets.symmetric(
+                                        //           horizontal: 10),
+                                        //       decoration: BoxDecoration(
+                                        //         border: Border.all(
+                                        //             color: Colors.black,
+                                        //             width: 1.0),
+                                        //         borderRadius:
+                                        //             BorderRadius.circular(5.0),
+                                        //       ),
+                                        //       // child: Row(
+                                        //       //   children: [
+                                        //       //     Icon(Icons
+                                        //       //         .location_on_outlined),
+                                        //       //     SizedBox(width: 5),
+                                        //       //     Container(
+                                        //       //       height: 30,
+                                        //       //       width: 1,
+                                        //       //       color: Colors.black,
+                                        //       //     ),
+                                        //       //     SizedBox(width: 5),
+                                        //       //     // SizedBox(
+                                        //       //     //   height: 200,
+                                        //       //     //   width: 200,
+                                        //       //     //   child: OpenStreetMapSearchAndPick(
+                                        //       //     //       buttonColor: Colors.blue,
+                                        //       //     //       buttonText:
+                                        //       //     //           'Set Current Location',
+                                        //       //     //       onPicked: (pickedData) {}),
+                                        //       //     // )
+                                        //       //     // Replace the below DropdownButton with your actual dropdown widget
+                                        //       //     DropdownButtonHideUnderline(
+                                        //       //       child:
+                                        //       //           DropdownButton<String>(
+                                        //       //         value:
+                                        //       //             selectedLocation, // Assign the selected location value to the dropdown
+                                        //       //         onChanged:
+                                        //       //             (String? newValue) {
+                                        //       //           setState(() {
+                                        //       //             selectedLocation =
+                                        //       //                 newValue; // Update the selected location when the user selects a new value
+                                        //       //           });
+                                        //       //         },
 
-                                                      items: <String>[
-                                                        'Location',
-                                                        'Riyadh ',
-                                                        'Mecca ',
-                                                        'Eastern ',
-                                                        'Medina',
-                                                        'Asir',
-                                                        'Jazan',
-                                                        'Al-Qassim',
-                                                        'Tabuk',
-                                                        'Hail',
-                                                        'Al-Jawaf',
-                                                        'Najran',
-                                                        'Northem Borders',
-                                                        'Al-Bahah',
-                                                      ].map<
-                                                          DropdownMenuItem<
-                                                              String>>(
-                                                        (String value) {
-                                                          return DropdownMenuItem<
-                                                              String>(
-                                                            value: value,
-                                                            child: Text(
-                                                              value,
-                                                              style: HomepageText
-                                                                  .helvetica16black,
-                                                            ),
-                                                          );
-                                                        },
-                                                      ).toList(),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ],
-                                        ),
+                                        //       //         items: <String>[
+                                        //       //           'Location',
+                                        //       //           'Riyadh ',
+                                        //       //           'Mecca ',
+                                        //       //           'Eastern ',
+                                        //       //           'Medina',
+                                        //       //           'Asir',
+                                        //       //           'Jazan',
+                                        //       //           'Al-Qassim',
+                                        //       //           'Tabuk',
+                                        //       //           'Hail',
+                                        //       //           'Al-Jawaf',
+                                        //       //           'Najran',
+                                        //       //           'Northem Borders',
+                                        //       //           'Al-Bahah',
+                                        //       //         ].map<
+                                        //       //             DropdownMenuItem<
+                                        //       //                 String>>(
+                                        //       //           (String value) {
+                                        //       //             return DropdownMenuItem<
+                                        //       //                 String>(
+                                        //       //               value: value,
+                                        //       //               child: Text(
+                                        //       //                 value,
+                                        //       //                 style: HomepageText
+                                        //       //                     .helvetica16black,
+                                        //       //               ),
+                                        //       //             );
+                                        //       //           },
+                                        //       //         ).toList(),
+                                        //       //       ),
+                                        //       //     ),
+                                        //       //   ],
+                                        //       // ),
+                                        //     ),
+                                        //   ],
+                                        // ),
                                         SizedBox(
                                           height: 30,
                                         ),
@@ -1073,76 +1073,76 @@ class _MyHomePageState extends State<MyHomePage>
                               // Use ListView instead of Column
                               children: [
                                 SizedBox(height: 10),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                    // Location text
-                                    Container(
-                                      padding:
-                                          EdgeInsets.symmetric(horizontal: 10),
-                                      decoration: BoxDecoration(
-                                        border: Border.all(
-                                            color: Colors.black, width: 1.0),
-                                        borderRadius:
-                                            BorderRadius.circular(5.0),
-                                      ),
-                                      child: Row(
-                                        children: [
-                                          Icon(Icons.location_on_outlined),
-                                          SizedBox(width: 5),
-                                          Container(
-                                            height: 30,
-                                            width: 1,
-                                            color: Colors.black,
-                                          ),
-                                          SizedBox(width: 5),
-                                          // Replace the below DropdownButton with your actual dropdown widget
-                                          DropdownButtonHideUnderline(
-                                            child: DropdownButton<String>(
-                                              value:
-                                                  selectedLocation, // Assign the selected location value to the dropdown
-                                              onChanged: (String? newValue) {
-                                                setState(() {
-                                                  selectedLocation =
-                                                      newValue; // Update the selected location when the user selects a new value
-                                                });
-                                              },
+                                // Row(
+                                //   mainAxisAlignment: MainAxisAlignment.end,
+                                //   children: [
+                                //     // Location text
+                                //     Container(
+                                //       padding:
+                                //           EdgeInsets.symmetric(horizontal: 10),
+                                //       decoration: BoxDecoration(
+                                //         border: Border.all(
+                                //             color: Colors.black, width: 1.0),
+                                //         borderRadius:
+                                //             BorderRadius.circular(5.0),
+                                //       ),
+                                //       child: Row(
+                                //         children: [
+                                //           Icon(Icons.location_on_outlined),
+                                //           SizedBox(width: 5),
+                                //           Container(
+                                //             height: 30,
+                                //             width: 1,
+                                //             color: Colors.black,
+                                //           ),
+                                //           SizedBox(width: 5),
+                                //           // Replace the below DropdownButton with your actual dropdown widget
+                                //           DropdownButtonHideUnderline(
+                                //             child: DropdownButton<String>(
+                                //               value:
+                                //                   selectedLocation, // Assign the selected location value to the dropdown
+                                //               onChanged: (String? newValue) {
+                                //                 setState(() {
+                                //                   selectedLocation =
+                                //                       newValue; // Update the selected location when the user selects a new value
+                                //                 });
+                                //               },
 
-                                              items: <String>[
-                                                'Location',
-                                                'Riyadh ',
-                                                'Mecca ',
-                                                'Eastern ',
-                                                'Medina',
-                                                'Asir',
-                                                'Jazan',
-                                                'Al-Qassim',
-                                                'Tabuk',
-                                                'Hail',
-                                                'Al-Jawaf',
-                                                'Najran',
-                                                'Northem Borders',
-                                                'Al-Bahah',
-                                              ].map<DropdownMenuItem<String>>(
-                                                (String value) {
-                                                  return DropdownMenuItem<
-                                                      String>(
-                                                    value: value,
-                                                    child: Text(
-                                                      value,
-                                                      style: HomepageText
-                                                          .helvetica16black,
-                                                    ),
-                                                  );
-                                                },
-                                              ).toList(),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
+                                //               items: <String>[
+                                //                 'Location',
+                                //                 'Riyadh ',
+                                //                 'Mecca ',
+                                //                 'Eastern ',
+                                //                 'Medina',
+                                //                 'Asir',
+                                //                 'Jazan',
+                                //                 'Al-Qassim',
+                                //                 'Tabuk',
+                                //                 'Hail',
+                                //                 'Al-Jawaf',
+                                //                 'Najran',
+                                //                 'Northem Borders',
+                                //                 'Al-Bahah',
+                                //               ].map<DropdownMenuItem<String>>(
+                                //                 (String value) {
+                                //                   return DropdownMenuItem<
+                                //                       String>(
+                                //                     value: value,
+                                //                     child: Text(
+                                //                       value,
+                                //                       style: HomepageText
+                                //                           .helvetica16black,
+                                //                     ),
+                                //                   );
+                                //                 },
+                                //               ).toList(),
+                                //             ),
+                                //           ),
+                                //         ],
+                                //       ),
+                                //     ),
+                                //   ],
+                                // ),
                                 SizedBox(
                                   height: 10,
                                 ),
