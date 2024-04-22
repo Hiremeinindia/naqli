@@ -157,27 +157,6 @@ class _MyHomePageState extends State<SingleUserDashboardPage> {
     });
   }
 
-  void tapOnPieChart(FlTouchEvent event, PieTouchResponse? response) {
-    if (response != null) {
-      final sectionIndex = response.touchedSection!.touchedSectionIndex;
-      final value = response.touchedSection!.touchedSection!.value;
-      if (sectionIndex == 0) {
-        month = 'January - $value';
-      } else if (sectionIndex == 1) {
-        month = 'February - $value';
-      } else if (sectionIndex == 2) {
-        month = 'March - $value';
-      } else if (sectionIndex == 3) {
-        month = 'April - $value';
-      } else if (sectionIndex == 4) {
-        month = 'May - $value';
-      }
-      setState(() {});
-      print('Tapped on section: $sectionIndex');
-      // You can add your custom logic here to respond to the tap on the Pie Chart
-    }
-  }
-
   bool isAnyCheckboxSelected() {
     return checkbox1 || checkbox2 || checkbox3;
   }
@@ -378,7 +357,7 @@ class _MyHomePageState extends State<SingleUserDashboardPage> {
                                       SizedBox(
                                         height: 20,
                                       ),
-                                      Text(" $firstName $lastName !",
+                                      Text("$firstName $lastName",
                                           style: DashboardText.acre),
                                       Text('$address',
                                           style: DashboardText.sfpro19),

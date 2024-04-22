@@ -58,7 +58,10 @@ class _MyHomePageState extends State<PartnerDashboardPage> {
       page.jumpToPage(p0);
     });
     super.initState();
-    _currentContent = Bookingpartner();
+    _currentContent = Bookingpartner(
+      unitType: 'Vehicle',
+      user: widget.user,
+    );
   }
 
   void enablePayNowButton() {
@@ -396,7 +399,7 @@ class _MyHomePageState extends State<PartnerDashboardPage> {
                                       SizedBox(
                                         height: 20,
                                       ),
-                                      Text(" $firstName $lastName !",
+                                      Text("$firstName $lastName",
                                           style: DashboardText.acre),
                                       Text('$address',
                                           style: DashboardText.sfpro19),
@@ -479,7 +482,10 @@ class _MyHomePageState extends State<PartnerDashboardPage> {
                                   title: 'Booking',
                                   onTap: (page, _) {
                                     setState(() {
-                                      _currentContent = Bookingpartner();
+                                      _currentContent = Bookingpartner(
+                                        unitType: 'Vehicle',
+                                        user: widget.user,
+                                      );
                                     });
                                     sideMenu.changePage(page);
                                   },
@@ -490,7 +496,10 @@ class _MyHomePageState extends State<PartnerDashboardPage> {
                                   title: 'Payments',
                                   onTap: (page, _) {
                                     setState(() {
-                                      _currentContent = Payments();
+                                      _currentContent = Payments(
+                                        unitType: 'Vehicle',
+                                        user: widget.user,
+                                      );
                                     });
                                     sideMenu.changePage(page);
                                   },
