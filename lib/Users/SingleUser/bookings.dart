@@ -20,7 +20,8 @@ class Bookings extends StatefulWidget {
   final String? user;
   final String? bookingId;
   final String? unitType;
-  Bookings({required this.user, this.unitType, this.bookingId});
+  final String? operId;
+  Bookings({required this.user, this.unitType, this.bookingId, this.operId});
   @override
   State<Bookings> createState() => _BookingsState();
 }
@@ -46,30 +47,108 @@ class _BookingsState extends State<Bookings> {
     mapController = controller;
   }
 
-  Future<Map<String, dynamic>?> fetchOperator(String userId) async {
-    try {
-      DocumentSnapshot<Map<String, dynamic>> documentSnapshot =
-          await FirebaseFirestore.instance
-              .collection('partneruser')
-              .doc(userId)
-              .get();
+  Stream<List<Map<String, dynamic>>> allBookings() {
+    FirebaseFirestore firestore = FirebaseFirestore.instance;
 
-      if (documentSnapshot.exists) {
-        Map<String, dynamic> userData = documentSnapshot.data()!;
+    // Query for all documents in the 'user' collection
+    Stream<QuerySnapshot<Map<String, dynamic>>> userStream =
+        firestore.collection('partneruser').snapshots();
 
-        String firstName = userData['firstName'] ?? '';
+    // Merge the streams using flatMap to process each user document separately
+    Stream<List<Map<String, dynamic>>> mergedStream =
+        userStream.asyncMap((userSnapshot) async {
+      List<Map<String, dynamic>> combinedData = [];
 
-        return {
-          'firstName': firstName,
-        };
-      } else {
-        // If the document doesn't exist, return null
-        print('Document does not exist for userId: $userId');
-        return null;
+      // Iterate through each user document
+      for (QueryDocumentSnapshot<Map<String, dynamic>> userDoc
+          in userSnapshot.docs) {
+        // Extract user data
+        String userName = userDoc.data()?['firstName'] ?? '';
+        String userId = userDoc.id;
+
+        // Query for vehicleBooking collection for this user
+        QuerySnapshot<Map<String, dynamic>> vehicleSnapshot = await firestore
+            .collection('partneruser')
+            .doc(userId)
+            .collection('operatorReg')
+            .get();
+
+        // Iterate through vehicleBooking documents and extract relevant fields
+        vehicleSnapshot.docs.forEach((vehicleDoc) {
+          Map<String, dynamic> bookingData = {
+            'type': 'vehicle',
+            'truck': vehicleDoc['truck'],
+            'date': vehicleDoc['date'],
+            'size': vehicleDoc['size'],
+            'bookingid': vehicleDoc['bookingid'],
+          };
+          combinedData.add(bookingData);
+        });
+
+        // Query for equipmentBooking collection for this user
+        QuerySnapshot<Map<String, dynamic>> equipmentSnapshot = await firestore
+            .collection('user')
+            .doc(userId)
+            .collection('equipmentBooking')
+            .get();
+
+        // Iterate through equipmentBooking documents and extract relevant fields
+        equipmentSnapshot.docs.forEach((equipmentDoc) {
+          Map<String, dynamic> bookingData = {
+            'type': 'equipment',
+            'equipment': equipmentDoc['equipment'],
+            'quantity': equipmentDoc['quantity'],
+            'bookingid': equipmentDoc['bookingid'],
+          };
+          combinedData.add(bookingData);
+        });
       }
+
+      return combinedData;
+    }).asBroadcastStream();
+
+    // Return the merged stream
+    return mergedStream;
+  }
+
+  Future<Map<String, dynamic>?> fetchOperator() async {
+    try {
+      // Fetching operator data from operatorReg collection
+      QuerySnapshot<Map<String, dynamic>> operatorQuerySnapshot =
+          await FirebaseFirestore.instance.collectionGroup('operatorReg').get();
+
+      if (operatorQuerySnapshot.docs.isNotEmpty) {
+        // Assume there's only one document in the collection for simplicity
+        DocumentSnapshot<Map<String, dynamic>> operatorSnapshot =
+            operatorQuerySnapshot.docs.first;
+
+        String operId = operatorSnapshot.data()?['operId'] ?? '';
+        String operName = operatorSnapshot.data()?['operName'] ?? '';
+
+        // Fetching user data from partneruser collection
+        QuerySnapshot<Map<String, dynamic>> userQuerySnapshot =
+            await FirebaseFirestore.instance.collection('partneruser').get();
+
+        if (userQuerySnapshot.docs.isNotEmpty) {
+          // Assume there's only one document in the collection for simplicity
+          DocumentSnapshot<Map<String, dynamic>> userSnapshot =
+              userQuerySnapshot.docs.first;
+
+          String firstName = userSnapshot.data()?['firstName'] ?? '';
+
+          return {
+            'vendorName': firstName,
+            'operId': operId,
+            'operName': operName,
+          };
+        }
+      }
+      // If the document doesn't exist, return null
+      print('Document does not exist for operator or user');
+      return null;
     } catch (e) {
       // Handle any errors that occur during fetching
-      print('Error fetching data for userId $userId: $e');
+      print('Error fetching data: $e');
       return null;
     }
   }
@@ -425,66 +504,75 @@ class _BookingsState extends State<Bookings> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             FutureBuilder<Map<String, dynamic>?>(
-              future: fetchOperator(
-                  widget.user!), // Call the fetchOperator function
+              future: fetchOperator(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  // While data is being fetched, show a loading indicator
                   return CircularProgressIndicator();
                 } else if (snapshot.hasError) {
-                  // If an error occurred during fetching, show an error message
                   return Text('Error: ${snapshot.error}');
+                } else if (snapshot.data == null) {
+                  // Handle case when data is null
+                  return Text('Data not found');
                 } else {
-                  // If data is successfully fetched, or if the document doesn't exist, display the firstName
-                  String firstName =
-                      snapshot.data?['firstName'] ?? 'User Not Found';
-                  return Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  String vendorName =
+                      snapshot.data?['vendorName'] ?? 'Vendor Not Found';
+                  String operId =
+                      snapshot.data?['operId'] ?? 'Operator ID Not Found';
+                  String operName =
+                      snapshot.data?['operName'] ?? 'Operator Name Not Found';
+
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        'Vendor Name',
-                        style: TabelText.tableText4,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Vendor Name',
+                            style: TabelText.tableText4,
+                          ),
+                          Text(
+                            vendorName,
+                            style: TabelText.tableText5,
+                          ),
+                        ],
                       ),
-                      Text(
-                        firstName,
-                        style: TabelText.tableText5,
+                      Divider(
+                        color: Color.fromRGBO(204, 195, 195, 1),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Operator id',
+                            style: TabelText.tableText4,
+                          ),
+                          Text(
+                            operId,
+                            style: TabelText.tableText5,
+                          ),
+                        ],
+                      ),
+                      Divider(
+                        color: Color.fromRGBO(204, 195, 195, 1),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Operator name',
+                            style: TabelText.tableText4,
+                          ),
+                          Text(
+                            operName,
+                            style: TabelText.tableText5,
+                          ),
+                        ],
                       ),
                     ],
                   );
                 }
               },
-            ),
-            Divider(
-              color: Color.fromRGBO(204, 195, 195, 1),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Operator id',
-                  style: TabelText.tableText4,
-                ),
-                Text(
-                  '#456789142',
-                  style: TabelText.tableText5,
-                ),
-              ],
-            ),
-            Divider(
-              color: Color.fromRGBO(204, 195, 195, 1),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Operator name',
-                  style: TabelText.tableText4,
-                ),
-                Text(
-                  'Tanjiro',
-                  style: TabelText.tableText5,
-                ),
-              ],
             ),
             Divider(
               color: Color.fromRGBO(204, 195, 195, 1),
