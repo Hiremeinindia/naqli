@@ -52,7 +52,8 @@ class _PaymentsState extends State<Payments> {
       for (QueryDocumentSnapshot<Map<String, dynamic>> userDoc
           in userSnapshot.docs) {
         // Extract user data
-        String userName = userDoc.data()?['firstName'] ?? '';
+        String firstName = userDoc.data()?['firstName'] ?? '';
+        String lastName = userDoc.data()?['lastName'] ?? '';
         String userId = userDoc.id;
 
         // Query for vehicleBooking collection for this user
@@ -66,6 +67,9 @@ class _PaymentsState extends State<Payments> {
         vehicleSnapshot.docs.forEach((vehicleDoc) {
           Map<String, dynamic> bookingData = {
             'type': 'vehicle',
+            'userId': userId,
+            'firstName': firstName,
+            'lastName': lastName,
             'truck': vehicleDoc['truck'],
             'date': vehicleDoc['date'],
             'size': vehicleDoc['size'],
@@ -85,6 +89,9 @@ class _PaymentsState extends State<Payments> {
         equipmentSnapshot.docs.forEach((equipmentDoc) {
           Map<String, dynamic> bookingData = {
             'type': 'equipment',
+            'userId': userId,
+            'firstName': firstName,
+            'lastName': lastName,
             'equipment': equipmentDoc['equipment'],
             'quantity': equipmentDoc['quantity'],
             'bookingid': equipmentDoc['bookingid'],
@@ -419,15 +426,22 @@ class _PaymentsState extends State<Payments> {
                                 child: Text("You haven't done any bookings"));
                           } else {
                             return ElevationContainer(
-                              child: Scrollbar(
-                                controller: _scrollController2,
-                                thumbVisibility: true,
+                              child: SingleChildScrollView(
+                                scrollDirection: Axis.horizontal,
                                 child: SingleChildScrollView(
-                                  scrollDirection: Axis.horizontal,
-                                  controller: _scrollController2,
                                   child: Container(
-                                    height: 340,
-                                    width: 1070,
+                                    height:
+                                        400, // Adjust the height as per your requirement
+                                    width: 1100,
+                                    decoration: BoxDecoration(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(8)),
+                                      border: Border.all(
+                                        color: Color.fromRGBO(112, 112, 112, 1)
+                                            .withOpacity(0.3),
+                                      ),
+                                    ),
+                                    constraints: BoxConstraints(minWidth: 1070),
                                     child: DataTable(
                                       decoration: BoxDecoration(
                                         color: Colors.white,
