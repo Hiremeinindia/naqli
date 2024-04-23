@@ -674,7 +674,7 @@ class _OperatorState extends State<Operator> {
                                       child: Row(
                                         children: [
                                           Image.network(
-                                            'assets/cancel.png', // Assuming you have an image asset named 'upload_icon.png' in your assets folder
+                                            'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/cancel.png?alt=media&token=dd1ed39b-abda-4780-94dd-f5c15e7d12f5', // Assuming you have an image asset named 'upload_icon.png' in your assets folder
                                             width: 17,
                                             height: 17,
                                             // color: Colors.black,
@@ -730,7 +730,7 @@ class _OperatorState extends State<Operator> {
                                           child: Row(
                                             children: [
                                               Image.network(
-                                                'assets/cancel.png', // Assuming you have an image asset named 'upload_icon.png' in your assets folder
+                                                'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/cancel.png?alt=media&token=dd1ed39b-abda-4780-94dd-f5c15e7d12f5', // Assuming you have an image asset named 'upload_icon.png' in your assets folder
                                                 width: 17,
                                                 height: 17,
                                                 // color: Colors.black,
@@ -1051,7 +1051,7 @@ class _OperatorState extends State<Operator> {
                                       child: Row(
                                         children: [
                                           Image.network(
-                                            'assets/cancel.png', // Assuming you have an image asset named 'upload_icon.png' in your assets folder
+                                            'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/cancel.png?alt=media&token=dd1ed39b-abda-4780-94dd-f5c15e7d12f5', // Assuming you have an image asset named 'upload_icon.png' in your assets folder
                                             width: 17,
                                             height: 17,
                                             // color: Colors.black,
@@ -1107,7 +1107,7 @@ class _OperatorState extends State<Operator> {
                                           child: Row(
                                             children: [
                                               Image.network(
-                                                'assets/cancel.png', // Assuming you have an image asset named 'upload_icon.png' in your assets folder
+                                                'https://firebasestorage.googleapis.com/v0/b/naqli-5825c.appspot.com/o/cancel.png?alt=media&token=dd1ed39b-abda-4780-94dd-f5c15e7d12f5', // Assuming you have an image asset named 'upload_icon.png' in your assets folder
                                                 width: 17,
                                                 height: 17,
                                                 // color: Colors.black,
