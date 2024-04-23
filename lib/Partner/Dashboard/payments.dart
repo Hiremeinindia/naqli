@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:easy_sidemenu/easy_sidemenu.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_application_1/Controllers/allUsersFormController.dart';
 import 'package:flutter_application_1/Users/SingleUser/singleuser.dart';
 import 'package:flutter_application_1/Widgets/colorContainer.dart';
@@ -38,35 +39,60 @@ class _PaymentsState extends State<Payments> {
   Stream<List<Map<String, dynamic>>> allBookings() {
     FirebaseFirestore firestore = FirebaseFirestore.instance;
 
-    // Query for user document to get firstName
-    Stream<DocumentSnapshot<Map<String, dynamic>>> userStream =
-        firestore.collection('user').doc(widget.user).snapshots();
+    // Query for all documents in the 'user' collection
+    Stream<QuerySnapshot<Map<String, dynamic>>> userStream =
+        firestore.collection('user').snapshots();
 
-    // Query for vehicleBooking collection
-    Stream<QuerySnapshot<Map<String, dynamic>>> vehicleStream = firestore
-        .collection('user')
-        .doc(widget.user)
-        .collection('vehicleBooking')
-        .snapshots();
-
-    // Merge both streams using Rx.combineLatest2
+    // Merge the streams using flatMap to process each user document separately
     Stream<List<Map<String, dynamic>>> mergedStream =
-        Rx.combineLatest2(userStream, vehicleStream,
-            (DocumentSnapshot<Map<String, dynamic>> userDoc,
-                QuerySnapshot<Map<String, dynamic>> vehicleSnapshot) {
+        userStream.asyncMap((userSnapshot) async {
       List<Map<String, dynamic>> combinedData = [];
-      // Extract firstName from user document
-      String firstName = userDoc.data()?['firstName'] ?? '';
-      // Iterate through vehicleBooking documents and extract relevant fields
-      vehicleSnapshot.docs.forEach((vehicleDoc) {
-        Map<String, dynamic> bookingData = {
-          'firstName': firstName,
-          'truck': vehicleDoc['truck'],
-          'size': vehicleDoc['size'],
-          'bookingid': vehicleDoc['bookingid'],
-        };
-        combinedData.add(bookingData);
-      });
+
+      // Iterate through each user document
+      for (QueryDocumentSnapshot<Map<String, dynamic>> userDoc
+          in userSnapshot.docs) {
+        // Extract user data
+        String userName = userDoc.data()?['firstName'] ?? '';
+        String userId = userDoc.id;
+
+        // Query for vehicleBooking collection for this user
+        QuerySnapshot<Map<String, dynamic>> vehicleSnapshot = await firestore
+            .collection('user')
+            .doc(userId)
+            .collection('vehicleBooking')
+            .get();
+
+        // Iterate through vehicleBooking documents and extract relevant fields
+        vehicleSnapshot.docs.forEach((vehicleDoc) {
+          Map<String, dynamic> bookingData = {
+            'type': 'vehicle',
+            'truck': vehicleDoc['truck'],
+            'date': vehicleDoc['date'],
+            'size': vehicleDoc['size'],
+            'bookingid': vehicleDoc['bookingid'],
+          };
+          combinedData.add(bookingData);
+        });
+
+        // Query for equipmentBooking collection for this user
+        QuerySnapshot<Map<String, dynamic>> equipmentSnapshot = await firestore
+            .collection('user')
+            .doc(userId)
+            .collection('equipmentBooking')
+            .get();
+
+        // Iterate through equipmentBooking documents and extract relevant fields
+        equipmentSnapshot.docs.forEach((equipmentDoc) {
+          Map<String, dynamic> bookingData = {
+            'type': 'equipment',
+            'equipment': equipmentDoc['equipment'],
+            'quantity': equipmentDoc['quantity'],
+            'bookingid': equipmentDoc['bookingid'],
+          };
+          combinedData.add(bookingData);
+        });
+      }
+
       return combinedData;
     }).asBroadcastStream();
 
@@ -74,59 +100,30 @@ class _PaymentsState extends State<Payments> {
     return mergedStream;
   }
 
-  Stream<Map<String, dynamic>> fetchData(String userId) {
-    // Create a StreamController to manage the stream
-    StreamController<Map<String, dynamic>> controller = StreamController();
+  Stream<Map<String, dynamic>> allUserData() {
+    FirebaseFirestore firestore = FirebaseFirestore.instance;
 
-    try {
-      // Perform the asynchronous operation
-      String userCollection;
-      if (widget.unitType == 'Vehicle') {
-        userCollection = 'vehicleBooking';
-      } else if (widget.unitType == 'Equipment') {
-        userCollection = 'equipmentBookings';
-      } else {
-        throw Exception('Invalid selected type');
-      }
-      FirebaseFirestore firestore = FirebaseFirestore.instance;
-      DocumentReference userDocRef = firestore.collection('user').doc(userId);
-      CollectionReference userBookingCollectionRef =
-          userDocRef.collection(userCollection);
-      Map<String, dynamic>? lastUserData;
-      // Listen to the collection's stream, order by timestamp, and limit to 1 document
-      userBookingCollectionRef.limit(1).snapshots().listen((querySnapshot) {
-        querySnapshot.docs.forEach((doc) {
-          if (doc.exists) {
-            // Explicitly cast doc.data() to Map<String, dynamic>
-            Map<String, dynamic>? data = doc.data() as Map<String, dynamic>?;
+    // Query for user documents
+    Stream<QuerySnapshot<Map<String, dynamic>>> userStream =
+        firestore.collection('user').snapshots();
 
-            if (data != null) {
-              String bookingid = data['bookingid'] ?? '';
+    // Transform the snapshot to Map<String, dynamic>
+    Stream<Map<String, dynamic>> userDataStream = userStream.map((snapshot) {
+      List<Map<String, dynamic>> userDataList = [];
 
-              // Create a map containing truck, load, and size
-              Map<String, dynamic> userData = {'bookingid': bookingid};
+      // Iterate through each document snapshot
+      snapshot.docs.forEach((doc) {
+        // Extract the 'bookingId' field from each document
+        String bookingId = doc.data()['userId'] ?? '';
 
-              // Update lastUserData with the new userData
-              lastUserData = userData;
-              // Emit the data to the stream
-              controller.add(data);
-            }
-          } else {
-            print('Document does not exist');
-            controller.addError('Document does not exist');
-          }
-        });
-      }, onError: (error) {
-        print('Error fetching data: $error');
-        controller.addError(error);
+        // Add the 'bookingId' to the list
+        userDataList.add({'userId': bookingId});
       });
-    } catch (e) {
-      print('Error fetching data: $e');
-      controller.addError(e);
-    }
 
-    // Return the stream from the StreamController
-    return controller.stream;
+      return {'userList': userDataList}; // Return the list of 'bookingId's
+    });
+
+    return userDataStream;
   }
 
   @override
@@ -181,105 +178,61 @@ class _PaymentsState extends State<Payments> {
                   child: Column(
                     children: [
                       ElevationContainer(
-                        child: Scrollbar(
-                          controller: _scrollController1,
-                          child: SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
-                            controller: _scrollController1,
-                            child: Container(
-                              width: 1070,
-                              height:
-                                  100, // Increased height to accommodate button
-                              child: StreamBuilder<Map<String, dynamic>>(
-                                stream: fetchData(widget.user!),
-                                builder: (context, snapshot) {
-                                  if (snapshot.connectionState ==
-                                      ConnectionState.waiting) {
-                                    return CircularProgressIndicator(); // Show a loading indicator while waiting for data
-                                  } else if (snapshot.hasError) {
-                                    return Text(
-                                        'Error: ${snapshot.error}'); // Show an error message if there's an error
-                                  } else {
-                                    // If data is available, build the UI using the retrieved userData
-                                    Map<String, dynamic> userData =
-                                        snapshot.data ?? {};
-
-                                    return Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
-                                      children: [
-                                        Text(
-                                          'Booking ID ${userData['bookingid']}',
-                                          style: TextStyle(
-                                              fontSize: 20.0,
-                                              fontFamily: 'SFProText',
-                                              color: Color.fromRGBO(
-                                                  92, 86, 86, 1)),
-                                        ),
-                                        Text(
-                                          'Booking Value : SAR xxxxxx',
-                                          style: TextStyle(
-                                              fontSize: 20.0,
-                                              fontFamily: 'SFProText',
-                                              color: Color.fromRGBO(
-                                                  149, 143, 143, 1)),
-                                        ),
-                                        Text(
-                                          'Paid : SAR xxxxx',
-                                          style: TextStyle(
-                                              fontSize: 20.0,
-                                              fontFamily: 'SFProText',
-                                              color: Color.fromRGBO(
-                                                  149, 143, 143, 1)),
-                                        ),
-                                        Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          children: [
-                                            Text(
-                                              'Balance',
-                                              style: TextStyle(
-                                                  fontSize: 17.0,
-                                                  fontFamily: 'SFProText'),
-                                            ),
-                                            ElevatedButton(
-                                              onPressed: () {
-                                                // Add your button functionality here
-                                              },
-                                              style: ElevatedButton.styleFrom(
-                                                backgroundColor: Color.fromRGBO(
-                                                    98, 105, 254, 1),
-                                                foregroundColor: Colors.white,
-                                                minimumSize: Size(200, 35),
-                                                shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(20),
-                                                ),
-                                              ),
-                                              child: Text('XXXXX SAR',
-                                                  style: TextStyle(
-                                                      fontSize: 17.0,
-                                                      fontFamily: 'SFProText')),
-                                            ),
-                                          ],
-                                        )
-                                      ],
-                                    );
-                                  }
-                                },
-                              ),
-
-                              decoration: BoxDecoration(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(8)),
-                                border: Border.all(
-                                  color: Color.fromRGBO(112, 112, 112, 1)
-                                      .withOpacity(0.3),
-                                ),
-                              ),
+                        child: Container(
+                          width: 1070,
+                          height: 100, // Increased height to accommodate button
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.all(Radius.circular(8)),
+                            border: Border.all(
+                              color: Color.fromRGBO(112, 112, 112, 1)
+                                  .withOpacity(0.3),
                             ),
+                          ),
+                          child: StreamBuilder<Map<String, dynamic>>(
+                            stream: allUserData(),
+                            builder: (context, snapshot) {
+                              if (snapshot.connectionState ==
+                                  ConnectionState.waiting) {
+                                return Center(
+                                    child:
+                                        CircularProgressIndicator()); // Show a loading indicator while waiting for data
+                              } else if (snapshot.hasError) {
+                                return Center(
+                                  child: Text('Error: ${snapshot.error}'),
+                                ); // Show an error message if there's an error
+                              } else {
+                                // If data is available, build the UI using the retrieved user data
+                                List<Map<String, dynamic>> userList =
+                                    snapshot.data?['userList'] ?? [];
+
+                                return SingleChildScrollView(
+                                  child: Container(
+                                    height: 100,
+                                    width: 1070,
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        ListView.builder(
+                                          shrinkWrap: true,
+                                          physics:
+                                              NeverScrollableScrollPhysics(),
+                                          itemCount: userList.length,
+                                          itemBuilder: (context, index) {
+                                            String bookingId =
+                                                userList[index]['userId'] ?? '';
+                                            return ListTile(
+                                              title: Text(
+                                                  'Booking ID: $bookingId'),
+                                            );
+                                          },
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                );
+                              }
+                            },
                           ),
                         ),
                       ),
@@ -452,7 +405,7 @@ class _PaymentsState extends State<Payments> {
                       ),
                       SizedBox(height: 10),
                       StreamBuilder<List<Map<String, dynamic>>>(
-                        stream: _currentStream,
+                        stream: allBookings(),
                         builder: (context, snapshot) {
                           if (snapshot.connectionState ==
                               ConnectionState.waiting) {
@@ -465,23 +418,6 @@ class _PaymentsState extends State<Payments> {
                             return Center(
                                 child: Text("You haven't done any bookings"));
                           } else {
-                            List<SingleUserBooking> blueSingleUsers = [];
-                            snapshot.data!.forEach((bookingData) {
-                              String truck = bookingData['truck'];
-                              String size = bookingData['size'];
-                              String bookingid = bookingData['bookingid'];
-
-                              SingleUserBooking singleUserBooking =
-                                  SingleUserBooking(
-                                truck: truck,
-                                size: size,
-                                bookingid: bookingid,
-                                // Add any additional fields needed for your SingleUserBooking constructor
-                              );
-
-                              blueSingleUsers.add(singleUserBooking);
-                            });
-
                             return ElevationContainer(
                               child: Scrollbar(
                                 controller: _scrollController2,
@@ -512,7 +448,7 @@ class _PaymentsState extends State<Payments> {
                                       dataRowHeight: 65,
                                       headingRowHeight: 70,
                                       columns: DataSource.getColumns(context),
-                                      rows: blueSingleUsers.map((user) {
+                                      rows: snapshot.data!.map((user) {
                                         return DataRow(
                                           cells: DataSource.getCells(user),
                                         );
@@ -808,88 +744,66 @@ class _PaymentsState extends State<Payments> {
   }
 }
 
-class DataSource extends DataTableSource {
-  final List<SingleUserBooking> candidates;
-  final BuildContext context;
-  final Function(SingleUserBooking) onSelect;
-
-  DataSource(this.candidates, {required this.context, required this.onSelect});
-
-  @override
-  DataRow? getRow(int index) {
-    final e = candidates[index];
-
-    return DataRow.byIndex(
-      index: index,
-      cells: [
-        DataCell(Text(e.truck?.toString() ?? 'nill')),
-        DataCell(Text('#623832623')),
-        DataCell(Text('14.02.2024')),
-        DataCell(Text(e.load.toString())),
-        DataCell(Text(e.size?.toString() ?? 'nill')),
-        DataCell(Text(e.size?.toString() ?? 'nill')),
-      ],
-    );
-  }
-
+class DataSource {
   static List<DataColumn> getColumns(BuildContext context) {
     return [
       DataColumn(
-          label: Text(
-        'Booked by',
-        style: BookingHistoryText.sfpro20white,
-        textAlign: TextAlign.center,
-      )),
+        label: Text(
+          'Booked by',
+          style: BookingHistoryText.sfpro20white,
+          textAlign: TextAlign.center,
+        ),
+      ),
       DataColumn(
-          label: Text(
-        'Booking ID',
-        style: BookingHistoryText.sfpro20white,
-        textAlign: TextAlign.center,
-      )),
+        label: Text(
+          'Booking ID',
+          style: BookingHistoryText.sfpro20white,
+          textAlign: TextAlign.center,
+        ),
+      ),
       DataColumn(
-          label: Text(
-        'Mode',
-        style: BookingHistoryText.sfpro20white,
-        textAlign: TextAlign.center,
-      )),
+        label: Text(
+          'Mode',
+          style: BookingHistoryText.sfpro20white,
+          textAlign: TextAlign.center,
+        ),
+      ),
       DataColumn(
-          label: Text(
-        'Date',
-        style: BookingHistoryText.sfpro20white,
-        textAlign: TextAlign.center,
-      )),
+        label: Text(
+          'Date',
+          style: BookingHistoryText.sfpro20white,
+          textAlign: TextAlign.center,
+        ),
+      ),
       DataColumn(
-          label: Text(
-        'Payment made',
-        style: BookingHistoryText.sfpro20white,
-        textAlign: TextAlign.center,
-      )),
+        label: Text(
+          'Payment made',
+          style: BookingHistoryText.sfpro20white,
+          textAlign: TextAlign.center,
+        ),
+      ),
       DataColumn(
-          label: Text(
-        'Payment Status',
-        style: BookingHistoryText.sfpro20white,
-        textAlign: TextAlign.center,
-      )),
+        label: Text(
+          'Payment Status',
+          style: BookingHistoryText.sfpro20white,
+          textAlign: TextAlign.center,
+        ),
+      ),
     ];
   }
 
-  static List<DataCell> getCells(SingleUserBooking user) {
+  static List<DataCell> getCells(Map<String, dynamic> user) {
     return [
-      DataCell(Text(user.truck?.toString() ?? 'nill')),
-      DataCell(Text(user.bookingid?.toString() ?? 'nill')),
-      DataCell(Text(user.date?.toString() ?? 'nill')),
-      DataCell(Text(user.load.toString())),
-      DataCell(Text(user.size?.toString() ?? 'nill')),
-      DataCell(Text(user.size?.toString() ?? 'nill')),
+      DataCell(Text(user['firstName']?.toString() ?? 'nill',
+          style: BookingHistoryText.sfpro20black)),
+      DataCell(Text(user['bookingid']?.toString() ?? 'nill',
+          style: BookingHistoryText.sfpro20black)),
+      DataCell(Text(user['truck']?.toString() ?? 'nill',
+          style: BookingHistoryText.sfpro20black)),
+      DataCell(Text(user['date']?.toString() ?? 'nill',
+          style: BookingHistoryText.sfpro20black)),
+      DataCell(Text('XXXXX SAR', style: BookingHistoryText.sfpro20black)),
+      DataCell(Text('Completed', style: BookingHistoryText.sfpro20black)),
     ];
   }
-
-  @override
-  bool get isRowCountApproximate => false;
-
-  @override
-  int get rowCount => candidates.length;
-
-  @override
-  int get selectedRowCount => 0;
 }
