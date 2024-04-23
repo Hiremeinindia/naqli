@@ -18,7 +18,6 @@ import 'package:flutter_application_1/classes/language_constants.dart';
 import 'package:flutter_application_1/createAccount.dart';
 import 'package:flutter_application_1/get_an_estimate.dart';
 import 'package:flutter_application_1/main.dart';
-import 'package:flutter_application_1/mobile.dart';
 
 import 'package:sizer/sizer.dart';
 
