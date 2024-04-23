@@ -46,6 +46,34 @@ class _BookingsState extends State<Bookings> {
     mapController = controller;
   }
 
+  Future<Map<String, dynamic>?> fetchOperator(String userId) async {
+    try {
+      DocumentSnapshot<Map<String, dynamic>> documentSnapshot =
+          await FirebaseFirestore.instance
+              .collection('partneruser')
+              .doc(userId)
+              .get();
+
+      if (documentSnapshot.exists) {
+        Map<String, dynamic> userData = documentSnapshot.data()!;
+
+        String firstName = userData['firstName'] ?? '';
+
+        return {
+          'firstName': firstName,
+        };
+      } else {
+        // If the document doesn't exist, return null
+        print('Document does not exist for userId: $userId');
+        return null;
+      }
+    } catch (e) {
+      // Handle any errors that occur during fetching
+      print('Error fetching data for userId $userId: $e');
+      return null;
+    }
+  }
+
   void _BookingConfirm(BuildContext context, String bookingId) {
     print('track 2');
     print('==================$bookingId');
@@ -396,18 +424,35 @@ class _BookingsState extends State<Bookings> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Vendor Name',
-                  style: TabelText.tableText4,
-                ),
-                Text(
-                  'Kamado',
-                  style: TabelText.tableText5,
-                ),
-              ],
+            FutureBuilder<Map<String, dynamic>?>(
+              future: fetchOperator(
+                  widget.user!), // Call the fetchOperator function
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  // While data is being fetched, show a loading indicator
+                  return CircularProgressIndicator();
+                } else if (snapshot.hasError) {
+                  // If an error occurred during fetching, show an error message
+                  return Text('Error: ${snapshot.error}');
+                } else {
+                  // If data is successfully fetched, or if the document doesn't exist, display the firstName
+                  String firstName =
+                      snapshot.data?['firstName'] ?? 'User Not Found';
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Vendor Name',
+                        style: TabelText.tableText4,
+                      ),
+                      Text(
+                        firstName,
+                        style: TabelText.tableText5,
+                      ),
+                    ],
+                  );
+                }
+              },
             ),
             Divider(
               color: Color.fromRGBO(204, 195, 195, 1),
