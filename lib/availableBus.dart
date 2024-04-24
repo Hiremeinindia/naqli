@@ -497,7 +497,7 @@ class _AvailableBusState extends State<AvailableBus> {
                                                                       'Value of the Product',
                                                                   controller:
                                                                       controller
-                                                                          .size,
+                                                                          .productValue,
                                                                 ),
                                                               ),
                                                             ],
@@ -999,7 +999,8 @@ class _AvailableBusState extends State<AvailableBus> {
                                                                 truck;
                                                             String size =
                                                                 controller
-                                                                    .size.text;
+                                                                    .productValue
+                                                                    .text;
                                                             String time =
                                                                 controller
                                                                     .time.text;
@@ -1528,7 +1529,7 @@ class _AvailableBusState extends State<AvailableBus> {
                                           ),
                                           CustomTextfieldGrey(
                                             text: 'Value of the Product',
-                                            controller: controller.size,
+                                            controller: controller.productValue,
                                           ),
                                           Row(
                                             children: [

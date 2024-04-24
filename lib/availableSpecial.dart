@@ -530,7 +530,7 @@ class _AvailableSpecialState extends State<AvailableSpecial> {
                                                                       'Value of the Product',
                                                                   controller:
                                                                       controller
-                                                                          .size,
+                                                                          .productValue,
                                                                 ),
                                                               ),
                                                             ],
@@ -1044,7 +1044,8 @@ class _AvailableSpecialState extends State<AvailableSpecial> {
                                                                 truck;
                                                             String size =
                                                                 controller
-                                                                    .size.text;
+                                                                    .productValue
+                                                                    .text;
                                                             String time =
                                                                 controller
                                                                     .time.text;
@@ -1573,7 +1574,7 @@ class _AvailableSpecialState extends State<AvailableSpecial> {
                                           ),
                                           CustomTextfieldGrey(
                                             text: 'Value of the Product',
-                                            controller: controller.size,
+                                            controller: controller.productValue,
                                           ),
                                           Row(
                                             children: [

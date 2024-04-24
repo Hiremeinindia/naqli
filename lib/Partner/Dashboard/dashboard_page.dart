@@ -509,7 +509,10 @@ class _MyHomePageState extends State<PartnerDashboardPage> {
                                   title: 'Report',
                                   onTap: (page, _) {
                                     setState(() {
-                                      _currentContent = Bookings1();
+                                      _currentContent = Bookings1(
+                                        unitType: 'Vehicle',
+                                        user: widget.user,
+                                      );
                                     });
                                     sideMenu.changePage(page);
                                   },

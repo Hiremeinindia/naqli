@@ -165,6 +165,7 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
     String date,
     String time,
     String labour,
+    String productValue,
     String adminUid,
   ) async {
     try {
@@ -185,6 +186,7 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
         'date': date,
         'time': time,
         'labour': labour,
+        'productValue': productValue,
       });
 
       // Store the auto-generated ID
@@ -816,9 +818,9 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                                               Flexible(
                                                                 child:
                                                                     CustomTextfieldGrey(
-                                                                  // controller:
-                                                                  //     controller
-                                                                  //         .size,
+                                                                  controller:
+                                                                      controller
+                                                                          .productValue,
                                                                   text:
                                                                       'Value of the Product',
                                                                 ),
@@ -1356,6 +1358,11 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                                               }
                                                               String truck1 =
                                                                   truck;
+                                                              String
+                                                                  productValue =
+                                                                  controller
+                                                                      .productValue
+                                                                      .text;
                                                               String size =
                                                                   controller
                                                                       .size
@@ -1386,6 +1393,7 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                                                       date,
                                                                       time,
                                                                       labour,
+                                                                      productValue,
                                                                       widget
                                                                           .user!);
                                                               String unitType =
@@ -1856,6 +1864,7 @@ class _AvailableVehicleState extends State<AvailableVehicle> {
                                             text: 'Time',
                                           ),
                                           CustomTextfieldGrey(
+                                            controller: controller.productValue,
                                             text: 'Value of the Product',
                                           ),
                                           Row(

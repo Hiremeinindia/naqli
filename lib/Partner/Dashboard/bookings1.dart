@@ -7,6 +7,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_application_1/Partner/Dashboard/detailsPage.dart';
 import 'package:flutter_application_1/Users/SingleUser/singleuser.dart';
 import 'package:flutter_application_1/Widgets/colorContainer.dart';
 import 'package:flutter_application_1/Widgets/formText.dart';
@@ -32,7 +33,7 @@ class _Bookings1State extends State<Bookings1> {
   PageController page = PageController();
   SideMenuController sideMenu = SideMenuController();
   ScrollController _scrollController = ScrollController();
-  Stream<List<QuerySnapshot<Map<String, dynamic>>>>? _currentStream;
+  Stream<List<Map<String, dynamic>>>? _currentStream;
   bool value = false;
   String month = '';
   bool checkbox1 = false;
@@ -56,31 +57,78 @@ class _Bookings1State extends State<Bookings1> {
     super.initState();
   }
 
-  Stream<List<QuerySnapshot<Map<String, dynamic>>>> allBookings() {
+  Stream<List<Map<String, dynamic>>> allBookings() {
     FirebaseFirestore firestore = FirebaseFirestore.instance;
 
-    // Query for vehicleBooking collection
-    Stream<QuerySnapshot<Map<String, dynamic>>> vehicleStream = firestore
-        .collection('user')
-        .doc(widget.user)
-        .collection('vehicleBooking')
-        .snapshots();
+    // Query for all documents in the 'user' collection
+    Stream<QuerySnapshot<Map<String, dynamic>>> userStream =
+        firestore.collection('user').snapshots();
 
-    // Query for equipmentBookings collection
-    Stream<QuerySnapshot<Map<String, dynamic>>> equipmentStream = firestore
-        .collection('user')
-        .doc(widget.user)
-        .collection('equipmentBookings')
-        .snapshots();
+    // Merge the streams using flatMap to process each user document separately
+    Stream<List<Map<String, dynamic>>> mergedStream =
+        userStream.asyncMap((userSnapshot) async {
+      List<Map<String, dynamic>> combinedData = [];
 
-    // Merge both streams using Rx.combineLatest2
-    Stream<List<QuerySnapshot<Map<String, dynamic>>>> mergedStream =
-        Rx.combineLatest2(
-            vehicleStream,
-            equipmentStream,
-            (QuerySnapshot<Map<String, dynamic>> a,
-                    QuerySnapshot<Map<String, dynamic>> b) =>
-                [a, b]).asBroadcastStream();
+      // Iterate through each user document
+      for (QueryDocumentSnapshot<Map<String, dynamic>> userDoc
+          in userSnapshot.docs) {
+        // Extract user data
+        String firstName = userDoc.data()?['firstName'] ?? '';
+        String lastName = userDoc.data()?['lastName'] ?? '';
+        String userId = userDoc.id;
+
+        // Query for vehicleBooking collection for this user
+        QuerySnapshot<Map<String, dynamic>> vehicleSnapshot = await firestore
+            .collection('user')
+            .doc(userId)
+            .collection('vehicleBooking')
+            .get();
+
+        // Iterate through vehicleBooking documents and extract relevant fields
+        vehicleSnapshot.docs.forEach((vehicleDoc) {
+          Map<String, dynamic> bookingData = {
+            'type': 'vehicle',
+            'userId': userId,
+            'firstName': firstName,
+            'lastName': lastName,
+            'load': vehicleDoc['load'],
+            'truck': vehicleDoc['truck'],
+            'time': vehicleDoc['time'],
+            'labour': vehicleDoc['labour'],
+            'productValue': vehicleDoc['productValue'],
+            'date': vehicleDoc['date'],
+            'size': vehicleDoc['size'],
+            'bookingid': vehicleDoc['bookingid'],
+          };
+          combinedData.add(bookingData);
+        });
+
+        // Query for equipmentBooking collection for this user
+        QuerySnapshot<Map<String, dynamic>> equipmentSnapshot = await firestore
+            .collection('user')
+            .doc(userId)
+            .collection('equipmentBooking')
+            .get();
+
+        // Iterate through equipmentBooking documents and extract relevant fields
+        equipmentSnapshot.docs.forEach((equipmentDoc) {
+          Map<String, dynamic> bookingData = {
+            'type': 'equipment',
+            'userId': userId,
+            'firstName': firstName,
+            'lastName': lastName,
+            'truck': equipmentDoc['truck'],
+            'time': equipmentDoc['time'],
+            'date': equipmentDoc['date'],
+            'size': equipmentDoc['size'],
+            'bookingid': equipmentDoc['bookingid'],
+          };
+          combinedData.add(bookingData);
+        });
+      }
+
+      return combinedData;
+    }).asBroadcastStream();
 
     // Return the merged stream
     return mergedStream;
@@ -140,67 +188,66 @@ class _Bookings1State extends State<Bookings1> {
                     ),
                   ],
                 ),
-                Padding(
-                  padding: EdgeInsets.fromLTRB(1.w, 12.h, 1.w, 2.h),
-                  child:
-                      StreamBuilder<List<QuerySnapshot<Map<String, dynamic>>>>(
-                    stream: _currentStream,
-                    builder: (context, snapshot) {
-                      if (snapshot.connectionState == ConnectionState.waiting) {
-                        return Center(child: CircularProgressIndicator());
-                      } else if (snapshot.hasError) {
-                        return Center(child: Text('Error: ${snapshot.error}'));
-                      } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                        return Center(
-                            child: Text("You haven't done any bookings"));
-                      } else {
-                        // Flatten the list of QuerySnapshot into a single List<DocumentSnapshot>
-                        List<SingleUserBooking> blueSingleUsers = [];
-                        snapshot.data!.forEach((querySnapshot) {
-                          querySnapshot.docs.forEach((doc) {
-                            blueSingleUsers
-                                .add(SingleUserBooking.fromSnapshot(doc));
-                          });
-                        });
-
-                        return ElevationContainer(
-                          child: Scrollbar(
-                            controller: _scrollController,
-                            thumbVisibility: true,
-                            child: SingleChildScrollView(
-                              scrollDirection: Axis.horizontal,
-                              controller: _scrollController,
-                              child: SizedBox(
-                                width: 1150,
-                                height: 350,
-                                child: DataTable(
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.only(
-                                        bottomLeft: Radius.circular(8),
-                                        bottomRight: Radius.circular(8)),
-                                    border: Border.all(
-                                      color: Color.fromRGBO(112, 112, 112, 1)
-                                          .withOpacity(0.3),
-                                    ),
-                                  ),
-                                  headingRowColor:
-                                      MaterialStateColor.resolveWith((states) =>
-                                          Color.fromRGBO(75, 61, 82, 1)),
-                                  dividerThickness: 1.0,
-                                  dataRowHeight: 65,
-                                  headingRowHeight: 70,
-                                  columnSpacing: 10.0,
-                                  columns: DataSource.getColumns(context),
-                                  rows: DataSource.getRows(context),
+                StreamBuilder<List<Map<String, dynamic>>>(
+                  stream: allBookings(),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return Center(child: CircularProgressIndicator());
+                    } else if (snapshot.hasError) {
+                      return Center(child: Text('Error: ${snapshot.error}'));
+                    } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                      return Center(
+                          child: Text("You haven't done any bookings"));
+                    } else {
+                      return ElevationContainer(
+                        child: SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: SingleChildScrollView(
+                            child: Container(
+                              height:
+                                  400, // Adjust the height as per your requirement
+                              width: 1150,
+                              decoration: BoxDecoration(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(8)),
+                                border: Border.all(
+                                  color: Color.fromRGBO(112, 112, 112, 1)
+                                      .withOpacity(0.3),
                                 ),
+                              ),
+                              constraints: BoxConstraints(minWidth: 1070),
+                              child: DataTable(
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.only(
+                                    bottomLeft: Radius.circular(8),
+                                    bottomRight: Radius.circular(8),
+                                  ),
+                                  border: Border.all(
+                                    color: Color.fromRGBO(112, 112, 112, 1)
+                                        .withOpacity(0.3),
+                                  ),
+                                ),
+                                headingRowColor: MaterialStateColor.resolveWith(
+                                    (states) => Color.fromRGBO(75, 61, 82, 1)),
+                                dividerThickness: 1.0,
+                                dataRowHeight: 65,
+                                headingRowHeight: 70,
+                                columns: DataSource(snapshot.data!, context)
+                                    .getColumns(),
+                                rows: snapshot.data!.map((user) {
+                                  return DataRow(
+                                    cells: DataSource(snapshot.data!, context)
+                                        .getCells(user),
+                                  );
+                                }).toList(),
                               ),
                             ),
                           ),
-                        );
-                      }
-                    },
-                  ),
+                        ),
+                      );
+                    }
+                  },
                 ),
               ],
             ),
@@ -238,66 +285,66 @@ class _Bookings1State extends State<Bookings1> {
                     ),
                   ],
                 ),
-                Padding(
-                  padding: EdgeInsets.fromLTRB(4.w, 12.h, 4.w, 2.h),
-                  child:
-                      StreamBuilder<List<QuerySnapshot<Map<String, dynamic>>>>(
-                    stream: _currentStream,
-                    builder: (context, snapshot) {
-                      if (snapshot.connectionState == ConnectionState.waiting) {
-                        return Center(child: CircularProgressIndicator());
-                      } else if (snapshot.hasError) {
-                        return Center(child: Text('Error: ${snapshot.error}'));
-                      } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                        return Center(
-                            child: Text("You haven't done any bookings"));
-                      } else {
-                        // Flatten the list of QuerySnapshot into a single List<DocumentSnapshot>
-                        List<SingleUserBooking> blueSingleUsers = [];
-                        snapshot.data!.forEach((querySnapshot) {
-                          querySnapshot.docs.forEach((doc) {
-                            blueSingleUsers
-                                .add(SingleUserBooking.fromSnapshot(doc));
-                          });
-                        });
-                        return ElevationContainer(
-                          //width:300; // Set width to match screen width
-
-                          child: Scrollbar(
-                            controller: _scrollController,
-                            child: SingleChildScrollView(
-                              scrollDirection: Axis.horizontal,
-                              controller: _scrollController,
-                              child: SizedBox(
-                                width: 1040,
-                                child: DataTable(
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.only(
-                                        bottomLeft: Radius.circular(8),
-                                        bottomRight: Radius.circular(8)),
-                                    border: Border.all(
-                                      color: Color.fromRGBO(112, 112, 112, 1)
-                                          .withOpacity(0.3),
-                                    ),
-                                  ),
-                                  headingRowColor:
-                                      MaterialStateColor.resolveWith((states) =>
-                                          Color.fromRGBO(75, 61, 82, 1)),
-                                  dividerThickness: 1.0,
-                                  dataRowHeight: 65,
-                                  headingRowHeight: 70,
-                                  columnSpacing: 30.0,
-                                  columns: DataSource.getColumns(context),
-                                  rows: DataSource.getRows(context),
+                StreamBuilder<List<Map<String, dynamic>>>(
+                  stream: allBookings(),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return Center(child: CircularProgressIndicator());
+                    } else if (snapshot.hasError) {
+                      return Center(child: Text('Error: ${snapshot.error}'));
+                    } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                      return Center(
+                          child: Text("You haven't done any bookings"));
+                    } else {
+                      return ElevationContainer(
+                        child: SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: SingleChildScrollView(
+                            child: Container(
+                              height:
+                                  400, // Adjust the height as per your requirement
+                              width: 1150,
+                              decoration: BoxDecoration(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(8)),
+                                border: Border.all(
+                                  color: Color.fromRGBO(112, 112, 112, 1)
+                                      .withOpacity(0.3),
                                 ),
+                              ),
+                              constraints: BoxConstraints(minWidth: 1070),
+                              child: DataTable(
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.only(
+                                    bottomLeft: Radius.circular(8),
+                                    bottomRight: Radius.circular(8),
+                                  ),
+                                  border: Border.all(
+                                    color: Color.fromRGBO(112, 112, 112, 1)
+                                        .withOpacity(0.3),
+                                  ),
+                                ),
+                                headingRowColor: MaterialStateColor.resolveWith(
+                                    (states) => Color.fromRGBO(75, 61, 82, 1)),
+                                dividerThickness: 1.0,
+                                dataRowHeight: 65,
+                                headingRowHeight: 70,
+                                columns: DataSource(snapshot.data!, context)
+                                    .getColumns(),
+                                rows: snapshot.data!.map((user) {
+                                  return DataRow(
+                                    cells: DataSource(snapshot.data!, context)
+                                        .getCells(user),
+                                  );
+                                }).toList(),
                               ),
                             ),
                           ),
-                        );
-                      }
-                    },
-                  ),
+                        ),
+                      );
+                    }
+                  },
                 ),
               ],
             ),
@@ -308,218 +355,192 @@ class _Bookings1State extends State<Bookings1> {
   }
 }
 
-class DataSource extends DataTableSource {
-  final List<SingleUserBooking> candidates;
+class DataSource {
+  final List<Map<String, dynamic>> candidates;
   final BuildContext context;
-  final Function(SingleUserBooking) onSelect;
 
-  DataSource(this.candidates, {required this.context, required this.onSelect});
+  DataSource(this.candidates, this.context);
 
-  @override
-  DataRow? getRow(int index) {
-    final e = candidates[index];
-
-    return DataRow.byIndex(
-      index: index,
-      cells: [
-        DataCell(Text(e.truck?.toString() ?? 'nill')),
-        DataCell(Text('#623832623')),
-        DataCell(Text('14.02.2024')),
-        DataCell(Text(e.load.toString())),
-        DataCell(Text(e.size?.toString() ?? 'nill')),
-      ],
-    );
-  }
-
-  static List<DataColumn> getColumns(BuildContext context) {
+  List<DataColumn> getColumns() {
     return [
       DataColumn(
-          label: Flexible(
-              child: Text(
+          label: Text(
         'Booked',
         style: BookingHistoryText.sfpro20white,
         textAlign: TextAlign.center,
-      ))),
+      )),
       DataColumn(
-          label: Flexible(
-              child: Text(
+          label: Text(
         'Booking No',
         softWrap: true,
         style: BookingHistoryText.sfpro20white,
         textAlign: TextAlign.center,
-      ))),
+      )),
       DataColumn(
-          label: Flexible(
-              child: Text(
+          label: Text(
         'Quote price',
         softWrap: true,
         style: BookingHistoryText.sfpro20white,
         textAlign: TextAlign.center,
-      ))),
+      )),
       DataColumn(
-          label: Flexible(
-              child: Text(
+          label: Text(
         'Date',
         style: BookingHistoryText.sfpro20white,
         textAlign: TextAlign.center,
-      ))),
+      )),
       DataColumn(
-          label: Flexible(
-              child: Text(
+          label: Text(
         'Time',
         style: BookingHistoryText.sfpro20white,
         textAlign: TextAlign.center,
-      ))),
+      )),
       DataColumn(
-          label: Flexible(
-              child: Text(
+          label: Text(
         'Mode',
         style: BookingHistoryText.sfpro20white,
         textAlign: TextAlign.center,
-      ))),
+      )),
       DataColumn(
-        label: Expanded(
-            child: Text(
+        label: Text(
           'Location',
           style: BookingHistoryText.sfpro20white,
           textAlign: TextAlign.center,
-        )),
+        ),
         numeric: true,
       ),
       DataColumn(
-          label: Expanded(
-              child: Text(
+          label: Text(
         'Action',
         style: BookingHistoryText.sfpro20white,
         textAlign: TextAlign.center,
-      ))),
+      )),
     ];
   }
 
-  static List<DataRow> getRows(BuildContext context) {
+  List<DataCell> getCells(Map<String, dynamic> user) {
     return [
-      DataRow(cells: [
-        DataCell(Text("User",
-            style: TextStyle(fontSize: 17, fontFamily: 'SFProText'))),
-        DataCell(
-          Column(
-            children: [
-              SizedBox(height: 14),
-              Text(
-                '1345789345',
-                style: TextStyle(
-                  color: Color.fromRGBO(173, 28, 134, 1),
-                ),
-              ),
-              SizedBox(
-                width: 80,
-                child: Divider(
-                  color: Color.fromRGBO(92, 8, 92, 1),
-                  thickness: 1.0,
-                ),
-              ),
-            ],
-          ),
-        ),
-        DataCell(
-          Container(
-            width: 120, // Set the desired width
-            height: 35, // Set the desired height
+      DataCell(Text(user['firstName']?.toString() ?? 'nill',
+          style: BookingHistoryText.sfpro20black)),
+      DataCell(
+        GestureDetector(
+          onTap: () {
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return Details(
+                  user: user['firstName'],
+                  operName: 'OperatorName',
+                  pickup: 'PickUp',
+                  productValue: user['productValue'],
+                  dropoff: 'Dropoff',
+                  labour: user['labour'],
+                  load: user['load'],
+                  bookingid: user['bookingid'],
+                  truck: user['truck'],
+                  date: user['date'],
+                  time: user['time'],
+                );
+              },
+            );
+          },
+          child: Container(
             decoration: BoxDecoration(
-              border: Border.all(
-                color: Colors.black, // Set the border color here
-                width: 1.0, // Set the border width here
-              ),
-              borderRadius: BorderRadius.circular(
-                  10.0), // Set the border radius to create a circular border
-            ),
-            child: TextField(
-              decoration: InputDecoration(
-                hintText: '', // Add any hint text if needed
-                border: InputBorder
-                    .none, // Remove the border from the TextField itself
-              ),
-            ),
-          ),
-        ),
-        DataCell(
-          Container(
-            width: 60, // Adjust the width as needed
-            child: Text(
-              'Jun 10 2022',
-              style: TextStyle(
-                fontFamily: 'SFProText',
-                fontSize: 17,
-              ),
-              maxLines: 2,
-            ),
-          ),
-        ),
-        DataCell(Text("10:30 AM",
-            style: TextStyle(fontFamily: 'SFProText', fontSize: 17))),
-        DataCell(Text("Box truck",
-            style: TextStyle(fontFamily: 'SFProText', fontSize: 17))),
-        DataCell(Row(
-          children: [
-            CircleAvatar(
-              backgroundColor: Colors.green,
-              radius: 5,
-            ),
-            SizedBox(width: 5),
-            Text('Xxxxxxxx',
-                style: TextStyle(fontFamily: 'SFProText', fontSize: 17)),
-            SizedBox(width: 30),
-            Image.network(
-              'assets/path 1514.png',
-              width: 24,
-              height: 20,
-            ),
-            SizedBox(width: 5),
-            Text('Xxxxxxxx',
-                style: TextStyle(fontFamily: 'SFProText', fontSize: 17)),
-          ],
-        )),
-        DataCell(
-          Row(
-            children: [
-              ElevatedButton(
-                onPressed: () {
-                  // Add your onPressed functionality here
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor:
-                      Color.fromRGBO(99, 194, 109, 1), // Background color
-                  minimumSize: Size(100, 40),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(
-                        10), // Adjust the radius as needed
-                  ),
+              border: Border(
+                bottom: BorderSide(
+                  color: Color.fromRGBO(173, 28, 134, 1), // Underline color
+                  width: 2.0, // Underline thickness
                 ),
-                child: Text("Send",
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontFamily: 'SFProText',
-                        fontSize: 13)),
               ),
-              SizedBox(width: 10),
-              Image.network(
-                'assets/Group 1982.png',
-                width: 35,
-                height: 35,
+            ),
+            child: Text(
+              user['bookingid']?.toString() ?? 'nill',
+              style: TextStyle(
+                fontSize: 17,
+                letterSpacing: 1,
+                fontFamily: 'SFproText',
+                color: Color.fromRGBO(173, 28, 134, 1),
               ),
-            ],
+            ),
           ),
         ),
-      ]),
+      ),
+      DataCell(
+        Container(
+          width: 120, // Set the desired width
+          height: 35, // Set the desired height
+          decoration: BoxDecoration(
+            border: Border.all(
+              color: Colors.black, // Set the border color here
+              width: 1.0, // Set the border width here
+            ),
+            borderRadius: BorderRadius.circular(
+                10.0), // Set the border radius to create a circular border
+          ),
+          child: TextField(
+            decoration: InputDecoration(
+              hintText: '', // Add any hint text if needed
+              border: InputBorder
+                  .none, // Remove the border from the TextField itself
+            ),
+          ),
+        ),
+      ),
+      DataCell(Text(user['date']?.toString() ?? 'nill',
+          style: BookingHistoryText.sfpro20black)),
+      DataCell(Text(user['time']?.toString() ?? 'nill',
+          style: BookingHistoryText.sfpro20black)),
+      DataCell(Text(user['truck']?.toString() ?? 'nill',
+          style: BookingHistoryText.sfpro20black)),
+      DataCell(Row(
+        children: [
+          CircleAvatar(
+            backgroundColor: Colors.green,
+            radius: 5,
+          ),
+          SizedBox(width: 5),
+          Text('Xxxxxxxx', style: BookingHistoryText.sfpro20black),
+          SizedBox(width: 30),
+          Image.network(
+            'assets/path 1514.png',
+            width: 24,
+            height: 20,
+          ),
+          SizedBox(width: 5),
+          Text('Xxxxxxxx', style: BookingHistoryText.sfpro20black),
+        ],
+      )),
+      DataCell(
+        Row(
+          children: [
+            ElevatedButton(
+              onPressed: () {
+                // Add your onPressed functionality here
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor:
+                    Color.fromRGBO(99, 194, 109, 1), // Background color
+                minimumSize: Size(100, 40),
+                shape: RoundedRectangleBorder(
+                  borderRadius:
+                      BorderRadius.circular(10), // Adjust the radius as needed
+                ),
+              ),
+              child: Text("Send",
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontFamily: 'SFProText',
+                      fontSize: 13)),
+            ),
+            SizedBox(width: 10),
+            Image.network(
+              'assets/Group 1982.png',
+              width: 35,
+              height: 35,
+            ),
+          ],
+        ),
+      ),
     ];
   }
-
-  @override
-  bool get isRowCountApproximate => false;
-
-  @override
-  int get rowCount => candidates.length;
-
-  @override
-  int get selectedRowCount => 0;
 }
